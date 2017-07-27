@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.DataContractSerializer</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
+    <Description>Using DataContractSerializer as serialization solution in Remote Agency</Description>
+    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.5\doc.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.5\RemoteAgency.DataContractSerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.0.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

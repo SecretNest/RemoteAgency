@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>RemoteAgency</Product>
+    <Description>Encapsulation including DataContractSerializer and RemoteAgency</Description>
+    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
+    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.5\doc.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.5\RemoteAgency.DataContractSerializer.EasyEncapsulation.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.0.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
