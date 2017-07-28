@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;net46;net47</TargetFrameworks>
+    <TargetFramework>netstandard1.5</TargetFramework>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
     <Authors>Allen Cui</Authors>
@@ -14,7 +14,7 @@
     <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.3.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,8 +26,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.3.0" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.3.1" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.1.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
