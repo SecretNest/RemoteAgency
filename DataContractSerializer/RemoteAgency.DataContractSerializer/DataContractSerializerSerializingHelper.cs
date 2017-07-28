@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency
     /// Provides serializing and deserializing methods for entities and exceptions using DataContractSerializer."/>.
     /// </summary>
     /// <remarks>
-    /// The name specified by <see href="http://docs.secretnest.info/RemoteAgencyBase/html/T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityAttribute.htm">CustomizedParameterEntityAttribute</see> or <see href="http://docs.secretnest.info/RemoteAgencyBase/html/T_SecretNest_RemoteAgency_Attributes_CustomizedReturnEntityAttribute.htm">CustomizedReturnEntityAttribute</see> may be changed when generic type applied. Names of types will be added to the end of the name. e.g.: MyParameterEntityOfstringint
+    /// The name specified by <see cref="Attributes.CustomizedParameterEntityAttribute"/> or <see cref="Attributes.CustomizedReturnEntityAttribute"/> may be changed when generic type applied. Names of types will be added to the end of the name. e.g.: MyParameterEntityOfstringint
     /// </remarks>
     public class DataContractSerializerSerializingHelper : SerializingHelperBase<string, object>
     {
