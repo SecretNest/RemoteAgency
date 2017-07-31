@@ -76,11 +76,11 @@ namespace Test
             Hello serviceObject = new Hello();
             serverSite.AddServiceWrapper<IHello>(serviceWrapperCreator, serviceObject, out Guid serviceWrapperInstanceId);
 
-            IHello proxy1 = clientSite1.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out _);
+            IHello proxy1 = clientSite1.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out var proxyInstance1Id);
             proxy1.WorldOpened += Proxy_WorldOpened1;
             proxy1.MyTestEvent += Proxy_MyTestEvent;
 
-            IHello proxy2 = clientSite1.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out _);
+            IHello proxy2 = clientSite2.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out var proxyInstance2Id);
             proxy2.WorldOpened += Proxy_WorldOpened2;
             proxy2.MyTestEvent += Proxy_MyTestEvent;
 
@@ -88,8 +88,8 @@ namespace Test
 
             Console.WriteLine("Finished.");
             Console.ReadKey(); //Pause before quit.
-            ((IDisposable)proxy1).Dispose();
-            ((IDisposable)proxy2).Dispose();
+            clientSite1.RemoveManagingObject(proxyInstance1Id, true);
+            clientSite2.RemoveManagingObject(proxyInstance2Id, true);
         }
 
         private static void Proxy_WorldOpened1(object sender, EventArgs e)

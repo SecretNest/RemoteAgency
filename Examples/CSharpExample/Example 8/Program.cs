@@ -55,7 +55,7 @@ namespace Test
             Hello serviceObject = new Hello();
             serverSite.AddServiceWrapper<IHello>(serviceObject, out Guid serviceWrapperInstanceId);
 
-            IHello proxy = clientSite.AddProxy<IHello>(serviceWrapperInstanceId, out _);
+            IHello proxy = clientSite.AddProxy<IHello>(serviceWrapperInstanceId, out var proxyInstanceId);
             proxy.WorldOpened += Proxy_WorldOpened;
             proxy.MyTestEvent += Proxy_MyTestEvent;
 
@@ -63,7 +63,7 @@ namespace Test
 
             Console.WriteLine("Finished.");
             Console.ReadKey(); //Pause before quit.
-            ((IDisposable)proxy).Dispose();
+            clientSite.RemoveManagingObject(proxyInstanceId, true);
         }
 
         private static void Proxy_WorldOpened(object sender, EventArgs e)
