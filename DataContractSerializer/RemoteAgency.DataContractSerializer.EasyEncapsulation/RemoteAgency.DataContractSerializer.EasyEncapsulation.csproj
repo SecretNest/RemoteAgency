@@ -14,7 +14,9 @@
     <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.3.3</Version>
+    <AssemblyVersion>1.3.3.0</AssemblyVersion>
+    <FileVersion>1.3.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,8 +28,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.1.0" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.0.0" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.3.1" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.3.2" />
   </ItemGroup>
 
 </Project>

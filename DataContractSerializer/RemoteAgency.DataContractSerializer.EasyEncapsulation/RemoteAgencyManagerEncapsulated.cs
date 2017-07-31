@@ -69,6 +69,24 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <summary>
+        /// Will be run for saving the proxy assembly in binary to cache if necessary.
+        /// </summary>
+        /// <seealso cref="IAssemblyCacheOperatings{TSerialized, TEntityBase}.SaveCachedAssemblyImageCallback"/>
+        /// <seealso cref="SaveCachedAssemblyImageCallback{TSerialized, TEntityBase}"/>
+        public SaveCachedAssemblyImageCallback<string, object> SaveCachedProxyAssemblyImageCallback
+        {
+            get
+            {
+                return proxyCreator?.SaveCachedAssemblyImageCallback;
+            }
+            set
+            {
+                if (proxyCreator != null)
+                    proxyCreator.SaveCachedAssemblyImageCallback = value;
+            }
+        }
+
+        /// <summary>
         /// Will be run for querying the cache for the service wrapper assembly specified.
         /// </summary>
         /// <seealso cref="IAssemblyCacheOperatings{TSerialized, TEntityBase}.LoadCachedAssemblyCallback"/>
@@ -101,6 +119,24 @@ namespace SecretNest.RemoteAgency
             {
                 if (serviceWrapperCreator != null)
                     serviceWrapperCreator.SaveCachedAssemblyCallback = value;
+            }
+        }
+
+        /// <summary>
+        /// Will be run for saving the service wrapper assembly in binary to cache if necessary.
+        /// </summary>
+        /// <seealso cref="IAssemblyCacheOperatings{TSerialized, TEntityBase}.SaveCachedAssemblyImageCallback"/>
+        /// <seealso cref="SaveCachedAssemblyImageCallback{TSerialized, TEntityBase}"/>
+        public SaveCachedAssemblyImageCallback<string, object> SaveCachedServiceWrapperAssemblyImageCallback
+        {
+            get
+            {
+                return serviceWrapperCreator?.SaveCachedAssemblyImageCallback;
+            }
+            set
+            {
+                if (serviceWrapperCreator != null)
+                    serviceWrapperCreator.SaveCachedAssemblyImageCallback = value;
             }
         }
 
