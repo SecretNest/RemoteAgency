@@ -208,7 +208,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="interfaceContracts">List of all types of service contract interfaces.</param>
         /// <param name="serviceWrapperInstanceId">Instance id of this service wrapper object.</param>
         /// <returns>Service wrapper object.</returns>
-        /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.AddServiceWrapper{TServiceObject}(ServiceWrapperCreator{TSerialized, TEntityBase}, TServiceObject, List{Type}, Guid)"/>
+        /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.AddServiceWrapper{TServiceObject}(ServiceWrapperCreator{TSerialized, TEntityBase}, TServiceObject, IEnumerable{Type}, Guid)"/>
         public ICommunicate<string> AddServiceWrapper<TServiceObject>(TServiceObject serviceObject, List<Type> interfaceContracts, Guid serviceWrapperInstanceId) where TServiceObject : class
         {
             if (serviceWrapperCreator == null)
@@ -224,7 +224,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="interfaceContracts">List of all types of service contract interfaces.</param>
         /// <param name="serviceWrapperInstanceId">Instance id of this service wrapper object.</param>
         /// <returns>Service wrapper object.</returns>
-        /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.AddServiceWrapper{TServiceObject}(ServiceWrapperCreator{TSerialized, TEntityBase}, TServiceObject, List{Type}, out Guid)"/>
+        /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.AddServiceWrapper{TServiceObject}(ServiceWrapperCreator{TSerialized, TEntityBase}, TServiceObject, IEnumerable{Type}, out Guid)"/>
         public ICommunicate<string> AddServiceWrapper<TServiceObject>(TServiceObject serviceObject, List<Type> interfaceContracts, out Guid serviceWrapperInstanceId) where TServiceObject : class
         {
             if (serviceWrapperCreator == null)
