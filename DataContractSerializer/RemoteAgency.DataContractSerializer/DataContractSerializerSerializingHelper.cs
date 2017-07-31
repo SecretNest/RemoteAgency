@@ -66,7 +66,7 @@ namespace SecretNest.RemoteAgency
                 using (var reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
-                    return result.Replace(" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+                    return result;//.Replace(" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
                 }
             }
         }
