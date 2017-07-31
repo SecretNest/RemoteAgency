@@ -14,15 +14,18 @@ namespace Test
 
     public interface IHello
     {
-        string NormalMethod(Parameter parameter, ref string refParameter, out int outParameter);
+        string NormalMethod(Parameter parameter, ref string refParameter, out int outParameter, params string[] extra);
     }
 
     class Hello : IHello
     {
-        public string NormalMethod(Parameter parameter, ref string refParameter, out int outParameter)
+        public string NormalMethod(Parameter parameter, ref string refParameter, out int outParameter, params string[] extra)
         {
             refParameter += "Changed";
             outParameter = 100;
+            if (extra != null)
+                foreach (var item in extra)
+                    Console.WriteLine(item);
             return parameter.MyValue;
         }
     }
@@ -54,7 +57,7 @@ namespace Test
 
             Parameter parameter = new Parameter() { MyValue = "ParameterValue" };
             string refParameter = "RefValue";
-            var result = proxy.NormalMethod(parameter, ref refParameter, out int outParameter);
+            var result = proxy.NormalMethod(parameter, ref refParameter, out int outParameter, "extra1", "extra2");
             if (result == "ParameterValue" && refParameter == "RefValueChanged" && outParameter == 100)
                 Console.WriteLine("Pass.");
 
