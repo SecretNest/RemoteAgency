@@ -39,25 +39,28 @@ namespace Test
 
     class Program
     {
-        static Dictionary<Guid, RemoteAgencyManagerEncapsulated> sites = new Dictionary<Guid, RemoteAgencyManagerEncapsulated>();
+        static Dictionary<Guid, RemoteAgencyManager<string, string, object>> sites = new Dictionary<Guid, RemoteAgencyManager<string, string, object>>();
         static ConcurrentDictionary<Type, Tuple<Assembly, bool>> assemblyCache = new ConcurrentDictionary<Type, Tuple<Assembly, bool>>();
 
         static void Main(string[] args)
         {
-            RemoteAgencyManagerEncapsulated clientSite1 = new RemoteAgencyManagerEncapsulated(true, false);
-            RemoteAgencyManagerEncapsulated clientSite2 = new RemoteAgencyManagerEncapsulated(true, false);
-            RemoteAgencyManagerEncapsulated serverSite = new RemoteAgencyManagerEncapsulated(false, true);
+            DataContractSerializerEntityCodeBuilder entityCodeBuilder = new DataContractSerializerEntityCodeBuilder();
+            DataContractSerializerSerializingHelper serializingHelper = new DataContractSerializerSerializingHelper();
+            DataContractToJsonPackingHelper packingHelper = new DataContractToJsonPackingHelper();
+            ProxyCreator<string, object> proxyCreator = new ProxyCreator<string, object>(entityCodeBuilder, typeof(DataContractSerializerSerializingHelper));
+            ServiceWrapperCreator<string, object> serviceWrapperCreator = new ServiceWrapperCreator<string, object>(entityCodeBuilder, typeof(DataContractSerializerSerializingHelper));
+
+            RemoteAgencyManager<string, string, object> clientSite1 = new RemoteAgencyManager<string, string, object>(packingHelper, serializingHelper);
+            RemoteAgencyManager<string, string, object> clientSite2 = new RemoteAgencyManager<string, string, object>(packingHelper, serializingHelper);
+            RemoteAgencyManager<string, string, object> serverSite = new RemoteAgencyManager<string, string, object>(packingHelper, serializingHelper);
 
             clientSite1.MessageForSendingPrepared += OnMessageForSendingPrepared;
             clientSite2.MessageForSendingPrepared += OnMessageForSendingPrepared;
             serverSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
 
-            clientSite1.LoadCachedProxyAssemblyCallback = LoadCachedAssembly;
-            clientSite2.LoadCachedProxyAssemblyCallback = LoadCachedAssembly;
-            //clientSite1.SaveCachedProxyAssemblyCallback = SaveCachedAssembly;
-            //clientSite2.SaveCachedProxyAssemblyCallback = SaveCachedAssembly;
-            clientSite1.SaveCachedProxyAssemblyImageCallback = SaveCachedAssemblyImage;
-            clientSite2.SaveCachedProxyAssemblyImageCallback = SaveCachedAssemblyImage;
+            proxyCreator.LoadCachedAssemblyCallback = LoadCachedAssembly;
+            //proxyCreator.SaveCachedAssemblyCallback = SaveCachedAssembly;
+            proxyCreator.SaveCachedAssemblyImageCallback = SaveCachedAssemblyImage;
 
             clientSite1.DefaultTargetSiteId = serverSite.SiteId;
             clientSite2.DefaultTargetSiteId = serverSite.SiteId;
@@ -71,13 +74,13 @@ namespace Test
             serverSite.Connect();
 
             Hello serviceObject = new Hello();
-            serverSite.AddServiceWrapper<IHello>(serviceObject, out Guid serviceWrapperInstanceId);
+            serverSite.AddServiceWrapper<IHello>(serviceWrapperCreator, serviceObject, out Guid serviceWrapperInstanceId);
 
-            IHello proxy1 = clientSite1.AddProxy<IHello>(serviceWrapperInstanceId, out _);
+            IHello proxy1 = clientSite1.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out _);
             proxy1.WorldOpened += Proxy_WorldOpened1;
             proxy1.MyTestEvent += Proxy_MyTestEvent;
 
-            IHello proxy2 = clientSite1.AddProxy<IHello>(serviceWrapperInstanceId, out _);
+            IHello proxy2 = clientSite1.AddProxy<IHello>(proxyCreator, serviceWrapperInstanceId, out _);
             proxy2.WorldOpened += Proxy_WorldOpened2;
             proxy2.MyTestEvent += Proxy_MyTestEvent;
 
