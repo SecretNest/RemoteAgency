@@ -7,16 +7,17 @@
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
     <Product>RemoteAgency</Product>
-    <Description>Encapsulation including DataContractSerializer and RemoteAgency.</Description>
+    <Description>Encapsulation including DataContractSerializer and RemoteAgency.
+NET framework is not supported. Working in .NET core and other compatible environments only.</Description>
     <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
     <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
     <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.3.3</Version>
-    <AssemblyVersion>1.3.3.0</AssemblyVersion>
-    <FileVersion>1.3.3.0</FileVersion>
+    <Version>1.3.4</Version>
+    <AssemblyVersion>1.3.4.0</AssemblyVersion>
+    <FileVersion>1.3.4.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,8 +29,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.3.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.3.2" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.3.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.3.3" />
   </ItemGroup>
 
 </Project>
