@@ -53,6 +53,7 @@ namespace Test
             Console.WriteLine("Finished.");
             Console.ReadKey(); //Pause before quit.
             clientSite.RemoveManagingObject(proxyInstanceId, true);
+            serverSite.RemoveManagingObject(serviceWrapperInstanceId, true);
         }
 
         private static void Proxy_WorldOpened(object sender, EventArgs e)
