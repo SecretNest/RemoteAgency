@@ -46,6 +46,9 @@ namespace Test
             sites.Add(clientSite.SiteId, clientSite);
             sites.Add(serverSite.SiteId, serverSite);
 
+            Console.WriteLine("Client: " + clientSite.SiteId.ToString());
+            Console.WriteLine("Server: " + serverSite.SiteId.ToString());
+
             clientSite.Connect();
             serverSite.Connect();
 
@@ -67,9 +70,18 @@ namespace Test
 
         private static void OnMessageForSendingPrepared(object sender, RemoteAgencyManagerMessageForSendingEventArgs<string> e)
         {
+            try
+            {
+                sites[e.TargetSiteId].ProcessPackagedMessage(e.Message);
+            }
+            catch
+            {
+                Console.WriteLine("Error TargetSiteId: " + e.TargetSiteId.ToString());
+                throw;
+            }
             //Async mode
-            Task.Run(() =>
-                sites[e.TargetSiteId].ProcessPackagedMessage(e.Message));
+            //Task.Run(() =>
+            //    sites[e.TargetSiteId].ProcessPackagedMessage(e.Message));
         }
     }
 }
