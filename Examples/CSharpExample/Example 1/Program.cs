@@ -30,6 +30,9 @@ namespace Test
             clientSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
             serverSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
 
+            clientSite.MissingAssemblyRequesting += MissingAssemblyRequesting;
+            serverSite.MissingAssemblyRequesting += MissingAssemblyRequesting;
+
             clientSite.DefaultTargetSiteId = serverSite.SiteId;
 
             sites.Add(clientSite.SiteId, clientSite);
@@ -47,6 +50,11 @@ namespace Test
 
             Console.WriteLine("Finished.");
             Console.ReadKey(); //Pause before quit.
+        }
+
+        private static void MissingAssemblyRequesting(object sender, AssemblyRequestingEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private static void OnMessageForSendingPrepared(object sender, RemoteAgencyManagerMessageForSendingEventArgs<string> e)

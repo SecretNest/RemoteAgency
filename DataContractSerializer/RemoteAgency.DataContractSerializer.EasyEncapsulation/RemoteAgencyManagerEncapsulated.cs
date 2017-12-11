@@ -16,6 +16,25 @@ namespace SecretNest.RemoteAgency
         ProxyCreator<string, object> proxyCreator;
         ServiceWrapperCreator<string, object> serviceWrapperCreator;
 
+        /// <summary>
+        /// Clear cached assemblies using in Roslyn.
+        /// </summary>
+        public void ClearBuilderAssemblyCache()
+        {
+            proxyCreator?.ClearBuilderAssemblyCache();
+            serviceWrapperCreator?.ClearBuilderAssemblyCache();
+        }
+        
+        /// <summary>
+        /// Occurs when a missing assembly / module, required by creator, needs to be resolved.
+        /// </summary>
+        public event EventHandler<AssemblyRequestingEventArgs> MissingAssemblyRequesting;
+
+        private void OnMissingAssemblyRequesting(object sender, AssemblyRequestingEventArgs e)
+        {
+            MissingAssemblyRequesting?.Invoke(this, e);
+        }
+
 
         /// <summary>
         /// Initializes an instance of the RemoteAgencyManagerEncapsulated.
@@ -27,9 +46,15 @@ namespace SecretNest.RemoteAgency
         {
             DataContractSerializerEntityCodeBuilder entityBuilder = new DataContractSerializerEntityCodeBuilder();
             if (createProxyCreator)
+            {
                 proxyCreator = new ProxyCreator<string, object>(entityBuilder, typeof(DataContractSerializerSerializingHelper));
+                proxyCreator.MissingAssemblyRequesting += OnMissingAssemblyRequesting;
+            }
             if (createServiceWrapperCreator)
+            {
                 serviceWrapperCreator = new ServiceWrapperCreator<string, object>(entityBuilder, typeof(DataContractSerializerSerializingHelper));
+                serviceWrapperCreator.MissingAssemblyRequesting += OnMissingAssemblyRequesting;
+            }
         }
 
         /// <summary>

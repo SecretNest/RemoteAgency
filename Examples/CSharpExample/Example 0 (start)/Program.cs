@@ -17,6 +17,8 @@ namespace Test
             clientSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
             serverSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
 
+            clientSite.MissingAssemblyRequesting += ClientSite_MissingAssemblyRequesting;
+
             clientSite.DefaultTargetSiteId = serverSite.SiteId;
 
             sites.Add(clientSite.SiteId, clientSite);
@@ -29,6 +31,11 @@ namespace Test
 
             Console.WriteLine("Finished.");
             Console.ReadKey(); //Pause before quit.
+        }
+
+        private static void ClientSite_MissingAssemblyRequesting(object sender, AssemblyRequestingEventArgs e)
+        {
+            Console.WriteLine("Whoops.");
         }
 
         private static void OnMessageForSendingPrepared(object sender, RemoteAgencyManagerMessageForSendingEventArgs<string> e)
