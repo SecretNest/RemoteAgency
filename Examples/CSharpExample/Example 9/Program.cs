@@ -90,6 +90,7 @@ namespace Test
             Console.ReadKey(); //Pause before quit.
             clientSite1.RemoveManagingObject(proxyInstance1Id, true);
             clientSite2.RemoveManagingObject(proxyInstance2Id, true);
+            serverSite.RemoveManagingObject(serviceWrapperInstanceId, true);
         }
 
         private static void Proxy_WorldOpened1(object sender, EventArgs e)
