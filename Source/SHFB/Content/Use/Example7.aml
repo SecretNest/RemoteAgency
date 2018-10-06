@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="824b7af8-08c6-493d-b694-e05bfe64b753" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Through event support, the server side can send message back to client side.</para>
+    </introduction>
+
+    <procedure>
+      <title>Event</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Define a service contract interface.</para>
+            <code language="c#">
+public interface IHello
+{
+  event EventHandler WorldOpened;
+  void HelloWorld();
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Create the service class.</para>
+            <code language="c#">
+class Hello : IHello
+{
+  public event EventHandler WorldOpened;
+
+  public void HelloWorld()
+  {
+    //sender cannot be this due to serializing support missing.
+    WorldOpened?.Invoke(null, EventArgs.Empty);
+  }
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, define the service object, create a service wrapper and put it into server site.</para>
+            <code language="c#">
+Hello serviceObject = new Hello();
+//Because we are using easy encapsulation, all creators, serializing helpers, packing helpers and entity code builders are encapsulated into just one call.
+serverSite.AddServiceWrapper&lt;IHello&gt;(serviceObject, out Guid serviceWrapperInstanceId);
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Add a method for handling event for client.</para>
+            <code language="c#">
+private static void Proxy_WorldOpened(object sender, EventArgs e)
+{
+  Console.WriteLine(&quot;Hello World!&quot;);
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, create a proxy object, put it into client site, and add the handler of the event.</para>
+            <code language="c#">
+IHello proxy = clientSite.AddProxy&lt;IHello&gt;(serviceWrapperInstanceId, out _);
+proxy.WorldOpened += Proxy_WorldOpened;
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, call the method of proxy.</para>
+            <code language="c#">
+proxy.HelloWorld();
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Dispose objects after testing.</para>
+            <code language="c#">
+clientSite.RemoveManagingObject(proxyInstanceId, true);
+serverSite.RemoveManagingObject(serviceWrapperInstanceId, true);
+            </code>
+          </content>
+        </step>
+      </steps>
+    </procedure>
+
+    <section>
+      <title>Source code package</title>
+      <content>
+        <para>
+          All examples can code can be fetched on <externalLink>
+            <linkText>Github</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+          </externalLink>.
+        </para>
+        <para>
+          Code file of this example: <externalLink>
+            <linkText>Github C#</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency/blob/master/Examples/CSharpExample/Example%207/Program.cs</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="c84610d8-63f7-48b7-aa35-3a66c03859a1"/>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

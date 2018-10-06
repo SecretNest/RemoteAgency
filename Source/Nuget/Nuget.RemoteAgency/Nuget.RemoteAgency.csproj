@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netcoreapp20</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Description>
+      Remote Agency is built for making the communicating among components in different computers easier.
+      Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.
+    </Description>
+    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <Product>Remote Agency</Product>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl>https://creativecommons.org/licenses/by-nd/4.0/</PackageLicenseUrl>
+    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.5.1</Version>
+    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+    <FileVersion>1.5.1.0</FileVersion>
+    <PackageReleaseNotes>
+      Add: dotnet framework 4.6, dotnet core app 2.0 support.
+      Remove: dotnet standard 1.x support.
+      Add: Error handling while serializing and deserializing data package.
+      Change: Roslyn calling code is changed. Event MissingAssemblyRequesting is added in proxy and service wrapper creator. ImportAssemblyAttribute is changed.
+      Fix: A bug in processing property set method.
+    </PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp20'">
+    <DefineConstants>netcore</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp20'">
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <!--<PackageReference Include="Microsoft.CSharp" Version="4.4.0" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <Import Project="..\..\Code\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
+
+</Project>

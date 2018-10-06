@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="428d92df-fe3a-4290-aac9-e39cc8ed8936" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>This example is based on example 8, but</para>
+      <list class="bullet">
+        <listItem>
+          <para>Two clients on two different sites are involved;</para>
+        </listItem>
+        <listItem>
+          <para>Changed to use standard RemoteAgency and Data Contract Serializer instead of EasyEncapsulation used in other examples; and,</para>
+        </listItem>
+        <listItem>
+          <para>Dealing with assembly cache.</para>
+        </listItem>
+      </list>
+    </introduction>
+
+    <procedure>
+      <title>Event with multiple clients</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Create a Console Application (.NET Core App 2 or .NET framework 4.6+) in Visual Studio or other IDE.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Add SecretNest.RemoteAgency and SecretNest.RemoteAgency.DataContractSerializer from NuGet.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Define a service contract interface and the delegate, create the service class like in Example 8.</para>
+            <code language="c#">
+public delegate string MyTestHandler(string value);
+
+//[ProxyCacheable]
+public interface IHello
+{
+  [EventParameterIgnored(&quot;sender&quot;)]
+  event EventHandler WorldOpened;
+
+  event MyTestHandler MyTestEvent;
+  void HelloWorld();
+}
+
+class Hello : IHello
+{
+  public event EventHandler WorldOpened;
+  public event MyTestHandler MyTestEvent;
+
+  public void HelloWorld()
+  {
+    WorldOpened?.Invoke(this, EventArgs.Empty);
+
+    string value = MyTestEvent?.Invoke(&quot;Request&quot;);
+    if (value == &quot;Response&quot;)
+      Console.WriteLine(&quot;Pass.&quot;);
+  }
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Add "using"s to the top.</para>
+            <code language="c#">
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SecretNest.RemoteAgency;
+using SecretNest.RemoteAgency.Attributes;
+using System.Collections.Concurrent;
+using System.Reflection;
+using System.IO;
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Declares the dictionary holding all managers of all sites in the top of class.</para>
+            <code language="c#">
+static Dictionary&lt;Guid, RemoteAgencyManager&lt;string, string, object&gt;&gt; sites = new Dictionary&lt;Guid, RemoteAgencyManager&lt;string, string, object&gt;&gt;();
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, define all helper objects.</para>
+            <code language="c#">
+//3 helper provided by Data Contract Serializer
+DataContractSerializerEntityCodeBuilder entityCodeBuilder = new DataContractSerializerEntityCodeBuilder();
+DataContractSerializerSerializingHelper serializingHelper = new DataContractSerializerSerializingHelper();
+DataContractToJsonPackingHelper packingHelper = new DataContractToJsonPackingHelper();
+
+//Create the proxy creator for creating proxy objects of client sites.
+ProxyCreator&lt;string, object&gt; proxyCreator = new ProxyCreator&lt;string, object&gt;(entityCodeBuilder, typeof(DataContractSerializerSerializingHelper));
+
+//Create the service wrapper creator for creating service wrapper object of server site.
+ServiceWrapperCreator&lt;string, object&gt; serviceWrapperCreator = new ServiceWrapperCreator&lt;string, object&gt;(entityCodeBuilder, typeof(DataContractSerializerSerializingHelper));
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, define manager object for each site.</para>
+            <code language="c#">
+RemoteAgencyManager&lt;string, string, object&gt; clientSite1 = new RemoteAgencyManager&lt;string, string, object&gt;(packingHelper, serializingHelper);
+RemoteAgencyManager&lt;string, string, object&gt; clientSite2 = new RemoteAgencyManager&lt;string, string, object&gt;(packingHelper, serializingHelper);
+RemoteAgencyManager&lt;string, string, object&gt; serverSite = new RemoteAgencyManager&lt;string, string, object&gt;(packingHelper, serializingHelper);
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Prepare the method for message sending in class. Asynchronous call is chosen for simulating the network environment.</para>
+            <code language="c#">
+private static void OnMessageForSendingPrepared(object sender, RemoteAgencyManagerMessageForSendingEventArgs&lt;string&gt; e)
+{
+  //Async mode
+  Task.Run(() =&gt;
+    sites[e.TargetSiteId].ProcessPackagedMessage(e.Message));
+}
+            </code>
+            <para>Add attach it to manager objects in Main method.</para>
+            <code language="c#">
+clientSite1.MessageForSendingPrepared += OnMessageForSendingPrepared;
+clientSite2.MessageForSendingPrepared += OnMessageForSendingPrepared;
+serverSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
+            </code>            
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, set the site id of server as the default target of clients.</para>
+            <code language="c#">
+clientSite1.DefaultTargetSiteId = serverSite.SiteId;
+clientSite2.DefaultTargetSiteId = serverSite.SiteId;
+            </code>
+            <para>When client send a message out, a target need to be specified. Check the <link xlink:href="3484da6c-de69-4562-8f77-0d2c92b273b6">target site management</link> for details.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, add manager objects to dictionary.</para>
+            <code language="c#">
+sites.Add(clientSite1.SiteId, clientSite1);
+sites.Add(clientSite2.SiteId, clientSite2);
+sites.Add(serverSite.SiteId, serverSite);
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, change the status of manager objects to connected.</para>
+            <code language="c#">
+clientSite1.Connect();
+clientSite2.Connect();
+serverSite.Connect();
+            </code>
+            <para>Only connected manager object can handle the message sending. Check the <link xlink:href="ae682acd-f05a-4470-a25a-9c19ce4e4d16">IO status</link> for details.
+          </para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, define the service object, create a service wrapper and put it into server site.</para>
+            <code language="c#">
+Hello serviceObject = new Hello();
+serverSite.AddServiceWrapper&lt;IHello&gt;(serviceWrapperCreator, serviceObject, out Guid serviceWrapperInstanceId);
+            </code>
+            <para>Service Wrapper Creator is required for creating the service wrapper object.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Add methods for handling events for clients.</para>
+            <code language="c#">
+private static void Proxy_WorldOpened1(object sender, EventArgs e)
+{
+  Console.WriteLine(&quot;Proxy1: Hello World!&quot;);
+}
+
+private static void Proxy_WorldOpened2(object sender, EventArgs e)
+{
+  Console.WriteLine(&quot;Proxy2: Hello World!&quot;);
+}
+
+private static string Proxy_MyTestEvent(string value)
+{
+  if (value == &quot;Request&quot;)
+    return &quot;Response&quot;;
+  else
+    return &quot;Unknown&quot;;
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, create proxy objects, put them into client sites, and add the handlers of events.</para>
+            <code language="c#">
+IHello proxy1 = clientSite1.AddProxy&lt;IHello&gt;(proxyCreator, serviceWrapperInstanceId, out var proxyInstance1Id);
+proxy1.WorldOpened += Proxy_WorldOpened1;
+proxy1.MyTestEvent += Proxy_MyTestEvent;
+
+IHello proxy2 = clientSite2.AddProxy&lt;IHello&gt;(proxyCreator, serviceWrapperInstanceId, out var proxyInstance2Id);
+proxy2.WorldOpened += Proxy_WorldOpened2;
+proxy2.MyTestEvent += Proxy_MyTestEvent;
+            </code>
+            <para>Proxy Creator is required for creating the proxy object.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, call the method of proxy1.</para>
+            <code language="c#">
+proxy1.HelloWorld();
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Finalizing</para>
+            <code language="c#">
+Console.WriteLine(&quot;Finished.&quot;);
+Console.ReadKey(); //Pause before quit.
+clientSite1.RemoveManagingObject(proxyInstance1Id, true);
+clientSite2.RemoveManagingObject(proxyInstance2Id, true);
+serverSite.RemoveManagingObject(serviceWrapperInstanceId, true);
+            </code>
+          </content>
+        </step>
+      </steps>
+      <!-- <conclusion>Optional conclusion</conclusion> -->
+    </procedure>
+
+    <procedure>
+      <title>Dealing with assembly cache</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Mark the interface [ProxyCacheable] (<codeEntityReference>T:SecretNest.RemoteAgency.Attributes.ProxyCacheableAttribute</codeEntityReference>) for proxy caching</para>
+            <code language="c#"></code>
+            <para>If you need service wrapper caching, mark [ServiceWrapperCacheable] (<codeEntityReference>T:SecretNest.RemoteAgency.Attributes.ServiceWrapperCacheableAttribute</codeEntityReference>) on the class of service.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In class level, prepare a dictionary for caching.</para>
+            <code language="c#">
+static ConcurrentDictionary&lt;Type, Tuple&lt;Assembly, bool&gt;&gt; assemblyCache = new ConcurrentDictionary&lt;Type, Tuple&lt;Assembly, bool&gt;&gt;();
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Prepare a method for loading from cache in class level.</para>
+            <code language="c#">
+static Assembly LoadCachedAssembly(Type type, out bool disposeRequired)
+{
+  if (assemblyCache.TryGetValue(type, out var item))
+  {
+    disposeRequired = item.Item2;
+    return item.Item1;
+  }
+  else
+  {
+    disposeRequired = false;
+    return null;
+  }
+}
+            </code>
+            <para>And attach it to the creator in Main method.</para>
+            <code language="c#">
+proxyCreator.LoadCachedAssemblyCallback = LoadCachedAssembly;
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>To save the created assembly to cache, you have 2 ways.</para>
+            <list class="bullet">
+              <listItem>
+                <para>If you just need to cache the assembly in memory, you can receive the assembly object directly.</para>
+                <para>Prepare a method for saving to cache in class level.</para>
+                <code language="c#">
+static void SaveCachedAssembly(Type type, bool disposeRequired, Assembly assembly)
+{
+    Tuple&lt;Assembly, bool&gt; item = new Tuple&lt;Assembly, bool&gt;(assembly, disposeRequired);
+    assemblyCache.AddOrUpdate(type, item, (i, j) =&gt; item);
+}
+                </code>
+                <para>And attach it to the creator in Main method.</para>
+                <code language="c#">
+proxyCreator.SaveCachedAssemblyCallback = SaveCachedAssembly;
+                </code>
+              </listItem>
+              <listItem>
+                <para>If you want to save the assembly to disk also, you may want to get the byte array of the assembly.</para>
+                <para>Prepare a method for saving to cache in class level.</para>
+                <para>Code for dotnet core app 2:</para>
+                <code language="c#">
+Assembly assembly;
+using (MemoryStream ms = new MemoryStream(image))
+{
+  assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
+}
+Tuple&lt;Assembly, bool&gt; item = new Tuple&lt;Assembly, bool&gt;(assembly, disposeRequired);
+assemblyCache.AddOrUpdate(type, item, (i, j) =&gt; item);
+                </code>
+                <para>Or, code for dotnet framework 4.6:</para>
+                <code language="c#">
+Assembly assembly = Assembly.Load(image);
+Tuple&lt;Assembly, bool&gt; item = new Tuple&lt;Assembly, bool&gt;(assembly, disposeRequired);
+assemblyCache.AddOrUpdate(type, item, (i, j) =&gt; item);
+                </code>
+                <para>And attach it to the creator in Main method.</para>
+                <code language="c#">
+proxyCreator.SaveCachedAssemblyImageCallback = SaveCachedAssemblyImage;
+                </code>
+              </listItem>
+            </list>
+            <para>You can use these 2 ways combined also.</para>
+          </content>
+        </step>
+      </steps>
+    </procedure>
+    
+    <section>
+      <title>Source code package</title>
+      <content>
+        <para>
+          All examples can code can be fetched on <externalLink>
+            <linkText>Github</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+          </externalLink>.
+        </para>
+        <para>
+          Code file of this example (core app 2): <externalLink>
+            <linkText>Github C#</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency/blob/master/Examples/CSharpExample/Example%209/Program.cs</linkUri>
+          </externalLink>
+        </para>
+        <para>
+          Code file of this example (framework 4.6): <externalLink>
+            <linkText>Github C#</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency/blob/master/Examples/CSharpExample/ExampleFx%209/Program.cs</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </section>
+  </developerWalkthroughDocument>
+</topic>

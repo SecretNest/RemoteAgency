@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c84610d8-63f7-48b7-aa35-3a66c03859a1" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+        <para>By following the examples provided, you could know how to use Remote Agency easily.</para>
+        <para>In these cases, SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation is chosen.</para>
+    </introduction>
+
+    <procedure>
+      <title>Preparing</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Create a Console Application (.NET Core App 2 or .NET framework 4.6+) in Visual Studio or other IDE;</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Add SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation from NuGet; and,</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Writing the initializing code for Remote Agency.</para>
+            <code language="c#">
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SecretNest.RemoteAgency;
+
+namespace Test
+{
+  class Program
+  {
+    //Contains all sites for routing of message sending
+    static Dictionary&lt;Guid, RemoteAgencyManagerEncapsulated&gt; sites = new Dictionary&lt;Guid, RemoteAgencyManagerEncapsulated&gt;();
+
+    static void Main(string[] args)
+    {
+      //Create client site and server site.
+      //Each site can contains multiple proxy and service wrapper objects.
+      //In our tests, we'll use only one proxy or service wrapper object on each site.
+      RemoteAgencyManagerEncapsulated clientSite = new RemoteAgencyManagerEncapsulated(true, false);
+      RemoteAgencyManagerEncapsulated serverSite = new RemoteAgencyManagerEncapsulated(false, true);
+
+      //Handle the message sending
+      clientSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
+      serverSite.MessageForSendingPrepared += OnMessageForSendingPrepared;
+
+      //Set the default target site of clientSite.
+      //The default target site of serverSite is not necessary. All response messages will be sent back to site of sender directly.
+      clientSite.DefaultTargetSiteId = serverSite.SiteId;
+
+      //Add sites to a dictionary for message routing.
+      sites.Add(clientSite.SiteId, clientSite);
+      sites.Add(serverSite.SiteId, serverSite);
+
+      //Make status of sites to connected.
+      clientSite.Connect();
+      serverSite.Connect();
+
+      //More testing code should be written here.
+
+      Console.WriteLine(&quot;Finished.&quot;);
+      Console.ReadKey(); //Pause before quit.
+    }
+
+    private static void OnMessageForSendingPrepared(object sender, RemoteAgencyManagerMessageForSendingEventArgs&lt;string&gt; e)
+    {
+      //Async mode sending message to the target site specified.
+      Task.Run(() =&gt;
+        sites[e.TargetSiteId].ProcessPackagedMessage(e.Message));
+    }
+  }
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Now, you are all set to go into any examples.</para>
+          </content>
+        </step>
+      </steps>
+    </procedure>
+    
+    <section>
+      <title>Source code package</title>
+      <content>
+        <para>All examples can code can be fetched on <externalLink>
+          <linkText>Github</linkText>
+          <linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+        </externalLink>.</para>
+        <para>Code file of this example: <externalLink>
+          <linkText>Github C#</linkText>
+          <linkUri>https://github.com/scegg/RemoteAgency/blob/master/Examples/CSharpExample/Example%200%20(start)/Program.cs</linkUri>
+        </externalLink></para>
+      </content>
+    </section>
+    
+    <relatedTopics>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

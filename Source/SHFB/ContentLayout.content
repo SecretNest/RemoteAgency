@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="e572b781-93d2-4e52-afb1-8ce06607856b" visible="True" isDefault="true" title="Welcome to the Remote Agency">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="Welcome" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="6a6fa38b-cdeb-4842-a313-c21ef5fe2d5c" visible="True" noFile="true" isExpanded="true" title="Components">
+    <Topic id="7947073a-78df-4f60-89b1-926ed9449451" visible="True" title="Remote Agency" />
+    <Topic id="271689f4-6c83-4900-9b06-1e52f7e0076d" visible="True" title="Remote Agency Base" />
+    <Topic id="8eee49c3-2aa3-4ea2-bbb6-e72eecaa2aa2" visible="True" title="Data Contract Serializer" />
+    <Topic id="522b4d73-68a4-46fb-9ec0-742b16305fbb" visible="True" title="Data Contract Serializer Easy Encapsulation" />
+  </Topic>
+  <Topic id="2fe3f60f-7261-4cb5-826b-b84bfeab6a3e" visible="True" isExpanded="true" title="How to">
+    <Topic id="ecc78678-d7a8-41b7-94ce-8743add59236" visible="True" isExpanded="true" title="Tutorial">
+      <Topic id="ae682acd-f05a-4470-a25a-9c19ce4e4d16" visible="True" title="IO of Manager" />
+      <Topic id="450e3fa8-d346-49eb-97e6-1a787ddaf694" visible="True" title="Managing Objects (Proxy and Service Wrapper)" />
+      <Topic id="3484da6c-de69-4562-8f77-0d2c92b273b6" visible="True" title="Target Site Management" />
+      <Topic id="5c397505-efd8-429a-9ebf-d163295cebbb" visible="True" title="Disposing Proxy" />
+      <Topic id="6aa5c978-00d2-4273-9b80-0a4ad3acdd68" visible="True" isSelected="true" title="Assembly Requirement" />
+      <Topic id="626ce0a5-b968-4dab-b5dd-0c73b3c0a5c6" visible="True" title="Exception Redirect" />
+    </Topic>
+    <Topic id="c84610d8-63f7-48b7-aa35-3a66c03859a1" visible="True" title="Example: Use Remote Agency">
+      <Topic id="d4df62b1-2c8f-471a-bc08-931e0bb21b0a" visible="True" title="1 Hello World" />
+      <Topic id="222b9528-0832-45f0-9eff-b6fc496212cb" visible="True" title="2 Method with parameter, ref, out and return." />
+      <Topic id="9c0126a8-a683-4903-86f0-d7737e2ba575" visible="True" title="3 Method with two way property and overload." />
+      <Topic id="fbcae2ec-4424-4fbb-82bb-0459c841eec5" visible="True" title="4 Generic method" />
+      <Topic id="b087c8c6-40f9-41de-adc1-16c90ef8e25d" visible="True" title="5 Property" />
+      <Topic id="d33e44c6-26cb-4396-880d-dfd3bb4783b1" visible="True" title="6 Multiple contracts" />
+      <Topic id="824b7af8-08c6-493d-b694-e05bfe64b753" visible="True" title="7 Event" />
+      <Topic id="94ec2756-b127-468a-8c6f-ce18bbefbafb" visible="True" title="8 Advanced event" />
+      <Topic id="428d92df-fe3a-4290-aac9-e39cc8ed8936" visible="True" title="9 Event with multiple clients" />
+    </Topic>
+    <Topic id="0a431cb5-f6dc-4fa3-ae88-33e70d7c8442" visible="True" title="Develop a serializer" />
+    <Topic id="fdc35204-77be-4f29-90a2-919bdfca97a2" visible="True" title="Disposing" />
+    <Topic id="162ef05d-ab9f-49e0-ad56-2ed045f7aae0" visible="True" title="Handle network transportations" />
+  </Topic>
+  <Topic id="7c0ee033-76bf-4b1c-8db0-a00db18a3d1f" visible="True" apiParentMode="InsertBefore" title="Version History">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="version, history" />
+    </HelpKeywords>
+  </Topic>
+</Topics>
