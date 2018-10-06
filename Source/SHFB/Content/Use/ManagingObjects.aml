@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="450e3fa8-d346-49eb-97e6-1a787ddaf694" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Adding and removing proxy and service wrapper objects.</para>
+    </introduction>
+
+    <section>
+      <title>General</title>
+      <content>
+        <para>You can choose to manage the lifespan of the proxy and service wrapper objects your own, or by manager instance.</para>
+        <list class="bullet">
+          <listItem>
+            <para>If you want to manage the lifespan your own:</para>
+            <list class="nobullet">
+              <listItem>
+                <para>Use ProxyCreator or ServiceWrapperCreator to create the object.</para>
+              </listItem>
+              <listItem>
+                <para>Add them to manager.</para>
+              </listItem>
+              <listItem>
+                <para>You can choose whether to dispose the object when removal from manager. If you choose not to, you need to dispose them by your own code when necessary.</para>
+              </listItem>
+            </list>
+            <para>It's possible to add an object to multiple manager instances, but it's not recommended.</para>
+          </listItem>
+          <listItem>
+            <para>If you want the manager instance to manage the lifespan:</para>
+            <list class="nobullet">
+              <listItem>
+                <para>Calling add methods with the object of ProxyCreator or ServiceWrapperCreator, will create the object and add it to manager in one process.</para>
+              </listItem>
+              <listItem>
+                <para>Manager will handle the disposing process when object removing.</para>
+              </listItem>
+            </list>
+            <para>This way is easier and recommended.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <section>
+      <title>Add and query proxy objects</title>
+      <content>
+        <para>To create a proxy object manually, you can use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.ProxyCreator`2.CreateProxyObject``1(System.Boolean@)</codeEntityReference>.</para>
+        <para>To add a proxy object to manager, you can call one of these methods:</para>
+        <list class="bullet">
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddProxy``1(``0,System.Boolean,System.Guid,System.Nullable{System.Guid})</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddProxy``1(SecretNest.RemoteAgency.ProxyCreator{`1,`2},System.Guid,System.Guid)</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddProxy``1(SecretNest.RemoteAgency.ProxyCreator{`1,`2},System.Guid,System.Guid@)</codeEntityReference></para>
+          </listItem>
+        </list>
+        <para>When instance id absent while creating proxy object, a randomized value will be used.</para>
+        <para>Use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.GetAllProxies</codeEntityReference> and <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.GetAllProxies``1</codeEntityReference> to query the proxies managed by this manager instance.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Add and query service wrapper objects</title>
+      <content>
+        <para>To create a service wrapper object manually, you can use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.ServiceWrapperCreator`2.CreateServiceWrapperObject``1(System.Boolean@,``0,System.Type)</codeEntityReference> or <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.ServiceWrapperCreator`2.CreateServiceWrapperObject``1(System.Boolean@,``0,System.Type[])</codeEntityReference>, based on whether one or multiple service contract interfaces are implemented by this service object.</para>
+        <para>To add a service wrapper object based on one service contract interface to manager, you can call one of these methods:</para>
+        <list class="bullet">
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper``1(System.Object,System.Boolean,System.Nullable{System.Guid})</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper``1(SecretNest.RemoteAgency.ServiceWrapperCreator{`1,`2},``0,System.Guid)</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper``1(SecretNest.RemoteAgency.ServiceWrapperCreator{`1,`2},``0,System.Guid@)</codeEntityReference></para>
+          </listItem>
+        </list>
+        <para>To add a service wrapper object based on multiple service contract interfaces to manager, you can call one of these methods:</para>
+        <list class="bullet">
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper(System.Object,System.Collections.Generic.IEnumerable{System.Type},System.Boolean,System.Nullable{System.Guid})</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper``1(SecretNest.RemoteAgency.ServiceWrapperCreator{`1,`2},``0,System.Collections.Generic.IEnumerable{System.Type},System.Guid)</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.AddServiceWrapper``1(SecretNest.RemoteAgency.ServiceWrapperCreator{`1,`2},``0,System.Collections.Generic.IEnumerable{System.Type},System.Guid@)</codeEntityReference></para>
+          </listItem>
+        </list>
+        <para>When multiple service contract interfaces are implemented by one service object, it's recommended to create one service wrapper to cover all interfaces, especially when you use caching function.</para>
+        <para>Use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.GetAllServiceWrappers</codeEntityReference> and <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.GetAllServiceWrappers``1</codeEntityReference> to query the service wrappers managed by this manager instance.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Remove</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>To remove one object from manager, use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.RemoveManagingObject(System.Guid,System.Boolean)</codeEntityReference>.</para>
+          </listItem>
+          <listItem>
+            <para>To remove all objects from manager, use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.RemoveAllManagingObjects(System.Boolean)</codeEntityReference>.</para>
+          </listItem>
+          <listItem>
+            <para>To remove one service contract interface from a service wrapper object, use <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.RemoveTypeFromServiceWrapper(System.Guid,System.Type,System.Boolean@,System.Boolean)</codeEntityReference>.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="ecc78678-d7a8-41b7-94ce-8743add59236"/>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

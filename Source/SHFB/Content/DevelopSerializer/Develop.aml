@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="0a431cb5-f6dc-4fa3-ae88-33e70d7c8442" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Develop a serializer</para>
+    </introduction>
+
+    <section>
+      <title>Preparing</title>
+      <content>
+        <para>The things you need:</para>
+        <list class="bullet">
+          <listItem>
+            <para>An editor that support developing class library.</para>
+          </listItem>
+          <listItem>
+            <para>Decide which class should be chosen as the base class of all entity.</para>
+            <para>Object should be a good choice if there is no special requirement.</para>
+          </listItem>
+          <listItem>
+            <para>The data format of serialized data.</para>
+            <para>Usually, string or a binary format, like byte array, is a good approach.</para>
+          </listItem>
+          <listItem>
+            <para>The data format of network message.</para>
+            <para>Serialized data and message headers will be packaged into this format while transferring among different sites.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <section>
+      <title>Coding</title>
+      <content>
+        <list class="ordered">
+          <listItem>
+            <para>Create a class library project;</para>
+          </listItem>
+          <listItem>
+            <para>Reference NuGet package: SecretNest.RemoteAgency.Base;</para>
+          </listItem>
+          <listItem>
+            <para>Create an inherited class based on <codeEntityReference>T:SecretNest.RemoteAgency.EntityCodeBuilderBase</codeEntityReference>;</para>
+            <para>This class will be used to generate entity classes and the code for accessing them.</para>
+          </listItem>
+          <listItem>
+            <para>Create an inherited class based on <codeEntityReference>T:SecretNest.RemoteAgency.SerializingHelperBase`2</codeEntityReference>;</para>
+            <para>This class will be used to serialize asset accessing to a message and reverse.</para>
+            <para>This class must be set to public. The instances of this class will be initialized and used in generated classes also.</para>
+          </listItem>
+          <listItem>
+            <para>Create an inherited class based on <codeEntityReference>T:SecretNest.RemoteAgency.PackingHelperBase`2</codeEntityReference>;</para>
+            <para>This class will be used to packing and unpacking message.</para>
+          </listItem>
+          <listItem>
+            <para>(Optional) You may create a class like <codeEntityReference>T:SecretNest.RemoteAgency.RemoteAgencyManagerEncapsulated</codeEntityReference> to make user accessing easier.</para>
+          </listItem>
+        </list>
+        <para>You could use SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation as an example while writing your own code. Code is available at github.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="271689f4-6c83-4900-9b06-1e52f7e0076d" />
+      <link xlink:href="8eee49c3-2aa3-4ea2-bbb6-e72eecaa2aa2" />
+      <link xlink:href="522b4d73-68a4-46fb-9ec0-742b16305fbb" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="5c397505-efd8-429a-9ebf-d163295cebbb" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>The disposing message of proxy object need to be transferred to the service wrapper. If the transportation of message is not reliable, this need to be handle by user code.</para>
+    </introduction>
+
+    <section>
+      <title>Proxy need disposing</title>
+      <content>
+        <para>On a reliable transportation, the disposing message of proxy object will be sent to service wrapper automatically. These code is only for remediation.</para>
+        <para>When a proxy object need disposing is found, <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyManager`3.DisposingMessageRequiredProxyAdded</codeEntityReference> will be raised.</para>
+        <para>When a proxy object, which needs sending disposing message, is removed, <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyManager`3.DisposingMessageRequiredProxyRemoved</codeEntityReference> will be raised.</para>
+        <para>When a proxy object is disposed, <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.OnProxyDisposed(System.Guid)</codeEntityReference> should be called.</para>
+        <para>When a whole site is down, you can remove each proxy of it, or simply call <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyManager`3.OnProxiesOfSiteDisposed(System.Guid)</codeEntityReference>.</para>
+        <para>Call a method for a proxy which is disposed will be ignored.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="ecc78678-d7a8-41b7-94ce-8743add59236"/>
+      <link xlink:href="fdc35204-77be-4f29-90a2-919bdfca97a2"/>
+      <link xlink:href="162ef05d-ab9f-49e0-ad56-2ed045f7aae0"/>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

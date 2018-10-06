@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="d4df62b1-2c8f-471a-bc08-931e0bb21b0a" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>The most simple method calling.</para>
+    </introduction>
+
+    <procedure>
+      <title>Hello world (simple method calling)</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Define a service contract interface.</para>
+            <code language="c#">
+public interface IHello
+{
+  void HelloWorld();
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Create the service class.</para>
+            <code language="c#">
+class Hello : IHello
+{
+  public void HelloWorld()
+  {
+    Console.WriteLine("Hello World.");
+  }
+}
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, define the service object, create a service wrapper and put it into server site.</para>
+            <code language="c#">
+Hello serviceObject = new Hello();
+//Because we are using easy encapsulation, all creators, serializing helpers, packing helpers and entity code builders are encapsulated into just one call.
+serverSite.AddServiceWrapper&lt;IHello&gt;(serviceObject, out Guid serviceWrapperInstanceId);
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, create a proxy object and put it into client site.</para>
+            <code language="c#">
+IHello proxy = clientSite.AddProxy&lt;IHello&gt;(serviceWrapperInstanceId, out _);
+            </code>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>In Main method, call the method of proxy.</para>
+            <code language="c#">
+proxy.HelloWorld();
+            </code>
+          </content>
+        </step>
+      </steps>
+    </procedure>
+
+    <section>
+      <title>Source code package</title>
+      <content>
+        <para>
+          All examples can code can be fetched on <externalLink>
+            <linkText>Github</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+          </externalLink>.
+        </para>
+        <para>
+          Code file of this example: <externalLink>
+            <linkText>Github C#</linkText>
+            <linkUri>https://github.com/scegg/RemoteAgency/blob/master/Examples/CSharpExample/Example%201/Program.cs</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="c84610d8-63f7-48b7-aa35-3a66c03859a1"/>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

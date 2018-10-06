@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netcoreapp20</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.Base</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
+    <Description>Base classes, interfaces and attributes of Remote Agency.</Description>
+    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <PackageLicenseUrl>https://creativecommons.org/licenses/by-nd/4.0/</PackageLicenseUrl>
+    <Copyright>Allen Cui</Copyright>
+    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.5.0</Version>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+    <PackageReleaseNotes>
+      Add: dotnet framework 4.6, dotnet core app 2.0 support.
+      Remove: dotnet standard 1.x support.
+      Change: ImportAssemblyAttribute is changed.
+    </PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <Import Project="..\..\Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems" Label="Shared" />
+
+</Project>

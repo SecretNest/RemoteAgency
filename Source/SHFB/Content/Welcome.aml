@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="e572b781-93d2-4e52-afb1-8ce06607856b" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>Remote Agency is built for making the communicating among components in different computers easier.</para>
+			<para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
+			<para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites.</para>
+		</introduction>
+
+		<section>
+			<title>Getting Started</title>
+			<content>
+				<para>Welcome to Remote Agency.</para>
+
+				<para>Remote Agency aims to a part of the technical solution for accessing a remote object, only management and serialization, but not network transportation.</para>
+
+				<para>The original way we used daily:</para>
+				<mediaLink>
+					<image placement="center" xlink:href="Original"/>
+				</mediaLink>
+				<para>could be transferred to:</para>
+				<mediaLink>
+					<image placement="center" xlink:href="NewStructure"/>
+				</mediaLink>
+				<para>The things user should handle:</para>
+				<list class="bullet">
+					<listItem>
+						<para>User code as usual;</para>
+					</listItem>
+					<listItem>
+						<para>Server object as usual;</para>
+					</listItem>
+					<listItem>
+						<para>A service contract interface, including all methods, properties and events, which clients should access;</para>
+					</listItem>
+					<listItem>
+						<para>Reference to Remote Agency;</para>
+					</listItem>
+					<listItem>
+						<para>The transportation among Remote Agency Manager objects.</para>
+					</listItem>
+				</list>
+				<para>The things Remote Agency cares:</para>
+				<list class="bullet">
+					<listItem>
+						<para>Creating types based on the service contract interfaces (access modifier must be public);</para>
+					</listItem>
+          <listItem>
+						<para>Creating proxy and service wrapper objects;</para>
+          </listItem>
+					<listItem>
+						<para>Handling the serialization and packing process;</para>
+					</listItem>
+					<listItem>
+						<para>Catching and playing back exceptions on remote sites; etc.</para>
+					</listItem>
+				</list>
+			</content>
+		</section>
+		<section>
+			<title>Released packages</title>
+			<content>
+				<para>Currently, 4 packages are officially released on NuGet:</para>
+				<table>
+					<title>Released packages</title>
+					<tableHeader>
+						<row>
+							<entry>
+								<para>Name</para>
+							</entry>
+							<entry>
+								<para>Description</para>
+							</entry>
+							<entry>
+								<para>Package</para>
+							</entry>
+							<entry>
+								<para>Documentation</para>
+							</entry>
+						</row>
+					</tableHeader>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency</para>
+						</entry>
+						<entry>
+							<para>Main library.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="7947073a-78df-4f60-89b1-926ed9449451" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.Base</para>
+						</entry>
+						<entry>
+							<para>Base classes, interfaces and attributes of Remote Agency.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Base/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="271689f4-6c83-4900-9b06-1e52f7e0076d" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.DataContractSerializer</para>
+						</entry>
+						<entry>
+							<para>Using DataContractSerializer as serialization solution in Remote Agency.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.DataContractSerializer/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="8eee49c3-2aa3-4ea2-bbb6-e72eecaa2aa2" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</para>
+						</entry>
+						<entry>
+							<para>Encapsulation including DataContractSerializer and RemoteAgency.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="522b4d73-68a4-46fb-9ec0-742b16305fbb" />
+							</para>
+						</entry>
+					</row>
+				</table>
+			</content>
+		</section>
+		<section>
+			<title>Supported frameworks</title>
+			<content>
+        <para>Remote Agency is built in both dotnet core app 2 and dotnet framework 4.6.</para>
+        <para>Dotnet standard is not supported due to lacking reflection loading support.</para>
+			</content>
+		</section>
+    <section>
+      <title>Known issues</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>While using dotnet framework, the entry (host) exe may need to add some packages as references through NuGet. Such as System.Security.Cryptography.Algorithms and System.IO.Compression.</para>
+            <para>Missing references will cause a compiling error. The required package will be notified in error message.</para>
+          </listItem>
+          <listItem>
+            <para>Due to lacking of derived exceptions serialization support from Data Contract Serializing currently (dotnet core 2.0.3), SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation cannot support exception other than System.Exception serialization.</para>
+            <para>
+              This issue will be fixed in dotnet core 2.0.4 or 2.1. Check 
+              <externalLink>
+                <linkText>this issue thread</linkText>
+                <linkUri>https://github.com/dotnet/corefx/issues/25259</linkUri>
+              </externalLink> for details.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+		<section>
+			<title>Licenses</title>
+			<content>
+				<para>SecretNest.RemoteAgency and SecretNest.RemoteAgency.Base are licensed under <externalLink>
+					<linkText>Create Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)</linkText>
+					<linkUri>https://creativecommons.org/licenses/by-nd/4.0/</linkUri>
+				</externalLink>. You can copy and redistribute the material in any medium or format
+					for any purpose, even commercially.
+				</para>
+				<para>SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation are licensed under <externalLink>
+					<linkText>MIT license</linkText>
+					<linkUri>http://secretnest.info/RemoteAgency/MIT.txt</linkUri>
+				</externalLink>. Source code is available at <externalLink>
+					<linkText>Github</linkText>
+					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+				</externalLink>.
+			</para>
+			</content>
+		</section>
+		<section>
+			<title>Links</title>
+			<content>
+				<para>Issues, requests and source code: <externalLink>
+					<linkText>Github</linkText>
+					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+				</externalLink>
+			</para>
+			<para>More information can be found here: <externalLink>
+					<linkText>http://secretnest.info/RemoteAgency</linkText>
+					<linkUri>http://secretnest.info/RemoteAgency</linkUri>
+				</externalLink></para>
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="ecc78678-d7a8-41b7-94ce-8743add59236" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>

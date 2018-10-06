@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>cf2e1703-b782-4d53-9073-c57736cd9d0e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AssetNotFoundException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedAssetNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOneWayOperatingAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOperatingTimedoutTimeAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedParameterEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedParameterEntityPropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertyGetRequestEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertyGetResponseEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertyGetResponsePropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertySetRequestEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertySetRequestPropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertySetResponseEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedReturnEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedReturnEntityPropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\EventParameterIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\EventParameterTwoWayPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\EventSubscriptionAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredParameterAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ImportAssemblyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterTwoWayPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyCacheableAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ServiceWrapperCacheableAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EntityCodeBuilderBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IAssemblyCacheOperatings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PackingHelperBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SerializingHelperBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WrappedException.cs" />
+  </ItemGroup>
+</Project>

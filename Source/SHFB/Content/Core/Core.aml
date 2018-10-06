@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="7947073a-78df-4f60-89b1-926ed9449451" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>SecretNest.RemoteAgency is the main library of Remote Agency.</para>
+    </introduction>
+
+    <section>
+      <title>Supported functions</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>Multiple interfaces</para>
+          </listItem>
+          <listItem>
+            <para>Methods</para>
+            <list class="nobullet">
+              <listItem>
+                <para>Normal methods</para>
+              </listItem>
+              <listItem>
+                <para>Overloading (Asset renaming is required)</para>
+              </listItem>
+              <listItem>
+                <para>Generic methods</para>
+              </listItem>
+              <listItem>
+                <para>Parameters: params, out, ref and default value</para>
+              </listItem>
+              <listItem>
+                <para>With or without return</para>
+              </listItem>
+              <listItem>
+                <para>Send specified property of parameter back to caller</para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>Properties</para>
+          </listItem>
+          <listItem>
+            <para>Events</para>
+            <list class="nobullet">
+              <listItem>
+                <para>Parameters: params, out, ref and default value</para>
+              </listItem>
+              <listItem>
+                <para>With or without return</para>
+              </listItem>
+              <listItem>
+                <para>Send specified property of parameter back to caller</para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>One way calling</para>
+          </listItem>
+          <listItem>
+            <para>Remote exception handling</para>
+          </listItem>
+          <listItem>
+            <para>Local exception redirecting</para>
+          </listItem>
+          <listItem>
+            <para>Asset, entity and property renaming</para>
+          </listItem>
+          <listItem>
+            <para>Parameter ignoring</para>
+          </listItem>
+          <listItem>
+            <para>Assembly caching</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="162ef05d-ab9f-49e0-ad56-2ed045f7aae0" />
+      <codeEntityReference>N:SecretNest.RemoteAgency</codeEntityReference>
+      <codeEntityReference>N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
+      <link xlink:href="271689f4-6c83-4900-9b06-1e52f7e0076d" />
+      <link xlink:href="ecc78678-d7a8-41b7-94ce-8743add59236" />
+      <link xlink:href="c84610d8-63f7-48b7-aa35-3a66c03859a1" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

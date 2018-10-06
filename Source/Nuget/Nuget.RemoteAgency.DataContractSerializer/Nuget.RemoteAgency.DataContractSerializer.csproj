@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.DataContractSerializer</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
+    <Description>Using DataContractSerializer as serialization solution in Remote Agency.</Description>
+    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.5</Version>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+    <PackageReleaseNotes>
+      Add: dotnet framework 4.6, dotnet core app 2.0 support.
+      Remove: dotnet standard 1.x support.
+
+      Known Issue:
+      Due to lacking of derived exceptions serialization support from Data Contract Serializing currently (dotnet core 2.0.3), SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation cannot support exception other than System.Exception serialization.
+      This issue will be fixed in dotnet core 2.0.4 or 2.1. Check https://github.com/dotnet/corefx/issues/25259 for details.
+    </PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.DataContractSerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.DataContractSerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.5.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+  </ItemGroup>
+
+  <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems" Label="Shared" />
+
+</Project>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="fdc35204-77be-4f29-90a2-919bdfca97a2" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <introduction>
+      <para>In some case, proxy and service wrapper objects need disposing.</para>
+    </introduction>
+
+    <section>
+      <title>Disposing requirement</title>
+      <content>
+        <para>When proxy or service wrapper is created from creator, the out parameter named disposeRequired indicates whether disposing is required on this object. This will be set to true only when event is found in service contract interfaces.</para>
+        <para>When a proxy is specified as disposing required, but no event is handled (subscribing, not executing) yet, the disposing is not necessary.</para>
+        <para>When proxy or service wrapper is generated from RemoteAgencyManager and its derived classes, disposing will be handled automatically.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Reason of disposing proxy</title>
+      <content>
+        <para>After an event is subscribed on a proxy, the site id, instance id and event asset will be registered on the target service wrapper object. These information will be removed while proxy object disposing. That's also the reason why a message need to be sent to remote side when a proxy is disposing at local.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Reason of disposing service wrapper</title>
+      <content>
+        <para>After an event is subscribed on a proxy, a handler is attached to service object well. The disposing process of service wrapper, includes the removal of attached handler from service object.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>To dispose</title>
+      <content>
+        <para>To dispose an object of proxy or service wrapper, cast it into IDisposable and call the dispose method on it.</para>
+        <code language="c#">
+((IDisposable)obj).Dispose();
+        </code>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="0a431cb5-f6dc-4fa3-ae88-33e70d7c8442" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

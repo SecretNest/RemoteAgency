@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="626ce0a5-b968-4dab-b5dd-0c73b3c0a5c6" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>The way to deal with the exception thrown when accessing by remote site.</para>
+    </introduction>
+
+    <section>
+      <title>Exception redirect</title>
+      <content>
+        <para>Normally, when an exception is thrown in the code accessed by remote site, only the caller will receive the exception, but the site which running this code won't be affected.</para>
+        <para>You can change this behavior by each asset if you need.</para>
+        <para>Using [LocalExceptionHandling] (<codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference>) on the asset (method, event and property) of interface, you can choose how to deal the exception:</para>
+        <list class="bullet">
+          <listItem>
+            <para>Suppress: Like not using this attribute.</para>
+          </listItem>
+          <listItem>
+            <para>Throw: Throw the exception in place after sending it back to caller. Caution: You may not easy to catch this exception.</para>
+          </listItem>
+          <listItem>
+            <para>Redirect: Redirect the exception after sending it back to caller.</para>
+          </listItem>
+        </list>
+        <para>
+          All exception redirected, will be transferred by raising an event <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyManager`3.RedirectedExceptionRaised</codeEntityReference>. If this event is not handled, it will be ignored.
+        </para>
+        <para>
+          Specially, if there is any error occurred while serializing processing of preparing the error message feedback in service wrapper when requested asset cannot be found, LocalExceptionHandling setting from the only or the first of all related interfaces will be applied.
+        </para>
+      </content>
+    </section>
+
+    <section>
+      <title>Service wrapper asset not found</title>
+      <content>
+        <para>When all conditions below are all matched:</para>
+        <list class="bullet">
+          <listItem>
+            <para>Service wrapper is created based on multiple interfaces,</para>
+          </listItem>
+          <listItem>
+            <para>The asset requested by the remote object (proxy) cannot be found, and</para>
+          </listItem>
+          <listItem>
+            <para>While preparing the feedback message for asset cannot be found, any exception occurred in serializing processing.</para>
+          </listItem>
+        </list>
+        <para>The setting of the first interface specified with service wrapper creating process will be used in this (serializing exception of preparing message for asset requested cannot be found) error handling.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="ecc78678-d7a8-41b7-94ce-8743add59236"/>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>
