@@ -31,8 +31,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Release\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
-    <ProjectReference Include="..\..\Release\Release.RemoteAgency\Release.RemoteAgency.csproj" />
+    <ProjectReference Include="..\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
+    <ProjectReference Include="..\Release.RemoteAgency\Release.RemoteAgency.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />
