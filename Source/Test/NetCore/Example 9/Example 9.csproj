@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency\Release.RemoteAgency.csproj" />
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency\Release.RemoteAgency.csproj" />
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation.csproj" />
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation.csproj" />
   </ItemGroup>
 
 </Project>

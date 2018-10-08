@@ -56,19 +56,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency.Base\Release.RemoteAgency.Base.csproj">
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency.Base\Release.RemoteAgency.Base.csproj">
       <Project>{7b38c03f-8c73-4523-9c3e-2c9f2fc404bc}</Project>
       <Name>Release.RemoteAgency.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation.csproj">
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation.csproj">
       <Project>{6cc0844d-ea0d-402a-8280-62bf7ae4abda}</Project>
       <Name>Release.RemoteAgency.DataContractSerializer.EasyEncapsulation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj">
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj">
       <Project>{1d615dc0-f702-44dc-a6ac-886ef5e37951}</Project>
       <Name>Release.RemoteAgency.DataContractSerializer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Release\Release.RemoteAgency\Release.RemoteAgency.csproj">
+    <ProjectReference Include="..\..\..\DirectRelease\Release.RemoteAgency\Release.RemoteAgency.csproj">
       <Project>{b102ef90-21d2-481b-8482-4eb1552c922a}</Project>
       <Name>Release.RemoteAgency</Name>
     </ProjectReference>
