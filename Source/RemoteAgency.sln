@@ -89,15 +89,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SHFB", "SHFB", "{09D7C0AE-F
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Doc", "SHFB\Doc.shfbproj", "{82A148A7-8109-4D60-820D-29F926CD394D}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.Roslyn", "Code\Code.Roslyn\Code.Roslyn.shproj", "{FEED1140-CB32-4A68-8104-A557B0015B3A}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems*{a8abbe6e-300d-4cc6-8229-0ecf9d1c4813}*SharedItemsImports = 13
 		Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems*{cf2e1703-b782-4d53-9073-c57736cd9d0e}*SharedItemsImports = 13
 		Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems*{e09861af-307f-4e62-828f-0af4b61c2eac}*SharedItemsImports = 13
 		Code\Code.RemoteAgency\Code.RemoteAgency.projitems*{fd102c4d-a934-424f-afa2-801697d70850}*SharedItemsImports = 13
-		Code\Code.Roslyn\Code.Roslyn.projitems*{feed1140-cb32-4a68-8104-a557b0015b3a}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -315,7 +312,6 @@ Global
 		{60769CD8-1852-41D6-832D-290D4BF25CB1} = {9454265A-E23A-424E-B757-87D76C3A498F}
 		{88D057C0-7BC6-4339-A320-041FD8028A89} = {9454265A-E23A-424E-B757-87D76C3A498F}
 		{82A148A7-8109-4D60-820D-29F926CD394D} = {09D7C0AE-F730-4314-B668-9E5156B8F44F}
-		{FEED1140-CB32-4A68-8104-A557B0015B3A} = {4A5E695F-4398-463D-9DF1-15ADA8908C1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D434C31C-F3F6-485F-B1FF-AA2C7AFEA1A2}
