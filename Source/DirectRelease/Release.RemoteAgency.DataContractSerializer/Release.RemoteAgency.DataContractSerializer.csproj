@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.DataContractSerializer</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
+    <Description></Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>1.5</Version>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.DataContractSerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\RemoteAgency.DataContractSerializer.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Release.RemoteAgency.Base\Release.RemoteAgency.Base.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems" Label="Shared" />
+</Project>
