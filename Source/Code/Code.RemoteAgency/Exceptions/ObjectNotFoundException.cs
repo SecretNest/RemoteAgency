@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of ObjectNotFoundException.
         /// </summary>
         /// <param name="instanceId">Id of the instance that cannot be found.</param>
-        public ObjectNotFoundException(Guid instanceId)
+        internal ObjectNotFoundException(Guid instanceId)
         {
             InstanceId = instanceId;
         }

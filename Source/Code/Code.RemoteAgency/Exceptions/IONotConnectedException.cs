@@ -21,5 +21,7 @@ namespace SecretNest.RemoteAgency
         {
             return Message;
         }
+
+        internal IONotConnectedException() { }
     }
 }

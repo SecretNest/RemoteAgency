@@ -27,7 +27,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="idType">Id type.</param>
         /// <param name="id">Instance id or Message id based on the value of <paramref name="idType"/>.</param>
-        public TargetSiteNotFoundException(TargetSiteNotFoundIdType idType, Guid id)
+        internal TargetSiteNotFoundException(TargetSiteNotFoundIdType idType, Guid id)
         {
             IdType = idType;
             Id = id;

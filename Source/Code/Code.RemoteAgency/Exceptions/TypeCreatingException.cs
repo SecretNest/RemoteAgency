@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of the TypeCreatingException.
         /// </summary>
         /// <param name="records">Collection of exceptions.</param>
-        public TypeCreatingException(IReadOnlyCollection<TypeCreatingExceptionRecord> records)
+        internal TypeCreatingException(IReadOnlyCollection<TypeCreatingExceptionRecord> records)
         {
             Records = records;
         }
@@ -50,7 +50,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="id">Exception Id.</param>
         /// <param name="message">Exception Message.</param>
-        public TypeCreatingExceptionRecord(string id, string message)
+        internal TypeCreatingExceptionRecord(string id, string message)
         {
             Id = id;
             Message = message;

@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of the EventHandlerRemovedException.
         /// </summary>
         /// <param name="assetName">Asset (event) name.</param>
-        public EventHandlerRemovedException(string assetName)
+        internal EventHandlerRemovedException(string assetName)
         {
             AssetName = assetName;
         }

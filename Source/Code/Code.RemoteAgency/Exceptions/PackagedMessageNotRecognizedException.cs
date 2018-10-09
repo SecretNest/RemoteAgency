@@ -20,7 +20,7 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of the PackagedMessageNotRecognizedException.
         /// </summary>
         /// <param name="packagedMessage">Packaged message that cannot be recognized.</param>
-        public PackagedMessageNotRecognizedException(TNetworkMessage packagedMessage)
+        internal PackagedMessageNotRecognizedException(TNetworkMessage packagedMessage)
         {
             PackagedMessage = packagedMessage;
         }
