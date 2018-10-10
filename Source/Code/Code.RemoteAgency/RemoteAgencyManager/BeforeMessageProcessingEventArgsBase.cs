@@ -11,42 +11,45 @@ namespace SecretNest.RemoteAgency
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.AfterMessageReceived"/>
     public abstract class BeforeMessageProcessingEventArgsBase : EventArgs
     {
+        MessageInstanceMetadata metadata;
+
         /// <summary>
         /// Gets the sender site id.
         /// </summary>
-        public Guid SenderSiteId { get; }
+        public Guid SenderSiteId => metadata.SenderSiteId;
         /// <summary>
         /// Gets the sender instance id.
         /// </summary>
-        public Guid SenderInstanceId { get; }
+        public Guid SenderInstanceId => metadata.SenderInstanceId;
         /// <summary>
         /// Gets the target site id.
         /// </summary>
-        public Guid TargetSiteId { get; }
+        public Guid TargetSiteId => metadata.TargetSiteId;
         /// <summary>
         /// Gets the target instance id.
         /// </summary>
-        public Guid TargetInstanceId { get; }
+        public Guid TargetInstanceId => metadata.TargetInstanceId;
         /// <summary>
         /// Gets the message type.
         /// </summary>
-        public MessageType MessageType { get; }
+        public MessageType MessageType => metadata.MessageType;
         /// <summary>
         /// Gets the asset name.
         /// </summary>
-        public string AssetName { get; }
+        public string AssetName => metadata.AssetName;
         /// <summary>
         /// Gets the message id.
         /// </summary>
-        public Guid MessageId { get; }
+        public Guid MessageId => metadata.MessageId;
+
         /// <summary>
         /// Gets whether this is a one way message. When set to true, no response should be returned from the target site.
         /// </summary>
-        public bool IsOneWay { get; }
+        public bool IsOneWay => metadata.IsOneWay;
         /// <summary>
         /// Gets whether this is an exception message.
         /// </summary>
-        public abstract bool IsException { get; }
+        public bool IsException => metadata.IsException;
 
         MessageFurtherProcessing furtherProcessing;
         /// <summary>
@@ -57,7 +60,7 @@ namespace SecretNest.RemoteAgency
             get { return furtherProcessing; }
             set
             {
-                if (IsOneWay && value == MessageFurtherProcessing.TerminateWithExceptionReturned)
+                if (metadata.IsOneWay && value == MessageFurtherProcessing.TerminateWithExceptionReturned)
                 {
                     furtherProcessing = MessageFurtherProcessing.TerminateSilently;
                 }
@@ -71,24 +74,10 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Initializes an instance of BeforeMessageProcessingEventArgsBase.
         /// </summary>
-        /// <param name="senderSiteId">Sender site id.</param>
-        /// <param name="senderInstanceId">Sender instance id.</param>
-        /// <param name="targetSiteId">Target site id.</param>
-        /// <param name="targetInstanceId">Target instance id.</param>
-        /// <param name="messageType">Message type.</param>
-        /// <param name="assetName">Asset Name.</param>
-        /// <param name="messageId">Message id.</param>
-        /// <param name="isOneWay">Whether this is a one way message. When set to true, no response should be returned from the target site.</param>
-        protected BeforeMessageProcessingEventArgsBase(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay)
+        /// <param name="metadata">Metadata of this message instance.</param>
+        protected BeforeMessageProcessingEventArgsBase(MessageInstanceMetadata metadata)
         {
-            SenderSiteId = senderSiteId;
-            SenderInstanceId = senderInstanceId;
-            TargetSiteId = targetSiteId;
-            TargetInstanceId = targetInstanceId;
-            MessageType = messageType;
-            AssetName = assetName;
-            MessageId = messageId;
-            IsOneWay = isOneWay;
+            this.metadata = metadata;
             furtherProcessing = MessageFurtherProcessing.Continue;
         }
     }
@@ -99,15 +88,19 @@ namespace SecretNest.RemoteAgency
     public enum MessageFurtherProcessing
     {
         /// <summary>
-        /// Continue.
+        /// Continues.
         /// </summary>
         Continue,
         /// <summary>
-        /// Terminate this sending process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be set when <see cref="BeforeMessageProcessingEventArgsBase.IsOneWay"/> is set to true.
+        /// Terminates this sending process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be set when <see cref="BeforeMessageProcessingEventArgsBase.IsOneWay"/> is set to true.
         /// </summary>
         TerminateWithExceptionReturned,
         /// <summary>
-        /// Terminate this sending process.
+        /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver.
+        /// </summary>
+        ReplacedWithException,
+        /// <summary>
+        /// Terminates this sending process.
         /// </summary>
         TerminateSilently
     }
@@ -126,17 +119,10 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Initializes an instance of BeforeMessageProcessingEventArgsBase.
         /// </summary>
-        /// <param name="senderSiteId">Sender site id.</param>
-        /// <param name="senderInstanceId">Sender instance id.</param>
-        /// <param name="targetSiteId">Target site id.</param>
-        /// <param name="targetInstanceId">Target instance id.</param>
-        /// <param name="messageType">Message type.</param>
-        /// <param name="assetName">Asset Name.</param>
-        /// <param name="messageId">Message id.</param>
-        /// <param name="isOneWay">Whether this is a one way message. When set to true, no response should be returned from the target site.</param>
+        /// <param name="metadata">Metadata of this message instance.</param>
         /// <param name="serializedMessage">Serialized message.</param>
-        protected BeforeMessageProcessingEventArgsBase(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serializedMessage)
-            : base(senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay)
+        protected BeforeMessageProcessingEventArgsBase(MessageInstanceMetadata metadata, TSerialized serializedMessage)
+            : base(metadata)
         {
             SerializedMessage = serializedMessage;
         }
@@ -149,16 +135,12 @@ namespace SecretNest.RemoteAgency
     public class BeforeExceptionMessageProcessingEventArgs<TSerialized> : BeforeMessageProcessingEventArgsBase<TSerialized>
     {
         /// <summary>
-        /// Gets whether this is an exception message. Will always return true.
-        /// </summary>
-        public override bool IsException => true;
-        /// <summary>
         /// Exception type wrapped in this message.
         /// </summary>
         public Type ExceptionType { get; }
 
-        internal BeforeExceptionMessageProcessingEventArgs(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, TSerialized serializedException, Type exceptionType)
-            : base(senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, true, serializedException)
+        internal BeforeExceptionMessageProcessingEventArgs(MessageInstanceMetadata metadata, TSerialized serializedException, Type exceptionType)
+            : base(metadata, serializedException)
         {
             ExceptionType = exceptionType;
         }
@@ -171,16 +153,12 @@ namespace SecretNest.RemoteAgency
     public class BeforeMessageProcessingEventArgs<TSerialized> : BeforeMessageProcessingEventArgsBase<TSerialized>
     {
         /// <summary>
-        /// Gets whether this is an exception message. Will always return false.
-        /// </summary>
-        public override bool IsException => false;
-        /// <summary>
         /// Generic arguments used in this message.
         /// </summary>
         public Type[] GenericArguments { get; }
 
-        internal BeforeMessageProcessingEventArgs(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serializedMessage, Type[] genericArguments)
-            : base(senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, serializedMessage)
+        internal BeforeMessageProcessingEventArgs(MessageInstanceMetadata metadata, TSerialized serializedMessage, Type[] genericArguments)
+            : base(metadata, serializedMessage)
         {
             GenericArguments = genericArguments;
         }

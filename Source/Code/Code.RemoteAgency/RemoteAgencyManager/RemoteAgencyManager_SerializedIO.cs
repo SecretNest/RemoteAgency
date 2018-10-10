@@ -38,49 +38,19 @@ namespace SecretNest.RemoteAgency
         public void ProcessPackagedMessage(TNetworkMessage message)
         {
             ThrowIfNotConnected();
-            if (!PackingHelper.TryUnpack(message, out Guid senderSiteId, out Guid targetSiteId, out Guid senderInstanceId, out Guid targetInstanceId, out bool isException, out MessageType messageType, out string assetName, out Guid messageId, out bool isOneWay, out TSerialized serialized, out Type[] genericArguments))
+            if (!PackingHelper.TryUnpack(message, out MessageInstanceMetadata metadata, out TSerialized serialized, out Type[] genericArguments))
             {
                 throw new PackagedMessageNotRecognizedException<TNetworkMessage>(message);
             }
 
-            if (isException)
+            if (metadata.IsException)
             {
-                ProcessReceivedException(senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, serialized, genericArguments[0]);
+                ProcessReceivedException(metadata, serialized, genericArguments[0]);
             }
             else
             {
-                ProcessReceivedMessage(senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
+                ProcessReceivedMessage(metadata, serialized, genericArguments);
             }
-
-            //if (!managingObjects.TryGetValue(targetInstanceId, out var managingObject))
-            //{
-            //    if (!isOneWay)
-            //    {
-            //        var exception = new WrappedException<ObjectNotFoundException>(new ObjectNotFoundException(targetInstanceId));
-            //        var serializedException = SerializingHelper.SerializeException(exception);
-            //        var packaged = PackingHelper.Pack(targetSiteId, senderSiteId, targetInstanceId, senderInstanceId, true, messageType, assetName, messageId, true, serializedException, new Type[] { typeof(ObjectNotFoundException) });
-            //        SendPackagedMessage(senderSiteId, packaged);
-            //    }
-            //    return;
-            //}
-
-            //if (isException)
-            //{
-            //    ProcessReceivedExceptionBypassCheckingEvent(managingObject, messageType, assetName, messageId, serialized, genericArguments[0]);
-            //}
-            //else
-            //{
-            //    if (messageType == MessageType.SpecialCommand)
-            //    {
-            //        if (assetName == "Dispose")
-            //        {
-            //            managingObject.TargetProxyDisposed(senderInstanceId);
-            //            OnDisposingMessageRequiredProxyRemoved(senderSiteId, senderInstanceId);
-            //            return;
-            //        }
-            //    }
-            //    ProcessReceivedMessageBypassCheckingEvent(managingObject, senderSiteId, senderInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
-            //}
         }
 
         /// <summary>
@@ -89,64 +59,123 @@ namespace SecretNest.RemoteAgency
         /// <seealso cref="MessageProcessTerminatedException" />
         public event EventHandler<BeforeMessageProcessingEventArgsBase<TSerialized>> AfterMessageReceived;
 
-        void ProcessReceivedMessage(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serialized, Type[] genericArguments)
+        void ProcessReceivedMessage(MessageInstanceMetadata metadata, TSerialized serialized, Type[] genericArguments)
         {
-            if (AfterMessageReceived != null && messageType != MessageType.SpecialCommand)
+            RemoteAgencyManagingObject<TSerialized> managingObject;
+            if (AfterMessageReceived != null && metadata.MessageType != MessageType.SpecialCommand)
             {
                 BeforeMessageProcessingEventArgs<TSerialized> e = new BeforeMessageProcessingEventArgs<TSerialized>
-                    (senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
+                    (metadata, serialized, genericArguments);
                 AfterMessageReceived(this, e);
 
-                if (e.FurtherProcessing == MessageFurtherProcessing.Continue)
-                { }
-                else if (e.FurtherProcessing == MessageFurtherProcessing.TerminateSilently)
+                switch (e.FurtherProcessing)
                 {
-                    return;
-                }
-                else
-                {
-                    //if (managingObjects.TryGetValue(senderInstanceId, out var managingObject))
-                    //{
-                    //    ProcessReceivedExceptionBypassCheckingEvent(managingObject, messageType, assetName, messageId, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
-                    //}
-                    return;
+                    //case MessageFurtherProcessing.Continue:
+                    case MessageFurtherProcessing.TerminateSilently:
+                        return;
+                    case MessageFurtherProcessing.TerminateWithExceptionReturned:
+                        metadata = new MessageInstanceMetadata(SiteId, metadata.TargetInstanceId, metadata.SenderSiteId, metadata.SenderInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, true, true);
+                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        return;
+                    case MessageFurtherProcessing.ReplacedWithException:
+                        if (!managingObjects.TryGetValue(metadata.TargetInstanceId, out managingObject))
+                        {
+                            if (!metadata.IsOneWay)
+                            {
+                                var exception = new WrappedException<ObjectNotFoundException>(new ObjectNotFoundException(metadata.TargetInstanceId));
+                                var serializedException = SerializingHelper.SerializeException(exception);
+                                metadata = new MessageInstanceMetadata(SiteId, metadata.TargetInstanceId, metadata.SenderSiteId, metadata.SenderInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, true, true);
+                                var packaged = PackingHelper.Pack(metadata, serializedException, new Type[] { typeof(ObjectNotFoundException) });
+                                SendPackagedMessage(metadata.SenderSiteId, packaged);
+                            }
+                            return;
+                        }
+                        metadata = new MessageInstanceMetadata(metadata.SenderSiteId, metadata.SenderInstanceId, metadata.TargetSiteId, metadata.TargetInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, metadata.IsOneWay, true);
+                        ProcessReceivedExceptionBypassCheckingEvent(managingObject, metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        return;
                 }
             }
 
+            if (!managingObjects.TryGetValue(metadata.TargetInstanceId, out managingObject))
+            {
+                if (!metadata.IsOneWay)
+                {
+                    var exception = new WrappedException<ObjectNotFoundException>(new ObjectNotFoundException(metadata.TargetInstanceId));
+                    var serializedException = SerializingHelper.SerializeException(exception);
+                    metadata = new MessageInstanceMetadata(SiteId, metadata.TargetInstanceId, metadata.SenderSiteId, metadata.SenderInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, true, true);
+                    var packaged = PackingHelper.Pack(metadata, serializedException, new Type[] { typeof(ObjectNotFoundException) });
+                    SendPackagedMessage(metadata.SenderSiteId, packaged);
+                }
+                return;
+            }
 
-
-
+            ProcessReceivedMessageBypassCheckingEvent(managingObject, metadata, serialized, genericArguments);
         }
 
-        void ProcessReceivedException(Guid senderSiteId, Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, TSerialized serializedException, Type exceptionType)
+        void ProcessReceivedException(MessageInstanceMetadata metadata, TSerialized serializedException, Type exceptionType)
         {
+            RemoteAgencyManagingObject<TSerialized> managingObject;
             if (AfterMessageReceived != null)
             {
                 BeforeExceptionMessageProcessingEventArgs<TSerialized> e = new BeforeExceptionMessageProcessingEventArgs<TSerialized>
-                    (senderSiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, serializedException, exceptionType);
+                    (metadata, serializedException, exceptionType);
                 AfterMessageReceived(this, e);
 
-                if (e.FurtherProcessing == MessageFurtherProcessing.Continue)
-                { }
-                else
+                switch (e.FurtherProcessing)
                 {
-                    //Exception will always has one way sending setting.
+                    //case MessageFurtherProcessing.Continue:
+                    case MessageFurtherProcessing.TerminateSilently:
+                        return;
+                    //case MessageFurtherProcessing.TerminateWithExceptionReturned:
+                    case MessageFurtherProcessing.ReplacedWithException:
+                        serializedException = sendingProcessTerminatedException.Value;
+                        exceptionType = typeof(MessageProcessTerminatedException);
+                        break;
+                }
+            }
+
+            if (!managingObjects.TryGetValue(metadata.TargetInstanceId, out managingObject))
+            {
+                return;
+            }
+
+            ProcessReceivedExceptionBypassCheckingEvent(managingObject, metadata, serializedException, exceptionType);
+        }
+
+        void ProcessReceivedMessageBypassCheckingEvent(RemoteAgencyManagingObject<TSerialized> managingObject, MessageInstanceMetadata metadata, TSerialized serialized, Type[] genericArguments)
+        {
+            if (metadata.MessageType == MessageType.SpecialCommand)
+            {
+                if (metadata.AssetName == "Dispose")
+                {
+                    managingObject.TargetProxyDisposed(metadata.SenderInstanceId);
+                    OnDisposingMessageRequiredProxyRemoved(metadata.SenderSiteId, metadata.SenderInstanceId);
                     return;
                 }
             }
 
-
-
+            try
+            {
+                MessageInstanceMetadataService.messageInstanceMetadata = metadata;
+                managingObject.ProcessMessage(metadata.SenderSiteId, metadata.SenderInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, metadata.IsOneWay, serialized, genericArguments);
+            }
+            finally
+            {
+                MessageInstanceMetadataService.messageInstanceMetadata = null;
+            }
         }
 
-        void ProcessReceivedMessageBypassCheckingEvent(RemoteAgencyManagingObject<TSerialized> managingObject, Guid senderSiteId, Guid senderInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serialized, Type[] genericArguments)
+        void ProcessReceivedExceptionBypassCheckingEvent(RemoteAgencyManagingObject<TSerialized> managingObject, MessageInstanceMetadata metadata, TSerialized serializedException, Type exceptionType)
         {
-            managingObject.ProcessMessage(senderSiteId, senderInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
-        }
-
-        void ProcessReceivedExceptionBypassCheckingEvent(RemoteAgencyManagingObject<TSerialized> managingObject, MessageType messageType, string assetName, Guid messageId, TSerialized serializedException, Type exceptionType)
-        {
-            managingObject.ProcessException(messageType, assetName, messageId, serializedException, exceptionType);
+            try
+            {
+                MessageInstanceMetadataService.messageInstanceMetadata = metadata;
+                managingObject.ProcessException(metadata.MessageType, metadata.AssetName, metadata.MessageId, serializedException, exceptionType);
+            }
+            finally
+            {
+                MessageInstanceMetadataService.messageInstanceMetadata = null;
+            }
         }
 
         /// <summary>
@@ -159,66 +188,86 @@ namespace SecretNest.RemoteAgency
 
         void SendMessage(Guid targetSiteId, Guid senderInstanceId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serialized, Type[] genericArguments)
         {
+            MessageInstanceMetadata metadata = new MessageInstanceMetadata(SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, false);
+
             if (BeforeMessageSending != null && messageType != MessageType.SpecialCommand)
             {
                 BeforeMessageProcessingEventArgs<TSerialized> e = new BeforeMessageProcessingEventArgs<TSerialized>
-                    (SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
+                    (metadata, serialized, genericArguments);
                 BeforeMessageSending(this, e);
 
-                if (e.FurtherProcessing == MessageFurtherProcessing.Continue)
-                { }
-                else if (e.FurtherProcessing == MessageFurtherProcessing.TerminateSilently)
+                switch(e.FurtherProcessing)
                 {
-                    return;
-                }
-                else
-                {
-                    if (managingObjects.TryGetValue(senderInstanceId, out var managingObject))
-                    {
-                        ProcessReceivedExceptionBypassCheckingEvent(managingObject, messageType, assetName, messageId, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
-                    }
-                    return;
+                    //case MessageFurtherProcessing.Continue:
+                    case MessageFurtherProcessing.TerminateSilently:
+                        return;
+                    case MessageFurtherProcessing.TerminateWithExceptionReturned:
+                        if (managingObjects.TryGetValue(senderInstanceId, out var managingObject))
+                        {
+                            //directly send it to the original sender (within the same manager)
+                            MessageInstanceMetadata newMetadata = new MessageInstanceMetadata(targetSiteId, targetInstanceId, SiteId, senderInstanceId, messageType, assetName, messageId, true, true);
+                            ProcessReceivedExceptionBypassCheckingEvent(managingObject, newMetadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        }
+                        return;
+                    case MessageFurtherProcessing.ReplacedWithException:
+                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        return;
                 }
             }
 
-            if (targetSiteId == SiteId)
-            {
-                ProcessReceivedMessage(SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
-            }
-            else
-            {
-                ThrowIfNotConnected();
-                var packaged = PackingHelper.Pack(SiteId, targetSiteId, senderInstanceId, targetInstanceId, false, messageType, assetName, messageId, isOneWay, serialized, genericArguments);
-                SendPackagedMessage(targetSiteId, packaged);
-            }
+            SendMessageBypassCheckingEvent(metadata, serialized, genericArguments);
         }
 
         void SendException(Guid targetSiteId, Guid senderInstanceId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, TSerialized serializedException, Type exceptionType)
         {
+            MessageInstanceMetadata metadata = new MessageInstanceMetadata(SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, true, true);
+
             if (BeforeMessageSending != null)
             {
                 BeforeExceptionMessageProcessingEventArgs<TSerialized> e = new BeforeExceptionMessageProcessingEventArgs<TSerialized>
-                    (SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, serializedException, exceptionType);
+                    (metadata, serializedException, exceptionType);
                 BeforeMessageSending(this, e);
 
-                if (e.FurtherProcessing == MessageFurtherProcessing.Continue)
-                { }
-                else
-                { 
-                    //Exception will always has one way sending setting.
-                    return;
+                switch (e.FurtherProcessing)
+                {
+                    //case MessageFurtherProcessing.Continue:
+                    case MessageFurtherProcessing.TerminateSilently:
+                        return;
+                    //case MessageFurtherProcessing.TerminateWithExceptionReturned:
+                    case MessageFurtherProcessing.ReplacedWithException:
+                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        return;
                 }
             }
 
-            if (targetSiteId == SiteId)
+            SendExceptionBypassCheckingEvent(metadata, serializedException, exceptionType);
+        }
+
+        void SendMessageBypassCheckingEvent(MessageInstanceMetadata metadata, TSerialized serialized, Type[] genericArguments)
+        {
+            if (metadata.TargetSiteId == SiteId)
             {
-                ProcessReceivedException(SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, serializedException, exceptionType);
+                ProcessReceivedMessage(metadata, serialized, genericArguments);
             }
             else
             {
                 ThrowIfNotConnected();
-                var packaged = PackingHelper.Pack(SiteId, targetSiteId, senderInstanceId, targetInstanceId, true, messageType, assetName, messageId, true, serializedException, new Type[] { exceptionType });
-                SendPackagedMessage(targetSiteId, packaged);
+                var packaged = PackingHelper.Pack(metadata, serialized, genericArguments);
+                SendPackagedMessage(metadata.TargetSiteId, packaged);
+            }
+        }
+
+        void SendExceptionBypassCheckingEvent(MessageInstanceMetadata metadata, TSerialized serializedException, Type exceptionType)
+        {
+            if (metadata.TargetSiteId == SiteId)
+            {
+                ProcessReceivedException(metadata, serializedException, exceptionType);
+            }
+            else
+            {
+                ThrowIfNotConnected();
+                var packaged = PackingHelper.Pack(metadata, serializedException, new Type[] { exceptionType });
+                SendPackagedMessage(metadata.TargetSiteId, packaged);
             }
         }
 

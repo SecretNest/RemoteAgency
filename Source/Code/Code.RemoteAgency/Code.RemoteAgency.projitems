@@ -47,6 +47,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Property.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageInstanceMetadataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrustedPlatformAssemblies.cs" />
   </ItemGroup>
 </Project>
