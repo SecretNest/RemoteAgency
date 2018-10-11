@@ -10,6 +10,20 @@
 			<content>
 				<list class="bullet">
           <listItem>
+            <para>Change: License changed to MIT, source published at GitHub.</para>
+            <para>Change: Use MessageInstanceMetadata in PackingHelperBase.Pack method.</para>
+            <para>Add: static class MessageInstanceMetadataService to get the instance metadata in service method.</para>
+            <para>Add: event AfterMessageReceived in RemoteAgencyManager to monitor and filter message before being processed by service object.</para>
+            <para>Add: event BeforeMessageSending in RemoteAgencyManager to monitor and filter message before sending out.</para>
+            <para>Add: MessageInstanceMetadata in base.</para>
+            <para>Fix: Exceptions serialization support.</para>
+            <para>Fix: Missing assemblies problem in dotnet core while changing platform version.</para>
+            <para>Remote Agency: 1.6</para>
+            <para>Remote Agency Base: 1.6</para>
+            <para>DataContract Serializer: 1.6</para>
+            <para>DataContract Serializer Easy Encapsulation: 1.6</para>
+          </listItem>
+          <listItem>
             <para>Fix: A bug in processing property set method.</para>
             <para>Remote Agency: 1.5.1</para>
             <para>Remote Agency Base: 1.5.0</para>

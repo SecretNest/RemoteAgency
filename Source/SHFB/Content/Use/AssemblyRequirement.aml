@@ -20,6 +20,7 @@
             <para>Event MissingAssemblyRequesting.</para>
           </listItem>
         </list>
+        <para>When searching assembly in TRUSTED_PLATFORM_ASSEMBLIES, only assembly (short) name will be used in matching if only one version under this assembly name is included, or full name (including version number) will be taken place.</para>
       </content>
     </section>
 

@@ -8,25 +8,21 @@
     <Company>SecretNest.info</Company>
     <Product>Remote Agency</Product>
     <Description>Using DataContractSerializer as serialization solution in Remote Agency.</Description>
-    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
-    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
+    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <Copyright>Allen Cui</Copyright>
-    <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.5</Version>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <Version>1.6</Version>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageReleaseNotes>
-      Add: dotnet framework 4.6, dotnet core app 2.0 support.
-      Remove: dotnet standard 1.x support.
-
-      Known Issue:
-      Due to lacking of derived exceptions serialization support from Data Contract Serializing currently (dotnet core 2.0.3), SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation cannot support exception other than System.Exception serialization.
-      This issue will be fixed in dotnet core 2.0.4 or 2.1. Check https://github.com/dotnet/corefx/issues/25259 for details.
-    </PackageReleaseNotes>
+Updated: Reference of RemoteAgency packages (1.6)
+Updated: DataContractToJsonPackingHelper changed to fulfill the change of the base class.</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer</AssemblyName>
     <Configurations>Debug;Release</Configurations>
+    <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -8,22 +8,23 @@
     <Company>SecretNest.info</Company>
     <Product>Remote Agency</Product>
     <Description>Base classes, interfaces and attributes of Remote Agency.</Description>
-    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
-    <PackageLicenseUrl>https://creativecommons.org/licenses/by-nd/4.0/</PackageLicenseUrl>
+    <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Allen Cui</Copyright>
-    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.5.0</Version>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <Version>1.6</Version>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageReleaseNotes>
-      Add: dotnet framework 4.6, dotnet core app 2.0 support.
-      Remove: dotnet standard 1.x support.
-      Change: ImportAssemblyAttribute is changed.
-    </PackageReleaseNotes>
+Changed: License changed to MIT, source published at GitHub.
+Added: MessageInstanceMetadata
+Fixed: Exceptions serialization support.</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
     <Configurations>Debug;Release</Configurations>
+    <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <PackageTags>RemoteAgency Remoting</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

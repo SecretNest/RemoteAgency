@@ -17,10 +17,12 @@
       <Topic id="450e3fa8-d346-49eb-97e6-1a787ddaf694" visible="True" title="Managing Objects (Proxy and Service Wrapper)" />
       <Topic id="3484da6c-de69-4562-8f77-0d2c92b273b6" visible="True" title="Target Site Management" />
       <Topic id="5c397505-efd8-429a-9ebf-d163295cebbb" visible="True" title="Disposing Proxy" />
-      <Topic id="6aa5c978-00d2-4273-9b80-0a4ad3acdd68" visible="True" isSelected="true" title="Assembly Requirement" />
+      <Topic id="6aa5c978-00d2-4273-9b80-0a4ad3acdd68" visible="True" title="Assembly Requirement" />
       <Topic id="626ce0a5-b968-4dab-b5dd-0c73b3c0a5c6" visible="True" title="Exception Redirect" />
+      <Topic id="09cf7238-2b9d-4aff-afaf-949c7734f607" visible="True" title="Accessing Metadata of Message in Service Method" />
+      <Topic id="c77e5e89-994c-42ee-86ab-addcd4d5ed46" visible="True" title="Message Filtering" />
     </Topic>
-    <Topic id="c84610d8-63f7-48b7-aa35-3a66c03859a1" visible="True" title="Example: Use Remote Agency">
+    <Topic id="c84610d8-63f7-48b7-aa35-3a66c03859a1" visible="True" isExpanded="true" title="Example: Use Remote Agency">
       <Topic id="d4df62b1-2c8f-471a-bc08-931e0bb21b0a" visible="True" title="1 Hello World" />
       <Topic id="222b9528-0832-45f0-9eff-b6fc496212cb" visible="True" title="2 Method with parameter, ref, out and return." />
       <Topic id="9c0126a8-a683-4903-86f0-d7737e2ba575" visible="True" title="3 Method with two way property and overload." />
@@ -30,6 +32,7 @@
       <Topic id="824b7af8-08c6-493d-b694-e05bfe64b753" visible="True" title="7 Event" />
       <Topic id="94ec2756-b127-468a-8c6f-ce18bbefbafb" visible="True" title="8 Advanced event" />
       <Topic id="428d92df-fe3a-4290-aac9-e39cc8ed8936" visible="True" title="9 Event with multiple clients" />
+      <Topic id="28b771ff-e4f5-4350-9339-200b2ba02f86" visible="True" isSelected="true" title="10 Message Filtering and Metadata" />
     </Topic>
     <Topic id="0a431cb5-f6dc-4fa3-ae88-33e70d7c8442" visible="True" title="Develop a serializer" />
     <Topic id="fdc35204-77be-4f29-90a2-919bdfca97a2" visible="True" title="Disposing" />

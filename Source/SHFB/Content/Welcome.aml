@@ -175,37 +175,15 @@
 		</section>
     <section>
       <title>Known issues</title>
-      <content>
-        <list class="bullet">
-          <listItem>
-            <para>While using dotnet framework, the entry (host) exe may need to add some packages as references through NuGet. Such as System.Security.Cryptography.Algorithms and System.IO.Compression.</para>
-            <para>Missing references will cause a compiling error. The required package will be notified in error message.</para>
-          </listItem>
-          <listItem>
-            <para>Due to lacking of derived exceptions serialization support from Data Contract Serializing currently (dotnet core 2.0.3), SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation cannot support exception other than System.Exception serialization.</para>
-            <para>
-              This issue will be fixed in dotnet core 2.0.4 or 2.1. Check 
-              <externalLink>
-                <linkText>this issue thread</linkText>
-                <linkUri>https://github.com/dotnet/corefx/issues/25259</linkUri>
-              </externalLink> for details.</para>
-          </listItem>
-        </list>
-      </content>
     </section>
 		<section>
 			<title>Licenses</title>
 			<content>
-				<para>SecretNest.RemoteAgency and SecretNest.RemoteAgency.Base are licensed under <externalLink>
-					<linkText>Create Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)</linkText>
-					<linkUri>https://creativecommons.org/licenses/by-nd/4.0/</linkUri>
+				<para>SecretNest.RemoteAgency packages are licensed under <externalLink>
+					<linkText>MIT</linkText>
+					<linkUri>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</linkUri>
 				</externalLink>. You can copy and redistribute the material in any medium or format
-					for any purpose, even commercially.
-				</para>
-				<para>SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation are licensed under <externalLink>
-					<linkText>MIT license</linkText>
-					<linkUri>http://secretnest.info/RemoteAgency/MIT.txt</linkUri>
-				</externalLink>. Source code is available at <externalLink>
+					for any purpose, even commercially. Source code is available at <externalLink>
 					<linkText>Github</linkText>
 					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
 				</externalLink>.
@@ -220,10 +198,6 @@
 					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
 				</externalLink>
 			</para>
-			<para>More information can be found here: <externalLink>
-					<linkText>http://secretnest.info/RemoteAgency</linkText>
-					<linkUri>http://secretnest.info/RemoteAgency</linkUri>
-				</externalLink></para>
 			</content>
 		</section>
 
