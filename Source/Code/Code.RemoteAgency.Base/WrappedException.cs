@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace SecretNest.RemoteAgency
 {
@@ -11,17 +12,18 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <seealso cref="WrappedException{T}"/>
     [DataContract(Namespace = "")]
+    [Serializable()]
     public abstract class WrappedException
     {
         /// <summary>
         /// Gets the exception from the remote site
         /// </summary>
-        [IgnoreDataMember] public abstract Exception ExceptionGeneric { get; internal set; }
+        [IgnoreDataMember][XmlIgnore] public abstract Exception ExceptionGeneric { get; internal set; }
 
         /// <summary>
         /// Gets the type of the exception
         /// </summary>
-        [IgnoreDataMember] public abstract Type ExceptionType { get; }
+        [IgnoreDataMember][XmlIgnore] public abstract Type ExceptionType { get; }
 
         /// <summary>
         /// Creates and returns a string representation of the inner exception.
@@ -51,6 +53,7 @@ namespace SecretNest.RemoteAgency
     /// <typeparam name="T">Type of the inner exception.</typeparam>
     /// <seealso cref="WrappedException"/>
     [DataContract(Namespace = "")]
+    [Serializable()]
     public class WrappedException<T> : WrappedException where T : Exception
     {
         //[DataMember]
@@ -75,6 +78,7 @@ namespace SecretNest.RemoteAgency
         /// Gets the exception from the remote site
         /// </summary>
         [IgnoreDataMember]
+        [XmlIgnore]
         public override Exception ExceptionGeneric { get { return Exception; } internal set { Exception = (T)value; } }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace SecretNest.RemoteAgency
         /// Gets the type of the exception
         /// </summary>
         [IgnoreDataMember]
+        [XmlIgnore]
         public override Type ExceptionType { get { return typeof(T); } }
 
         /// <summary>

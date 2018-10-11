@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace SecretNest.RemoteAgency
 {
@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.RemoveTargetSite(Guid)"/>
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.ResetTargetSite"/>
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.DefaultTargetSiteId"/>
+    [Serializable]
     public class TargetSiteNotFoundException : NullReferenceException
     {
         /// <summary>
@@ -34,6 +35,14 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <summary>
+        /// Initializes a new instance of the TargetSiteNotFoundException class with serialized data.
+        /// </summary>
+        /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        public TargetSiteNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
+
+        /// <summary>
         /// Gets the error message of the current exception.
         /// </summary>
         public override string Message => string.Format("The site for {0} {1} not found.", IdType, Id);
@@ -49,15 +58,19 @@ namespace SecretNest.RemoteAgency
     /// Contains a list of id types for <see cref="TargetSiteNotFoundException"/>.
     /// </summary>
     /// <seealso cref="TargetSiteNotFoundException"/>
+    [DataContract(Namespace = "")]
+    [Serializable()]
     public enum TargetSiteNotFoundIdType
     {
         /// <summary>
         /// Instance id.
         /// </summary>
+        [EnumMember]
         InstanceId,
         /// <summary>
         /// Message id.
         /// </summary>
+        [EnumMember]
         MessageId
     }
 }

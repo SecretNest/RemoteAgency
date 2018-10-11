@@ -75,7 +75,7 @@ namespace SecretNest.RemoteAgency
                         return;
                     case MessageFurtherProcessing.TerminateWithExceptionReturned:
                         metadata = new MessageInstanceMetadata(SiteId, metadata.TargetInstanceId, metadata.SenderSiteId, metadata.SenderInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, true, true);
-                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        SendExceptionBypassCheckingEvent(metadata, messageProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
                         return;
                     case MessageFurtherProcessing.ReplacedWithException:
                         if (!managingObjects.TryGetValue(metadata.TargetInstanceId, out managingObject))
@@ -91,7 +91,7 @@ namespace SecretNest.RemoteAgency
                             return;
                         }
                         metadata = new MessageInstanceMetadata(metadata.SenderSiteId, metadata.SenderInstanceId, metadata.TargetSiteId, metadata.TargetInstanceId, metadata.MessageType, metadata.AssetName, metadata.MessageId, metadata.IsOneWay, true);
-                        ProcessReceivedExceptionBypassCheckingEvent(managingObject, metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        ProcessReceivedExceptionBypassCheckingEvent(managingObject, metadata, messageProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
                         return;
                 }
             }
@@ -128,7 +128,7 @@ namespace SecretNest.RemoteAgency
                         return;
                     //case MessageFurtherProcessing.TerminateWithExceptionReturned:
                     case MessageFurtherProcessing.ReplacedWithException:
-                        serializedException = sendingProcessTerminatedException.Value;
+                        serializedException = messageProcessTerminatedException.Value;
                         exceptionType = typeof(MessageProcessTerminatedException);
                         break;
                 }
@@ -184,7 +184,7 @@ namespace SecretNest.RemoteAgency
         /// <seealso cref="MessageProcessTerminatedException" />
         public event EventHandler<BeforeMessageProcessingEventArgsBase<TSerialized>> BeforeMessageSending;
 
-        Lazy<TSerialized> sendingProcessTerminatedException;
+        Lazy<TSerialized> messageProcessTerminatedException;
 
         void SendMessage(Guid targetSiteId, Guid senderInstanceId, Guid targetInstanceId, MessageType messageType, string assetName, Guid messageId, bool isOneWay, TSerialized serialized, Type[] genericArguments)
         {
@@ -205,12 +205,13 @@ namespace SecretNest.RemoteAgency
                         if (managingObjects.TryGetValue(senderInstanceId, out var managingObject))
                         {
                             //directly send it to the original sender (within the same manager)
-                            MessageInstanceMetadata newMetadata = new MessageInstanceMetadata(targetSiteId, targetInstanceId, SiteId, senderInstanceId, messageType, assetName, messageId, true, true);
-                            ProcessReceivedExceptionBypassCheckingEvent(managingObject, newMetadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                            metadata = new MessageInstanceMetadata(targetSiteId, targetInstanceId, SiteId, senderInstanceId, messageType, assetName, messageId, true, true);
+                            ProcessReceivedExceptionBypassCheckingEvent(managingObject, metadata, messageProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
                         }
                         return;
                     case MessageFurtherProcessing.ReplacedWithException:
-                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
+                        metadata = new MessageInstanceMetadata(SiteId, senderInstanceId, targetSiteId, targetInstanceId, messageType, assetName, messageId, true, true);
+                        SendExceptionBypassCheckingEvent(metadata, messageProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
                         return;
                 }
             }
@@ -235,8 +236,9 @@ namespace SecretNest.RemoteAgency
                         return;
                     //case MessageFurtherProcessing.TerminateWithExceptionReturned:
                     case MessageFurtherProcessing.ReplacedWithException:
-                        SendExceptionBypassCheckingEvent(metadata, sendingProcessTerminatedException.Value, typeof(MessageProcessTerminatedException));
-                        return;
+                        serializedException = messageProcessTerminatedException.Value;
+                        exceptionType = typeof(MessageProcessTerminatedException);
+                        break;
                 }
             }
 

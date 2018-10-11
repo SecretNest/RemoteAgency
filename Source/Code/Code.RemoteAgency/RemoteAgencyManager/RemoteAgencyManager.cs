@@ -74,7 +74,7 @@ namespace SecretNest.RemoteAgency
             else
                 SiteId = Guid.NewGuid();
 
-            sendingProcessTerminatedException = new Lazy<TSerialized>
+            messageProcessTerminatedException = new Lazy<TSerialized>
                 (() => serializingHelper.SerializeException(new WrappedException<MessageProcessTerminatedException>(new MessageProcessTerminatedException())));
         }
 

@@ -12,6 +12,10 @@ namespace SecretNest.RemoteAgency
     public abstract class BeforeMessageProcessingEventArgsBase : EventArgs
     {
         MessageInstanceMetadata metadata;
+        /// <summary>
+        /// Gets the metadata of this message instance.
+        /// </summary>
+        public MessageInstanceMetadata MessageInstanceMetadata => metadata;
 
         /// <summary>
         /// Gets the sender site id.
