@@ -87,7 +87,7 @@
             <para>Note: for example, one way attribute will be ignored when set to a method with returning type or out parameter.</para>
           </listItem>
           <listItem>
-            <para>Timeout is specified by <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.Attributes.CustomizedOperatingTimedoutTimeAttribute.MillisecondsTimeout</codeEntityReference> and time specified is passed.</para>
+            <para>Timeout is specified by <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedOperatingTimedoutTimeAttribute</codeEntityReference> and it is passed.</para>
           </listItem>
         </list>
         <para>Or, it will wait forever until the thread of the caller ends.</para>

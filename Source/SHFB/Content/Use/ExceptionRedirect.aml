@@ -12,7 +12,7 @@
       <content>
         <para>Normally, when an exception is thrown in the code accessed by remote site, only the caller will receive the exception, but the site which running this code won't be affected.</para>
         <para>You can change this behavior by each asset if you need.</para>
-        <para>Using [LocalExceptionHandling] (<codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference>) on the asset (method, event and property) of interface, you can choose how to deal the exception:</para>
+        <para>Using <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference> on the asset (method, event and property) of interface, you can choose how to deal the exception:</para>
         <list class="bullet">
           <listItem>
             <para>Suppress: Like not using this attribute.</para>
