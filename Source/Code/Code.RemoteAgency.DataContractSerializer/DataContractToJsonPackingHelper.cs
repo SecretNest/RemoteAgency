@@ -15,31 +15,23 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Packs the data for transporting.
         /// </summary>
-        /// <param name="sourceSiteId">Id of the source site.</param>
-        /// <param name="targetSiteId">Id of the target site.</param>
-        /// <param name="sourceInstanceId">Id of the source instance.</param>
-        /// <param name="targetInstanceId">Id of the target instance.</param>
-        /// <param name="isException">Whether this message is an exception.</param>
-        /// <param name="messageType">Message type.</param>
-        /// <param name="assetName">Asset name.</param>
-        /// <param name="messageId">Id of the message.</param>
-        /// <param name="isOneWay">When set to true, no response should be returned from the target site.</param>
+        /// <param name="metadata">Metadata of this message instance.</param>
         /// <param name="serialized">Serialized data.</param>
         /// <param name="genericArguments">Generic arguments used in this calling.</param>
         /// <returns>The packed data.</returns>
-        public override string Pack(Guid sourceSiteId, Guid targetSiteId, Guid sourceInstanceId, Guid targetInstanceId, bool isException, MessageType messageType, string assetName, Guid messageId, bool isOneWay, string serialized, Type[] genericArguments)
+        public override string Pack(MessageInstanceMetadata metadata, string serialized, Type[] genericArguments)
         {
             DataContractToJsonPackingEntity entity = new DataContractToJsonPackingEntity()
             {
-                SourceSiteId = sourceSiteId,
-                TargetSiteId = targetSiteId,
-                SourceInstanceId = sourceInstanceId,
-                TargetInstanceId = targetInstanceId,
-                IsException = isException,
-                MessageType = messageType,
-                AssetName = assetName,
-                MessageId = messageId,
-                IsOneWay = isOneWay,
+                SenderSiteId = metadata.SenderSiteId,
+                TargetSiteId = metadata.TargetSiteId,
+                SenderInstanceId = metadata.SenderInstanceId,
+                TargetInstanceId = metadata.TargetInstanceId,
+                IsException = metadata.IsException,
+                MessageType = metadata.MessageType,
+                AssetName = metadata.AssetName,
+                MessageId = metadata.MessageId,
+                IsOneWay = metadata.IsOneWay,
                 Serialized = serialized,
                 GenericArguments = genericArguments
             };
@@ -50,47 +42,24 @@ namespace SecretNest.RemoteAgency
         /// Unpack the data receiving form transporting.
         /// </summary>
         /// <param name="message">The packed data received from the remote site.</param>
-        /// <param name="sourceSiteId">Id of the source site.</param>
-        /// <param name="targetSiteId">Id of the target site.</param>
-        /// <param name="sourceInstanceId">Id of the source instance.</param>
-        /// <param name="targetInstanceId">Id of the target instance.</param>
-        /// <param name="isException">Whether this message is an exception.</param>
-        /// <param name="messageType">Message type.</param>
-        /// <param name="assetName">Asset name.</param>
-        /// <param name="messageId">Id of the message.</param>
-        /// <param name="isOneWay">When set to true, no response should be returned from the target site.</param>
+        /// <param name="metadata">Metadata of this message instance.</param>
         /// <param name="serialized">Serialized data.</param>
         /// <param name="genericArguments">Generic arguments used in this calling.</param>
         /// <returns>Whether processing is finished without problem.</returns>
-        public override bool TryUnpack(string message, out Guid sourceSiteId, out Guid targetSiteId, out Guid sourceInstanceId, out Guid targetInstanceId, out bool isException, out MessageType messageType, out string assetName, out Guid messageId, out bool isOneWay, out string serialized, out Type[] genericArguments)
+        public override bool TryUnpack(string message, out MessageInstanceMetadata metadata, out string serialized, out Type[] genericArguments)
         {
             try
             {
                 var entity = JsonConvert.DeserializeObject<DataContractToJsonPackingEntity>(message, stringEnumConverter);
-                sourceSiteId = entity.SourceSiteId;
-                targetSiteId = entity.TargetSiteId;
-                sourceInstanceId = entity.SourceInstanceId;
-                targetInstanceId = entity.TargetInstanceId;
-                isException = entity.IsException;
-                messageType = entity.MessageType;
-                assetName = entity.AssetName;
-                messageId = entity.MessageId;
-                isOneWay = entity.IsOneWay;
+                metadata = new MessageInstanceMetadata(entity.SenderSiteId, entity.SenderInstanceId, entity.TargetSiteId, entity.TargetInstanceId,
+                    entity.MessageType, entity.AssetName, entity.MessageId, entity.IsOneWay, entity.IsException);
                 serialized = entity.Serialized;
                 genericArguments = entity.GenericArguments;
                 return true;
             }
             catch
             {
-                sourceSiteId = Guid.Empty;
-                targetSiteId = Guid.Empty;
-                sourceInstanceId = Guid.Empty;
-                targetInstanceId = Guid.Empty;
-                isException = false;
-                messageType = MessageType.SpecialCommand;
-                assetName = null;
-                messageId = Guid.Empty;
-                isOneWay = true;
+                metadata = null;
                 serialized = null;
                 genericArguments = null;
                 return false;
@@ -106,7 +75,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Site id of the source Remote Agency manager
         /// </summary>
-        public Guid SourceSiteId;
+        public Guid SenderSiteId;
         /// <summary>
         /// Site id of the target Remote Agency manager
         /// </summary>
@@ -114,7 +83,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Instance id of the source proxy or service wrapper
         /// </summary>
-        public Guid SourceInstanceId;
+        public Guid SenderInstanceId;
         /// <summary>
         /// Instance id of the target proxy or service wrapper
         /// </summary>

@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CommonHelpers\DictionaryMerger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommonHelpers\DictionaryTryGetValueWithExplicitConversion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommonHelpers\MetadataReferenceResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\MessageProcessTerminatedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EventHandlerRemovedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\IONotConnectedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectNotFoundException.cs" />
@@ -30,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ProxyCreator\ProxyCreator_Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProxyCreator\ProxyCreator_Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProxyCreator\ProxyCreator_Property.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManager\BeforeMessageProcessingEventArgsBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManager\RemoteAgencyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManager\RemoteAgencyManager_DisposingProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManager\RemoteAgencyManager_ExceptionRedirect.cs" />
@@ -45,6 +47,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceWrapperCreator\ServiceWrapperCreator_Property.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageInstanceMetadataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrustedPlatformAssemblies.cs" />
   </ItemGroup>
 </Project>

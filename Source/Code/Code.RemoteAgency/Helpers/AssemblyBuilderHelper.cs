@@ -80,8 +80,7 @@ namespace SecretNest.RemoteAgency
             {
 #if netcore
                 //process with trusted platform
-                var assemblyFullName = e.AssemblyName.FullName;
-                var image = tpa.Value.LoadAssembly(assemblyFullName);
+                var image = tpa.Value.LoadAssembly(e.AssemblyName);
                 if (image != null)
                 {
                     e.MissingAssemblyImage = image;

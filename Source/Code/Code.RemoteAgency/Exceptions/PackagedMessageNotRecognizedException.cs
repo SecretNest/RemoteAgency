@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace SecretNest.RemoteAgency
 {
@@ -9,6 +9,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="TNetworkMessage">Type of the message for transporting.</typeparam>
     /// <seealso cref="PackingHelperBase{TNetworkMessage, TSerialized}"/>
+    [Serializable]
     public sealed class PackagedMessageNotRecognizedException<TNetworkMessage> : FormatException
     {
         /// <summary>
@@ -20,10 +21,19 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of the PackagedMessageNotRecognizedException.
         /// </summary>
         /// <param name="packagedMessage">Packaged message that cannot be recognized.</param>
-        public PackagedMessageNotRecognizedException(TNetworkMessage packagedMessage)
+        internal PackagedMessageNotRecognizedException(TNetworkMessage packagedMessage)
         {
             PackagedMessage = packagedMessage;
         }
+
+
+        /// <summary>
+        /// Initializes a new instance of the PackagedMessageNotRecognizedException class with serialized data.
+        /// </summary>
+        /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        public PackagedMessageNotRecognizedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
 
         /// <summary>
         /// Gets the error message of the current exception.

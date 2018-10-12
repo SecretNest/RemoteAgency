@@ -6,7 +6,7 @@
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
-    <Product>RemoteAgency</Product>
+    <Product>Remote Agency</Product>
     <Description></Description>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
@@ -14,9 +14,9 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.5.1</Version>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
-    <FileVersion>1.5.1.0</FileVersion>
+    <Version>1.6</Version>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</AssemblyName>
     <Configurations>Debug;Release</Configurations>
@@ -31,8 +31,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Release\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
-    <ProjectReference Include="..\..\Release\Release.RemoteAgency\Release.RemoteAgency.csproj" />
+    <ProjectReference Include="..\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
+    <ProjectReference Include="..\Release.RemoteAgency\Release.RemoteAgency.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />

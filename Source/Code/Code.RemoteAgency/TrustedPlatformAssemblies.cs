@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
 #if netcore
 
         Dictionary<string, Lazy<byte[]>> platformAssemblies = new Dictionary<string, Lazy<byte[]>>();
+        Dictionary<string, string> shortNameMapping = new Dictionary<string, string>();
 
         public TrustedPlatformAssemblies()
         {
@@ -19,25 +20,34 @@ namespace SecretNest.RemoteAgency
             foreach (var file in locationsOfAllReferences)
             {
                 var name = System.Runtime.Loader.AssemblyLoadContext.GetAssemblyName(file);
-                var fullname = name.FullName;
+                var fullName = name.FullName;
+                var shortName = name.Name;
                 var lazy = new Lazy<byte[]>(() => File.ReadAllBytes(file), false);
-                platformAssemblies.Add(fullname, lazy);
-                if (fullname.StartsWith("Microsoft.CSharp,"))
+                platformAssemblies.Add(fullName, lazy);
+                if (!shortNameMapping.TryAdd(shortName, fullName))
+                {
+                    shortNameMapping[shortName] = null;
+                }
+                if (shortName == "Microsoft.CSharp")
                     CSharpAssemblyName = name;
                 //else if (fullname.StartsWith("System.Runtime,"))
                 //    RuntimeAssemblyName = name;
                 //else if (fullname.StartsWith("System.Collections,"))
                 //    CollectionsAssemblyName = name;
-                else if (fullname.StartsWith("System.Linq.Expressions,"))
+                else if (shortName == "System.Linq.Expressions")
                     LinqExpressionsAssemblyName = name;
             }
         }
 
-        public byte[] LoadAssembly(string assemblyFullName)
+        public byte[] LoadAssembly(AssemblyName assemblyName)
         {
-            if (platformAssemblies.TryGetValue(assemblyFullName, out var value))
+            if (shortNameMapping.TryGetValue(assemblyName.Name, out string fullName))
             {
-                return value.Value;
+                if (fullName == null)
+                {
+                    fullName = assemblyName.FullName;
+                }
+                return platformAssemblies[fullName].Value;
             }
             else
             {

@@ -6,27 +6,23 @@
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
-    <Product>RemoteAgency</Product>
+    <Product>Remote Agency</Product>
     <Description>Encapsulation including DataContractSerializer and RemoteAgency.</Description>
-    <PackageProjectUrl>http://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
-    <PackageLicenseUrl>http://secretnest.info/RemoteAgency/MIT.txt</PackageLicenseUrl>
-    <PackageIconUrl>http://secretnest.info/RemoteAgency/icon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.5.1</Version>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
-    <FileVersion>1.5.1.0</FileVersion>
+    <Version>1.6</Version>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageReleaseNotes>
-      Add: dotnet framework 4.6, dotnet core app 2.0 support.
-      Remove: dotnet standard 1.x support.
-      Fix: A bug in processing property set method.
-      Known Issue:
-      Due to lacking of derived exceptions serialization support from Data Contract Serializing currently (dotnet core 2.0.3), SecretNest.RemoteAgency.DataContractSerializer and SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation cannot support exception other than System.Exception serialization.
-      This issue will be fixed in dotnet core 2.0.4 or 2.1. Check https://github.com/dotnet/corefx/issues/25259 for details.
-    </PackageReleaseNotes>
+Updated: Reference of RemoteAgency packages (1.6)</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</AssemblyName>
     <Configurations>Debug;Release</Configurations>
+    <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <PackageTags>RemoteAgency Remoting DataContract</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -38,8 +34,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.5.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.5.0" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.6.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.6.0" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />

@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency
     /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
     public partial class RemoteAgencyManager<TNetworkMessage, TSerialized, TEntityBase> : IDisposable where TEntityBase : class
     {
+
         /// <summary>
         /// Gets or sets the site id of this manager. Will be used to identify remote agency manager.
         /// </summary>
@@ -72,6 +73,9 @@ namespace SecretNest.RemoteAgency
                 SiteId = siteId.Value;
             else
                 SiteId = Guid.NewGuid();
+
+            messageProcessTerminatedException = new Lazy<TSerialized>
+                (() => serializingHelper.SerializeException(new WrappedException<MessageProcessTerminatedException>(new MessageProcessTerminatedException())));
         }
 
         #region IDisposable Support

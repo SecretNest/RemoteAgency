@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace SecretNest.RemoteAgency
 {
@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.RemoveTargetSite(Guid)"/>
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.ResetTargetSite"/>
     /// <seealso cref="RemoteAgencyManager{TNetworkMessage, TSerialized, TEntityBase}.DefaultTargetSiteId"/>
+    [Serializable]
     public class TargetSiteNotFoundException : NullReferenceException
     {
         /// <summary>
@@ -27,11 +28,19 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="idType">Id type.</param>
         /// <param name="id">Instance id or Message id based on the value of <paramref name="idType"/>.</param>
-        public TargetSiteNotFoundException(TargetSiteNotFoundIdType idType, Guid id)
+        internal TargetSiteNotFoundException(TargetSiteNotFoundIdType idType, Guid id)
         {
             IdType = idType;
             Id = id;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the TargetSiteNotFoundException class with serialized data.
+        /// </summary>
+        /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        public TargetSiteNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
 
         /// <summary>
         /// Gets the error message of the current exception.
@@ -49,15 +58,19 @@ namespace SecretNest.RemoteAgency
     /// Contains a list of id types for <see cref="TargetSiteNotFoundException"/>.
     /// </summary>
     /// <seealso cref="TargetSiteNotFoundException"/>
+    [DataContract(Namespace = "")]
+    [Serializable()]
     public enum TargetSiteNotFoundIdType
     {
         /// <summary>
         /// Instance id.
         /// </summary>
+        [EnumMember]
         InstanceId,
         /// <summary>
         /// Message id.
         /// </summary>
+        [EnumMember]
         MessageId
     }
 }

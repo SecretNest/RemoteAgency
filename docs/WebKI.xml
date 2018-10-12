@@ -10,6 +10,7 @@
   </HelpKINode>
   <HelpKINode Title="AddTargetSite method" Url="html/cde7bcc0-793b-7922-f409-b1f7383ace9c.htm" />
   <HelpKINode Title="AfterInitialized method" Url="html/05b51ea9-e33b-a120-255b-27dc3dcb3699.htm" />
+  <HelpKINode Title="AfterMessageReceived event" Url="html/fce52c14-69cb-26fc-247e-0578027b046b.htm" />
   <HelpKINode Title="Aliases property">
     <HelpKINode Title="AssemblyRequestingEventArgs.Aliases Property " Url="html/a9d7c978-d62a-d390-3063-d51ddd915375.htm" />
     <HelpKINode Title="ImportAssemblyAttribute.Aliases Property " Url="html/a80af0d1-c265-9080-e846-a3d6dc1d6951.htm" />
@@ -32,21 +33,82 @@
   <HelpKINode Title="AssetName field" Url="html/bec12a37-8395-e4da-7e9e-b06019895999.htm" />
   <HelpKINode Title="AssetName property">
     <HelpKINode Title="AssetNotFoundException.AssetName Property " Url="html/8e869678-2fb3-99e6-dd58-139e64f7b57a.htm" />
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.AssetName Property " Url="html/00e4aa65-9c6d-6c81-b6be-917faa76ce56.htm" />
     <HelpKINode Title="CustomizedAssetNameAttribute.AssetName Property " Url="html/753a3713-96f5-ebc9-c9df-ee28b3a5959f.htm" />
     <HelpKINode Title="EventHandlerRemovedException.AssetName Property " Url="html/e3d2929d-49f0-172f-6eb3-10199f31beb3.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.AssetName Property " Url="html/fd157a8e-a84a-07b2-727b-b67289065691.htm" />
     <HelpKINode Title="RedirectedExceptionEventArgs.AssetName Property " Url="html/b77f697c-2d3d-ccd0-f01c-425e7de23a8f.htm" />
   </HelpKINode>
   <HelpKINode Title="AssetNotFoundException class">
     <HelpKINode Title="AssetNotFoundException Class" Url="html/655e1ed7-eb42-32eb-0f7e-909c7493f7ae.htm" />
-    <HelpKINode Title="constructor" Url="html/e7ededef-4486-47ce-fe9c-ea956d4d0e23.htm" />
+    <HelpKINode Title="constructor" Url="html/e1666750-a413-961b-bda0-e66a97eb15d3.htm" />
     <HelpKINode Title="methods" Url="html/030ec01d-93da-a7aa-b185-94222e78ecb5.htm" />
     <HelpKINode Title="properties" Url="html/946e289e-5a0d-c448-74e4-f241ec1b6855.htm" />
   </HelpKINode>
   <HelpKINode Title="AssetNotFoundException.AssetName property" Url="html/8e869678-2fb3-99e6-dd58-139e64f7b57a.htm" />
-  <HelpKINode Title="AssetNotFoundException.AssetNotFoundException constructor" Url="html/e7ededef-4486-47ce-fe9c-ea956d4d0e23.htm" />
+  <HelpKINode Title="AssetNotFoundException.AssetNotFoundException constructor" Url="html/e1666750-a413-961b-bda0-e66a97eb15d3.htm" />
   <HelpKINode Title="AssetNotFoundException.Message property" Url="html/7c995b85-bf9a-6b13-07ce-4bcc29024b0c.htm" />
   <HelpKINode Title="AssetNotFoundException.MessageType property" Url="html/52cab44d-451c-4f96-ac18-d97467207a25.htm" />
   <HelpKINode Title="AssetNotFoundException.ToString method" Url="html/dbc33d80-46c2-27ea-1476-6761e752b8fd.htm" />
+  <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs(Of TSerialized) class">
+    <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm" />
+    <HelpKINode Title="methods" Url="html/55c56b4c-59bb-40e8-09d1-bda3d329eedc.htm" />
+    <HelpKINode Title="properties" Url="html/96b9d9d1-f4e7-bb9f-43ce-068d25d125fa.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs(Of TSerialized).ExceptionType property" Url="html/7874c2e3-fa49-d5b0-ea55-a6edc9399e53.htm" />
+  <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs&lt;TSerialized&gt; class">
+    <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm" />
+    <HelpKINode Title="methods" Url="html/55c56b4c-59bb-40e8-09d1-bda3d329eedc.htm" />
+    <HelpKINode Title="properties" Url="html/96b9d9d1-f4e7-bb9f-43ce-068d25d125fa.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs&lt;TSerialized&gt;.ExceptionType property" Url="html/7874c2e3-fa49-d5b0-ea55-a6edc9399e53.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgs(Of TSerialized) class">
+    <HelpKINode Title="BeforeMessageProcessingEventArgs(TSerialized) Class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm" />
+    <HelpKINode Title="methods" Url="html/05750a93-b7d6-9444-0c7f-0a79124664b6.htm" />
+    <HelpKINode Title="properties" Url="html/c38fca9d-b14d-cc7a-a2fc-a64d6d2a29d4.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeMessageProcessingEventArgs(Of TSerialized).GenericArguments property" Url="html/271b2f9b-efbc-1be2-e769-c2d90ce1aeb2.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgs&lt;TSerialized&gt; class">
+    <HelpKINode Title="BeforeMessageProcessingEventArgs(TSerialized) Class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm" />
+    <HelpKINode Title="methods" Url="html/05750a93-b7d6-9444-0c7f-0a79124664b6.htm" />
+    <HelpKINode Title="properties" Url="html/c38fca9d-b14d-cc7a-a2fc-a64d6d2a29d4.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeMessageProcessingEventArgs&lt;TSerialized&gt;.GenericArguments property" Url="html/271b2f9b-efbc-1be2-e769-c2d90ce1aeb2.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase class">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase Class" Url="html/c10e5574-a068-0dfe-1969-db98aacb1023.htm" />
+    <HelpKINode Title="constructor" Url="html/6ec1b0f5-de7c-bd3f-3581-7ca11d5e62df.htm" />
+    <HelpKINode Title="methods" Url="html/db33aa2e-c99f-8441-ec2f-62847441a2bb.htm" />
+    <HelpKINode Title="properties" Url="html/292a17e5-89e2-d297-3b2b-b3bdac2d1497.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase(Of TSerialized) class">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase(TSerialized) Class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm" />
+    <HelpKINode Title="constructor" Url="html/2083ee2f-508b-2b1d-aa2e-50bb91b14eed.htm" />
+    <HelpKINode Title="methods" Url="html/eb1b2096-5006-046d-b029-9c99e898fa45.htm" />
+    <HelpKINode Title="properties" Url="html/c82f7f92-7916-468f-2872-93b82c4ef440.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase(Of TSerialized).BeforeMessageProcessingEventArgsBase constructor" Url="html/2083ee2f-508b-2b1d-aa2e-50bb91b14eed.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase(Of TSerialized).SerializedMessage property" Url="html/cbb9e3f3-ffa8-eccd-4870-809d36a0e756.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.AssetName property" Url="html/00e4aa65-9c6d-6c81-b6be-917faa76ce56.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.BeforeMessageProcessingEventArgsBase constructor" Url="html/6ec1b0f5-de7c-bd3f-3581-7ca11d5e62df.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.FurtherProcessing property" Url="html/7dd688b2-f798-7c98-3d65-e087923d5916.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.IsException property" Url="html/79be2518-a9ef-18ea-f13d-12f7ad3bf2e4.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.IsOneWay property" Url="html/37060616-b3d4-33f7-f190-7685b5b69ad3.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.MessageId property" Url="html/912b7eaf-8866-40c3-16dc-9c0034a4171d.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.MessageInstanceMetadata property" Url="html/3c1b92eb-c08e-f825-7b77-d9b030362e1f.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.MessageType property" Url="html/b59f1559-9d5d-a018-03f7-c1bd662442aa.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.SenderInstanceId property" Url="html/08b45149-8b65-d80a-63a6-8d1edc0ddeac.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.SenderSiteId property" Url="html/eaa586a5-3b2c-aac0-2251-6c9f164e0ead.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.TargetInstanceId property" Url="html/2eed669a-781e-6511-d96f-49d3069af412.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase.TargetSiteId property" Url="html/a5ffb130-7556-c9ca-3bb4-de3cf5a88e1b.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase&lt;TSerialized&gt; class">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase(TSerialized) Class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm" />
+    <HelpKINode Title="constructor" Url="html/2083ee2f-508b-2b1d-aa2e-50bb91b14eed.htm" />
+    <HelpKINode Title="methods" Url="html/eb1b2096-5006-046d-b029-9c99e898fa45.htm" />
+    <HelpKINode Title="properties" Url="html/c82f7f92-7916-468f-2872-93b82c4ef440.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase&lt;TSerialized&gt;.BeforeMessageProcessingEventArgsBase constructor" Url="html/2083ee2f-508b-2b1d-aa2e-50bb91b14eed.htm" />
+  <HelpKINode Title="BeforeMessageProcessingEventArgsBase&lt;TSerialized&gt;.SerializedMessage property" Url="html/cbb9e3f3-ffa8-eccd-4870-809d36a0e756.htm" />
+  <HelpKINode Title="BeforeMessageSending event" Url="html/4c24584a-6188-d520-e332-f4a18c8347ed.htm" />
   <HelpKINode Title="BuildEntity method">
     <HelpKINode Title="DataContractSerializerEntityCodeBuilder.BuildEntity Method " Url="html/22170e07-1ff6-3e7c-6802-a7b414f5d235.htm" />
     <HelpKINode Title="EntityCodeBuilderBase.BuildEntity Method " Url="html/72369ff0-d910-045c-d804-0217f59f4334.htm" />
@@ -61,6 +123,7 @@
     <HelpKINode Title="RedirectedExceptionEventArgs.ContextId Property " Url="html/c0586692-7945-0094-0ea5-aec6e575b2a6.htm" />
     <HelpKINode Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase).ContextId Property " Url="html/c43b55dd-276a-edd2-0c02-5cbaf03d7598.htm" />
   </HelpKINode>
+  <HelpKINode Title="Continue enumeration member" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
   <HelpKINode Title="Create method" Url="html/2a374817-030a-dd38-865a-1566d3ec70d6.htm" />
   <HelpKINode Title="CreateInstance method">
     <HelpKINode Title="FastActivator(TArg).CreateInstance Method " Url="html/c258a5d2-f5fb-ab19-01e7-0a8e95f12001.htm" />
@@ -69,6 +132,7 @@
   <HelpKINode Title="CreateProxyObject(Of TInterfaceContract) method" Url="html/cd5de4f9-26e5-f499-0cf6-328c82e8f395.htm" />
   <HelpKINode Title="CreateProxyObject&lt;TInterfaceContract&gt; method" Url="html/cd5de4f9-26e5-f499-0cf6-328c82e8f395.htm" />
   <HelpKINode Title="CreateServiceWrapperObject method" Url="html/982f7b08-78dd-ce25-b237-2668f4eabe4e.htm" />
+  <HelpKINode Title="CurrentMessageInstanceMetadata property" Url="html/4c534f0b-a601-773a-fb86-a5939e0c6c75.htm" />
   <HelpKINode Title="CustomizedAssetNameAttribute class">
     <HelpKINode Title="CustomizedAssetNameAttribute Class" Url="html/c1126b53-63c2-baf7-ee23-8684e1f02609.htm" />
     <HelpKINode Title="constructor" Url="html/6e14050a-e3df-35f4-071f-78912ff62386.htm" />
@@ -213,9 +277,9 @@
   <HelpKINode Title="DataContractToJsonPackingEntity.IsOneWay field" Url="html/b4f9da04-a8ea-222f-7b05-56104b2659cf.htm" />
   <HelpKINode Title="DataContractToJsonPackingEntity.MessageId field" Url="html/db330081-be7f-c588-962e-2ed785950bb5.htm" />
   <HelpKINode Title="DataContractToJsonPackingEntity.MessageType field" Url="html/08402d27-2bb2-cb49-8219-d5ff787c8078.htm" />
+  <HelpKINode Title="DataContractToJsonPackingEntity.SenderInstanceId field" Url="html/ca935084-6212-99b7-d51d-02bbb6274191.htm" />
+  <HelpKINode Title="DataContractToJsonPackingEntity.SenderSiteId field" Url="html/43fdb256-1a6b-1157-fd03-a48e750cda7f.htm" />
   <HelpKINode Title="DataContractToJsonPackingEntity.Serialized field" Url="html/756f6dbc-4f44-a167-95b4-fecd3bf7a53b.htm" />
-  <HelpKINode Title="DataContractToJsonPackingEntity.SourceInstanceId field" Url="html/4bf38e2d-7087-f456-d1f0-d74dc640647c.htm" />
-  <HelpKINode Title="DataContractToJsonPackingEntity.SourceSiteId field" Url="html/b5c6f4e9-760f-384c-a46f-27aade47cfea.htm" />
   <HelpKINode Title="DataContractToJsonPackingEntity.TargetInstanceId field" Url="html/f7fbd0a9-172c-dd8f-7c53-0d4a7ed373d9.htm" />
   <HelpKINode Title="DataContractToJsonPackingEntity.TargetSiteId field" Url="html/9ced306c-e3e9-2ee7-abb7-2e9cd7617ba5.htm" />
   <HelpKINode Title="DataContractToJsonPackingHelper class">
@@ -224,8 +288,8 @@
     <HelpKINode Title="methods" Url="html/59da6eed-4cb6-799c-cb01-94658180a3e9.htm" />
   </HelpKINode>
   <HelpKINode Title="DataContractToJsonPackingHelper.DataContractToJsonPackingHelper constructor" Url="html/6fcbb1da-5fbc-0a2d-3290-ff9b84d10bd7.htm" />
-  <HelpKINode Title="DataContractToJsonPackingHelper.Pack method" Url="html/10f10e31-8148-b929-ee4b-52aa7a8b88be.htm" />
-  <HelpKINode Title="DataContractToJsonPackingHelper.TryUnpack method" Url="html/8c408a52-625a-bbe9-5a3f-d74152c4bedf.htm" />
+  <HelpKINode Title="DataContractToJsonPackingHelper.Pack method" Url="html/4af47e7f-bd08-07ae-c4ee-847948030e84.htm" />
+  <HelpKINode Title="DataContractToJsonPackingHelper.TryUnpack method" Url="html/09530c11-1687-695e-c042-6b5bb60fbb57.htm" />
   <HelpKINode Title="DefaultTargetSiteId property" Url="html/64a7c2e9-dd69-5edb-5685-375f2289719f.htm" />
   <HelpKINode Title="Deserialize method">
     <HelpKINode Title="DataContractSerializerSerializingHelper.Deserialize Method " Url="html/12b5fefe-136d-a630-4142-5553b42d0a59.htm" />
@@ -303,13 +367,13 @@
   <HelpKINode Title="EventAdd enumeration member" Url="html/3b9ef10e-942b-c272-0130-e16a001ba577.htm" />
   <HelpKINode Title="EventHandlerRemovedException class">
     <HelpKINode Title="EventHandlerRemovedException Class" Url="html/7c4de0cc-0e11-6514-545c-c2fddaddc7c0.htm" />
-    <HelpKINode Title="constructor" Url="html/afdf468a-d813-ef8b-f4b7-d9dd436e34d8.htm" />
+    <HelpKINode Title="constructor" Url="html/1f9cc5e5-d122-5d5b-ab9b-0158e36a63db.htm" />
     <HelpKINode Title="events" Url="html/a8f2ad09-b453-12d2-146c-e64081d98c84.htm" />
     <HelpKINode Title="methods" Url="html/5691c7cf-0734-dc4e-9577-349a59c0ba70.htm" />
     <HelpKINode Title="properties" Url="html/d4cc1359-44e9-7ea4-a408-a9a8c3c384e3.htm" />
   </HelpKINode>
   <HelpKINode Title="EventHandlerRemovedException.AssetName property" Url="html/e3d2929d-49f0-172f-6eb3-10199f31beb3.htm" />
-  <HelpKINode Title="EventHandlerRemovedException.EventHandlerRemovedException constructor" Url="html/afdf468a-d813-ef8b-f4b7-d9dd436e34d8.htm" />
+  <HelpKINode Title="EventHandlerRemovedException.EventHandlerRemovedException constructor" Url="html/1f9cc5e5-d122-5d5b-ab9b-0158e36a63db.htm" />
   <HelpKINode Title="EventHandlerRemovedException.Message property" Url="html/98c9aacf-1e97-d25a-ac76-bad84c358275.htm" />
   <HelpKINode Title="EventHandlerRemovedException.ToString method" Url="html/e14e44ec-c1d7-4fe7-1de9-40e334bb39a9.htm" />
   <HelpKINode Title="EventParameterIgnoredAttribute class">
@@ -358,6 +422,7 @@
     <HelpKINode Title="WrappedException.ExceptionGeneric Property " Url="html/17bbfb76-d51d-4127-b039-a5c83791575f.htm" />
   </HelpKINode>
   <HelpKINode Title="ExceptionType property">
+    <HelpKINode Title="BeforeExceptionMessageProcessingEventArgs(TSerialized).ExceptionType Property " Url="html/7874c2e3-fa49-d5b0-ea55-a6edc9399e53.htm" />
     <HelpKINode Title="WrappedException(T).ExceptionType Property " Url="html/212f5304-a6e8-1df8-3fa2-1fdd6318a577.htm" />
     <HelpKINode Title="WrappedException.ExceptionType Property " Url="html/bbdc3f0b-748d-6631-bd3c-9d01dc5ddc6f.htm" />
   </HelpKINode>
@@ -376,7 +441,9 @@
     <HelpKINode Title="methods" Url="html/2c6fbdd4-8c22-8198-9a25-9ec007bd6057.htm" />
   </HelpKINode>
   <HelpKINode Title="FastActivator&lt;TArg&gt;.CreateInstance method" Url="html/c258a5d2-f5fb-ab19-01e7-0a8e95f12001.htm" />
+  <HelpKINode Title="FurtherProcessing property" Url="html/7dd688b2-f798-7c98-3d65-e087923d5916.htm" />
   <HelpKINode Title="GenericArguments field" Url="html/afdbb7e7-994b-40d4-e715-054d16c3c472.htm" />
+  <HelpKINode Title="GenericArguments property" Url="html/271b2f9b-efbc-1be2-e769-c2d90ce1aeb2.htm" />
   <HelpKINode Title="GetAllDisposingRequiredProxies method" Url="html/94b9edae-17d5-f3dd-3675-2a8f0fe965a2.htm" />
   <HelpKINode Title="GetAllInstancesGroupedBySiteId method" Url="html/9d644d7b-1e9d-ce69-276e-73be0fe2dddd.htm" />
   <HelpKINode Title="GetAllProxies method" Url="html/66d542ff-a78c-166e-c8a5-bb323cc436bc.htm" />
@@ -476,20 +543,28 @@
   <HelpKINode Title="IOConnected property" Url="html/4f884c23-9167-09a3-9e4c-15c67b916430.htm" />
   <HelpKINode Title="IONotConnectedException class">
     <HelpKINode Title="IONotConnectedException Class" Url="html/13ffb09f-d632-0554-46ed-d9cd67a88835.htm" />
-    <HelpKINode Title="constructor" Url="html/190a55d8-f5ce-5740-5219-2dcc18c50382.htm" />
+    <HelpKINode Title="constructor" Url="html/7ad44507-d47d-b0f2-a7ad-6cf1bf7b35f8.htm" />
     <HelpKINode Title="methods" Url="html/e5122970-ce1d-1d41-9940-d1225a2235a4.htm" />
     <HelpKINode Title="properties" Url="html/0b690732-13e5-9f58-a5b3-7d09100f7997.htm" />
   </HelpKINode>
-  <HelpKINode Title="IONotConnectedException.IONotConnectedException constructor" Url="html/190a55d8-f5ce-5740-5219-2dcc18c50382.htm" />
+  <HelpKINode Title="IONotConnectedException.IONotConnectedException constructor" Url="html/7ad44507-d47d-b0f2-a7ad-6cf1bf7b35f8.htm" />
   <HelpKINode Title="IONotConnectedException.Message property" Url="html/5205443c-9a0a-fc3e-758f-d5ea3ce7505d.htm" />
   <HelpKINode Title="IONotConnectedException.ToString method" Url="html/21b6fac8-5302-accc-0fbc-1046fe94c2bd.htm" />
   <HelpKINode Title="IsException field" Url="html/b6bcd7ee-4e71-807c-1a14-98698fa8e2f6.htm" />
+  <HelpKINode Title="IsException property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.IsException Property " Url="html/79be2518-a9ef-18ea-f13d-12f7ad3bf2e4.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.IsException Property " Url="html/aa1e19d8-5c89-a836-b8e3-26cdcd48baa3.htm" />
+  </HelpKINode>
   <HelpKINode Title="IsLoaded property" Url="html/de525975-ea0c-41ff-37b2-b2b06d7e6270.htm" />
   <HelpKINode Title="IsModule property">
     <HelpKINode Title="AssemblyRequestingEventArgs.IsModule Property " Url="html/5126af2c-7c61-6f2d-e413-6cecf883983c.htm" />
     <HelpKINode Title="ImportAssemblyAttribute.IsModule Property " Url="html/5379f173-c635-5a57-2797-c7833d0740f3.htm" />
   </HelpKINode>
   <HelpKINode Title="IsOneWay field" Url="html/b4f9da04-a8ea-222f-7b05-56104b2659cf.htm" />
+  <HelpKINode Title="IsOneWay property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.IsOneWay Property " Url="html/37060616-b3d4-33f7-f190-7685b5b69ad3.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.IsOneWay Property " Url="html/d59b883a-b119-6ab7-e01d-aa5f0d9ce69c.htm" />
+  </HelpKINode>
   <HelpKINode Title="IsSimpleMode property">
     <HelpKINode Title="EventParameterTwoWayPropertyAttribute.IsSimpleMode Property " Url="html/05bfd3df-2ff2-1813-0d8d-85a6117a64ec.htm" />
     <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsSimpleMode Property " Url="html/3f346bf3-b3f4-547a-6f4e-b9a667dbe8c4.htm" />
@@ -555,6 +630,7 @@
     <HelpKINode Title="AssetNotFoundException.Message Property " Url="html/7c995b85-bf9a-6b13-07ce-4bcc29024b0c.htm" />
     <HelpKINode Title="EventHandlerRemovedException.Message Property " Url="html/98c9aacf-1e97-d25a-ac76-bad84c358275.htm" />
     <HelpKINode Title="IONotConnectedException.Message Property " Url="html/5205443c-9a0a-fc3e-758f-d5ea3ce7505d.htm" />
+    <HelpKINode Title="MessageProcessTerminatedException.Message Property " Url="html/3eb10bb3-6eec-b693-e3b3-212aa4022339.htm" />
     <HelpKINode Title="ObjectNotFoundException.Message Property " Url="html/bed6a74e-171e-7733-7ee7-241362308c8d.htm" />
     <HelpKINode Title="PackagedMessageNotRecognizedException(TNetworkMessage).Message Property " Url="html/8a8336f2-2e0c-0a25-4e8f-517519134d0a.htm" />
     <HelpKINode Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage).Message Property " Url="html/a6911eec-af6c-5098-17ad-6d4304270a9c.htm" />
@@ -562,13 +638,53 @@
     <HelpKINode Title="TypeCreatingExceptionRecord.Message Property " Url="html/39388cdf-5ad4-8aa6-1987-b9a0e7166f2a.htm" />
   </HelpKINode>
   <HelpKINode Title="MessageForSendingPrepared event" Url="html/1887b9d3-4692-2c2e-d054-1d386d9e1797.htm" />
+  <HelpKINode Title="MessageFurtherProcessing enumeration" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
   <HelpKINode Title="MessageId enumeration member" Url="html/e67f78c1-ec2e-b3c7-572b-7ed15014a70d.htm" />
   <HelpKINode Title="MessageId field" Url="html/db330081-be7f-c588-962e-2ed785950bb5.htm" />
-  <HelpKINode Title="MessageId property" Url="html/6f7eee7a-4d24-9bc8-5b16-b1e388308c37.htm" />
+  <HelpKINode Title="MessageId property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.MessageId Property " Url="html/912b7eaf-8866-40c3-16dc-9c0034a4171d.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.MessageId Property " Url="html/698a8c97-78eb-7bb3-2b9c-a7a698ae15f9.htm" />
+    <HelpKINode Title="RedirectedExceptionEventArgs.MessageId Property " Url="html/6f7eee7a-4d24-9bc8-5b16-b1e388308c37.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageInstanceMetadata class">
+    <HelpKINode Title="MessageInstanceMetadata Class" Url="html/5e88cf19-ae99-abc7-0a0f-e752b32fde0d.htm" />
+    <HelpKINode Title="constructor" Url="html/3b22da3c-27c1-df0f-7268-125f35b1b356.htm" />
+    <HelpKINode Title="methods" Url="html/6974047e-3b5c-ea80-6b53-da5426694b11.htm" />
+    <HelpKINode Title="properties" Url="html/51d9b564-1ca4-6cbe-17f5-8330497f6c11.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageInstanceMetadata property" Url="html/3c1b92eb-c08e-f825-7b77-d9b030362e1f.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.AssetName property" Url="html/fd157a8e-a84a-07b2-727b-b67289065691.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.IsException property" Url="html/aa1e19d8-5c89-a836-b8e3-26cdcd48baa3.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.IsOneWay property" Url="html/d59b883a-b119-6ab7-e01d-aa5f0d9ce69c.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.MessageId property" Url="html/698a8c97-78eb-7bb3-2b9c-a7a698ae15f9.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.MessageInstanceMetadata constructor" Url="html/3b22da3c-27c1-df0f-7268-125f35b1b356.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.MessageType property" Url="html/ecd7b56f-49d7-5f52-fc91-4538959bc489.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.SenderInstanceId property" Url="html/b8697ccb-b427-97b1-aefd-753c0198a0d6.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.SenderSiteId property" Url="html/92410d97-3d8e-67b7-fff4-89b966588609.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.TargetInstanceId property" Url="html/eb7fbf2d-fcf5-97eb-c829-1385c55e9954.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.TargetSiteId property" Url="html/f9ab6b20-ef55-a862-7008-be2a8782f77d.htm" />
+  <HelpKINode Title="MessageInstanceMetadata.ToString method" Url="html/5fb6781f-94a1-40a7-5a95-44c2838849bf.htm" />
+  <HelpKINode Title="MessageInstanceMetadataService class">
+    <HelpKINode Title="MessageInstanceMetadataService Class" Url="html/c7c1ce18-78cc-af17-d0c6-17cd0ca3124b.htm" />
+    <HelpKINode Title="properties" Url="html/dac12f5e-f6e6-b9ed-f7ac-d8178880f1b7.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageInstanceMetadataService.CurrentMessageInstanceMetadata property" Url="html/4c534f0b-a601-773a-fb86-a5939e0c6c75.htm" />
+  <HelpKINode Title="MessageProcessTerminatedException class">
+    <HelpKINode Title="MessageProcessTerminatedException Class" Url="html/7a4c9747-6510-de2e-1c00-73d601119083.htm" />
+    <HelpKINode Title="constructor" Url="html/3337aa5f-f1ff-b43a-f7d6-8691d45d39dc.htm" />
+    <HelpKINode Title="events" Url="html/87df192b-08db-39e8-848e-bfacb1a9b7c8.htm" />
+    <HelpKINode Title="methods" Url="html/5f2df37c-44d1-228c-3dc2-d665aa35281e.htm" />
+    <HelpKINode Title="properties" Url="html/a39a5f6c-fab4-77b0-a21a-d7ebe34a15ef.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageProcessTerminatedException.Message property" Url="html/3eb10bb3-6eec-b693-e3b3-212aa4022339.htm" />
+  <HelpKINode Title="MessageProcessTerminatedException.MessageProcessTerminatedException constructor" Url="html/3337aa5f-f1ff-b43a-f7d6-8691d45d39dc.htm" />
+  <HelpKINode Title="MessageProcessTerminatedException.ToString method" Url="html/5edc772e-c84a-9332-04df-399c5d2e8d8e.htm" />
   <HelpKINode Title="MessageType enumeration" Url="html/3b9ef10e-942b-c272-0130-e16a001ba577.htm" />
   <HelpKINode Title="MessageType field" Url="html/08402d27-2bb2-cb49-8219-d5ff787c8078.htm" />
   <HelpKINode Title="MessageType property">
     <HelpKINode Title="AssetNotFoundException.MessageType Property " Url="html/52cab44d-451c-4f96-ac18-d97467207a25.htm" />
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.MessageType Property " Url="html/b59f1559-9d5d-a018-03f7-c1bd662442aa.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.MessageType Property " Url="html/ecd7b56f-49d7-5f52-fc91-4538959bc489.htm" />
     <HelpKINode Title="RedirectedExceptionEventArgs.MessageType Property " Url="html/6b285356-e967-9ab7-f645-de24a4edd4e2.htm" />
   </HelpKINode>
   <HelpKINode Title="MessageWaitingTimedOutCallback delegate" Url="html/07724b8e-874e-0c7a-1495-002fe833dd6a.htm" />
@@ -587,40 +703,40 @@
   <HelpKINode Title="NameInCode property" Url="html/699c9b1b-7321-80e3-585b-b704021e4fd8.htm" />
   <HelpKINode Title="ObjectNotFoundException class">
     <HelpKINode Title="ObjectNotFoundException Class" Url="html/71b2f93a-f2da-98e4-b970-a7b1a194aba2.htm" />
-    <HelpKINode Title="constructor" Url="html/30727816-25f8-f505-b7ec-07b005de599d.htm" />
+    <HelpKINode Title="constructor" Url="html/b7b26396-8e21-b2ad-5e18-b354824d9282.htm" />
     <HelpKINode Title="methods" Url="html/f10d9916-a275-ed16-b162-7710c8b76755.htm" />
     <HelpKINode Title="properties" Url="html/62a530a1-78e2-59ed-ed28-7bdc909fce97.htm" />
   </HelpKINode>
   <HelpKINode Title="ObjectNotFoundException.InstanceId property" Url="html/47b919af-57f8-a8c4-485f-46414c46426a.htm" />
   <HelpKINode Title="ObjectNotFoundException.Message property" Url="html/bed6a74e-171e-7733-7ee7-241362308c8d.htm" />
-  <HelpKINode Title="ObjectNotFoundException.ObjectNotFoundException constructor" Url="html/30727816-25f8-f505-b7ec-07b005de599d.htm" />
+  <HelpKINode Title="ObjectNotFoundException.ObjectNotFoundException constructor" Url="html/b7b26396-8e21-b2ad-5e18-b354824d9282.htm" />
   <HelpKINode Title="ObjectNotFoundException.ToString method" Url="html/59016a6f-09ff-2d6b-9faa-f695b6e5a915.htm" />
   <HelpKINode Title="OnProxiesOfSiteDisposed method" Url="html/285dfea2-e195-71e0-cdd8-5bf68518db81.htm" />
   <HelpKINode Title="OnProxyDisposed method" Url="html/87f26f7d-b96c-4515-9f0b-a8e470a1694e.htm" />
   <HelpKINode Title="Pack method">
-    <HelpKINode Title="DataContractToJsonPackingHelper.Pack Method " Url="html/10f10e31-8148-b929-ee4b-52aa7a8b88be.htm" />
-    <HelpKINode Title="PackingHelperBase(TNetworkMessage, TSerialized).Pack Method " Url="html/428c411b-a69a-b5a9-24cb-072be9f6de0f.htm" />
+    <HelpKINode Title="DataContractToJsonPackingHelper.Pack Method " Url="html/4af47e7f-bd08-07ae-c4ee-847948030e84.htm" />
+    <HelpKINode Title="PackingHelperBase(TNetworkMessage, TSerialized).Pack Method " Url="html/3bb99d2b-9033-6b8a-28d0-d3d4d8e5d276.htm" />
   </HelpKINode>
   <HelpKINode Title="PackagedMessage property" Url="html/e3fb7bbd-00f4-1190-b7b8-ccb8c2ef9797.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage) class">
     <HelpKINode Title="PackagedMessageNotRecognizedException(TNetworkMessage) Class" Url="html/da339451-8830-0641-f764-126061afca58.htm" />
-    <HelpKINode Title="constructor" Url="html/10e945ab-9048-69c8-bee5-0a1affbf993a.htm" />
+    <HelpKINode Title="constructor" Url="html/f7f85fc7-9ae1-570d-4bd0-d810cf18bc6c.htm" />
     <HelpKINode Title="methods" Url="html/96afbf91-d8ce-4524-4c7a-29d2327c2852.htm" />
     <HelpKINode Title="properties" Url="html/8980ba51-5f86-e293-3bbd-dea7c21cf342.htm" />
   </HelpKINode>
   <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage).Message property" Url="html/8a8336f2-2e0c-0a25-4e8f-517519134d0a.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage).PackagedMessage property" Url="html/e3fb7bbd-00f4-1190-b7b8-ccb8c2ef9797.htm" />
-  <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage).PackagedMessageNotRecognizedException constructor" Url="html/10e945ab-9048-69c8-bee5-0a1affbf993a.htm" />
+  <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage).PackagedMessageNotRecognizedException constructor" Url="html/f7f85fc7-9ae1-570d-4bd0-d810cf18bc6c.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException(Of TNetworkMessage).ToString method" Url="html/cf14feb8-80c9-9b84-6533-eb9002c2d4dd.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt; class">
     <HelpKINode Title="PackagedMessageNotRecognizedException(TNetworkMessage) Class" Url="html/da339451-8830-0641-f764-126061afca58.htm" />
-    <HelpKINode Title="constructor" Url="html/10e945ab-9048-69c8-bee5-0a1affbf993a.htm" />
+    <HelpKINode Title="constructor" Url="html/f7f85fc7-9ae1-570d-4bd0-d810cf18bc6c.htm" />
     <HelpKINode Title="methods" Url="html/96afbf91-d8ce-4524-4c7a-29d2327c2852.htm" />
     <HelpKINode Title="properties" Url="html/8980ba51-5f86-e293-3bbd-dea7c21cf342.htm" />
   </HelpKINode>
   <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt;.Message property" Url="html/8a8336f2-2e0c-0a25-4e8f-517519134d0a.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt;.PackagedMessage property" Url="html/e3fb7bbd-00f4-1190-b7b8-ccb8c2ef9797.htm" />
-  <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt;.PackagedMessageNotRecognizedException constructor" Url="html/10e945ab-9048-69c8-bee5-0a1affbf993a.htm" />
+  <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt;.PackagedMessageNotRecognizedException constructor" Url="html/f7f85fc7-9ae1-570d-4bd0-d810cf18bc6c.htm" />
   <HelpKINode Title="PackagedMessageNotRecognizedException&lt;TNetworkMessage&gt;.ToString method" Url="html/cf14feb8-80c9-9b84-6533-eb9002c2d4dd.htm" />
   <HelpKINode Title="PackingHelper property" Url="html/03ba0ded-7cf4-0d05-e0db-0b1ab606f8a9.htm" />
   <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized) class">
@@ -628,17 +744,17 @@
     <HelpKINode Title="constructor" Url="html/77d79c16-d1a3-1fdb-d7d6-008ecbf975a5.htm" />
     <HelpKINode Title="methods" Url="html/d6b8786b-354b-fa26-ae6e-5b20851682b6.htm" />
   </HelpKINode>
-  <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized).Pack method" Url="html/428c411b-a69a-b5a9-24cb-072be9f6de0f.htm" />
+  <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized).Pack method" Url="html/3bb99d2b-9033-6b8a-28d0-d3d4d8e5d276.htm" />
   <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized).PackingHelperBase constructor" Url="html/77d79c16-d1a3-1fdb-d7d6-008ecbf975a5.htm" />
-  <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized).TryUnpack method" Url="html/444f9851-0169-6e0e-d29c-f6709fc88ee1.htm" />
+  <HelpKINode Title="PackingHelperBase(Of TNetworkMessage, TSerialized).TryUnpack method" Url="html/2d518a90-170a-6362-e4cc-cc0d8a562832.htm" />
   <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt; class">
     <HelpKINode Title="PackingHelperBase(TNetworkMessage, TSerialized) Class" Url="html/fa35cccb-326c-d5d3-0216-786f651e8568.htm" />
     <HelpKINode Title="constructor" Url="html/77d79c16-d1a3-1fdb-d7d6-008ecbf975a5.htm" />
     <HelpKINode Title="methods" Url="html/d6b8786b-354b-fa26-ae6e-5b20851682b6.htm" />
   </HelpKINode>
-  <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt;.Pack method" Url="html/428c411b-a69a-b5a9-24cb-072be9f6de0f.htm" />
+  <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt;.Pack method" Url="html/3bb99d2b-9033-6b8a-28d0-d3d4d8e5d276.htm" />
   <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt;.PackingHelperBase constructor" Url="html/77d79c16-d1a3-1fdb-d7d6-008ecbf975a5.htm" />
-  <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt;.TryUnpack method" Url="html/444f9851-0169-6e0e-d29c-f6709fc88ee1.htm" />
+  <HelpKINode Title="PackingHelperBase&lt;TNetworkMessage, TSerialized&gt;.TryUnpack method" Url="html/2d518a90-170a-6362-e4cc-cc0d8a562832.htm" />
   <HelpKINode Title="ParameterIgnoredAttribute class">
     <HelpKINode Title="ParameterIgnoredAttribute Class" Url="html/6f6fe1cd-bc06-4a55-6c28-66f07d7e7953.htm" />
     <HelpKINode Title="constructor" Url="html/e3bca4ab-902d-b208-6965-25b9813bb26b.htm" />
@@ -745,6 +861,8 @@
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).AddProxy method" Url="html/90068960-563d-c187-29bc-8be02c275ee8.htm" />
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).AddServiceWrapper method" Url="html/51c49b70-fe03-0bea-4b4d-ef5acd5dd95c.htm" />
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).AddTargetSite method" Url="html/cde7bcc0-793b-7922-f409-b1f7383ace9c.htm" />
+  <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).AfterMessageReceived event" Url="html/fce52c14-69cb-26fc-247e-0578027b046b.htm" />
+  <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).BeforeMessageSending event" Url="html/4c24584a-6188-d520-e332-f4a18c8347ed.htm" />
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).Connect method" Url="html/34cde294-3906-636c-b120-3e11f3b7e6c0.htm" />
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).ContextId property" Url="html/c43b55dd-276a-edd2-0c02-5cbaf03d7598.htm" />
   <HelpKINode Title="RemoteAgencyManager(Of TNetworkMessage, TSerialized, TEntityBase).DefaultTargetSiteId property" Url="html/64a7c2e9-dd69-5edb-5685-375f2289719f.htm" />
@@ -785,6 +903,8 @@
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.AddProxy method" Url="html/90068960-563d-c187-29bc-8be02c275ee8.htm" />
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.AddServiceWrapper method" Url="html/51c49b70-fe03-0bea-4b4d-ef5acd5dd95c.htm" />
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.AddTargetSite method" Url="html/cde7bcc0-793b-7922-f409-b1f7383ace9c.htm" />
+  <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.AfterMessageReceived event" Url="html/fce52c14-69cb-26fc-247e-0578027b046b.htm" />
+  <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.BeforeMessageSending event" Url="html/4c24584a-6188-d520-e332-f4a18c8347ed.htm" />
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.Connect method" Url="html/34cde294-3906-636c-b120-3e11f3b7e6c0.htm" />
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.ContextId property" Url="html/c43b55dd-276a-edd2-0c02-5cbaf03d7598.htm" />
   <HelpKINode Title="RemoteAgencyManager&lt;TNetworkMessage, TSerialized, TEntityBase&gt;.DefaultTargetSiteId property" Url="html/64a7c2e9-dd69-5edb-5685-375f2289719f.htm" />
@@ -856,6 +976,7 @@
   <HelpKINode Title="RemoveManagingObject method" Url="html/8ee0e55e-1c0b-342d-7d51-aa1a1191fdbd.htm" />
   <HelpKINode Title="RemoveTargetSite method" Url="html/2bc3c658-c775-dd14-d724-8504a10b9e89.htm" />
   <HelpKINode Title="RemoveTypeFromServiceWrapper method" Url="html/b76a57eb-e1c8-f2c2-262b-6678727b83fe.htm" />
+  <HelpKINode Title="ReplacedWithException enumeration member" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
   <HelpKINode Title="ResetContextId method" Url="html/696af44e-b00d-1799-8ddb-bb9201c932a4.htm" />
   <HelpKINode Title="ResetTargetSite method" Url="html/98a49b63-0681-204e-2b96-105b8de30f0a.htm" />
   <HelpKINode Title="Responder(Of T) class">
@@ -934,6 +1055,13 @@
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute class" Url="html/20cd2d0c-c682-9f86-e4a1-ae2877c7e176.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ProxyCacheableAttribute class" Url="html/685234bc-fe7c-2116-b26f-e77172141a63.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ServiceWrapperCacheableAttribute class" Url="html/33debc4f-4f22-e585-2f88-e40ce1e0689b.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeExceptionMessageProcessingEventArgs(Of TSerialized) class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeExceptionMessageProcessingEventArgs&lt;TSerialized&gt; class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgs(Of TSerialized) class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgs&lt;TSerialized&gt; class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase class" Url="html/c10e5574-a068-0dfe-1969-db98aacb1023.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase(Of TSerialized) class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase&lt;TSerialized&gt; class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.DataContractSerializerEntityCodeBuilder class" Url="html/b50cce9d-7f50-25be-e587-aad027e7176a.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.DataContractSerializerSerializingHelper class" Url="html/8d5880f7-0a4c-3a59-7573-4b51a1713ef9.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.DataContractToJsonPackingEntity class" Url="html/44d62104-a976-7181-92de-0552b4e210de.htm" />
@@ -956,6 +1084,10 @@
   <HelpKINode Title="SecretNest.RemoteAgency.ManagingProxy(Of TInterfaceContract) class" Url="html/55475e50-e9cc-7900-cdc3-3621df875997.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.ManagingProxy&lt;TInterfaceContract&gt; class" Url="html/55475e50-e9cc-7900-cdc3-3621df875997.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.ManagingServiceWrapper class" Url="html/6d21131f-c07d-94d7-27e0-54a8250c4618.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.MessageFurtherProcessing enumeration" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.MessageInstanceMetadata class" Url="html/5e88cf19-ae99-abc7-0a0f-e752b32fde0d.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.MessageInstanceMetadataService class" Url="html/c7c1ce18-78cc-af17-d0c6-17cd0ca3124b.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.MessageProcessTerminatedException class" Url="html/7a4c9747-6510-de2e-1c00-73d601119083.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.MessageType enumeration" Url="html/3b9ef10e-942b-c272-0130-e16a001ba577.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.MessageWaitingTimedOutCallback delegate" Url="html/07724b8e-874e-0c7a-1495-002fe833dd6a.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.ObjectNotFoundException class" Url="html/71b2f93a-f2da-98e4-b970-a7b1a194aba2.htm" />
@@ -994,6 +1126,16 @@
   <HelpKINode Title="SecretNest.RemoteAgency.WrappedException class" Url="html/6dbc63c7-2016-84a8-360c-de17ab1a42ce.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.WrappedException(Of T) class" Url="html/8630fd1d-2671-fe8d-7dd2-d00ec734c255.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.WrappedException&lt;T&gt; class" Url="html/8630fd1d-2671-fe8d-7dd2-d00ec734c255.htm" />
+  <HelpKINode Title="SenderInstanceId field" Url="html/ca935084-6212-99b7-d51d-02bbb6274191.htm" />
+  <HelpKINode Title="SenderInstanceId property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.SenderInstanceId Property " Url="html/08b45149-8b65-d80a-63a6-8d1edc0ddeac.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.SenderInstanceId Property " Url="html/b8697ccb-b427-97b1-aefd-753c0198a0d6.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SenderSiteId field" Url="html/43fdb256-1a6b-1157-fd03-a48e750cda7f.htm" />
+  <HelpKINode Title="SenderSiteId property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.SenderSiteId Property " Url="html/eaa586a5-3b2c-aac0-2251-6c9f164e0ead.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.SenderSiteId Property " Url="html/92410d97-3d8e-67b7-fff4-89b966588609.htm" />
+  </HelpKINode>
   <HelpKINode Title="SendExceptionCallback property" Url="html/6bf5faff-9f3a-09d7-9fd5-384f93a99a13.htm" />
   <HelpKINode Title="SendExceptionCallback(Of TSerialized) delegate" Url="html/7a257583-a423-aa21-0b06-7e4fb2280ce0.htm" />
   <HelpKINode Title="SendExceptionCallback&lt;TSerialized&gt; delegate" Url="html/7a257583-a423-aa21-0b06-7e4fb2280ce0.htm" />
@@ -1005,6 +1147,7 @@
     <HelpKINode Title="SerializingHelperBase(TSerialized, TEntityBase).Serialize Method " Url="html/6310f74f-466b-6895-a6f8-cab782c8b89e.htm" />
   </HelpKINode>
   <HelpKINode Title="Serialized field" Url="html/756f6dbc-4f44-a167-95b4-fecd3bf7a53b.htm" />
+  <HelpKINode Title="SerializedMessage property" Url="html/cbb9e3f3-ffa8-eccd-4870-809d36a0e756.htm" />
   <HelpKINode Title="SerializeException method">
     <HelpKINode Title="DataContractSerializerSerializingHelper.SerializeException Method " Url="html/6be81fce-11af-b693-6840-d55a098ef7ff.htm" />
     <HelpKINode Title="SerializingHelperBase(TSerialized, TEntityBase).SerializeException Method " Url="html/a3cb837f-a819-33bc-060e-d34251e261d6.htm" />
@@ -1086,19 +1229,25 @@
     <HelpKINode Title="RedirectedExceptionEventArgs.SiteId Property " Url="html/9a2d3583-1bdd-362f-296d-308995bef492.htm" />
     <HelpKINode Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase).SiteId Property " Url="html/068c824d-c98f-70c0-c0f2-01c0f4f3acdc.htm" />
   </HelpKINode>
-  <HelpKINode Title="SourceInstanceId field" Url="html/4bf38e2d-7087-f456-d1f0-d74dc640647c.htm" />
-  <HelpKINode Title="SourceSiteId field" Url="html/b5c6f4e9-760f-384c-a46f-27aade47cfea.htm" />
   <HelpKINode Title="SpecialCommand enumeration member" Url="html/3b9ef10e-942b-c272-0130-e16a001ba577.htm" />
   <HelpKINode Title="SubscribeOnFirstUseAndKeep enumeration member" Url="html/8f1f8fb7-8be2-85f0-5186-4d70cb100ab1.htm" />
   <HelpKINode Title="SubscribeOnStartAndKeep enumeration member" Url="html/8f1f8fb7-8be2-85f0-5186-4d70cb100ab1.htm" />
   <HelpKINode Title="Suppress enumeration member" Url="html/a808135f-cc96-a0ee-de31-373a43593198.htm" />
   <HelpKINode Title="TargetInstanceId field" Url="html/f7fbd0a9-172c-dd8f-7c53-0d4a7ed373d9.htm" />
+  <HelpKINode Title="TargetInstanceId property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.TargetInstanceId Property " Url="html/2eed669a-781e-6511-d96f-49d3069af412.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.TargetInstanceId Property " Url="html/eb7fbf2d-fcf5-97eb-c829-1385c55e9954.htm" />
+  </HelpKINode>
   <HelpKINode Title="TargetServiceWrapperInstanceId property" Url="html/b7a1bcc6-5aac-da81-25e3-4ad7a472ee9d.htm" />
   <HelpKINode Title="TargetSiteId field" Url="html/9ced306c-e3e9-2ee7-abb7-2e9cd7617ba5.htm" />
-  <HelpKINode Title="TargetSiteId property" Url="html/275c5709-2b9d-17bf-9906-12acbffed434.htm" />
+  <HelpKINode Title="TargetSiteId property">
+    <HelpKINode Title="BeforeMessageProcessingEventArgsBase.TargetSiteId Property " Url="html/a5ffb130-7556-c9ca-3bb4-de3cf5a88e1b.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.TargetSiteId Property " Url="html/f9ab6b20-ef55-a862-7008-be2a8782f77d.htm" />
+    <HelpKINode Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage).TargetSiteId Property " Url="html/275c5709-2b9d-17bf-9906-12acbffed434.htm" />
+  </HelpKINode>
   <HelpKINode Title="TargetSiteNotFoundException class">
     <HelpKINode Title="TargetSiteNotFoundException Class" Url="html/d0192810-1fa0-98f2-8c5f-c8092b80eff6.htm" />
-    <HelpKINode Title="constructor" Url="html/097fdde4-7779-df4a-3972-f36079653650.htm" />
+    <HelpKINode Title="constructor" Url="html/4e2a0b4e-fa19-bea7-14f5-979bacaca166.htm" />
     <HelpKINode Title="events" Url="html/9208fd62-efb3-14ba-0301-9a142bce7460.htm" />
     <HelpKINode Title="methods" Url="html/c2fc4956-86c2-10aa-f9f8-5ea04f03c232.htm" />
     <HelpKINode Title="properties" Url="html/d5351bbf-5bfb-9bd1-eaa8-673658b5573b.htm" />
@@ -1106,14 +1255,18 @@
   <HelpKINode Title="TargetSiteNotFoundException.Id property" Url="html/0d5fb4d1-3966-6c39-3046-5faef4dae8d4.htm" />
   <HelpKINode Title="TargetSiteNotFoundException.IdType property" Url="html/2da01a5a-138e-2696-a1ce-28a781ee737b.htm" />
   <HelpKINode Title="TargetSiteNotFoundException.Message property" Url="html/06792b0e-0699-23b3-a2ce-b3ec8d8f95be.htm" />
-  <HelpKINode Title="TargetSiteNotFoundException.TargetSiteNotFoundException constructor" Url="html/097fdde4-7779-df4a-3972-f36079653650.htm" />
+  <HelpKINode Title="TargetSiteNotFoundException.TargetSiteNotFoundException constructor" Url="html/4e2a0b4e-fa19-bea7-14f5-979bacaca166.htm" />
   <HelpKINode Title="TargetSiteNotFoundException.ToString method" Url="html/67a77009-be16-3d64-fc32-b6f4ccb51709.htm" />
   <HelpKINode Title="TargetSiteNotFoundIdType enumeration" Url="html/e67f78c1-ec2e-b3c7-572b-7ed15014a70d.htm" />
+  <HelpKINode Title="TerminateSilently enumeration member" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
+  <HelpKINode Title="TerminateWithExceptionReturned enumeration member" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
   <HelpKINode Title="Throw enumeration member" Url="html/a808135f-cc96-a0ee-de31-373a43593198.htm" />
   <HelpKINode Title="ToString method">
     <HelpKINode Title="AssetNotFoundException.ToString Method " Url="html/dbc33d80-46c2-27ea-1476-6761e752b8fd.htm" />
     <HelpKINode Title="EventHandlerRemovedException.ToString Method " Url="html/e14e44ec-c1d7-4fe7-1de9-40e334bb39a9.htm" />
     <HelpKINode Title="IONotConnectedException.ToString Method " Url="html/21b6fac8-5302-accc-0fbc-1046fe94c2bd.htm" />
+    <HelpKINode Title="MessageInstanceMetadata.ToString Method " Url="html/5fb6781f-94a1-40a7-5a95-44c2838849bf.htm" />
+    <HelpKINode Title="MessageProcessTerminatedException.ToString Method " Url="html/5edc772e-c84a-9332-04df-399c5d2e8d8e.htm" />
     <HelpKINode Title="ObjectNotFoundException.ToString Method " Url="html/59016a6f-09ff-2d6b-9faa-f695b6e5a915.htm" />
     <HelpKINode Title="PackagedMessageNotRecognizedException(TNetworkMessage).ToString Method " Url="html/cf14feb8-80c9-9b84-6533-eb9002c2d4dd.htm" />
     <HelpKINode Title="RedirectedExceptionEventArgs.ToString Method " Url="html/51197aef-1ba3-160a-4087-70beea85d938.htm" />
@@ -1122,27 +1275,27 @@
     <HelpKINode Title="WrappedException.ToString Method " Url="html/299faa8f-36ef-0f75-6db8-35e634e94797.htm" />
   </HelpKINode>
   <HelpKINode Title="TryUnpack method">
-    <HelpKINode Title="DataContractToJsonPackingHelper.TryUnpack Method " Url="html/8c408a52-625a-bbe9-5a3f-d74152c4bedf.htm" />
-    <HelpKINode Title="PackingHelperBase(TNetworkMessage, TSerialized).TryUnpack Method " Url="html/444f9851-0169-6e0e-d29c-f6709fc88ee1.htm" />
+    <HelpKINode Title="DataContractToJsonPackingHelper.TryUnpack Method " Url="html/09530c11-1687-695e-c042-6b5bb60fbb57.htm" />
+    <HelpKINode Title="PackingHelperBase(TNetworkMessage, TSerialized).TryUnpack Method " Url="html/2d518a90-170a-6362-e4cc-cc0d8a562832.htm" />
   </HelpKINode>
   <HelpKINode Title="TypeCreatingException class">
     <HelpKINode Title="TypeCreatingException Class" Url="html/bc52cae7-3a77-0cae-41ee-53e2658f58d8.htm" />
-    <HelpKINode Title="constructor" Url="html/f77d5a04-7677-1fba-c3d3-a3daa1705530.htm" />
+    <HelpKINode Title="constructor" Url="html/f6ff8c08-1532-6834-f13c-c5f0f9b571f6.htm" />
     <HelpKINode Title="events" Url="html/37f021d2-80a1-2486-93e6-75c3fcab925b.htm" />
     <HelpKINode Title="methods" Url="html/a834eeaa-fe5a-dbbb-1152-797458768146.htm" />
     <HelpKINode Title="properties" Url="html/36a09568-4b04-4cbd-22b6-2eccbe784776.htm" />
   </HelpKINode>
   <HelpKINode Title="TypeCreatingException.Records property" Url="html/efc174a9-54ac-05df-3689-b35faebbf959.htm" />
-  <HelpKINode Title="TypeCreatingException.TypeCreatingException constructor" Url="html/f77d5a04-7677-1fba-c3d3-a3daa1705530.htm" />
+  <HelpKINode Title="TypeCreatingException.TypeCreatingException constructor" Url="html/f6ff8c08-1532-6834-f13c-c5f0f9b571f6.htm" />
   <HelpKINode Title="TypeCreatingExceptionRecord class">
     <HelpKINode Title="TypeCreatingExceptionRecord Class" Url="html/4902d89a-95c1-0786-4edb-2c9c9ad8eed8.htm" />
-    <HelpKINode Title="constructor" Url="html/e668778f-f7ba-b1e5-ac32-2bab449130ba.htm" />
+    <HelpKINode Title="constructor" Url="html/0026cb98-18d1-8fc5-5106-7dde732331ef.htm" />
     <HelpKINode Title="methods" Url="html/8fa97866-8314-9e39-3093-1d79d0b91393.htm" />
     <HelpKINode Title="properties" Url="html/1a49bf14-3cff-4f29-0fe7-cd2ec4caac82.htm" />
   </HelpKINode>
   <HelpKINode Title="TypeCreatingExceptionRecord.Id property" Url="html/27334baa-66c9-a8c5-ec36-8bc8ba86eb0a.htm" />
   <HelpKINode Title="TypeCreatingExceptionRecord.Message property" Url="html/39388cdf-5ad4-8aa6-1987-b9a0e7166f2a.htm" />
-  <HelpKINode Title="TypeCreatingExceptionRecord.TypeCreatingExceptionRecord constructor" Url="html/e668778f-f7ba-b1e5-ac32-2bab449130ba.htm" />
+  <HelpKINode Title="TypeCreatingExceptionRecord.TypeCreatingExceptionRecord constructor" Url="html/0026cb98-18d1-8fc5-5106-7dde732331ef.htm" />
   <HelpKINode Title="TypeName property" Url="html/d418cf5f-d4d4-79ff-5cda-edbc82251d8c.htm" />
   <HelpKINode Title="UniqueName property" Url="html/09a8a3c2-0123-cfde-7b7c-c2683e857636.htm" />
   <HelpKINode Title="ValueMapping class">
