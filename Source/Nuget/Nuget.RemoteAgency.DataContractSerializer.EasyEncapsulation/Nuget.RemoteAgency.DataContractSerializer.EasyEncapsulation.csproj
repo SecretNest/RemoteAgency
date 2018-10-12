@@ -22,6 +22,7 @@ Updated: Reference of RemoteAgency packages (1.6)</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <PackageTags>RemoteAgency Remoting DataContract</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,8 +34,8 @@ Updated: Reference of RemoteAgency packages (1.6)</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.5.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.5.0" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.6.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.6.0" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />

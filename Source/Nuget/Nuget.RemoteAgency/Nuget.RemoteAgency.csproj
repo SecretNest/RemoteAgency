@@ -30,6 +30,7 @@ Fixed: Missing assemblies problem in dotnet core while changing platform version
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <PackageTags>RemoteAgency Remoting</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -51,7 +52,7 @@ Fixed: Missing assemblies problem in dotnet core while changing platform version
 
   <ItemGroup>
     <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.0" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.5.0" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net46'">

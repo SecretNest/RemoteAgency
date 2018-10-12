@@ -23,6 +23,7 @@ Updated: DataContractToJsonPackingHelper changed to fulfill the change of the ba
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <PackageTags>RemoteAgency Remoting DataContract</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -34,8 +35,8 @@ Updated: DataContractToJsonPackingHelper changed to fulfill the change of the ba
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
   </ItemGroup>
