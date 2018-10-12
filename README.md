@@ -1,7 +1,16 @@
 Remote Agency is built for making the communicating among components in different computers easier. 
 Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.
 
-Remote Agency base and main library is closed source, licensed under CC-ND 4.0 (https://creativecommons.org/licenses/by-nd/4.0/). Issues and requests could be tracked here.
-Remote Agency Data Contract Serializer and Easy Encapsulation of that are open source, licensed under MIT (http://secretnest.info/RemoteAgency/MIT.txt). You are welcome to use this as a demo to create any serialization support package. Issues and requests could be tracked here also.
+SecretNest.RemoteAgency packages are licensed under MIT. You can copy and redistribute the material in any medium or format for any purpose, even commercially.
 
-Home page for this project: http://secretnest.info/RemoteAgency
+Home page: http://secretnest.info/RemoteAgency
+
+Documentation: https://scegg.github.io/RemoteAgency/
+
+# Nuget Packages
+|Package|Description|
+|---|---|
+|[SecretNest.RemoteAgency](https://www.nuget.org/packages/SecretNest.RemoteAgency/)|Main library.|
+|[SecretNest.RemoteAgency.Base](https://www.nuget.org/packages/SecretNest.RemoteAgency.Base/)|Base classes, interfaces and attributes of Remote Agency.|
+|[SecretNest.RemoteAgency.DataContractSerializer](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer/)|Using DataContractSerializer as serialization solution in Remote Agency.|
+|[SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation/)|Encapsulation including DataContractSerializer and RemoteAgency.|
