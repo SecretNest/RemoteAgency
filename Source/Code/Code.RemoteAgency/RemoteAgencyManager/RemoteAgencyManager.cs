@@ -58,7 +58,7 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <summary>
-        /// initializes an instance of the RemoteAgencyManager.
+        /// Initializes an instance of the RemoteAgencyManager.
         /// </summary>
         /// <param name="packingHelper">Packing helper object.</param>
         /// <param name="serializingHelper">Serializing helper object.</param>
