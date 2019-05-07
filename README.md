@@ -14,3 +14,6 @@ Documentation: https://scegg.github.io/RemoteAgency/
 |[SecretNest.RemoteAgency.Base](https://www.nuget.org/packages/SecretNest.RemoteAgency.Base/)|Base classes, interfaces and attributes of Remote Agency.|
 |[SecretNest.RemoteAgency.DataContractSerializer](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer/)|Using DataContractSerializer as serialization solution in Remote Agency.|
 |[SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation/)|Encapsulation including DataContractSerializer and RemoteAgency.|
+
+# RemoteHub
+[Remote Hub](https://secretnest.info/RemoteHub) is the solution for connecting Remote Agency sites.
