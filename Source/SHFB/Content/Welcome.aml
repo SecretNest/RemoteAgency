@@ -4,7 +4,10 @@
 		<introduction>
 			<para>Remote Agency is built for making the communicating among components in different computers easier.</para>
 			<para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
-			<para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites.</para>
+			<para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <externalLink>
+          <linkText>Remote Hub</linkText>
+          <linkUri>https://secretnest.info/RemoteHub</linkUri>
+        </externalLink>.</para>
 		</introduction>
 
 		<section>
@@ -13,8 +16,13 @@
 				<para>Welcome to Remote Agency.</para>
 
 				<para>Remote Agency aims to a part of the technical solution for accessing a remote object, only management and serialization, but not network transportation.</para>
+        <para>
+          <externalLink>
+            <linkText>Remote Hub</linkText>
+            <linkUri>https://secretnest.info/RemoteHub</linkUri>
+          </externalLink>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
 
-				<para>The original way we used daily:</para>
+        <para>The original way we used daily:</para>
 				<mediaLink>
 					<image placement="center" xlink:href="Original"/>
 				</mediaLink>

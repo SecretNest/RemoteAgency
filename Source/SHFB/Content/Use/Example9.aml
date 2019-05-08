@@ -245,7 +245,6 @@ serverSite.RemoveManagingObject(serviceWrapperInstanceId, true);
         <step>
           <content>
             <para>Mark the interface [ProxyCacheable] (<codeEntityReference>T:SecretNest.RemoteAgency.Attributes.ProxyCacheableAttribute</codeEntityReference>) for proxy caching</para>
-            <code language="c#"></code>
             <para>If you need service wrapper caching, mark [ServiceWrapperCacheable] (<codeEntityReference>T:SecretNest.RemoteAgency.Attributes.ServiceWrapperCacheableAttribute</codeEntityReference>) on the class of service.</para>
           </content>
         </step>
