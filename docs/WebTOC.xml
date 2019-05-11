@@ -2,14 +2,14 @@
 <HelpTOC>
 
   <HelpTOCNode Title="Welcome to the Remote Agency" Url="html/e572b781-93d2-4e52-afb1-8ce06607856b.htm" />
-  <HelpTOCNode Id="54956e8a-1269-4792-a56a-45480928d773" Title="Components">
+  <HelpTOCNode Id="bd52da36-0152-49de-8372-507150a4bf1d" Title="Components">
     <HelpTOCNode Title="Remote Agency" Url="html/7947073a-78df-4f60-89b1-926ed9449451.htm" />
     <HelpTOCNode Title="Remote Agency Base" Url="html/271689f4-6c83-4900-9b06-1e52f7e0076d.htm" />
     <HelpTOCNode Title="Data Contract Serializer" Url="html/8eee49c3-2aa3-4ea2-bbb6-e72eecaa2aa2.htm" />
     <HelpTOCNode Title="Data Contract Serializer Easy Encapsulation" Url="html/522b4d73-68a4-46fb-9ec0-742b16305fbb.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="3f78f78d-b80d-4a51-9c31-880625376a8e" Title="How to" Url="html/2fe3f60f-7261-4cb5-826b-b84bfeab6a3e.htm">
-    <HelpTOCNode Id="2e2f22c6-52ce-4c8c-b02a-e1b6bd02d002" Title="Tutorial" Url="html/ecc78678-d7a8-41b7-94ce-8743add59236.htm">
+  <HelpTOCNode Id="c1245c78-205b-4d9d-abcd-44cd320a5eae" Title="How to" Url="html/2fe3f60f-7261-4cb5-826b-b84bfeab6a3e.htm">
+    <HelpTOCNode Id="c45ed9fa-7e6a-4d2b-8526-e92abf7c5bb7" Title="Tutorial" Url="html/ecc78678-d7a8-41b7-94ce-8743add59236.htm">
       <HelpTOCNode Title="IO of Manager" Url="html/ae682acd-f05a-4470-a25a-9c19ce4e4d16.htm" />
       <HelpTOCNode Title="Managing Objects (Proxy and Service Wrapper)" Url="html/450e3fa8-d346-49eb-97e6-1a787ddaf694.htm" />
       <HelpTOCNode Title="Target Site Management" Url="html/3484da6c-de69-4562-8f77-0d2c92b273b6.htm" />
@@ -19,7 +19,7 @@
       <HelpTOCNode Title="Accessing Metadata of Message in Service Method" Url="html/09cf7238-2b9d-4aff-afaf-949c7734f607.htm" />
       <HelpTOCNode Title="Message Filtering" Url="html/c77e5e89-994c-42ee-86ab-addcd4d5ed46.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4b323ff2-4b24-4a99-a017-5a0b809cf75c" Title="Example: Use Remote Agency" Url="html/c84610d8-63f7-48b7-aa35-3a66c03859a1.htm">
+    <HelpTOCNode Id="48dbe842-1334-4689-80b3-aa3725a41836" Title="Example: Use Remote Agency" Url="html/c84610d8-63f7-48b7-aa35-3a66c03859a1.htm">
       <HelpTOCNode Title="1 Hello World" Url="html/d4df62b1-2c8f-471a-bc08-931e0bb21b0a.htm" />
       <HelpTOCNode Title="2 Method with parameter, ref, out and return." Url="html/222b9528-0832-45f0-9eff-b6fc496212cb.htm" />
       <HelpTOCNode Title="3 Method with two way property and overload." Url="html/9c0126a8-a683-4903-86f0-d7737e2ba575.htm" />
@@ -35,9 +35,9 @@
     <HelpTOCNode Title="Disposing" Url="html/fdc35204-77be-4f29-90a2-919bdfca97a2.htm" />
     <HelpTOCNode Title="Handle network transportations" Url="html/162ef05d-ab9f-49e0-ad56-2ed045f7aae0.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="14f08f95-b137-42d5-8e5e-7fcb91cc59c7" Title="SecretNest.RemoteAgency" Url="html/e8c60655-b2e7-3f30-1766-ec00e49fe4f8.htm">
-    <HelpTOCNode Id="11168b8f-e50a-42ef-89ef-81ef8c9083d3" Title="AssemblyRequestingEventArgs Class" Url="html/60145561-5dbb-930c-35ea-887f795197ea.htm">
-      <HelpTOCNode Id="6f819779-152b-4825-aa35-25836c3efdd7" Title="AssemblyRequestingEventArgs Properties" Url="html/8af58825-3731-569f-ecf8-c83903a5ca30.htm">
+  <HelpTOCNode Id="6e5bd11b-9590-4379-8054-0328e1005165" Title="SecretNest.RemoteAgency" Url="html/e8c60655-b2e7-3f30-1766-ec00e49fe4f8.htm">
+    <HelpTOCNode Id="90089733-5dd1-4663-9aa5-fe6af7738822" Title="AssemblyRequestingEventArgs Class" Url="html/60145561-5dbb-930c-35ea-887f795197ea.htm">
+      <HelpTOCNode Id="f0015fa3-c788-45cf-b2d7-a15409676bed" Title="AssemblyRequestingEventArgs Properties" Url="html/8af58825-3731-569f-ecf8-c83903a5ca30.htm">
         <HelpTOCNode Title="Aliases Property " Url="html/a9d7c978-d62a-d390-3063-d51ddd915375.htm" />
         <HelpTOCNode Title="AssemblyName Property " Url="html/1924a7f8-d5c0-4c9d-bac3-8a77dfc5767f.htm" />
         <HelpTOCNode Title="Display Property " Url="html/a382cb6b-0c1e-5667-0d7d-c5e57e9566a3.htm" />
@@ -46,39 +46,39 @@
         <HelpTOCNode Title="IsModule Property " Url="html/5126af2c-7c61-6f2d-e413-6cecf883983c.htm" />
         <HelpTOCNode Title="MissingAssemblyImage Property " Url="html/cca51994-6d30-5759-1522-423a9c50b27f.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="72f4410e-4c75-4240-b3b3-7fa9aa76ac2b" Title="AssemblyRequestingEventArgs Methods" Url="html/221c68ba-e5cb-274a-2cb8-6dd8467e4d9d.htm">
+      <HelpTOCNode Id="ccedd32a-3e87-47a9-b91b-84cc566ec15c" Title="AssemblyRequestingEventArgs Methods" Url="html/221c68ba-e5cb-274a-2cb8-6dd8467e4d9d.htm">
         <HelpTOCNode Title="Load Method " Url="html/431ebee0-b219-638f-d579-e527003d0d22.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7d691079-5bf4-442e-b00e-a065fb21f22b" Title="AssetNotFoundException Class" Url="html/655e1ed7-eb42-32eb-0f7e-909c7493f7ae.htm">
-      <HelpTOCNode Id="6241b744-2b1b-4ce1-8c40-5edd1cac08a6" Title="AssetNotFoundException Constructor " Url="html/e1666750-a413-961b-bda0-e66a97eb15d3.htm">
+    <HelpTOCNode Id="0b795e31-b7b5-4fef-b1ab-262c0d9db43c" Title="AssetNotFoundException Class" Url="html/655e1ed7-eb42-32eb-0f7e-909c7493f7ae.htm">
+      <HelpTOCNode Id="b1e323ac-165b-44df-a751-9958011adb94" Title="AssetNotFoundException Constructor " Url="html/e1666750-a413-961b-bda0-e66a97eb15d3.htm">
         <HelpTOCNode Title="AssetNotFoundException Constructor (SerializationInfo, StreamingContext)" Url="html/2bd14c30-7da6-5257-ef66-b28592c7b37f.htm" />
         <HelpTOCNode Title="AssetNotFoundException Constructor (MessageType, String)" Url="html/e7ededef-4486-47ce-fe9c-ea956d4d0e23.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="1dcc2915-de53-46c6-b69f-d59e9d3ad499" Title="AssetNotFoundException Properties" Url="html/946e289e-5a0d-c448-74e4-f241ec1b6855.htm">
+      <HelpTOCNode Id="745573ca-696a-4e0b-b924-30e8e0a6e02f" Title="AssetNotFoundException Properties" Url="html/946e289e-5a0d-c448-74e4-f241ec1b6855.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/8e869678-2fb3-99e6-dd58-139e64f7b57a.htm" />
         <HelpTOCNode Title="Message Property " Url="html/7c995b85-bf9a-6b13-07ce-4bcc29024b0c.htm" />
         <HelpTOCNode Title="MessageType Property " Url="html/52cab44d-451c-4f96-ac18-d97467207a25.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="b323fe71-07ff-4287-bfe0-9ab1724d8fec" Title="AssetNotFoundException Methods" Url="html/030ec01d-93da-a7aa-b185-94222e78ecb5.htm">
+      <HelpTOCNode Id="ccc0b266-3b82-4d2b-840a-c6db2c1d3674" Title="AssetNotFoundException Methods" Url="html/030ec01d-93da-a7aa-b185-94222e78ecb5.htm">
         <HelpTOCNode Title="ToString Method " Url="html/dbc33d80-46c2-27ea-1476-6761e752b8fd.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e105c269-b262-4811-8b2e-6258bda299bb" Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm">
-      <HelpTOCNode Id="fe476f7c-1bbc-454b-8420-90b615ef3ff2" Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Properties" Url="html/96b9d9d1-f4e7-bb9f-43ce-068d25d125fa.htm">
+    <HelpTOCNode Id="947a5618-2883-4d6a-9598-72dbab1fc774" Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Class" Url="html/1094e8b4-d607-1fc0-dd36-fa553f38e798.htm">
+      <HelpTOCNode Id="02dd0433-0b44-4442-82ef-40883ec118a5" Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Properties" Url="html/96b9d9d1-f4e7-bb9f-43ce-068d25d125fa.htm">
         <HelpTOCNode Title="ExceptionType Property " Url="html/7874c2e3-fa49-d5b0-ea55-a6edc9399e53.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BeforeExceptionMessageProcessingEventArgs(TSerialized) Methods" Url="html/55c56b4c-59bb-40e8-09d1-bda3d329eedc.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="6a371e7b-c5b9-41cf-8435-bd02f66a975b" Title="BeforeMessageProcessingEventArgs(TSerialized) Class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm">
-      <HelpTOCNode Id="eb545be0-68b6-43d3-afdd-8a85b80f8c68" Title="BeforeMessageProcessingEventArgs(TSerialized) Properties" Url="html/c38fca9d-b14d-cc7a-a2fc-a64d6d2a29d4.htm">
+    <HelpTOCNode Id="5809a0f9-a426-493d-b1ac-30a37a43f438" Title="BeforeMessageProcessingEventArgs(TSerialized) Class" Url="html/9aa82836-06a6-0702-a0a6-c16abe94d2b4.htm">
+      <HelpTOCNode Id="5c6ed4d5-6057-4e6d-a896-1e24b55ad333" Title="BeforeMessageProcessingEventArgs(TSerialized) Properties" Url="html/c38fca9d-b14d-cc7a-a2fc-a64d6d2a29d4.htm">
         <HelpTOCNode Title="GenericArguments Property " Url="html/271b2f9b-efbc-1be2-e769-c2d90ce1aeb2.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BeforeMessageProcessingEventArgs(TSerialized) Methods" Url="html/05750a93-b7d6-9444-0c7f-0a79124664b6.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f38ef8b2-4275-433b-ae5a-06274ac172fa" Title="BeforeMessageProcessingEventArgsBase Class" Url="html/c10e5574-a068-0dfe-1969-db98aacb1023.htm">
+    <HelpTOCNode Id="f1453758-f2fe-4e1f-80c3-6d28ae957c61" Title="BeforeMessageProcessingEventArgsBase Class" Url="html/c10e5574-a068-0dfe-1969-db98aacb1023.htm">
       <HelpTOCNode Title="BeforeMessageProcessingEventArgsBase Constructor " Url="html/6ec1b0f5-de7c-bd3f-3581-7ca11d5e62df.htm" />
-      <HelpTOCNode Id="c6bcff53-ea5e-4e24-b2e2-6339aec07f56" Title="BeforeMessageProcessingEventArgsBase Properties" Url="html/292a17e5-89e2-d297-3b2b-b3bdac2d1497.htm">
+      <HelpTOCNode Id="f28c3b5c-f614-46a4-ad9c-d535108c7180" Title="BeforeMessageProcessingEventArgsBase Properties" Url="html/292a17e5-89e2-d297-3b2b-b3bdac2d1497.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/00e4aa65-9c6d-6c81-b6be-917faa76ce56.htm" />
         <HelpTOCNode Title="FurtherProcessing Property " Url="html/7dd688b2-f798-7c98-3d65-e087923d5916.htm" />
         <HelpTOCNode Title="IsException Property " Url="html/79be2518-a9ef-18ea-f13d-12f7ad3bf2e4.htm" />
@@ -93,23 +93,23 @@
       </HelpTOCNode>
       <HelpTOCNode Title="BeforeMessageProcessingEventArgsBase Methods" Url="html/db33aa2e-c99f-8441-ec2f-62847441a2bb.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="39e91e03-77ef-4c47-b4bf-b9ce55b0351b" Title="BeforeMessageProcessingEventArgsBase(TSerialized) Class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm">
+    <HelpTOCNode Id="4a0b7d82-7ddf-4d7b-96f6-6fc5cc5d996e" Title="BeforeMessageProcessingEventArgsBase(TSerialized) Class" Url="html/5b9f26cc-2015-12b7-33df-35861aacc4ea.htm">
       <HelpTOCNode Title="BeforeMessageProcessingEventArgsBase(TSerialized) Constructor " Url="html/2083ee2f-508b-2b1d-aa2e-50bb91b14eed.htm" />
-      <HelpTOCNode Id="0b44f386-3009-45fb-886d-b0a5b64c93bc" Title="BeforeMessageProcessingEventArgsBase(TSerialized) Properties" Url="html/c82f7f92-7916-468f-2872-93b82c4ef440.htm">
+      <HelpTOCNode Id="ff8adb18-ba42-4c38-a2e8-68076fe3baba" Title="BeforeMessageProcessingEventArgsBase(TSerialized) Properties" Url="html/c82f7f92-7916-468f-2872-93b82c4ef440.htm">
         <HelpTOCNode Title="SerializedMessage Property " Url="html/cbb9e3f3-ffa8-eccd-4870-809d36a0e756.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BeforeMessageProcessingEventArgsBase(TSerialized) Methods" Url="html/eb1b2096-5006-046d-b029-9c99e898fa45.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="cf212d6e-3dbd-4a56-a626-795dd721c855" Title="DataContractSerializerEntityCodeBuilder Class" Url="html/b50cce9d-7f50-25be-e587-aad027e7176a.htm">
+    <HelpTOCNode Id="1237dfc2-eb74-4f62-b991-040379cd7165" Title="DataContractSerializerEntityCodeBuilder Class" Url="html/b50cce9d-7f50-25be-e587-aad027e7176a.htm">
       <HelpTOCNode Title="DataContractSerializerEntityCodeBuilder Constructor " Url="html/d4e37afb-2f2e-d386-9f54-ef9c7795b442.htm" />
-      <HelpTOCNode Id="7588ba95-0742-4112-9e2d-86043c4c68c8" Title="DataContractSerializerEntityCodeBuilder Methods" Url="html/56123b70-c35b-a76f-8e22-fb8dedf00e2c.htm">
+      <HelpTOCNode Id="9a46154e-6f94-4813-ac11-bf4121230917" Title="DataContractSerializerEntityCodeBuilder Methods" Url="html/56123b70-c35b-a76f-8e22-fb8dedf00e2c.htm">
         <HelpTOCNode Title="BuildEntity Method " Url="html/22170e07-1ff6-3e7c-6802-a7b414f5d235.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="aa972417-21ff-4b66-b267-5d6ce730670c" Title="DataContractSerializerSerializingHelper Class" Url="html/8d5880f7-0a4c-3a59-7573-4b51a1713ef9.htm">
+    <HelpTOCNode Id="bf337e45-f34b-4d25-b9a6-e8c8167b0698" Title="DataContractSerializerSerializingHelper Class" Url="html/8d5880f7-0a4c-3a59-7573-4b51a1713ef9.htm">
       <HelpTOCNode Title="DataContractSerializerSerializingHelper Constructor " Url="html/5946c906-79dc-8b8a-af32-982064963c26.htm" />
-      <HelpTOCNode Id="e79a0bbf-6451-476e-962e-bbe6ade4152f" Title="DataContractSerializerSerializingHelper Methods" Url="html/38ced573-29e2-1671-7311-b85c73e32d70.htm">
-        <HelpTOCNode Id="53a944a7-b044-40b7-995b-2305ef9d8396" Title="Deserialize Method " Url="html/12b5fefe-136d-a630-4142-5553b42d0a59.htm">
+      <HelpTOCNode Id="44c5dd45-c41c-43f9-98d8-933bbe6cc6c6" Title="DataContractSerializerSerializingHelper Methods" Url="html/38ced573-29e2-1671-7311-b85c73e32d70.htm">
+        <HelpTOCNode Id="00736c62-e7c9-4b0a-b015-ec2fb4fe00f0" Title="Deserialize Method " Url="html/12b5fefe-136d-a630-4142-5553b42d0a59.htm">
           <HelpTOCNode Title="Deserialize Method (String, Type)" Url="html/106f6326-7f9a-6b22-5b20-436d8fe3e1a2.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="DeserializeException Method " Url="html/cb3f7cb5-ae46-18ee-8033-3008a4c2f408.htm" />
@@ -117,10 +117,10 @@
         <HelpTOCNode Title="SerializeException Method " Url="html/6be81fce-11af-b693-6840-d55a098ef7ff.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b8ecaa02-34c3-4b17-ad8a-4803b198286b" Title="DataContractToJsonPackingEntity Class" Url="html/44d62104-a976-7181-92de-0552b4e210de.htm">
+    <HelpTOCNode Id="7fe81c22-b62b-4053-966b-d807a1fae96a" Title="DataContractToJsonPackingEntity Class" Url="html/44d62104-a976-7181-92de-0552b4e210de.htm">
       <HelpTOCNode Title="DataContractToJsonPackingEntity Constructor " Url="html/926de8c5-3ce1-6f5a-d3a6-3dc76a000d42.htm" />
       <HelpTOCNode Title="DataContractToJsonPackingEntity Methods" Url="html/0cbe2e01-5173-65af-3006-db32ee8a7893.htm" />
-      <HelpTOCNode Id="48604059-603a-4847-b9f3-ec06f11b4c9f" Title="DataContractToJsonPackingEntity Fields" Url="html/65474955-9862-c197-5c41-50fa5e392419.htm">
+      <HelpTOCNode Id="a7cbf84f-3892-4b6e-8bf6-d7e165848aae" Title="DataContractToJsonPackingEntity Fields" Url="html/65474955-9862-c197-5c41-50fa5e392419.htm">
         <HelpTOCNode Title="AssetName Field" Url="html/bec12a37-8395-e4da-7e9e-b06019895999.htm" />
         <HelpTOCNode Title="GenericArguments Field" Url="html/afdbb7e7-994b-40d4-e715-054d16c3c472.htm" />
         <HelpTOCNode Title="IsException Field" Url="html/b6bcd7ee-4e71-807c-1a14-98698fa8e2f6.htm" />
@@ -134,103 +134,103 @@
         <HelpTOCNode Title="TargetSiteId Field" Url="html/9ced306c-e3e9-2ee7-abb7-2e9cd7617ba5.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cc901cb4-3938-444c-ae08-1ceb66b392e6" Title="DataContractToJsonPackingHelper Class" Url="html/df2c84c3-e514-6aae-3235-f3970962f118.htm">
+    <HelpTOCNode Id="3854d111-53fa-4e2d-9bbb-8f185c5e3366" Title="DataContractToJsonPackingHelper Class" Url="html/df2c84c3-e514-6aae-3235-f3970962f118.htm">
       <HelpTOCNode Title="DataContractToJsonPackingHelper Constructor " Url="html/6fcbb1da-5fbc-0a2d-3290-ff9b84d10bd7.htm" />
-      <HelpTOCNode Id="1a7e2aae-7a07-41fa-a475-30dc0a6ede22" Title="DataContractToJsonPackingHelper Methods" Url="html/59da6eed-4cb6-799c-cb01-94658180a3e9.htm">
+      <HelpTOCNode Id="e36bcad1-35f6-499d-a083-f91fc9ad6ea0" Title="DataContractToJsonPackingHelper Methods" Url="html/59da6eed-4cb6-799c-cb01-94658180a3e9.htm">
         <HelpTOCNode Title="Pack Method " Url="html/4af47e7f-bd08-07ae-c4ee-847948030e84.htm" />
         <HelpTOCNode Title="TryUnpack Method " Url="html/09530c11-1687-695e-c042-6b5bb60fbb57.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b9e77a09-5144-4dc7-b213-a43bd7918b5b" Title="DisposingMessageRequiredProxyEventArgs Class" Url="html/0e29c2d1-446e-8cd2-e270-bb1bd3d698d7.htm">
+    <HelpTOCNode Id="f49d8825-7331-46c1-8004-9cda65a122d4" Title="DisposingMessageRequiredProxyEventArgs Class" Url="html/0e29c2d1-446e-8cd2-e270-bb1bd3d698d7.htm">
       <HelpTOCNode Title="DisposingMessageRequiredProxyEventArgs Constructor " Url="html/15369f90-a4d7-adfe-0443-1522f2477915.htm" />
-      <HelpTOCNode Id="9e23161d-9f15-47f9-9f3e-9740b41b75eb" Title="DisposingMessageRequiredProxyEventArgs Properties" Url="html/974cc30c-4581-35b1-a202-bc6370ba79c4.htm">
+      <HelpTOCNode Id="1c86ecc1-0225-4ca9-8d3b-b69f6721a7b5" Title="DisposingMessageRequiredProxyEventArgs Properties" Url="html/974cc30c-4581-35b1-a202-bc6370ba79c4.htm">
         <HelpTOCNode Title="InstanceId Property " Url="html/13fba748-1844-8a9b-7e3e-968d8cd1e7e2.htm" />
         <HelpTOCNode Title="SiteId Property " Url="html/92b5eb69-cd73-7431-2169-c44800330226.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="DisposingMessageRequiredProxyEventArgs Methods" Url="html/1c8f06ec-92cd-015f-dd8b-75d75dec7971.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="bd51f43c-614a-4307-aeaf-5f23d829dec8" Title="DisposingMessageRequiredProxyQueryResult Class" Url="html/b382882f-0c13-fae8-14dc-a71234f7bd2d.htm">
+    <HelpTOCNode Id="880d26b3-8f44-4afa-ad5f-cf3861e3b269" Title="DisposingMessageRequiredProxyQueryResult Class" Url="html/b382882f-0c13-fae8-14dc-a71234f7bd2d.htm">
       <HelpTOCNode Title="DisposingMessageRequiredProxyQueryResult Constructor " Url="html/0f4c7df1-3dba-86a7-9610-287170a2c191.htm" />
-      <HelpTOCNode Id="0a4380e2-1de5-48dd-8100-9590fd13c49b" Title="DisposingMessageRequiredProxyQueryResult Properties" Url="html/33e78832-d412-220a-a572-5e472fbe3c83.htm">
+      <HelpTOCNode Id="cfeb4494-6c1e-4ebf-a4fa-ff2ba11febe9" Title="DisposingMessageRequiredProxyQueryResult Properties" Url="html/33e78832-d412-220a-a572-5e472fbe3c83.htm">
         <HelpTOCNode Title="InstanceId Property " Url="html/a119abb8-cd38-b5f2-f44e-9242debe0c2a.htm" />
         <HelpTOCNode Title="SiteId Property " Url="html/8b309245-4041-15ae-b0eb-30e8c7c2ff04.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="DisposingMessageRequiredProxyQueryResult Methods" Url="html/6c09f5d3-a818-b3a3-93c6-8dec29b49257.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f15b4c31-40f4-428d-85e5-518da471dc20" Title="EntityCodeBuilderBase Class" Url="html/1a244d92-e332-8821-fc63-385ee0a7e8d0.htm">
+    <HelpTOCNode Id="0fa2b435-9da8-41cf-a28b-85c87e5424ef" Title="EntityCodeBuilderBase Class" Url="html/1a244d92-e332-8821-fc63-385ee0a7e8d0.htm">
       <HelpTOCNode Title="EntityCodeBuilderBase Constructor " Url="html/fcfa2a1a-709b-7f91-7f3f-ebca6027dc27.htm" />
-      <HelpTOCNode Id="e82740cb-4c5f-4e9c-a79c-83298528d57d" Title="EntityCodeBuilderBase Methods" Url="html/b7d795a3-acd4-bd5a-0441-5ee807441b9a.htm">
+      <HelpTOCNode Id="e9a5ba80-bf5f-40a2-a86d-23de20b13896" Title="EntityCodeBuilderBase Methods" Url="html/b7d795a3-acd4-bd5a-0441-5ee807441b9a.htm">
         <HelpTOCNode Title="BuildEntity Method " Url="html/72369ff0-d910-045c-d804-0217f59f4334.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d231e81a-1e85-4f71-bf06-8c7b8c4c5554" Title="EventHandlerRemovedException Class" Url="html/7c4de0cc-0e11-6514-545c-c2fddaddc7c0.htm">
+    <HelpTOCNode Id="71bbf622-770b-48c5-ac43-6ba9ad24d08e" Title="EventHandlerRemovedException Class" Url="html/7c4de0cc-0e11-6514-545c-c2fddaddc7c0.htm">
       <HelpTOCNode Title="EventHandlerRemovedException Constructor " Url="html/1f9cc5e5-d122-5d5b-ab9b-0158e36a63db.htm" />
-      <HelpTOCNode Id="18ae807a-2204-4f4a-bc8d-b012abe4e6ad" Title="EventHandlerRemovedException Properties" Url="html/d4cc1359-44e9-7ea4-a408-a9a8c3c384e3.htm">
+      <HelpTOCNode Id="47684544-da9d-4c3d-9279-93832578f78a" Title="EventHandlerRemovedException Properties" Url="html/d4cc1359-44e9-7ea4-a408-a9a8c3c384e3.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/e3d2929d-49f0-172f-6eb3-10199f31beb3.htm" />
         <HelpTOCNode Title="Message Property " Url="html/98c9aacf-1e97-d25a-ac76-bad84c358275.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="095c0178-7500-46fd-990b-414e804f4680" Title="EventHandlerRemovedException Methods" Url="html/5691c7cf-0734-dc4e-9577-349a59c0ba70.htm">
+      <HelpTOCNode Id="7e421b99-a047-4588-9edb-15d00444aabf" Title="EventHandlerRemovedException Methods" Url="html/5691c7cf-0734-dc4e-9577-349a59c0ba70.htm">
         <HelpTOCNode Title="ToString Method " Url="html/e14e44ec-c1d7-4fe7-1de9-40e334bb39a9.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EventHandlerRemovedException Events" Url="html/a8f2ad09-b453-12d2-146c-e64081d98c84.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="1471ceec-4c56-403b-a8ae-75b32570eae6" Title="FastActivator Class" Url="html/a9f9cd5f-4b54-7df0-9223-2304e5a75544.htm">
-      <HelpTOCNode Id="b849cfd7-9a3a-49b3-8964-b4ba9b5ae20c" Title="FastActivator Methods" Url="html/8f7f3d80-ee85-acf0-7f19-2fb8f507698e.htm">
+    <HelpTOCNode Id="e83f7523-2f61-4589-9e4b-945162f91865" Title="FastActivator Class" Url="html/a9f9cd5f-4b54-7df0-9223-2304e5a75544.htm">
+      <HelpTOCNode Id="1f208570-aa7d-47da-83d9-4006e0dad267" Title="FastActivator Methods" Url="html/8f7f3d80-ee85-acf0-7f19-2fb8f507698e.htm">
         <HelpTOCNode Title="CreateInstance Method " Url="html/8dee92bf-bb03-0799-d240-9a4971a6c76c.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="91efa5da-5700-4c10-83ee-49c64b30a5bd" Title="FastActivator(TArg) Class" Url="html/fee514dd-d358-8fbc-3296-4380885aa43f.htm">
-      <HelpTOCNode Id="4a68b17d-bf7b-484a-9c3f-8429a5085d4f" Title="FastActivator(TArg) Methods" Url="html/2c6fbdd4-8c22-8198-9a25-9ec007bd6057.htm">
+    <HelpTOCNode Id="415279c3-2e38-40e8-b1fa-a08de1e5bdbe" Title="FastActivator(TArg) Class" Url="html/fee514dd-d358-8fbc-3296-4380885aa43f.htm">
+      <HelpTOCNode Id="c5db12d0-c820-41cf-8331-a82be624c1bc" Title="FastActivator(TArg) Methods" Url="html/2c6fbdd4-8c22-8198-9a25-9ec007bd6057.htm">
         <HelpTOCNode Title="CreateInstance Method " Url="html/c258a5d2-f5fb-ab19-01e7-0a8e95f12001.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ce613ab8-9629-4329-baec-c77040d40fb2" Title="IAssemblyCacheOperatings(TSerialized, TEntityBase) Interface" Url="html/acd9985f-96f8-ff41-123f-5e1a17fd58d5.htm">
-      <HelpTOCNode Id="b9948400-daa8-451a-932c-d09ffca8f4f5" Title="IAssemblyCacheOperatings(TSerialized, TEntityBase) Properties" Url="html/b394e821-99a4-f4eb-0dce-efe3273c3963.htm">
+    <HelpTOCNode Id="f1000728-a81d-44a2-884d-f9e0d1fa2b19" Title="IAssemblyCacheOperatings(TSerialized, TEntityBase) Interface" Url="html/acd9985f-96f8-ff41-123f-5e1a17fd58d5.htm">
+      <HelpTOCNode Id="ce6313d6-a8b3-46b8-8484-59a24269c79b" Title="IAssemblyCacheOperatings(TSerialized, TEntityBase) Properties" Url="html/b394e821-99a4-f4eb-0dce-efe3273c3963.htm">
         <HelpTOCNode Title="LoadCachedAssemblyCallback Property " Url="html/b2bce81d-d89f-f60e-054d-6775b50941c7.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyCallback Property " Url="html/5ebb3326-7664-bd45-aff8-35f71d566f37.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyImageCallback Property " Url="html/cad06ad3-477c-20ed-dc0e-2fb4194ae693.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="6b80e83e-60bf-44e4-a24b-505d02853520" Title="ICommunicate(TSerialized) Interface" Url="html/cb12e822-270c-4574-57b8-18c7dccc810c.htm">
-      <HelpTOCNode Id="bf3673cf-3f50-471a-a4ce-cab23da3e103" Title="ICommunicate(TSerialized) Properties" Url="html/c424f53a-23dd-de8b-f135-5fef531aeca2.htm">
+    <HelpTOCNode Id="072a6aae-b3fb-48d7-a971-6ce9f42a3c17" Title="ICommunicate(TSerialized) Interface" Url="html/cb12e822-270c-4574-57b8-18c7dccc810c.htm">
+      <HelpTOCNode Id="7fa47ce9-3673-46e2-992f-ddbc9a706574" Title="ICommunicate(TSerialized) Properties" Url="html/c424f53a-23dd-de8b-f135-5fef531aeca2.htm">
         <HelpTOCNode Title="MessageWaitingTimedOutCallback Property " Url="html/4c7c660c-87e8-dbf0-df3f-01cfb6b3eee1.htm" />
         <HelpTOCNode Title="RedirectedExceptionRaisedCallback Property " Url="html/0865d6d4-f49c-3ca4-3ad0-bec89639655e.htm" />
         <HelpTOCNode Title="SendExceptionCallback Property " Url="html/6bf5faff-9f3a-09d7-9fd5-384f93a99a13.htm" />
         <HelpTOCNode Title="SendMessageCallback Property " Url="html/821cb90d-f128-ad51-8136-afafa392a5d9.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="31366036-5e14-459b-a6fa-3b91044aee77" Title="ICommunicate(TSerialized) Methods" Url="html/4c706386-bb76-865a-0485-b3e5e2ce80bb.htm">
+      <HelpTOCNode Id="08006376-12e9-44ce-b28c-3542ca33bd0d" Title="ICommunicate(TSerialized) Methods" Url="html/4c706386-bb76-865a-0485-b3e5e2ce80bb.htm">
         <HelpTOCNode Title="AfterInitialized Method " Url="html/05b51ea9-e33b-a120-255b-27dc3dcb3699.htm" />
         <HelpTOCNode Title="ProcessException Method " Url="html/0b558a4f-eea6-bce6-4dea-2eb30fd6be61.htm" />
         <HelpTOCNode Title="ProcessMessage Method " Url="html/1fa31517-89c0-0efa-c8f2-a2509854126d.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d57bd19a-51ca-438a-a369-04b239cb7e2f" Title="IONotConnectedException Class" Url="html/13ffb09f-d632-0554-46ed-d9cd67a88835.htm">
+    <HelpTOCNode Id="ff8a612f-2b8f-427d-9cfe-30efdc9ecc00" Title="IONotConnectedException Class" Url="html/13ffb09f-d632-0554-46ed-d9cd67a88835.htm">
       <HelpTOCNode Title="IONotConnectedException Constructor " Url="html/7ad44507-d47d-b0f2-a7ad-6cf1bf7b35f8.htm" />
-      <HelpTOCNode Id="1dea7980-bb3a-4d79-9b3b-660d4e23f96a" Title="IONotConnectedException Properties" Url="html/0b690732-13e5-9f58-a5b3-7d09100f7997.htm">
+      <HelpTOCNode Id="0cbd3dba-8ebc-47cf-b03a-be7e8428ebdd" Title="IONotConnectedException Properties" Url="html/0b690732-13e5-9f58-a5b3-7d09100f7997.htm">
         <HelpTOCNode Title="Message Property " Url="html/5205443c-9a0a-fc3e-758f-d5ea3ce7505d.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="65526be7-3b61-41fd-9000-b4c6f2ab741c" Title="IONotConnectedException Methods" Url="html/e5122970-ce1d-1d41-9940-d1225a2235a4.htm">
+      <HelpTOCNode Id="ce355c8c-3f2e-48bc-b54e-f7fe93cfe2d1" Title="IONotConnectedException Methods" Url="html/e5122970-ce1d-1d41-9940-d1225a2235a4.htm">
         <HelpTOCNode Title="ToString Method " Url="html/21b6fac8-5302-accc-0fbc-1046fe94c2bd.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="LoadCachedAssemblyCallback(TSerialized, TEntityBase) Delegate" Url="html/0396a396-fbe0-36ac-0d37-03dfd06c5cd1.htm" />
-    <HelpTOCNode Id="95f3d6dd-d089-41e7-9ac2-9b9d77d9b3e2" Title="ManagingProxy Class" Url="html/47542090-0bdd-6907-cab6-a26d03e8157f.htm">
+    <HelpTOCNode Id="70c69d19-7de3-46e9-afe2-90f6c3eb2973" Title="ManagingProxy Class" Url="html/47542090-0bdd-6907-cab6-a26d03e8157f.htm">
       <HelpTOCNode Title="ManagingProxy Constructor " Url="html/151fe257-af17-b056-829c-89f61645f40b.htm" />
       <HelpTOCNode Title="ManagingProxy Properties" Url="html/0ccc1814-a439-406d-c466-ba4794382009.htm" />
       <HelpTOCNode Title="ManagingProxy Methods" Url="html/265541a0-a2a6-ade1-0f4a-7548d5e9896c.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="0fc22efd-27e1-4ddd-a9bc-b227a6853d93" Title="ManagingProxy(TInterfaceContract) Class" Url="html/55475e50-e9cc-7900-cdc3-3621df875997.htm">
+    <HelpTOCNode Id="10d0160e-8b19-4bd5-a477-b010fa202076" Title="ManagingProxy(TInterfaceContract) Class" Url="html/55475e50-e9cc-7900-cdc3-3621df875997.htm">
       <HelpTOCNode Title="ManagingProxy(TInterfaceContract) Constructor " Url="html/5b02d862-55ae-4c1a-1b1f-9bcc10f1cf6f.htm" />
-      <HelpTOCNode Id="a8c0d90f-5af4-4415-b03b-aba41ef4fdae" Title="ManagingProxy(TInterfaceContract) Properties" Url="html/c53be115-4fce-c8d2-0993-484c9bdf7e07.htm">
+      <HelpTOCNode Id="7918c768-9118-40ac-a4d4-7cad71464094" Title="ManagingProxy(TInterfaceContract) Properties" Url="html/c53be115-4fce-c8d2-0993-484c9bdf7e07.htm">
         <HelpTOCNode Title="ProxyInstanceId Property " Url="html/d200d737-2d73-9259-0433-0f5ff9dd9e86.htm" />
         <HelpTOCNode Title="ProxyObject Property " Url="html/da03e5b9-a6cd-469e-e8d1-4fd4dcfc2fa8.htm" />
         <HelpTOCNode Title="TargetServiceWrapperInstanceId Property " Url="html/b7a1bcc6-5aac-da81-25e3-4ad7a472ee9d.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ManagingProxy(TInterfaceContract) Methods" Url="html/c32ce99e-7fc7-b16a-56aa-950196a40feb.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="532b1cfb-bb33-4583-81de-3e5b13ee4aaf" Title="ManagingServiceWrapper Class" Url="html/6d21131f-c07d-94d7-27e0-54a8250c4618.htm">
+    <HelpTOCNode Id="14dcb733-6325-4dbd-8d63-88ec1c608c59" Title="ManagingServiceWrapper Class" Url="html/6d21131f-c07d-94d7-27e0-54a8250c4618.htm">
       <HelpTOCNode Title="ManagingServiceWrapper Constructor " Url="html/2b4b868b-d686-0b5b-cfab-128d75125e41.htm" />
-      <HelpTOCNode Id="09f47951-6aad-4950-a04c-e47ba8a24660" Title="ManagingServiceWrapper Properties" Url="html/a8250b35-b2c7-ecf6-4af9-cc12de26592e.htm">
+      <HelpTOCNode Id="04c880f3-541d-408a-9d5c-89750dff9342" Title="ManagingServiceWrapper Properties" Url="html/a8250b35-b2c7-ecf6-4af9-cc12de26592e.htm">
         <HelpTOCNode Title="InterfaceContracts Property " Url="html/b51d5d03-b09f-f586-4c4b-5ae526cbf4b9.htm" />
         <HelpTOCNode Title="ServiceWrapperInstanceId Property " Url="html/d60f833f-745b-ea64-4333-a3d694b223c3.htm" />
         <HelpTOCNode Title="ServiceWrapperObject Property " Url="html/e83ad621-3be7-b172-52cb-c14b6f49dbff.htm" />
@@ -238,12 +238,12 @@
       <HelpTOCNode Title="ManagingServiceWrapper Methods" Url="html/dccd5853-11f2-590a-59a9-d331e1f3422a.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="MessageFurtherProcessing Enumeration" Url="html/69b757f5-3f35-016b-5827-4b564b5f12f6.htm" />
-    <HelpTOCNode Id="2c1f21ed-ece9-45bd-b35e-a8e8819ceeb1" Title="MessageInstanceMetadata Class" Url="html/5e88cf19-ae99-abc7-0a0f-e752b32fde0d.htm">
-      <HelpTOCNode Id="6373c594-16f5-4f0e-8e69-98040de9d98f" Title="MessageInstanceMetadata Constructor " Url="html/3b22da3c-27c1-df0f-7268-125f35b1b356.htm">
+    <HelpTOCNode Id="6e63fbd5-f731-4d9d-8282-a07e4c329513" Title="MessageInstanceMetadata Class" Url="html/5e88cf19-ae99-abc7-0a0f-e752b32fde0d.htm">
+      <HelpTOCNode Id="9a619569-eed0-4fb8-9182-c5367b07bb6f" Title="MessageInstanceMetadata Constructor " Url="html/3b22da3c-27c1-df0f-7268-125f35b1b356.htm">
         <HelpTOCNode Title="MessageInstanceMetadata Constructor " Url="html/d33cef60-d5d8-c14b-86aa-d7c2b30a5b81.htm" />
         <HelpTOCNode Title="MessageInstanceMetadata Constructor (Guid, Guid, Guid, Guid, MessageType, String, Guid, Boolean, Boolean)" Url="html/c2e7caee-6788-3635-9635-08d49c19095b.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="08387f60-117c-49b9-bd53-6de5f6d58ae0" Title="MessageInstanceMetadata Properties" Url="html/51d9b564-1ca4-6cbe-17f5-8330497f6c11.htm">
+      <HelpTOCNode Id="3ea73d79-b37e-4974-8702-6f7e79add39e" Title="MessageInstanceMetadata Properties" Url="html/51d9b564-1ca4-6cbe-17f5-8330497f6c11.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/fd157a8e-a84a-07b2-727b-b67289065691.htm" />
         <HelpTOCNode Title="IsException Property " Url="html/aa1e19d8-5c89-a836-b8e3-26cdcd48baa3.htm" />
         <HelpTOCNode Title="IsOneWay Property " Url="html/d59b883a-b119-6ab7-e01d-aa5f0d9ce69c.htm" />
@@ -254,75 +254,75 @@
         <HelpTOCNode Title="TargetInstanceId Property " Url="html/eb7fbf2d-fcf5-97eb-c829-1385c55e9954.htm" />
         <HelpTOCNode Title="TargetSiteId Property " Url="html/f9ab6b20-ef55-a862-7008-be2a8782f77d.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="97d76945-3034-4df2-ab62-844b0f4489f3" Title="MessageInstanceMetadata Methods" Url="html/6974047e-3b5c-ea80-6b53-da5426694b11.htm">
+      <HelpTOCNode Id="806b0ef2-033d-44e9-a0ce-9059b9b1c9bc" Title="MessageInstanceMetadata Methods" Url="html/6974047e-3b5c-ea80-6b53-da5426694b11.htm">
         <HelpTOCNode Title="ToString Method " Url="html/5fb6781f-94a1-40a7-5a95-44c2838849bf.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a22e868b-a053-483d-b6da-0daae539d023" Title="MessageInstanceMetadataService Class" Url="html/c7c1ce18-78cc-af17-d0c6-17cd0ca3124b.htm">
-      <HelpTOCNode Id="5213b352-9b9f-4d9b-9824-54ba27f822d6" Title="MessageInstanceMetadataService Properties" Url="html/dac12f5e-f6e6-b9ed-f7ac-d8178880f1b7.htm">
+    <HelpTOCNode Id="3d6350d9-be37-4be5-915d-e92995f775a2" Title="MessageInstanceMetadataService Class" Url="html/c7c1ce18-78cc-af17-d0c6-17cd0ca3124b.htm">
+      <HelpTOCNode Id="c343849f-f63b-4a7b-8410-0c36cda277dd" Title="MessageInstanceMetadataService Properties" Url="html/dac12f5e-f6e6-b9ed-f7ac-d8178880f1b7.htm">
         <HelpTOCNode Title="CurrentMessageInstanceMetadata Property " Url="html/4c534f0b-a601-773a-fb86-a5939e0c6c75.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="759158c6-6208-421c-a12c-5e566fbc16ae" Title="MessageProcessTerminatedException Class" Url="html/7a4c9747-6510-de2e-1c00-73d601119083.htm">
-      <HelpTOCNode Id="0c15f6ad-23f1-4508-bc14-2a8ba554474a" Title="MessageProcessTerminatedException Constructor " Url="html/3337aa5f-f1ff-b43a-f7d6-8691d45d39dc.htm">
+    <HelpTOCNode Id="324a5ff0-b311-4488-94a4-e54e8f958bc1" Title="MessageProcessTerminatedException Class" Url="html/7a4c9747-6510-de2e-1c00-73d601119083.htm">
+      <HelpTOCNode Id="dc629bc3-a47c-4c10-8456-ac467746db15" Title="MessageProcessTerminatedException Constructor " Url="html/3337aa5f-f1ff-b43a-f7d6-8691d45d39dc.htm">
         <HelpTOCNode Title="MessageProcessTerminatedException Constructor " Url="html/a928dbd8-7cd4-1aad-e61d-93db719e8f89.htm" />
         <HelpTOCNode Title="MessageProcessTerminatedException Constructor (SerializationInfo, StreamingContext)" Url="html/9e5d98b9-eb73-d333-0d6d-b0f05f1e8a5e.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c562bc8b-61e8-4b59-840f-64b22f1329be" Title="MessageProcessTerminatedException Properties" Url="html/a39a5f6c-fab4-77b0-a21a-d7ebe34a15ef.htm">
+      <HelpTOCNode Id="594ec656-2c97-4355-86f9-f2f8201b7deb" Title="MessageProcessTerminatedException Properties" Url="html/a39a5f6c-fab4-77b0-a21a-d7ebe34a15ef.htm">
         <HelpTOCNode Title="Message Property " Url="html/3eb10bb3-6eec-b693-e3b3-212aa4022339.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="3d31a161-3014-4a13-9024-656613102976" Title="MessageProcessTerminatedException Methods" Url="html/5f2df37c-44d1-228c-3dc2-d665aa35281e.htm">
+      <HelpTOCNode Id="88a44510-8dd0-4fb5-b46f-cf6388c2b37e" Title="MessageProcessTerminatedException Methods" Url="html/5f2df37c-44d1-228c-3dc2-d665aa35281e.htm">
         <HelpTOCNode Title="ToString Method " Url="html/5edc772e-c84a-9332-04df-399c5d2e8d8e.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="MessageProcessTerminatedException Events" Url="html/87df192b-08db-39e8-848e-bfacb1a9b7c8.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="MessageType Enumeration" Url="html/3b9ef10e-942b-c272-0130-e16a001ba577.htm" />
     <HelpTOCNode Title="MessageWaitingTimedOutCallback Delegate" Url="html/07724b8e-874e-0c7a-1495-002fe833dd6a.htm" />
-    <HelpTOCNode Id="be139da1-e26f-42bf-96f7-17e595f6d746" Title="ObjectNotFoundException Class" Url="html/71b2f93a-f2da-98e4-b970-a7b1a194aba2.htm">
+    <HelpTOCNode Id="72e5fed5-0adc-4c1d-a487-5f735a36f182" Title="ObjectNotFoundException Class" Url="html/71b2f93a-f2da-98e4-b970-a7b1a194aba2.htm">
       <HelpTOCNode Title="ObjectNotFoundException Constructor " Url="html/b7b26396-8e21-b2ad-5e18-b354824d9282.htm" />
-      <HelpTOCNode Id="cf030d2b-a851-4aba-9a42-7431c5127128" Title="ObjectNotFoundException Properties" Url="html/62a530a1-78e2-59ed-ed28-7bdc909fce97.htm">
+      <HelpTOCNode Id="8d14252f-8d40-4b9b-9880-ad44ffa87aa1" Title="ObjectNotFoundException Properties" Url="html/62a530a1-78e2-59ed-ed28-7bdc909fce97.htm">
         <HelpTOCNode Title="InstanceId Property " Url="html/47b919af-57f8-a8c4-485f-46414c46426a.htm" />
         <HelpTOCNode Title="Message Property " Url="html/bed6a74e-171e-7733-7ee7-241362308c8d.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="fa44a146-cc44-412b-add7-3cb380e57976" Title="ObjectNotFoundException Methods" Url="html/f10d9916-a275-ed16-b162-7710c8b76755.htm">
+      <HelpTOCNode Id="57c2ad2a-168e-40b9-95dd-41f3fd1cd74c" Title="ObjectNotFoundException Methods" Url="html/f10d9916-a275-ed16-b162-7710c8b76755.htm">
         <HelpTOCNode Title="ToString Method " Url="html/59016a6f-09ff-2d6b-9faa-f695b6e5a915.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="fdf3d2c8-2855-4951-9334-be3b05cd140a" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Class" Url="html/da339451-8830-0641-f764-126061afca58.htm">
+    <HelpTOCNode Id="bae61894-013f-4ce5-b7a8-281ad37ec8de" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Class" Url="html/da339451-8830-0641-f764-126061afca58.htm">
       <HelpTOCNode Title="PackagedMessageNotRecognizedException(TNetworkMessage) Constructor " Url="html/f7f85fc7-9ae1-570d-4bd0-d810cf18bc6c.htm" />
-      <HelpTOCNode Id="2deaa2af-071a-4835-bcd9-6b35a2f1fca1" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Properties" Url="html/8980ba51-5f86-e293-3bbd-dea7c21cf342.htm">
+      <HelpTOCNode Id="b0b5b603-33d2-42a6-bb4d-136760511cbb" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Properties" Url="html/8980ba51-5f86-e293-3bbd-dea7c21cf342.htm">
         <HelpTOCNode Title="Message Property " Url="html/8a8336f2-2e0c-0a25-4e8f-517519134d0a.htm" />
         <HelpTOCNode Title="PackagedMessage Property " Url="html/e3fb7bbd-00f4-1190-b7b8-ccb8c2ef9797.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="da641752-f211-491c-9568-e7633cc8b284" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Methods" Url="html/96afbf91-d8ce-4524-4c7a-29d2327c2852.htm">
+      <HelpTOCNode Id="b977c6e6-d75e-4a55-a2d7-841d260e5a7b" Title="PackagedMessageNotRecognizedException(TNetworkMessage) Methods" Url="html/96afbf91-d8ce-4524-4c7a-29d2327c2852.htm">
         <HelpTOCNode Title="ToString Method " Url="html/cf14feb8-80c9-9b84-6533-eb9002c2d4dd.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b2338ea7-e83d-4a53-abfd-c99d059b3593" Title="PackingHelperBase(TNetworkMessage, TSerialized) Class" Url="html/fa35cccb-326c-d5d3-0216-786f651e8568.htm">
+    <HelpTOCNode Id="6af419c5-6312-4b6a-8d67-9ece378a3ab3" Title="PackingHelperBase(TNetworkMessage, TSerialized) Class" Url="html/fa35cccb-326c-d5d3-0216-786f651e8568.htm">
       <HelpTOCNode Title="PackingHelperBase(TNetworkMessage, TSerialized) Constructor " Url="html/77d79c16-d1a3-1fdb-d7d6-008ecbf975a5.htm" />
-      <HelpTOCNode Id="0ac82970-36a0-483f-9090-d2d3701e4725" Title="PackingHelperBase(TNetworkMessage, TSerialized) Methods" Url="html/d6b8786b-354b-fa26-ae6e-5b20851682b6.htm">
+      <HelpTOCNode Id="b4004ebb-36b9-4172-94a3-41ca596dd388" Title="PackingHelperBase(TNetworkMessage, TSerialized) Methods" Url="html/d6b8786b-354b-fa26-ae6e-5b20851682b6.htm">
         <HelpTOCNode Title="Pack Method " Url="html/3bb99d2b-9033-6b8a-28d0-d3d4d8e5d276.htm" />
         <HelpTOCNode Title="TryUnpack Method " Url="html/2d518a90-170a-6362-e4cc-cc0d8a562832.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="1c07021f-daca-4cdb-9cc1-5986e6f72a5e" Title="ProxyCreator(TSerialized, TEntityBase) Class" Url="html/b8aed468-7a52-63c9-d8a1-276d148791bb.htm">
+    <HelpTOCNode Id="bd1e9efc-cbfc-4f51-b938-aa9bc9028856" Title="ProxyCreator(TSerialized, TEntityBase) Class" Url="html/b8aed468-7a52-63c9-d8a1-276d148791bb.htm">
       <HelpTOCNode Title="ProxyCreator(TSerialized, TEntityBase) Constructor " Url="html/6e15f2c2-2fa1-767f-1774-7a19c2dc8abd.htm" />
-      <HelpTOCNode Id="a2b70d62-421c-4c82-8d0d-22912eb0ca29" Title="ProxyCreator(TSerialized, TEntityBase) Properties" Url="html/3ff1b4f9-aacf-0cf8-d6d9-277f8540ea3f.htm">
+      <HelpTOCNode Id="f8ba5bb5-7474-40d2-9f8b-3f1b994cfe9d" Title="ProxyCreator(TSerialized, TEntityBase) Properties" Url="html/3ff1b4f9-aacf-0cf8-d6d9-277f8540ea3f.htm">
         <HelpTOCNode Title="LoadCachedAssemblyCallback Property " Url="html/790dbb94-7625-8400-2501-8e74eb49e27c.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyCallback Property " Url="html/ee179f78-1495-9761-80ad-b144fb9b8a00.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyImageCallback Property " Url="html/ad5441e4-81e5-6eab-2bcb-66063604474f.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="3095e252-7a27-42e7-8242-94334cb85c86" Title="ProxyCreator(TSerialized, TEntityBase) Methods" Url="html/8a538c98-6d49-ef3f-33bc-350193868843.htm">
+      <HelpTOCNode Id="5f50040a-6c19-4edf-bbde-b838e46b0221" Title="ProxyCreator(TSerialized, TEntityBase) Methods" Url="html/8a538c98-6d49-ef3f-33bc-350193868843.htm">
         <HelpTOCNode Title="ClearBuilderAssemblyCache Method " Url="html/e3e38d59-4090-4447-6b53-1df4306816e4.htm" />
         <HelpTOCNode Title="CreateProxyObject(TInterfaceContract) Method " Url="html/cd5de4f9-26e5-f499-0cf6-328c82e8f395.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="79cdbb2f-36fa-4db1-929e-4a3ec04095a0" Title="ProxyCreator(TSerialized, TEntityBase) Events" Url="html/9ee93369-3c5c-a234-7227-8848dbb9d5f4.htm">
+      <HelpTOCNode Id="7681311a-bec7-42d1-ba35-c0a615b793d6" Title="ProxyCreator(TSerialized, TEntityBase) Events" Url="html/9ee93369-3c5c-a234-7227-8848dbb9d5f4.htm">
         <HelpTOCNode Title="MissingAssemblyRequesting Event" Url="html/509e74b6-7b05-57f5-bcab-72af4612f762.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="156e73cd-304b-4d01-9674-c49cfd6b7f24" Title="RedirectedExceptionEventArgs Class" Url="html/01ad3a95-ebda-3557-2209-0eee2874b33e.htm">
+    <HelpTOCNode Id="54272be6-c4e5-4b8a-9b4d-876b249bdf64" Title="RedirectedExceptionEventArgs Class" Url="html/01ad3a95-ebda-3557-2209-0eee2874b33e.htm">
       <HelpTOCNode Title="RedirectedExceptionEventArgs Constructor " Url="html/48b0cb65-c9c7-e494-43b2-5becf6af6ef9.htm" />
-      <HelpTOCNode Id="33329de8-b537-4f92-a547-c0072e8dab53" Title="RedirectedExceptionEventArgs Properties" Url="html/dd89eb8d-b6b0-124c-637c-134ded5d8c1e.htm">
+      <HelpTOCNode Id="dc25c7e3-14ec-40fe-b105-7361c72b0315" Title="RedirectedExceptionEventArgs Properties" Url="html/dd89eb8d-b6b0-124c-637c-134ded5d8c1e.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/b77f697c-2d3d-ccd0-f01c-425e7de23a8f.htm" />
         <HelpTOCNode Title="ContextId Property " Url="html/c0586692-7945-0094-0ea5-aec6e575b2a6.htm" />
         <HelpTOCNode Title="Exception Property " Url="html/4fd0da8c-c910-ccfe-0efd-155559747f05.htm" />
@@ -331,14 +331,14 @@
         <HelpTOCNode Title="MessageType Property " Url="html/6b285356-e967-9ab7-f645-de24a4edd4e2.htm" />
         <HelpTOCNode Title="SiteId Property " Url="html/9a2d3583-1bdd-362f-296d-308995bef492.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="57314636-90bf-4e97-b29f-60499a25ce21" Title="RedirectedExceptionEventArgs Methods" Url="html/e168a55e-6817-fc7f-5cd2-f984a72a16c5.htm">
+      <HelpTOCNode Id="545e7c02-88cc-4bac-9488-4eea5e642525" Title="RedirectedExceptionEventArgs Methods" Url="html/e168a55e-6817-fc7f-5cd2-f984a72a16c5.htm">
         <HelpTOCNode Title="ToString Method " Url="html/51197aef-1ba3-160a-4087-70beea85d938.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="RedirectedExceptionRaisedCallback Delegate" Url="html/ab5d686c-403d-f2b9-c68c-7bd412781f93.htm" />
-    <HelpTOCNode Id="9c9be29a-4d03-4ef3-aff3-f9fb2af7c82d" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Class" Url="html/16606404-74da-035d-dfa5-d9ec76d54f8a.htm">
+    <HelpTOCNode Id="38fedfd1-c00a-423d-a061-5e939fe865b7" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Class" Url="html/16606404-74da-035d-dfa5-d9ec76d54f8a.htm">
       <HelpTOCNode Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Constructor " Url="html/4608ed5c-8a7c-f7c3-fad9-41c72a482c38.htm" />
-      <HelpTOCNode Id="904f3261-bb07-40e6-8658-caf408cda806" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Properties" Url="html/78d8bb42-f983-335f-030c-5999ba30c199.htm">
+      <HelpTOCNode Id="cc7dceee-843f-4a1c-9fbb-3353f46428e6" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Properties" Url="html/78d8bb42-f983-335f-030c-5999ba30c199.htm">
         <HelpTOCNode Title="ContextId Property " Url="html/c43b55dd-276a-edd2-0c02-5cbaf03d7598.htm" />
         <HelpTOCNode Title="DefaultTargetSiteId Property " Url="html/64a7c2e9-dd69-5edb-5685-375f2289719f.htm" />
         <HelpTOCNode Title="IOConnected Property " Url="html/4f884c23-9167-09a3-9e4c-15c67b916430.htm" />
@@ -346,13 +346,13 @@
         <HelpTOCNode Title="SerializingHelper Property " Url="html/7629c1cc-e9de-7e6d-1f1b-79cd44410209.htm" />
         <HelpTOCNode Title="SiteId Property " Url="html/068c824d-c98f-70c0-c0f2-01c0f4f3acdc.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="7848c7c2-8db2-499d-b69e-318c4d918ef5" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Methods" Url="html/9304902c-3363-4fc8-3592-7d2b9279cee0.htm">
-        <HelpTOCNode Id="510b4681-356e-47bc-bbdb-0d0ce0d547f5" Title="AddProxy Method " Url="html/90068960-563d-c187-29bc-8be02c275ee8.htm">
+      <HelpTOCNode Id="75c152cd-49b7-4133-aed1-65e095d476e4" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Methods" Url="html/9304902c-3363-4fc8-3592-7d2b9279cee0.htm">
+        <HelpTOCNode Id="9d41a2ee-fd61-4dbd-9d61-6fcf7dc432d0" Title="AddProxy Method " Url="html/90068960-563d-c187-29bc-8be02c275ee8.htm">
           <HelpTOCNode Title="AddProxy(TInterfaceContract) Method (ProxyCreator(TSerialized, TEntityBase), Guid, Guid)" Url="html/3b7acf11-3541-f6c2-7f7c-6d884b2a0b7f.htm" />
           <HelpTOCNode Title="AddProxy(TInterfaceContract) Method (ProxyCreator(TSerialized, TEntityBase), Guid, Guid)" Url="html/2fed3ff3-c513-d636-c11e-62f0ce381017.htm" />
           <HelpTOCNode Title="AddProxy(TInterfaceContract) Method (TInterfaceContract, Boolean, Guid, Nullable(Guid))" Url="html/1f217edb-1e6a-e030-8429-c0c7810296b6.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="5f10ce0e-353a-4178-b9d8-a399624aacd1" Title="AddServiceWrapper Method " Url="html/51c49b70-fe03-0bea-4b4d-ef5acd5dd95c.htm">
+        <HelpTOCNode Id="87b33dc1-5e18-46e9-a7ee-27886e66d942" Title="AddServiceWrapper Method " Url="html/51c49b70-fe03-0bea-4b4d-ef5acd5dd95c.htm">
           <HelpTOCNode Title="AddServiceWrapper(TInterfaceContract) Method (Object, Boolean, Nullable(Guid))" Url="html/ce90aa6a-60df-d4dd-fcc3-4e44c532b25b.htm" />
           <HelpTOCNode Title="AddServiceWrapper(TInterfaceContract) Method (ServiceWrapperCreator(TSerialized, TEntityBase), TInterfaceContract, Guid)" Url="html/9e5e10b2-b402-29b8-eca0-3ee97077ff70.htm" />
           <HelpTOCNode Title="AddServiceWrapper(TInterfaceContract) Method (ServiceWrapperCreator(TSerialized, TEntityBase), TInterfaceContract, Guid)" Url="html/19a39042-fa29-cef1-36bb-b0656d0a16f3.htm" />
@@ -363,17 +363,17 @@
         <HelpTOCNode Title="AddTargetSite Method " Url="html/cde7bcc0-793b-7922-f409-b1f7383ace9c.htm" />
         <HelpTOCNode Title="Connect Method " Url="html/34cde294-3906-636c-b120-3e11f3b7e6c0.htm" />
         <HelpTOCNode Title="Disconnect Method " Url="html/2347bcd7-dc45-4579-0d59-3fada91c8dc5.htm" />
-        <HelpTOCNode Id="1231196e-35a2-4de6-98bd-5d53bdf29812" Title="Dispose Method " Url="html/08780fa0-e22c-d4e7-6c35-98aa9b965ac6.htm">
+        <HelpTOCNode Id="ebb04f16-1380-4c18-bbb7-00335f5a0b1f" Title="Dispose Method " Url="html/08780fa0-e22c-d4e7-6c35-98aa9b965ac6.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/e39c1fda-588e-e8ed-483f-4e7e9f6ea7db.htm" />
           <HelpTOCNode Title="Dispose Method (Boolean)" Url="html/f1db7e69-849a-3c98-6388-a03d2c9ef2f4.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetAllDisposingRequiredProxies Method " Url="html/94b9edae-17d5-f3dd-3675-2a8f0fe965a2.htm" />
         <HelpTOCNode Title="GetAllInstancesGroupedBySiteId Method " Url="html/9d644d7b-1e9d-ce69-276e-73be0fe2dddd.htm" />
-        <HelpTOCNode Id="823cddb6-4f19-4ed6-8296-0027e3d4242e" Title="GetAllProxies Method " Url="html/66d542ff-a78c-166e-c8a5-bb323cc436bc.htm">
+        <HelpTOCNode Id="9db6b2c4-493a-4697-87d0-b069f52115cb" Title="GetAllProxies Method " Url="html/66d542ff-a78c-166e-c8a5-bb323cc436bc.htm">
           <HelpTOCNode Title="GetAllProxies Method " Url="html/3ed78580-8dee-8f95-14cc-3dfae1ae6509.htm" />
           <HelpTOCNode Title="GetAllProxies(TInterfaceContract) Method " Url="html/c9ec8507-2a98-af52-d3bc-5049663434c7.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="efba58ec-00e0-40e7-8695-885df308269b" Title="GetAllServiceWrappers Method " Url="html/9c64c9ae-6abb-55f0-5d1f-63b4fb9b674a.htm">
+        <HelpTOCNode Id="578258a5-9b2b-4fff-badf-31ed542a5cdb" Title="GetAllServiceWrappers Method " Url="html/9c64c9ae-6abb-55f0-5d1f-63b4fb9b674a.htm">
           <HelpTOCNode Title="GetAllServiceWrappers Method " Url="html/3461587d-2458-f1eb-0800-15a00926069b.htm" />
           <HelpTOCNode Title="GetAllServiceWrappers(TInterfaceContract) Method " Url="html/cbc4ddfb-1920-b5ec-f624-d6c8ae4ddc1b.htm" />
         </HelpTOCNode>
@@ -387,13 +387,13 @@
         <HelpTOCNode Title="RemoveManagingObject Method " Url="html/8ee0e55e-1c0b-342d-7d51-aa1a1191fdbd.htm" />
         <HelpTOCNode Title="RemoveTargetSite Method " Url="html/2bc3c658-c775-dd14-d724-8504a10b9e89.htm" />
         <HelpTOCNode Title="RemoveTypeFromServiceWrapper Method " Url="html/b76a57eb-e1c8-f2c2-262b-6678727b83fe.htm" />
-        <HelpTOCNode Id="bd2cd59a-40aa-4b39-8152-ad9428d227b0" Title="ResetContextId Method " Url="html/696af44e-b00d-1799-8ddb-bb9201c932a4.htm">
+        <HelpTOCNode Id="bdba33db-2b81-4c54-83a9-dc111e4af2b6" Title="ResetContextId Method " Url="html/696af44e-b00d-1799-8ddb-bb9201c932a4.htm">
           <HelpTOCNode Title="ResetContextId Method " Url="html/5d9dfc0b-1111-256d-a76c-0080cbed6eef.htm" />
           <HelpTOCNode Title="ResetContextId Method (Guid)" Url="html/3f3251a7-ac6b-9976-2e54-741e175ae93d.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="ResetTargetSite Method " Url="html/98a49b63-0681-204e-2b96-105b8de30f0a.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="dcde29a6-0cc7-41a3-ac96-b232a614ad79" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Events" Url="html/24e7c778-bf67-72bb-ec7f-38da80d33aa5.htm">
+      <HelpTOCNode Id="07314162-8624-42db-9bd7-fe883611bd2b" Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase) Events" Url="html/24e7c778-bf67-72bb-ec7f-38da80d33aa5.htm">
         <HelpTOCNode Title="AfterMessageReceived Event" Url="html/fce52c14-69cb-26fc-247e-0578027b046b.htm" />
         <HelpTOCNode Title="BeforeMessageSending Event" Url="html/4c24584a-6188-d520-e332-f4a18c8347ed.htm" />
         <HelpTOCNode Title="DisposingMessageRequiredProxyAdded Event" Url="html/ce652d44-3605-31d5-30ac-1447c67898a4.htm" />
@@ -402,9 +402,9 @@
         <HelpTOCNode Title="RedirectedExceptionRaised Event" Url="html/2d150fa7-55b3-6374-c6d4-9d11b4ad06a4.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0d4a7a92-4ac9-47c9-b549-4f9e673280d9" Title="RemoteAgencyManagerEncapsulated Class" Url="html/f7d05eeb-37c3-69e9-54ed-f060f4aa682e.htm">
+    <HelpTOCNode Id="5af73f2e-7e66-459b-b5e1-76036d154188" Title="RemoteAgencyManagerEncapsulated Class" Url="html/f7d05eeb-37c3-69e9-54ed-f060f4aa682e.htm">
       <HelpTOCNode Title="RemoteAgencyManagerEncapsulated Constructor " Url="html/10040a5a-9b78-b2ac-1ee2-479eec0bc148.htm" />
-      <HelpTOCNode Id="a6cf0670-124c-4552-8263-c29b787b819d" Title="RemoteAgencyManagerEncapsulated Properties" Url="html/4ff6b5f7-db0c-3ff4-3dbe-7ec5117d4137.htm">
+      <HelpTOCNode Id="957ae3ba-4649-44bf-93d8-b040ff7e540e" Title="RemoteAgencyManagerEncapsulated Properties" Url="html/4ff6b5f7-db0c-3ff4-3dbe-7ec5117d4137.htm">
         <HelpTOCNode Title="LoadCachedProxyAssemblyCallback Property " Url="html/e22b0770-ecba-8666-e0c7-6109ea2aca4a.htm" />
         <HelpTOCNode Title="LoadCachedServiceWrapperAssemblyCallback Property " Url="html/6491ec75-4f20-3f75-4b73-8c43a7f57f17.htm" />
         <HelpTOCNode Title="SaveCachedProxyAssemblyCallback Property " Url="html/aa00898b-35fd-7697-2653-c53bf64606a8.htm" />
@@ -412,12 +412,12 @@
         <HelpTOCNode Title="SaveCachedServiceWrapperAssemblyCallback Property " Url="html/bbe8bc20-0b39-7780-3a8a-b2b90720ed63.htm" />
         <HelpTOCNode Title="SaveCachedServiceWrapperAssemblyImageCallback Property " Url="html/a3709511-0ccc-87a9-04ed-6facb9a2efbb.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="afe72fdb-8919-40d5-9dcc-23089d029f80" Title="RemoteAgencyManagerEncapsulated Methods" Url="html/48d00f37-9ba7-5f99-376c-cc47747d5e8f.htm">
-        <HelpTOCNode Id="a7dac11f-3d6e-49c9-ae07-be66bdb79620" Title="AddProxy Method " Url="html/6b0c7fb7-0ddd-6349-89c5-66ea92bb6740.htm">
+      <HelpTOCNode Id="8298c58a-48ca-41ee-8850-5f08c625abbb" Title="RemoteAgencyManagerEncapsulated Methods" Url="html/48d00f37-9ba7-5f99-376c-cc47747d5e8f.htm">
+        <HelpTOCNode Id="c19d9171-ef2e-4f9b-afbb-f553666f0779" Title="AddProxy Method " Url="html/6b0c7fb7-0ddd-6349-89c5-66ea92bb6740.htm">
           <HelpTOCNode Title="AddProxy(TInterfaceContract) Method (Guid, Guid)" Url="html/e4c8c8ab-43a4-d1f1-28a0-397633466c8b.htm" />
           <HelpTOCNode Title="AddProxy(TInterfaceContract) Method (Guid, Guid)" Url="html/4bbe9698-2a5b-9de7-3be2-c727ddb447d6.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="111b9790-61c7-439f-afee-0fd0cae530bb" Title="AddServiceWrapper Method " Url="html/8dd3a751-f528-25ef-4db5-7b7779454590.htm">
+        <HelpTOCNode Id="b527e15e-50fc-4f13-8b8c-fe8f9adff3e9" Title="AddServiceWrapper Method " Url="html/8dd3a751-f528-25ef-4db5-7b7779454590.htm">
           <HelpTOCNode Title="AddServiceWrapper(TInterfaceContract) Method (TInterfaceContract, Guid)" Url="html/b49d631e-d24e-a3b0-b22a-4f4599fc7b7e.htm" />
           <HelpTOCNode Title="AddServiceWrapper(TInterfaceContract) Method (TInterfaceContract, Guid)" Url="html/9239161e-e308-dec8-2bcb-1011ad3fdfa6.htm" />
           <HelpTOCNode Title="AddServiceWrapper(TServiceObject) Method (TServiceObject, List(Type), Guid)" Url="html/72972fc9-c588-0c63-a32c-86f5692d8750.htm" />
@@ -425,24 +425,24 @@
         </HelpTOCNode>
         <HelpTOCNode Title="ClearBuilderAssemblyCache Method " Url="html/e0966652-4785-e0aa-ddd1-86bff4d2a5e8.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f6b75537-2687-44f8-a012-e62568089c43" Title="RemoteAgencyManagerEncapsulated Events" Url="html/304f2937-7568-5368-3c47-5da5f927400b.htm">
+      <HelpTOCNode Id="d3e82606-a5f7-4bd3-bb65-2e7045f1b500" Title="RemoteAgencyManagerEncapsulated Events" Url="html/304f2937-7568-5368-3c47-5da5f927400b.htm">
         <HelpTOCNode Title="MissingAssemblyRequesting Event" Url="html/cf5956af-de37-ba09-2a2a-483f173570b1.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5c4869b8-b5f9-4013-8f19-461931858959" Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Class" Url="html/24097452-2978-e109-3dc1-b92e24da11f0.htm">
+    <HelpTOCNode Id="e3f37b9e-acf9-4367-9d23-41ef28f72527" Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Class" Url="html/24097452-2978-e109-3dc1-b92e24da11f0.htm">
       <HelpTOCNode Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Constructor " Url="html/b4548ca0-c9a6-24c3-f941-75c79632f224.htm" />
-      <HelpTOCNode Id="ce649527-7184-4fa7-9281-68ef2252e3d9" Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Properties" Url="html/3b8fc146-6872-a27f-07ad-cf93c0a5d2b3.htm">
+      <HelpTOCNode Id="8c232192-a5bb-4c30-9820-a1a984ddb3ed" Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Properties" Url="html/3b8fc146-6872-a27f-07ad-cf93c0a5d2b3.htm">
         <HelpTOCNode Title="Message Property " Url="html/a6911eec-af6c-5098-17ad-6d4304270a9c.htm" />
         <HelpTOCNode Title="TargetSiteId Property " Url="html/275c5709-2b9d-17bf-9906-12acbffed434.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="RemoteAgencyManagerMessageForSendingEventArgs(TNetworkMessage) Methods" Url="html/d9859b01-570e-1577-d9be-d755377b9d67.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="98f92f6d-46d4-4862-b5f5-1d4a3817c499" Title="Responder(T) Class" Url="html/83098205-165c-0b8f-ae59-8291c809acc4.htm">
+    <HelpTOCNode Id="93a9370c-8b81-4ee7-9772-81fbb6420ed6" Title="Responder(T) Class" Url="html/83098205-165c-0b8f-ae59-8291c809acc4.htm">
       <HelpTOCNode Title="Responder(T) Constructor " Url="html/6733ea32-327f-5dda-df89-ee52cbfa689a.htm" />
-      <HelpTOCNode Id="96f6167a-1567-4132-b0a8-c17bb21286bb" Title="Responder(T) Properties" Url="html/96ef5477-515a-a076-9924-8721da787d9b.htm">
+      <HelpTOCNode Id="99bab37e-2fd4-4337-aa76-87dda4adc9dc" Title="Responder(T) Properties" Url="html/96ef5477-515a-a076-9924-8721da787d9b.htm">
         <HelpTOCNode Title="MessageWaitingTimedOutCallback Property " Url="html/583fc692-2deb-8659-821d-06452a46f8ed.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="dc7824ef-7e52-44ad-b4b4-b037194a755d" Title="Responder(T) Methods" Url="html/ceeead9a-31a4-f0fc-d19b-2e21e584e12c.htm">
+      <HelpTOCNode Id="cda83475-0d5b-4c13-8776-b583efde495f" Title="Responder(T) Methods" Url="html/ceeead9a-31a4-f0fc-d19b-2e21e584e12c.htm">
         <HelpTOCNode Title="GetResult Method " Url="html/610eb979-2b7a-d73b-d2e3-ceb10864305f.htm" />
         <HelpTOCNode Title="Prepare Method " Url="html/ef5c635b-b2b0-c354-5b58-8aeb62d7dd40.htm" />
         <HelpTOCNode Title="Remove Method " Url="html/5eb168dd-49e6-319c-bec9-9bd9726d793a.htm" />
@@ -455,16 +455,16 @@
     <HelpTOCNode Title="SaveCachedAssemblyImageCallback(TSerialized, TEntityBase) Delegate" Url="html/3ad975d7-d57a-a6a0-8577-37f1f114648c.htm" />
     <HelpTOCNode Title="SendExceptionCallback(TSerialized) Delegate" Url="html/7a257583-a423-aa21-0b06-7e4fb2280ce0.htm" />
     <HelpTOCNode Title="SendMessageCallback(TSerialized) Delegate" Url="html/744a90b4-8845-8327-b43c-41494519c7fb.htm" />
-    <HelpTOCNode Id="4e388909-def2-4c69-914b-05432a0d1273" Title="SerializingHelperBase(TSerialized, TEntityBase) Class" Url="html/21fb9e5f-a654-2ed1-03fd-a4528af6111a.htm">
+    <HelpTOCNode Id="8f1e7461-d6c6-438d-b9d4-0d2427c0d0eb" Title="SerializingHelperBase(TSerialized, TEntityBase) Class" Url="html/21fb9e5f-a654-2ed1-03fd-a4528af6111a.htm">
       <HelpTOCNode Title="SerializingHelperBase(TSerialized, TEntityBase) Constructor " Url="html/da52d7f6-7276-9d9d-bc7a-bed6a56db860.htm" />
-      <HelpTOCNode Id="646f1174-e798-4237-b5cc-f7c26713abd6" Title="SerializingHelperBase(TSerialized, TEntityBase) Methods" Url="html/fc766c15-e1bb-c466-9c38-55b46e7a1746.htm">
-        <HelpTOCNode Id="b17181b2-ede3-4385-acf4-8b114e5c14c5" Title="Deserialize Method " Url="html/06985252-e9a6-5917-d922-769ea33a9472.htm">
+      <HelpTOCNode Id="c87708fa-1edb-4650-81e5-21fd983f3151" Title="SerializingHelperBase(TSerialized, TEntityBase) Methods" Url="html/fc766c15-e1bb-c466-9c38-55b46e7a1746.htm">
+        <HelpTOCNode Id="b496e740-bd08-4417-9d1b-8b23791ac064" Title="Deserialize Method " Url="html/06985252-e9a6-5917-d922-769ea33a9472.htm">
           <HelpTOCNode Title="Deserialize Method (TSerialized, Type)" Url="html/4115346f-2ef2-f1a8-a886-ea49688f0068.htm" />
           <HelpTOCNode Title="Deserialize Method (TSerialized, Type, Type[])" Url="html/d41b32a7-7020-b4e4-1913-8dd1b6b4a3f5.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="DeserializeException Method " Url="html/6193a21d-f9a5-58e2-0061-8634f5090405.htm" />
         <HelpTOCNode Title="DeserializeExceptionWithExceptionTolerance Method " Url="html/efa4e780-1b82-4a36-5ae0-fc873378ec97.htm" />
-        <HelpTOCNode Id="00f65fdc-68e5-4aeb-99f5-8ada3bfccdf4" Title="DeserializeWithExceptionTolerance Method " Url="html/55e5eba0-fc55-cba8-eaa7-a9b63f6ba88d.htm">
+        <HelpTOCNode Id="3a3fc55b-80ff-496d-a304-9c4ce78cb829" Title="DeserializeWithExceptionTolerance Method " Url="html/55e5eba0-fc55-cba8-eaa7-a9b63f6ba88d.htm">
           <HelpTOCNode Title="DeserializeWithExceptionTolerance Method (TSerialized, Type, WrappedException, Exception)" Url="html/77c79be5-ca2f-c09e-8ef6-941f32dc0e63.htm" />
           <HelpTOCNode Title="DeserializeWithExceptionTolerance Method (TSerialized, Type, Type[], WrappedException, Exception)" Url="html/e95b59fe-e4ee-8441-a367-7f1fb34dc1af.htm" />
         </HelpTOCNode>
@@ -474,59 +474,59 @@
         <HelpTOCNode Title="SerializeWithExceptionTolerance Method " Url="html/fb094a51-5fe6-6c07-5f19-e1d2dfe93d65.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="92bcdf59-0f82-4d1b-a394-108a9494be23" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Class" Url="html/1375bd68-a114-a3e7-456d-c73d569c9eeb.htm">
+    <HelpTOCNode Id="36a1c213-7885-4eb5-b120-cbee56d28f0e" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Class" Url="html/1375bd68-a114-a3e7-456d-c73d569c9eeb.htm">
       <HelpTOCNode Title="ServiceWrapperCreator(TSerialized, TEntityBase) Constructor " Url="html/aba32e8c-56e5-e115-b2ab-95c5c739bde0.htm" />
-      <HelpTOCNode Id="c4d0d387-ea24-4095-8b8c-63e67732e759" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Properties" Url="html/8221920d-4ed9-d8d1-0c8d-8ddd2fb53f8d.htm">
+      <HelpTOCNode Id="337c1e1f-65bb-4ae5-9e2f-d1fa391e817c" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Properties" Url="html/8221920d-4ed9-d8d1-0c8d-8ddd2fb53f8d.htm">
         <HelpTOCNode Title="LoadCachedAssemblyCallback Property " Url="html/41eebe91-e08f-d1a8-eded-e228eee961c1.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyCallback Property " Url="html/45073160-80ea-df97-b9c3-eab405e062f7.htm" />
         <HelpTOCNode Title="SaveCachedAssemblyImageCallback Property " Url="html/584ed342-5fa1-d935-5cfd-b78b90c77a2f.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="3a5e7fe5-a52c-4ae3-9b85-d976b2d1ec88" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Methods" Url="html/29f3709a-3694-d0b1-7dab-c298b8fca793.htm">
+      <HelpTOCNode Id="98489810-8c51-403b-add8-179cce01b242" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Methods" Url="html/29f3709a-3694-d0b1-7dab-c298b8fca793.htm">
         <HelpTOCNode Title="ClearBuilderAssemblyCache Method " Url="html/877e8d78-cdcf-5546-85e9-cb021c219577.htm" />
-        <HelpTOCNode Id="03a41bd1-7db4-4272-86c5-e5fde3f108cf" Title="CreateServiceWrapperObject Method " Url="html/982f7b08-78dd-ce25-b237-2668f4eabe4e.htm">
+        <HelpTOCNode Id="38eb5db9-9af2-472d-82ad-83cc688ef37c" Title="CreateServiceWrapperObject Method " Url="html/982f7b08-78dd-ce25-b237-2668f4eabe4e.htm">
           <HelpTOCNode Title="CreateServiceWrapperObject(TServiceObject) Method (Boolean, TServiceObject, Type)" Url="html/64c1013b-de82-1d22-a0f6-33f297affe15.htm" />
           <HelpTOCNode Title="CreateServiceWrapperObject(TServiceObject) Method (Boolean, TServiceObject, Type[])" Url="html/59ae1609-f986-7525-aac0-5f055df32e10.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="983ea8e2-d9d9-4b87-9c3f-f448cb7444a4" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Events" Url="html/1818ef30-b1f7-2f29-3f4b-4da9c94bf8d3.htm">
+      <HelpTOCNode Id="188bc22d-d690-49ce-9770-d499517a2187" Title="ServiceWrapperCreator(TSerialized, TEntityBase) Events" Url="html/1818ef30-b1f7-2f29-3f4b-4da9c94bf8d3.htm">
         <HelpTOCNode Title="MissingAssemblyRequesting Event" Url="html/9c423f87-362e-a8f8-af92-80163978e321.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="772eb217-dc18-4213-bf82-e87229309e89" Title="TargetSiteNotFoundException Class" Url="html/d0192810-1fa0-98f2-8c5f-c8092b80eff6.htm">
+    <HelpTOCNode Id="7cd8ca80-6862-48f0-8a16-17faff76beaa" Title="TargetSiteNotFoundException Class" Url="html/d0192810-1fa0-98f2-8c5f-c8092b80eff6.htm">
       <HelpTOCNode Title="TargetSiteNotFoundException Constructor " Url="html/4e2a0b4e-fa19-bea7-14f5-979bacaca166.htm" />
-      <HelpTOCNode Id="45f40ba6-6d0f-4316-94d0-b4d2869d0d54" Title="TargetSiteNotFoundException Properties" Url="html/d5351bbf-5bfb-9bd1-eaa8-673658b5573b.htm">
+      <HelpTOCNode Id="3587edf7-6b69-4a41-83dd-b791f2e72701" Title="TargetSiteNotFoundException Properties" Url="html/d5351bbf-5bfb-9bd1-eaa8-673658b5573b.htm">
         <HelpTOCNode Title="Id Property " Url="html/0d5fb4d1-3966-6c39-3046-5faef4dae8d4.htm" />
         <HelpTOCNode Title="IdType Property " Url="html/2da01a5a-138e-2696-a1ce-28a781ee737b.htm" />
         <HelpTOCNode Title="Message Property " Url="html/06792b0e-0699-23b3-a2ce-b3ec8d8f95be.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="79c184a6-f76b-442d-835c-5fdb95ac51b8" Title="TargetSiteNotFoundException Methods" Url="html/c2fc4956-86c2-10aa-f9f8-5ea04f03c232.htm">
+      <HelpTOCNode Id="57fecc42-093f-409f-87d7-2bc975c079ca" Title="TargetSiteNotFoundException Methods" Url="html/c2fc4956-86c2-10aa-f9f8-5ea04f03c232.htm">
         <HelpTOCNode Title="ToString Method " Url="html/67a77009-be16-3d64-fc32-b6f4ccb51709.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="TargetSiteNotFoundException Events" Url="html/9208fd62-efb3-14ba-0301-9a142bce7460.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="TargetSiteNotFoundIdType Enumeration" Url="html/e67f78c1-ec2e-b3c7-572b-7ed15014a70d.htm" />
-    <HelpTOCNode Id="ec98fd45-8b8f-4cf8-8816-c3f0618100ba" Title="TypeCreatingException Class" Url="html/bc52cae7-3a77-0cae-41ee-53e2658f58d8.htm">
+    <HelpTOCNode Id="896d2585-67e1-4f44-b9cb-da41c8a9e7f2" Title="TypeCreatingException Class" Url="html/bc52cae7-3a77-0cae-41ee-53e2658f58d8.htm">
       <HelpTOCNode Title="TypeCreatingException Constructor " Url="html/f6ff8c08-1532-6834-f13c-c5f0f9b571f6.htm" />
-      <HelpTOCNode Id="17254f87-9e26-4b9d-836a-c4796a0e586f" Title="TypeCreatingException Properties" Url="html/36a09568-4b04-4cbd-22b6-2eccbe784776.htm">
+      <HelpTOCNode Id="60c550fd-7414-48b1-98b2-6fde4169f70f" Title="TypeCreatingException Properties" Url="html/36a09568-4b04-4cbd-22b6-2eccbe784776.htm">
         <HelpTOCNode Title="Records Property " Url="html/efc174a9-54ac-05df-3689-b35faebbf959.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="TypeCreatingException Methods" Url="html/a834eeaa-fe5a-dbbb-1152-797458768146.htm" />
       <HelpTOCNode Title="TypeCreatingException Events" Url="html/37f021d2-80a1-2486-93e6-75c3fcab925b.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="9493aa1d-4600-483b-a19a-3cc05e517671" Title="TypeCreatingExceptionRecord Class" Url="html/4902d89a-95c1-0786-4edb-2c9c9ad8eed8.htm">
-      <HelpTOCNode Id="0a866d82-7324-4887-86d3-6b78ccc9e822" Title="TypeCreatingExceptionRecord Constructor " Url="html/0026cb98-18d1-8fc5-5106-7dde732331ef.htm">
+    <HelpTOCNode Id="2e05f1cf-a025-45bd-a2c5-452b7a1a8232" Title="TypeCreatingExceptionRecord Class" Url="html/4902d89a-95c1-0786-4edb-2c9c9ad8eed8.htm">
+      <HelpTOCNode Id="fc0d5d55-79ac-4e7a-aec9-2cb90467873f" Title="TypeCreatingExceptionRecord Constructor " Url="html/0026cb98-18d1-8fc5-5106-7dde732331ef.htm">
         <HelpTOCNode Title="TypeCreatingExceptionRecord Constructor " Url="html/95fce484-5133-6c04-f33d-c06084d62443.htm" />
         <HelpTOCNode Title="TypeCreatingExceptionRecord Constructor (String, String)" Url="html/e668778f-f7ba-b1e5-ac32-2bab449130ba.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="194c9f1b-63ee-4b6c-8719-c4bd18c798b2" Title="TypeCreatingExceptionRecord Properties" Url="html/1a49bf14-3cff-4f29-0fe7-cd2ec4caac82.htm">
+      <HelpTOCNode Id="de08a4a0-731b-494a-b7bf-38d931060b39" Title="TypeCreatingExceptionRecord Properties" Url="html/1a49bf14-3cff-4f29-0fe7-cd2ec4caac82.htm">
         <HelpTOCNode Title="Id Property " Url="html/27334baa-66c9-a8c5-ec36-8bc8ba86eb0a.htm" />
         <HelpTOCNode Title="Message Property " Url="html/39388cdf-5ad4-8aa6-1987-b9a0e7166f2a.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="TypeCreatingExceptionRecord Methods" Url="html/8fa97866-8314-9e39-3093-1d79d0b91393.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="bd09cce5-9be0-410e-aa50-191ef46be4c2" Title="ValueMapping Class" Url="html/16865b70-6409-88cf-0532-bb5cf8ce6c06.htm">
+    <HelpTOCNode Id="09297191-630e-4829-a800-4c65889d56c1" Title="ValueMapping Class" Url="html/16865b70-6409-88cf-0532-bb5cf8ce6c06.htm">
       <HelpTOCNode Title="ValueMapping Constructor " Url="html/1d6f2890-0eb4-fc2a-fbd1-e8767779de3d.htm" />
-      <HelpTOCNode Id="e277aab3-c62e-4dd2-b610-715cb9a5e7af" Title="ValueMapping Properties" Url="html/37256b53-05d7-d3b0-6930-bd7a8d714fe1.htm">
+      <HelpTOCNode Id="d408aca1-1882-443a-ba28-ebebdbb5e775" Title="ValueMapping Properties" Url="html/37256b53-05d7-d3b0-6930-bd7a8d714fe1.htm">
         <HelpTOCNode Title="NameInCode Property " Url="html/699c9b1b-7321-80e3-585b-b704021e4fd8.htm" />
         <HelpTOCNode Title="PropertyName Property " Url="html/b1134bc0-e17a-5df4-da2c-4990d40c6795.htm" />
         <HelpTOCNode Title="TypeName Property " Url="html/d418cf5f-d4d4-79ff-5cda-edbc82251d8c.htm" />
@@ -534,184 +534,184 @@
       </HelpTOCNode>
       <HelpTOCNode Title="ValueMapping Methods" Url="html/b3b5bea6-6ebf-bc14-5bfd-3a1bfda69f10.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4dfacd4f-08da-4edf-98f1-69a03e671265" Title="WrappedException Class" Url="html/6dbc63c7-2016-84a8-360c-de17ab1a42ce.htm">
+    <HelpTOCNode Id="784c1e22-8778-4a1e-b6b9-f2df6712980a" Title="WrappedException Class" Url="html/6dbc63c7-2016-84a8-360c-de17ab1a42ce.htm">
       <HelpTOCNode Title="WrappedException Constructor " Url="html/d021cc47-61c4-8c3c-3044-24c8026ce6b7.htm" />
-      <HelpTOCNode Id="23c6d46e-fefa-4e3c-9269-c2aec9b9b084" Title="WrappedException Properties" Url="html/854737f5-8c98-63a9-1466-c0160c8a96d2.htm">
+      <HelpTOCNode Id="21489185-f13d-4944-a7d6-ba999fd24aa7" Title="WrappedException Properties" Url="html/854737f5-8c98-63a9-1466-c0160c8a96d2.htm">
         <HelpTOCNode Title="ExceptionGeneric Property " Url="html/17bbfb76-d51d-4127-b039-a5c83791575f.htm" />
         <HelpTOCNode Title="ExceptionType Property " Url="html/bbdc3f0b-748d-6631-bd3c-9d01dc5ddc6f.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="8c3f7563-48af-4d50-9c68-96d23d357334" Title="WrappedException Methods" Url="html/1f65e37e-4ac8-57f1-6453-db5af4e80871.htm">
+      <HelpTOCNode Id="5250a012-b6a5-4552-acfc-5cd465210b15" Title="WrappedException Methods" Url="html/1f65e37e-4ac8-57f1-6453-db5af4e80871.htm">
         <HelpTOCNode Title="Create Method " Url="html/2a374817-030a-dd38-865a-1566d3ec70d6.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/299faa8f-36ef-0f75-6db8-35e634e94797.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="79b3c0cd-67da-43ee-a91f-a02bcb00c793" Title="WrappedException(T) Class" Url="html/8630fd1d-2671-fe8d-7dd2-d00ec734c255.htm">
-      <HelpTOCNode Id="bd72382f-10ed-4e6e-ab51-5cd0153f180c" Title="WrappedException(T) Constructor " Url="html/ac53d4ce-7a6e-7952-483f-1e535b9a9817.htm">
+    <HelpTOCNode Id="29a4d377-31d7-4dba-b081-a3de45a9eefe" Title="WrappedException(T) Class" Url="html/8630fd1d-2671-fe8d-7dd2-d00ec734c255.htm">
+      <HelpTOCNode Id="ab6f6795-4592-4837-8b5e-e5c4e7de70d5" Title="WrappedException(T) Constructor " Url="html/ac53d4ce-7a6e-7952-483f-1e535b9a9817.htm">
         <HelpTOCNode Title="WrappedException(T) Constructor " Url="html/f741df2c-8ca5-9e17-3606-a67323bd4f4f.htm" />
         <HelpTOCNode Title="WrappedException(T) Constructor (T)" Url="html/01b954e1-d9a8-5d95-81aa-698ddfcc7662.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="24fde738-975c-43b6-863a-e778ed715f46" Title="WrappedException(T) Properties" Url="html/23770119-1a71-6f44-a44e-2d7826cf2a3f.htm">
+      <HelpTOCNode Id="7d113d58-30fb-426b-923e-f064149fc483" Title="WrappedException(T) Properties" Url="html/23770119-1a71-6f44-a44e-2d7826cf2a3f.htm">
         <HelpTOCNode Title="Exception Property " Url="html/cfa03571-3653-5201-4ab5-e65c1d64fc07.htm" />
         <HelpTOCNode Title="ExceptionGeneric Property " Url="html/05a7880e-4b12-d387-8ccd-a48a94f91663.htm" />
         <HelpTOCNode Title="ExceptionType Property " Url="html/212f5304-a6e8-1df8-3fa2-1fdd6318a577.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="a5022e85-00dd-42cc-824f-33ff18d38fbb" Title="WrappedException(T) Methods" Url="html/5edbd246-3a5c-4171-dfe2-a8be4c83dfcc.htm">
+      <HelpTOCNode Id="ef6ed90a-5fc4-4da1-8e1a-2298004e1beb" Title="WrappedException(T) Methods" Url="html/5edbd246-3a5c-4171-dfe2-a8be4c83dfcc.htm">
         <HelpTOCNode Title="ToString Method " Url="html/d4d42962-4b92-7d98-b271-3fb0631e424b.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="2f505adb-249b-44f6-90d6-cb278136c0b1" Title="SecretNest.RemoteAgency.Attributes" Url="html/9f7e33fc-e2dc-6749-19a3-c53b0f8c4620.htm">
-    <HelpTOCNode Id="5abf3f06-92a8-46d7-a8d4-162e1577fe55" Title="CustomizedAssetNameAttribute Class" Url="html/c1126b53-63c2-baf7-ee23-8684e1f02609.htm">
+  <HelpTOCNode Id="1dcfd8ad-f5ab-40c2-9af5-15e70b65494e" Title="SecretNest.RemoteAgency.Attributes" Url="html/9f7e33fc-e2dc-6749-19a3-c53b0f8c4620.htm">
+    <HelpTOCNode Id="68363f0b-9ee6-438c-87eb-01ae02edc788" Title="CustomizedAssetNameAttribute Class" Url="html/c1126b53-63c2-baf7-ee23-8684e1f02609.htm">
       <HelpTOCNode Title="CustomizedAssetNameAttribute Constructor " Url="html/6e14050a-e3df-35f4-071f-78912ff62386.htm" />
-      <HelpTOCNode Id="7885db3c-3fe3-4c58-9d8f-847e829915b5" Title="CustomizedAssetNameAttribute Properties" Url="html/139e8dbc-921a-a245-7d45-273898fefeb3.htm">
+      <HelpTOCNode Id="a6de1f04-72af-44a6-93c2-c402e2b7081c" Title="CustomizedAssetNameAttribute Properties" Url="html/139e8dbc-921a-a245-7d45-273898fefeb3.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/753a3713-96f5-ebc9-c9df-ee28b3a5959f.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedAssetNameAttribute Methods" Url="html/98d83281-4a32-513a-eb09-c60cc51db97a.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="578d5a07-d3ae-4267-a124-8a568c348004" Title="CustomizedEventParameterEntityPropertyNameAttribute Class" Url="html/e17d7e90-c1fd-91cb-99ef-43da4ddb4ae6.htm">
+    <HelpTOCNode Id="c64417cb-a8c4-4290-a8da-e94470724fd8" Title="CustomizedEventParameterEntityPropertyNameAttribute Class" Url="html/e17d7e90-c1fd-91cb-99ef-43da4ddb4ae6.htm">
       <HelpTOCNode Title="CustomizedEventParameterEntityPropertyNameAttribute Constructor " Url="html/38724377-3519-15f2-cbeb-b9b7b672b60d.htm" />
-      <HelpTOCNode Id="7f311815-a182-4cff-af4d-e9e4d3df7656" Title="CustomizedEventParameterEntityPropertyNameAttribute Properties" Url="html/b16211ff-19a5-815a-0ded-808810eea6d0.htm">
+      <HelpTOCNode Id="127d3860-7504-4637-9ebc-7928f4d7c4c0" Title="CustomizedEventParameterEntityPropertyNameAttribute Properties" Url="html/b16211ff-19a5-815a-0ded-808810eea6d0.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/1cccb920-b016-43b8-ad1a-e7d752b8e045.htm" />
         <HelpTOCNode Title="ParameterName Property " Url="html/fe24b206-011f-a106-571a-2b947ba9a1ea.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="36ede92a-9e23-43bb-b8b2-01bdd15ed52c" Title="CustomizedEventParameterEntityPropertyNameAttribute Methods" Url="html/d3caef12-1c3e-5e8d-9938-1139b8d39c5c.htm">
+      <HelpTOCNode Id="3c0ec987-8977-4d57-a221-eb7082ba6e95" Title="CustomizedEventParameterEntityPropertyNameAttribute Methods" Url="html/d3caef12-1c3e-5e8d-9938-1139b8d39c5c.htm">
         <HelpTOCNode Title="Equals Method " Url="html/115222c8-8a9d-054a-6b27-0675a6f689d0.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/f095f2dd-af35-d5a5-7218-3f361c7c2227.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ada0754b-6610-4a90-8562-baaf9d9a2839" Title="CustomizedOneWayOperatingAttribute Class" Url="html/43083ff1-3f03-3fa0-e0b6-7641ec73cdc7.htm">
+    <HelpTOCNode Id="07ad83ee-db95-4455-a21a-7801387280a1" Title="CustomizedOneWayOperatingAttribute Class" Url="html/43083ff1-3f03-3fa0-e0b6-7641ec73cdc7.htm">
       <HelpTOCNode Title="CustomizedOneWayOperatingAttribute Constructor " Url="html/d0a3b434-b06f-393f-7e4c-0c06a4b783e7.htm" />
       <HelpTOCNode Title="CustomizedOneWayOperatingAttribute Properties" Url="html/58584c8e-d94d-9504-1de4-d136419ae893.htm" />
       <HelpTOCNode Title="CustomizedOneWayOperatingAttribute Methods" Url="html/4df4667d-6af0-75d5-0e91-1db7f26c1027.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f5a445a8-c3b3-4e56-97ba-cb342d9dbd34" Title="CustomizedOperatingTimedoutTimeAttribute Class" Url="html/0437763a-84d1-182d-6641-8cf7fc9374d8.htm">
+    <HelpTOCNode Id="3277d099-a6eb-4aeb-8639-373fb3fce3cd" Title="CustomizedOperatingTimedoutTimeAttribute Class" Url="html/0437763a-84d1-182d-6641-8cf7fc9374d8.htm">
       <HelpTOCNode Title="CustomizedOperatingTimedoutTimeAttribute Constructor " Url="html/1c630c6a-0c16-934b-b206-c88327cb46b9.htm" />
-      <HelpTOCNode Id="1a0fb3f3-a9bb-4b95-b882-197e27efb068" Title="CustomizedOperatingTimedoutTimeAttribute Properties" Url="html/4c89eb20-29e2-60dc-9ada-55e8e8076502.htm">
+      <HelpTOCNode Id="d12387cb-5ce7-40f3-bcfe-7568b2383f97" Title="CustomizedOperatingTimedoutTimeAttribute Properties" Url="html/4c89eb20-29e2-60dc-9ada-55e8e8076502.htm">
         <HelpTOCNode Title="MillisecondsTimeout Property " Url="html/c172f53d-2f80-485b-4387-d596b06ad7fb.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedOperatingTimedoutTimeAttribute Methods" Url="html/fa4d0e99-f469-cca4-9dd7-ac359bb57ce1.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="70c6e904-c28e-4925-9475-e0fc36e45b76" Title="CustomizedParameterEntityAttribute Class" Url="html/54ba1df3-9cd5-41e6-3499-e99870ac2b96.htm">
+    <HelpTOCNode Id="0d9905ff-0807-4070-a759-0244176f3411" Title="CustomizedParameterEntityAttribute Class" Url="html/54ba1df3-9cd5-41e6-3499-e99870ac2b96.htm">
       <HelpTOCNode Title="CustomizedParameterEntityAttribute Constructor " Url="html/cf7963f1-3b9d-96b1-f867-96c382dcf16a.htm" />
-      <HelpTOCNode Id="091aecd3-3227-44fd-ac77-fa902f7b514d" Title="CustomizedParameterEntityAttribute Properties" Url="html/0000d6a3-bae5-3c10-5c83-6448ea84d404.htm">
+      <HelpTOCNode Id="bb4421f7-d4dc-40ab-b32e-b928973f7925" Title="CustomizedParameterEntityAttribute Properties" Url="html/0000d6a3-bae5-3c10-5c83-6448ea84d404.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/aacbc633-9e4f-b682-526b-94e00a7721c9.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedParameterEntityAttribute Methods" Url="html/79c97c79-fa60-57ab-d110-cd9a8410420c.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="d843c3ec-07f1-4274-8ff5-347713966fce" Title="CustomizedParameterEntityPropertyNameAttribute Class" Url="html/4b9bbd54-d465-3e47-76b0-05b991e096dd.htm">
+    <HelpTOCNode Id="396b5c7f-44f9-43d4-8076-8f18bae0e0d7" Title="CustomizedParameterEntityPropertyNameAttribute Class" Url="html/4b9bbd54-d465-3e47-76b0-05b991e096dd.htm">
       <HelpTOCNode Title="CustomizedParameterEntityPropertyNameAttribute Constructor " Url="html/c0496728-e91a-78c4-152d-0aca950df3f5.htm" />
-      <HelpTOCNode Id="9b1f9444-8094-4a2f-9782-71d5e4fe6786" Title="CustomizedParameterEntityPropertyNameAttribute Properties" Url="html/27bd3cfd-9938-8073-dcef-b25ba54de816.htm">
+      <HelpTOCNode Id="06e46be3-6b5e-4e74-b625-647ece876a7a" Title="CustomizedParameterEntityPropertyNameAttribute Properties" Url="html/27bd3cfd-9938-8073-dcef-b25ba54de816.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/7d3dbdf2-85a2-9991-7855-f74590a260da.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedParameterEntityPropertyNameAttribute Methods" Url="html/1d80e5d9-d27f-6d99-8b25-0f0738305c87.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="d0b2d94d-3b37-4f20-a544-3f4aa529297c" Title="CustomizedPropertyGetRequestEntityAttribute Class" Url="html/0c9bdf97-db7e-c0ba-f4e4-05b1411898d2.htm">
+    <HelpTOCNode Id="b0607523-9539-48b5-8366-309c91db9538" Title="CustomizedPropertyGetRequestEntityAttribute Class" Url="html/0c9bdf97-db7e-c0ba-f4e4-05b1411898d2.htm">
       <HelpTOCNode Title="CustomizedPropertyGetRequestEntityAttribute Constructor " Url="html/2f023a16-0a6e-3f5e-7386-8c40d6c12a8a.htm" />
-      <HelpTOCNode Id="0346f59f-97c6-4100-a783-15e18e7d59a9" Title="CustomizedPropertyGetRequestEntityAttribute Properties" Url="html/ebeac506-7e21-a4d5-364a-fbc13d38de48.htm">
+      <HelpTOCNode Id="d76d4925-9fe5-4785-9eb5-e5452cafc420" Title="CustomizedPropertyGetRequestEntityAttribute Properties" Url="html/ebeac506-7e21-a4d5-364a-fbc13d38de48.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/55b052e5-ef37-fbc3-13f7-e8a69024d8ab.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertyGetRequestEntityAttribute Methods" Url="html/1d854b6e-2f5a-6548-e73b-0ae6f3381c4e.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="6254eb06-c5e2-4e8a-b8c2-31958757ef50" Title="CustomizedPropertyGetResponseEntityAttribute Class" Url="html/f2833bfc-88ab-f39e-691b-7462828b58c1.htm">
+    <HelpTOCNode Id="c82e0a44-d670-4f3f-a3c4-ada6e1d80bf2" Title="CustomizedPropertyGetResponseEntityAttribute Class" Url="html/f2833bfc-88ab-f39e-691b-7462828b58c1.htm">
       <HelpTOCNode Title="CustomizedPropertyGetResponseEntityAttribute Constructor " Url="html/f61ce844-6c59-8776-9482-62154f7ce3e4.htm" />
-      <HelpTOCNode Id="aa0393c8-3958-41cc-ac57-d9f1cc050633" Title="CustomizedPropertyGetResponseEntityAttribute Properties" Url="html/ba5e50de-a4d3-48b6-2eb6-5e15d1512ef9.htm">
+      <HelpTOCNode Id="79706e21-2a52-4ddb-b031-b8182c01b58a" Title="CustomizedPropertyGetResponseEntityAttribute Properties" Url="html/ba5e50de-a4d3-48b6-2eb6-5e15d1512ef9.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/d9f2eade-1b4f-a33d-ea72-d1face412ad3.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertyGetResponseEntityAttribute Methods" Url="html/41569503-f664-d7f2-280d-fd45118b61be.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="04e04856-1941-47d0-a0c6-366e1f95d6d9" Title="CustomizedPropertyGetResponsePropertyNameAttribute Class" Url="html/07d45785-bade-9efa-d8dc-8bab55c28455.htm">
+    <HelpTOCNode Id="20195041-bf41-46e5-8937-37f865d37b57" Title="CustomizedPropertyGetResponsePropertyNameAttribute Class" Url="html/07d45785-bade-9efa-d8dc-8bab55c28455.htm">
       <HelpTOCNode Title="CustomizedPropertyGetResponsePropertyNameAttribute Constructor " Url="html/367f6ac9-07d2-ac5d-17b1-43a4de82c1ce.htm" />
-      <HelpTOCNode Id="3fa5e7ca-d3fd-4e3c-b144-87c446593dae" Title="CustomizedPropertyGetResponsePropertyNameAttribute Properties" Url="html/fcb34684-54c3-54c4-deab-7e15a5515e05.htm">
+      <HelpTOCNode Id="0a3ffec0-779d-4681-bcfc-50b045547c0f" Title="CustomizedPropertyGetResponsePropertyNameAttribute Properties" Url="html/fcb34684-54c3-54c4-deab-7e15a5515e05.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/f3b371f9-2087-9bbc-622b-6a2d5dbd208b.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertyGetResponsePropertyNameAttribute Methods" Url="html/a7f03af4-b0f7-5c69-57c7-551f241238ff.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="cca41a05-ed2f-4883-b965-85df8f28006f" Title="CustomizedPropertySetRequestEntityAttribute Class" Url="html/5ee2f567-fe36-78e5-2028-2a1e35606f4c.htm">
+    <HelpTOCNode Id="54698110-1f12-4c48-acc9-c70507800c7c" Title="CustomizedPropertySetRequestEntityAttribute Class" Url="html/5ee2f567-fe36-78e5-2028-2a1e35606f4c.htm">
       <HelpTOCNode Title="CustomizedPropertySetRequestEntityAttribute Constructor " Url="html/69218685-af00-f03a-c512-0467d003997c.htm" />
-      <HelpTOCNode Id="f87d24b4-8045-418a-97e0-acb23ef70718" Title="CustomizedPropertySetRequestEntityAttribute Properties" Url="html/c571b182-6ae3-e441-2236-95a6bc6070be.htm">
+      <HelpTOCNode Id="b04a731e-590e-4f20-8ec5-1497e1fc1f0e" Title="CustomizedPropertySetRequestEntityAttribute Properties" Url="html/c571b182-6ae3-e441-2236-95a6bc6070be.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/0695fa3c-1173-01be-2147-e27074ffbee0.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertySetRequestEntityAttribute Methods" Url="html/b51450b9-f82f-ec7d-d6b2-67421ac09e5c.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="52a115c6-fa1b-47a6-837e-d3bfd638bde4" Title="CustomizedPropertySetRequestPropertyNameAttribute Class" Url="html/57be4723-6a0a-0f3d-3f0b-d2c162ed8921.htm">
+    <HelpTOCNode Id="909a3e6b-68a6-4a5b-992e-f259cb487339" Title="CustomizedPropertySetRequestPropertyNameAttribute Class" Url="html/57be4723-6a0a-0f3d-3f0b-d2c162ed8921.htm">
       <HelpTOCNode Title="CustomizedPropertySetRequestPropertyNameAttribute Constructor " Url="html/b2fdb2c4-9b21-b9dc-d0d4-799978c3ab07.htm" />
-      <HelpTOCNode Id="97371b6d-62d5-41f2-aaed-0195a3293ca0" Title="CustomizedPropertySetRequestPropertyNameAttribute Properties" Url="html/da4d61f5-9c8a-2f75-45ee-865e3dfb9a47.htm">
+      <HelpTOCNode Id="9e1c47bb-b0d2-431b-901f-337c2f3449bb" Title="CustomizedPropertySetRequestPropertyNameAttribute Properties" Url="html/da4d61f5-9c8a-2f75-45ee-865e3dfb9a47.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/7ef65072-fc59-c7a3-5f56-6ae9211f9703.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertySetRequestPropertyNameAttribute Methods" Url="html/a98d0c63-a2c4-31d9-8b43-f94db884ad4f.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="12aa6b37-6490-4568-8c50-b2c74c524cb0" Title="CustomizedPropertySetResponseEntityAttribute Class" Url="html/83c7f4d9-674e-4394-376f-dff3379d68cf.htm">
+    <HelpTOCNode Id="90883476-f965-48a2-81c3-d48c47d49364" Title="CustomizedPropertySetResponseEntityAttribute Class" Url="html/83c7f4d9-674e-4394-376f-dff3379d68cf.htm">
       <HelpTOCNode Title="CustomizedPropertySetResponseEntityAttribute Constructor " Url="html/d9ef359c-8632-20bf-1dae-3b773014dae2.htm" />
-      <HelpTOCNode Id="e732388c-db8a-4f25-bc95-0cb7011325b9" Title="CustomizedPropertySetResponseEntityAttribute Properties" Url="html/3f5d959e-ec2c-c496-ec41-9e4b98114561.htm">
+      <HelpTOCNode Id="2b2f5f67-090c-4ad2-871d-0e9adb2693fd" Title="CustomizedPropertySetResponseEntityAttribute Properties" Url="html/3f5d959e-ec2c-c496-ec41-9e4b98114561.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/395bb298-5a83-6419-3c7e-cf6709d1f971.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertySetResponseEntityAttribute Methods" Url="html/ccdfcf97-d698-0c4f-8580-70524d4b0250.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a6444191-3d32-4ebe-8d40-921d56663703" Title="CustomizedReturnEntityAttribute Class" Url="html/dc351200-9735-e539-eef2-11efdac674f4.htm">
+    <HelpTOCNode Id="6ea30bfc-c377-471d-933e-101e0461688b" Title="CustomizedReturnEntityAttribute Class" Url="html/dc351200-9735-e539-eef2-11efdac674f4.htm">
       <HelpTOCNode Title="CustomizedReturnEntityAttribute Constructor " Url="html/d45df3be-d89c-13b9-23d8-c778abd6fa6d.htm" />
-      <HelpTOCNode Id="d3055c60-b02d-447f-bf40-114044a25028" Title="CustomizedReturnEntityAttribute Properties" Url="html/3217744e-fef6-1b3f-ccba-f878f737a6ae.htm">
+      <HelpTOCNode Id="167fe86b-9cb7-489e-b1c3-0007a8676adc" Title="CustomizedReturnEntityAttribute Properties" Url="html/3217744e-fef6-1b3f-ccba-f878f737a6ae.htm">
         <HelpTOCNode Title="EntityName Property " Url="html/fcc3cfa5-6be7-2644-e354-c03c0511af16.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedReturnEntityAttribute Methods" Url="html/5b12c913-f58d-d5a7-7a19-4b7eeece04f7.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="df78ef7c-1b32-4d41-bf05-8d06451f856a" Title="CustomizedReturnEntityPropertyNameAttribute Class" Url="html/415d7940-8c83-1b16-5040-7e9c844a0e16.htm">
+    <HelpTOCNode Id="b3971b46-48ac-461f-9520-93819133a1e4" Title="CustomizedReturnEntityPropertyNameAttribute Class" Url="html/415d7940-8c83-1b16-5040-7e9c844a0e16.htm">
       <HelpTOCNode Title="CustomizedReturnEntityPropertyNameAttribute Constructor " Url="html/7d9174d6-eda3-8013-72e4-3b531a68f1b6.htm" />
-      <HelpTOCNode Id="a2c70fd9-1e55-4672-95e4-7ff648ccd7c3" Title="CustomizedReturnEntityPropertyNameAttribute Properties" Url="html/5b4af351-3729-1ff8-4d82-0678d7fcd2f3.htm">
+      <HelpTOCNode Id="fa4e40b1-ecaa-4dea-9608-b4e606db5633" Title="CustomizedReturnEntityPropertyNameAttribute Properties" Url="html/5b4af351-3729-1ff8-4d82-0678d7fcd2f3.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/6f5672eb-5eb1-9b8e-4906-4e2c190a5f64.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedReturnEntityPropertyNameAttribute Methods" Url="html/c1845318-e728-6eb5-9ba4-27a3c436eb7b.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a40c0aec-3093-4dd8-91c7-7cee7fd3cdee" Title="EventParameterIgnoredAttribute Class" Url="html/9fa56d83-c4ef-c3c1-2472-a188e0e62fb4.htm">
+    <HelpTOCNode Id="374e953c-ca6c-40cf-b1f7-828db8903fb2" Title="EventParameterIgnoredAttribute Class" Url="html/9fa56d83-c4ef-c3c1-2472-a188e0e62fb4.htm">
       <HelpTOCNode Title="EventParameterIgnoredAttribute Constructor " Url="html/48c77dff-63e9-f5dc-aeb2-190ea748e6d3.htm" />
-      <HelpTOCNode Id="f119fa28-bdf3-4f81-9a47-1e878fd2ccfa" Title="EventParameterIgnoredAttribute Properties" Url="html/76f234a3-4687-68e6-a9a2-d6ab44e408ea.htm">
+      <HelpTOCNode Id="9b8a64d2-e8f1-4d2e-acdb-d0d05f32e36f" Title="EventParameterIgnoredAttribute Properties" Url="html/76f234a3-4687-68e6-a9a2-d6ab44e408ea.htm">
         <HelpTOCNode Title="IgnoredInParameter Property " Url="html/6ac4e264-fc72-6a42-3fad-a29d6cf8127e.htm" />
         <HelpTOCNode Title="IgnoredInReturn Property " Url="html/b1a76657-08c5-c764-4ad8-b2343170a12a.htm" />
         <HelpTOCNode Title="ParameterName Property " Url="html/391482e0-56ae-eb53-95eb-7ae6932538c9.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="482639dc-5ee2-470f-b38a-15cb0e95808f" Title="EventParameterIgnoredAttribute Methods" Url="html/a271b99b-fb6a-9600-c128-618f68b1c2d3.htm">
+      <HelpTOCNode Id="e9758361-a851-47f0-950c-2777efc172ee" Title="EventParameterIgnoredAttribute Methods" Url="html/a271b99b-fb6a-9600-c128-618f68b1c2d3.htm">
         <HelpTOCNode Title="Equals Method " Url="html/b603ad26-03b4-f8bd-362a-47182151cd13.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/81d8edd6-d384-cef1-b1c4-8838bb842018.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e2a364fe-5e8e-484b-81a0-c833dc667da6" Title="EventParameterTwoWayPropertyAttribute Class" Url="html/a6900a14-552d-0a3d-b62b-366621e27b96.htm">
-      <HelpTOCNode Id="e1027ec4-a243-4fc9-9a97-834b0a5bf729" Title="EventParameterTwoWayPropertyAttribute Constructor " Url="html/874839a9-e0da-d687-4fc5-b4e58caccabf.htm">
+    <HelpTOCNode Id="78aa26a9-2548-4297-aafb-fe884898e98e" Title="EventParameterTwoWayPropertyAttribute Class" Url="html/a6900a14-552d-0a3d-b62b-366621e27b96.htm">
+      <HelpTOCNode Id="8e44e926-dab9-4c5c-aa49-d2bc82447266" Title="EventParameterTwoWayPropertyAttribute Constructor " Url="html/874839a9-e0da-d687-4fc5-b4e58caccabf.htm">
         <HelpTOCNode Title="EventParameterTwoWayPropertyAttribute Constructor (String, String, String)" Url="html/e42ce039-2ea5-5e9b-cfb0-a43d69741b5d.htm" />
         <HelpTOCNode Title="EventParameterTwoWayPropertyAttribute Constructor (String, String, Type, String)" Url="html/81877654-5492-4006-09d4-d531129ebebc.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="85b68dfa-ec6a-44b1-98d6-59efe1680bf3" Title="EventParameterTwoWayPropertyAttribute Properties" Url="html/59e673dc-03f0-3b96-52d6-74aa5afdb7af.htm">
+      <HelpTOCNode Id="fad09763-98e4-4dfd-b97a-b391508d488e" Title="EventParameterTwoWayPropertyAttribute Properties" Url="html/59e673dc-03f0-3b96-52d6-74aa5afdb7af.htm">
         <HelpTOCNode Title="ElementType Property " Url="html/1d6aae4c-b692-cfab-94ec-e9d1db6dab80.htm" />
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/62ef7701-cf9a-8aa2-2a84-3ff388380ff3.htm" />
         <HelpTOCNode Title="IsSimpleMode Property " Url="html/05bfd3df-2ff2-1813-0d8d-85a6117a64ec.htm" />
         <HelpTOCNode Title="ParameterName Property " Url="html/9c41ecab-ee26-479f-7a9d-23578f45e47c.htm" />
         <HelpTOCNode Title="ParameterProperty Property " Url="html/0be7b5f6-ae38-54bb-caab-dd7f91f14a76.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f5af2627-6f0c-4517-ac71-2cea5fb26b6e" Title="EventParameterTwoWayPropertyAttribute Methods" Url="html/6bd49e9e-2b8d-b136-c446-365fb76744d4.htm">
+      <HelpTOCNode Id="8a0c85a9-1f73-479a-b25d-5f04015355c7" Title="EventParameterTwoWayPropertyAttribute Methods" Url="html/6bd49e9e-2b8d-b136-c446-365fb76744d4.htm">
         <HelpTOCNode Title="Equals Method " Url="html/39217ad0-b7f7-fd2f-4011-486e340f079a.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/fa751093-4139-9322-7488-ca00605d3940.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0939d986-9d8d-49e6-ad1d-13afd6b5c0bd" Title="EventSubscriptionAttribute Class" Url="html/5ce1f2a9-a290-6fe7-9fb2-cb21203cec38.htm">
+    <HelpTOCNode Id="251b675a-2888-434c-b113-5b45f86711cb" Title="EventSubscriptionAttribute Class" Url="html/5ce1f2a9-a290-6fe7-9fb2-cb21203cec38.htm">
       <HelpTOCNode Title="EventSubscriptionAttribute Constructor " Url="html/38c5ff75-a305-a4a6-5366-79063e85e45e.htm" />
-      <HelpTOCNode Id="ebeaf6d7-187c-4e0f-9db7-39e24884b56b" Title="EventSubscriptionAttribute Properties" Url="html/845b2033-1088-92cf-b8f2-d47f40db175c.htm">
+      <HelpTOCNode Id="bd74bcfc-3e2d-4cb2-bdf0-1ccb0a8d596d" Title="EventSubscriptionAttribute Properties" Url="html/845b2033-1088-92cf-b8f2-d47f40db175c.htm">
         <HelpTOCNode Title="EventSubscritionMode Property " Url="html/3611ac6a-feed-baf1-2c20-73cb5de08806.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EventSubscriptionAttribute Methods" Url="html/4c02f9f1-0893-ae48-6c22-8ba7fbdbd738.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="EventSubscritionMode Enumeration" Url="html/8f1f8fb7-8be2-85f0-5186-4d70cb100ab1.htm" />
-    <HelpTOCNode Id="6aec90e5-604e-4f25-b132-edb0a338be57" Title="IgnoredParameterAttribute Class" Url="html/e7afa1f5-089f-fca8-773f-a4379c3b0d4f.htm">
-      <HelpTOCNode Id="4e3ffacb-82fe-4170-9395-b9a9d7f9814a" Title="IgnoredParameterAttribute Constructor " Url="html/8b218583-27a6-bce7-2684-ba73daf12e48.htm">
+    <HelpTOCNode Id="07d8ac0a-6e73-4d2d-bfc7-713c0db5badc" Title="IgnoredParameterAttribute Class" Url="html/e7afa1f5-089f-fca8-773f-a4379c3b0d4f.htm">
+      <HelpTOCNode Id="c0a6eb4a-6168-4465-a91e-0d6f5726914a" Title="IgnoredParameterAttribute Constructor " Url="html/8b218583-27a6-bce7-2684-ba73daf12e48.htm">
         <HelpTOCNode Title="IgnoredParameterAttribute Constructor (EventParameterIgnoredAttribute)" Url="html/40e1fabd-c979-65f6-657f-86b660316bd5.htm" />
         <HelpTOCNode Title="IgnoredParameterAttribute Constructor (Boolean, Boolean)" Url="html/04823296-49c0-62be-bded-4cef2a7df86d.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="60a1f42b-ba0c-46af-ac5c-4dfe36540308" Title="IgnoredParameterAttribute Properties" Url="html/367d5ca8-4079-bad9-56e6-62c50f24db49.htm">
+      <HelpTOCNode Id="56fe1926-7a2f-4b4b-a81b-e1a7e94b1061" Title="IgnoredParameterAttribute Properties" Url="html/367d5ca8-4079-bad9-56e6-62c50f24db49.htm">
         <HelpTOCNode Title="IgnoredInParameter Property " Url="html/9523b801-5528-e8cd-125e-72d7cecb3b4d.htm" />
         <HelpTOCNode Title="IgnoredInReturn Property " Url="html/41a9a6c6-121a-d783-5ce4-612fa3ca3759.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="IgnoredParameterAttribute Methods" Url="html/8fc3c367-58b2-b7b7-7924-33f7081629db.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a8e1e8d8-17a8-4d1c-a540-47c13da6aef4" Title="ImportAssemblyAttribute Class" Url="html/991f296f-518c-5922-f2b5-e8c1d83aac08.htm">
+    <HelpTOCNode Id="c7f23801-e9a7-47ae-aa26-0e43b25ea2ca" Title="ImportAssemblyAttribute Class" Url="html/991f296f-518c-5922-f2b5-e8c1d83aac08.htm">
       <HelpTOCNode Title="ImportAssemblyAttribute Constructor " Url="html/68364d56-6001-ace1-314d-d3de1ae37839.htm" />
-      <HelpTOCNode Id="daeac0cc-c48f-46d1-95c7-55a6beea24c4" Title="ImportAssemblyAttribute Properties" Url="html/809aafde-7846-2567-0340-604dbaff219d.htm">
+      <HelpTOCNode Id="0b5d392d-843c-4f72-b8ce-a023bcad5182" Title="ImportAssemblyAttribute Properties" Url="html/809aafde-7846-2567-0340-604dbaff219d.htm">
         <HelpTOCNode Title="Aliases Property " Url="html/a80af0d1-c265-9080-e846-a3d6dc1d6951.htm" />
         <HelpTOCNode Title="AssemblyFullName Property " Url="html/342597a1-09f0-69cb-9626-25b4ca2e7d05.htm" />
         <HelpTOCNode Title="EmbedInteropTypes Property " Url="html/8473fed6-afa5-2ec9-7c63-5cb99dde59ff.htm" />
@@ -720,48 +720,48 @@
       </HelpTOCNode>
       <HelpTOCNode Title="ImportAssemblyAttribute Methods" Url="html/bb75a5e6-3eb3-f265-ac2d-796a57e929a9.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="522a7655-edb3-4d6d-962c-59f817df1b98" Title="LocalExceptionHandlingAttribute Class" Url="html/a45eeff9-276b-a5e3-e193-22b5af85c640.htm">
+    <HelpTOCNode Id="b9249267-1c56-4f76-91f7-1533b56ba850" Title="LocalExceptionHandlingAttribute Class" Url="html/a45eeff9-276b-a5e3-e193-22b5af85c640.htm">
       <HelpTOCNode Title="LocalExceptionHandlingAttribute Constructor " Url="html/85787009-0926-c78f-4a3e-bc5447fda6fa.htm" />
-      <HelpTOCNode Id="c64c5fc9-fcf2-43b7-a44c-ef03ca0f1dc9" Title="LocalExceptionHandlingAttribute Properties" Url="html/72ab45f4-0602-6963-8261-501e84312908.htm">
+      <HelpTOCNode Id="82c0bb21-1db4-4f8a-b62e-01ae5059d1ca" Title="LocalExceptionHandlingAttribute Properties" Url="html/72ab45f4-0602-6963-8261-501e84312908.htm">
         <HelpTOCNode Title="LocalExceptionHandlingMode Property " Url="html/997900ef-53a0-302c-b3b3-c85a09d35fd4.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="LocalExceptionHandlingAttribute Methods" Url="html/dd610456-e225-3fb7-fc35-99282e68241b.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="LocalExceptionHandlingMode Enumeration" Url="html/a808135f-cc96-a0ee-de31-373a43593198.htm" />
-    <HelpTOCNode Id="5b1e0777-58ca-4c76-97e7-889d4594f0ca" Title="ParameterIgnoredAttribute Class" Url="html/6f6fe1cd-bc06-4a55-6c28-66f07d7e7953.htm">
-      <HelpTOCNode Id="5030e82c-c74b-4837-9158-51cc748c4563" Title="ParameterIgnoredAttribute Constructor " Url="html/e3bca4ab-902d-b208-6965-25b9813bb26b.htm">
+    <HelpTOCNode Id="7e4f8d56-97b2-4480-a83d-3adc5e38d074" Title="ParameterIgnoredAttribute Class" Url="html/6f6fe1cd-bc06-4a55-6c28-66f07d7e7953.htm">
+      <HelpTOCNode Id="41de6984-418c-424c-a180-460610a45194" Title="ParameterIgnoredAttribute Constructor " Url="html/e3bca4ab-902d-b208-6965-25b9813bb26b.htm">
         <HelpTOCNode Title="ParameterIgnoredAttribute Constructor (EventParameterIgnoredAttribute)" Url="html/0e73fbd1-8c8c-e968-bc9d-4ee684a61322.htm" />
         <HelpTOCNode Title="ParameterIgnoredAttribute Constructor (Boolean, Boolean)" Url="html/1a9b574b-43fe-5627-dce1-0dff95c56b86.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d3a94993-7398-4694-9fc0-ac8c065f4df7" Title="ParameterIgnoredAttribute Properties" Url="html/e8664f03-72aa-d3a1-c996-359d2e55907f.htm">
+      <HelpTOCNode Id="73fad8ee-c1a0-4ba5-8c25-7929788521ad" Title="ParameterIgnoredAttribute Properties" Url="html/e8664f03-72aa-d3a1-c996-359d2e55907f.htm">
         <HelpTOCNode Title="IgnoredInParameter Property " Url="html/d218ce3d-2fe3-1577-89e7-3a0aa4330f52.htm" />
         <HelpTOCNode Title="IgnoredInReturn Property " Url="html/bec157ba-5d76-000b-f79e-8e29bd1e47b2.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ParameterIgnoredAttribute Methods" Url="html/07f2fe14-2a7e-3f8f-3627-5de852f5aa9c.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="0ac1b206-3a16-4a11-bea6-8f8116ae4cfb" Title="ParameterTwoWayPropertyAttribute Class" Url="html/20cd2d0c-c682-9f86-e4a1-ae2877c7e176.htm">
-      <HelpTOCNode Id="c35f873d-e3a4-46ea-afd7-a9957facaa03" Title="ParameterTwoWayPropertyAttribute Constructor " Url="html/7f66d268-5dd9-44ed-f1a0-6005640d3f11.htm">
+    <HelpTOCNode Id="f0128fb1-1a42-4cfc-b922-407c0292ecef" Title="ParameterTwoWayPropertyAttribute Class" Url="html/20cd2d0c-c682-9f86-e4a1-ae2877c7e176.htm">
+      <HelpTOCNode Id="6d109fec-c79a-4d2b-b566-943286f94558" Title="ParameterTwoWayPropertyAttribute Constructor " Url="html/7f66d268-5dd9-44ed-f1a0-6005640d3f11.htm">
         <HelpTOCNode Title="ParameterTwoWayPropertyAttribute Constructor (EventParameterTwoWayPropertyAttribute)" Url="html/e235d670-5d0f-2b7c-16ed-0be74bd21879.htm" />
         <HelpTOCNode Title="ParameterTwoWayPropertyAttribute Constructor (String, String)" Url="html/4bfae605-0cd3-cfa5-9d2c-c7763ad94d31.htm" />
         <HelpTOCNode Title="ParameterTwoWayPropertyAttribute Constructor (String, Type, String)" Url="html/31c1bb4d-93b2-a261-dbb1-32ef010e87e3.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e40c0750-0046-460e-a88d-40f9b6ffbd68" Title="ParameterTwoWayPropertyAttribute Properties" Url="html/1e4865f7-7dbe-7d0f-effd-84e25126f91d.htm">
+      <HelpTOCNode Id="47026cd7-baa2-4588-9118-ce9fcc33a93d" Title="ParameterTwoWayPropertyAttribute Properties" Url="html/1e4865f7-7dbe-7d0f-effd-84e25126f91d.htm">
         <HelpTOCNode Title="ElementType Property " Url="html/e46a37fe-ab1c-461a-ede0-15f04fd3153f.htm" />
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/1fc8b5ee-34dd-99bc-56d7-589581390eff.htm" />
         <HelpTOCNode Title="IsSimpleMode Property " Url="html/3f346bf3-b3f4-547a-6f4e-b9a667dbe8c4.htm" />
         <HelpTOCNode Title="ParameterProperty Property " Url="html/1dd87d34-fcfe-bc7a-4fd6-23b6849e6565.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="28ca023a-dae8-4d54-8785-5d19a84e0e4e" Title="ParameterTwoWayPropertyAttribute Methods" Url="html/c685e856-3636-44cf-4662-9b9c7a11f533.htm">
+      <HelpTOCNode Id="31e5f14c-c6e6-4e8f-a261-9e55545f9081" Title="ParameterTwoWayPropertyAttribute Methods" Url="html/c685e856-3636-44cf-4662-9b9c7a11f533.htm">
         <HelpTOCNode Title="Equals Method " Url="html/7ec8024e-f241-739a-8324-c86cd2b9bc02.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/a3875bdd-8ce2-a6a0-d8e0-8d526cca6891.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7139b7a9-6b10-499c-a74f-a17b7d57d4ff" Title="ProxyCacheableAttribute Class" Url="html/685234bc-fe7c-2116-b26f-e77172141a63.htm">
+    <HelpTOCNode Id="768063d2-bdd0-4584-a293-2767ee7fb1b0" Title="ProxyCacheableAttribute Class" Url="html/685234bc-fe7c-2116-b26f-e77172141a63.htm">
       <HelpTOCNode Title="ProxyCacheableAttribute Constructor " Url="html/77ed4972-cadd-0bd5-afd7-cc344f604f1d.htm" />
       <HelpTOCNode Title="ProxyCacheableAttribute Properties" Url="html/21514034-6c88-97fd-3d04-7a1436f922ac.htm" />
       <HelpTOCNode Title="ProxyCacheableAttribute Methods" Url="html/aa76ded2-e4bc-781a-e9ed-2052e00795ba.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="430d8e13-08a1-4c65-b105-cf6b7628f552" Title="ServiceWrapperCacheableAttribute Class" Url="html/33debc4f-4f22-e585-2f88-e40ce1e0689b.htm">
+    <HelpTOCNode Id="ecf1210c-0037-41ef-a8e7-853cf60a8750" Title="ServiceWrapperCacheableAttribute Class" Url="html/33debc4f-4f22-e585-2f88-e40ce1e0689b.htm">
       <HelpTOCNode Title="ServiceWrapperCacheableAttribute Constructor " Url="html/df1a7030-efa9-e61e-6e3c-2a9e257bd04c.htm" />
       <HelpTOCNode Title="ServiceWrapperCacheableAttribute Properties" Url="html/6b2b4bf0-1955-0e5c-b68f-e5025acdaf47.htm" />
       <HelpTOCNode Title="ServiceWrapperCacheableAttribute Methods" Url="html/9b9ef8e6-6f4e-14c3-a45c-ab12402beeb5.htm" />
