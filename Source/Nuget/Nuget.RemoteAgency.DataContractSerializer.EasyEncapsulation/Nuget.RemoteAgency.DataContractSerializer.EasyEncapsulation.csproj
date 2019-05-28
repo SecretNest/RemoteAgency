@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
     <Authors>Allen Cui</Authors>
@@ -10,32 +10,31 @@
     <Description>Encapsulation including DataContractSerializer and RemoteAgency.</Description>
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
-    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.6</Version>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <Version>1.6.1</Version>
+    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <FileVersion>1.6.1.0</FileVersion>
     <PackageReleaseNotes>
-Updated: Reference of RemoteAgency packages (1.6)</PackageReleaseNotes>
+Removes netFx 4.6 support.
+Adds netFx 4.6.1 support.
+Note: Use version 1.6.0 when netFx 4.6 support is required.
+    </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
     <PackageTags>RemoteAgency Remoting DataContract</PackageTags>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  
+  <PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.DataContractSerializer.EasyEncapsulation.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\RemoteAgency.DataContractSerializer.EasyEncapsulation.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.6.0" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.6.0" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.6.1" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.6.1" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />
