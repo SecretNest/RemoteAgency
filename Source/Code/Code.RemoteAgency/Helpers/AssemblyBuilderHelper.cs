@@ -215,15 +215,7 @@ namespace SecretNest.RemoteAgency
             }
             else
             {
-                Assembly assembly;
-#if netcore
-                using (var ms = new MemoryStream(image))
-                {
-                    assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
-                }
-#else
-                assembly = Assembly.Load(image);
-#endif
+                Assembly assembly = Assembly.Load(image);
                 return assembly;
             }
         }

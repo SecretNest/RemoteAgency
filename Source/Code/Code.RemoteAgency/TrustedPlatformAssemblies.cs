@@ -19,14 +19,18 @@ namespace SecretNest.RemoteAgency
 
             foreach (var file in locationsOfAllReferences)
             {
-                var name = System.Runtime.Loader.AssemblyLoadContext.GetAssemblyName(file);
+                var name = AssemblyName.GetAssemblyName(file);
                 var fullName = name.FullName;
                 var shortName = name.Name;
                 var lazy = new Lazy<byte[]>(() => File.ReadAllBytes(file), false);
                 platformAssemblies.Add(fullName, lazy);
-                if (!shortNameMapping.TryAdd(shortName, fullName))
+                if (shortNameMapping.ContainsKey(shortName))
                 {
                     shortNameMapping[shortName] = null;
+                }
+                else
+                {
+                    shortNameMapping[shortName] = fullName;
                 }
                 if (shortName == "Microsoft.CSharp")
                     CSharpAssemblyName = name;

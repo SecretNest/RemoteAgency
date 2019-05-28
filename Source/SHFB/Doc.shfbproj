@@ -28,13 +28,9 @@
     </TransformComponentArguments>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency\Release.RemoteAgency.csproj" />
-      <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency\bin\RemoteAgency.xml" />
       <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.Base\Release.RemoteAgency.Base.csproj" />
-      <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.Base\bin\RemoteAgency.Base.xml" />
       <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.DataContractSerializer\Release.RemoteAgency.DataContractSerializer.csproj" />
-      <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.DataContractSerializer\bin\RemoteAgency.DataContractSerializer.xml" />
       <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation.csproj" />
-      <DocumentationSource sourceFile="..\DirectRelease\Release.RemoteAgency.DataContractSerializer.EasyEncapsulation\bin\RemoteAgency.DataContractSerializer.EasyEncapsulation.xml" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>

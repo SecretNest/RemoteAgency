@@ -1,61 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp20</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
     <Description>
-      Remote Agency is built for making the communicating among components in different computers easier.
-      Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.
+Remote Agency is built for making the communicating among components in different computers easier.
+Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.
     </Description>
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
     <Product>Remote Agency</Product>
     <Copyright>Allen Cui</Copyright>
-    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.6</Version>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <Version>1.6.1</Version>
+    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <FileVersion>1.6.1.0</FileVersion>
     <PackageReleaseNotes>
-Changed: License changed to MIT, source published at GitHub.
-Added: static class MessageInstanceMetadataService to get the instance metadata in service method.
-Added: event AfterMessageReceived in RemoteAgencyManager to monitor and filter message before being processed by service object.
-Added: event BeforeMessageSending in RemoteAgencyManager to monitor and filter message before sending out.
-Fixed: Exceptions serialization support.
-Fixed: Missing assemblies problem in dotnet core while changing platform version.</PackageReleaseNotes>
+Removes netFx 4.6 support.
+Adds netFx 4.6.1 support.
+Updates Roslyn to 3.1.
+Note: Use version 1.6.0 when netFx 4.6 support is required.
+</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
     <PackageTags>RemoteAgency Remoting</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp20'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
     <DefineConstants>netcore</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp20'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>netcore</DefineConstants>
+  </PropertyGroup>
+
+  <!--<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp20'">
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-    <!--<PackageReference Include="Microsoft.CSharp" Version="4.4.0" />-->
-  </ItemGroup>
+    --><!--<PackageReference Include="Microsoft.CSharp" Version="4.4.0" />--><!--
+  </ItemGroup>-->
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.0" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.0" />
+    <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.1" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 

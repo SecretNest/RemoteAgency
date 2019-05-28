@@ -176,13 +176,9 @@
 		<section>
 			<title>Supported frameworks</title>
 			<content>
-        <para>Remote Agency is built in both dotnet core app 2 and dotnet framework 4.6.</para>
-        <para>Dotnet standard is not supported due to lacking reflection loading support.</para>
+        <para>Remote Agency is built in dotnet standard 2.0, dotnet core app 2.0 and dotnet framework 4.6.1.</para>
 			</content>
 		</section>
-    <section>
-      <title>Known issues</title>
-    </section>
 		<section>
 			<title>Licenses</title>
 			<content>

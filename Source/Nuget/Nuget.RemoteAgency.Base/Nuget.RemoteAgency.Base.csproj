@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp20</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.Base</PackageId>
     <Authors>Allen Cui</Authors>
@@ -9,30 +9,27 @@
     <Product>Remote Agency</Product>
     <Description>Base classes, interfaces and attributes of Remote Agency.</Description>
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Allen Cui</Copyright>
     <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.6</Version>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <Version>1.6.1</Version>
+    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <FileVersion>1.6.1.0</FileVersion>
     <PackageReleaseNotes>
-Changed: License changed to MIT, source published at GitHub.
-Added: MessageInstanceMetadata
-Fixed: Exceptions serialization support.</PackageReleaseNotes>
+Removes netFx 4.6 support.
+Adds netFx 4.6.1 support.
+Note: Use version 1.6.0 when netFx 4.6 support is required.
+    </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
     <PackageTags>RemoteAgency Remoting</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
