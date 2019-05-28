@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example 0 (start)", "Example 0 (start)\Example 0 (start).csproj", "{5A66DF76-7FD0-40FB-935D-D50B4AEB02F4}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example 9", "Example 9\Exam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet core 2.0", "dotnet core 2.0", "{7CB8A0F2-7576-4C15-BCD9-3E56DFBC18A0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet framework 4.6", "dotnet framework 4.6", "{DDF5D7A2-C72C-478E-B8CA-2F3A02A88D2B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet framework 4.6.1", "dotnet framework 4.6.1", "{DDF5D7A2-C72C-478E-B8CA-2F3A02A88D2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleFx 0 (start)", "ExampleFx 0 (start)\ExampleFx 0 (start).csproj", "{3909A7BF-9513-4A80-8EA7-91AE4B3636D0}"
 EndProject
