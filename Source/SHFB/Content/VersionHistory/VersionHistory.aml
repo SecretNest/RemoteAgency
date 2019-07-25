@@ -10,6 +10,14 @@
 			<content>
 				<list class="bullet">
           <listItem>
+            <para>Fix: Runtime error while using method with generic type parameter.</para>
+            <para>Fix: Memory leaking when thread aborted while waiting response message.</para>
+            <para>Remote Agency: 1.7.0</para>
+            <para>Remote Agency Base: 1.7.0</para>
+            <para>DataContract Serializer: 1.6.1</para>
+            <para>DataContract Serializer Easy Encapsulation: 1.7.0</para>
+          </listItem>
+          <listItem>
             <para>Fix: Building error while using reference parameter with generic type in method.</para>
             <para>Remote Agency: 1.6.2</para>
             <para>Remote Agency Base: 1.6.1</para>

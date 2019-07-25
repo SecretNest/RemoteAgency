@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency
     /// Manages the matching of the request and response message.
     /// </summary>
     /// <typeparam name="T">Entity base</typeparam>
-    public class Responder<T> // where TEntityBase : class
+    public class Responder<T> : IDisposable // where TEntityBase : class
     {
         ConcurrentDictionary<Guid, ResponderItem> responders = new ConcurrentDictionary<Guid, ResponderItem>();
 
@@ -79,12 +79,14 @@ namespace SecretNest.RemoteAgency
             {
                 if (item.GetResult(millisecondsTimeout, out var value))
                 {
-                    responders.TryRemove(messageId, out _);
+                    responders.TryRemove(messageId, out var removed);
+                    removed.RemoveItem();
                     return value;
                 }
                 else
                 {
-                    responders.TryRemove(messageId, out _);
+                    responders.TryRemove(messageId, out var removed);
+                    removed.RemoveItem();
                     MessageWaitingTimedOutCallback(messageId);
                     throw new TimeoutException();
                 }
@@ -112,7 +114,8 @@ namespace SecretNest.RemoteAgency
         /// <remarks>This method just remove the matching from managing, will not unblock the <see cref="GetResult(Guid, int)"/> calling.</remarks>
         public void Remove(Guid messageId)
         {
-            responders.TryRemove(messageId, out _);
+            responders.TryRemove(messageId, out var removed);
+            removed.RemoveItem();
         }
 
         //public void SetExceptionAndRemove(Guid messageId, WrappedException exception)
@@ -129,40 +132,98 @@ namespace SecretNest.RemoteAgency
             T value;
             WrappedException exception;
 
-            readonly ManualResetEvent waitHandle = new ManualResetEvent(false);
+            ManualResetEvent waitHandle = new ManualResetEvent(false);
 
             public void SetResult(T value)
             {
                 this.value = value;
-                waitHandle.Set();
+                waitHandle?.Set();
             }
 
             public void SetException(WrappedException exception)
             {
                 this.exception = exception;
-                waitHandle.Set();
+                waitHandle?.Set();
             }
 
             public bool GetResult(int millisecondsTimeout, out T value)
             {
-                if (waitHandle.WaitOne(millisecondsTimeout))
+                try
                 {
-                    if (exception != null)
+                    if (waitHandle.WaitOne(millisecondsTimeout))
                     {
-                        throw exception.ExceptionGeneric;
+                        if (exception != null)
+                        {
+                            throw exception.ExceptionGeneric;
+                        }
+                        else
+                        {
+                            value = this.value;
+                            return true;
+                        }
                     }
                     else
                     {
-                        value = this.value;
-                        return true;
+                        value = default(T);
+                        return false;
                     }
                 }
-                else
+                finally
                 {
-                    value = default(T);
-                    return false;
+                    waitHandle = null;
+                    var copy = waitHandle;
+                    copy?.Dispose();
+                }
+            }
+
+            public void RemoveItem() //will not unblock
+            {
+                if (waitHandle != null)
+                {
+                    waitHandle = null;
+                    var copy = waitHandle;
+                    copy?.Dispose();
                 }
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        /// <summary>
+        /// Disposes of the resources (other than memory) used by this instance.
+        /// </summary>
+        /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    foreach (var item in responders)
+                    {
+                        item.Value.RemoveItem();
+                    }
+                    responders.Clear();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        /// <summary>
+        /// Releases all resources used by this instance.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

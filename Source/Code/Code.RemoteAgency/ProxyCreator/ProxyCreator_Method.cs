@@ -234,7 +234,7 @@ namespace SecretNest.RemoteAgency
                 .Append(messageIdValueName).Append(", ")
                 .Append(isOneWay ? "true" : "false").Append(", ")
                 .Append(serializedParameterValueName).Append(", ");
-            if (genericReturnEntityTypeName == null)
+            if (methodGenericArguments.Count == 0)
                 sendingMessageBackBuilder.Append("null");
             else
                 sendingMessageBackBuilder.Append("new Type[] { ").Append(string.Join(", ", methodGenericArguments.Keys.Select(i => "typeof(" + i + ")"))).Append(" }");

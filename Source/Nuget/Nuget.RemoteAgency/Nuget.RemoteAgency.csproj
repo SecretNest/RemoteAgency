@@ -16,12 +16,12 @@ Remote Agency can create proxy objects based on one interface file which should 
     <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.6.2</Version>
-    <AssemblyVersion>1.6.2.0</AssemblyVersion>
-    <FileVersion>1.6.2.0</FileVersion>
+    <Version>1.7.0</Version>
+    <AssemblyVersion>1.7.0.0</AssemblyVersion>
+    <FileVersion>1.7.0.0</FileVersion>
     <PackageReleaseNotes>
-Bug fix: Building error while using reference parameter with generic type in method.
-</PackageReleaseNotes>
+Bug fix: Runtime error while using method with generic type parameter.
+    </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
@@ -48,7 +48,7 @@ Bug fix: Building error while using reference parameter with generic type in met
 
   <ItemGroup>
     <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.1" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">

@@ -303,7 +303,10 @@
   <HelpKINode Title="DeserializeWithExceptionTolerance method" Url="html/55e5eba0-fc55-cba8-eaa7-a9b63f6ba88d.htm" />
   <HelpKINode Title="Disconnect method" Url="html/2347bcd7-dc45-4579-0d59-3fada91c8dc5.htm" />
   <HelpKINode Title="Display property" Url="html/a382cb6b-0c1e-5667-0d7d-c5e57e9566a3.htm" />
-  <HelpKINode Title="Dispose method" Url="html/08780fa0-e22c-d4e7-6c35-98aa9b965ac6.htm" />
+  <HelpKINode Title="Dispose method">
+    <HelpKINode Title="RemoteAgencyManager(TNetworkMessage, TSerialized, TEntityBase).Dispose Method " Url="html/08780fa0-e22c-d4e7-6c35-98aa9b965ac6.htm" />
+    <HelpKINode Title="Responder(T).Dispose Method " Url="html/bba90343-b37a-fdb2-9989-c5d9e4cd2736.htm" />
+  </HelpKINode>
   <HelpKINode Title="DisposingMessageRequiredProxyAdded event" Url="html/ce652d44-3605-31d5-30ac-1447c67898a4.htm" />
   <HelpKINode Title="DisposingMessageRequiredProxyEventArgs class">
     <HelpKINode Title="DisposingMessageRequiredProxyEventArgs Class" Url="html/0e29c2d1-446e-8cd2-e270-bb1bd3d698d7.htm" />
@@ -985,6 +988,7 @@
     <HelpKINode Title="methods" Url="html/ceeead9a-31a4-f0fc-d19b-2e21e584e12c.htm" />
     <HelpKINode Title="properties" Url="html/96ef5477-515a-a076-9924-8721da787d9b.htm" />
   </HelpKINode>
+  <HelpKINode Title="Responder(Of T).Dispose method" Url="html/bba90343-b37a-fdb2-9989-c5d9e4cd2736.htm" />
   <HelpKINode Title="Responder(Of T).GetResult method" Url="html/610eb979-2b7a-d73b-d2e3-ceb10864305f.htm" />
   <HelpKINode Title="Responder(Of T).MessageWaitingTimedOutCallback property" Url="html/583fc692-2deb-8659-821d-06452a46f8ed.htm" />
   <HelpKINode Title="Responder(Of T).Prepare method" Url="html/ef5c635b-b2b0-c354-5b58-8aeb62d7dd40.htm" />
@@ -999,6 +1003,7 @@
     <HelpKINode Title="methods" Url="html/ceeead9a-31a4-f0fc-d19b-2e21e584e12c.htm" />
     <HelpKINode Title="properties" Url="html/96ef5477-515a-a076-9924-8721da787d9b.htm" />
   </HelpKINode>
+  <HelpKINode Title="Responder&lt;T&gt;.Dispose method" Url="html/bba90343-b37a-fdb2-9989-c5d9e4cd2736.htm" />
   <HelpKINode Title="Responder&lt;T&gt;.GetResult method" Url="html/610eb979-2b7a-d73b-d2e3-ceb10864305f.htm" />
   <HelpKINode Title="Responder&lt;T&gt;.MessageWaitingTimedOutCallback property" Url="html/583fc692-2deb-8659-821d-06452a46f8ed.htm" />
   <HelpKINode Title="Responder&lt;T&gt;.Prepare method" Url="html/ef5c635b-b2b0-c354-5b58-8aeb62d7dd40.htm" />

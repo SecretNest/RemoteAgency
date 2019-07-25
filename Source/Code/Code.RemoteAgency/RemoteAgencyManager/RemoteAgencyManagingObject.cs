@@ -298,6 +298,7 @@ namespace SecretNest.RemoteAgency
         {
             InterfaceTypes = null;
             disposingMessageRequiredProxyAddedCallback = null;
+            eventResponder.Dispose();
         }
 
         public override void TargetProxyDisposed(Guid instanceId)

@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation">
-      <Version>1.6.1</Version>
+      <Version>1.6.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
