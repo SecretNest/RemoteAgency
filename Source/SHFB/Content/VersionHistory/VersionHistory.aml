@@ -10,6 +10,13 @@
 			<content>
 				<list class="bullet">
           <listItem>
+            <para>Fix: Building error while using reference parameter with generic type in method.</para>
+            <para>Remote Agency: 1.6.2</para>
+            <para>Remote Agency Base: 1.6.1</para>
+            <para>DataContract Serializer: 1.6.1</para>
+            <para>DataContract Serializer Easy Encapsulation: 1.6.2</para>
+          </listItem>
+          <listItem>
             <para>Change: Update Roslyn to 3.1.</para>
             <para>Change: The lowest support framework is changed from netFx 4.6 to netFx 4.6.1 due to Roslyn updated. Dotnet Standard and dotnet core app are not affected.</para>
             <para>Remove: Reference to System.Runtime.Loader is removed because bug (PlatformNotSupportedException in Assembly.Load) is fixed by the latest version of dotNet core.</para>

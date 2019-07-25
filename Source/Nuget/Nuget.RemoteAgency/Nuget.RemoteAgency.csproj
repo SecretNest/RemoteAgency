@@ -16,14 +16,11 @@ Remote Agency can create proxy objects based on one interface file which should 
     <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.6.1</Version>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
-    <FileVersion>1.6.1.0</FileVersion>
+    <Version>1.6.2</Version>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
+    <FileVersion>1.6.2.0</FileVersion>
     <PackageReleaseNotes>
-Removes netFx 4.6 support.
-Adds netFx 4.6.1 support.
-Updates Roslyn to 3.1.
-Note: Use version 1.6.0 when netFx 4.6 support is required.
+Bug fix: Building error while using reference parameter with generic type in method.
 </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Debug;Release</Configurations>

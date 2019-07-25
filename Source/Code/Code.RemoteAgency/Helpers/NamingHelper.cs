@@ -26,6 +26,11 @@ namespace SecretNest.RemoteAgency
 
         internal static string GetFullName(this Type type, GetTypeFullNameParameter parameter, Dictionary<string, Type> foundGenerics)
         {
+            if (type.IsByRef)
+            {
+                type = type.GetElementType();
+            }
+
             if (type.IsArray)
             {
                 var elementType = type.GetElementType();

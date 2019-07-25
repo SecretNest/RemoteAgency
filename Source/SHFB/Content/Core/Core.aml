@@ -22,7 +22,7 @@
                 <para>Overloading (Asset renaming is required)</para>
               </listItem>
               <listItem>
-                <para>Generic methods</para>
+                <para>Generic methods (covariant and contravariant is not supported due to serializing limitation)</para>
               </listItem>
               <listItem>
                 <para>Parameters: params, out, ref and default value</para>

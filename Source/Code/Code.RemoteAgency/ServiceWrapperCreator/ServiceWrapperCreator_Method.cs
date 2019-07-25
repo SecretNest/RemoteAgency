@@ -101,7 +101,7 @@ namespace SecretNest.RemoteAgency
                 {
                     var para = parameters[parameterIndex];
                     var parameterType = para.ParameterType;
-                    var parameterTypeInfo = parameterType.GetTypeInfo();
+                    //var parameterTypeInfo = parameterType.GetTypeInfo();
 
                     Dictionary<string, Type> oneParameterTypeUsedGenerics = new Dictionary<string, Type>();
                     string typeName = parameterType.GetFullName(parameter.GetTypeFullNameParameter, oneParameterTypeUsedGenerics);
