@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0;netcoreapp3.0;netstandard2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer</PackageId>
     <Authors>Allen Cui</Authors>
@@ -9,17 +9,17 @@
     <Product>Remote Agency</Product>
     <Description>Using DataContractSerializer as serialization solution in Remote Agency.</Description>
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
-    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <Copyright>Allen Cui</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.6.1</Version>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
-    <FileVersion>1.6.1.0</FileVersion>
+    <Version>1.7.1</Version>
+    <AssemblyVersion>1.7.1.0</AssemblyVersion>
+    <FileVersion>1.7.1.0</FileVersion>
     <PackageReleaseNotes>
-Removes netFx 4.6 support.
-Adds netFx 4.6.1 support.
-Note: Use version 1.6.0 when netFx 4.6 support is required.
+      No code changed.
+      Update to support netcore 3 and netstandard 2.1.
+      Update Remote Agency Base to 1.7.1.
     </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer</AssemblyName>
     <Configurations>Debug;Release</Configurations>
@@ -34,9 +34,13 @@ Note: Use version 1.6.0 when netFx 4.6 support is required.
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.6.1" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.7.1" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems" Label="Shared" />

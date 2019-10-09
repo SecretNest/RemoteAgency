@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0;netcoreapp3.0;netstandard2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.Base</PackageId>
     <Authors>Allen Cui</Authors>
@@ -10,14 +10,15 @@
     <Description>Base classes, interfaces and attributes of Remote Agency.</Description>
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
-    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.7.0</Version>
-    <AssemblyVersion>1.7.0.0</AssemblyVersion>
-    <FileVersion>1.7.0.0</FileVersion>
+    <Version>1.7.1</Version>
+    <AssemblyVersion>1.7.1.0</AssemblyVersion>
+    <FileVersion>1.7.1.0</FileVersion>
     <PackageReleaseNotes>
-Bug fix: Fix memory leaking when thread aborted while waiting response message.
+      No code changed.
+      Update to support netcore 3 and netstandard 2.1.
     </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
     <Configurations>Debug;Release</Configurations>
@@ -31,9 +32,13 @@ Bug fix: Fix memory leaking when thread aborted while waiting response message.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.6.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.6.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems" Label="Shared" />

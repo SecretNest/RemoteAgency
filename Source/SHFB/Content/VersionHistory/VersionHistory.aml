@@ -10,6 +10,15 @@
 			<content>
 				<list class="bullet">
           <listItem>
+            <para>Fix: Proxy generating exception on non-generic method.</para>
+            <para>Update to support netcore 3 and netstandard 2.1.</para>
+            <para>Update Roslyn to 3.3.1 for C# 8 and netcore3/netstandard 2.1 support.</para>
+            <para>Remote Agency: 1.7.1</para>
+            <para>Remote Agency Base: 1.7.1</para>
+            <para>DataContract Serializer: 1.7.1</para>
+            <para>DataContract Serializer Easy Encapsulation: 1.7.1</para>
+          </listItem>
+          <listItem>
             <para>Fix: Runtime error while using method with generic type parameter.</para>
             <para>Fix: Memory leaking when thread aborted while waiting response message.</para>
             <para>Remote Agency: 1.7.0</para>

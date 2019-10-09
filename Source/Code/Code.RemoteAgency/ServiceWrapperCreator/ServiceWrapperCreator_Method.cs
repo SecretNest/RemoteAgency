@@ -259,7 +259,7 @@ namespace SecretNest.RemoteAgency
             }
             else
             {
-                helperMethodName = null;
+                //helperMethodName = null;
                 parameter.ProcessMethodMessageSourceBuilder.Append(", out var ")
                     .Append(wrappedDeserializingExceptionValueName).Append(", out var ")
                     .Append(deserializingExceptionValueName).AppendLine(") as ")

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0;netcoreapp3.0;netstandard2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
@@ -13,14 +13,16 @@ Remote Agency can create proxy objects based on one interface file which should 
     <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
     <Product>Remote Agency</Product>
     <Copyright>Allen Cui</Copyright>
-    <PackageIconUrl>https://scegg.github.io/RemoteAgency/icons/Help.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.7.0</Version>
-    <AssemblyVersion>1.7.0.0</AssemblyVersion>
-    <FileVersion>1.7.0.0</FileVersion>
+    <Version>1.7.1</Version>
+    <AssemblyVersion>1.7.1.0</AssemblyVersion>
+    <FileVersion>1.7.1.0</FileVersion>
     <PackageReleaseNotes>
-Bug fix: Runtime error while using method with generic type parameter.
+      Bug Fix: Fix proxy generating bug on non-generic method.
+      Update to support netcore 3 and netstandard 2.1.
+      Update Roslyn to 3.3.1 for C# 8 and netcore3/netstandard 2.1 support.
     </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Debug;Release</Configurations>
@@ -33,11 +35,7 @@ Bug fix: Runtime error while using method with generic type parameter.
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
-    <DefineConstants>netcore</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0' OR '$(TargetFramework)'=='netcoreapp3.0' OR '$(TargetFramework)'=='netstandard2.0' OR '$(TargetFramework)'=='netstandard2.1'">
     <DefineConstants>netcore</DefineConstants>
   </PropertyGroup>
 
@@ -47,12 +45,16 @@ Bug fix: Runtime error while using method with generic type parameter.
   </ItemGroup>-->
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.7.0" />
+    <PackageReference Include="SecretNest.CSharpRoslynAgency" Version="1.3.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.Base" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
