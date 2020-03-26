@@ -6,7 +6,7 @@ SecretNest.RemoteAgency packages are licensed under MIT. You can copy and redist
 
 Home page: https://secretnest.info/RemoteAgency
 
-Documentation: https://scegg.github.io/RemoteAgency/
+Documentation: https://RemoteAgency.docs.secretnest.info
 
 # Nuget Packages
 |Package|Description|
