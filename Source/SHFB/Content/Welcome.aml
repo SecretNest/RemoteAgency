@@ -2,7 +2,11 @@
 <topic id="e572b781-93d2-4e52-afb1-8ce06607856b" revisionNumber="1">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
-			<para>Remote Agency is built for making the communicating among components in different computers easier.</para>
+			<para>
+        <externalLink>
+          <linkText>Remote Agency</linkText>
+          <linkUri>https://secretnest.info/RemoteAgency</linkUri>
+        </externalLink> is built for making the communicating among components in different computers easier.</para>
 			<para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
 			<para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <externalLink>
           <linkText>Remote Hub</linkText>
@@ -184,11 +188,11 @@
 			<content>
 				<para>SecretNest.RemoteAgency packages are licensed under <externalLink>
 					<linkText>MIT</linkText>
-					<linkUri>https://github.com/scegg/RemoteAgency/blob/master/LICENSE</linkUri>
+					<linkUri>https://github.com/SecretNest/RemoteAgency/blob/master/LICENSE</linkUri>
 				</externalLink>. You can copy and redistribute the material in any medium or format
 					for any purpose, even commercially. Source code is available at <externalLink>
 					<linkText>Github</linkText>
-					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+					<linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
 				</externalLink>.
 			</para>
 			</content>
@@ -198,7 +202,7 @@
 			<content>
 				<para>Issues, requests and source code: <externalLink>
 					<linkText>Github</linkText>
-					<linkUri>https://github.com/scegg/RemoteAgency</linkUri>
+					<linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
 				</externalLink>
 			</para>
 			</content>
