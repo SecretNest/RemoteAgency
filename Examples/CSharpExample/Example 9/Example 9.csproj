@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.7.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.7.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation" Version="1.7.1" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.7.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.7.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation" Version="1.7.2" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
   </ItemGroup>
 
