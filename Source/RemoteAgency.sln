@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{4A5E695F-4398-463D-9DF1-15ADA8908C1D}"
 EndProject
@@ -95,7 +95,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleFx 10", "Test\NetFx\
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems*{0b0c24a7-51cd-4704-a075-970f949f2e14}*SharedItemsImports = 5
+		Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems*{1d615dc0-f702-44dc-a6ac-886ef5e37951}*SharedItemsImports = 5
+		Code\Code.RemoteAgency\Code.RemoteAgency.projitems*{26657ae7-4a29-4ca5-ac7c-00f3fec921b1}*SharedItemsImports = 5
+		Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems*{628b903f-787a-47c2-b30a-b509bb31475b}*SharedItemsImports = 5
+		Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems*{6cc0844d-ea0d-402a-8280-62bf7ae4abda}*SharedItemsImports = 5
+		Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems*{7b38c03f-8c73-4523-9c3e-2c9f2fc404bc}*SharedItemsImports = 5
 		Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems*{a8abbe6e-300d-4cc6-8229-0ecf9d1c4813}*SharedItemsImports = 13
+		Code\Code.RemoteAgency\Code.RemoteAgency.projitems*{b102ef90-21d2-481b-8482-4eb1552c922a}*SharedItemsImports = 5
+		Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems*{bb72a6d3-aca9-4546-8274-d1facd498ea0}*SharedItemsImports = 5
 		Code\Code.RemoteAgency.Base\Code.RemoteAgency.Base.projitems*{cf2e1703-b782-4d53-9073-c57736cd9d0e}*SharedItemsImports = 13
 		Code\Code.RemoteAgency.DataContractSerializer\Code.RemoteAgency.DataContractSerializer.projitems*{e09861af-307f-4e62-828f-0af4b61c2eac}*SharedItemsImports = 13
 		Code\Code.RemoteAgency\Code.RemoteAgency.projitems*{fd102c4d-a934-424f-afa2-801697d70850}*SharedItemsImports = 13

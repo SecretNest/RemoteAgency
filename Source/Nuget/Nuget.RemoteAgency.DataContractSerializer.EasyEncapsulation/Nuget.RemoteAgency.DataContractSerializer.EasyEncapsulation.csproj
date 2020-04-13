@@ -1,29 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0;netcoreapp3.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
     <Product>Remote Agency</Product>
     <Description>Encapsulation including DataContractSerializer and RemoteAgency.</Description>
-    <PackageProjectUrl>https://scegg.github.io/RemoteAgency</PackageProjectUrl>
+    <PackageProjectUrl>https://secretnest.info/RemoteAgency</PackageProjectUrl>
     <Copyright>Allen Cui</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.7.1</Version>
-    <AssemblyVersion>1.7.1.0</AssemblyVersion>
-    <FileVersion>1.7.1.0</FileVersion>
+    <Version>1.7.2</Version>
+    <AssemblyVersion>1.7.2.0</AssemblyVersion>
+    <FileVersion>1.7.2.0</FileVersion>
     <PackageReleaseNotes>
-      No code changed.
-      Update to support netcore 3 and netstandard 2.1.
-      Update Remote Agency main library and DataContractSerializer to 1.7.1.
+      Refresh Nuget references.
+      Change dotnet core support to 2.1 LTS and 3.1 LTS.
     </PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation</AssemblyName>
     <Configurations>Debug;Release</Configurations>
-    <RepositoryUrl>https://github.com/scegg/RemoteAgency</RepositoryUrl>
+    <RepositoryUrl>https://github.com/SecretNest/RemoteAgency</RepositoryUrl>
     <PackageTags>RemoteAgency Remoting DataContract</PackageTags>
   </PropertyGroup>
   
@@ -33,12 +32,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SecretNest.RemoteAgency" Version="1.7.1" />
-    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.7.1" />
+    <PackageReference Include="SecretNest.RemoteAgency" Version="1.7.2" />
+    <PackageReference Include="SecretNest.RemoteAgency.DataContractSerializer" Version="1.7.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath=""/>
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <Import Project="..\..\Code\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation\Code.RemoteAgency.DataContractSerializer.EasyEncapsulation.projitems" Label="Shared" />

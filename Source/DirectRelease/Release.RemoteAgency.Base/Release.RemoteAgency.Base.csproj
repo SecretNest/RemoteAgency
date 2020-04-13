@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0;netcoreapp3.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.Base</PackageId>
     <Authors>Allen Cui</Authors>
@@ -14,9 +14,9 @@
     <PackageIconUrl></PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.7.1</Version>
-    <AssemblyVersion>1.7.1.0</AssemblyVersion>
-    <FileVersion>1.7.1.0</FileVersion>
+    <Version>1.7.2</Version>
+    <AssemblyVersion>1.7.2.0</AssemblyVersion>
+    <FileVersion>1.7.2.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
     <Configurations>Debug;Release</Configurations>
@@ -27,8 +27,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.6.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.6.0" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
 
