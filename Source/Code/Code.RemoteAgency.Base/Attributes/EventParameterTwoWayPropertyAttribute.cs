@@ -7,7 +7,10 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies a parameter of the event contains a property or field which value should be send back to the caller.
     /// </summary>
-    /// <remarks>You can also use <see cref="ParameterTwoWayPropertyAttribute"/> in declaration of the delegate related to this event, which has lower priority.</remarks>
+    /// <remarks>You can also use <see cref="ParameterTwoWayPropertyAttribute"/> in declaration of the delegate related to this event, which has lower priority.
+    /// <para>When a parameter contains properties or fields which will be changed on the target site and need to be sent back to the caller, use <see cref="EventParameterTwoWayPropertyAttribute"/> or <see cref="ParameterTwoWayPropertyAttribute"/> on related properties.</para>
+    /// <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="EventParameterTwoWayPropertyAttribute"/> or <see cref="ParameterTwoWayPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
+    /// </remarks>
     /// <seealso cref="ParameterTwoWayPropertyAttribute"/>
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class EventParameterTwoWayPropertyAttribute : Attribute
