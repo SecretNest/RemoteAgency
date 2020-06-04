@@ -235,7 +235,7 @@ namespace SecretNest.RemoteAgency
                 .Append(resultValueName).Append(returnEntityValueBasedConstructorCallerCode)
                 .Append(serializedResultValueName).Append(" = ")
                 .Append(parameter.SerializingHelperName).Append(".SerializeWithExceptionTolerance(")
-                .Append(resultValueName).Append(", typeof(").Append(returnEntityName).AppendLine("), out var ")
+                .Append(resultValueName).Append(", typeof(").Append(returnEntityName).Append("), out var ")
                 .Append(serializingExceptionValueName).Append(");\nif (")
                 .Append(serializingExceptionValueName).AppendLine(" != null)\n{\nvar ")
                 .Append(wrappedSerializingExceptionValueName).Append(" = ").Append(parameter.WrappedExceptionTypeName).Append(".Create(").Append(serializingExceptionValueName).AppendLine(");");
