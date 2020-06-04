@@ -296,7 +296,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Sets the status to disconnected.
         /// </summary>
-        /// <param name="force">True: break all waiting messages (throwing timeout exceptions to all messages); False: wait for processing of all messages finished.</param>
+        /// <param name="force"><see langword="true"/>: break all waiting messages (throwing timeout exceptions to all messages); <see langword="false"/>: wait for processing of all messages finished.</param>
         public void Disconnect(bool force)
         {
             lock(ioStateLock)
