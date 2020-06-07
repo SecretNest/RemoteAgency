@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Description></Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Product>Remote Agency</Product>
+    <Copyright>Allen Cui</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.1' OR '$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='netstandard2.0' OR '$(TargetFramework)'=='netstandard2.1'">
+    <DefineConstants>netcore</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
+
+</Project>
+
+

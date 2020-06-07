@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{AC0D8FE4-885F-4776-8B5C-179EED825604}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectRelease", "DirectRelease", "{9AC2CB1C-D52F-4A2A-8BB1-1C79645E2348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{9CD0A745-394A-463B-A203-B666E26BB287}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{14151C5B-65C4-46EC-A2F9-BC723244313F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.Abstraction", "Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.shproj", "{B16ACFBC-D798-4629-9225-F8FB12F15AFC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency", "Code.RemoteAgency\Code.RemoteAgency.shproj", "{23A75AF3-8979-45F8-A7B3-984CEF6C3E39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectRelease.RemoteAgency", "DirectRelease.RemoteAgency\DirectRelease.RemoteAgency.csproj", "{3893D742-0C28-4562-915A-8656196A3B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectRelease.RemoteAgency.Abstraction", "DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj", "{11B3F107-2F03-4A21-9241-723F1642A3FA}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{23a75af3-8979-45f8-a7b3-984cef6c3e39}*SharedItemsImports = 13
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3893D742-0C28-4562-915A-8656196A3B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3893D742-0C28-4562-915A-8656196A3B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3893D742-0C28-4562-915A-8656196A3B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3893D742-0C28-4562-915A-8656196A3B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B16ACFBC-D798-4629-9225-F8FB12F15AFC} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
+		{23A75AF3-8979-45F8-A7B3-984CEF6C3E39} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
+		{3893D742-0C28-4562-915A-8656196A3B7C} = {9AC2CB1C-D52F-4A2A-8BB1-1C79645E2348}
+		{11B3F107-2F03-4A21-9241-723F1642A3FA} = {9AC2CB1C-D52F-4A2A-8BB1-1C79645E2348}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}
+	EndGlobalSection
+EndGlobal
