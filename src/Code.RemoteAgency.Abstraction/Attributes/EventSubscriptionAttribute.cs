@@ -8,23 +8,23 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the event subscription mode.
     /// </summary>
-    /// <remarks>The default setting is <see cref="EventSubscritionMode.Dynamic"/> if this attribute absents.</remarks>
-    /// <seealso cref="EventSubscritionMode"/>
+    /// <remarks>The default setting is <see cref="EventSubscriptionMode"/>.Dynamic if this attribute absents.</remarks>
+    /// <seealso cref="EventSubscriptionMode"/>
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = false)]
     public class EventSubscriptionAttribute : Attribute
     {
         /// <summary>
         /// Event subscription mode.
         /// </summary>
-        public EventSubscritionMode EventSubscritionMode { get; }
+        public EventSubscriptionMode EventSubscriptionMode { get; }
 
         /// <summary>
         /// Initializes an instance of the EventSubscriptionAttribute.
         /// </summary>
-        /// <param name="eventSubscritionMode">Event subscription mode.</param>
-        public EventSubscriptionAttribute(EventSubscritionMode eventSubscritionMode = EventSubscritionMode.Dynamic)
+        /// <param name="eventSubscriptionMode">Event subscription mode.</param>
+        public EventSubscriptionAttribute(EventSubscriptionMode eventSubscriptionMode = EventSubscriptionMode.Dynamic)
         {
-            EventSubscritionMode = eventSubscritionMode;
+            EventSubscriptionMode = eventSubscriptionMode;
         }
     }
 
@@ -33,7 +33,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <seealso cref="EventSubscriptionAttribute"/>
     [DataContract(Namespace = "")]
-    public enum EventSubscritionMode
+    public enum EventSubscriptionMode
     {
         /// <summary>
         /// Subscribe the event on proxy initializing. Unsubscribe on disposing.

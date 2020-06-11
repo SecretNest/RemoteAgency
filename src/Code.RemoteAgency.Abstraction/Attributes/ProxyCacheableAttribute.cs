@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <remarks>Cache will not be used while this attribute absent.</remarks>
     /// <seealso cref="LoadCachedAssemblyCallback{TSerialized, TEntityBase}"/>
     /// <seealso cref="SaveCachedAssemblyCallback{TSerialized, TEntityBase}"/>
-    /// <seealso cref="IAssemblyCacheOperatings{TSerialized, TEntityBase}"/>
+    /// <seealso cref="IAssemblyCacheOperating{TSerialized, TEntityBase}"/>
     [AttributeUsage(AttributeTargets.Interface, Inherited = false, AllowMultiple = false)]
     public class ProxyCacheableAttribute : Attribute
     {

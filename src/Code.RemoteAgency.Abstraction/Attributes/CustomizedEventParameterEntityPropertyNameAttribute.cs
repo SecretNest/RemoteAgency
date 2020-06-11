@@ -61,8 +61,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <remarks>This comparer is based on <see cref="ParameterName"/>.</remarks>
         public override bool Equals(object obj)
         {
-            var target = obj as CustomizedEventParameterEntityPropertyNameAttribute;
-            return target != null && target.ParameterName == ParameterName;
+            return obj is CustomizedEventParameterEntityPropertyNameAttribute target && target.ParameterName == ParameterName;
         }
     }
 }

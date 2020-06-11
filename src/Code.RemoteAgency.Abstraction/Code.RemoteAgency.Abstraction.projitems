@@ -13,7 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedAssetNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOneWayOperatingAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOperatingTimedoutTimeAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOperatingTimeoutTimeAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedParameterEntityAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedParameterEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedPropertyGetRequestEntityAttribute.cs" />
@@ -37,14 +37,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ServiceWrapperCacheableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IAssemblyCacheOperatings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IAssemblyCacheOperating.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MessageInstanceMetadata.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PackingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SerializingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WrappedException.cs" />
   </ItemGroup>
 </Project>

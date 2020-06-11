@@ -11,8 +11,9 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="T">Entity base</typeparam>
     public class Responder<T> : IDisposable // where TEntityBase : class
+        where T : IRemoteAgencyMessage
     {
-        ConcurrentDictionary<Guid, ResponderItem> responders = new ConcurrentDictionary<Guid, ResponderItem>();
+        readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ConcurrentDictionary<Guid, ResponderItem>();
 
         /// <summary>
         /// Should be called while the waiting of response is timed out.
@@ -27,8 +28,7 @@ namespace SecretNest.RemoteAgency
         /// <remarks>Will unblock the calling of <see cref="GetResult(Guid, int)"/>.</remarks>
         public void SetResult(Guid messageId, T value)
         {
-            ResponderItem item;
-            if (responders.TryGetValue(messageId, out item))
+            if (_responders.TryGetValue(messageId, out var item))
             {
                 item.SetResult(value);
             }
@@ -41,25 +41,9 @@ namespace SecretNest.RemoteAgency
         /// <remarks>Will unblock the calling of <see cref="GetResult(Guid, int)"/>.</remarks>
         public void SetDefaultResult(Guid messageId)
         {
-            ResponderItem item;
-            if (responders.TryGetValue(messageId, out item))
+            if (_responders.TryGetValue(messageId, out var item))
             {
                 item.SetResult(default(T));
-            }
-        }
-
-        /// <summary>
-        /// Sends a exception to the original request.
-        /// </summary>
-        /// <param name="messageId">Id of the message.</param>
-        /// <param name="exception">Exception object.</param>
-        /// <remarks>Will raise the exception represented by <paramref name="exception"/> in the calling of <see cref="GetResult(Guid, int)"/>.</remarks>
-        public void SetException(Guid messageId, WrappedException exception)
-        {
-            ResponderItem item;
-            if (responders.TryGetValue(messageId, out item))
-            {
-                item.SetException(exception);
             }
         }
 
@@ -74,18 +58,17 @@ namespace SecretNest.RemoteAgency
         /// <remarks>The instance of the mapping will be removed after this calling end.</remarks>
         public T GetResult(Guid messageId, int millisecondsTimeout)
         {
-            ResponderItem item;
-            if (responders.TryGetValue(messageId, out item))
+            if (_responders.TryGetValue(messageId, out var item))
             {
                 if (item.GetResult(millisecondsTimeout, out var value))
                 {
-                    responders.TryRemove(messageId, out var removed);
+                    _responders.TryRemove(messageId, out var removed);
                     removed.RemoveItem();
                     return value;
                 }
                 else
                 {
-                    responders.TryRemove(messageId, out var removed);
+                    _responders.TryRemove(messageId, out var removed);
                     removed.RemoveItem();
                     MessageWaitingTimedOutCallback(messageId);
                     throw new TimeoutException();
@@ -101,10 +84,10 @@ namespace SecretNest.RemoteAgency
         /// Prepares for receiving response.
         /// </summary>
         /// <param name="messageId">Id of the message.</param>
-        /// <remarks>This should be called before calling <see cref="SetDefaultResult(Guid)"/>, <see cref="SetResult(Guid, T)"/> and <see cref="SetException(Guid, WrappedException)"/>.</remarks>
+        /// <remarks>This should be called before calling <see cref="SetDefaultResult(Guid)"/> and <see cref="SetResult(Guid, T)"/>.</remarks>
         public void Prepare(Guid messageId)
         {
-            responders.TryAdd(messageId, new ResponderItem());
+            _responders.TryAdd(messageId, new ResponderItem());
         }
 
         /// <summary>
@@ -114,53 +97,30 @@ namespace SecretNest.RemoteAgency
         /// <remarks>This method just remove the matching from managing, will not unblock the <see cref="GetResult(Guid, int)"/> calling.</remarks>
         public void Remove(Guid messageId)
         {
-            responders.TryRemove(messageId, out var removed);
+            _responders.TryRemove(messageId, out var removed);
             removed.RemoveItem();
         }
 
-        //public void SetExceptionAndRemove(Guid messageId, WrappedException exception)
-        //{
-        //    ResponderItem item;
-        //    if (responders.TryRemove(messageId, out item))
-        //    {
-        //        item.SetException(exception);
-        //    }
-        //}
-
         class ResponderItem
         {
-            T value;
-            WrappedException exception;
+            private T _value;
 
-            ManualResetEvent waitHandle = new ManualResetEvent(false);
+            ManualResetEvent _waitHandle = new ManualResetEvent(false);
 
             public void SetResult(T value)
             {
-                this.value = value;
-                waitHandle?.Set();
-            }
-
-            public void SetException(WrappedException exception)
-            {
-                this.exception = exception;
-                waitHandle?.Set();
+                _value = value;
+                _waitHandle?.Set();
             }
 
             public bool GetResult(int millisecondsTimeout, out T value)
             {
                 try
                 {
-                    if (waitHandle.WaitOne(millisecondsTimeout))
+                    if (_waitHandle.WaitOne(millisecondsTimeout))
                     {
-                        if (exception != null)
-                        {
-                            throw exception.ExceptionGeneric;
-                        }
-                        else
-                        {
-                            value = this.value;
-                            return true;
-                        }
+                        value = _value;
+                        return true;
                     }
                     else
                     {
@@ -170,20 +130,18 @@ namespace SecretNest.RemoteAgency
                 }
                 finally
                 {
-                    waitHandle = null;
-                    var copy = waitHandle;
+                    _waitHandle = null;
+                    var copy = _waitHandle;
                     copy?.Dispose();
                 }
             }
 
             public void RemoveItem() //will not unblock
             {
-                if (waitHandle != null)
-                {
-                    waitHandle = null;
-                    var copy = waitHandle;
-                    copy?.Dispose();
-                }
+                if (_waitHandle == null) return;
+                _waitHandle = null;
+                var copy = _waitHandle;
+                copy?.Dispose();
             }
         }
 
@@ -200,15 +158,12 @@ namespace SecretNest.RemoteAgency
             {
                 if (disposing)
                 {
-                    foreach (var item in responders)
+                    foreach (var item in _responders)
                     {
                         item.Value.RemoveItem();
                     }
-                    responders.Clear();
+                    _responders.Clear();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }
@@ -221,8 +176,6 @@ namespace SecretNest.RemoteAgency
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
         #endregion
     }

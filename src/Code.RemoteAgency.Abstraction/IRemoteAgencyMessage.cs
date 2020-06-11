@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SecretNest.RemoteAgency
@@ -7,8 +8,7 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Defines the common properties contained in messages.
     /// </summary>
-    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-    public interface IRemoteAgencyMessage<TSerialized>
+    public interface IRemoteAgencyMessage
     {
         /// <summary>
         /// Site id of the source Remote Agency manager
@@ -45,11 +45,69 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Exception object
         /// </summary>
-        WrappedException WrappedException { get; set; }
+        Exception Exception { get; set; }
 
         /// <summary>
         /// Whether this message is one way (do not need any response)
         /// </summary>
         bool IsOneWay { get; set; }
+    }
+
+    /// <summary>
+    /// Defines the common properties contained in messages.
+    /// </summary>
+    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
+    public interface IRemoteAgencyMessage<out TSerialized> : IRemoteAgencyMessage
+    {
+        /// <summary>
+        /// Serializes message into serialized type.
+        /// </summary>
+        /// <returns>Serialized data.</returns>
+        TSerialized Serialize();
+    }
+
+
+    /// <summary>
+    /// Contains a list of message type
+    /// </summary>
+    [Serializable]
+    [DataContract(Namespace = "")]
+    public enum MessageType
+    {
+        /// <summary>
+        /// Declares this message is related to a method calling or the returning of it.
+        /// </summary>
+        [EnumMember]
+        Method,
+        /// <summary>
+        /// Declares this message is related to adding event handler or the result of it.
+        /// </summary>
+        [EnumMember]
+        EventAdd,
+        /// <summary>
+        /// Declares this message is related to removing event handler or the result of it.
+        /// </summary>
+        [EnumMember]
+        EventRemove,
+        /// <summary>
+        /// Declares this message is related to an event raised or the returning of it.
+        /// </summary>
+        [EnumMember]
+        Event,
+        /// <summary>
+        /// Declares this message is related to getting value of a property or the returning of it.
+        /// </summary>
+        [EnumMember]
+        PropertyGet,
+        /// <summary>
+        /// Declares this message is related to setting value of a property or the result of it.
+        /// </summary>
+        [EnumMember]
+        PropertySet,
+        /// <summary>
+        /// Declares this message is a system reserved message.
+        /// </summary>
+        [EnumMember]
+        SpecialCommand
     }
 }

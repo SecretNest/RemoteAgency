@@ -18,7 +18,8 @@ namespace SecretNest.RemoteAgency
     /// <item><term>The type of class of service object.</term><description>When this request is related to a service wrapper.</description></item></list></remarks>
     /// <seealso cref="Attributes.ProxyCacheableAttribute"/>
     /// <seealso cref="Attributes.ServiceWrapperCacheableAttribute"/>
-    public delegate Assembly LoadCachedAssemblyCallback<TSerialized, TEntityBase>(Type type, out bool disposeRequired);
+    public delegate Assembly LoadCachedAssemblyCallback<TSerialized, TEntityBase>(Type type, out bool disposeRequired)
+        where TEntityBase : class, IRemoteAgencyMessage<TSerialized>, new();
 
     /// <summary>
     /// Saves the assembly to cache if necessary.
@@ -33,7 +34,8 @@ namespace SecretNest.RemoteAgency
     /// <item><term>The type of class of service object.</term><description>When this request is related to a service wrapper.</description></item></list></remarks>
     /// <seealso cref="Attributes.ProxyCacheableAttribute"/>
     /// <seealso cref="Attributes.ServiceWrapperCacheableAttribute"/>
-    public delegate void SaveCachedAssemblyCallback<TSerialized, TEntityBase>(Type type, bool disposeRequired, Assembly assembly);
+    public delegate void SaveCachedAssemblyCallback<TSerialized, TEntityBase>(Type type, bool disposeRequired, Assembly assembly)
+        where TEntityBase : class, IRemoteAgencyMessage<TSerialized>, new();
 
     /// <summary>
     /// Saves the assembly in binary to cache if necessary.
@@ -48,7 +50,8 @@ namespace SecretNest.RemoteAgency
     /// <item><term>The type of class of service object.</term><description>When this request is related to a service wrapper.</description></item></list></remarks>
     /// <seealso cref="Attributes.ProxyCacheableAttribute"/>
     /// <seealso cref="Attributes.ServiceWrapperCacheableAttribute"/>
-    public delegate void SaveCachedAssemblyImageCallback<TSerialized, TEntityBase>(Type type, bool disposeRequired, byte[] image);
+    public delegate void SaveCachedAssemblyImageCallback<TSerialized, TEntityBase>(Type type, bool disposeRequired, byte[] image)
+        where TEntityBase : class, IRemoteAgencyMessage<TSerialized>, new();
 
     /// <summary>
     /// Represents a object that can support the assembly caching function.
@@ -60,7 +63,8 @@ namespace SecretNest.RemoteAgency
     /// <seealso cref="LoadCachedAssemblyCallback{TSerialized, TEntityBase}"/>
     /// <seealso cref="SaveCachedAssemblyCallback{TSerialized, TEntityBase}"/>
     /// <seealso cref="SaveCachedAssemblyImageCallback{TSerialized, TEntityBase}"/>
-    public interface IAssemblyCacheOperatings<TSerialized, TEntityBase> where TEntityBase : class
+    public interface IAssemblyCacheOperating<TSerialized, TEntityBase>
+        where TEntityBase : class, IRemoteAgencyMessage<TSerialized>, new()
     {
         /// <summary>
         /// Should be called when an assembly cache querying is undertaken.

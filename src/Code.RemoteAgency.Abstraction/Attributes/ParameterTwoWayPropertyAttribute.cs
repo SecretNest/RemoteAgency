@@ -119,8 +119,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <remarks>This comparer is based on <see cref="IsSimpleMode"/> and <see cref="ParameterProperty"/>.</remarks>
         public override bool Equals(object obj)
         {
-            var target = obj as ParameterTwoWayPropertyAttribute;
-            return target != null && target.IsSimpleMode == IsSimpleMode && target.ParameterProperty == ParameterProperty;
+            return obj is ParameterTwoWayPropertyAttribute target && target.IsSimpleMode == IsSimpleMode && target.ParameterProperty == ParameterProperty;
         }
     }
 }

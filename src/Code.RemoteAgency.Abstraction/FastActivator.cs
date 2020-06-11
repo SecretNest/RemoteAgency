@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     public static class FastActivator
     {
-        static ConcurrentDictionary<Type, Func<object>> constructorCache = new ConcurrentDictionary<Type, Func<object>>();
+        static readonly ConcurrentDictionary<Type, Func<object>> constructorCache = new ConcurrentDictionary<Type, Func<object>>();
 
         /// <summary>
         /// Creates an instance of the type specified
@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
 
         internal static object BuildConstructorDelegate(Type type, Type delegateType, Type[] argTypes)
         {
-            var dynMethod = new DynamicMethod(string.Format("FastActivatorMethod_{0}_{1}", type.Name, argTypes.Length), type, argTypes, type);
+            var dynMethod = new DynamicMethod($"FastActivatorMethod_{type.Name}_{argTypes.Length}", type, argTypes, type);
             ILGenerator ilGen = dynMethod.GetILGenerator();
             for (int argIdx = 0; argIdx < argTypes.Length; argIdx++)
             {
@@ -49,7 +49,7 @@ namespace SecretNest.RemoteAgency
     /// <typeparam name="TArg">Type of the argument of the constructor.</typeparam>
     public static class FastActivator<TArg>
     {
-        static ConcurrentDictionary<Type, Func<TArg, object>> constructorCache = new ConcurrentDictionary<Type, Func<TArg, object>>();
+        private static readonly ConcurrentDictionary<Type, Func<TArg, object>> ConstructorCache = new ConcurrentDictionary<Type, Func<TArg, object>>();
         /// <summary>
         /// Creates an instance of the type specified
         /// </summary>
@@ -62,7 +62,7 @@ namespace SecretNest.RemoteAgency
         }
         static Func<TArg, object> GetConstructor(Type objType, Type[] argTypes)
         {
-            return constructorCache.GetOrAdd(objType, i => (Func<TArg, object>)FastActivator.BuildConstructorDelegate(i, typeof(Func<TArg, object>), argTypes));
+            return ConstructorCache.GetOrAdd(objType, i => (Func<TArg, object>)FastActivator.BuildConstructorDelegate(i, typeof(Func<TArg, object>), argTypes));
         }
     }
 }

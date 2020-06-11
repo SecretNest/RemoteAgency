@@ -7,8 +7,8 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies a parameter of the event should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.
     /// </summary>
-    /// <remarks>You can also use <see cref="EventParameterIgnoredAttribute"/> in declaration of the delegate related to this event, which has lower priority.</remarks>
-    /// <seealso cref="EventParameterIgnoredAttribute"/>
+    /// <remarks>You can also use <see cref="ParameterIgnoredAttribute"/> in declaration of the delegate related to this event, which has lower priority.</remarks>
+    /// <seealso cref="ParameterIgnoredAttribute"/>
     /// <seealso cref="ParameterTwoWayPropertyAttribute"/>
     /// <seealso cref="EventParameterTwoWayPropertyAttribute"/>
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
@@ -60,8 +60,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <remarks>This comparer is based on <see cref="ParameterName"/>.</remarks>
         public override bool Equals(object obj)
         {
-            var target = obj as EventParameterIgnoredAttribute;
-            return target != null && target.ParameterName == ParameterName;
+            return obj is EventParameterIgnoredAttribute target && target.ParameterName == ParameterName;
         }
     }
 }

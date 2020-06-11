@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <seealso cref="MessageWaitingTimedOutCallback"/>
     /// <seealso cref="ICommunicate{TSerialized}.MessageWaitingTimedOutCallback"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public class CustomizedOperatingTimedoutTimeAttribute : Attribute
+    public class CustomizedOperatingTimeoutTimeAttribute : Attribute
     {
         /// <summary>
         /// The length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.
@@ -26,10 +26,10 @@ namespace SecretNest.RemoteAgency.Attributes
         public int MillisecondsTimeout { get; }
 
         /// <summary>
-        /// Initializes an instance of the CustomizedOperatingTimedoutTimeAttribute.
+        /// Initializes an instance of the CustomizedOperatingTimeoutTimeAttribute.
         /// </summary>
         /// <param name="millisecondsTimeout">The length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.</param>
-        public CustomizedOperatingTimedoutTimeAttribute(int millisecondsTimeout)
+        public CustomizedOperatingTimeoutTimeAttribute(int millisecondsTimeout)
         {
             MillisecondsTimeout = millisecondsTimeout;
         }
