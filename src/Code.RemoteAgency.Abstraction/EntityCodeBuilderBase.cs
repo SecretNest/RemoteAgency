@@ -28,7 +28,27 @@ namespace SecretNest.RemoteAgency
         /// <returns>Class code.</returns>
         public abstract string BuildEntity(string className, string entityBaseTypeFullName, string messagePackageInterfaceTypeFullName,
             List<SerializingBehaviorAttributeBase> interfaceLevelAttributes, List<SerializingBehaviorAttributeBase> assetLevelAttributes, List<SerializingBehaviorAttributeBase> delegateLevelAttributes,
-            IEnumerable<ValueMapping> values, Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor,
+            List<ValueMapping> values, Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor,
             StringBuilder sourceCodeBuilder, out string valueBasedConstructorCallerCode);
+
+        /// <summary>
+        /// Gets the type of the base class of attributes which are used to mark metadata on interface level.
+        /// </summary>
+        public abstract Type InterfaceLevelAttributeBaseType { get; }
+
+        /// <summary>
+        /// Gets the type of the base class of attributes which are used to mark metadata on asset level.
+        /// </summary>
+        public abstract Type AssetLevelAttributeBaseType { get; }
+
+        /// <summary>
+        /// Gets the type of the base class of attributes which are used to mark metadata on delegate level. Only works with processing events.
+        /// </summary>
+        public abstract Type DelegateLevelAttributeBaseType { get; }
+
+        /// <summary>
+        /// Gets the type of the base class of attributes which are used to mark metadata on parameter level.
+        /// </summary>
+        public abstract Type ParameterLevelAttributeBaseType { get; }
     }
 }

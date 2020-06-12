@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     public static class FastActivator
     {
-        static readonly ConcurrentDictionary<Type, Func<object>> constructorCache = new ConcurrentDictionary<Type, Func<object>>();
+        static readonly ConcurrentDictionary<Type, Func<object>> ConstructorCache = new ConcurrentDictionary<Type, Func<object>>();
 
         /// <summary>
         /// Creates an instance of the type specified
@@ -26,7 +26,7 @@ namespace SecretNest.RemoteAgency
 
         static Func<object> GetConstructor(Type objType)
         {
-            return constructorCache.GetOrAdd(objType, i => (Func<object>)BuildConstructorDelegate(i, typeof(Func<object>), new Type[] { }));
+            return ConstructorCache.GetOrAdd(objType, i => (Func<object>)BuildConstructorDelegate(i, typeof(Func<object>), new Type[] { }));
         }
 
         internal static object BuildConstructorDelegate(Type type, Type delegateType, Type[] argTypes)
@@ -37,7 +37,7 @@ namespace SecretNest.RemoteAgency
             {
                 ilGen.Emit(OpCodes.Ldarg, argIdx);
             }
-            ilGen.Emit(OpCodes.Newobj, type.GetTypeInfo().GetConstructor(argTypes));
+            ilGen.Emit(OpCodes.Newobj, type.GetTypeInfo().GetConstructor(argTypes) ?? throw new InvalidOperationException());
             ilGen.Emit(OpCodes.Ret);
             return dynMethod.CreateDelegate(delegateType);
         }

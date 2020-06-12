@@ -35,10 +35,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />
   </ItemGroup>
 
   <Import Project="..\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
+
+  <Import Project="..\Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems" Label="Shared" />
 
 </Project>
 

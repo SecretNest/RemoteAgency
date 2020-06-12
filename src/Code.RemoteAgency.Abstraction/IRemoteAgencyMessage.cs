@@ -58,15 +58,8 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     public interface IRemoteAgencyMessage<out TSerialized> : IRemoteAgencyMessage
-    {
-        /// <summary>
-        /// Serializes message into serialized type.
-        /// </summary>
-        /// <returns>Serialized data.</returns>
-        TSerialized Serialize();
-    }
-
-
+    { }
+    
     /// <summary>
     /// Contains a list of message type
     /// </summary>
