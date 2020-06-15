@@ -21,13 +21,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectRelease.RemoteAgency.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.JsonSerializer", "Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.shproj", "{38520679-A9FE-45CC-9520-32CBCB1713E2}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.BinarySerializer", "Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.shproj", "{69B6869B-FD3A-4904-A8FE-4B77874B6F74}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{23a75af3-8979-45f8-a7b3-984cef6c3e39}*SharedItemsImports = 13
 		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{38520679-a9fe-45cc-9520-32cbcb1713e2}*SharedItemsImports = 13
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{69b6869b-fd3a-4904-a8fe-4b77874b6f74}*SharedItemsImports = 13
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,7 @@ Global
 		{3893D742-0C28-4562-915A-8656196A3B7C} = {9AC2CB1C-D52F-4A2A-8BB1-1C79645E2348}
 		{11B3F107-2F03-4A21-9241-723F1642A3FA} = {9AC2CB1C-D52F-4A2A-8BB1-1C79645E2348}
 		{38520679-A9FE-45CC-9520-32CBCB1713E2} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
+		{69B6869B-FD3A-4904-A8FE-4B77874B6F74} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}

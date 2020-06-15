@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace SecretNest.RemoteAgency.JsonSerializer
+namespace SecretNest.RemoteAgency
 {
     static class CodeBuilderHelper
     {
