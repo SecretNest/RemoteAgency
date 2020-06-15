@@ -9,6 +9,7 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssetNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedAssetNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
@@ -42,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SerializingHelperBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeCreatingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
   </ItemGroup>
 </Project>
