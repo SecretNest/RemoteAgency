@@ -8,19 +8,18 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// The exception that is thrown when there is exception thrown from proxy or service wrapper type creating procedure.
     /// </summary>
-    [Serializable]
     public class TypeCreatingException : Exception
     {
         /// <summary>
-        /// Collection of exceptions.
+        /// Exceptions.
         /// </summary>
-        public IReadOnlyCollection<TypeCreatingExceptionRecord> Records { get; }
+        public IEnumerable<TypeCreatingExceptionRecord> Records { get; }
 
         /// <summary>
         /// Initializes an instance of the TypeCreatingException.
         /// </summary>
-        /// <param name="records">Collection of exceptions.</param>
-        internal TypeCreatingException(IReadOnlyCollection<TypeCreatingExceptionRecord> records)
+        /// <param name="records">Exceptions.</param>
+        public TypeCreatingException(IEnumerable<TypeCreatingExceptionRecord> records)
         {
             Records = records;
         }
@@ -37,7 +36,6 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Contains one exception thrown from type creating procedure.
     /// </summary>
-    [Serializable]
     public class TypeCreatingExceptionRecord
     {
         /// <summary>

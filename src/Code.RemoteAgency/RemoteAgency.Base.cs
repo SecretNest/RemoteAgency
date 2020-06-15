@@ -6,7 +6,12 @@ namespace SecretNest.RemoteAgency
 {
     public abstract partial class RemoteAgency
     {
+        protected RemoteAgency()
+        {
 
+
+            InitializeAssemblyBuilder();
+        }
     }
 
     public partial class RemoteAgency<TSerialized, TEntityBase> : IDisposable

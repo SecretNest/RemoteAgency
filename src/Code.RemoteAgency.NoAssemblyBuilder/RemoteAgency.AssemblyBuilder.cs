@@ -6,7 +6,11 @@ namespace SecretNest.RemoteAgency
 {
     public abstract partial class RemoteAgency
     {
-        bool BuildAssembly(string assemblyName, IEnumerable<string> sourceCode, IEnumerable<AssemblyReference> references, out byte[] assemblyImage, out TypeCreatingException buidlingError)
+        void InitializeAssemblyBuilder()
+        {
+        }
+
+        bool BuildAssembly(string assemblyName, IEnumerable<string> sourceCode, IEnumerable<AssemblyReference> references, out byte[] assemblyImage, out TypeCreatingException buildingError)
         {
             throw new NotSupportedException("Neat version of RemoteAgency does not shipped with built-in assembly builder.");
         }
