@@ -33,7 +33,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterTwoWayPropertyAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\SerializingBehaviorAttributeBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />

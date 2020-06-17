@@ -8,7 +8,6 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Represents a mapping relation of a parameter and a property.
     /// </summary>
-    /// <seealso cref="SerializingBehaviorAttributeBase"/>
     public class ValueMapping
     {
         /// <summary>
@@ -32,14 +31,16 @@ namespace SecretNest.RemoteAgency
         public string PropertyName { get; }
 
         /// <summary>
-        /// Metadata objects marked with derived class of <see cref="SerializingBehaviorAttributeBase"/> in parameter level.
+        /// Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
         /// </summary>
-        public IReadOnlyList<SerializingBehaviorAttributeBase> Attributes { get; }
+        /// <remarks>This will contains nothing when <see cref="EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> is set to null.</remarks>
+        public IReadOnlyList<Attribute> Attributes { get; }
 
         /// <summary>
-        /// Metadata objects marked with derived class of <see cref="SerializingBehaviorAttributeBase"/> in parameter of the delegate of event. Only available when processing events.
+        /// Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> in parameter of the delegate of event. Only available when processing events.
         /// </summary>
-        public IReadOnlyList<SerializingBehaviorAttributeBase> DelegateAttributes { get; }
+        /// <remarks>This will contains nothing when <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set to null.</remarks>
+        public IReadOnlyList<Attribute> DelegateAttributes { get; }
 
         /// <summary>
         /// Initializes a new instance of the ValueMapping.
@@ -48,9 +49,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="propertyName">Name of the property in entity</param>
         /// <param name="typeName">Full name of the type</param>
         /// <param name="nameInCode">Name which can be represent in code</param>
-        /// <param name="attributes">Metadata objects marked with derived class of <see cref="SerializingBehaviorAttributeBase"/> in parameter level.</param>
-        /// <param name="delegateAttributes">Metadata objects marked with derived class of <see cref="SerializingBehaviorAttributeBase"/> in parameter of the delegate of event. Only available when processing events.</param>
-        public ValueMapping(string uniqueName, string propertyName, string typeName, string nameInCode, IReadOnlyList<SerializingBehaviorAttributeBase> attributes, IReadOnlyList<SerializingBehaviorAttributeBase> delegateAttributes)
+        /// <param name="attributes">Metadata objects marked with derived class of <see cref="Attribute"/> in parameter level.</param>
+        /// <param name="delegateAttributes">Metadata objects marked with derived class of <see cref="Attribute"/> in parameter of the delegate of event. Only available when processing events.</param>
+        public ValueMapping(string uniqueName, string propertyName, string typeName, string nameInCode, IReadOnlyList<Attribute> attributes, IReadOnlyList<Attribute> delegateAttributes)
         {
             TypeName = typeName;
             UniqueName = uniqueName;

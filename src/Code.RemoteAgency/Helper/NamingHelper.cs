@@ -82,6 +82,7 @@ namespace SecretNest.RemoteAgency.Helper
             return result;
         }
     }
+
     internal class GetTypeFullNameParameter
     {
         public readonly Dictionary<Type, string> UsedTypes;

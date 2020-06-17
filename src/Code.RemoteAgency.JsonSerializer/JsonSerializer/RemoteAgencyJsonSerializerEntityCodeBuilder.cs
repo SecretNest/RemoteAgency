@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
     {
         /// <inheritdoc />
         public override string BuildEntity(string className, string entityBaseTypeFullName, string messagePackageInterfaceTypeFullName,
-            List<SerializingBehaviorAttributeBase> interfaceLevelAttributes, List<SerializingBehaviorAttributeBase> assetLevelAttributes, List<SerializingBehaviorAttributeBase> delegateLevelAttributes, List<ValueMapping> values,
+            List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes, List<Attribute> delegateLevelAttributes, List<ValueMapping> values,
             Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor, StringBuilder sourceCodeBuilder,
             out string valueBasedConstructorCallerCode)
         {
