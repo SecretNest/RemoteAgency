@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,6 +12,11 @@ namespace SecretNest.RemoteAgency
 {
     public abstract partial class RemoteAgency
     {
+        
+#if !net461
+        static Lazy<TrustedPlatformAssemblies> tpa = new Lazy<TrustedPlatformAssemblies>(false);
+#endif
+
         void InitializeAssemblyBuilder()
         {
             _metadataReferenceResolver = new MetadataReferenceResolver() { GetMissingAssemblyCallback = GetMissingAssembly };
@@ -70,11 +76,13 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Occurs when a missing assembly / module needs to be resolved. Property MissingAssemblyImage in parameter e should be set before returning if the assembly / module is resolved.
         /// </summary>
+        /// <remarks>This event is not present in Neat release.</remarks>
         public event EventHandler<MissingAssemblyResolvingEventArgs> MissingAssemblyResolving;
 
         /// <summary>
         /// Occurs when a missing assembly / module needs to be resolved before querying from cache. Property MissingAssemblyImage in parameter e should be set before returning if the assembly / module is resolved.
         /// </summary>
+        /// <remarks>This event is not present in Neat release.</remarks>
         public event EventHandler<MissingAssemblyResolvingEventArgs> MissingAssemblyResolvingBeforeCache;
 
         PortableExecutableReference GetFromEvent(EventHandler<MissingAssemblyResolvingEventArgs> handler, string display, string fullName, AssemblyReference assemblyReference)
@@ -114,6 +122,29 @@ namespace SecretNest.RemoteAgency
                 return result;
             }
 
+            if (!assemblyReference.IsModule)
+            {
+#if !net461
+                //process with trusted platform
+                image = tpa.Value.LoadAssembly(assemblyReference.Name);
+#else
+                //process with file loading
+                var assembly = Assembly.Load(assemblyReference.Name);
+                var filename = assembly.Location;
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    image = File.ReadAllBytes(filename);
+                }
+#endif
+                if (image != null)
+                {
+                    _assemblyImageCache[fullName] = image;
+                    var result = assemblyReference.BuildPortableExecutableReference(image);
+                    return result;
+                }
+            }
+
+            //process with MissingAssemblyRequesting
             return GetFromEvent(MissingAssemblyResolving, display, fullName, assemblyReference);
         }
 
@@ -122,8 +153,12 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Clears the assembly cache.
         /// </summary>
+        /// <remarks>This method is not present in Neat release.</remarks>
         public void ClearAssemblyCache()
         {
+#if !net461
+            tpa = new Lazy<TrustedPlatformAssemblies>(false);
+#endif
             //metadataReferenceCache.Clear();
             _assemblyImageCache.Clear();
         }
@@ -133,6 +168,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="fullName">Full name of the assembly / module</param>
         /// <param name="image">PE format image of the assembly / module</param>
+        /// <remarks>This method is not present in Neat release.</remarks>
         public void LoadIntoAssemblyCache(string fullName, byte[] image)
         {
             _assemblyImageCache[fullName] = image;
@@ -142,6 +178,7 @@ namespace SecretNest.RemoteAgency
         /// Returns names of all cached assemblies and modules.
         /// </summary>
         /// <returns>Names of all cached assemblies and modules</returns>
+        /// <remarks>This method is not present in Neat release.</remarks>
         public IEnumerable<string> GetAllCachedAssemblyNames()
         {
             return _assemblyImageCache.Keys;
@@ -152,6 +189,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="fullName">Full name of the assembly / module</param>
         /// <returns>Whether the element is successfully found and removed.</returns>
+        /// <remarks>This method is not present in Neat release.</remarks>
         public bool RemoveFromAssemblyCache(string fullName)
         {
             return _assemblyImageCache.Remove(fullName);
@@ -162,6 +200,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="fullName">Full name of the assembly / module</param>
         /// <returns>Whether the assembly / module specified is cached.</returns>
+        /// <remarks>This method is not present in Neat release.</remarks>
         public bool IsPresentInAssemblyCache(string fullName)
         {
             return _assemblyImageCache.ContainsKey(fullName);

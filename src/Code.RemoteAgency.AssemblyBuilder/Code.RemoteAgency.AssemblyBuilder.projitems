@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MissingAssemblyResolvingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PortableExecutableReferenceBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.AssemblyBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TrustedPlatformAssemblies.cs" />
   </ItemGroup>
 </Project>
