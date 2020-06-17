@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency
 
         public override bool Equals(object other)
         {
-            return other.Equals(this);
+            return other != null && other.Equals(this);
         }
 
         public override int GetHashCode()

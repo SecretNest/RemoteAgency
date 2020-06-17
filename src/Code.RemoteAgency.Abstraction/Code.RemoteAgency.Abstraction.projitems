@@ -33,12 +33,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ParameterTwoWayPropertyAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyCacheableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\SerializingBehaviorAttributeBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ServiceWrapperCacheableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EntityCodeBuilderBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IAssemblyCacheOperating.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />

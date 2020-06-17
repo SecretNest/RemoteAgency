@@ -14,13 +14,15 @@ namespace SecretNest.RemoteAgency
     {
         
 #if !net461
-        static Lazy<TrustedPlatformAssemblies> tpa = new Lazy<TrustedPlatformAssemblies>(false);
+        static Lazy<TrustedPlatformAssemblies> _tpa = new Lazy<TrustedPlatformAssemblies>(false);
 #endif
 
         void InitializeAssemblyBuilder()
         {
-            _metadataReferenceResolver = new MetadataReferenceResolver() { GetMissingAssemblyCallback = GetMissingAssembly };
+            _metadataReferenceResolver = new Lazy<MetadataReferenceResolver>(() => new MetadataReferenceResolver() {GetMissingAssemblyCallback = GetMissingAssembly});
         }
+
+        private Lazy<MetadataReferenceResolver> _metadataReferenceResolver; 
 
         bool BuildAssembly(string assemblyName, IEnumerable<string> sourceCode, IEnumerable<AssemblyReference> references, out byte[] assemblyImage, out TypeCreatingException buildingError)
         {
@@ -39,12 +41,12 @@ namespace SecretNest.RemoteAgency
             }
             CSharpCompilation compilation = CSharpCompilation.Create(
                 assemblyName,
-                syntaxTrees: syntaxTrees,
-                references: metadataReferences,
-                options: new CSharpCompilationOptions(
+                syntaxTrees,
+                metadataReferences,
+                new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,
                     optimizationLevel: OptimizationLevel.Release,
-                    metadataReferenceResolver: _metadataReferenceResolver));
+                    metadataReferenceResolver: _metadataReferenceResolver.Value));
 #if DEBUG
             Console.WriteLine("Begin Emit");
 #endif
@@ -63,15 +65,13 @@ namespace SecretNest.RemoteAgency
                 }
                 else
                 {
-                    ms.Seek(0, SeekOrigin.Begin);
+                    //ms.Seek(0, SeekOrigin.Begin);
                     assemblyImage = ms.ToArray();
                     buildingError = null;
                     return true;
                 }
             }
         }
-
-        MetadataReferenceResolver _metadataReferenceResolver;
 
         /// <summary>
         /// Occurs when a missing assembly / module needs to be resolved. Property MissingAssemblyImage in parameter e should be set before returning if the assembly / module is resolved.
@@ -126,7 +126,7 @@ namespace SecretNest.RemoteAgency
             {
 #if !net461
                 //process with trusted platform
-                image = tpa.Value.LoadAssembly(assemblyReference.Name);
+                image = _tpa.Value.LoadAssembly(assemblyReference.Name);
 #else
                 //process with file loading
                 var assembly = Assembly.Load(assemblyReference.Name);
@@ -157,7 +157,7 @@ namespace SecretNest.RemoteAgency
         public void ClearAssemblyCache()
         {
 #if !net461
-            tpa = new Lazy<TrustedPlatformAssemblies>(false);
+            _tpa = new Lazy<TrustedPlatformAssemblies>(false);
 #endif
             //metadataReferenceCache.Clear();
             _assemblyImageCache.Clear();
