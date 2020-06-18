@@ -15,7 +15,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="className">Class name</param>
         /// <param name="entityBaseTypeFullName">Type name of the base class of entity classes.</param>
-        /// <param name="messagePackageInterfaceTypeFullName">Type name of <see cref="IRemoteAgencyMessage{TSerialized}"/>.</param>
+        /// <param name="fullNameOfIRemoteAgencyMessage">Type name of <see cref="IRemoteAgencyMessage{TSerialized}"/>.</param>
         /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="InterfaceLevelAttributeBaseType"/> in interface level.<remarks>This will contains nothing when <see cref="InterfaceLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="AssetLevelAttributeBaseType"/> in asset level.<remarks>This will contains nothing when <see cref="AssetLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.<remarks>This will contains nothing when <see cref="DelegateLevelAttributeBaseType"/> is set to null.</remarks></param>
@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="sourceCodeBuilder">The <see cref="StringBuilder"/> for writing source code to.</param>
         /// <param name="valueBasedConstructorCallerCode">The calling code for create an instance of this entity class, starting with <code>= new ...</code>.</param>
         /// <returns>Class code.</returns>
-        public abstract string BuildEntity(string className, string entityBaseTypeFullName, string messagePackageInterfaceTypeFullName,
+        public abstract string BuildEntity(string className, string entityBaseTypeFullName, string fullNameOfIRemoteAgencyMessage, 
             List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes, List<Attribute> delegateLevelAttributes,
             List<ValueMapping> values, Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor,
             StringBuilder sourceCodeBuilder, out string valueBasedConstructorCallerCode);
@@ -49,5 +49,11 @@ namespace SecretNest.RemoteAgency
         /// Gets the type of the base class of attributes which are used to mark metadata on parameter level.
         /// </summary>
         public abstract Type ParameterLevelAttributeBaseType { get; }
+
+        /// <summary>
+        /// Creates an empty message which is allowed to be serialized.
+        /// </summary>
+        /// <returns>Empty message.</returns>
+        public abstract IRemoteAgencyMessage CreateEmptyMessage();
     }
 }

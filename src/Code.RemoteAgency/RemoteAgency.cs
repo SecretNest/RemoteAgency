@@ -11,49 +11,6 @@ namespace SecretNest.RemoteAgency
     public abstract partial class RemoteAgency
     {
         /// <summary>
-        /// Creates an instance of Remote Agency without entity code builder.
-        /// </summary>
-        /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-        /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-        /// <param name="serializingHelper">Serializer helper.</param>
-        /// <returns>Created Remote Agency instance.</returns>
-        /// <remarks>Due to lack of entity code builder, this instance cannot create any constructed type.</remarks>
-        public static RemoteAgency<TSerialized, TEntityBase> Create<TSerialized, TEntityBase>(
-            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper)
-        {
-            if (serializingHelper == null)
-                throw new ArgumentNullException(nameof(serializingHelper));
-
-
-            return CreateWithoutCheck(serializingHelper, null);
-        }
-
-        /// <summary>
-        /// Creates an instance of Remote Agency.
-        /// </summary>
-        /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-        /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-        /// <param name="serializingHelper">Serializer helper.</param>
-        /// <param name="entityCodeBuilder">Entity code builder.</param>
-        /// <returns>Created Remote Agency instance.</returns>
-        public static RemoteAgency<TSerialized, TEntityBase> Create<TSerialized, TEntityBase>(
-            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder)
-        {
-            if (serializingHelper == null)
-                throw new ArgumentNullException(nameof(serializingHelper));
-            if (entityCodeBuilder == null)
-                throw new ArgumentNullException(nameof(entityCodeBuilder));
-
-            return CreateWithoutCheck(serializingHelper, entityCodeBuilder);
-        }
-
-        static RemoteAgency<TSerialized, TEntityBase> CreateWithoutCheck<TSerialized, TEntityBase>(
-            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder)
-        {
-            return new RemoteAgency<TSerialized, TEntityBase>(serializingHelper, entityCodeBuilder);
-        }
-
-        /// <summary>
         /// Initializes the instance of Remote Agency.
         /// </summary>
         protected RemoteAgency()
@@ -70,7 +27,7 @@ namespace SecretNest.RemoteAgency
     public partial class RemoteAgency<TSerialized, TEntityBase> : IDisposable
     {
         private readonly SerializingHelperBase<TSerialized, TEntityBase> serializingHelper;
-        private readonly EntityCodeBuilderBase entityCodeBuilder; //NOTE: this could be null.
+        private readonly EntityCodeBuilderBase entityCodeBuilder;
 
         /// <summary>
         /// Initializes an instance of Remote Agency.
@@ -83,6 +40,23 @@ namespace SecretNest.RemoteAgency
             this.entityCodeBuilder = entityCodeBuilder;
 
 
+
+        }
+
+        /// <summary>
+        /// Placeholder
+        /// </summary>
+        public Guid SiteId { get; set; }
+
+        //Placeholder
+        void PrepareMessageForSending(TEntityBase messageBody)
+        {
+
+        }
+
+        //Placeholder
+        void ProcessMessage(TEntityBase messageBody)
+        {
 
         }
 

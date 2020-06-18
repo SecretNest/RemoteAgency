@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageProcessTerminatedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SerializingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeCreatingException.cs" />

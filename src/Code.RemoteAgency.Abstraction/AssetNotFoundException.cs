@@ -38,12 +38,24 @@ namespace SecretNest.RemoteAgency
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
         private AssetNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        { }
+        {
+            AssetName = info.GetString("AssetName");
+            Enum.TryParse<MessageType>( info.GetString("MessageType"), out var messageType);
+            MessageType = messageType;
+        }
+
+        /// <inheritdoc />
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("AssetName", AssetName);
+            info.AddValue("MessageType", MessageType.ToString());
+        }
 
         /// <summary>
         /// Gets the error message of the current exception.
         /// </summary>
-        public override string Message => string.Format("RemoteAgency asset {0}({1}) not found.", AssetName, MessageType);
+        public override string Message => $"RemoteAgency asset {AssetName}({MessageType}) not found.";
 
         /// <summary>
         /// Creates and returns a string representation of the current exception.

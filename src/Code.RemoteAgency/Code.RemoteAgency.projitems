@@ -10,17 +10,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Manager\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Serializer\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageFiltering\BeforeMessageProcessingEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageFiltering\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AfterTypeAndAssemblyBuiltEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeAssemblyBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeTypeBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\CustomizedAssemblyBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CodeBuilderHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Base.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Manager\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Factory.cs" />
   </ItemGroup>

@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
     public class RemoteAgencyJsonSerializerEntityCodeBuilder : EntityCodeBuilderBase
     {
         /// <inheritdoc />
-        public override string BuildEntity(string className, string entityBaseTypeFullName, string messagePackageInterfaceTypeFullName,
+        public override string BuildEntity(string className, string entityBaseTypeFullName, string fullNameOfIRemoteAgencyMessage,
             List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes, List<Attribute> delegateLevelAttributes, List<ValueMapping> values,
             Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor, StringBuilder sourceCodeBuilder,
             out string valueBasedConstructorCallerCode)
@@ -32,7 +32,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
             }
 
             sourceCodeBuilder.Append(" : ")
-                .Append(entityBaseTypeFullName).Append(", ").Append(messagePackageInterfaceTypeFullName);
+                .Append(entityBaseTypeFullName).Append(", ").Append(fullNameOfIRemoteAgencyMessage);
             CodeBuilderHelper.ApplyConstraints(usedGenerics, sourceCodeBuilder);
             sourceCodeBuilder.AppendLine("\n{");
 
@@ -69,17 +69,18 @@ namespace SecretNest.RemoteAgency.JsonSerializer
             }
 
             //interface members
-            sourceCodeBuilder.AppendLine(@"System.Guid IRemoteAgencyMessage<string>.SenderSiteId { get; set; }
-System.Guid IRemoteAgencyMessage<string>.TargetSiteId { get; set; }
-System.Guid IRemoteAgencyMessage<string>.SenderInstanceId { get; set; }
-System.Guid IRemoteAgencyMessage<string>.TargetInstanceId { get; set; }
-SecretNest.RemoteAgency.MessageType IRemoteAgencyMessage<string>.MessageType { get; set; }
-string IRemoteAgencyMessage<string>.AssetName { get; set; }
-System.Guid IRemoteAgencyMessage<string>.MessageId { get; set; }
-System.Exception IRemoteAgencyMessage<string>.Exception { get; set; }
-bool IRemoteAgencyMessage<string>.IsOneWay { get; set; }");
+            sourceCodeBuilder.AppendLine(@"System.Guid IRemoteAgencyMessage.SenderSiteId { get; set; }
+System.Guid IRemoteAgencyMessage.TargetSiteId { get; set; }
+System.Guid IRemoteAgencyMessage.SenderInstanceId { get; set; }
+System.Guid IRemoteAgencyMessage.TargetInstanceId { get; set; }
+SecretNest.RemoteAgency.MessageType IRemoteAgencyMessage.MessageType { get; set; }
+string IRemoteAgencyMessage.AssetName { get; set; }
+System.Guid IRemoteAgencyMessage.MessageId { get; set; }
+System.Exception IRemoteAgencyMessage.Exception { get; set; }
+bool IRemoteAgencyMessage.IsOneWay { get; set; }
+[Newtonsoft.Json.JsonIgnore] bool IRemoteAgencyMessage.IsEmptyMessage => false;
+}"); //<--class end
 
-            sourceCodeBuilder.AppendLine("}");
             return entityClassName;
         }
 
@@ -91,5 +92,11 @@ bool IRemoteAgencyMessage<string>.IsOneWay { get; set; }");
         public override Type DelegateLevelAttributeBaseType => null;
         /// <inheritdoc />
         public override Type ParameterLevelAttributeBaseType => null;
+
+        /// <inheritdoc />
+        public override IRemoteAgencyMessage CreateEmptyMessage()
+        {
+            return new RemoteAgencyJsonEmptyMessage();
+        }
     }
 }

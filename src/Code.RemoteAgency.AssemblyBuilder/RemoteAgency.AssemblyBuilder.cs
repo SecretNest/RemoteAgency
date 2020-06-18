@@ -58,7 +58,7 @@ namespace SecretNest.RemoteAgency
                     IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                         diagnostic.IsWarningAsError ||
                         diagnostic.Severity == DiagnosticSeverity.Error);
-                    var errors = failures.Select(i => new TypeCreatingExceptionRecord(i.Id, i.GetMessage())).ToArray();
+                    var errors = failures.Select(i => new TypeCreatingExceptionRecord(i.Id, i.GetMessage())).ToList();
                     buildingError = new TypeCreatingException(errors);
                     assemblyImage = null;
                     return false;

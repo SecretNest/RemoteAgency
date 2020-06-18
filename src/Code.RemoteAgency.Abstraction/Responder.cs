@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency
     /// Manages the matching of the request and response message.
     /// </summary>
     /// <typeparam name="T">Entity base</typeparam>
-    public class Responder<T> : IDisposable // where TEntityBase : class
+    public class Responder<T> : IDisposable
         where T : IRemoteAgencyMessage
     {
         readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ConcurrentDictionary<Guid, ResponderItem>();

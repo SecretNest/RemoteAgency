@@ -51,12 +51,18 @@ namespace SecretNest.RemoteAgency
         /// Whether this message is one way (do not need any response)
         /// </summary>
         bool IsOneWay { get; set; }
+
+        /// <summary>
+        /// Whether this message is empty, not containing parameters required by asset.
+        /// </summary>
+        bool IsEmptyMessage { get; }
     }
 
     /// <summary>
     /// Defines the common properties contained in messages.
     /// </summary>
     /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
+    /// <remarks>The type parameter is not used by any property defined in this interface, which is only used to constrain data type.</remarks>
     public interface IRemoteAgencyMessage<out TSerialized> : IRemoteAgencyMessage
     { }
     
