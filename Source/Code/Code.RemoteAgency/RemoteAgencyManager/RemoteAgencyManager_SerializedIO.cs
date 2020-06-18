@@ -54,7 +54,7 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <summary>
-        /// Occurs when a message need to be checked for sending.
+        /// Occurs when a message need to be checked after receiving.
         /// </summary>
         /// <seealso cref="MessageProcessTerminatedException" />
         public event EventHandler<BeforeMessageProcessingEventArgsBase<TSerialized>> AfterMessageReceived;
