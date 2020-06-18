@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     public class EventSubscriptionAttribute : Attribute
     {
         /// <summary>
-        /// Event subscription mode.
+        /// Gets the event subscription mode.
         /// </summary>
         public EventSubscriptionMode EventSubscriptionMode { get; }
 
@@ -36,17 +36,17 @@ namespace SecretNest.RemoteAgency.Attributes
     public enum EventSubscriptionMode
     {
         /// <summary>
-        /// Subscribe the event on proxy initializing. Unsubscribe on disposing.
+        /// Subscribes the event on proxy initializing. Unsubscribe on disposing.
         /// </summary>
         [EnumMember]
         SubscribeOnStartAndKeep,
         /// <summary>
-        /// Subscribe the event when the first handler is linked. Unsubscribe on disposing when subscribed before.
+        /// Subscribes the event when the first handler is linked. Unsubscribe on disposing when subscribed before.
         /// </summary>
         [EnumMember]
         SubscribeOnFirstUseAndKeep,
         /// <summary>
-        /// Subscribe the event when the first handler is linked. Unsubscribe on the last one is removed. This could happened repeatedly. Unsubscribing process is also called in disposing when the event is subscribed before.
+        /// Subscribes the event when the first handler is linked. Unsubscribe on the last one is removed. This could happened repeatedly. Unsubscribing process is also called in disposing when the event is subscribed before.
         /// </summary>
         [EnumMember]
         Dynamic

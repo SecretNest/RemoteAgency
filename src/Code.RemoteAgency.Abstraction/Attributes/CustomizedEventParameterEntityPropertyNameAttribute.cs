@@ -22,12 +22,12 @@ namespace SecretNest.RemoteAgency.Attributes
     public class CustomizedEventParameterEntityPropertyNameAttribute : Attribute
     {
         /// <summary>
-        /// Parameter name of the event.
+        /// Gets the parameter name of the event.
         /// </summary>
         public string ParameterName { get; }
 
         /// <summary>
-        /// Property name in entity class.
+        /// Gets the property name in entity class.
         /// </summary>
         public string EntityPropertyName { get; }
 

@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency.Attributes
     public class CustomizedOperatingTimeoutTimeAttribute : Attribute
     {
         /// <summary>
-        /// The length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.
+        /// Gets the length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.
         /// </summary>
         public int MillisecondsTimeout { get; }
 

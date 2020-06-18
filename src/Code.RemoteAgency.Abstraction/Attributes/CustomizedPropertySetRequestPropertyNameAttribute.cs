@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency.Attributes
     public class CustomizedPropertySetRequestPropertyNameAttribute : Attribute
     {
         /// <summary>
-        /// Property name in entity class.
+        /// Gets the property name in entity class.
         /// </summary>
         public string EntityPropertyName { get; }
         /// <summary>

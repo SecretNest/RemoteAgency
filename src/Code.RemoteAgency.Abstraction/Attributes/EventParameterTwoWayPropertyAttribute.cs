@@ -16,7 +16,7 @@ namespace SecretNest.RemoteAgency.Attributes
     public class EventParameterTwoWayPropertyAttribute : Attribute
     {
         /// <summary>
-        /// Simple mode.
+        /// Gets whether this is in simple mode.
         /// </summary>
         /// <remarks>
         /// <list type="bullet">
@@ -33,12 +33,12 @@ namespace SecretNest.RemoteAgency.Attributes
         public bool IsSimpleMode { get; }
 
         /// <summary>
-        /// Parameter name of the event.
+        /// Gets the parameter name of the event.
         /// </summary>
         public string ParameterName { get; }
 
         /// <summary>
-        /// Parameter property.
+        /// Gets the parameter property.
         /// </summary>
         /// <remarks>
         /// Based on the value of <see cref="IsSimpleMode"/>:
@@ -56,13 +56,13 @@ namespace SecretNest.RemoteAgency.Attributes
         public string ParameterProperty { get; }
 
         /// <summary>
-        /// The type of the property or field specified by <see cref="ParameterProperty"/>.
+        /// Gets the type of the property or field specified by <see cref="ParameterProperty"/>.
         /// </summary>
         /// <remarks>When <see cref="IsSimpleMode"/> is set to true, this value will be ignored.</remarks>
         public Type ElementType { get; }
 
         /// <summary>
-        /// Preferred property name in entity.
+        /// Gets the preferred property name in entity.
         /// </summary>
         /// <remarks>If it's set to null (default), the property name will be chosen automatically.</remarks>
         public string EntityPropertyName { get; }

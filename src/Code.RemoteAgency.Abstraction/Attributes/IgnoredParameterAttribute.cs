@@ -15,12 +15,12 @@ namespace SecretNest.RemoteAgency.Attributes
     public class IgnoredParameterAttribute : Attribute
     {
         /// <summary>
-        /// Ignored in parameter. If set to true, this parameter should not be transferred to remote site.
+        /// Gets whether this parameter is ignored. If set to true, this parameter should not be transferred to remote site.
         /// </summary>
         public bool IgnoredInParameter { get; }
 
         /// <summary>
-        /// Ignored in return. If set to true, this parameter should not be transferred back from the remote site.
+        /// Gets whether the return is ignored. If set to true, this parameter should not be transferred back from the remote site.
         /// </summary>
         public bool IgnoredInReturn { get; }
 
