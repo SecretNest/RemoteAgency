@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the parameter should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.
     /// </summary>
-    /// <remarks>When <see cref="IgnoredInParameter"/> or <see cref="IgnoredInReturn"/> is set to true, the <see cref="ParameterTwoWayPropertyAttribute"/> and <see cref="EventParameterTwoWayPropertyAttribute"/> will be ignored.</remarks>
+    /// <remarks>When <see cref="IsIgnoredFromParameter"/> or <see cref="IsIgnoredFromReturn"/> is set to true, the <see cref="ParameterTwoWayPropertyAttribute"/> and <see cref="EventParameterTwoWayPropertyAttribute"/> will be ignored.</remarks>
     /// <seealso cref="EventParameterIgnoredAttribute"/>
     /// <seealso cref="ParameterTwoWayPropertyAttribute"/>
     /// <seealso cref="EventParameterTwoWayPropertyAttribute"/>
@@ -16,24 +16,24 @@ namespace SecretNest.RemoteAgency.Attributes
     public class ParameterIgnoredAttribute : Attribute
     {
         /// <summary>
-        /// Gets whether this parameter is ignored. If set to true, this parameter should not be transferred to remote site.
+        /// Gets whether this parameter is excluded from parameter entity. If set to true, this parameter should not be transferred to remote site.
         /// </summary>
-        public bool IgnoredInParameter { get; }
+        public bool IsIgnoredFromParameter { get; }
 
         /// <summary>
-        /// Gets whether the return is ignored.. If set to true, this parameter should not be transferred back from the remote site.
+        /// Gets whether this parameter is excluded from returning entity. If set to true, this parameter should not be transferred back from the remote site.
         /// </summary>
-        public bool IgnoredInReturn { get; }
+        public bool IsIgnoredFromReturn { get; }
 
         /// <summary>
         /// Initializes an instance of the ParameterIgnoredAttribute.
         /// </summary>
-        /// <param name="ignoredInParameter">Ignored in parameter. If set to true, this parameter should not be transferred to remote site.</param>
-        /// <param name="ignoredInReturn">Ignored in return. If set to true, this parameter should not be transferred back from the remote site.</param>
-        public ParameterIgnoredAttribute(bool ignoredInParameter = true, bool ignoredInReturn = true)
+        /// <param name="ignoredFromParameter">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        /// <param name="ignoredFromReturn">Ignored from return. If set to true, this parameter should not be transferred back from the remote site.</param>
+        public ParameterIgnoredAttribute(bool ignoredFromParameter = true, bool ignoredFromReturn = true)
         {
-            IgnoredInParameter = ignoredInParameter;
-            IgnoredInReturn = ignoredInReturn;
+            IsIgnoredFromParameter = ignoredFromParameter;
+            IsIgnoredFromReturn = ignoredFromReturn;
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace SecretNest.RemoteAgency.Attributes
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public ParameterIgnoredAttribute(EventParameterIgnoredAttribute attribute)
         {
-            IgnoredInParameter = attribute.IgnoredInParameter;
-            IgnoredInReturn = attribute.IgnoredInReturn;
+            IsIgnoredFromParameter = attribute.IsIgnoredFromParameter;
+            IsIgnoredFromReturn = attribute.IsIgnoredFromReturn;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    abstract partial class RemoteAgencyManagingObject<TEntityBase>
+    partial class RemoteAgencyManagingObject<TEntityBase>
     {
 
 

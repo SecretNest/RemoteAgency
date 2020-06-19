@@ -20,26 +20,26 @@ namespace SecretNest.RemoteAgency.Attributes
         public string ParameterName { get; }
 
         /// <summary>
-        /// Gets whether this parameter is ignored. If set to true, this parameter should not be transferred to remote site.
+        /// Gets whether this parameter is excluded from parameter entity. If set to true, this parameter should not be transferred to remote site.
         /// </summary>
-        public bool IgnoredInParameter { get; }
+        public bool IsIgnoredFromParameter { get; }
 
         /// <summary>
-        /// Gets whether the return is ignored. If set to true, this parameter should not be transferred back from the remote site.
+        /// Gets whether this parameter is excluded from returning entity. If set to true, this parameter should not be transferred back from the remote site.
         /// </summary>
-        public bool IgnoredInReturn { get; }
+        public bool IsIgnoredFromReturn { get; }
 
         /// <summary>
         /// Initializes an instance of the EventParameterIgnoredAttribute.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
-        /// <param name="ignoredInParameter">Ignored in parameter. If set to true, this parameter should not be transferred to remote site.</param>
-        /// <param name="ignoredInReturn">Ignored in return. If set to true, this parameter should not be transferred back from the remote site.</param>
-        public EventParameterIgnoredAttribute(string parameterName, bool ignoredInParameter = true, bool ignoredInReturn = true)
+        /// <param name="ignoredFromParameter">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        /// <param name="ignoredFromReturn">Ignored from return. If set to true, this parameter should not be transferred back from the remote site.</param>
+        public EventParameterIgnoredAttribute(string parameterName, bool ignoredFromParameter = true, bool ignoredFromReturn = true)
         {
             ParameterName = parameterName;
-            IgnoredInParameter = ignoredInParameter;
-            IgnoredInReturn = ignoredInReturn;
+            IsIgnoredFromParameter = ignoredFromParameter;
+            IsIgnoredFromReturn = ignoredFromReturn;
         }
 
         /// <summary>

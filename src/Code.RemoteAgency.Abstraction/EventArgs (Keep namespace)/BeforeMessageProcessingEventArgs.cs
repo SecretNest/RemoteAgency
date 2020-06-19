@@ -189,7 +189,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         public override IRemoteAgencyMessage MessageBodyGeneric => (IRemoteAgencyMessage) MessageBody;
 
         /// <summary>
-        /// Initializes an instance of BeforeMessageProcessingEventArgsBase.
+        /// Initializes an instance of BeforeMessageProcessingEventArgs.
         /// </summary>
         /// <param name="messageDirection">Direction of the message.</param>
         /// <param name="messageBody">Message.</param>

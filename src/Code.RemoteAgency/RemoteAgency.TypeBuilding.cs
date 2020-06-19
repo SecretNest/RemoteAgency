@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.TypeBuilding;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency
+    partial class RemoteAgency
     {
         /// <summary>
         /// Occurs when a type is required for constructing.

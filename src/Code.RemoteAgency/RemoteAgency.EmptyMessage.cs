@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency<TSerialized, TEntityBase>
     {
         TEntityBase GenerateEmptyMessage(Guid targetSiteId, Guid targetInstanceId, MessageType messageType,
             string assetName, Guid messageId, Exception exception)

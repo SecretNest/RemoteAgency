@@ -19,6 +19,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets whether the image of the assembly will be loaded to compiler by event handler in user code before compiling.
         /// </summary>
+        // ReSharper disable once IdentifierTypo
         public bool Preloading { get; }
 
         /// <summary>
@@ -44,6 +45,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="isModule">Whether this is a module.</param>
         /// <param name="aliases">Assembly aliases.</param>
         /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the referencing compilation.</param>
+        // ReSharper disable once IdentifierTypo
         public ImportAssemblyAttribute(string assemblyFullName, bool preloading = false, bool isModule = false, string[] aliases = null, bool embedInteropTypes = false)
         {
             AssemblyFullName = assemblyFullName;

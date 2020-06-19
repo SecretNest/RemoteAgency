@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Initializes an instance of ThreadLockAttribute.
         /// </summary>
-        /// <param name="threadLockMode">Thead lock mode. <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/> is not supported by this constructor.</param>
+        /// <param name="threadLockMode">Thread lock mode. <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/> is not supported by this constructor.</param>
         public ThreadLockAttribute(ThreadLockMode threadLockMode)
         {
             if (threadLockMode == ThreadLockMode.TaskSchedulerSpecified)

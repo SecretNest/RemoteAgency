@@ -22,8 +22,9 @@ namespace SecretNest.RemoteAgency
         /// Processes a method calling message and get the data returned.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
+        /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessMethodCallingMessageWithReturn(IRemoteAgencyMessage message);
+        IRemoteAgencyMessage ProcessMethodCallingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
         /// Processes a method calling message.
@@ -47,8 +48,9 @@ namespace SecretNest.RemoteAgency
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
+        /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessEventRaisingMessageWithReturn(IRemoteAgencyMessage message);
+        IRemoteAgencyMessage ProcessEventRaisingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
         
         /// <summary>
         /// Processes an event raising message.
@@ -60,15 +62,17 @@ namespace SecretNest.RemoteAgency
         /// Processes a property getting message and get the data returned.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
+        /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessPropertyGettingMessage(IRemoteAgencyMessage message);
+        IRemoteAgencyMessage ProcessPropertyGettingMessage(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
         /// Processes a property setting message and get the data returned.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
+        /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessPropertySettingMessageWithReturn(IRemoteAgencyMessage message);
+        IRemoteAgencyMessage ProcessPropertySettingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
         /// Processes a property setting message.
@@ -76,17 +80,6 @@ namespace SecretNest.RemoteAgency
         /// <param name="message">Message to be processed.</param>
         void ProcessPropertySettingMessageWithoutReturn(IRemoteAgencyMessage message);
 
-        ///// <summary>
-        ///// Should be called while an exception is raised in user code.
-        ///// </summary>
-        ///// <seealso cref="LocalExceptionHandlingAttribute"/>
-        ///// <remarks>This will only be called when <see cref="LocalExceptionHandlingAttribute"/> exists and the <see cref="LocalExceptionHandlingMode"/> is set to Redirect. When it's not set, the exception will be suppressed.</remarks>
-        //RedirectedExceptionRaisedCallback RedirectedExceptionRaisedCallback { get; set; }
-        ///// <summary>
-        ///// Should be called while waiting for response is timed out.
-        ///// </summary>
-        ///// <seealso cref="CustomizedOperatingTimeoutTimeAttribute"/>
-        //MessageWaitingTimedOutCallback MessageWaitingTimedOutCallback { get; set; }
         /// <summary>
         /// Should be called while a message should be sent to a remote site.
         /// </summary>
@@ -100,17 +93,4 @@ namespace SecretNest.RemoteAgency
     /// <returns>Message returned. Value <see langword="null" /> will be returned if no return required by <paramref name="message"/>.</returns>
     /// <exception cref="TimeoutException">Thrown when timed out.</exception>
     public delegate IRemoteAgencyMessage SendMessageCallback(IRemoteAgencyMessage message);
-
-    ///// <summary>
-    ///// Redirects the exception raised in user code.
-    ///// </summary>
-    ///// <param name="messageType"><see cref="MessageType">Message type.</see></param>
-    ///// <param name="assetName">Asset name.</param>
-    ///// <param name="messageId">Id of the message.</param>
-    ///// <param name="interfaceType">The type of the interface related to this asset.</param>
-    ///// <param name="exception">Raised exception object.</param>
-    ///// <seealso cref="LocalExceptionHandlingAttribute"/>
-    ///// <seealso cref="RedirectedExceptionRaisedCallback"/>
-    //public delegate void RedirectedExceptionRaisedCallback(MessageType messageType, string assetName, Guid messageId, Type interfaceType, Exception exception);
-
 }

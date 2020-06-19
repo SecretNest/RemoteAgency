@@ -1,10 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency
+    {
+        /// <summary>
+        /// Occurs when an exception thrown from user code.
+        /// </summary>
+        /// <seealso cref="LocalExceptionHandlingAttribute"/>
+        public event EventHandler<ExceptionRedirectedEventArgs> ExceptionRedirected;
+
+        /// <summary>
+        /// Redirects an exception.
+        /// </summary>
+        /// <param name="exception">Exception to be redirected.</param>
+        protected void RedirectException(Exception exception)
+        {
+            if (ExceptionRedirected == null)
+            {
+                throw exception;
+            }
+            else
+            {
+                var e = new ExceptionRedirectedEventArgs(exception);
+                ExceptionRedirected(this, e);
+            }
+        }
+    }
+
+    partial class RemoteAgency<TSerialized, TEntityBase>
     {
         /// <summary>
         /// Occurs when a message is generated and ready to be sent.

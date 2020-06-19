@@ -36,17 +36,17 @@ namespace SecretNest.RemoteAgency.Attributes
     public enum EventSubscriptionMode
     {
         /// <summary>
-        /// Subscribes the event on proxy initializing. Unsubscribe on disposing.
+        /// Subscribes the event on proxy initializing. Unsubscribes on disposing.
         /// </summary>
         [EnumMember]
         SubscribeOnStartAndKeep,
         /// <summary>
-        /// Subscribes the event when the first handler is linked. Unsubscribe on disposing when subscribed before.
+        /// Subscribes the event when the first handler is linked. Unsubscribes on disposing when subscribed before.
         /// </summary>
         [EnumMember]
         SubscribeOnFirstUseAndKeep,
         /// <summary>
-        /// Subscribes the event when the first handler is linked. Unsubscribe on the last one is removed. This could happened repeatedly. Unsubscribing process is also called in disposing when the event is subscribed before.
+        /// Subscribes the event when the first handler is linked. Unsubscribes on the last one is removed. This could happened repeatedly. Unsubscribing process is also called in disposing when the event is subscribed before.
         /// </summary>
         [EnumMember]
         Dynamic

@@ -5,7 +5,7 @@ using SecretNest.RemoteAgency.BinarySerializer;
 
 namespace SecretNest.RemoteAgency
 {
-    public abstract partial class RemoteAgency
+    abstract partial class RemoteAgency
     {
         /// <summary>
         /// Creates an instance of Remote Agency using binary serializer.

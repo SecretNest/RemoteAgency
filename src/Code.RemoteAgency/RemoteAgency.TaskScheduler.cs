@@ -8,7 +8,7 @@ using SecretNest.RemoteAgency.TaskSchedulers;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency
     {
         private readonly ConcurrentDictionary<string, TaskScheduler> _namedTaskSchedulers =
             new ConcurrentDictionary<string, TaskScheduler>();

@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.MessageFiltering;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency<TSerialized, TEntityBase>
     {
         /// <summary>
         /// Gets or sets whether system messages should be bypassed from filtering. Default value is <see langword="true" />.

@@ -8,10 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the local exception handling mode.
     /// </summary>
-    /// <remarks>The attribute declared with interface affects the handling of serializing process when asset requested cannot be found, and has lower priority on all assets within the interface. The default setting is <see cref="LocalExceptionHandlingMode"/>.Suppress if this attribute absents.</remarks>
-    /// <seealso cref="LocalExceptionHandlingMode"/>
-    /// <seealso cref="ICommunicate.RedirectedExceptionRaisedCallback"/>
-    /// <seealso cref="RedirectedExceptionRaisedCallback"/>
+    /// <remarks>The attribute declared with interface has lower priority on all assets within the interface. The default setting is <see cref="LocalExceptionHandlingMode"/>.Redirect if this attribute is absent.</remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class LocalExceptionHandlingAttribute : Attribute
     {
@@ -32,23 +29,21 @@ namespace SecretNest.RemoteAgency.Attributes
     }
 
     /// <summary>
-    /// Contains a list of local exception handling mode
+    /// Contains a list of local exception handling mode.
     /// </summary>
     public enum LocalExceptionHandlingMode
     {
         /// <summary>
-        /// Throw exceptions in place.
+        /// Throws exceptions in place.
         /// </summary>
         Throw,
         /// <summary>
-        /// Suppress exceptions.
+        /// Suppresses exceptions.
         /// </summary>
         Suppress,
         /// <summary>
-        /// Redirect exceptions to the handler specified.
+        /// Redirects exceptions to the handler specified. Throws when handler is absent.
         /// </summary>
-        /// <seealso cref="ICommunicate.RedirectedExceptionRaisedCallback"/>
-        /// <seealso cref="RedirectedExceptionRaisedCallback"/>
         Redirect
     }
 }

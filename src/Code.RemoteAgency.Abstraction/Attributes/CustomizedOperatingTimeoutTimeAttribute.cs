@@ -8,15 +8,13 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies the time out setting of this asset.
     /// </summary>
     /// <remarks>
-    /// Priority list:
+    /// Priority:
     /// 1 Attributes specified in method, property and event.
     /// 2 Attributes specified in delegate related to event.
     /// 3 Attributes specified in interface.
     /// 4 Default value: -1 (Infinity)
     /// </remarks>
     /// <seealso cref="TimeoutException"/>
-    /// <seealso cref="MessageWaitingTimedOutCallback"/>
-    /// <seealso cref="ICommunicate.MessageWaitingTimedOutCallback"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class CustomizedOperatingTimeoutTimeAttribute : Attribute
     {

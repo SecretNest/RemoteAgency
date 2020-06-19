@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency<TSerialized, TEntityBase>
     {
         /// <summary>
         /// Serializes an entity using the serializer passed from constructor.
