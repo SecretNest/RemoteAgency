@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
@@ -11,7 +12,8 @@ namespace SecretNest.RemoteAgency
 
         public abstract void Dispose();
 
-
+        public ThreadLockMode ThreadLockMode { get; }
+        public string ThreadLockTaskSchedulerName { get; }
 
         
     }

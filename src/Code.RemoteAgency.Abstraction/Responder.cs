@@ -3,15 +3,25 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
+    //TODO: need to redesign
+
+    /// <summary>
+    /// Notifies a message waiting is timed out.
+    /// </summary>
+    /// <param name="messageId">Id of the message.</param>
+    /// <seealso cref="MessageWaitingTimedOutCallback"/>
+    /// <seealso cref="CustomizedOperatingTimeoutTimeAttribute"/>
+    public delegate void MessageWaitingTimedOutCallback(Guid messageId);
+
     /// <summary>
     /// Manages the matching of the request and response message.
     /// </summary>
-    /// <typeparam name="T">Entity base</typeparam>
-    public class Responder<T> : IDisposable
-        where T : IRemoteAgencyMessage
+    /// <typeparam name="TEntityBase">Entity base</typeparam>
+    public class Responder<TEntityBase> : IDisposable
     {
         readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ConcurrentDictionary<Guid, ResponderItem>();
 
@@ -26,7 +36,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="messageId">Id of the message.</param>
         /// <param name="value">Responded value.</param>
         /// <remarks>Will unblock the calling of <see cref="GetResult(Guid, int)"/>.</remarks>
-        public void SetResult(Guid messageId, T value)
+        public void SetResult(Guid messageId, TEntityBase value)
         {
             if (_responders.TryGetValue(messageId, out var item))
             {
@@ -43,7 +53,7 @@ namespace SecretNest.RemoteAgency
         {
             if (_responders.TryGetValue(messageId, out var item))
             {
-                item.SetResult(default(T));
+                item.SetResult(default);
             }
         }
 
@@ -56,7 +66,7 @@ namespace SecretNest.RemoteAgency
         /// <exception cref="TimeoutException">This is thrown when waiting is timed out.</exception>
         /// <exception cref="ArgumentOutOfRangeException">This is thrown when message specified by <paramref name="messageId"/> cannot be found.</exception>
         /// <remarks>The instance of the mapping will be removed after this calling end.</remarks>
-        public T GetResult(Guid messageId, int millisecondsTimeout)
+        public TEntityBase GetResult(Guid messageId, int millisecondsTimeout)
         {
             if (_responders.TryGetValue(messageId, out var item))
             {
@@ -103,17 +113,17 @@ namespace SecretNest.RemoteAgency
 
         class ResponderItem
         {
-            private T _value;
+            private TEntityBase _value;
 
             ManualResetEvent _waitHandle = new ManualResetEvent(false);
 
-            public void SetResult(T value)
+            public void SetResult(TEntityBase value)
             {
                 _value = value;
                 _waitHandle?.Set();
             }
 
-            public bool GetResult(int millisecondsTimeout, out T value)
+            public bool GetResult(int millisecondsTimeout, out TEntityBase value)
             {
                 try
                 {
@@ -124,7 +134,7 @@ namespace SecretNest.RemoteAgency
                     }
                     else
                     {
-                        value = default(T);
+                        value = default;
                         return false;
                     }
                 }
@@ -146,7 +156,7 @@ namespace SecretNest.RemoteAgency
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool _disposedValue = false; // To detect redundant calls
 
         /// <summary>
         /// Disposes of the resources (other than memory) used by this instance.
@@ -154,7 +164,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposedValue)
             {
                 if (disposing)
                 {
@@ -165,7 +175,7 @@ namespace SecretNest.RemoteAgency
                     _responders.Clear();
                 }
 
-                disposedValue = true;
+                _disposedValue = true;
             }
         }
 

@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.MessageFiltering.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.TaskScheduler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.ThreadLock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.FromOutside.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.FomInside.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.cs" />
