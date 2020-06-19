@@ -11,8 +11,6 @@ namespace SecretNest.RemoteAgency.JsonSerializer
     /// </summary>
     public class RemoteAgencyJsonSerializer : SerializingHelperBase<string, object>
     {
-        private readonly Formatting _formatting;
-
         /// <summary>
         /// Initializes an instance of RemoteAgencyJsonSerializer.
         /// </summary>
@@ -20,11 +18,14 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// <param name="includingFullAssemblyName">Whether should include full assembly name in serialized data and use <code>Load</code> method of the <see cref="Assembly"/> class is used to load the assembly instead of using <code>Load</code> method. Default value is true</param>
         public RemoteAgencyJsonSerializer(bool intented = false, bool includingFullAssemblyName = true)
         {
-            _formatting = intented ? Formatting.Indented : Formatting.None;
             _setting = new JsonSerializerSettings()
             {
-                TypeNameAssemblyFormatHandling = includingFullAssemblyName ? TypeNameAssemblyFormatHandling.Full : TypeNameAssemblyFormatHandling.Simple,
+                TypeNameAssemblyFormatHandling =
+                    includingFullAssemblyName
+                        ? TypeNameAssemblyFormatHandling.Full
+                        : TypeNameAssemblyFormatHandling.Simple,
                 TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = intented ? Formatting.Indented : Formatting.None,
                 Converters = new List<JsonConverter>() {new Newtonsoft.Json.Converters.StringEnumConverter()}
             };
         }
@@ -34,7 +35,8 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// <inheritdoc />
         public override string Serialize(object original)
         {
-            return JsonConvert.SerializeObject(original, _formatting, _setting);
+            //typeof(object) is placed here to force the root type is included.
+            return JsonConvert.SerializeObject(original, typeof(object), _setting);
         }
 
         /// <inheritdoc />

@@ -13,6 +13,10 @@ namespace SecretNest.RemoteAgency.TaskSchedulers
     /// <summary>
     /// Defines a task scheduler that run tasks on a single thread.
     /// </summary>
+    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.TryAddTaskScheduler"/>
+    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.TryRemoveTaskScheduler"/>
+    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.TryGetTaskScheduler"/>
+    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.TryAddSequentialScheduler"/>
     public class SequentialScheduler : TaskScheduler, IDisposable
     {
         readonly BlockingCollection<Task> _taskQueue = new BlockingCollection<Task>();

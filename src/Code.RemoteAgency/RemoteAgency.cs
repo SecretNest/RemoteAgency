@@ -11,11 +11,20 @@ namespace SecretNest.RemoteAgency
     public abstract partial class RemoteAgency
     {
         /// <summary>
+        /// Gets or sets the site id of this instance.
+        /// </summary>
+        /// <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
+        public Guid SiteId { get; set; }
+
+        /// <summary>
         /// Initializes the instance of Remote Agency.
         /// </summary>
-        protected RemoteAgency()
+        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
+        protected RemoteAgency(Guid siteId)
         {
             InitializeAssemblyBuilder();
+
+            SiteId = siteId == Guid.Empty ? Guid.NewGuid() : siteId;
         }
     }
 
@@ -24,7 +33,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-    public partial class RemoteAgency<TSerialized, TEntityBase> : IDisposable
+    public partial class RemoteAgency<TSerialized, TEntityBase> : RemoteAgency, IDisposable
     {
         private readonly SerializingHelperBase<TSerialized, TEntityBase> serializingHelper;
         private readonly EntityCodeBuilderBase entityCodeBuilder;
@@ -34,7 +43,8 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="serializingHelper">Serializer helper.</param>
         /// <param name="entityCodeBuilder">Entity code builder.</param>
-        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder)
+        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
+        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(siteId)
         {
             this.serializingHelper = serializingHelper;
             this.entityCodeBuilder = entityCodeBuilder;

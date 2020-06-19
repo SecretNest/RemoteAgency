@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IO\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MessageFiltering\BeforeMessageProcessingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MessageFiltering\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer\RemoteAgency.cs" />
