@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Declares the source thread(s) should be used while accessing assets within.
     /// </summary>
     /// <remarks>The default mode is <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.None"/> if this attribute is absent.</remarks>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class ThreadLockAttribute : Attribute
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets the name of the task scheduler to be used while accessing assets within. Only valid when <see cref="ThreadLockMode"/> is set to <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/>.
         /// </summary>
-        /// <remarks>One task scheduler with the same name should be added to the instance of Remote Agency before accessing assets.</remarks>
+        /// <remarks>One task scheduler with the same name should be added to the instance of Remote Agency before processing the interface related.</remarks>
         public string TaskSchedulerName { get; }
 
         /// <summary>

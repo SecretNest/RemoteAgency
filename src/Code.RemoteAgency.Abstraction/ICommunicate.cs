@@ -19,6 +19,11 @@ namespace SecretNest.RemoteAgency
         void AfterInitialized();
 
         /// <summary>
+        /// Occurs when disposing.
+        /// </summary>
+        event EventHandler DisposingRequested;
+
+        /// <summary>
         /// Processes a method calling message and get the data returned.
         /// </summary>
         /// <param name="message">Message to be processed.</param>

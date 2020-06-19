@@ -1,27 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    abstract class RemoteAgencyManagingObject : IDisposable
+    abstract partial class RemoteAgencyManagingObject : IDisposable
     {
-        public abstract void OnProxiesDisposed(Guid siteId);
-        public abstract void OnProxyDisposed(Guid siteId, Guid proxyInstanceId);
+        public virtual void OnProxiesDisposed(Guid siteId)
+        {
+        }
 
-        public abstract void Dispose();
+        public virtual void OnProxyDisposed(Guid siteId, Guid proxyInstanceId)
+        {
+        }
 
-        public ThreadLockMode ThreadLockMode { get; }
-        public string ThreadLockTaskSchedulerName { get; }
+        public virtual void Dispose()
+        { 
+            DisposeThreadLock();
+        }
 
-        
+        //TODO: call InitializeThreadLock in constructor
+      
     }
 
     abstract partial class RemoteAgencyManagingObject<TEntityBase> : RemoteAgencyManagingObject
     {
 
+    }
 
+    partial class RemoteAgencyManagingObjectProxy<TEntityBase> : RemoteAgencyManagingObject<TEntityBase>
+    {
 
+    }
+
+    partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase> : RemoteAgencyManagingObject<TEntityBase>
+    {
+        public override void OnProxiesDisposed(Guid siteId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnProxyDisposed(Guid siteId, Guid proxyInstanceId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

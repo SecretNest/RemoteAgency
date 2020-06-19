@@ -8,6 +8,8 @@ namespace SecretNest.RemoteAgency
     {
         void ProcessMessageReceivedFromInside(TEntityBase message)
         {
+            ((IRemoteAgencyMessage) message).SenderSiteId = SiteId;
+
             //internal routing
             if (((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
             {
