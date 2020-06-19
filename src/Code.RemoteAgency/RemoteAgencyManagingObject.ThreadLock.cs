@@ -107,28 +107,28 @@ namespace SecretNest.RemoteAgency
             ProcessWithSynchronizationContextEntityWithResponse state =
                 new ProcessWithSynchronizationContextEntityWithResponse()
                 {
-                    callback = callback,
-                    message = message
+                    Callback = callback,
+                    Message = message
                 };
             SynchronizationContext.Current.Post(ProcessWithSynchronizationContextWithResponseInternal, state);
-            response = state.response;
-            exception = state.exception;
+            response = state.Response;
+            exception = state.Exception;
         }
 
         void ProcessWithSynchronizationContextWithResponseInternal(object state)
         {
-            ((ProcessWithSynchronizationContextEntityWithResponse) state).response =
-                ((ProcessWithSynchronizationContextEntityWithResponse) state).callback(
-                    ((ProcessWithSynchronizationContextEntityWithResponse) state).message,
-                    out ((ProcessWithSynchronizationContextEntityWithResponse) state).exception);
+            ((ProcessWithSynchronizationContextEntityWithResponse) state).Response =
+                ((ProcessWithSynchronizationContextEntityWithResponse) state).Callback(
+                    ((ProcessWithSynchronizationContextEntityWithResponse) state).Message,
+                    out ((ProcessWithSynchronizationContextEntityWithResponse) state).Exception);
         }
 
         class ProcessWithSynchronizationContextEntityWithResponse
         {
-            public AccessWithReturn callback;
-            public IRemoteAgencyMessage message;
-            public IRemoteAgencyMessage response;
-            public Exception exception;
+            public AccessWithReturn Callback;
+            public IRemoteAgencyMessage Message;
+            public IRemoteAgencyMessage Response;
+            public Exception Exception;
         }
 
         void ProcessWithSynchronizationContext(AccessWithoutReturn callback, IRemoteAgencyMessage message, out Exception exception)
@@ -136,25 +136,32 @@ namespace SecretNest.RemoteAgency
             ProcessWithSynchronizationContextEntity state =
                 new ProcessWithSynchronizationContextEntity()
                 {
-                    callback = callback,
-                    message = message
+                    Callback = callback,
+                    Message = message
                 };
             SynchronizationContext.Current.Post(ProcessWithSynchronizationContextInternal, state);
-            exception = state.exception;
+            exception = state.Exception;
         }
 
         void ProcessWithSynchronizationContextInternal(object state)
         {
-            ((ProcessWithSynchronizationContextEntityWithResponse) state).callback(
-                ((ProcessWithSynchronizationContextEntityWithResponse) state).message,
-                out ((ProcessWithSynchronizationContextEntityWithResponse) state).exception);
+            try
+            {
+                ((ProcessWithSynchronizationContextEntity) state).Callback(
+                    ((ProcessWithSynchronizationContextEntity) state).Message);
+                ((ProcessWithSynchronizationContextEntity) state).Exception = null;
+            }
+            catch (Exception ex)
+            {
+                ((ProcessWithSynchronizationContextEntity) state).Exception = ex;
+            }
         }
 
         class ProcessWithSynchronizationContextEntity
         {
-            public AccessWithoutReturn callback;
-            public IRemoteAgencyMessage message;
-            public Exception exception;
+            public AccessWithoutReturn Callback;
+            public IRemoteAgencyMessage Message;
+            public Exception Exception;
         }
 
         void ProcessWithTaskScheduler(AccessWithReturn callback, IRemoteAgencyMessage message, out IRemoteAgencyMessage response, out Exception exception)

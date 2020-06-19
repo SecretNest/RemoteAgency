@@ -38,7 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\EventSubscriptionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ImportAssemblyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
@@ -52,10 +51,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\SerializingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\TypeCreatingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\" />
   </ItemGroup>
 </Project>
