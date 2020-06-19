@@ -9,8 +9,7 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Represents a created object that can communicate with Remote Agency Manager.
     /// </summary>
-    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-    public interface ICommunicate<TSerialized>
+    public interface ICommunicate
     {
         /// <summary>
         /// Will be called after this object is linked to a Remote Agency Manager.
@@ -21,7 +20,7 @@ namespace SecretNest.RemoteAgency
         /// Processes a message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        void ProcessMessage(IRemoteAgencyMessage<TSerialized> message);
+        void ProcessMessage(IRemoteAgencyMessage message);
 
         /// <summary>
         /// Should be called while an exception is raised in user code.
@@ -37,22 +36,21 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Should be called while a message should be sent to a remote site.
         /// </summary>
-        SendMessageCallback<TSerialized> SendMessageCallback { get; set; }
+        SendMessageCallback SendMessageCallback { get; set; }
     }
 
     /// <summary>
     /// Sends a message out.
     /// </summary>
-    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     /// <param name="message">Message to be sent.</param>
-    /// <seealso cref="ICommunicate{TSerialized}.SendMessageCallback"/>
-    public delegate void SendMessageCallback<in TSerialized>(IRemoteAgencyMessage<TSerialized> message);
+    /// <seealso cref="SendMessageCallback"/>
+    public delegate void SendMessageCallback(IRemoteAgencyMessage message);
 
     /// <summary>
     /// Notifies a message waiting is timed out.
     /// </summary>
     /// <param name="messageId">Id of the message.</param>
-    /// <seealso cref="ICommunicate{TSerialized}.MessageWaitingTimedOutCallback"/>
+    /// <seealso cref="MessageWaitingTimedOutCallback"/>
     /// <seealso cref="CustomizedOperatingTimeoutTimeAttribute"/>
     public delegate void MessageWaitingTimedOutCallback(Guid messageId);
 
@@ -65,7 +63,7 @@ namespace SecretNest.RemoteAgency
     /// <param name="interfaceType">The type of the interface related to this asset.</param>
     /// <param name="exception">Raised exception object.</param>
     /// <seealso cref="LocalExceptionHandlingAttribute"/>
-    /// <seealso cref="ICommunicate{TSerialized}.RedirectedExceptionRaisedCallback"/>
+    /// <seealso cref="RedirectedExceptionRaisedCallback"/>
     public delegate void RedirectedExceptionRaisedCallback(MessageType messageType, string assetName, Guid messageId, Type interfaceType, Exception exception);
 
 }

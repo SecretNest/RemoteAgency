@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
     /// Defines an empty message with binary serialization support.
     /// </summary>
     [Serializable]
-    public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage<byte[]>
+    public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage
     {
 #pragma warning disable CA2235 // Mark all non-serializable fields
         Guid IRemoteAgencyMessage.SenderSiteId { get; set; }

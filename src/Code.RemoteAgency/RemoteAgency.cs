@@ -33,10 +33,10 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-    public partial class RemoteAgency<TSerialized, TEntityBase> : RemoteAgency, IDisposable
+    public sealed partial class RemoteAgency<TSerialized, TEntityBase> : RemoteAgency, IDisposable
     {
-        private readonly SerializingHelperBase<TSerialized, TEntityBase> serializingHelper;
-        private readonly EntityCodeBuilderBase entityCodeBuilder;
+        private readonly SerializingHelperBase<TSerialized, TEntityBase> _serializingHelper;
+        private readonly EntityCodeBuilderBase _entityCodeBuilder;
 
         /// <summary>
         /// Initializes an instance of Remote Agency.
@@ -46,37 +46,13 @@ namespace SecretNest.RemoteAgency
         /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
         public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(siteId)
         {
-            this.serializingHelper = serializingHelper;
-            this.entityCodeBuilder = entityCodeBuilder;
+            this._serializingHelper = serializingHelper;
+            this._entityCodeBuilder = entityCodeBuilder;
 
 
 
         }
 
-        /// <summary>
-        /// Placeholder
-        /// </summary>
-        public Guid SiteId { get; set; }
-
-        //Placeholder
-        void PrepareMessageForSending(TEntityBase messageBody)
-        {
-
-        }
-
-        //Placeholder
-        void ProcessMessage(TEntityBase messageBody)
-        {
-
-        }
-
-        /// <summary>
-        /// Placeholder
-        /// </summary>
-        /// <param name="force"></param>
-        public void Disconnect(bool force)
-        {
-        }
 
         /// <summary>
         /// Placeholder
@@ -95,13 +71,12 @@ namespace SecretNest.RemoteAgency
         /// Disposes of the resources (other than memory) used by this instance.
         /// </summary>
         /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing)
+        void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {
                 if (disposing)
                 {
-                    Disconnect(true);
                     RemoveAllManagingObjects(true);
                 }
 

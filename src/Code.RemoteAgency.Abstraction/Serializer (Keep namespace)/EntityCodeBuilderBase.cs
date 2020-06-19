@@ -15,7 +15,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="className">Class name</param>
         /// <param name="entityBaseTypeFullName">Type name of the base class of entity classes.</param>
-        /// <param name="fullNameOfIRemoteAgencyMessage">Type name of <see cref="IRemoteAgencyMessage{TSerialized}"/>.</param>
+        /// <param name="fullNameOfIRemoteAgencyMessage">Type name of <see cref="IRemoteAgencyMessage"/>.</param>
         /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="InterfaceLevelAttributeBaseType"/> in interface level.<remarks>This will contains nothing when <see cref="InterfaceLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="AssetLevelAttributeBaseType"/> in asset level.<remarks>This will contains nothing when <see cref="AssetLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.<remarks>This will contains nothing when <see cref="DelegateLevelAttributeBaseType"/> is set to null.</remarks></param>

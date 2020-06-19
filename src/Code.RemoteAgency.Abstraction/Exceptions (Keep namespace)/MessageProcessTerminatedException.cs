@@ -15,10 +15,7 @@ namespace SecretNest.RemoteAgency
         /// Creates and returns a string representation of the current exception.
         /// </summary>
         /// <returns>A string representation of the current exception.</returns>
-        public override string ToString()
-        {
-            return Message;
-        }
+        public override string ToString() => Message;
 
         /// <summary>
         /// Initializes an instance of the MessageProcessTerminatedException.

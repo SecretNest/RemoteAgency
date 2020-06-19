@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency
         /// <returns>Serialized data.</returns>
         public TSerialized Serialize(TEntityBase entity)
         {
-            return serializingHelper.Serialize(entity);
+            return _serializingHelper.Serialize(entity);
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace SecretNest.RemoteAgency
         /// <returns>Entity object.</returns>
         public TEntityBase Deserialize(TSerialized serialized)
         {
-            return serializingHelper.Deserialize(serialized);
+            return _serializingHelper.Deserialize(serialized);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </remarks>
     /// <seealso cref="TimeoutException"/>
     /// <seealso cref="MessageWaitingTimedOutCallback"/>
-    /// <seealso cref="ICommunicate{TSerialized}.MessageWaitingTimedOutCallback"/>
+    /// <seealso cref="ICommunicate.MessageWaitingTimedOutCallback"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class CustomizedOperatingTimeoutTimeAttribute : Attribute
     {

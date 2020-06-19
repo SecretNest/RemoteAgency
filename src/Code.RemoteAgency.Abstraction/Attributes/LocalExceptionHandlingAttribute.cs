@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks>The attribute declared with interface affects the handling of serializing process when asset requested cannot be found, and has lower priority on all assets within the interface. The default setting is <see cref="LocalExceptionHandlingMode"/>.Suppress if this attribute absents.</remarks>
     /// <seealso cref="LocalExceptionHandlingMode"/>
-    /// <seealso cref="ICommunicate{TSerialized}.RedirectedExceptionRaisedCallback"/>
+    /// <seealso cref="ICommunicate.RedirectedExceptionRaisedCallback"/>
     /// <seealso cref="RedirectedExceptionRaisedCallback"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class LocalExceptionHandlingAttribute : Attribute
@@ -47,7 +47,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Redirect exceptions to the handler specified.
         /// </summary>
-        /// <seealso cref="ICommunicate{TSerialized}.RedirectedExceptionRaisedCallback"/>
+        /// <seealso cref="ICommunicate.RedirectedExceptionRaisedCallback"/>
         /// <seealso cref="RedirectedExceptionRaisedCallback"/>
         Redirect
     }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    public partial class RemoteAgency<TSerialized, TEntityBase>
+    static class SpecialCommands
     {
-
+        public const string Dispose = "Dispose";
     }
 }

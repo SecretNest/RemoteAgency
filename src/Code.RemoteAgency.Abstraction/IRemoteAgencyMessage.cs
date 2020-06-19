@@ -11,60 +11,52 @@ namespace SecretNest.RemoteAgency
     public interface IRemoteAgencyMessage
     {
         /// <summary>
-        /// Site id of the source Remote Agency manager
+        /// Gets or sets the site id of the source Remote Agency instance.
         /// </summary>
         Guid SenderSiteId { get; set; }
         /// <summary>
-        /// Site id of the target Remote Agency manager
+        /// Gets or sets the site id of the target Remote Agency instance.
         /// </summary>
         Guid TargetSiteId { get; set; }
         /// <summary>
-        /// Instance id of the source proxy or service wrapper
+        /// Gets or sets the instance id of the source proxy or service wrapper.
         /// </summary>
         Guid SenderInstanceId { get; set; }
         /// <summary>
-        /// Instance id of the target proxy or service wrapper
+        /// Gets or sets the instance id of the target proxy or service wrapper.
         /// </summary>
         Guid TargetInstanceId { get; set; }
 
         /// <summary>
-        /// Message type
+        /// Gets or sets the message type.
         /// </summary>
         MessageType MessageType { get; set; }
 
         /// <summary>
-        /// Asset name
+        /// Gets or sets the asset name.
         /// </summary>
         string AssetName { get; set; }
 
         /// <summary>
-        /// Message id
+        /// Gets or sets the message id.
         /// </summary>
         Guid MessageId { get; set; }
 
         /// <summary>
-        /// Exception object
+        /// Gets or sets the exception object.
         /// </summary>
         Exception Exception { get; set; }
 
         /// <summary>
-        /// Whether this message is one way (do not need any response)
+        /// Gets or sets whether this message is one way (do not need any response).
         /// </summary>
         bool IsOneWay { get; set; }
 
         /// <summary>
-        /// Whether this message is empty, not containing parameters required by asset.
+        /// Gets whether this message is empty, not containing parameters required by asset.
         /// </summary>
         bool IsEmptyMessage { get; }
     }
-
-    /// <summary>
-    /// Defines the common properties contained in messages.
-    /// </summary>
-    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-    /// <remarks>The type parameter is not used by any property defined in this interface, which is only used to constrain data type.</remarks>
-    public interface IRemoteAgencyMessage<out TSerialized> : IRemoteAgencyMessage
-    { }
     
     /// <summary>
     /// Contains a list of message type

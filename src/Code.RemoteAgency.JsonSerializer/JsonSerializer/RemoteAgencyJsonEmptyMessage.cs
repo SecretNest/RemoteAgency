@@ -6,7 +6,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
 {    /// <summary>
     /// Defines an empty message with Json serialization support.
     /// </summary>
-    public class RemoteAgencyJsonEmptyMessage : IRemoteAgencyMessage<string>
+    public class RemoteAgencyJsonEmptyMessage : IRemoteAgencyMessage
     {
         Guid IRemoteAgencyMessage.SenderSiteId { get; set; }
         Guid IRemoteAgencyMessage.TargetSiteId { get; set; }

@@ -7,11 +7,9 @@ namespace SecretNest.RemoteAgency.MessageFiltering
     /// <summary>
     /// Represents a message to be checked for sending or processing after received. This is an abstract class.
     /// </summary>
-    /// <seealso cref="BeforeMessageProcessingEventArgs{TEntityBase}"/>
-    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.BeforeMessageSending"/>
-    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.AfterMessageReceived"/>
+    /// <seealso cref="BeforeMessageProcessingEventArgs{TSerialized, TEntityBase}"/>
     /// <seealso cref="MessageProcessTerminatedException"/>
-    public abstract class BeforeMessageProcessingEventArgsBase
+    public abstract class BeforeMessageProcessingEventArgsBase : MessageBodyEventArgsBase
     {
         #region FurtherProcessing
         MessageFurtherProcessing _furtherProcessing;
@@ -36,7 +34,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         }
 
         /// <summary>
-        /// Gets text will be used as <see cref="MessageProcessTerminatedException.Message"/>.
+        /// Gets text will be used as the message of <see cref="MessageProcessTerminatedException"/>.
         /// </summary>
         public string MessageOfMessageProcessTerminatedException { get; private set; }
 
@@ -46,7 +44,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         public void SetToContinue() => _furtherProcessing = MessageFurtherProcessing.Continue;
         
         /// <summary>
-        /// Terminates this process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be used when <see cref="BeforeMessageProcessingEventArgsBase.IsOneWay"/> is <see langword="true" />.
+        /// Terminates this process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be used when <see cref="MessageBodyEventArgsBase.IsOneWay"/> is <see langword="true" />.
         /// </summary>
         /// <param name="message">Message of the exception.</param>
         public void SetToTerminateAndReturnException(
@@ -65,7 +63,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver. Cannot be used when <see cref="MessageDirection"/> is <see cref="SecretNest.RemoteAgency.MessageFiltering.MessageDirection.Sending"/>.
         /// </summary>
         /// <param name="message">Message of the exception.</param>
-        /// <remarks>Caution: This may cause the sender throw <see cref="TimeoutException"/> if <see cref="IsOneWay"/> is set to <see langword="false"/>.</remarks>
+        /// <remarks>Caution: This may cause the sender throw <see cref="TimeoutException"/> if <see cref="MessageBodyEventArgsBase.IsOneWay"/> is set to <see langword="false"/>.</remarks>
         public void SetToReplaceWithException(
             string message = "Remote Agency Manager terminated this message processing due to user request.")
         {
@@ -114,58 +112,6 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         public MessageDirection MessageDirection { get; }
 
         /// <summary>
-        /// Gets the message body.
-        /// </summary>
-        public abstract IRemoteAgencyMessage MessageBodyGeneric { get; }
-
-        #region Members from message
-        /// <summary>
-        /// Site id of the source Remote Agency manager.
-        /// </summary>
-        public Guid SenderSiteId => MessageBodyGeneric.SenderSiteId;
-
-        /// <summary>
-        /// Site id of the target Remote Agency manager.
-        /// </summary>
-        public Guid TargetSiteId => MessageBodyGeneric.TargetSiteId;
-
-        /// <summary>
-        /// Instance id of the source proxy or service wrapper.
-        /// </summary>
-        public Guid SenderInstanceId => MessageBodyGeneric.SenderInstanceId;
-
-        /// <summary>
-        /// Instance id of the target proxy or service wrapper.
-        /// </summary>
-        public Guid TargetInstanceId => MessageBodyGeneric.TargetInstanceId;
-
-        /// <summary>
-        /// Message type.
-        /// </summary>
-        public MessageType MessageType => MessageBodyGeneric.MessageType;
-
-        /// <summary>
-        /// Asset name.
-        /// </summary>
-        public string AssetName => MessageBodyGeneric.AssetName;
-
-        /// <summary>
-        /// Message id.
-        /// </summary>
-        public Guid MessageId => MessageBodyGeneric.MessageId;
-
-        /// <summary>
-        /// Exception object.
-        /// </summary>
-        public Exception Exception => MessageBodyGeneric.Exception;
-
-        /// <summary>
-        /// Whether this message is one way (do not need any response).
-        /// </summary>
-        public bool IsOneWay => MessageBodyGeneric.IsOneWay;
-        #endregion
-
-        /// <summary>
         /// Initializes an instance of BeforeMessageProcessingEventArgsBase.
         /// </summary>
         /// <param name="messageDirection">Direction of the message.</param>
@@ -186,7 +132,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         /// </summary>
         Continue,
         /// <summary>
-        /// Terminates this process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be used when <see cref="BeforeMessageProcessingEventArgsBase.IsOneWay"/> is <see langword="true" />.
+        /// Terminates this process and send an instance of <see cref="MessageProcessTerminatedException" /> back to the sender. Cannot be used when <see cref="MessageBodyEventArgsBase.IsOneWay"/> is <see langword="true" />.
         /// </summary>
         TerminateAndReturnException,
         /// <summary>
@@ -194,7 +140,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         /// </summary>
         ReplaceWithException,
         /// <summary>
-        /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver and the sender. Cannot be used when <see cref="BeforeMessageProcessingEventArgsBase.MessageDirection"/> is <see cref="MessageDirection.Sending"/> or <see cref="BeforeMessageProcessingEventArgsBase.IsOneWay"/> is <see langword="true" />. 
+        /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver and the sender. Cannot be used when <see cref="BeforeMessageProcessingEventArgsBase.MessageDirection"/> is <see cref="MessageDirection.Sending"/> or <see cref="MessageBodyEventArgsBase.IsOneWay"/> is <see langword="true" />. 
         /// </summary>
         ReplaceWithExceptionAndReturn,
         /// <summary>
@@ -221,28 +167,37 @@ namespace SecretNest.RemoteAgency.MessageFiltering
     /// <summary>
     /// Represents a message to be checked for sending or processing after received.
     /// </summary>
+    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.BeforeMessageSending"/>
-    /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}.AfterMessageReceived"/>
     /// <seealso cref="MessageProcessTerminatedException"/>
-    public class BeforeMessageProcessingEventArgs<TEntityBase> : BeforeMessageProcessingEventArgsBase
+    public class BeforeMessageProcessingEventArgs<TSerialized, TEntityBase> : BeforeMessageProcessingEventArgsBase, IMessageBodyGenericEventArgs<TSerialized, TEntityBase>
     {
         /// <summary>
         /// Gets the message body.
         /// </summary>
         public TEntityBase MessageBody { get; }
 
+        readonly Lazy<TSerialized> _serialized;
+
+        /// <inheritdoc />
+        public TSerialized Serialize()
+        {
+            return _serialized.Value;
+        }
+
+        /// <inheritdoc />
+        public override IRemoteAgencyMessage MessageBodyGeneric => (IRemoteAgencyMessage) MessageBody;
+
         /// <summary>
         /// Initializes an instance of BeforeMessageProcessingEventArgsBase.
         /// </summary>
         /// <param name="messageDirection">Direction of the message.</param>
         /// <param name="messageBody">Message.</param>
-        public BeforeMessageProcessingEventArgs(MessageDirection messageDirection, TEntityBase messageBody) : base(messageDirection)
+        /// <param name="serializerCallback">Callback for serializing message body.</param>
+        public BeforeMessageProcessingEventArgs(MessageDirection messageDirection, TEntityBase messageBody, Func<TEntityBase, TSerialized> serializerCallback) : base(messageDirection)
         {
             MessageBody = messageBody;
+            _serialized = new Lazy<TSerialized>(() => serializerCallback(MessageBody));
         }
-
-        /// <inheritdoc />
-        public override IRemoteAgencyMessage MessageBodyGeneric => (IRemoteAgencyMessage) MessageBody;
     }
 }
