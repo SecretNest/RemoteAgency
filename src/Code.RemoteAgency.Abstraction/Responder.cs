@@ -63,7 +63,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="messageId">Id of the message</param>
         /// <param name="millisecondsTimeout">The length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.</param>
         /// <returns>Responded value.</returns>
-        /// <exception cref="TimeoutException">This is thrown when waiting is timed out.</exception>
+        /// <exception cref="AccessingTimeOutException">This is thrown when waiting is timed out.</exception>
         /// <exception cref="ArgumentOutOfRangeException">This is thrown when message specified by <paramref name="messageId"/> cannot be found.</exception>
         /// <remarks>The instance of the mapping will be removed after this calling end.</remarks>
         public TEntityBase GetResult(Guid messageId, int millisecondsTimeout)
@@ -81,7 +81,7 @@ namespace SecretNest.RemoteAgency
                     _responders.TryRemove(messageId, out var removed);
                     removed.RemoveItem();
                     MessageWaitingTimedOutCallback(messageId);
-                    throw new TimeoutException();
+                    throw new AccessingTimeOutException();
                 }
             }
             else
@@ -94,7 +94,7 @@ namespace SecretNest.RemoteAgency
         /// Prepares for receiving response.
         /// </summary>
         /// <param name="messageId">Id of the message.</param>
-        /// <remarks>This should be called before calling <see cref="SetDefaultResult(Guid)"/> and <see cref="SetResult(Guid, T)"/>.</remarks>
+        /// <remarks>This should be called before calling <see cref="SetDefaultResult(Guid)"/> and <see cref="SetResult(Guid, TEntityBase)"/>.</remarks>
         public void Prepare(Guid messageId)
         {
             _responders.TryAdd(messageId, new ResponderItem());

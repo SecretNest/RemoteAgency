@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency
     /// The exception that is thrown when the object specified by instance id cannot be found in target instance of Remote Agency.
     /// </summary>
     [Serializable]
-    public class InstanceNotFoundException : NullReferenceException
+    public sealed class InstanceNotFoundException : NullReferenceException
     {
         /// <summary>
         /// Gets the id of the instance that cannot be found.
@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected InstanceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        private InstanceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             InstanceId = (Guid)info.GetValue("InstanceId", typeof(Guid));
         }

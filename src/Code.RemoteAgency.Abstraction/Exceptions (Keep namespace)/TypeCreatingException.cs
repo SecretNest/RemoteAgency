@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency
     /// The exception that is thrown when there is exception thrown from proxy or service wrapper type creating procedure.
     /// </summary>
     [Serializable]
-    public class TypeCreatingException : Exception
+    public sealed class TypeCreatingException : Exception
     {
         /// <summary>
         /// Exceptions.
@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected TypeCreatingException(SerializationInfo info, StreamingContext context) : base(info, context)
+        private TypeCreatingException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Records = (TypeCreatingExceptionRecordCollection)info.GetValue("Records", typeof(TypeCreatingExceptionRecordCollection));
         }
@@ -48,7 +48,7 @@ namespace SecretNest.RemoteAgency
     /// Contains messages from multiple exceptions thrown from type creating procedure.
     /// </summary>
     [Serializable]
-    public class TypeCreatingExceptionRecordCollection : IEnumerable<TypeCreatingExceptionRecord>, ISerializable
+    public sealed class TypeCreatingExceptionRecordCollection : IEnumerable<TypeCreatingExceptionRecord>, ISerializable
     {
         private List<TypeCreatingExceptionRecord> _records;
 
@@ -87,7 +87,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected TypeCreatingExceptionRecordCollection(SerializationInfo info, StreamingContext context)
+        private TypeCreatingExceptionRecordCollection(SerializationInfo info, StreamingContext context)
         {
             var count = info.GetInt32("RecordCount");
             _records = new List<TypeCreatingExceptionRecord>(count);
@@ -103,7 +103,7 @@ namespace SecretNest.RemoteAgency
     /// Contains message from one exception thrown from type creating procedure.
     /// </summary>
     [Serializable]
-    public class TypeCreatingExceptionRecord : ISerializable
+    public sealed class TypeCreatingExceptionRecord : ISerializable
     {
         /// <summary>
         /// Exception Id.
@@ -137,7 +137,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected TypeCreatingExceptionRecord(SerializationInfo info, StreamingContext context)
+        private TypeCreatingExceptionRecord(SerializationInfo info, StreamingContext context)
         {
             Id = info.GetString("Id");
             Message = info?.GetString("Message");

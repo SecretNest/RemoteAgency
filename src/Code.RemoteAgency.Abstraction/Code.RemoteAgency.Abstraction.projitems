@@ -9,9 +9,11 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssemblyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\IMessageBodyGenericEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\MessageBodyEventArgs.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
@@ -40,8 +42,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IProxyCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityCodeBuilderBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ICommunicate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\MessageBodyEventArgsBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\MessageProcessTerminatedException.cs" />

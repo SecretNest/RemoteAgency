@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// 3 Attributes specified in interface.
     /// 4 Default value: -1 (Infinity)
     /// </remarks>
-    /// <seealso cref="TimeoutException"/>
+    /// <seealso cref="AccessingTimeOutException"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class CustomizedOperatingTimeoutTimeAttribute : Attribute
     {

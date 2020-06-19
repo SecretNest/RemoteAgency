@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency
     /// The exception to indicate a message processing is terminated.
     /// </summary>
     [Serializable]
-    public class MessageProcessTerminatedException : Exception
+    public sealed class MessageProcessTerminatedException : Exception
     {
         /// <summary>
         /// Creates and returns a string representation of the current exception.
@@ -29,7 +29,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected MessageProcessTerminatedException(SerializationInfo info, StreamingContext context) : base(info,
+        private MessageProcessTerminatedException(SerializationInfo info, StreamingContext context) : base(info,
             context)
         { }
     }

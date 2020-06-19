@@ -6,36 +6,24 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    //TODO: need to clean
-
     /// <summary>
-    /// Represents a created object that can communicate with Remote Agency Manager.
+    /// Represents a created service wrapper object that can communicate with Remote Agency.
     /// </summary>
-    public interface ICommunicate
+    public interface IServiceWrapperCommunicate
     {
         /// <summary>
-        /// Will be called after this object is linked to a Remote Agency Manager.
-        /// </summary>
-        void AfterInitialized();
-
-        /// <summary>
-        /// Occurs when disposing.
-        /// </summary>
-        event EventHandler DisposingRequested;
-
-        /// <summary>
-        /// Processes a method calling message and get the data returned.
+        /// Processes a method calling message and returns response.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessMethodCallingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
+        IRemoteAgencyMessage ProcessMethodMessage(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
-        /// Processes a method calling message.
+        /// Processes a one way method calling message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        void ProcessMethodCallingMessageWithoutReturn(IRemoteAgencyMessage message);
+        void ProcessOneWayMethodMessage(IRemoteAgencyMessage message);
 
         /// <summary>
         /// Processes an event adding message.
@@ -48,23 +36,19 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         void ProcessEventRemovingMessage(IRemoteAgencyMessage message);
-        
-        /// <summary>
-        /// Processes an event raising message.
-        /// </summary>
-        /// <param name="message">Message to be processed.</param>
-        /// <param name="exception">Exception thrown while running user code.</param>
-        /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessEventRaisingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
-        
-        /// <summary>
-        /// Processes an event raising message.
-        /// </summary>
-        /// <param name="message">Message to be processed.</param>
-        void ProcessEventRaisingMessageWithoutReturn(IRemoteAgencyMessage message);
 
         /// <summary>
-        /// Processes a property getting message and get the data returned.
+        /// Will be called while an event raising message need to be sent to a remote site and get response of it.
+        /// </summary>
+        SendMessageAndGetReturnCallback SendEventMessageCallback { get; set; }
+
+        /// <summary>
+        /// Will be called while an event raising message need to be sent to a remote site without getting response.
+        /// </summary>
+        SendMessageWithoutReturnCallback SendOneWayEventMessageCallback { get; set; }
+
+        /// <summary>
+        /// Processes a property getting message and returns response.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
@@ -72,7 +56,7 @@ namespace SecretNest.RemoteAgency
         IRemoteAgencyMessage ProcessPropertyGettingMessage(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
-        /// Processes a property setting message and get the data returned.
+        /// Processes a property setting message and returns response.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
@@ -84,18 +68,5 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         void ProcessPropertySettingMessageWithoutReturn(IRemoteAgencyMessage message);
-
-        /// <summary>
-        /// Should be called while a message should be sent to a remote site.
-        /// </summary>
-        SendMessageCallback SendMessageCallback { get; set; }
     }
-
-    /// <summary>
-    /// Sends a message out.
-    /// </summary>
-    /// <param name="message">Message to be sent.</param>
-    /// <returns>Message returned. Value <see langword="null" /> will be returned if no return required by <paramref name="message"/>.</returns>
-    /// <exception cref="TimeoutException">Thrown when timed out.</exception>
-    public delegate IRemoteAgencyMessage SendMessageCallback(IRemoteAgencyMessage message);
 }
