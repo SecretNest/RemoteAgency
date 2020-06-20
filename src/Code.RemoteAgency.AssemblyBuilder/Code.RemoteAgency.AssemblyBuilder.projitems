@@ -9,10 +9,13 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)MetadataReferenceResolver.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MissingAssemblyResolvingEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PortableExecutableReferenceBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\MetadataReferenceResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\MissingAssemblyResolvingEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\PortableExecutableReferenceBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.AssemblyBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TrustedPlatformAssemblies.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\TrustedPlatformAssemblies.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)TypeBuilding\" />
   </ItemGroup>
 </Project>

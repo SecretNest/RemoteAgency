@@ -20,10 +20,10 @@ namespace SecretNest.RemoteAgency
 
         void InitializeAssemblyBuilder()
         {
-            _metadataReferenceResolver = new Lazy<MetadataReferenceResolver>(() => new MetadataReferenceResolver() {GetMissingAssemblyCallback = GetMissingAssembly});
+            _metadataReferenceResolver = new Lazy<TypeBuilding.MetadataReferenceResolver>(() => new TypeBuilding.MetadataReferenceResolver() {GetMissingAssemblyCallback = GetMissingAssembly});
         }
 
-        private Lazy<MetadataReferenceResolver> _metadataReferenceResolver; 
+        private Lazy<TypeBuilding.MetadataReferenceResolver> _metadataReferenceResolver; 
 
         bool BuildAssembly(string assemblyName, IEnumerable<string> sourceCode, IEnumerable<AssemblyReference> references, out byte[] assemblyImage, out TypeCreatingException buildingError)
         {

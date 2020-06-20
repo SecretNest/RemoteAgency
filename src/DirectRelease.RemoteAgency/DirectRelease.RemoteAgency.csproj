@@ -39,6 +39,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
+    <PackageReference Include="SecretNest.SequentialScheduler" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +53,8 @@
   <Import Project="..\Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems" Label="Shared" />
 
   <Import Project="..\Code.RemoteAgency.AssemblyBuilder\Code.RemoteAgency.AssemblyBuilder.projitems" Label="Shared" />
+
+  <Import Project="..\Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems" Label="Shared" />
 
 </Project>
 

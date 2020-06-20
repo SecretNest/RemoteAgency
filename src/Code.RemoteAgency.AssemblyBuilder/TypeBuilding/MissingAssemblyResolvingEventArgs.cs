@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using SecretNest.RemoteAgency.TypeBuilding;
 
-namespace SecretNest.RemoteAgency
+namespace SecretNest.RemoteAgency.TypeBuilding
 {
     /// <summary>
     /// Represents an argument of the MissingAssemblyResolving.

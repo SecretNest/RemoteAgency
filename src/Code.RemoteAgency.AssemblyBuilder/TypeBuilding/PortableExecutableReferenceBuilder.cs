@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
-using SecretNest.RemoteAgency.TypeBuilding;
 
-namespace SecretNest.RemoteAgency
+namespace SecretNest.RemoteAgency.TypeBuilding
 {
     static class PortableExecutableReferenceBuilder
     {

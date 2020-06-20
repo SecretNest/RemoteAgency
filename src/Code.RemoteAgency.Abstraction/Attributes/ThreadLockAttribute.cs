@@ -63,6 +63,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Always use one thread to access assets within this object.
         /// </summary>
+        /// <remarks>This is not supported by neat version of Remote Agency due to lack of built-in SequentialScheduler.</remarks>
         AnyButSameThread,
         /// <summary>
         /// Always use the TaskScheduler specified by name to access assets within this object.

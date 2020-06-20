@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
-using SecretNest.RemoteAgency.TaskSchedulers;
 
 namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-        private SequentialScheduler _sequentialScheduler = null;
         private TaskFactory _taskFactory = null;
 
         protected delegate IRemoteAgencyMessage AccessWithReturn(IRemoteAgencyMessage message, out Exception exception);
@@ -35,10 +33,7 @@ namespace SecretNest.RemoteAgency
                     _processThreadLockWithoutReturn = ProcessWithSynchronizationContext;
                     break;
                 case ThreadLockMode.AnyButSameThread:
-                    _sequentialScheduler = new SequentialScheduler();
-                    _taskFactory = new TaskFactory(_sequentialScheduler);
-                    _processThreadLockWithReturn = ProcessWithTaskScheduler;
-                    _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
+                    PrepareSequentialScheduler();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(threadLockMode), threadLockMode, null);
@@ -61,11 +56,7 @@ namespace SecretNest.RemoteAgency
 
         void DisposeThreadLock()
         {
-            if (_sequentialScheduler != null)
-            {
-                _sequentialScheduler.Dispose();
-                _sequentialScheduler = null;
-            }
+            DisposeSequentialScheduler();
 
             _taskFactory = null;
             _processThreadLockWithReturn = null;

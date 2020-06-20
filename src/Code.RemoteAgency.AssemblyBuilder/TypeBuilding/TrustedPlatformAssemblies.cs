@@ -7,7 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace SecretNest.RemoteAgency
+namespace SecretNest.RemoteAgency.TypeBuilding
 {
     class TrustedPlatformAssemblies
     {

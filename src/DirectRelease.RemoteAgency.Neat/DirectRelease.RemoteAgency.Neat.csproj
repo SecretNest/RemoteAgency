@@ -34,4 +34,6 @@
 
   <Import Project="..\Code.RemoteAgency.NoAssemblyBuilder\Code.RemoteAgency.NoAssemblyBuilder.projitems" Label="Shared" />
 
+  <Import Project="..\Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems" Label="Shared" />
+
 </Project>

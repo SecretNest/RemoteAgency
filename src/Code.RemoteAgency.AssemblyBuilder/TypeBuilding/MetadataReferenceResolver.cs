@@ -4,9 +4,8 @@ using System.Collections.Immutable;
 using System.Reflection;
 using System.Text;
 using Microsoft.CodeAnalysis;
-using SecretNest.RemoteAgency.TypeBuilding;
 
-namespace SecretNest.RemoteAgency
+namespace SecretNest.RemoteAgency.TypeBuilding
 {
     class MetadataReferenceResolver : Microsoft.CodeAnalysis.MetadataReferenceResolver
     {
