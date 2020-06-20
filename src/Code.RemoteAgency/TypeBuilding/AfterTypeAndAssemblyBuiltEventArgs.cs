@@ -7,15 +7,8 @@ namespace SecretNest.RemoteAgency.TypeBuilding
     /// <summary>
     /// Represents an argument of the <see cref="RemoteAgency.AfterTypeAndAssemblyBuilt"/>.
     /// </summary>
-    public class AfterTypeAndAssemblyBuiltEventArgs : EventArgs
+    public class AfterTypeAndAssemblyBuiltEventArgs : SourceTypeAndBuiltClassTypeEventArgsBase
     {
-        /// <summary>
-        /// Gets the source type.
-        /// </summary>
-        /// <remarks><p>When building proxy, the value is the type of the interface.</p>
-        /// <p>When building service wrapper, the value is the type of the service object.</p></remarks>
-        public Type SourceType { get; }
-
         /// <summary>
         /// Gets the type of the built object.
         /// </summary>
@@ -30,11 +23,11 @@ namespace SecretNest.RemoteAgency.TypeBuilding
         /// Initializes an instance of AfterTypeAndAssemblyBuiltEventArgs.
         /// </summary>
         /// <param name="sourceType">Source type.</param>
+        /// <param name="builtClassType">Type of the built class, proxy or service wrapper.</param>
         /// <param name="constructedType">TYpe of the built object.</param>
         /// <param name="assemblyImage">Built assembly.</param>
-        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceType, Type constructedType, byte[] assemblyImage)
+        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceType, BuiltClassType builtClassType, Type constructedType, byte[] assemblyImage) : base(sourceType, builtClassType)
         {
-            SourceType = sourceType;
             ConstructedType = constructedType;
             AssemblyImage = assemblyImage;
         }

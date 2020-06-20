@@ -25,6 +25,8 @@ namespace SecretNest.RemoteAgency
             InitializeAssemblyBuilder();
 
             SiteId = siteId == Guid.Empty ? Guid.NewGuid() : siteId;
+
+            EnableInMemoryTypeCache();
         }
     }
 

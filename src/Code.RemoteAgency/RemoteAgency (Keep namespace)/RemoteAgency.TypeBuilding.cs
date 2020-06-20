@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -45,66 +46,120 @@ namespace SecretNest.RemoteAgency
             out List<AssemblyReference> assemblyReferences);
 
         /// <summary>
-        /// Constructs a type.
+        /// Constructs an object of a type.
         /// </summary>
         /// <param name="sourceType">Source type.</param>
         /// <param name="constructedTypeName">Full name of the constructed type.</param>
+        /// <param name="assemblyName">Assembly name to be built.</param>
+        /// <param name="builtClassType">Type of the class to be built, proxy or service wrapper.</param>
+        /// <param name="inMemoryCache">In memory cache of the built type.</param>
         /// <param name="creatingInstanceCallback">Callback for creating instance of specified type.</param>
         /// <param name="sourceCodeBuilderCallback">Callback for creating source code of the constructed type and related.</param>
-        /// <returns></returns>
-        protected object ConstructType(Type sourceType, string constructedTypeName, Func<Type, object> creatingInstanceCallback, SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback) 
+        /// <returns>Instance of the type constructed or should be constructed.</returns>
+        private object ConstructTypeInstance(Type sourceType, string constructedTypeName, string assemblyName, BuiltClassType builtClassType,
+            ConcurrentDictionary<Type, Type> inMemoryCache, Func<Type, object> creatingInstanceCallback,
+            SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
         {
-            if (BeforeTypeBuilding != null)
+            Type constructedType;
+
+            if (inMemoryCache != null)
             {
-                var e = new BeforeTypeBuildingEventArgs(sourceType);
+                inMemoryCache.TryGetValue(sourceType, out constructedType);
+            }
+            else
+            {
+                constructedType = null;
+            }
+
+            if (constructedType == null && BeforeTypeBuilding != null)
+            {
+                var e = new BeforeTypeBuildingEventArgs(sourceType, builtClassType);
                 BeforeTypeBuilding(this, e);
-                if (e.ConstructedType != null)
-                {
-                    return creatingInstanceCallback(e.ConstructedType);
-                }
+                constructedType = e.ConstructedType;
             }
 
-            if (BeforeAssemblyBuilding != null)
+            if (constructedType == null && BeforeAssemblyBuilding != null)
             {
-                var e = new BeforeAssemblyBuildingEventArgs(sourceType);
+                var e = new BeforeAssemblyBuildingEventArgs(sourceType, builtClassType);
                 BeforeAssemblyBuilding(this, e);
-                Type constructedType = e.Assembly.GetType(constructedTypeName);
-                return creatingInstanceCallback(constructedType);
+                constructedType = e.Assembly?.GetType(constructedTypeName);
             }
 
-            sourceCodeBuilderCallback(out var sourceCode, out var assemblyReferences);
-
-            if (CustomizedAssemblyBuildingRequested != null)
+            if (constructedType == null)
             {
-                var e = new CustomizedAssemblyBuildingEventArgs(sourceCode, assemblyReferences);
-                CustomizedAssemblyBuildingRequested(this, e);
-                if (e.BuiltAssembly != null)
-                {
-                    Type constructedType = e.BuiltAssembly.GetType(constructedTypeName);
-                    return creatingInstanceCallback(constructedType);
-                }
+                sourceCodeBuilderCallback(out var sourceCode, out var assemblyReferences);
 
-                throw new InvalidOperationException(
-                    $"Property {nameof(CustomizedAssemblyBuildingEventArgs.BuiltAssembly)} in argument e of event {nameof(CustomizedAssemblyBuildingRequested)} should not be set to null.");
+                if (CustomizedAssemblyBuildingRequested != null)
+                {
+                    var e = new CustomizedAssemblyBuildingEventArgs(sourceCode, assemblyReferences);
+                    CustomizedAssemblyBuildingRequested(this, e);
+                    if (e.BuiltAssembly != null)
+                    {
+                        constructedType = e.BuiltAssembly.GetType(constructedTypeName);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(
+                            $"Property {nameof(CustomizedAssemblyBuildingEventArgs.BuiltAssembly)} in argument e of event {nameof(CustomizedAssemblyBuildingRequested)} should not be set to null.");
+                    }
+                }
+                else if (BuildAssembly(assemblyName, new string[] {sourceCode},
+                    assemblyReferences, out var assemblyImage, out var buildingError))
+                {
+                    var assembly = Assembly.Load(assemblyImage);
+                    constructedType = assembly.GetType(constructedTypeName);
+
+                    if (AfterTypeAndAssemblyBuilt != null)
+                    {
+                        var e = new AfterTypeAndAssemblyBuiltEventArgs(sourceType, builtClassType, constructedType,
+                            assemblyImage);
+                        AfterTypeAndAssemblyBuilt(this, e);
+                    }
+                }
+                else
+                {
+                    throw buildingError;
+                }
             }
 
-
-            if (BuildAssembly(NamingHelper.GetRandomName("Assembly"), new string[] {sourceCode},
-                assemblyReferences, out var assemblyImage, out var buildingError))
+            if (inMemoryCache != null)
             {
-                var assembly = Assembly.Load(assemblyImage);
-                Type constructedType = assembly.GetType(constructedTypeName);
-
-                if (AfterTypeAndAssemblyBuilt != null)
-                {
-                    var e = new AfterTypeAndAssemblyBuiltEventArgs(sourceType, constructedType, assemblyImage);
-                    AfterTypeAndAssemblyBuilt(this, e);
-                }
-
-                return creatingInstanceCallback(constructedType);
+                inMemoryCache[sourceType] = constructedType;
             }
 
-            throw buildingError;
+            return creatingInstanceCallback(constructedType);
+        }
+
+        /// <summary>
+        /// Constructs a proxy object of a type.
+        /// </summary>
+        /// <param name="sourceType">Source type.</param>
+        /// <param name="constructedTypeName">Full name of the constructed type.</param>
+        /// <param name="assemblyName">Assembly name to be built.</param>
+        /// <param name="sourceCodeBuilderCallback">Callback for creating source code of the constructed type and related.</param>
+        /// <returns>Instance of the type constructed or should be constructed.</returns>
+        protected object ConstructProxyInstance(Type sourceType, string constructedTypeName, string assemblyName,
+            SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
+        {
+            return ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.Proxy,
+                _inMemoryProxyTypeCache, FastActivator.CreateInstance, sourceCodeBuilderCallback);
+        }
+
+        /// <summary>
+        /// Constructs a service wrapper object of a type.
+        /// </summary>
+        /// <param name="sourceType">Source type.</param>
+        /// <param name="constructedTypeName">Full name of the constructed type.</param>
+        /// <param name="assemblyName">Assembly name to be built.</param>
+        /// <param name="serviceObject">Target service object to be wrapped.</param>
+        /// <param name="sourceCodeBuilderCallback">Callback for creating source code of the constructed type and related.</param>
+        /// <returns>Instance of the type constructed or should be constructed.</returns>
+        protected object ConstructServiceWrapperInstance(Type sourceType, string constructedTypeName, string assemblyName,
+            object serviceObject, SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
+        {
+            return ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.ServiceWrapper,
+                _inMemoryServiceWrapperTypeCache, t => FastActivator<object>.CreateInstance(t, serviceObject),
+                sourceCodeBuilderCallback);
         }
     }
 }

@@ -9,12 +9,14 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TypeBuilding.InMemoryCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AssemblyReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\ExceptionRedirectedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\IMessageBodyGenericEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgs.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgsBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BuiltClassType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.EmptyMessage.cs" />
@@ -38,9 +40,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeTypeBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\CustomizedAssemblyBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\SourceTypeAndBuiltClassTypeEventArgsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\" />
-    <Folder Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

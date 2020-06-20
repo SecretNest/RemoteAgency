@@ -8,15 +8,8 @@ namespace SecretNest.RemoteAgency.TypeBuilding
     /// Represents an argument of the <see cref="RemoteAgency.BeforeAssemblyBuilding"/>.
     /// </summary>
     /// <remarks>The handler should set the <see cref="ConstructedType"/> when matching item found.</remarks>
-    public class BeforeTypeBuildingEventArgs : EventArgs
+    public class BeforeTypeBuildingEventArgs : SourceTypeAndBuiltClassTypeEventArgsBase
     {
-        /// <summary>
-        /// Gets the source type.
-        /// </summary>
-        /// <remarks><p>When building proxy, the value is the type of the interface.</p>
-        /// <p>When building service wrapper, the value is the type of the service object.</p></remarks>
-        public Type SourceType { get; }
-
         /// <summary>
         /// Gets of sets the type of the constructed object.
         /// </summary>
@@ -26,9 +19,9 @@ namespace SecretNest.RemoteAgency.TypeBuilding
         /// Initializes an instance of BeforeTypeBuildingEventArgs.
         /// </summary>
         /// <param name="sourceType">Source type.</param>
-        internal BeforeTypeBuildingEventArgs(Type sourceType)
+        /// <param name="builtClassType">Type of the class to be built, proxy or service wrapper.</param>
+        internal BeforeTypeBuildingEventArgs(Type sourceType, BuiltClassType builtClassType) : base(sourceType, builtClassType)
         {
-            SourceType = sourceType;
         }
     }
 }
