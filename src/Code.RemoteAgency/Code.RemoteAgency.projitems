@@ -15,30 +15,33 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\IMessageBodyGenericEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgs.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgsBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.EmptyMessage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Factory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.IO.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Manager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.MessageFiltering.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.MessageFlow.FromInside.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.MessageFlow.FromOutside.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Serializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.TaskScheduler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Template.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.TypeBuilding.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.ThreadLock.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.FromOutside.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.FomInside.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.EmptyMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Factory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.IO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Manager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.MessageFiltering.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.MessageFlow.FromInside.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.MessageFlow.FromOutside.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Serializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TaskScheduler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Template.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TypeBuilding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.ThreadLock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.FromOutside.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.FomInside.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SpecialCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaskSchedulers\SequentialScheduler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AfterTypeAndAssemblyBuiltEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeAssemblyBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeTypeBuildingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\CustomizedAssemblyBuildingEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CodeBuilderHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\" />
+    <Folder Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

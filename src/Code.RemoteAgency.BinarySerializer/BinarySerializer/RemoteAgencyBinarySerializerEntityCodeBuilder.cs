@@ -1,5 +1,4 @@
-﻿using SecretNest.RemoteAgency.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +31,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
 
             sourceCodeBuilder.Append(" : ")
                 .Append(entityBaseTypeFullName).Append(", ").Append(fullNameOfIRemoteAgencyMessage);
-            CodeBuilderHelper.ApplyConstraints(usedGenerics, sourceCodeBuilder);
+            ApplyConstraints(usedGenerics, sourceCodeBuilder);
             sourceCodeBuilder.AppendLine("\n{");
 
             //values

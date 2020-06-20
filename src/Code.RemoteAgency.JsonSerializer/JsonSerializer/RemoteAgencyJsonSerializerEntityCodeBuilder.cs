@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.JsonSerializer
 {
@@ -33,7 +32,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
 
             sourceCodeBuilder.Append(" : ")
                 .Append(entityBaseTypeFullName).Append(", ").Append(fullNameOfIRemoteAgencyMessage);
-            CodeBuilderHelper.ApplyConstraints(usedGenerics, sourceCodeBuilder);
+            ApplyConstraints(usedGenerics, sourceCodeBuilder);
             sourceCodeBuilder.AppendLine("\n{");
 
             //values

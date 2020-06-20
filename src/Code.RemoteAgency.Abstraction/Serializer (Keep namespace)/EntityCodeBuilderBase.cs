@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -55,5 +57,40 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <returns>Empty message.</returns>
         public abstract IRemoteAgencyMessage CreateEmptyMessage();
+
+        /// <summary>
+        /// Appends "where" cause.
+        /// </summary>
+        /// <param name="genericTypes">Generic types. Key is the name in code.</param>
+        /// <param name="builder">String builder to append on.</param>
+        protected void ApplyConstraints(Dictionary<string, Type> genericTypes, StringBuilder builder)
+        {
+            if (genericTypes != null)
+                foreach (var type in genericTypes)
+                    ApplyConstraints(type.Key, type.Value, builder);
+        }
+
+        void ApplyConstraints(string name, Type genericType, StringBuilder builder)
+        {
+            var typeInfo = genericType.GetTypeInfo();
+            var typeConstraints = typeInfo.GetGenericParameterConstraints();
+            var typeAttributes = typeInfo.GenericParameterAttributes;
+            var valueType = typeof(ValueType);
+            var words = typeConstraints.Where(i => i != valueType).Select(i => i.Name).ToList();
+            if (typeAttributes.HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint))
+                words.Add("struct");
+            else
+            {
+                if (typeAttributes.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                    words.Add("class");
+                if (typeAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint))
+                    words.Add("new()");
+            }
+            if (words.Count > 0)
+            {
+                builder.Append(" where ").Append(name).Append(" : ")
+                    .Append(string.Join(", ", words));
+            }
+        }
     }
 }
