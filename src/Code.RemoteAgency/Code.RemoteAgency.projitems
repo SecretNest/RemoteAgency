@@ -9,6 +9,12 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AssemblyReference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\ExceptionRedirectedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\IMessageBodyGenericEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgs.Generic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgsBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.EmptyMessage.cs" />

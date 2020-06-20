@@ -10,14 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AssemblyReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssemblyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Delegates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\IMessageBodyGenericEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\MessageBodyEventArgs.Generic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\ExceptionRedirectedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AssetNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssetNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
@@ -45,7 +40,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs %28Keep namespace%29\MessageBodyEventArgsBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\MessageProcessTerminatedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\SerializingHelperBase.cs" />

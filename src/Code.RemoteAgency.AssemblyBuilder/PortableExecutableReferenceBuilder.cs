@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
+using SecretNest.RemoteAgency.TypeBuilding;
 
 namespace SecretNest.RemoteAgency
 {
@@ -13,7 +14,7 @@ namespace SecretNest.RemoteAgency
             if (assemblyReference == null) return null;
             MetadataReferenceProperties properties = new MetadataReferenceProperties(
                 assemblyReference.IsModule ? MetadataImageKind.Module : MetadataImageKind.Assembly,
-                assemblyReference.Aliases?.ToImmutableArray() ?? default(ImmutableArray<string>),
+                assemblyReference.Aliases?.ToImmutableArray() ?? default,
                 assemblyReference.EmbedInteropTypes);
 
             PortableExecutableReference reference = MetadataReference.CreateFromImage(image.ToImmutableArray(), properties);

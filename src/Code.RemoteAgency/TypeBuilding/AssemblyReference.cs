@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace SecretNest.RemoteAgency
+namespace SecretNest.RemoteAgency.TypeBuilding
 {
     /// <summary>
     /// Represents an assembly for building code.
