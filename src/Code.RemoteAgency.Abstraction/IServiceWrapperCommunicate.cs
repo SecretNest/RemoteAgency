@@ -28,14 +28,14 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Processes an event adding.
         /// </summary>
-        /// <param name="assetName">Event name.</param>
-        void ProcessEventAdding(string assetName);
+        /// <param name="message">Message to be processed.</param>
+        void ProcessEventAddingMessage(IRemoteAgencyMessage message);
         
         /// <summary>
         /// Processes an event removing.
         /// </summary>
-        /// <param name="assetName">Event name.</param>
-        void ProcessEventRemoving(string assetName);
+        /// <param name="message">Message to be processed.</param>
+        void ProcessEventRemovingMessage(IRemoteAgencyMessage message);
 
         /// <summary>
         /// Will be called while an event raising message need to be sent to a remote site and get response of it.

@@ -120,6 +120,7 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase> : RemoteAgencyManagingObject<TEntityBase>
     {
         private readonly IServiceWrapperCommunicate _serviceWrapperObject;
+        private Func<IRemoteAgencyMessage> _createEmptyMessageCallback;
 
         public override void OnProxiesDisposed(Guid siteId)
         {
@@ -141,22 +142,26 @@ namespace SecretNest.RemoteAgency
         public RemoteAgencyManagingObjectServiceWrapper(IServiceWrapperCommunicate serviceWrapperObject,
             ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets)
+            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets,
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 localExceptionHandlingAssets)
         {
             _serviceWrapperObject = serviceWrapperObject;
+            _createEmptyMessageCallback = createEmptyMessageCallback;
         }
 
         public RemoteAgencyManagingObjectServiceWrapper(IServiceWrapperCommunicate serviceWrapperObject,
             ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets)
+            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets,
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback, localExceptionHandlingAssets)
         {
             _serviceWrapperObject = serviceWrapperObject;
+            _createEmptyMessageCallback = createEmptyMessageCallback;
         }
     }
 }

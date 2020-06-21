@@ -17,24 +17,27 @@ namespace SecretNest.RemoteAgency
         }
 
         void ProcessMessageReceivedAfterFiltering(TEntityBase message)
+            => ProcessMessageReceivedAfterFiltering((IRemoteAgencyMessage) message);
+
+        void ProcessMessageReceivedAfterFiltering(IRemoteAgencyMessage message)
         {
-            if (_managingObjects.TryGetValue(((IRemoteAgencyMessage) message).TargetInstanceId, out var managingObject))
+            if (_managingObjects.TryGetValue(message.TargetInstanceId, out var managingObject))
             {
                 ProcessMessageReceivedOnManagingObject(managingObject, message);
             }
             else if (((IRemoteAgencyMessage) message).IsOneWay)
             {
                 //Send InstanceNotFoundException back to sender.
-                var exception = new InstanceNotFoundException(((IRemoteAgencyMessage) message).TargetInstanceId);
-                var emptyMessage = GenerateEmptyMessage(((IRemoteAgencyMessage) message).SenderSiteId,
-                    ((IRemoteAgencyMessage) message).SenderInstanceId, ((IRemoteAgencyMessage) message).MessageType,
-                    ((IRemoteAgencyMessage) message).AssetName, ((IRemoteAgencyMessage) message).MessageId, exception);
+                var exception = new InstanceNotFoundException(message.TargetInstanceId);
+                var emptyMessage = GenerateEmptyMessage(message.SenderSiteId,
+                    message.SenderInstanceId, message.MessageType,
+                    message.AssetName, message.MessageId, exception);
                 ProcessMessageReceivedFromInsideBypassFiltering(emptyMessage);
             }
         }
 
         void ProcessMessageReceivedOnManagingObject(RemoteAgencyManagingObject<TEntityBase> managingObject,
-            TEntityBase message)
+            IRemoteAgencyMessage message)
         {
             managingObject.ProcessMessageReceivedFromOutside(message);
         }

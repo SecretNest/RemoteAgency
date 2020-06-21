@@ -10,8 +10,6 @@ namespace SecretNest.RemoteAgency
     {
         public void ProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
         {
-
-
             switch (message.MessageType)
             {
                 case MessageType.Method:
@@ -70,35 +68,14 @@ namespace SecretNest.RemoteAgency
                 ProcessResponseMessageReceivedFromInside(response, message);
             }
 
-            if (exception != null)
-            {
-                if (_localExceptionHandlingAssets.TryGetValue(message.AssetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
-                {
-                    if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
-                    {
-                        throw exception;
-                    }
-                    else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
-                    {
-                        _sendExceptionToManagerCallback(exception);
-                    }
-                }
-            }
+            ThrowExceptionWhenNecessary(message.AssetName, exception);
         }
 
-        protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback) //when drop response while property getting
+        protected void ThrowExceptionWhenNecessary(string assetName, Exception exception)
         {
-            ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out var exception);
-
-            if (!message.IsOneWay)
-            {
-                response.Exception = exception;
-                ProcessResponseMessageReceivedFromInside(response, message);
-            }
-
             if (exception != null)
             {
-                if (_localExceptionHandlingAssets.TryGetValue(message.AssetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
+                if (_localExceptionHandlingAssets.TryGetValue(assetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
                 {
                     if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
                     {
@@ -160,7 +137,32 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
     {
+        void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback) //when drop response while property getting, add and remove event handler
+        {
+            ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out var exception);
 
+            if (!message.IsOneWay)
+            {
+                response.Exception = exception;
+                ProcessResponseMessageReceivedFromInside(response, message);
+            }
+
+            ThrowExceptionWhenNecessary(message.AssetName, exception);
+        }
+
+        void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithoutReturn withoutReturnCallback) //when add and remove event handler
+        {
+            ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out var exception);
+
+            if (!message.IsOneWay)
+            {
+                var response = _createEmptyMessageCallback();
+                response.Exception = exception;
+                ProcessResponseMessageReceivedFromInside(response, message);
+            }
+
+            ThrowExceptionWhenNecessary(message.AssetName, exception);
+        }
 
         protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
         {
@@ -172,31 +174,19 @@ namespace SecretNest.RemoteAgency
         protected override void ProcessEventAddMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-
-            //special 
-
-
-            throw new NotImplementedException();
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessEventAddingMessage);
         }
         
         protected override void ProcessEventMessageReceived(IRemoteAgencyMessage message)
         {
             //response
-
-            //special 
-
-
             OnResponseReceived(message);
         }
 
         protected override void ProcessEventRemoveMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-
-            //special 
-
-
-            throw new NotImplementedException();
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessEventRemovingMessage);
         }
 
         protected override void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message)

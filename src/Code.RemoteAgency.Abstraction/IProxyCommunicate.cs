@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency
         void AfterInitialized();
 
         /// <summary>
-        /// Willl be called when disposing.
+        /// Will be called when disposing.
         /// </summary>
         ProxyDisposingCallback DisposingRequestedCallback { get; set; }
 
