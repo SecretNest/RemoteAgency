@@ -10,18 +10,42 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-        private TaskFactory _taskFactory = null;
+
+        #region Entry methods
+        protected void ProcessThreadLockWithReturn(
+            AccessWithReturn callback, IRemoteAgencyMessage message,
+            out IRemoteAgencyMessage response, out Exception exception)
+            => _processThreadLockWithReturn(callback, message, out response, out exception);
+
+        protected void ProcessThreadLockWithoutReturn(
+            AccessWithoutReturn callback, IRemoteAgencyMessage message, out Exception exception)
+            => _processThreadLockWithoutReturn(callback, message, out exception);
+
+        protected void CallClose()
+            => _callClose();
+
+        protected void CallOnClosing(AccessOnClosing callback, Guid siteId, Guid? instanceId)
+            => _callOnClosing(callback, siteId, instanceId);
+
+        #endregion
+
+        #region Entry methods delegate and maintenance
+
+        private AccessWithReturnCaller _processThreadLockWithReturn;
+        private AccessWithoutReturnCaller _processThreadLockWithoutReturn;
+        private CallCloseCaller _callClose;
+        private CallOnClosingCaller _callOnClosing;
 
         protected delegate IRemoteAgencyMessage AccessWithReturn(IRemoteAgencyMessage message, out Exception exception);
         protected delegate void AccessWithoutReturn(IRemoteAgencyMessage message);
+        protected delegate void AccessOnClosing(Guid siteId, Guid? instanceId);
 
         delegate void AccessWithReturnCaller(AccessWithReturn callback, IRemoteAgencyMessage message,
             out IRemoteAgencyMessage response, out Exception exception);
-
         delegate void AccessWithoutReturnCaller(AccessWithoutReturn callback, IRemoteAgencyMessage message,
             out Exception exception);
-        
-        public delegate bool TryGetTaskSchedulerCallback(string name, out TaskScheduler taskScheduler);
+        delegate void CallCloseCaller();
+        delegate void CallOnClosingCaller(AccessOnClosing callback, Guid siteId, Guid? instanceId);
 
         void InitializeThreadLock(ThreadLockMode threadLockMode)
         {
@@ -30,13 +54,22 @@ namespace SecretNest.RemoteAgency
                 case ThreadLockMode.None:
                     _processThreadLockWithReturn = ProcessWithNoThreadLock;
                     _processThreadLockWithoutReturn = ProcessWithNoThreadLock;
+                    _callClose = CallCloseWithNoThreadLock;
+                    _callOnClosing = CallOnClosingWithNoThreadLock;
                     break;
                 case ThreadLockMode.SynchronizationContext:
-                    _processThreadLockWithReturn = ProcessWithSynchronizationContext;
-                    _processThreadLockWithoutReturn = ProcessWithSynchronizationContext;
+                    _taskFactory = new TaskFactory(TaskScheduler.FromCurrentSynchronizationContext());
+                    _processThreadLockWithReturn = ProcessWithTaskScheduler;
+                    _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
+                    _callClose = CallCloseWithTaskScheduler;
+                    _callOnClosing = CallOnClosingWithTaskScheduler;
                     break;
                 case ThreadLockMode.AnyButSameThread:
                     PrepareSequentialScheduler();
+                    _processThreadLockWithReturn = ProcessWithTaskScheduler;
+                    _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
+                    _callClose = CallCloseWithTaskScheduler;
+                    _callOnClosing = CallOnClosingWithTaskScheduler;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(threadLockMode), threadLockMode, null);
@@ -50,6 +83,8 @@ namespace SecretNest.RemoteAgency
                 _taskFactory = new TaskFactory(selectedTaskScheduler);
                 _processThreadLockWithReturn = ProcessWithTaskScheduler;
                 _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
+                _callClose = CallCloseWithTaskScheduler;
+                _callOnClosing = CallOnClosingWithTaskScheduler;
             }
             else
             {
@@ -59,25 +94,19 @@ namespace SecretNest.RemoteAgency
 
         void DisposeThreadLock()
         {
-            DisposeSequentialScheduler();
-
             _taskFactory = null;
             _processThreadLockWithReturn = null;
             _processThreadLockWithoutReturn = null;
+            _callClose = null;
+            _callOnClosing = null;
+
+            DisposeSequentialScheduler();
         }
-        
-        private AccessWithReturnCaller _processThreadLockWithReturn;
-        private AccessWithoutReturnCaller _processThreadLockWithoutReturn;
 
-        protected void ProcessThreadLockWithReturn(
-            AccessWithReturn callback, IRemoteAgencyMessage message,
-            out IRemoteAgencyMessage response, out Exception exception)
-            => _processThreadLockWithReturn(callback, message, out response, out exception);
 
-        protected void ProcessThreadLockWithoutReturn(
-            AccessWithoutReturn callback, IRemoteAgencyMessage message, out Exception exception)
-            => _processThreadLockWithoutReturn(callback, message, out exception);
+        #endregion
 
+        #region No Lock
         void ProcessWithNoThreadLock(AccessWithReturn callback, IRemoteAgencyMessage message, out IRemoteAgencyMessage response, out Exception exception)
         {
             response = callback(message, out exception);
@@ -96,67 +125,22 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void ProcessWithSynchronizationContext(AccessWithReturn callback, IRemoteAgencyMessage message, out IRemoteAgencyMessage response, out Exception exception)
+        void CallCloseWithNoThreadLock()
         {
-            ProcessWithSynchronizationContextEntityWithResponse state =
-                new ProcessWithSynchronizationContextEntityWithResponse()
-                {
-                    Callback = callback,
-                    Message = message
-                };
-            SynchronizationContext.Current.Post(ProcessWithSynchronizationContextWithResponseInternal, state);
-            response = state.Response;
-            exception = state.Exception;
+            CloseManagingObject();
         }
 
-        void ProcessWithSynchronizationContextWithResponseInternal(object state)
+        void CallOnClosingWithNoThreadLock(AccessOnClosing callback, Guid siteId, Guid? instanceId)
         {
-            ((ProcessWithSynchronizationContextEntityWithResponse) state).Response =
-                ((ProcessWithSynchronizationContextEntityWithResponse) state).Callback(
-                    ((ProcessWithSynchronizationContextEntityWithResponse) state).Message,
-                    out ((ProcessWithSynchronizationContextEntityWithResponse) state).Exception);
+            callback(siteId, instanceId);
         }
 
-        class ProcessWithSynchronizationContextEntityWithResponse
-        {
-            public AccessWithReturn Callback;
-            public IRemoteAgencyMessage Message;
-            public IRemoteAgencyMessage Response;
-            public Exception Exception;
-        }
+        #endregion
 
-        void ProcessWithSynchronizationContext(AccessWithoutReturn callback, IRemoteAgencyMessage message, out Exception exception)
-        {
-            ProcessWithSynchronizationContextEntity state =
-                new ProcessWithSynchronizationContextEntity()
-                {
-                    Callback = callback,
-                    Message = message
-                };
-            SynchronizationContext.Current.Post(ProcessWithSynchronizationContextInternal, state);
-            exception = state.Exception;
-        }
-
-        void ProcessWithSynchronizationContextInternal(object state)
-        {
-            try
-            {
-                ((ProcessWithSynchronizationContextEntity) state).Callback(
-                    ((ProcessWithSynchronizationContextEntity) state).Message);
-                ((ProcessWithSynchronizationContextEntity) state).Exception = null;
-            }
-            catch (Exception ex)
-            {
-                ((ProcessWithSynchronizationContextEntity) state).Exception = ex;
-            }
-        }
-
-        class ProcessWithSynchronizationContextEntity
-        {
-            public AccessWithoutReturn Callback;
-            public IRemoteAgencyMessage Message;
-            public Exception Exception;
-        }
+        #region TaskScheduelr
+        private TaskFactory _taskFactory = null;
+        
+        public delegate bool TryGetTaskSchedulerCallback(string name, out TaskScheduler taskScheduler);
 
         void ProcessWithTaskScheduler(AccessWithReturn callback, IRemoteAgencyMessage message, out IRemoteAgencyMessage response, out Exception exception)
         {
@@ -206,5 +190,32 @@ namespace SecretNest.RemoteAgency
                 return ex;
             }
         }
+
+        void CallCloseWithTaskScheduler()
+        {
+            try
+            {
+                _taskFactory
+                    .StartNew(CloseManagingObject).Wait();
+            }
+            catch (TaskCanceledException)
+            {
+            }
+        }
+
+        void CallOnClosingWithTaskScheduler(AccessOnClosing callback, Guid siteId, Guid? instanceId)
+        {
+            try
+            {
+                _taskFactory
+                    .StartNew(() => callback(siteId, instanceId)).Wait();
+            }
+            catch (TaskCanceledException)
+            {
+            }
+        }
+
+        #endregion
+
     }
 }

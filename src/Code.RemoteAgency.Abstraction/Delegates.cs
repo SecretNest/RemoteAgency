@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
@@ -30,4 +31,25 @@ namespace SecretNest.RemoteAgency
     /// Notifies the proxy is disposing.
     /// </summary>
     public delegate void ProxyDisposingCallback();
+
+    /// <summary>
+    /// Gets site id from the Remote Agency instance.
+    /// </summary>
+    public delegate Guid GetSiteIdCallback();
+
+    /// <summary>
+    /// Resets the proxy sticky target site to the original state.
+    /// </summary>
+    /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
+    public delegate void ProxyStickyTargetSiteResetCallback();
+
+    /// <summary>
+    /// Queries the proxy sticky target site setting state.
+    /// </summary>
+    /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
+    /// <param name="defaultTargetSiteId">Will be set as default target site id.</param>
+    /// <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set to <see langword="null"/> if no sticky target set yet.</param>
+    public delegate void ProxyStickyTargetSiteQueryCallback(out bool isEnabled, out Guid defaultTargetSiteId,
+        out Guid? stickyTargetSiteId);
+
 }

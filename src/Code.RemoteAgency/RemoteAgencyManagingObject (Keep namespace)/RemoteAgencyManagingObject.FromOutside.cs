@@ -8,6 +8,10 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
+        protected virtual void PreProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
+        {
+        }
+
         public void ProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
         {
             switch (message.MessageType)
@@ -92,6 +96,11 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectProxy<TEntityBase>
     {
+        protected override void PreProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
+        {
+            SetStickyTargetId(message);
+        }
+
         protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
         {
             //response
@@ -132,6 +141,14 @@ namespace SecretNest.RemoteAgency
         protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
             //nothing to do.
+        }
+
+        void SetStickyTargetId(IRemoteAgencyMessage message)
+        {
+            if (_isStickyModeEnabled && !_stickyTargetSiteId.HasValue)
+            {
+                _stickyTargetSiteId = message.SenderSiteId;
+            }
         }
     }
 
@@ -204,12 +221,7 @@ namespace SecretNest.RemoteAgency
 
         protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
-            //request (notification): dispose
-            if (message.AssetName == SpecialCommands.Dispose)
-            {
-                OnProxyDisposed(message.SenderSiteId,
-                    message.SenderInstanceId);
-            }
+             //nothing to do.
         }
     }
 }

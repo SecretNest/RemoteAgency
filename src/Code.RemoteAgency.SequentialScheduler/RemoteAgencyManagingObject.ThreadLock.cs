@@ -14,8 +14,6 @@ namespace SecretNest.RemoteAgency
         {
             _sequentialScheduler = new SequentialScheduler();
             _taskFactory = new TaskFactory(_sequentialScheduler);
-            _processThreadLockWithReturn = ProcessWithTaskScheduler;
-            _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
         }
 
         void DisposeSequentialScheduler()

@@ -12,6 +12,11 @@ namespace SecretNest.RemoteAgency
     public interface IServiceWrapperCommunicate
     {
         /// <summary>
+        /// Will be called when site id is required.
+        /// </summary>
+        GetSiteIdCallback GetSiteIdCallback { get; set; }
+
+        /// <summary>
         /// Processes a method calling message and returns response.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
@@ -68,5 +73,17 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         void ProcessOneWayPropertySettingMessage(IRemoteAgencyMessage message);
+
+        /// <summary>
+        /// Unlinks specified remote proxy from the event registered in service wrapper objects.
+        /// </summary>
+        /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
+        /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+        void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null);
+
+        /// <summary>
+        /// Closes this service wrapper.
+        /// </summary>
+        void Close();
     }
 }

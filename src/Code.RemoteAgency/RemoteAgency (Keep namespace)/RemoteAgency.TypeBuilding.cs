@@ -48,6 +48,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Constructs an object of a type.
         /// </summary>
+        /// <typeparam name="T">Type of object to be built.</typeparam>
         /// <param name="sourceType">Source type.</param>
         /// <param name="constructedTypeName">Full name of the constructed type.</param>
         /// <param name="assemblyName">Assembly name to be built.</param>
@@ -56,8 +57,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="creatingInstanceCallback">Callback for creating instance of specified type.</param>
         /// <param name="sourceCodeBuilderCallback">Callback for creating source code of the constructed type and related.</param>
         /// <returns>Instance of the type constructed or should be constructed.</returns>
-        private object ConstructTypeInstance(Type sourceType, string constructedTypeName, string assemblyName, BuiltClassType builtClassType,
-            ConcurrentDictionary<Type, Type> inMemoryCache, Func<Type, object> creatingInstanceCallback,
+        private T ConstructTypeInstance<T>(Type sourceType, string constructedTypeName, string assemblyName,
+            BuiltClassType builtClassType, ConcurrentDictionary<Type, Type> inMemoryCache,
+            Func<Type, T> creatingInstanceCallback,
             SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
         {
             Type constructedType;
@@ -130,6 +132,8 @@ namespace SecretNest.RemoteAgency
             return creatingInstanceCallback(constructedType);
         }
 
+        Guid GetSiteId() => SiteId;
+
         /// <summary>
         /// Constructs a proxy object of a type.
         /// </summary>
@@ -141,8 +145,10 @@ namespace SecretNest.RemoteAgency
         protected object ConstructProxyInstance(Type sourceType, string constructedTypeName, string assemblyName,
             SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
         {
-            return ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.Proxy,
-                _inMemoryProxyTypeCache, FastActivator.CreateInstance, sourceCodeBuilderCallback);
+            var proxy = ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.Proxy,
+                _inMemoryProxyTypeCache, FastActivator.CreateInstance<IProxyCommunicate>, sourceCodeBuilderCallback);
+            proxy.GetSiteIdCallback = GetSiteId;
+            return proxy;
         }
 
         /// <summary>
@@ -157,9 +163,11 @@ namespace SecretNest.RemoteAgency
         protected object ConstructServiceWrapperInstance(Type sourceType, string constructedTypeName, string assemblyName,
             object serviceObject, SourceCodeBuilderFromConstructTypeCallback sourceCodeBuilderCallback)
         {
-            return ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.ServiceWrapper,
-                _inMemoryServiceWrapperTypeCache, t => FastActivator<object>.CreateInstance(t, serviceObject),
+            var serviceWrapper = ConstructTypeInstance(sourceType, constructedTypeName, assemblyName, BuiltClassType.ServiceWrapper,
+                _inMemoryServiceWrapperTypeCache, t => FastActivator<object>.CreateInstance<IServiceWrapperCommunicate>(t, serviceObject),
                 sourceCodeBuilderCallback);
+            serviceWrapper.GetSiteIdCallback = GetSiteId;
+            return serviceWrapper;
         }
     }
 }

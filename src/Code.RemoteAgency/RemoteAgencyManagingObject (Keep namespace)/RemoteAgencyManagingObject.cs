@@ -7,20 +7,24 @@ namespace SecretNest.RemoteAgency
 {
     abstract partial class RemoteAgencyManagingObject : IDisposable
     {
-        public virtual void OnProxiesDisposed(Guid siteId)
+        public virtual void OnProxyClosing(Guid siteId, Guid? proxyInstanceId)
         {
         }
 
-        public virtual void OnProxyDisposed(Guid siteId, Guid proxyInstanceId)
+        public virtual void OnServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId)
         {
         }
 
         public virtual void Dispose()
         {
+            CloseManagingObject();
             DisposeThreadLock();
         }
 
+        protected abstract void CloseManagingObject();
+
         public Guid InstanceId { get; }
+        protected abstract Guid TargetSiteId { get; }
         public abstract Guid DefaultTargetSiteId { get; }
         public abstract Guid DefaultTargetInstanceId { get; }
 
@@ -85,31 +89,95 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectProxy<TEntityBase> : RemoteAgencyManagingObject<TEntityBase>
     {
-        private readonly IProxyCommunicate _proxyObject;
+        private IProxyCommunicate _proxyObject;
+        private readonly bool _isStickyModeEnabled;
+        private Guid? _stickyTargetSiteId = null;
+
+        public override void OnServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId)
+        {
+            if (_isStickyModeEnabled && _stickyTargetSiteId == siteId)
+            {
+                if (!serviceWrapperInstanceId.HasValue || serviceWrapperInstanceId == DefaultTargetInstanceId)
+                {
+                    _stickyTargetSiteId = null;
+                }
+            }
+        }
+
+        protected override void CloseManagingObject()
+        {
+            CallClose();
+            _proxyObject.SendEventAddingMessageCallback = null;
+            _proxyObject.GetSiteIdCallback = null;
+            _proxyObject.ProxyStickyTargetSiteResetCallback = null;
+            _proxyObject.ProxyStickyTargetSiteQueryCallback = null;
+            _proxyObject.SendEventRemovingMessageCallback = null;
+            _proxyObject.SendMethodMessageCallback = null;
+            _proxyObject.SendOneWayMethodMessageCallback = null;
+            _proxyObject.SendOneWayPropertySetMessageCallback = null;
+            _proxyObject.SendPropertyGetMessageCallback = null;
+            _proxyObject.SendPropertySetMessageCallback = null;
+            _proxyObject = null;
+        }
 
         public RemoteAgencyManagingObjectProxy(IProxyCommunicate proxyObject, ref Guid instanceId,
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets)
+            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets, bool isStickyModeEnabled)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 localExceptionHandlingAssets)
         {
             _proxyObject = proxyObject;
+            _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
+            _proxyObject.ProxyStickyTargetSiteQueryCallback = ProxyStickyTargetSiteQuery;
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
+            _isStickyModeEnabled = isStickyModeEnabled;
         }
 
         public RemoteAgencyManagingObjectProxy(IProxyCommunicate proxyObject, ref Guid instanceId,
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets)
+            Dictionary<string, LocalExceptionHandlingMode> localExceptionHandlingAssets, bool isStickyModeEnabled)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback, localExceptionHandlingAssets)
         {
             _proxyObject = proxyObject;
+            _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
+            _proxyObject.ProxyStickyTargetSiteQueryCallback = ProxyStickyTargetSiteQuery;
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
+            _isStickyModeEnabled = isStickyModeEnabled;
+        }
+
+        void ResetProxyStickyTargetSite()
+        {
+            if (_isStickyModeEnabled)
+                _stickyTargetSiteId = null;
+        }
+
+        void ProxyStickyTargetSiteQuery(out bool isEnabled, out Guid defaultTargetSiteId,
+            out Guid? stickyTargetSiteId)
+        {
+            isEnabled = _isStickyModeEnabled;
+            defaultTargetSiteId = DefaultTargetSiteId;
+            stickyTargetSiteId = _stickyTargetSiteId;
+        }
+
+        protected override Guid TargetSiteId
+        {
+            get
+            {
+                if (_isStickyModeEnabled && _stickyTargetSiteId.HasValue)
+                {
+                    return _stickyTargetSiteId.Value;
+                }
+                else
+                {
+                    return DefaultTargetSiteId;
+                }
+            }
         }
 
         public override Guid DefaultTargetSiteId { get; }
@@ -119,23 +187,25 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase> : RemoteAgencyManagingObject<TEntityBase>
     {
-        private readonly IServiceWrapperCommunicate _serviceWrapperObject;
+        private IServiceWrapperCommunicate _serviceWrapperObject;
         private Func<IRemoteAgencyMessage> _createEmptyMessageCallback;
 
-        public override void OnProxiesDisposed(Guid siteId)
+        public override void OnProxyClosing(Guid siteId, Guid? proxyInstanceId)
         {
-            throw new NotImplementedException();
-
-
+            CallOnClosing(_serviceWrapperObject.OnRemoteProxyClosing, siteId, proxyInstanceId);
         }
 
-        public override void OnProxyDisposed(Guid siteId, Guid proxyInstanceId)
+        protected override void CloseManagingObject()
         {
-            throw new NotImplementedException();
-
-
+            CallClose();
+            _serviceWrapperObject.GetSiteIdCallback = null;
+            _serviceWrapperObject.SendEventMessageCallback = null;
+            _serviceWrapperObject.SendOneWayEventMessageCallback = null;
+            _serviceWrapperObject = null;
+            _createEmptyMessageCallback = null;
         }
 
+        protected override Guid TargetSiteId => throw new InvalidOperationException();
         public override Guid DefaultTargetSiteId => throw new InvalidOperationException();
         public override Guid DefaultTargetInstanceId => throw new InvalidOperationException();
 

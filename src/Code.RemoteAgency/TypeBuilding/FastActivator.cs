@@ -15,13 +15,24 @@ namespace SecretNest.RemoteAgency.TypeBuilding
         static readonly ConcurrentDictionary<Type, Func<object>> ConstructorCache = new ConcurrentDictionary<Type, Func<object>>();
 
         /// <summary>
-        /// Creates an instance of the type specified
+        /// Creates an instance of the type specified.
         /// </summary>
         /// <param name="type">The type of the instance to be created.</param>
         /// <returns>The created instance.</returns>
         public static object CreateInstance(Type type)
         {
             return GetConstructor(type)();
+        }
+
+        /// <summary>
+        /// Creates an instance of the type specified and cast it to the type specified.
+        /// </summary>
+        /// <typeparam name="T">Target type to be cast to.</typeparam>
+        /// <param name="type">The type of the instance to be created.</param>
+        /// <returns>The created instance.</returns>
+        public static T CreateInstance<T>(Type type) where T : class
+        {
+            return CreateInstance(type) as T;
         }
 
         static Func<object> GetConstructor(Type objType)
@@ -51,7 +62,7 @@ namespace SecretNest.RemoteAgency.TypeBuilding
     {
         private static readonly ConcurrentDictionary<Type, Func<TArg, object>> ConstructorCache = new ConcurrentDictionary<Type, Func<TArg, object>>();
         /// <summary>
-        /// Creates an instance of the type specified
+        /// Creates an instance of the type specified.
         /// </summary>
         /// <param name="type">The type of the instance to be created.</param>
         /// <param name="arg1">The argument which will be passed to the constructor.</param>
@@ -60,6 +71,19 @@ namespace SecretNest.RemoteAgency.TypeBuilding
         {
             return GetConstructor(type, new Type[] { typeof(TArg) })(arg1);
         }
+
+        /// <summary>
+        /// Creates an instance of the type specified and cast it to the type specified.
+        /// </summary>
+        /// <typeparam name="T">Target type to be cast to.</typeparam>
+        /// <param name="type">The type of the instance to be created.</param>
+        /// <param name="arg1">The argument which will be passed to the constructor.</param>
+        /// <returns>The created instance.</returns>
+        public static T CreateInstance<T>(Type type, TArg arg1) where T : class
+        {
+            return CreateInstance(type, arg1) as T;
+        }
+
         static Func<TArg, object> GetConstructor(Type objType, Type[] argTypes)
         {
             return ConstructorCache.GetOrAdd(objType, i => (Func<TArg, object>)FastActivator.BuildConstructorDelegate(i, typeof(Func<TArg, object>), argTypes));

@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
             message.SenderInstanceId = InstanceId;
             //message.SenderSiteId leave to manager.
             message.TargetInstanceId = DefaultTargetInstanceId;
-            message.TargetSiteId = DefaultTargetSiteId;
+            message.TargetSiteId = TargetSiteId;
             //message.MessageType set by caller.
 
             ProcessPreparedRequestMessageReceivedFromInside(message);

@@ -22,13 +22,21 @@ namespace SecretNest.RemoteAgency
         public Guid InstanceId => OriginalMessage.TargetInstanceId;
 
         /// <summary>
+        /// Gets the site id of the Remote Agency instance which throws the exception.
+        /// </summary>
+        /// <returns>Due to routing mechanism, like load-balancing, the actual target site may not the same as requested in the message. This property contains the site id of the site id of the actual Remote Agency site.</returns>
+        public Guid ExceptionThrownSiteId { get; }
+
+        /// <summary>
         /// Initializes an instance of InstanceNotFoundException.
         /// </summary>
         /// <param name="originalMessage">Message which causes this exception thrown.</param>
-        public InstanceNotFoundException(IRemoteAgencyMessage originalMessage) : base(
+        /// <param name="exceptionThrownSiteId">Site id of the Remote Agency instance which throws the exception.</param>
+        public InstanceNotFoundException(IRemoteAgencyMessage originalMessage, Guid exceptionThrownSiteId) : base(
             $"Remote Agency object instance {originalMessage.TargetInstanceId} is not found.")
         {
             OriginalMessage = originalMessage;
+            ExceptionThrownSiteId = exceptionThrownSiteId;
         }
 
         /// <summary>
@@ -40,6 +48,7 @@ namespace SecretNest.RemoteAgency
         {
             var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
             OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
+            ExceptionThrownSiteId = (Guid) info.GetValue("ExceptionThrownSiteId", typeof(Guid));
         }
 
         /// <inheritdoc />
@@ -48,6 +57,7 @@ namespace SecretNest.RemoteAgency
             base.GetObjectData(info, context);
             info.AddValue("OriginalMessageType", OriginalMessage.GetType());
             info.AddValue("OriginalMessage", OriginalMessage);
+            info.AddValue("ExceptionThrownSiteId", ExceptionThrownSiteId);
         }
 
         /// <inheritdoc />

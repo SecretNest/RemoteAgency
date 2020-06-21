@@ -12,14 +12,19 @@ namespace SecretNest.RemoteAgency
     public interface IProxyCommunicate
     {
         /// <summary>
-        /// Will be called after this object is linked to a Remote Agency.
+        /// Will be called when site id is required.
         /// </summary>
-        void AfterInitialized();
+        GetSiteIdCallback GetSiteIdCallback { get; set; }
 
         /// <summary>
-        /// Will be called when disposing.
+        /// Will be called for resetting the proxy sticky target site to the original state.
         /// </summary>
-        ProxyDisposingCallback DisposingRequestedCallback { get; set; }
+        ProxyStickyTargetSiteResetCallback ProxyStickyTargetSiteResetCallback { get; set; }
+
+        /// <summary>
+        /// Will be called for querying the proxy sticky target site state.
+        /// </summary>
+        ProxyStickyTargetSiteQueryCallback ProxyStickyTargetSiteQueryCallback { get; set; }
 
         /// <summary>
         /// Will be called while a method calling message need to be sent to a remote site and get response of it.
@@ -69,6 +74,11 @@ namespace SecretNest.RemoteAgency
         /// Will be called while a property setting message need to be sent to a remote site without getting response.
         /// </summary>
         SendMessageAndGetReturnCallback SendOneWayPropertySetMessageCallback { get; set; }
+
+        /// <summary>
+        /// Closes this proxy.
+        /// </summary>
+        void Close();
     }
 
 }
