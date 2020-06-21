@@ -41,7 +41,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\MessageProcessTerminatedException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\SerializingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\TypeCreatingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />

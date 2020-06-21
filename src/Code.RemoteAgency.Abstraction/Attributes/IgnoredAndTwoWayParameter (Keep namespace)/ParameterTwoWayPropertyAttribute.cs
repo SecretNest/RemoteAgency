@@ -63,17 +63,24 @@ namespace SecretNest.RemoteAgency.Attributes
         public string EntityPropertyName { get; }
 
         /// <summary>
+        /// Gets whether this property should be included in return entity when exception thrown by the user code on remote site.
+        /// </summary>
+        public bool IsIncludedWhenExceptionThrown { get; }
+
+        /// <summary>
         /// Initializes an instance of the ParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to false.
         /// </summary>
         /// <param name="parameterPropertyPath">The path, starts with ".", from the parameter entity.</param>
         /// <param name="elementType">The type of the property or field specified by <see cref="ParameterProperty"/>.</param>
         /// <param name="entityPropertyName">Preferred property name in entity. If it's set to null, the property name will be chosen automatically.</param>
-        public ParameterTwoWayPropertyAttribute(string parameterPropertyPath, Type elementType, string entityPropertyName)
+        /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on remote site. Default value is <see langword="false" />.</param>
+        public ParameterTwoWayPropertyAttribute(string parameterPropertyPath, Type elementType, string entityPropertyName, bool isIncludedWhenExceptionThrown = false)
         {
             ParameterProperty = parameterPropertyPath;
             ElementType = elementType;
             EntityPropertyName = entityPropertyName;
             IsSimpleMode = false;
+            IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
         }
 
         /// <summary>
@@ -81,11 +88,13 @@ namespace SecretNest.RemoteAgency.Attributes
         /// </summary>
         /// <param name="parameterPropertyName">The name of property or field of the parameter entity.</param>
         /// <param name="entityPropertyName">Preferred property name in entity. If it's set to null (default), the property name will be chosen automatically.</param>
-        public ParameterTwoWayPropertyAttribute(string parameterPropertyName, string entityPropertyName = null)
+        /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on remote site. Default value is <see langword="false" />.</param>
+        public ParameterTwoWayPropertyAttribute(string parameterPropertyName, string entityPropertyName = null, bool isIncludedWhenExceptionThrown = false)
         {
             ParameterProperty = parameterPropertyName;
             EntityPropertyName = entityPropertyName;
             IsSimpleMode = true;
+            IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
         }
 
         /// <summary>
@@ -99,6 +108,7 @@ namespace SecretNest.RemoteAgency.Attributes
             ElementType = attribute.ElementType;
             EntityPropertyName = attribute.EntityPropertyName;
             IsSimpleMode = attribute.IsSimpleMode;
+            IsIncludedWhenExceptionThrown = attribute.IsIncludedWhenExceptionThrown;
         }
 
         /// <summary>

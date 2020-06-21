@@ -26,16 +26,16 @@ namespace SecretNest.RemoteAgency
         void ProcessOneWayMethodMessage(IRemoteAgencyMessage message);
 
         /// <summary>
-        /// Processes an event adding message.
+        /// Processes an event adding.
         /// </summary>
-        /// <param name="message">Message to be processed.</param>
-        void ProcessEventAddingMessage(IRemoteAgencyMessage message);
+        /// <param name="assetName">Event name.</param>
+        void ProcessEventAdding(string assetName);
         
         /// <summary>
-        /// Processes an event removing message.
+        /// Processes an event removing.
         /// </summary>
-        /// <param name="message">Message to be processed.</param>
-        void ProcessEventRemovingMessage(IRemoteAgencyMessage message);
+        /// <param name="assetName">Event name.</param>
+        void ProcessEventRemoving(string assetName);
 
         /// <summary>
         /// Will be called while an event raising message need to be sent to a remote site and get response of it.
@@ -61,12 +61,12 @@ namespace SecretNest.RemoteAgency
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessPropertySettingMessageWithReturn(IRemoteAgencyMessage message, out Exception exception);
+        IRemoteAgencyMessage ProcessPropertySettingMessage(IRemoteAgencyMessage message, out Exception exception);
 
         /// <summary>
         /// Processes a property setting message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        void ProcessPropertySettingMessageWithoutReturn(IRemoteAgencyMessage message);
+        void ProcessOneWayPropertySettingMessage(IRemoteAgencyMessage message);
     }
 }

@@ -15,10 +15,13 @@ namespace SecretNest.RemoteAgency
         protected delegate IRemoteAgencyMessage AccessWithReturn(IRemoteAgencyMessage message, out Exception exception);
         protected delegate void AccessWithoutReturn(IRemoteAgencyMessage message);
 
-        delegate void AccessWithReturnCaller(AccessWithReturn callback, IRemoteAgencyMessage message, out IRemoteAgencyMessage response, out Exception exception);
-        delegate void AccessWithoutReturnCaller(AccessWithoutReturn callback, IRemoteAgencyMessage message, out Exception exception);
+        delegate void AccessWithReturnCaller(AccessWithReturn callback, IRemoteAgencyMessage message,
+            out IRemoteAgencyMessage response, out Exception exception);
+
+        delegate void AccessWithoutReturnCaller(AccessWithoutReturn callback, IRemoteAgencyMessage message,
+            out Exception exception);
         
-        delegate bool TryGetTaskSchedulerCallback(string name, out TaskScheduler taskScheduler);
+        public delegate bool TryGetTaskSchedulerCallback(string name, out TaskScheduler taskScheduler);
 
         void InitializeThreadLock(ThreadLockMode threadLockMode)
         {

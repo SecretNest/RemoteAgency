@@ -4,44 +4,53 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgencyManagingObject<TEntityBase>
+    partial class RemoteAgencyManagingObject
     {
-        private Action<TEntityBase> _sendToManagerCallback;
-
-        protected void ProcessMessageReceivedFromInside(TEntityBase message)
+        protected void ProcessResponseMessageReceivedFromInside(IRemoteAgencyMessage message, IRemoteAgencyMessage requestMessage)
         {
-            //add remote site id, remote instance id, local instance id
+            message.MessageId = requestMessage.MessageId;
+            message.AssetName = requestMessage.AssetName;
+            message.IsOneWay = true;
+            //message.Exception set by caller.
+            message.SenderInstanceId = InstanceId;
+            //message.SenderSiteId leave to manager.
+            message.TargetInstanceId = requestMessage.SenderInstanceId;
+            message.TargetSiteId = requestMessage.SenderSiteId;
+            message.MessageType = requestMessage.MessageType;
 
-
-
-
-
-            //local site id will be set by manager.
-            _sendToManagerCallback(message);
-
-
-            //switch (((IRemoteAgencyMessage) message).MessageType)
-            //{
-            //    case MessageType.Method:
-            //        break;
-            //    case MessageType.EventAdd:
-            //        break;
-            //    case MessageType.EventRemove:
-            //        break;
-            //    case MessageType.Event:
-            //        break;
-            //    case MessageType.PropertyGet:
-            //        break;
-            //    case MessageType.PropertySet:
-            //        break;
-            //    case MessageType.SpecialCommand:
-            //        break;
-            //    default:
-            //        throw new ArgumentOutOfRangeException(nameof(IRemoteAgencyMessage.MessageType));
-            //}
+            _sendMessageToManagerCallback(message);
         }
 
+        protected void ProcessDefaultTargetRequestMessageReceivedFromInside(IRemoteAgencyMessage message)
+        {
+            //add message id, remote site id, remote instance id, local instance id
+            message.MessageId = Guid.NewGuid();
+            //message.AssetName set by caller.
+            //message.IsOneWay set by caller.
+            //message.Exception = null;
+            message.SenderInstanceId = InstanceId;
+            //message.SenderSiteId leave to manager.
+            message.TargetInstanceId = DefaultTargetInstanceId;
+            message.TargetSiteId = DefaultTargetSiteId;
+            //message.MessageType set by caller.
+
+            ProcessPreparedRequestMessageReceivedFromInside(message);
+        }
+
+        protected void ProcessPreparedRequestMessageReceivedFromInside(IRemoteAgencyMessage message)
+        {
+            //local site id will be set by manager.
+            _sendMessageToManagerCallback(message);
+        }
+    }
+
+    partial class RemoteAgencyManagingObjectProxy<TEntityBase>
+    {
 
     }
 
+    partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
+    {
+
+    }
 }

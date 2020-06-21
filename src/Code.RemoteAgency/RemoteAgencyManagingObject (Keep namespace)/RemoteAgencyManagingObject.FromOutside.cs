@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgencyManagingObject<TEntityBase>
+    partial class RemoteAgencyManagingObject
     {
-        public void ProcessMessageReceivedFromOutside(TEntityBase message)
+        public void ProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
         {
-            switch (((IRemoteAgencyMessage) message).MessageType)
+
+
+            switch (message.MessageType)
             {
                 case MessageType.Method:
                     ProcessMethodMessageReceived(message);
@@ -36,54 +40,119 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        protected abstract void ProcessMethodMessageReceived(TEntityBase message);
+        protected abstract void ProcessMethodMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessEventAddMessageReceived(TEntityBase message);
+        protected abstract void ProcessEventAddMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessEventRemoveMessageReceived(TEntityBase message);
+        protected abstract void ProcessEventRemoveMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessEventMessageReceived(TEntityBase message);
+        protected abstract void ProcessEventMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessPropertyGetMessageReceived(TEntityBase message);
+        protected abstract void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessPropertySetMessageReceived(TEntityBase message);
+        protected abstract void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessSpecialCommandMessageReceived(TEntityBase message);
+        protected abstract void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message);
+
+        protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback, AccessWithoutReturn withoutReturnCallback)
+        {
+            Exception exception;
+
+            if (message.IsOneWay)
+            {
+                ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out exception);
+            }
+            else
+            {
+                ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out exception);
+
+                response.Exception = exception;
+                ProcessResponseMessageReceivedFromInside(response, message);
+            }
+
+            if (exception != null)
+            {
+                if (_localExceptionHandlingAssets.TryGetValue(message.AssetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
+                {
+                    if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
+                    {
+                        throw exception;
+                    }
+                    else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
+                    {
+                        _sendExceptionToManagerCallback(exception);
+                    }
+                }
+            }
+        }
+
+        protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback) //when drop response while property getting
+        {
+            ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out var exception);
+
+            if (!message.IsOneWay)
+            {
+                response.Exception = exception;
+                ProcessResponseMessageReceivedFromInside(response, message);
+            }
+
+            if (exception != null)
+            {
+                if (_localExceptionHandlingAssets.TryGetValue(message.AssetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
+                {
+                    if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
+                    {
+                        throw exception;
+                    }
+                    else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
+                    {
+                        _sendExceptionToManagerCallback(exception);
+                    }
+                }
+            }
+        }
     }
 
     partial class RemoteAgencyManagingObjectProxy<TEntityBase>
     {
-        protected override void ProcessEventAddMessageReceived(TEntityBase message)
+        protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //response
+            OnResponseReceived(message);
         }
 
-        protected override void ProcessEventMessageReceived(TEntityBase message)
+        protected override void ProcessEventAddMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //response
+            OnResponseReceived(message);
         }
 
-        protected override void ProcessEventRemoveMessageReceived(TEntityBase message)
+        protected override void ProcessEventMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //request
+            ProcessRequestAndSendResponseIfRequired(message, _proxyObject.ProcessEventRaisingMessage,
+                _proxyObject.ProcessOneWayEventRaisingMessage);
         }
 
-        protected override void ProcessMethodMessageReceived(TEntityBase message)
+        protected override void ProcessEventRemoveMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //response
+            OnResponseReceived(message);
         }
 
-        protected override void ProcessPropertyGetMessageReceived(TEntityBase message)
+        protected override void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //response
+            OnResponseReceived(message);
         }
 
-        protected override void ProcessPropertySetMessageReceived(TEntityBase message)
+        protected override void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //response
+            OnResponseReceived(message);
         }
 
-        protected override void ProcessSpecialCommandMessageReceived(TEntityBase message)
+        protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
             //nothing to do.
         }
@@ -91,42 +160,65 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
     {
-        protected override void ProcessMethodMessageReceived(TEntityBase message)
+
+
+        protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
         {
+            //request
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessMethodMessage,
+                _serviceWrapperObject.ProcessOneWayMethodMessage);
+        }
+
+        protected override void ProcessEventAddMessageReceived(IRemoteAgencyMessage message)
+        {
+            //request
+
+            //special 
+
+
+            throw new NotImplementedException();
+        }
+        
+        protected override void ProcessEventMessageReceived(IRemoteAgencyMessage message)
+        {
+            //response
+
+            //special 
+
+
+            OnResponseReceived(message);
+        }
+
+        protected override void ProcessEventRemoveMessageReceived(IRemoteAgencyMessage message)
+        {
+            //request
+
+            //special 
+
+
             throw new NotImplementedException();
         }
 
-        protected override void ProcessEventAddMessageReceived(TEntityBase message)
+        protected override void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //request
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertyGettingMessage);
         }
 
-        protected override void ProcessEventRemoveMessageReceived(TEntityBase message)
+        protected override void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //request
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertySettingMessage,
+                _serviceWrapperObject.ProcessOneWayPropertySettingMessage);
         }
 
-        protected override void ProcessEventMessageReceived(TEntityBase message)
+        protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void ProcessPropertyGetMessageReceived(TEntityBase message)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void ProcessPropertySetMessageReceived(TEntityBase message)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void ProcessSpecialCommandMessageReceived(TEntityBase message)
-        {
-            if (((IRemoteAgencyMessage) message).AssetName == SpecialCommands.Dispose)
+            //request (notification): dispose
+            if (message.AssetName == SpecialCommands.Dispose)
             {
-                OnProxyDisposed(((IRemoteAgencyMessage) message).SenderSiteId,
-                    ((IRemoteAgencyMessage) message).SenderInstanceId);
+                OnProxyDisposed(message.SenderSiteId,
+                    message.SenderInstanceId);
             }
         }
     }
