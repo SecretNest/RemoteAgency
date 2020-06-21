@@ -185,6 +185,12 @@ namespace SecretNest.RemoteAgency.MessageFiltering
             return _serialized.Value;
         }
 
+        /// <summary>
+        /// Gets or sets whether the terminated message should be included in exception. Default value is <see langword="true"/>.
+        /// </summary>
+        /// <remarks>If enabled, the terminated message will be saved in <see cref="MessageProcessTerminatedException.TerminatedMessage"/>.</remarks>
+        public bool IncludeTerminatedMessageInException { get; set; }
+
         /// <inheritdoc />
         public override IRemoteAgencyMessage MessageBodyGeneric => (IRemoteAgencyMessage) MessageBody;
 
@@ -198,6 +204,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         {
             MessageBody = messageBody;
             _serialized = new Lazy<TSerialized>(() => serializerCallback(MessageBody));
+            IncludeTerminatedMessageInException = true;
         }
     }
 }

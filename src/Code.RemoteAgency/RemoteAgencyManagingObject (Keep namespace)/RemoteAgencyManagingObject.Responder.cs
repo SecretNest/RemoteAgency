@@ -26,7 +26,7 @@ namespace SecretNest.RemoteAgency
                 else
                 {
                     _responders.TryRemove(message.MessageId, out _);
-                    throw new AccessingTimeOutException();
+                    throw new AccessingTimeOutException(message);
                 }
             }
         }

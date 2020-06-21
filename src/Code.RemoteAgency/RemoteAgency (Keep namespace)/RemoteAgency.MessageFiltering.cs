@@ -30,8 +30,8 @@ namespace SecretNest.RemoteAgency
 
         void BeforeMessageProcess(ref TEntityBase message,
             EventHandler<BeforeMessageProcessingEventArgs<TSerialized, TEntityBase>> eventHandler, MessageDirection messageDirection,
-            Func<TEntityBase, string, TEntityBase> generateExceptionForContinueSendingCallback,
-            Func<TEntityBase, string, TEntityBase> generateExceptionForSendingBackCallback,
+            Func<TEntityBase, string, bool, TEntityBase> generateExceptionForContinueSendingCallback,
+            Func<TEntityBase, string, bool, TEntityBase> generateExceptionForSendingBackCallback,
             Action<TEntityBase> sendMessageBackCallback,
             out bool shouldTerminate)
         {
@@ -65,7 +65,8 @@ namespace SecretNest.RemoteAgency
                 {
                     shouldTerminate = true;
                     var newMessage = generateExceptionForSendingBackCallback(message,
-                        e.MessageOfMessageProcessTerminatedException);
+                        e.MessageOfMessageProcessTerminatedException,
+                        e.IncludeTerminatedMessageInException);
                     Task.Run(() => sendMessageBackCallback(newMessage));
 
                     return;
@@ -74,18 +75,21 @@ namespace SecretNest.RemoteAgency
                 {
                     shouldTerminate = false;
                     message = generateExceptionForContinueSendingCallback(message,
-                        e.MessageOfMessageProcessTerminatedException);
+                        e.MessageOfMessageProcessTerminatedException,
+                        e.IncludeTerminatedMessageInException);
                     return;
                 }
                 case MessageFurtherProcessing.ReplaceWithExceptionAndReturn:
                 {
                     shouldTerminate = false;
                     var newMessage = generateExceptionForSendingBackCallback(message,
-                        e.MessageOfMessageProcessTerminatedException);
+                        e.MessageOfMessageProcessTerminatedException,
+                        e.IncludeTerminatedMessageInException);
                     Task.Run(() => sendMessageBackCallback(newMessage));
 
                     message = generateExceptionForContinueSendingCallback(message,
-                        e.MessageOfMessageProcessTerminatedException);
+                        e.MessageOfMessageProcessTerminatedException,
+                        e.IncludeTerminatedMessageInException);
                     return;
 
                 }
@@ -112,22 +116,23 @@ namespace SecretNest.RemoteAgency
         }
 
         TEntityBase BeforeMessageSendingProcess_GenerateExceptionForContinueSending(
-            TEntityBase originalMessage, string exceptionMessage)
+            TEntityBase originalMessage, string exceptionMessage, bool includeTerminatedMessage)
         {
             //Sending message cannot set to ReplaceWithException.
             throw new NotSupportedException(); 
         }
 
         TEntityBase BeforeMessageSendingProcess_GenerateExceptionForSendingBack(
-            TEntityBase originalMessage, string exceptionMessage)
+            TEntityBase originalMessage, string exceptionMessage, bool includeTerminatedMessage)
         {
             var emptyMessage = GenerateEmptyMessage(
-                SiteId, 
+                SiteId,
                 ((IRemoteAgencyMessage) originalMessage).SenderInstanceId,
                 ((IRemoteAgencyMessage) originalMessage).MessageType,
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
-                new MessageProcessTerminatedException(exceptionMessage));
+                new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.BeforeSending,
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
             return emptyMessage;
         }
 
@@ -144,7 +149,7 @@ namespace SecretNest.RemoteAgency
         }
 
         TEntityBase AfterMessageReceivedProcess_GenerateExceptionForContinueSending(
-            TEntityBase originalMessage, string exceptionMessage)
+            TEntityBase originalMessage, string exceptionMessage, bool includeTerminatedMessage)
         {
             var emptyMessage = GenerateEmptyMessage(
                 ((IRemoteAgencyMessage) originalMessage).TargetSiteId,
@@ -152,12 +157,13 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).MessageType,
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
-                new MessageProcessTerminatedException(exceptionMessage));
+                new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
             return emptyMessage;
         }
 
         TEntityBase AfterMessageReceivedProcess_GenerateExceptionForSendingBack(
-            TEntityBase originalMessage, string exceptionMessage)
+            TEntityBase originalMessage, string exceptionMessage, bool includeTerminatedMessage)
         {
             var emptyMessage = GenerateEmptyMessage(
                 ((IRemoteAgencyMessage) originalMessage).SenderSiteId,
@@ -165,7 +171,8 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).MessageType,
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
-                new MessageProcessTerminatedException(exceptionMessage));
+                new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
             return emptyMessage;
         }
     }

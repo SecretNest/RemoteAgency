@@ -12,18 +12,23 @@ namespace SecretNest.RemoteAgency
     public sealed class InstanceNotFoundException : NullReferenceException
     {
         /// <summary>
+        /// Gets the message which causes this exception thrown.
+        /// </summary>
+        public IRemoteAgencyMessage OriginalMessage { get; }
+
+        /// <summary>
         /// Gets the id of the instance that cannot be found.
         /// </summary>
-        public Guid InstanceId { get; set; }
+        public Guid InstanceId => OriginalMessage.TargetInstanceId;
 
         /// <summary>
         /// Initializes an instance of InstanceNotFoundException.
         /// </summary>
-        /// <param name="instanceId">Id of the instance that cannot be found.</param>
-        public InstanceNotFoundException(Guid instanceId) : base(
-            $"Remote Agency object instance {instanceId} is not found.")
+        /// <param name="originalMessage">Message which causes this exception thrown.</param>
+        public InstanceNotFoundException(IRemoteAgencyMessage originalMessage) : base(
+            $"Remote Agency object instance {originalMessage.TargetInstanceId} is not found.")
         {
-            InstanceId = instanceId;
+            OriginalMessage = originalMessage;
         }
 
         /// <summary>
@@ -33,14 +38,16 @@ namespace SecretNest.RemoteAgency
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
         private InstanceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            InstanceId = (Guid)info.GetValue("InstanceId", typeof(Guid));
+            var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
         }
 
         /// <inheritdoc />
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("InstanceId", InstanceId);
+            info.AddValue("OriginalMessageType", OriginalMessage.GetType());
+            info.AddValue("OriginalMessage", OriginalMessage);
         }
 
         /// <inheritdoc />

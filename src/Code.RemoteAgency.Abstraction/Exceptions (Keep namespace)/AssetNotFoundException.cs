@@ -12,24 +12,27 @@ namespace SecretNest.RemoteAgency
     public sealed class AssetNotFoundException : Exception
     {
         /// <summary>
-        /// Gets the asset name.
+        /// Gets the message which causes this exception thrown.
         /// </summary>
-        public string AssetName { get; set; }
+        public IRemoteAgencyMessage OriginalMessage { get; }
 
         /// <summary>
-        /// <see cref="MessageType">Gets or sets the message type.</see>
+        /// Gets the asset name.
         /// </summary>
-        public MessageType MessageType { get; set; }
+        public string AssetName => OriginalMessage.AssetName;
+
+        /// <summary>
+        /// Gets the message type.
+        /// </summary>
+        public MessageType MessageType => OriginalMessage.MessageType;
 
         /// <summary>
         /// Initializes an instance of the AssetNotFoundException.
         /// </summary>
-        /// <param name="messageType"><see cref="MessageType">Gets or sets the message type.</see></param>
-        /// <param name="assetName">Asset name.</param>
-        public AssetNotFoundException(MessageType messageType, string assetName)
+        /// <param name="originalMessage">Message which causes this exception thrown.</param>
+        public AssetNotFoundException(IRemoteAgencyMessage originalMessage)
         {
-            MessageType = messageType;
-            AssetName = assetName;
+            OriginalMessage = originalMessage;
         }
 
         /// <summary>
@@ -39,17 +42,16 @@ namespace SecretNest.RemoteAgency
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
         private AssetNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            AssetName = info.GetString("AssetName");
-            Enum.TryParse<MessageType>( info.GetString("MessageType"), out var messageType);
-            MessageType = messageType;
+            var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
         }
 
         /// <inheritdoc />
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("AssetName", AssetName);
-            info.AddValue("MessageType", MessageType.ToString());
+            info.AddValue("OriginalMessageType", OriginalMessage.GetType());
+            info.AddValue("OriginalMessage", OriginalMessage);
         }
 
         /// <summary>

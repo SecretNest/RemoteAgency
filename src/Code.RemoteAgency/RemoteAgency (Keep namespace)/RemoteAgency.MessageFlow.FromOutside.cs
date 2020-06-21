@@ -28,7 +28,7 @@ namespace SecretNest.RemoteAgency
             else if (((IRemoteAgencyMessage) message).IsOneWay)
             {
                 //Send InstanceNotFoundException back to sender.
-                var exception = new InstanceNotFoundException(message.TargetInstanceId);
+                var exception = new InstanceNotFoundException(message);
                 var emptyMessage = GenerateEmptyMessage(message.SenderSiteId,
                     message.SenderInstanceId, message.MessageType,
                     message.AssetName, message.MessageId, exception);

@@ -12,10 +12,18 @@ namespace SecretNest.RemoteAgency
     public sealed class AccessingTimeOutException : TimeoutException
     {
         /// <summary>
+        /// Gets the message which causes this exception thrown.
+        /// </summary>
+        public IRemoteAgencyMessage OriginalMessage { get; }
+
+        /// <summary>
         /// Initializes an instance of AccessingTimeOutException.
         /// </summary>
-        public AccessingTimeOutException()
-        { }
+        /// <param name="originalMessage">Message which causes this exception thrown.</param>
+        public AccessingTimeOutException(IRemoteAgencyMessage originalMessage)
+        {
+            OriginalMessage = originalMessage;
+        }
 
         /// <summary>
         /// Initializes a new instance of the AccessingTimeOutException class with serialized data.
@@ -24,6 +32,16 @@ namespace SecretNest.RemoteAgency
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
         private AccessingTimeOutException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+            var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
+        }
+
+        /// <inheritdoc />
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("OriginalMessageType", OriginalMessage.GetType());
+            info.AddValue("OriginalMessage", OriginalMessage);
         }
     }
 }
