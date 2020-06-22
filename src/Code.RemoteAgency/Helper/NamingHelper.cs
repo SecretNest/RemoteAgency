@@ -9,20 +9,20 @@ namespace SecretNest.RemoteAgency.Helper
 {
     static class NamingHelper
     {
-        internal static string MakeFirstUpper(string original)
-        {
-            return original.First().ToString().ToUpper() + original.Substring(1);
-        }
+        //internal static string MakeFirstUpper(string original)
+        //{
+        //    return original.First().ToString().ToUpper() + original.Substring(1);
+        //}
 
-        internal static string GetRandomName(string prefix)
-        {
-            return $"{prefix}_{Guid.NewGuid():N}";
-        }
+        //internal static string GetRandomName(string prefix)
+        //{
+        //    return $"{prefix}_{Guid.NewGuid():N}";
+        //}
 
-        internal static string GetAssetName(MemberInfo memberInfo)
-        {
-            return memberInfo.GetCustomAttribute<CustomizedAssetNameAttribute>()?.AssetName ?? memberInfo.Name;
-        }
+        //internal static string GetAssetName(MemberInfo memberInfo)
+        //{
+        //    return memberInfo.GetCustomAttribute<CustomizedAssetNameAttribute>()?.AssetName ?? memberInfo.Name;
+        //}
 
         internal static string GetFullName(this Type type, GetTypeFullNameParameter parameter, Dictionary<string, Type> foundGenerics)
         {
