@@ -42,4 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\SourceTypeAndBuiltClassTypeEventArgsBase.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Inspector %28Keep namespace%29\" />
+  </ItemGroup>
 </Project>
