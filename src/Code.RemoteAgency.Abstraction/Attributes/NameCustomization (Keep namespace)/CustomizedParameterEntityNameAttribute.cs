@@ -5,11 +5,11 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies the entity class name which will be generated for holding the request of setting this property.
+    /// Specifies the entity class name which will be generated for holding parameters of this asset.
     /// </summary>
     /// <remarks>When this attribute is not present, or <see cref="EntityName"/> is set to <see langword="null"/> or empty string, the entity name will be chosen automatically.</remarks>
-    [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
-    public class CustomizedPropertySetRequestEntityAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event, Inherited = true, AllowMultiple = false)]
+    public class CustomizedParameterEntityNameAttribute : Attribute
     {
         /// <summary>
         /// Gets the entity class name.
@@ -17,10 +17,10 @@ namespace SecretNest.RemoteAgency.Attributes
         public string EntityName { get; }
 
         /// <summary>
-        /// Initializes an instance of the CustomizedPropertySetRequestEntityAttribute.
+        /// Initializes an instance of the CustomizedParameterEntityNameAttribute.
         /// </summary>
         /// <param name="entityName">Entity class name.</param>
-        public CustomizedPropertySetRequestEntityAttribute(string entityName)
+        public CustomizedParameterEntityNameAttribute(string entityName)
         {
             EntityName = entityName;
         }

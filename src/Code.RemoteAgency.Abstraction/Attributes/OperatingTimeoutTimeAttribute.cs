@@ -16,7 +16,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </remarks>
     /// <seealso cref="AccessingTimeOutException"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public class CustomizedOperatingTimeoutTimeAttribute : Attribute
+    public class OperatingTimeoutTimeAttribute : Attribute
     {
         /// <summary>
         /// Gets the length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.
@@ -24,10 +24,10 @@ namespace SecretNest.RemoteAgency.Attributes
         public int MillisecondsTimeout { get; }
 
         /// <summary>
-        /// Initializes an instance of the CustomizedOperatingTimeoutTimeAttribute.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute.
         /// </summary>
         /// <param name="millisecondsTimeout">The length of time for waiting response, in milliseconds, or the value -1 to indicate that the waiting does not time out.</param>
-        public CustomizedOperatingTimeoutTimeAttribute(int millisecondsTimeout)
+        public OperatingTimeoutTimeAttribute(int millisecondsTimeout)
         {
             MillisecondsTimeout = millisecondsTimeout;
         }
