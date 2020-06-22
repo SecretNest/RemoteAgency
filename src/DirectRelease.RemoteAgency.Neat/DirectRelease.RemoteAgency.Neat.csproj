@@ -29,6 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+  </ItemGroup>
 
   <Import Project="..\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
 

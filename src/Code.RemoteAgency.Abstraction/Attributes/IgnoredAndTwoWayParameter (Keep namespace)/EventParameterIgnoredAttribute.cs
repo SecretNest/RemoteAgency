@@ -5,12 +5,13 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies a parameter of the event should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.
+    /// Specifies a parameter of the event should or should not be transferred to remote site.
     /// </summary>
-    /// <remarks>You can also use <see cref="ParameterIgnoredAttribute"/> in declaration of the delegate related to this event, which has lower priority.</remarks>
-    /// <seealso cref="ParameterIgnoredAttribute"/>
-    /// <seealso cref="ParameterTwoWayPropertyAttribute"/>
-    /// <seealso cref="EventParameterTwoWayPropertyAttribute"/>
+    /// <remarks>
+    /// <para><see cref="ParameterIgnoredAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="EventParameterIgnoredAttribute"/>.</para>
+    /// <para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, <see cref="ParameterTwoWayAttribute"/>, <see cref="ParameterTwoWayPropertyAttribute"/>, <see cref="EventParameterTwoWayAttribute"/>, <see cref="EventParameterTwoWayPropertyAttribute"/>, <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> and <see cref="CustomizedParameterEntityPropertyNameAttribute"/> on or in the same parameter of the asset and the delegate related to the asset if the asset is an event, will be ignored.</para>
+    /// <para>Without <see cref="EventParameterIgnoredAttribute"/> or <see cref="ParameterIgnoredAttribute"/> specified, no parameter is ignored.</para>
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class EventParameterIgnoredAttribute : Attribute
     {
@@ -22,45 +23,17 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets whether this parameter is excluded from parameter entity. If set to true, this parameter should not be transferred to remote site.
         /// </summary>
-        public bool IsIgnoredFromParameter { get; }
-
-        /// <summary>
-        /// Gets whether this parameter is excluded from returning entity. If set to true, this parameter should not be transferred back from the remote site.
-        /// </summary>
-        public bool IsIgnoredFromReturn { get; }
+        public bool IsIgnored { get; }
 
         /// <summary>
         /// Initializes an instance of the EventParameterIgnoredAttribute.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
-        /// <param name="ignoredFromParameter">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
-        /// <param name="ignoredFromReturn">Ignored from return. If set to true, this parameter should not be transferred back from the remote site.</param>
-        public EventParameterIgnoredAttribute(string parameterName, bool ignoredFromParameter = true, bool ignoredFromReturn = true)
+        /// <param name="isIgnored">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        public EventParameterIgnoredAttribute(string parameterName, bool isIgnored = true)
         {
             ParameterName = parameterName;
-            IsIgnoredFromParameter = ignoredFromParameter;
-            IsIgnoredFromReturn = ignoredFromReturn;
-        }
-
-        /// <summary>
-        /// Returns the hash code for this instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        /// <remarks>This is calculated based on <see cref="ParameterName"/>.</remarks>
-        public override int GetHashCode()
-        {
-            return ParameterName.GetHashCode();
-        }
-
-        /// <summary>
-        /// This API supports the product infrastructure and is not intended to be used directly from your code. Returns a value that indicates whether this instance is equal to a specified object.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance or null.</param>
-        /// <returns>true if obj equals the type and value of this instance; otherwise, false.</returns>
-        /// <remarks>This comparer is based on <see cref="ParameterName"/>.</remarks>
-        public override bool Equals(object obj)
-        {
-            return obj is EventParameterIgnoredAttribute target && target.ParameterName == ParameterName;
+            IsIgnored = isIgnored;
         }
     }
 }

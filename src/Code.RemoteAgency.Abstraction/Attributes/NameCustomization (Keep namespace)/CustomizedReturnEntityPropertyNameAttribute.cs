@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks>
     /// <para>When this attribute is not present, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name will be chosen automatically.</para>
-    /// <para>The attribute marked at delegate has lower priority than at event.</para>
+    /// <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class CustomizedReturnEntityPropertyNameAttribute : Attribute

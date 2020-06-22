@@ -26,12 +26,6 @@
     <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-  </ItemGroup>
-
   <Import Project="..\Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems" Label="Shared" />
 
 </Project>

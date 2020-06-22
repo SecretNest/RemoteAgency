@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Attributes
@@ -8,43 +7,26 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the parameter should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.
     /// </summary>
-    /// <remarks>When <see cref="IsIgnoredFromParameter"/> or <see cref="IsIgnoredFromReturn"/> is set to true, the <see cref="ParameterTwoWayPropertyAttribute"/> and <see cref="EventParameterTwoWayPropertyAttribute"/> will be ignored.</remarks>
-    /// <seealso cref="EventParameterIgnoredAttribute"/>
-    /// <seealso cref="ParameterTwoWayPropertyAttribute"/>
-    /// <seealso cref="EventParameterTwoWayPropertyAttribute"/>
+    /// <remarks>
+    /// <para><see cref="EventParameterIgnoredAttribute"/> can be marked on event, with higher priority than <see cref="ParameterIgnoredAttribute"/> with the same parameter.</para>
+    /// <para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, <see cref="ParameterTwoWayAttribute"/>, <see cref="ParameterTwoWayPropertyAttribute"/>, <see cref="EventParameterTwoWayAttribute"/>, <see cref="EventParameterTwoWayPropertyAttribute"/>, <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> and <see cref="CustomizedParameterEntityPropertyNameAttribute"/> on or in the same parameter of the asset and the delegate related to the asset if the asset is an event, will be ignored.</para>
+    /// <para>Without <see cref="EventParameterIgnoredAttribute"/> or <see cref="ParameterIgnoredAttribute"/> specified, no parameter is ignored.</para>
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
     public class ParameterIgnoredAttribute : Attribute
     {
         /// <summary>
         /// Gets whether this parameter is excluded from parameter entity. If set to true, this parameter should not be transferred to remote site.
         /// </summary>
-        public bool IsIgnoredFromParameter { get; }
-
-        /// <summary>
-        /// Gets whether this parameter is excluded from returning entity. If set to true, this parameter should not be transferred back from the remote site.
-        /// </summary>
-        public bool IsIgnoredFromReturn { get; }
+        public bool IsIgnored { get; }
 
         /// <summary>
         /// Initializes an instance of the ParameterIgnoredAttribute.
         /// </summary>
-        /// <param name="ignoredFromParameter">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
-        /// <param name="ignoredFromReturn">Ignored from return. If set to true, this parameter should not be transferred back from the remote site.</param>
-        public ParameterIgnoredAttribute(bool ignoredFromParameter = true, bool ignoredFromReturn = true)
+        /// <param name="isIgnored">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        public ParameterIgnoredAttribute(bool isIgnored = true)
         {
-            IsIgnoredFromParameter = ignoredFromParameter;
-            IsIgnoredFromReturn = ignoredFromReturn;
-        }
-
-        /// <summary>
-        /// Initializes an instance of the IgnoredParameterAttribute, copying the value from <see cref="EventParameterIgnoredAttribute"/> object.
-        /// </summary>
-        /// <param name="attribute"><see cref="EventParameterIgnoredAttribute"/> object.</param>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public ParameterIgnoredAttribute(EventParameterIgnoredAttribute attribute)
-        {
-            IsIgnoredFromParameter = attribute.IsIgnoredFromParameter;
-            IsIgnoredFromReturn = attribute.IsIgnoredFromReturn;
+            IsIgnored = isIgnored;
         }
     }
 }
