@@ -5,19 +5,12 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies property name of return value in entity class. If this attribute absent, the name will be chosen automatically.
+    /// Specifies property name for return value in entity class.
     /// </summary>
-    /// <seealso cref="CustomizedEventParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponseEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponsePropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetResponseEntityAttribute"/>
-    /// <remarks>The attribute marked at delegate has lower priority than at event.</remarks>
+    /// <remarks>
+    /// <para>When this attribute is not present, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name will be chosen automatically.</para>
+    /// <para>The attribute marked at delegate has lower priority than at event.</para>
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class CustomizedReturnEntityPropertyNameAttribute : Attribute
     {
@@ -25,6 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the property name in entity class.
         /// </summary>
         public string EntityPropertyName { get; }
+
         /// <summary>
         /// Initializes an instance of the CustomizedReturnEntityPropertyNameAttribute.
         /// </summary>

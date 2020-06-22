@@ -5,25 +5,17 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies property name of the parameter in entity class. If this attribute absent, the name will be chosen automatically.
+    /// Specifies property name for the parameter in entity class.
     /// </summary>
-    /// <seealso cref="CustomizedEventParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponseEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponsePropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetResponseEntityAttribute"/>
-    [AttributeUsage(AttributeTargets.Parameter, Inherited = false, AllowMultiple = false)]
+    /// <remarks>When this attribute is not present, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name will be chosen automatically.</remarks>
+    [AttributeUsage(AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
     public class CustomizedParameterEntityPropertyNameAttribute : Attribute
     {
         /// <summary>
         /// Gets the property name in entity class.
         /// </summary>
         public string EntityPropertyName { get; }
+
         /// <summary>
         /// Initializes an instance of the CustomizedParameterEntityPropertyNameAttribute.
         /// </summary>

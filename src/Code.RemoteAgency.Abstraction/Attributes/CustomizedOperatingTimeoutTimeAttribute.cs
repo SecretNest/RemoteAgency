@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// 1 Attributes specified in method, property and event.
     /// 2 Attributes specified in delegate related to event.
     /// 3 Attributes specified in interface.
-    /// 4 Default value: -1 (Infinity)
+    /// 4 Default value: set while adding proxy or service wrapper to the Remote Agency instance. Default value is -1 (Infinity).
     /// </remarks>
     /// <seealso cref="AccessingTimeOutException"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]

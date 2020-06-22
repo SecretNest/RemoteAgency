@@ -9,17 +9,17 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Represents a created proxy object that can communicate with Remote Agency.
     /// </summary>
-    public interface IProxyCommunicate
+    public interface IProxyCommunicate : IManagedObjectCommunicate
     {
         /// <summary>
-        /// Will be called when site id is required.
+        /// Gets or sets the id of this proxy instance.
         /// </summary>
-        GetSiteIdCallback GetSiteIdCallback { get; set; }
+        Guid InstanceId { get; set; }
 
         /// <summary>
         /// Will be called for resetting the proxy sticky target site to the original state.
         /// </summary>
-        ProxyStickyTargetSiteResetCallback ProxyStickyTargetSiteResetCallback { get; set; }
+        Action ProxyStickyTargetSiteResetCallback { get; set; }
 
         /// <summary>
         /// Will be called for querying the proxy sticky target site state.
@@ -29,12 +29,12 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Will be called while a method calling message need to be sent to a remote site and get response of it.
         /// </summary>
-        SendMessageAndGetReturnCallback SendMethodMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendMethodMessageCallback { get; set; }
 
         /// <summary>
         /// Will be called while a method calling message need to be sent to a remote site without getting response.
         /// </summary>
-        SendMessageWithoutReturnCallback SendOneWayMethodMessageCallback { get; set; }
+        SendOneWayMessageCallback SendOneWayMethodMessageCallback { get; set; }
 
         /// <summary>
         /// Will be called while an event adding is requested.
@@ -51,34 +51,35 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
+        /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception);
+        IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode);
         
         /// <summary>
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message);
+        /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode);
 
         /// <summary>
         /// Will be called while a property getting message need to be sent to a remote site and get response of it.
         /// </summary>
-        SendMessageAndGetReturnCallback SendPropertyGetMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendPropertyGetMessageCallback { get; set; }
+
+        /// <summary>
+        /// Will be called while a property getting message need to be sent to a remote site without getting response.
+        /// </summary>
+        SendOneWayMessageCallback SendOneWayPropertyGetMessageCallback { get; set; }
 
         /// <summary>
         /// Will be called while a property setting message need to be sent to a remote site and get response of it.
         /// </summary>
-        SendMessageAndGetReturnCallback SendPropertySetMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendPropertySetMessageCallback { get; set; }
 
         /// <summary>
         /// Will be called while a property setting message need to be sent to a remote site without getting response.
         /// </summary>
-        SendMessageAndGetReturnCallback SendOneWayPropertySetMessageCallback { get; set; }
-
-        /// <summary>
-        /// Closes this proxy.
-        /// </summary>
-        void Close();
+        SendOneWayMessageCallback SendOneWayPropertySetMessageCallback { get; set; }
     }
-
 }

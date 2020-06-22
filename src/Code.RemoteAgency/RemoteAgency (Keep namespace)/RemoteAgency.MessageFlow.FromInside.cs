@@ -6,6 +6,8 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
+        //TODO: Link ProcessMessageReceivedFromInside to the managing object
+
         void ProcessMessageReceivedFromInside(TEntityBase message)
         {
             ((IRemoteAgencyMessage) message).SenderSiteId = SiteId;

@@ -5,19 +5,11 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies property name of a parameter in entity class of the event. If this attribute absent, the name will be chosen automatically.
+    /// Specifies property name for a parameter in entity class of the event.
     /// </summary>
-    /// <remarks>You can also use <see cref="CustomizedParameterEntityPropertyNameAttribute"/> in declaration of the delegate related to this event, which has lower priority.</remarks>
-    /// <seealso cref="CustomizedParameterEntityAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponseEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponsePropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetResponseEntityAttribute"/>
+    /// <remarks><para>Marking on delegate of this event with <see cref="CustomizedParameterEntityPropertyNameAttribute"/> is effected when parameter is not described by this attribute on the event.</para>
+    /// <para>For the parameter is not described by either <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> or <see cref="CustomizedParameterEntityPropertyNameAttribute"/>, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name will be chosen automatically.</para>
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class CustomizedEventParameterEntityPropertyNameAttribute : Attribute
     {
@@ -35,7 +27,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Initializes an instance of the CustomizedEventParameterEntityPropertyNameAttribute.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
-        /// <param name="entityPropertyName">Property name in entity class.</param>
+        /// <param name="entityPropertyName">Property name in entity class. Set to <see langword="null"/> or empty string to use the default value.</param>
         public CustomizedEventParameterEntityPropertyNameAttribute(string parameterName, string entityPropertyName)
         {
             ParameterName = parameterName;

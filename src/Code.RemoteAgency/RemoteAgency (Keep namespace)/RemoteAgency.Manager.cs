@@ -8,20 +8,37 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
-        ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>> _managingObjects = new ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>>(); //key: instanceId
+        readonly ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>> _managingObjects = new ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>>(); //key: instanceId
 
         /// <summary>
         /// Unlinks specified remote proxy from the event registered in service wrapper objects.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
         /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
-        /// <remarks><p>Should be called when a remote proxy closing happened without messages routed to <see cref="ProcessReceivedMessage(TEntityBase)"/> or <see cref="ProcessReceivedMessage(IRemoteAgencyMessage)"/>.</p>
-        /// <p>Service wrapper object manages links of all proxies which need to handle events. When remote proxy is disposed, messages for removing event handlers are sent to the service wrapper object. But when something wrong happened, network disconnected or proxy object crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper object which may cause lags or exceptions while processing events.</p></remarks>
+        /// <remarks><para>Should be called when a remote proxy closing happened without messages routed to <see cref="ProcessReceivedMessage(TEntityBase)"/> or <see cref="ProcessReceivedMessage(IRemoteAgencyMessage)"/>.</para>
+        /// <para>Service wrapper object manages links of all proxies which need to handle events. When remote proxy is disposed, messages for removing event handlers are sent to the service wrapper object. But when something wrong happened, network disconnected or proxy object crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper object which may cause lags or exceptions while processing events.</para></remarks>
         public void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null)
         {
+            List<Exception> exceptions = new List<Exception>();
             foreach (var remoteAgencyManagingObject in _managingObjects.Values)
             {
-                remoteAgencyManagingObject.OnProxyClosing(siteId, proxyInstanceId);
+                try
+                {
+                    remoteAgencyManagingObject.OnProxyClosing(siteId, proxyInstanceId);
+                }
+                catch (AggregateException e)
+                {
+                    exceptions.AddRange(e.InnerExceptions);
+                }
+            }
+
+            if (exceptions.Count == 0)
+                return;
+            else if (exceptions.Count == 1)
+                throw exceptions[0];
+            else
+            {
+                throw new AggregateException(exceptions);
             }
         }
 
@@ -70,6 +87,39 @@ namespace SecretNest.RemoteAgency
                 throw new ArgumentNullException(nameof(proxy), $"Argument {nameof(proxy)} is not set as a proxy object.");
 
             obj.ProxyStickyTargetSiteQueryCallback(out isEnabled, out defaultTargetSiteId, out stickyTargetSiteId);
+        }
+
+        /// <summary>
+        /// Closes the proxy object.
+        /// </summary>
+        /// <param name="proxy">Proxy to be closed.</param>
+        /// <returns>Result. <see langword="true"/> when instance is located and closed; <see langword="false"/> when instance is not found.</returns>
+        public bool CloseProxy(object proxy)
+        {
+            var obj = proxy as IProxyCommunicate;
+            if (obj == null)
+                throw new ArgumentNullException(nameof(proxy), $"Argument {nameof(proxy)} is not set as a proxy object.");
+
+            var instanceId = obj.InstanceId;
+            return CloseInstance(instanceId);
+        }
+
+        /// <summary>
+        /// Closes the proxy or service wrapper by instance id.
+        /// </summary>
+        /// <param name="instanceId">Instance id of the proxy or service wrapper to be closed.</param>
+        /// <returns>Result. <see langword="true"/> when instance is located and closed; <see langword="false"/> when instance is not found.</returns>
+        public bool CloseInstance(Guid instanceId)
+        {
+            if (_managingObjects.TryRemove(instanceId, out var removed))
+            {
+                removed.Dispose();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

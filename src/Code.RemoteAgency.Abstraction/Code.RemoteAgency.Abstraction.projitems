@@ -9,6 +9,8 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\AssetIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\PropertyGetOneWayOperatingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyStickyTargetSiteAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
@@ -17,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AssetNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssetNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOneWayOperatingAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\AssetOneWayOperatingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\CustomizedOperatingTimeoutTimeAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedParameterEntityAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedParameterEntityPropertyNameAttribute.cs" />
@@ -36,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IManagedObjectCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IProxyCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
@@ -44,5 +47,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\SerializingHelperBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\TypeCreatingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

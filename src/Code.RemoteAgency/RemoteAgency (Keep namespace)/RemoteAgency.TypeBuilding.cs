@@ -13,22 +13,22 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Occurs when a type is required for constructing.
         /// </summary>
-        /// <remarks><p>The handler of this event can contains the code for providing type built previously, aka from caching.</p>
-        /// <p>This event is raised before <see cref="BeforeAssemblyBuilding"/>.</p></remarks>
+        /// <remarks><para>The handler of this event can contains the code for providing type built previously, aka from caching.</para>
+        /// <para>This event is raised before <see cref="BeforeAssemblyBuilding"/>.</para></remarks>
         public event EventHandler<BeforeTypeBuildingEventArgs> BeforeTypeBuilding;
 
         /// <summary>
         /// Occurs when an assembly is required for building.
         /// </summary>
-        /// <remarks><p>The handler of this event can contains the code for providing assembly built previously, aka from caching.</p>
-        /// <p>This event is raised when no type is provided from <see cref="BeforeTypeBuilding"/>.</p></remarks>
+        /// <remarks><para>The handler of this event can contains the code for providing assembly built previously, aka from caching.</para>
+        /// <para>This event is raised when no type is provided from <see cref="BeforeTypeBuilding"/>.</para></remarks>
         public event EventHandler<BeforeAssemblyBuildingEventArgs> BeforeAssemblyBuilding;
 
         /// <summary>
         /// Occurs before compiling the assembly.
         /// </summary>
-        /// <remarks><p>By handling this, the built-in compiling component will be skipped.</p>
-        /// <p>Handling of this event is required when using Neat version of RemoteAgency, which does not shipped with built-in assembly builder.</p></remarks>
+        /// <remarks><para>By handling this, the built-in compiling component will be skipped.</para>
+        /// <para>Handling of this event is required when using Neat version of RemoteAgency, which does not shipped with built-in assembly builder.</para></remarks>
         public event EventHandler<CustomizedAssemblyBuildingEventArgs> CustomizedAssemblyBuildingRequested; 
 
         /// <summary>

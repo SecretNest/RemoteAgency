@@ -7,9 +7,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Declares the source thread(s) should be used while accessing assets within.
     /// </summary>
-    /// <remarks><p>The default mode is <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.None"/> if this attribute is absent.</p>
-    /// <p>In proxy, only event assets are affected.</p>
-    /// <p>In service wrapper, method and property assets are affected.</p></remarks>
+    /// <remarks><para>The default mode is <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.None"/> if this attribute is absent.</para>
+    /// <para>In proxy, only event assets are affected.</para>
+    /// <para>In service wrapper, method and property assets are affected.</para></remarks>
     [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class ThreadLockAttribute : Attribute
     {

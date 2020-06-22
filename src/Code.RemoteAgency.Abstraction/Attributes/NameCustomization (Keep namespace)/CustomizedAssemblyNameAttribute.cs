@@ -5,9 +5,12 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies the name and namespace of the assembly generated. If this attribute is not present, the name and namespace will be chosen automatically.
+    /// Specifies the name and namespace of the assembly generated.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    /// <remarks><para>When this attribute is not present, or <see cref="AssemblyName"/> or <see cref="Namespace"/> is set to <see langword="null"/> or empty string, the value will be chosen automatically.</para>
+    /// <para>This attribute cannot be inherited by derived classes and overriding members.</para>
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Interface, Inherited = false, AllowMultiple = false)]
     public class CustomizedAssemblyNameAttribute : Attribute
     {
         /// <summary>

@@ -9,39 +9,25 @@ namespace SecretNest.RemoteAgency
     /// Sends a message out and gets a response message.
     /// </summary>
     /// <param name="message">Message to be sent.</param>
+    /// <param name="timeout">Timeout in millisecond.</param>
     /// <returns>Response message. Value <see langword="null" /> will be returned if no return required by <paramref name="message"/>.</returns>
     /// <exception cref="AccessingTimeOutException">Thrown when timed out.</exception>
-    public delegate IRemoteAgencyMessage SendMessageAndGetReturnCallback(IRemoteAgencyMessage message);
+    public delegate IRemoteAgencyMessage SendTwoWayMessageCallback(IRemoteAgencyMessage message, int timeout);
 
     /// <summary>
     /// Sends a message out.
     /// </summary>
     /// <param name="message">Message to be sent.</param>
-    public delegate void SendMessageWithoutReturnCallback(IRemoteAgencyMessage message);
+    public delegate void SendOneWayMessageCallback(IRemoteAgencyMessage message);
 
     /// <summary>
     /// Sends an empty message out.
     /// </summary>
     /// <param name="messageType">Message type.</param>
     /// <param name="assetName">Asset name.</param>
+    /// <param name="timeout">Timeout in millisecond.</param>
     /// <exception cref="AccessingTimeOutException">Thrown when timed out.</exception>
-    public delegate void SendEmptyMessageCallback(MessageType messageType, string assetName);
-
-    /// <summary>
-    /// Notifies the proxy is disposing.
-    /// </summary>
-    public delegate void ProxyDisposingCallback();
-
-    /// <summary>
-    /// Gets site id from the Remote Agency instance.
-    /// </summary>
-    public delegate Guid GetSiteIdCallback();
-
-    /// <summary>
-    /// Resets the proxy sticky target site to the original state.
-    /// </summary>
-    /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
-    public delegate void ProxyStickyTargetSiteResetCallback();
+    public delegate void SendEmptyMessageCallback(MessageType messageType, string assetName, int timeout);
 
     /// <summary>
     /// Queries the proxy sticky target site setting state.

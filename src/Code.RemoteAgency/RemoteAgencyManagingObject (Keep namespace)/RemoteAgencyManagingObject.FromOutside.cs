@@ -59,36 +59,34 @@ namespace SecretNest.RemoteAgency
         protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback, AccessWithoutReturn withoutReturnCallback)
         {
             Exception exception;
+            LocalExceptionHandlingMode localExceptionHandlingMode;
 
             if (message.IsOneWay)
             {
-                ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out exception);
+                ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out exception, out localExceptionHandlingMode);
             }
             else
             {
-                ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out exception);
+                ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out exception, out localExceptionHandlingMode);
 
                 response.Exception = exception;
                 ProcessResponseMessageReceivedFromInside(response, message);
             }
 
-            ThrowExceptionWhenNecessary(message.AssetName, exception);
+            ThrowExceptionWhenNecessary(message.AssetName, exception, localExceptionHandlingMode);
         }
 
-        protected void ThrowExceptionWhenNecessary(string assetName, Exception exception)
+        protected void ThrowExceptionWhenNecessary(string assetName, Exception exception, LocalExceptionHandlingMode localExceptionHandlingMode)
         {
             if (exception != null)
             {
-                if (_localExceptionHandlingAssets.TryGetValue(assetName, out var localExceptionHandlingMode)) //if not exist, suppressed (default).
+                if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
                 {
-                    if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
-                    {
-                        throw exception;
-                    }
-                    else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
-                    {
-                        _sendExceptionToManagerCallback(exception);
-                    }
+                    throw exception;
+                }
+                else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
+                {
+                    _sendExceptionToManagerCallback(exception);
                 }
             }
         }
@@ -154,31 +152,18 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
     {
-        void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback) //when drop response while property getting, add and remove event handler
-        {
-            ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out var exception);
-
-            if (!message.IsOneWay)
-            {
-                response.Exception = exception;
-                ProcessResponseMessageReceivedFromInside(response, message);
-            }
-
-            ThrowExceptionWhenNecessary(message.AssetName, exception);
-        }
-
         void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithoutReturn withoutReturnCallback) //when add and remove event handler
         {
-            ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out var exception);
+            ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out var exception, out var localExceptionHandlingMode);
 
             if (!message.IsOneWay)
             {
-                var response = _createEmptyMessageCallback();
+                var response = CreateEmptyMessage();
                 response.Exception = exception;
                 ProcessResponseMessageReceivedFromInside(response, message);
             }
 
-            ThrowExceptionWhenNecessary(message.AssetName, exception);
+            ThrowExceptionWhenNecessary(message.AssetName, exception, localExceptionHandlingMode);
         }
 
         protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
@@ -209,7 +194,7 @@ namespace SecretNest.RemoteAgency
         protected override void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertyGettingMessage);
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertyGettingMessage, _serviceWrapperObject.ProcessOneWayPropertyGettingMessage);
         }
 
         protected override void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message)

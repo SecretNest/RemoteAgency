@@ -5,18 +5,9 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies property name in entity class which will be generated for holding the request of setting this property. If this attribute absent, the name will be set to "Value".
+    /// Specifies property name in entity class which will be generated for holding the request of setting this property.
     /// </summary>
-    /// <seealso cref="CustomizedEventParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponseEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponsePropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertySetResponseEntityAttribute"/>
+    /// <remarks>When this attribute is not present, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name will be chosen automatically.</remarks>
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public class CustomizedPropertySetRequestPropertyNameAttribute : Attribute
     {
@@ -24,6 +15,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the property name in entity class.
         /// </summary>
         public string EntityPropertyName { get; }
+
         /// <summary>
         /// Initializes an instance of the CustomizedPropertySetRequestPropertyNameAttribute.
         /// </summary>

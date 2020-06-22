@@ -5,18 +5,9 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies the entity class name which will be generated for holding parameters of this asset. If this attribute absent, the name will be chosen automatically.
+    /// Specifies the entity class name which will be generated for holding parameters of this asset.
     /// </summary>
-    /// <seealso cref="CustomizedEventParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedParameterEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityAttribute"/>
-    /// <seealso cref="CustomizedReturnEntityPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponseEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertyGetResponsePropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestEntityAttribute"/>
-    /// <seealso cref="CustomizedPropertySetRequestPropertyNameAttribute"/>
-    /// <seealso cref="CustomizedPropertySetResponseEntityAttribute"/>
+    /// <remarks>When this attribute is not present, or <see cref="EntityName"/> is set to <see langword="null"/> or empty string, the entity name will be chosen automatically.</remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event, Inherited = true, AllowMultiple = false)]
     public class CustomizedParameterEntityAttribute : Attribute
     {

@@ -12,8 +12,8 @@ namespace SecretNest.RemoteAgency.TypeBuilding
         /// <summary>
         /// Gets the source type.
         /// </summary>
-        /// <remarks><p>When building proxy, the value is the type of the interface.</p>
-        /// <p>When building service wrapper, the value is the type of the service object.</p></remarks>
+        /// <remarks><para>When building proxy, the value is the type of the interface.</para>
+        /// <para>When building service wrapper, the value is the type of the service object.</para></remarks>
         public Type SourceType { get; }
 
         /// <summary>

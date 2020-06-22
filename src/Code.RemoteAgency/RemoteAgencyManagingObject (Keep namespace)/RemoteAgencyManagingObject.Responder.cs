@@ -10,9 +10,12 @@ namespace SecretNest.RemoteAgency
     {
         readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ConcurrentDictionary<Guid, ResponderItem>();
 
-        IRemoteAgencyMessage ProcessRequestAndWaitResponse(IRemoteAgencyMessage message,
+        protected IRemoteAgencyMessage ProcessRequestAndWaitResponse(IRemoteAgencyMessage message,
             Action<IRemoteAgencyMessage> afterPreparedCallback, int millisecondsTimeout)
         {
+            if (millisecondsTimeout == 0)
+                millisecondsTimeout = DefaultTimeOutTime;
+
             using (ResponderItem responder = new ResponderItem())
             {
                 _responders[message.MessageId] = responder;
@@ -21,6 +24,15 @@ namespace SecretNest.RemoteAgency
                 if (responder.GetResult(millisecondsTimeout, out var response))
                 {
                     _responders.TryRemove(message.MessageId, out _);
+                    if (message.Exception != null)
+                    {
+                        if (message.Exception is AssetNotFoundException ||
+                            message.Exception is InstanceNotFoundException ||
+                            message.Exception is MessageProcessTerminatedException)
+                        {
+                            throw message.Exception;
+                        }
+                    }
                     return response;
                 }
                 else
