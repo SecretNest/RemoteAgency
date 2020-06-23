@@ -304,19 +304,19 @@ namespace SecretNest.RemoteAgency.EventHelper
 
     }
 
-    /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling an two way event handler in service wrapper. This is an abstract class.
-    /// </summary>
-    public abstract class TwoWayEventRouterBase : EventRouterBase
-    {
+    ///// <summary>
+    ///// Defines a helper class to be implanted into built assembly for handling an two way event handler in service wrapper. This is an abstract class.
+    ///// </summary>
+    //public abstract class TwoWayEventRouterBase : EventRouterBase
+    //{
 
-    }
+    //}
     
-    /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
-    /// </summary>
-    public abstract class OneWayEventRouterBase : EventRouterBase
-    {
+    ///// <summary>
+    ///// Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
+    ///// </summary>
+    //public abstract class OneWayEventRouterBase : EventRouterBase
+    //{
 
-    }
+    //}
 }
