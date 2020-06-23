@@ -5,7 +5,7 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies a parameter of the event contains a settable property or field which value should be send back to the caller.
+    /// Specifies a parameter of the event contains a property or field which value should be send back to the caller.
     /// </summary>
     /// <remarks>
     /// <para>When a parameter contains properties or fields which may be changed on the target site and need to be sent back to the caller, use <see cref="EventParameterTwoWayPropertyAttribute"/> or <see cref="ParameterTwoWayPropertyAttribute"/> on related properties.</para>
@@ -16,92 +16,67 @@ namespace SecretNest.RemoteAgency.Attributes
     public class EventParameterTwoWayPropertyAttribute : Attribute
     {
         /// <summary>
-        /// Gets whether this is in simple mode.
-        /// </summary>
-        /// <remarks>
-        /// <list type="bullet">
-        /// <item>
-        ///     <term>True</term>
-        ///     <description><see cref="PropertyInParameter"/> is the name of property or field of the parameter entity.</description>
-        /// </item>
-        /// <item>
-        ///     <term>False</term>
-        ///     <description><see cref="PropertyInParameter"/> is the path, starts with ".", from the parameter entity.</description>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        public bool IsSimpleMode { get; }
-
-        /// <summary>
         /// Gets the parameter name of the event.
         /// </summary>
         public string ParameterName { get; }
 
         /// <summary>
-        /// Gets the property in the parameter.
+        /// Gets whether this is in simple mode.
         /// </summary>
-        /// <remarks>
-        /// Based on the value of <see cref="IsSimpleMode"/>:
-        /// <list type="bullet">
-        /// <item>
-        ///     <term>True</term>
-        ///     <description>The name of property or field of the parameter entity.</description>
-        /// </item>
-        /// <item>
-        ///     <term>False</term>
-        ///     <description>The path, starts with ".", from the parameter entity.</description>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        public string PropertyInParameter { get; }
+        /// <remarks>When the value is <see langword="true"/>, property specified by <see cref="PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="TwoWayHelperAttribute"/> and <see cref="TwoWayHelperAttribute.IsTwoWay"/> set to <see langword="true"/> are used as the helper fow two way property accessing.</remarks>
+        public bool IsSimpleMode { get; }
 
         /// <summary>
-        /// Gets the type of the property or field specified by <see cref="PropertyInParameter"/>.
+        /// Gets the property name in the parameter which need to be sent back to the caller.
         /// </summary>
-        /// <remarks>When <see cref="IsSimpleMode"/> is set to true, this value will be ignored.</remarks>
-        public Type ElementType { get; }
+        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="true"/>.</remarks>
+        public string PropertyNameInParameter { get; }
 
         /// <summary>
-        /// Gets the preferred property name in entity.
+        /// Gets the type of the helper class.
         /// </summary>
-        /// <remarks>If it's set to null (default), the property name will be chosen automatically.</remarks>
-        public string EntityPropertyName { get; }
+        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</para>
+        /// <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="TwoWayHelperAttribute"/> and <see cref="TwoWayHelperAttribute.IsTwoWay"/> set to <see langword="true"/> are used as the helper fow two way property accessing.</para></remarks>
+        public Type HelperClass { get; }
+
+        /// <summary>
+        /// Gets the preferred property name in response entity.
+        /// </summary>
+        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</para>
+        /// <para>When the value is <see langword="null"/> or empty string, name is chosen automatically.</para></remarks>
+        public string ResponseEntityPropertyName { get; }
 
         /// <summary>
         /// Gets whether this property should be included in return entity when exception thrown by the user code on the remote site.
         /// </summary>
+        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</remarks>
         public bool IsIncludedWhenExceptionThrown { get; }
 
         /// <summary>
-        /// Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to false.
+        /// Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="false"/>.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
-        /// <param name="propertyPathInParameter">The path, starts with ".", from the parameter entity.</param>
-        /// <param name="elementType">The type of the property or field specified by <see cref="PropertyInParameter"/>.</param>
-        /// <param name="entityPropertyName">Preferred property name in entity. If it's set to null, the property name will be chosen automatically.</param>
-        /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
-        public EventParameterTwoWayPropertyAttribute(string parameterName, string propertyPathInParameter, Type elementType, string entityPropertyName, bool isIncludedWhenExceptionThrown = false)
+        /// <param name="helperClass">Type of the helper class.</param>
+        /// <seealso cref="HelperClass"/>
+        public EventParameterTwoWayPropertyAttribute(string parameterName, Type helperClass)
         {
             ParameterName = parameterName;
-            PropertyInParameter = propertyPathInParameter;
-            ElementType = elementType;
-            EntityPropertyName = entityPropertyName;
+            HelperClass = helperClass;
             IsSimpleMode = false;
-            IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
         }
 
         /// <summary>
-        /// Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to true.
+        /// Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="true"/>.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
         /// <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
-        /// <param name="entityPropertyName">Preferred property name in entity. If it's set to null (default), the property name will be chosen automatically.</param>
+        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
         /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
-        public EventParameterTwoWayPropertyAttribute(string parameterName, string propertyNameInParameter, string entityPropertyName = null, bool isIncludedWhenExceptionThrown = false)
+        public EventParameterTwoWayPropertyAttribute(string parameterName, string propertyNameInParameter, string responseEntityPropertyName = null, bool isIncludedWhenExceptionThrown = false)
         {
             ParameterName = parameterName;
-            PropertyInParameter = propertyNameInParameter;
-            EntityPropertyName = entityPropertyName;
+            PropertyNameInParameter = propertyNameInParameter;
+            ResponseEntityPropertyName = responseEntityPropertyName;
             IsSimpleMode = true;
             IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
         }

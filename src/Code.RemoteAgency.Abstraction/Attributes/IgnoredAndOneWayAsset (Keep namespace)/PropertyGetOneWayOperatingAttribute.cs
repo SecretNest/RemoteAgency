@@ -8,9 +8,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies the property get operating should be one way. No response is required.
     /// </summary>
     /// <remarks>
-    /// <para>When <see cref="IsOneWay"/> is set to <see langword="true"/>, the getting operating will always return the default value to the caller due to lack of response, any exception raised from the user code on target site will not be transferred to the caller site.</para>
-    /// <para>By specifying this on properties, only get operating will be affected. If one way set operating is expected, mark the property with <see cref="AssetOneWayOperatingAttribute"/>.</para>
-    /// <para>When this attribute is absent, the one way mode on property get operating of this asset is disabled.</para>
+    /// <para>When <see cref="IsOneWay"/> is set to <see langword="true"/>, the getting operating return the default value to the caller due to lack of response. Any exception raised from the user code on target site will not be transferred to the caller site.</para>
+    /// <para>By specifying this on properties, only getting operating is affected. If one way setting operating is expected, mark the property with <see cref="AssetOneWayOperatingAttribute"/>.</para>
+    /// <para>When this attribute is absent, the one way mode on property getting operating of this asset is disabled.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public class PropertyGetOneWayOperatingAttribute : Attribute

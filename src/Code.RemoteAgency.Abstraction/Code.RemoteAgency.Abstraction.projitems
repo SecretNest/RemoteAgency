@@ -13,12 +13,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\PropertyGetOneWayOperatingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterTwoWayAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\TwoWayHelperAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyStickyTargetSiteAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ReturnIgnoredAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventHelper\ServiceWrapperEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssemblyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedClassNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AssetNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssetNameAttribute.cs" />

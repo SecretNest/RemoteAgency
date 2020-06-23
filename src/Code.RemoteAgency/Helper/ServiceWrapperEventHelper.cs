@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SecretNest.RemoteAgency.EventHelper
+namespace SecretNest.RemoteAgency.Helper
 {
     /// <summary>
     /// Defines a helper class to be implanted into built assembly for event servicing in service wrapper.

@@ -9,6 +9,7 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TypeBuilding.InMemoryCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AssemblyReference.cs" />

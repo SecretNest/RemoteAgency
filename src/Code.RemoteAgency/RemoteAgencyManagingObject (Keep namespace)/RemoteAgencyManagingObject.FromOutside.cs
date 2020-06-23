@@ -113,7 +113,7 @@ namespace SecretNest.RemoteAgency
 
         protected override void ProcessEventMessageReceived(IRemoteAgencyMessage message)
         {
-            //request
+            //request (notify)
             ProcessRequestAndSendResponseIfRequired(message, _proxyObject.ProcessEventRaisingMessage,
                 _proxyObject.ProcessOneWayEventRaisingMessage);
         }
