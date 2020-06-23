@@ -26,9 +26,7 @@ namespace SecretNest.RemoteAgency
                     _responders.TryRemove(message.MessageId, out _);
                     if (message.Exception != null)
                     {
-                        if (message.Exception is AssetNotFoundException ||
-                            message.Exception is InstanceNotFoundException ||
-                            message.Exception is MessageProcessTerminatedException)
+                        if (message.IsEmptyMessage)
                         {
                             throw message.Exception;
                         }

@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyStickyTargetSiteAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ReturnIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventHelper\ServiceWrapperEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedAssemblyNameAttribute.cs" />

@@ -27,20 +27,12 @@ namespace SecretNest.RemoteAgency
         public MessageType MessageType => OriginalMessage.MessageType;
 
         /// <summary>
-        /// Gets the site id of the Remote Agency instance which throws the exception.
-        /// </summary>
-        /// <returns>Due to routing mechanism, like load-balancing, the actual target site may not the same as requested in the message. This property contains the site id of the site id of the actual Remote Agency site.</returns>
-        public Guid ExceptionThrownSiteId { get; }
-
-        /// <summary>
         /// Initializes an instance of the AssetNotFoundException.
         /// </summary>
         /// <param name="originalMessage">Message which causes this exception thrown.</param>
-        /// <param name="exceptionThrownSiteId">Site id of the Remote Agency instance which throws the exception.</param>
-        public AssetNotFoundException(IRemoteAgencyMessage originalMessage, Guid exceptionThrownSiteId)
+        public AssetNotFoundException(IRemoteAgencyMessage originalMessage)
         {
             OriginalMessage = originalMessage;
-            ExceptionThrownSiteId = exceptionThrownSiteId;
         }
 
         /// <summary>
@@ -52,7 +44,6 @@ namespace SecretNest.RemoteAgency
         {
             var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
             OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
-            ExceptionThrownSiteId = (Guid) info.GetValue("ExceptionThrownSiteId", typeof(Guid));
         }
 
         /// <inheritdoc />
@@ -61,7 +52,6 @@ namespace SecretNest.RemoteAgency
             base.GetObjectData(info, context);
             info.AddValue("OriginalMessageType", OriginalMessage.GetType());
             info.AddValue("OriginalMessage", OriginalMessage);
-            info.AddValue("ExceptionThrownSiteId", ExceptionThrownSiteId);
         }
 
         /// <summary>
