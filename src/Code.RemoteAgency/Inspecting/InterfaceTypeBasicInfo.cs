@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Inspecting
     {
         public Type SourceInterface { get; set; }
         public string AssemblyName { get; set; }
-        public virtual string ProxyTypeName { get; set; }
-        public virtual string ServiceWrapperTypeName { get; set; }
+        public string ProxyTypeName { get; set; }
+        public string ServiceWrapperTypeName { get; set; }
     }
 }

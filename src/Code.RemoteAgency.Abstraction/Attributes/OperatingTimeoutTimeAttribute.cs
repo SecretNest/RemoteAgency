@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>Set <see cref="Timeout"/> to 0 to use the default value set by Remote Agency instance.</para>
     /// </remarks>
     /// <seealso cref="AccessingTimeOutException"/>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class OperatingTimeoutTimeAttribute : Attribute
     {
         /// <summary>

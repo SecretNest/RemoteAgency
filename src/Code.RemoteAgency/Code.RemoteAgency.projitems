@@ -10,9 +10,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\AttributePassThrough %28Keep namespace%29\AttributePassThrough.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.AttributePassThrough.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Template.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Basic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\AttributePassThrough %28Keep namespace%29\InterfaceLevelAttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InterfaceTypeBasicInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InterfaceTypeInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InvalidAttributeDataException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.InstanceBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
@@ -42,5 +48,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\AfterTypeAndAssemblyBuiltEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Inspecting\AttributePassThrough %28Keep namespace%29\" />
   </ItemGroup>
 </Project>
