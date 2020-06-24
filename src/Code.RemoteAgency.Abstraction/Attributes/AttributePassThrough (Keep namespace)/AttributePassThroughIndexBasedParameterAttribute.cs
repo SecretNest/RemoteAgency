@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the id of the instance of the attribute.
         /// </summary>
         /// <remarks>This value should be same as the <see cref="AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
-        public Guid AttributeId { get; }
+        public string AttributeId { get; }
 
         /// <summary>
         /// Gets the index of the parameter.
@@ -38,9 +38,10 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="attributeId">Id of the instance of the attribute. This value should be same as the <see cref="AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</param>
         /// <param name="parameterIndex">Index of the parameter.</param>
         /// <param name="value">Value of the parameter.</param>
-        public AttributePassThroughIndexBasedParameterAttribute(Guid attributeId, int parameterIndex, object value)
+        public AttributePassThroughIndexBasedParameterAttribute(string attributeId, int parameterIndex, object value)
         {
-            AttributeId = attributeId;
+            if (parameterIndex < 0) throw new ArgumentOutOfRangeException(nameof(parameterIndex));
+            AttributeId = attributeId ?? throw new ArgumentNullException(nameof(attributeId));
             ParameterIndex = parameterIndex;
             Value = value;
         }

@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>The one marked on the return value has higher priority than the one marked on other place.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event | AttributeTargets.Delegate | AttributeTargets.ReturnValue, Inherited = true, AllowMultiple = false)]
-    public class CustomizedReturnEntityPropertyNameAttribute : Attribute
+    public class CustomizedReturnValueEntityPropertyNameAttribute : Attribute
     {
         /// <summary>
         /// Gets the property name in entity class.
@@ -22,10 +22,10 @@ namespace SecretNest.RemoteAgency.Attributes
         public string EntityPropertyName { get; }
 
         /// <summary>
-        /// Initializes an instance of the CustomizedReturnEntityPropertyNameAttribute.
+        /// Initializes an instance of the CustomizedReturnValueEntityPropertyNameAttribute.
         /// </summary>
         /// <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
-        public CustomizedReturnEntityPropertyNameAttribute(string entityPropertyName)
+        public CustomizedReturnValueEntityPropertyNameAttribute(string entityPropertyName)
         {
             EntityPropertyName = entityPropertyName;
         }

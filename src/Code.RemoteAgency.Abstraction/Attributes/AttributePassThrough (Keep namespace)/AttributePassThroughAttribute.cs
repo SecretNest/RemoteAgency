@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <see cref="AttributeConstructorParameterTypes"/> and leading values to <see cref="AttributeConstructorParameters"/>. Marks the rest one by one using <see cref="AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// <para>When properties need to be set while initializing, marks the properties one by one using <see cref="AttributePassThroughPropertyAttribute"/>. The <see cref="AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Property |
+    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class AttributePassThroughAttribute : Attribute
@@ -21,8 +21,9 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets the id of the instance of the attribute.
         /// </summary>
-        /// <remarks>This id is designed for linking <see cref="AttributePassThroughAttribute"/> with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="AttributePassThroughPropertyAttribute"/>. When no need to mark with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> or <see cref="AttributePassThroughPropertyAttribute"/>, this value is optional.</remarks>
-        public Guid? AttributeId { get; }
+        /// <remarks><para>This id is designed for linking <see cref="AttributePassThroughAttribute"/> with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="AttributePassThroughPropertyAttribute"/> on the same member. When no need to mark with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> or <see cref="AttributePassThroughPropertyAttribute"/>, this value is optional.</para>
+        /// </remarks>
+        public string AttributeId { get; }
 
         /// <summary>
         /// Gets the type of the attribute.
@@ -46,13 +47,19 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="attributeConstructorParameterTypes">Types to identify the constructor of attribute. Default value is <see langword="null"/>. Set the value to <see langword="null"/> or empty array to use parameterless constructor.</param>
         /// <param name="attributeConstructorParameters">Parameters used in constructor. The length can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
         /// <param name="attributeId"></param>
-        public AttributePassThroughAttribute(Type attribute, Type[] attributeConstructorParameterTypes = null, object[] attributeConstructorParameters = null, Guid? attributeId = null)
+        public AttributePassThroughAttribute(Type attribute, Type[] attributeConstructorParameterTypes = null, object[] attributeConstructorParameters = null, string attributeId = null)
         {
             AttributeId = attributeId;
             Attribute = attribute;
+
             if (attributeConstructorParameterTypes == null)
                 attributeConstructorParameterTypes = new Type[0];
             AttributeConstructorParameterTypes = attributeConstructorParameterTypes;
+
+            if (attributeConstructorParameters != null &&
+                attributeConstructorParameters.Length > attributeConstructorParameterTypes.Length)
+                throw new ArgumentException(nameof(attributeConstructorParameters),
+                    $"The length can not exceed the length of {nameof(attributeConstructorParameterTypes)}.");
             AttributeConstructorParameters = attributeConstructorParameters;
         }
     }

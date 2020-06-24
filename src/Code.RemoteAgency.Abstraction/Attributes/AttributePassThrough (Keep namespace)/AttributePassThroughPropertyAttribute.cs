@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the id of the instance of the attribute.
         /// </summary>
         /// <remarks>This value should be same as the <see cref="AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
-        public Guid AttributeId { get; }
+        public string AttributeId { get; }
 
         /// <summary>
         /// Gets the order for setting the property. All setting operations are performed sequentially. Default value is 0.
@@ -41,10 +41,10 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">Value of the property.</param>
         /// <param name="order">Order for setting the property. All setting operations are performed sequentially. Default value is 0.</param>
-        public AttributePassThroughPropertyAttribute(Guid attributeId, string propertyName, object value, int order = 0)
+        public AttributePassThroughPropertyAttribute(string attributeId, string propertyName, object value, int order = 0)
         {
-            AttributeId = attributeId;
-            PropertyName = propertyName;
+            AttributeId = attributeId ?? throw new ArgumentNullException(nameof(attributeId));
+            PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
             Value = value;
             Order = order;
         }

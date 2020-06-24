@@ -25,8 +25,17 @@ namespace SecretNest.RemoteAgency.Inspecting
                 memberInfo.GetCustomAttributes<AttributePassThroughPropertyAttribute>()
                     .ToLookup(i => i.AttributeId);
 
+            HashSet<string> processedAttributeId = new HashSet<string>();
             foreach (var attributePassThroughAttribute in attributePassThroughAttributes)
             {
+                //Avoid process with same attribute id.
+                if (attributePassThroughAttribute.AttributeId != null)
+                {
+                    if (processedAttributeId.Contains(attributePassThroughAttribute.AttributeId))
+                        continue;
+                    processedAttributeId.Add(attributePassThroughAttribute.AttributeId);
+                }
+
                 var mainRecord = new AttributePassThrough
                 {
                     Attribute = attributePassThroughAttribute.Attribute,
@@ -38,6 +47,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (attributePassThroughAttribute.AttributeConstructorParameterTypes.Length != 0)
                 {
+                    Dictionary<int, object> parameters =
+                        new Dictionary<int, object>(attributePassThroughAttribute.AttributeConstructorParameterTypes
+                            .Length);
+
                     if (attributePassThroughAttribute.AttributeConstructorParameters != null)
                     {
                         if (attributePassThroughAttribute.AttributeConstructorParameters.Length >
@@ -48,53 +61,59 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 attributePassThroughAttribute, memberInfo, memberParentPath);
                         }
 
-                        Dictionary<int, object> parameters = new Dictionary<int, object>(attributePassThroughAttribute.AttributeConstructorParameterTypes.Length);
-
                         for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameters.Length; i++)
                         {
                             parameters[i] = attributePassThroughAttribute.AttributeConstructorParameters[i];
                         }
 
-                        if (attributePassThroughAttribute.AttributeId.HasValue)
-                        {
-                            var linkedAttributePassThroughIndexBasedParameterAttributes =
-                                attributePassThroughIndexBasedParameterAttributes[
-                                    attributePassThroughAttribute.AttributeId.Value];
+                    }
 
-                            foreach (var attributePassThroughIndexBasedParameterAttribute in
-                                linkedAttributePassThroughIndexBasedParameterAttributes)
+                    if (attributePassThroughAttribute.AttributeId != null)
+                    {
+                        var linkedAttributePassThroughIndexBasedParameterAttributes =
+                            attributePassThroughIndexBasedParameterAttributes[
+                                attributePassThroughAttribute.AttributeId].Reverse(); //reverse to process from base to derived class.
+
+                        foreach (var attributePassThroughIndexBasedParameterAttribute in
+                            linkedAttributePassThroughIndexBasedParameterAttributes)
+                        {
+                            if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
+                                attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
                             {
-                                if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
-                                    attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
-                                {
-                                    throw new InvalidAttributeDataException(
-                                        $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
-                                        attributePassThroughIndexBasedParameterAttribute, memberInfo, memberParentPath);
-                                }
-                                else
-                                {
-                                    parameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
-                                        attributePassThroughIndexBasedParameterAttribute.Value;
-                                }
+                                throw new InvalidAttributeDataException(
+                                    $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
+                                    attributePassThroughIndexBasedParameterAttribute, memberInfo, memberParentPath);
+                            }
+                            else
+                            {
+                                parameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
+                                    attributePassThroughIndexBasedParameterAttribute.Value;
                             }
                         }
+                    }
 
-                        for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameterTypes.Length; i++)
-                        {
-                            if (parameters.TryGetValue(i, out var value))
-                                mainRecord.AttributeConstructorParameters.Add(new KeyValuePair<int, object>(i, value));
-                        }
+                    for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameterTypes.Length; i++)
+                    {
+                        if (parameters.TryGetValue(i, out var value))
+                            mainRecord.AttributeConstructorParameters.Add(new KeyValuePair<int, object>(i, value));
                     }
                 }
 
-                if (attributePassThroughAttribute.AttributeId.HasValue)
+                if (attributePassThroughAttribute.AttributeId != null)
                 {
+                    HashSet<string> setProperties = new HashSet<string>();
+
                     var linkedAttributePassThroughPropertyAttributes =
-                        attributePassThroughPropertyAttributes[attributePassThroughAttribute.AttributeId.Value]
+                        attributePassThroughPropertyAttributes[attributePassThroughAttribute.AttributeId]
                             .OrderBy(i => i.Order);
 
                     foreach (var attributePassThroughPropertyAttribute in linkedAttributePassThroughPropertyAttributes)
                     {
+                        //Avoid process with same property.
+                        if (setProperties.Contains(attributePassThroughPropertyAttribute.PropertyName))
+                            continue;
+                        setProperties.Add(attributePassThroughPropertyAttribute.PropertyName);
+
                         mainRecord.AttributeProperties.Add(new KeyValuePair<string, object>(
                             attributePassThroughPropertyAttribute.PropertyName,
                             attributePassThroughPropertyAttribute.Value));
