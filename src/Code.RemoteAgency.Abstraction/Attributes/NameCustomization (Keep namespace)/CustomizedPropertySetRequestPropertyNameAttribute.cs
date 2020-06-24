@@ -14,13 +14,13 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets the property name in entity class.
         /// </summary>
-        /// <remarks>When the value is <see langword="null"/> or empty string, name will be generate automatically.</remarks>
+        /// <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
         public string EntityPropertyName { get; }
 
         /// <summary>
         /// Initializes an instance of the CustomizedPropertySetRequestPropertyNameAttribute.
         /// </summary>
-        /// <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name will be generate automatically.</param>
+        /// <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
         public CustomizedPropertySetRequestPropertyNameAttribute(string entityPropertyName)
         {
             EntityPropertyName = entityPropertyName;

@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets the entity class name.
         /// </summary>
-        /// <remarks>When the value is <see langword="null"/> or empty string, name will be generate automatically.</remarks>
+        /// <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
         public string EntityName { get; }
 
         /// <summary>

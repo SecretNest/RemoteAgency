@@ -51,12 +51,12 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Initializes an instance of CustomizedEventEntityNameAttribute.
         /// </summary>
-        /// <param name="addingRequestEntityName">Name of the entity class for processing event adding request. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
-        /// <param name="addingResponseEntityName">Name of the entity class for processing event adding response. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
-        /// <param name="removingRequestEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
-        /// <param name="removingResponseEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
-        /// <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
-        /// <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name will be generate automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="addingRequestEntityName">Name of the entity class for processing event adding request. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="addingResponseEntityName">Name of the entity class for processing event adding response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="removingRequestEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="removingResponseEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        /// <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
         public CustomizedEventEntityNameAttribute(
             string addingRequestEntityName = null, string addingResponseEntityName = null,
             string removingRequestEntityName = null, string removingResponseEntityName = null,
