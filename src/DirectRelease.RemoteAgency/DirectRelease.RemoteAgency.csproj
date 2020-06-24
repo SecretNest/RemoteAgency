@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
@@ -27,18 +27,8 @@
     <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-    <DefineConstants>net461</DefineConstants>
-    <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
     <PackageReference Include="SecretNest.SequentialScheduler" Version="1.0.0" />
     <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
   </ItemGroup>
@@ -52,8 +42,6 @@
   <Import Project="..\Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems" Label="Shared" />
 
   <Import Project="..\Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems" Label="Shared" />
-
-  <Import Project="..\Code.RemoteAgency.AssemblyBuilder\Code.RemoteAgency.AssemblyBuilder.projitems" Label="Shared" />
 
   <Import Project="..\Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems" Label="Shared" />
 

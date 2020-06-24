@@ -10,16 +10,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TypeBuilding.InMemoryCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InterfaceTypeBasicInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InterfaceTypeInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.InstanceBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.Responder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AssemblyReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\ExceptionRedirectedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\IMessageBodyGenericEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgs.Generic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\MessageBodyEventArgsBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BuiltClassType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\FastActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BeforeAssemblyCreatedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BeforeTypeCreatedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BuiltClassType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.EmptyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Factory.cs" />
@@ -31,19 +35,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TaskScheduler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Template.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TypeBuilding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.ThreadLock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.FromOutside.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.FomInside.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\AfterTypeAndAssemblyBuiltEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeAssemblyBuildingEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\BeforeTypeBuildingEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\CustomizedAssemblyBuildingEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\AfterTypeAndAssemblyBuiltEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeBuilding\SourceTypeAndBuiltClassTypeEventArgsBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Inspector %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

@@ -38,7 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedReturnEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterTwoWayPropertyAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ImportAssemblyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
@@ -49,9 +48,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\MessageProcessTerminatedException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityProperty.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\SerializingHelperBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\TypeCreatingException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ValueMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\" />

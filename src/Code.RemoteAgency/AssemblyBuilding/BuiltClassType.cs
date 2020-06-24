@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SecretNest.RemoteAgency.TypeBuilding
+namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     /// <summary>
     /// Contains a list of the Remote Agency built type. Entity classes are excluded.

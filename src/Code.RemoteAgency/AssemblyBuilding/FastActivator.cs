@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace SecretNest.RemoteAgency.TypeBuilding
+namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     /// <summary>
     /// Activator faster than built in version.

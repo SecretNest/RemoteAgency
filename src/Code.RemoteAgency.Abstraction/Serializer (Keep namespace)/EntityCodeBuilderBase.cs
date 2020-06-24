@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -13,24 +14,21 @@ namespace SecretNest.RemoteAgency
     public abstract class EntityCodeBuilderBase
     {
         /// <summary>
-        /// Generates code for an entity class.
+        /// Builds an entity class type.
         /// </summary>
-        /// <param name="className">Class name</param>
-        /// <param name="entityBaseTypeFullName">Type name of the base class of entity classes.</param>
-        /// <param name="fullNameOfIRemoteAgencyMessage">Type name of <see cref="IRemoteAgencyMessage"/>.</param>
+        /// <param name="targetModule">Module to place the entity class.</param>
+        /// <param name="entityClassName">Name of the entity class.</param>
+        /// <param name="entityClassParentClass">Type of the parent of entity class.</param>
+        /// <param name="entityClassInterface">Type of the interface to be implemented explicitly.</param>
+        /// <param name="properties">Properties other than in interface.</param>
         /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="InterfaceLevelAttributeBaseType"/> in interface level.<remarks>This will contains nothing when <see cref="InterfaceLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="AssetLevelAttributeBaseType"/> in asset level.<remarks>This will contains nothing when <see cref="AssetLevelAttributeBaseType"/> is set to null.</remarks></param>
         /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.<remarks>This will contains nothing when <see cref="DelegateLevelAttributeBaseType"/> is set to null.</remarks></param>
-        /// <param name="values">Values need to be represented in entity.</param>
-        /// <param name="usedGenerics">Generic arguments should be represented in entity.</param>
-        /// <param name="needValueBasedConstructor">Whether need to create a constructor.</param>
-        /// <param name="sourceCodeBuilder">The <see cref="StringBuilder"/> for writing source code to.</param>
-        /// <param name="valueBasedConstructorCallerCode">The calling code for create an instance of this entity class, starting with <code>= new ...</code>.</param>
-        /// <returns>Class code.</returns>
-        public abstract string BuildEntity(string className, string entityBaseTypeFullName, string fullNameOfIRemoteAgencyMessage, 
-            List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes, List<Attribute> delegateLevelAttributes,
-            List<ValueMapping> values, Dictionary<string, Type> usedGenerics, bool needValueBasedConstructor,
-            StringBuilder sourceCodeBuilder, out string valueBasedConstructorCallerCode);
+        /// <returns>Type of the built entity class.</returns>
+        public abstract Type BuildEntity(ModuleBuilder targetModule, string entityClassName,
+            Type entityClassParentClass, Type entityClassInterface, List<EntityProperty> properties,
+            List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes,
+            List<Attribute> delegateLevelAttributes);
 
         /// <summary>
         /// Gets the type of the base class of attributes which are used to mark metadata on interface level.
@@ -57,40 +55,5 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <returns>Empty message.</returns>
         public abstract IRemoteAgencyMessage CreateEmptyMessage();
-
-        /// <summary>
-        /// Appends "where" cause.
-        /// </summary>
-        /// <param name="genericTypes">Generic types. Key is the name in code.</param>
-        /// <param name="builder">String builder to append on.</param>
-        protected void ApplyConstraints(Dictionary<string, Type> genericTypes, StringBuilder builder)
-        {
-            if (genericTypes != null)
-                foreach (var type in genericTypes)
-                    ApplyConstraints(type.Key, type.Value, builder);
-        }
-
-        void ApplyConstraints(string name, Type genericType, StringBuilder builder)
-        {
-            var typeInfo = genericType.GetTypeInfo();
-            var typeConstraints = typeInfo.GetGenericParameterConstraints();
-            var typeAttributes = typeInfo.GenericParameterAttributes;
-            var valueType = typeof(ValueType);
-            var words = typeConstraints.Where(i => i != valueType).Select(i => i.Name).ToList();
-            if (typeAttributes.HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint))
-                words.Add("struct");
-            else
-            {
-                if (typeAttributes.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
-                    words.Add("class");
-                if (typeAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint))
-                    words.Add("new()");
-            }
-            if (words.Count > 0)
-            {
-                builder.Append(" where ").Append(name).Append(" : ")
-                    .Append(string.Join(", ", words));
-            }
-        }
     }
 }

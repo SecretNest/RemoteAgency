@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.Neat</PackageId>
     <Authors>Allen Cui</Authors>
@@ -35,8 +35,6 @@
   </ItemGroup>
 
   <Import Project="..\Code.RemoteAgency\Code.RemoteAgency.projitems" Label="Shared" />
-
-  <Import Project="..\Code.RemoteAgency.NoAssemblyBuilder\Code.RemoteAgency.NoAssemblyBuilder.projitems" Label="Shared" />
 
   <Import Project="..\Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems" Label="Shared" />
 

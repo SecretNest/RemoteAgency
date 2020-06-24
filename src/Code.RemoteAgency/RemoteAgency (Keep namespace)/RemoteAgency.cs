@@ -22,11 +22,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
         protected RemoteAgency(Guid siteId)
         {
-            InitializeAssemblyBuilder();
-
             SiteId = siteId == Guid.Empty ? Guid.NewGuid() : siteId;
-
-            EnableInMemoryTypeCache();
         }
     }
 
