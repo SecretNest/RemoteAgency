@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies the asset is ignored from type building.
     /// </summary>
     /// <remarks><para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, any access to this asset will not be transferred or relayed. When <see cref="WillThrowException"/> is set to <see langword="true"/>, a <see cref="NotImplementedException"/> will be thrown when accessing, or default value will be used as returning like one way operating enabled.</para>
-    /// <para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, all other attributes on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
+    /// <para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, all other attributes except <see cref="AttributePassThroughAttribute"/>, <see cref="AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="AttributePassThroughPropertyAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
     /// <para>When this attribute is absent, the ignored mode is disabled.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
