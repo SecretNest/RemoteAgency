@@ -72,12 +72,17 @@ namespace SecretNest.RemoteAgency.Inspecting
                     {
                         var linkedAttributePassThroughIndexBasedParameterAttributes =
                             attributePassThroughIndexBasedParameterAttributes[
-                                attributePassThroughAttribute.AttributeId].Reverse(); //reverse to process from base to derived class.
+                                attributePassThroughAttribute.AttributeId];
+
+                        HashSet<int> setIndices = new HashSet<int>();
 
                         foreach (var attributePassThroughIndexBasedParameterAttribute in
                             linkedAttributePassThroughIndexBasedParameterAttributes)
                         {
-                            if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
+                            //Avoid process with same index.
+                            if (setIndices.Contains(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
+                                continue;
+                            else if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
                                 attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
                             {
                                 throw new InvalidAttributeDataException(
@@ -86,6 +91,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                             }
                             else
                             {
+                                setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex);
+
                                 parameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
                                     attributePassThroughIndexBasedParameterAttribute.Value;
                             }
