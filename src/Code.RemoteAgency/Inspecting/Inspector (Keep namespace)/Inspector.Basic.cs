@@ -20,7 +20,16 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         static void SetInterfaceTypeBasicInfo(InterfaceTypeBasicInfo interfaceTypeBasicInfo, Type sourceInterface, TypeInfo typeInfo)
         {
-            interfaceTypeBasicInfo.SourceInterface = sourceInterface;
+            if (sourceInterface.IsGenericType)
+            {
+                interfaceTypeBasicInfo.SourceInterface = sourceInterface.GetGenericTypeDefinition();
+                interfaceTypeBasicInfo.IsSourceInterfaceGenericType = true;
+                interfaceTypeBasicInfo.SourceInterfaceGenericArguments = sourceInterface.GetGenericArguments();
+            }
+            else
+            {
+                interfaceTypeBasicInfo.SourceInterface = sourceInterface;
+            }
 
             Lazy<string> classNameBase = new Lazy<string>(() => GetClassNameBase(sourceInterface));
 

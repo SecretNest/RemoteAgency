@@ -33,6 +33,10 @@ namespace SecretNest.RemoteAgency
                     out proxyType, out _);
             }
 
+            if (interfaceTypeBasicInfo.IsSourceInterfaceGenericType)
+            {
+                proxyType = proxyType.MakeGenericType(interfaceTypeBasicInfo.SourceInterfaceGenericArguments);
+            }
             var obj = FastActivator.CreateInstance<IProxyCommunicate>(proxyType);
             obj.GetSiteIdCallback = GetSiteId;
             return obj;
@@ -59,6 +63,10 @@ namespace SecretNest.RemoteAgency
                     out _, out serviceWrapperType);
             }
 
+            if (interfaceTypeBasicInfo.IsSourceInterfaceGenericType)
+            {
+                serviceWrapperType = serviceWrapperType.MakeGenericType(interfaceTypeBasicInfo.SourceInterfaceGenericArguments);
+            }
             var obj = FastActivator<object>.CreateInstance<IServiceWrapperCommunicate>(serviceWrapperType,
                 serviceObject);
             obj.GetSiteIdCallback = GetSiteId;

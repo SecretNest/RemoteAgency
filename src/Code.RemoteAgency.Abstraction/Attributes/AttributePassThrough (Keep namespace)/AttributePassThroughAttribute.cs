@@ -5,7 +5,7 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies an attribute should be marked at the same place of built proxy or service wrapper class.
+    /// Specifies an attribute should be marked at the same place of built proxy class.
     /// </summary>
     /// <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
     /// <para>When using the parameterless constructor of target attribute, <see cref="AttributeId"/>, <see cref="AttributeConstructorParameterTypes"/> and <see cref="AttributeConstructorParameters"/> are not required.</para>

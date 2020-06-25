@@ -42,7 +42,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 
         internal static object BuildConstructorDelegate(Type type, Type delegateType, Type[] argTypes)
         {
-            var dynMethod = new DynamicMethod($"FastActivatorMethod_{type.Name}_{argTypes.Length}", type, argTypes, type);
+            Guid methodName = Guid.NewGuid();
+            var dynMethod = new DynamicMethod($"FastActivatorMethod_{methodName:N}", type, argTypes, type);
             ILGenerator ilGen = dynMethod.GetILGenerator();
             for (int argIdx = 0; argIdx < argTypes.Length; argIdx++)
             {
