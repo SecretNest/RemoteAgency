@@ -54,20 +54,23 @@ namespace SecretNest.RemoteAgency
         /// <param name="assemblyName">Assembly name.</param>
         /// <param name="typeName">Type name.</param>
         /// <param name="type">Type object specified.</param>
+        /// <exception cref="TypeLoadException">Thrown when the type request cannot be found in the assembly specified.</exception>
         /// <returns>Result.</returns>
         protected bool TryGetType(string assemblyName, string typeName, out Type type)
         {
+            Assembly assembly;
             try
             {
-                Assembly assembly = Assembly.Load(assemblyName);
-                type = assembly.GetType(typeName);
-                return type != null;
+                assembly = Assembly.Load(assemblyName);
             }
             catch
             {
                 type = default;
                 return false;
             }
+
+            type = assembly.GetType(typeName);
+            return type != null;
         }
     }
 }

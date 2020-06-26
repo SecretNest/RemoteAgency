@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency.Inspecting
     /// The exception that is thrown when the invalid attribute or data within attribute is found.
     /// </summary>
     [Serializable]
-    public sealed class InvalidAttributeDataException : Exception
+    public class InvalidAttributeDataException : Exception
     {
         /// <summary>
         /// Gets the attribute that cause this exception.
@@ -53,7 +53,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        private InvalidAttributeDataException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidAttributeDataException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             var attributeType = (Type)info.GetValue("AttributeType", typeof(Type));
             Attribute = (Attribute)info.GetValue("Attribute", attributeType);
@@ -69,6 +69,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// <inheritdoc />
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            base.GetObjectData(info, context);
             info.AddValue("AttributeType", Attribute.GetType());
             info.AddValue("Attribute", Attribute);
             var path = MemberPath.ToArray();

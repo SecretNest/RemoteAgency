@@ -9,40 +9,40 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        public static InterfaceTypeBasicInfo GetBasicInfo(Type sourceInterface)
+        public static RemoteAgencyInterfaceBasicInfo GetBasicInfo(Type sourceInterface)
         {
-            var interfaceTypeBasicInfo = new InterfaceTypeBasicInfo();
+            var basicInfo = new RemoteAgencyInterfaceBasicInfo();
 
-            SetInterfaceTypeBasicInfo(interfaceTypeBasicInfo, sourceInterface, sourceInterface.GetTypeInfo());
+            SetInterfaceTypeBasicInfo(basicInfo, sourceInterface, sourceInterface.GetTypeInfo());
 
-            return interfaceTypeBasicInfo;
+            return basicInfo;
         }
 
-        static void SetInterfaceTypeBasicInfo(InterfaceTypeBasicInfo interfaceTypeBasicInfo, Type sourceInterface, TypeInfo typeInfo)
+        static void SetInterfaceTypeBasicInfo(RemoteAgencyInterfaceBasicInfo basicInfo, Type sourceInterface, TypeInfo typeInfo)
         {
             if (sourceInterface.IsGenericType)
             {
-                interfaceTypeBasicInfo.SourceInterface = sourceInterface.GetGenericTypeDefinition();
-                interfaceTypeBasicInfo.IsSourceInterfaceGenericType = true;
-                interfaceTypeBasicInfo.SourceInterfaceGenericArguments = sourceInterface.GetGenericArguments();
+                basicInfo.SourceInterface = sourceInterface.GetGenericTypeDefinition();
+                basicInfo.IsSourceInterfaceGenericType = true;
+                basicInfo.SourceInterfaceGenericArguments = sourceInterface.GetGenericArguments();
             }
             else
             {
-                interfaceTypeBasicInfo.SourceInterface = sourceInterface;
+                basicInfo.SourceInterface = sourceInterface;
             }
 
-            Lazy<string> classNameBase = new Lazy<string>(() => GetClassNameBase(sourceInterface));
+            basicInfo.ClassNameBase = GetClassNameBase(sourceInterface);
 
             var customized = typeInfo.GetCustomAttribute<CustomizedClassNameAttribute>();
 
-            interfaceTypeBasicInfo.AssemblyName = string.IsNullOrEmpty(customized?.AssemblyName)
-                ? GetDefaultAssemblyName(classNameBase.Value)
+            basicInfo.AssemblyName = string.IsNullOrEmpty(customized?.AssemblyName)
+                ? GetDefaultAssemblyName(basicInfo.ClassNameBase)
                 : customized.AssemblyName;
-            interfaceTypeBasicInfo.ProxyTypeName = string.IsNullOrEmpty(customized?.ProxyClassName)
-                ? GetDefaultProxyTypeName(classNameBase.Value)
+            basicInfo.ProxyTypeName = string.IsNullOrEmpty(customized?.ProxyClassName)
+                ? GetDefaultProxyTypeName(basicInfo.ClassNameBase)
                 : customized.ProxyClassName;
-            interfaceTypeBasicInfo.ServiceWrapperTypeName = string.IsNullOrEmpty(customized?.ServiceWrapperClassName)
-                ? GetDefaultServiceWrapperTypeName(classNameBase.Value)
+            basicInfo.ServiceWrapperTypeName = string.IsNullOrEmpty(customized?.ServiceWrapperClassName)
+                ? GetDefaultServiceWrapperTypeName(basicInfo.ClassNameBase)
                 : customized.ServiceWrapperClassName;
         }
 
@@ -82,6 +82,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         static string GetDefaultServiceWrapperTypeName(string classNameBase)
         {
             return classNameBase + "_ServiceWrapper";
+        }
+
+        static string GetDefaultEntityTypeName(string classNameBase, string assetName, string usage)
+        {
+            return $"{classNameBase}_{assetName}_{usage}";
         }
     }
 }

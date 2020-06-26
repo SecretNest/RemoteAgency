@@ -29,7 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventParameterEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\AssetOneWayOperatingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\OperatingTimeoutTimeAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEntityNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedMethodEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedParameterEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertyGetEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertyGetResponsePropertyNameAttribute.cs" />

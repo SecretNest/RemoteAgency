@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
-    class AttributePassThrough
+    class RemoteAgencyAttributePassThrough
     {
         public Type Attribute { get; set; }
         public Type[] AttributeConstructorParameterTypes { get; set; }

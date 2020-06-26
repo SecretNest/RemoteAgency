@@ -24,18 +24,18 @@ namespace SecretNest.RemoteAgency
             => ConstructProxyInstance(Inspector.GetBasicInfo(sourceInterface),
                 isServiceWrapperIncludedWhileBuildingProxy);
 
-        object ConstructProxyInstance(InterfaceTypeBasicInfo interfaceTypeBasicInfo,
+        object ConstructProxyInstance(RemoteAgencyInterfaceBasicInfo interfaceBasicInfo,
             bool isServiceWrapperIncludedWhileBuildingProxy)
         {
-            if (!TryGetType(interfaceTypeBasicInfo.AssemblyName, interfaceTypeBasicInfo.ProxyTypeName, out var proxyType))
+            if (!TryGetType(interfaceBasicInfo.AssemblyName, interfaceBasicInfo.ProxyTypeName, out var proxyType))
             {
-                BuildAssembly(interfaceTypeBasicInfo.SourceInterface, true, isServiceWrapperIncludedWhileBuildingProxy,
+                BuildAssembly(interfaceBasicInfo.SourceInterface, true, isServiceWrapperIncludedWhileBuildingProxy,
                     out proxyType, out _);
             }
 
-            if (interfaceTypeBasicInfo.IsSourceInterfaceGenericType)
+            if (interfaceBasicInfo.IsSourceInterfaceGenericType)
             {
-                proxyType = proxyType.MakeGenericType(interfaceTypeBasicInfo.SourceInterfaceGenericArguments);
+                proxyType = proxyType.MakeGenericType(interfaceBasicInfo.SourceInterfaceGenericArguments);
             }
             var obj = FastActivator.CreateInstance<IProxyCommunicate>(proxyType);
             obj.GetSiteIdCallback = GetSiteId;
@@ -54,18 +54,18 @@ namespace SecretNest.RemoteAgency
             => ConstructServiceWrapperInstance(Inspector.GetBasicInfo(sourceInterface), serviceObject,
                 isProxyIncludedWhileBuildingServiceWrapper);
 
-        object ConstructServiceWrapperInstance(InterfaceTypeBasicInfo interfaceTypeBasicInfo, object serviceObject, 
+        object ConstructServiceWrapperInstance(RemoteAgencyInterfaceBasicInfo interfaceBasicInfo, object serviceObject, 
             bool isProxyIncludedWhileBuildingServiceWrapper)
         {
-            if (!TryGetType(interfaceTypeBasicInfo.AssemblyName, interfaceTypeBasicInfo.ServiceWrapperTypeName, out var serviceWrapperType))
+            if (!TryGetType(interfaceBasicInfo.AssemblyName, interfaceBasicInfo.ServiceWrapperTypeName, out var serviceWrapperType))
             {
-                BuildAssembly(interfaceTypeBasicInfo.SourceInterface, isProxyIncludedWhileBuildingServiceWrapper, true,
+                BuildAssembly(interfaceBasicInfo.SourceInterface, isProxyIncludedWhileBuildingServiceWrapper, true,
                     out _, out serviceWrapperType);
             }
 
-            if (interfaceTypeBasicInfo.IsSourceInterfaceGenericType)
+            if (interfaceBasicInfo.IsSourceInterfaceGenericType)
             {
-                serviceWrapperType = serviceWrapperType.MakeGenericType(interfaceTypeBasicInfo.SourceInterfaceGenericArguments);
+                serviceWrapperType = serviceWrapperType.MakeGenericType(interfaceBasicInfo.SourceInterfaceGenericArguments);
             }
             var obj = FastActivator<object>.CreateInstance<IServiceWrapperCommunicate>(serviceWrapperType,
                 serviceObject);

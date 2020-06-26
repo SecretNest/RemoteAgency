@@ -9,9 +9,9 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        List<AttributePassThrough> GetAttributePassThrough(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath)
+        List<RemoteAgencyAttributePassThrough> GetAttributePassThrough(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath)
         {
-            List<AttributePassThrough> result = new List<AttributePassThrough>();
+            List<RemoteAgencyAttributePassThrough> result = new List<RemoteAgencyAttributePassThrough>();
 
             var attributePassThroughAttributes =
                 memberInfo.GetCustomAttributes<AttributePassThroughAttribute>().ToArray();
@@ -36,7 +36,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     processedAttributeId.Add(attributePassThroughAttribute.AttributeId);
                 }
 
-                var mainRecord = new AttributePassThrough
+                var mainRecord = new RemoteAgencyAttributePassThrough
                 {
                     Attribute = attributePassThroughAttribute.Attribute,
                     AttributeConstructorParameterTypes =
@@ -128,27 +128,6 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
 
                 result.Add(mainRecord);
-            }
-
-            return result;
-        }
-
-        InterfaceLevelAttributePassThrough GetInterfaceLevelAttributePassThrough(TypeInfo interfaceTypeInfo, Stack<MemberInfo> memberParentPath)
-        {
-            InterfaceLevelAttributePassThrough result = new InterfaceLevelAttributePassThrough
-            {
-                Interface = GetAttributePassThrough(interfaceTypeInfo, memberParentPath),
-                GenericTypes = new Dictionary<Type, List<AttributePassThrough>>()
-            };
-            var generics = interfaceTypeInfo.GetGenericArguments();
-            if (generics.Length > 0)
-            {
-                memberParentPath.Push(interfaceTypeInfo);
-                foreach (var generic in generics)
-                {
-                    result.GenericTypes[generic] = GetAttributePassThrough(generic, memberParentPath);
-                }
-                memberParentPath.Pop();
             }
 
             return result;
