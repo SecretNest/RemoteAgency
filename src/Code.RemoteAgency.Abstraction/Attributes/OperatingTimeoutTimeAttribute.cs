@@ -13,9 +13,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// 1 Attributes specified in method, property and event.
     /// 2 Attributes specified in delegate related to event.
     /// 3 Attributes specified in interface.
-    /// 4 Default value: set while adding proxy or service wrapper to the Remote Agency instance. Default value is -1 (Infinity).
+    /// 4 Default value: set while building assembly.
     /// </para>
-    /// <para>Set <see cref="Timeout"/> to 0 to use the default value set by Remote Agency instance.</para>
+    /// <para>Set value to 0 to use the default value.</para>
     /// </remarks>
     /// <seealso cref="AccessingTimeOutException"/>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
@@ -57,7 +57,7 @@ namespace SecretNest.RemoteAgency.Attributes
         public int PropertySettingTimeout { get; }
 
         /// <summary>
-        /// Initializes an instance of the OperatingTimeoutTimeAttribute to use the default value set by Remote Agency instance.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute to use the default value.
         /// </summary>
         /// <remarks>To set specific value or values, uses other constructors.</remarks>
         public OperatingTimeoutTimeAttribute()

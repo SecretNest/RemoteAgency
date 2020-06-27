@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     var item = new RemoteAgencyGenericParameterInfo();
 
-                    if (_includeAttributePassThrough)
+                    if (_includeProxyOnlyInfo)
                     {
                         item.AttributePassThroughs = GetAttributePassThrough(type, memberParentPath);
                     }

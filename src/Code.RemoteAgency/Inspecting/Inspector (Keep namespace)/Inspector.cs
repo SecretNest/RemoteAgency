@@ -13,14 +13,14 @@ namespace SecretNest.RemoteAgency.Inspecting
         private readonly Type _sourceInterface;
         private readonly TypeInfo _sourceInterfaceTypeInfo;
         private readonly RemoteAgencyInterfaceInfo _result;
-        private readonly bool _includeAttributePassThrough;
+        private readonly bool _includeProxyOnlyInfo;
 
-        public Inspector(Type sourceInterface, bool includeAttributePassThrough)
+        public Inspector(Type sourceInterface, bool includeProxyOnlyInfo)
         {
             _sourceInterface = sourceInterface;
             _sourceInterfaceTypeInfo = sourceInterface.GetTypeInfo();
             _result = new RemoteAgencyInterfaceInfo();
-            _includeAttributePassThrough = includeAttributePassThrough;
+            _includeProxyOnlyInfo = includeProxyOnlyInfo;
             SetInterfaceTypeBasicInfo(_result, _sourceInterface, _sourceInterfaceTypeInfo);
         }
 
@@ -30,11 +30,47 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             //interface level
             Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
-            if (_includeAttributePassThrough)
+            if (_includeProxyOnlyInfo)
                 _result.InterfaceLevelPassThroughAttributes =
                     GetAttributePassThrough(_sourceInterfaceTypeInfo, parentPath);
             _result.InterfaceLevelGenericParameters =
                 ProcessGenericParameter(_sourceInterfaceTypeInfo, _sourceInterface.GetGenericArguments(), parentPath);
+            _result.IsProxyStickyTargetSite =
+                GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(_sourceInterface, i => i.IsSticky, out _);
+            _result.ThreadLockMode =
+                GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(_sourceInterface, i => i.ThreadLockMode,
+                    out var threadLockAttribute, ThreadLockMode.None);
+            if (_result.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
+                _result.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
+            var interfaceLevelLocalExceptionHandlingMode =
+                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_sourceInterface,
+                    i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Redirect);
+            var interfaceLevelOperatingTimeoutTimeAttribute =
+                _sourceInterface.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
+            int interfaceLevelMethodCallingTimeout,
+                interfaceLevelEventAddingTimeout,
+                interfaceLevelEventRemovingTimeout,
+                interfaceLevelEventRaisingTimeout,
+                interfaceLevelPropertyGettingTimeout,
+                interfaceLevelPropertySettingTimeout;
+            if (interfaceLevelOperatingTimeoutTimeAttribute == null)
+            {
+                interfaceLevelMethodCallingTimeout = 0;
+                interfaceLevelEventAddingTimeout = 0;
+                interfaceLevelEventRemovingTimeout = 0;
+                interfaceLevelEventRaisingTimeout = 0;
+                interfaceLevelPropertyGettingTimeout = 0;
+                interfaceLevelPropertySettingTimeout = 0;
+            }
+            else
+            {
+                interfaceLevelMethodCallingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.Timeout;
+                interfaceLevelEventAddingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.EventAddingTimeout;
+                interfaceLevelEventRemovingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.EventRemovingTimeout;
+                interfaceLevelEventRaisingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.EventRaisingTimeout;
+                interfaceLevelPropertyGettingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.PropertyGettingTimeout;
+                interfaceLevelPropertySettingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.PropertySettingTimeout;
+            }
 
             //assets start
             parentPath.Push(_sourceInterface);
@@ -60,21 +96,27 @@ namespace SecretNest.RemoteAgency.Inspecting
             //methods
             foreach (var method in _result.Methods)
             {
-                var task = Task.Run(() => ProcessMethod(method, _sourceInterfaceTypeInfo));
+                var task = Task.Run(() => ProcessMethod(method, _sourceInterfaceTypeInfo,
+                    interfaceLevelLocalExceptionHandlingMode, interfaceLevelMethodCallingTimeout));
                 tasks[taskIndex++] = task;
             }
 
             //events
             foreach (var @event in _result.Events)
             {
-                var task = Task.Run(() => ProcessEvent(@event, _sourceInterfaceTypeInfo));
+
+                var task = Task.Run(() => ProcessEvent(@event, _sourceInterfaceTypeInfo,
+                    interfaceLevelLocalExceptionHandlingMode, interfaceLevelEventAddingTimeout,
+                    interfaceLevelEventRemovingTimeout, interfaceLevelEventRaisingTimeout));
                 tasks[taskIndex++] = task;
             }
 
             //properties
             foreach (var property in _result.Properties)
             {
-                var task = Task.Run(() => ProcessProperty(property, _sourceInterfaceTypeInfo));
+                var task = Task.Run(() => ProcessProperty(property, _sourceInterfaceTypeInfo,
+                    interfaceLevelLocalExceptionHandlingMode, interfaceLevelPropertyGettingTimeout,
+                    interfaceLevelPropertySettingTimeout));
                 tasks[taskIndex++] = task;
             }
 
@@ -82,7 +124,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         //foreach asset: get ignore, one way, preset asset name and entity name
-        void ReadOriginalAsset(HashSet<string> usedAssetNames, HashSet<string> usedClassNames, Stack<MemberInfo> parentPath)
+        void ReadOriginalAsset(HashSet<string> usedAssetNames, HashSet<string> usedClassNames,
+            Stack<MemberInfo> parentPath)
         {
             foreach (var method in _sourceInterfaceTypeInfo.GetMethods())
             {
@@ -265,7 +308,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     Asset = property
                 };
 
-                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored))
+                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored)
+                )
                 {
                     item.IsIgnored = true;
                     item.WillThrowException = assetIgnored.WillThrowException;
@@ -273,11 +317,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                 else
                 {
                     item.IsGettingOneWay =
-                        GetValueFromAttribute<PropertyGetOneWayOperatingAttribute, bool>(property, i => i.IsOneWay, out _);
+                        GetValueFromAttribute<PropertyGetOneWayOperatingAttribute, bool>(property, i => i.IsOneWay,
+                            out _);
                     item.IsSettingOneWay =
                         GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(property, i => i.IsOneWay, out _);
 
-                    var customizedGetEntityName = property.GetCustomAttribute<CustomizedPropertyGetEntityNameAttribute>();
+                    var customizedGetEntityName =
+                        property.GetCustomAttribute<CustomizedPropertyGetEntityNameAttribute>();
                     if (customizedGetEntityName != null)
                     {
                         if (!string.IsNullOrEmpty(customizedGetEntityName.RequestEntityName))
@@ -307,7 +353,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                         }
                     }
 
-                    var customizedSetEntityName = property.GetCustomAttribute<CustomizedPropertySetEntityNameAttribute>();
+                    var customizedSetEntityName =
+                        property.GetCustomAttribute<CustomizedPropertySetEntityNameAttribute>();
                     if (customizedSetEntityName != null)
                     {
                         if (!string.IsNullOrEmpty(customizedSetEntityName.RequestEntityName))

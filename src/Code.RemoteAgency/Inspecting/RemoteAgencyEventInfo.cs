@@ -18,5 +18,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyParameterInfo> RaisingNotificationEntityProperties { get; set; }
         public string RaisingFeedbackEntityName { get; set; }
         public List<RemoteAgencyReturnValueInfo> RaisingFeedbackEntityProperties { get; set; }
+
+        public int EventAddingTimeout { get; set; }
+        public int EventRemovingTimeout { get; set; }
+        public int EventRaisingTimeout { get; set; }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -17,6 +18,6 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public List<RemoteAgencyAttributePassThrough> AssetLevelPassThroughAttributes { get; set; }
 
-
+        public LocalExceptionHandlingMode LocalExceptionHandlingMode { get; set; }
     }
 }

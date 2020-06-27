@@ -21,5 +21,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyParameterInfo> SettingRequestEntityProperties { get; set; }
         public string SettingResponseEntityName { get; set; }
         public List<RemoteAgencyReturnValueInfo> SettingResponseEntityProperties { get; set; }
+
+        public int PropertyGettingTimeout { get; set; }
+        public int PropertySettingTimeout { get; set; }
     }
 }
