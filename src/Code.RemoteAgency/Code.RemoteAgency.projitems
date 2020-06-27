@@ -14,6 +14,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\EntityNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\AssetNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.GenericParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Event.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Property.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyAttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.AttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Template.cs" />

@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        private Type _sourceInterface;
-        private TypeInfo _sourceInterfaceTypeInfo;
-        private RemoteAgencyInterfaceInfo _result;
+        private readonly Type _sourceInterface;
+        private readonly TypeInfo _sourceInterfaceTypeInfo;
+        private readonly RemoteAgencyInterfaceInfo _result;
+        private readonly bool _includeAttributePassThrough;
 
-        public Inspector(Type sourceInterface)
+        public Inspector(Type sourceInterface, bool includeAttributePassThrough)
         {
             _sourceInterface = sourceInterface;
             _sourceInterfaceTypeInfo = sourceInterface.GetTypeInfo();
             _result = new RemoteAgencyInterfaceInfo();
+            _includeAttributePassThrough = includeAttributePassThrough;
             SetInterfaceTypeBasicInfo(_result, _sourceInterface, _sourceInterfaceTypeInfo);
         }
 
         public RemoteAgencyInterfaceInfo InterfaceTypeInfo => _result;
 
-        public void Process(bool includeAttributePassThrough)
+        public void Process()
         {
             //interface level
             Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
-            if (includeAttributePassThrough)
+            if (_includeAttributePassThrough)
                 _result.InterfaceLevelPassThroughAttributes =
                     GetAttributePassThrough(_sourceInterfaceTypeInfo, parentPath);
             _result.InterfaceLevelGenericParameters =
-                ProcessGenericParameter(_sourceInterface, parentPath, includeAttributePassThrough);
+                ProcessGenericParameter(_sourceInterfaceTypeInfo, _sourceInterface.GetGenericArguments(), parentPath);
 
             //assets start
             parentPath.Push(_sourceInterface);
@@ -45,11 +48,48 @@ namespace SecretNest.RemoteAgency.Inspecting
             _result.Events = new List<RemoteAgencyEventInfo>();
             _result.Properties = new List<RemoteAgencyPropertyInfo>();
 
+            //foreach asset: get ignore, one way, preset asset name and entity name
+            ReadOriginalAsset(usedAssetNames, usedClassNames, parentPath);
+
+            //foreach asset: auto naming
+            AutoNaming(usedAssetNames, usedClassNames, parentPath);
+
+            Task[] tasks = new Task[_result.Methods.Count + _result.Events.Count + _result.Properties.Count];
+            int taskIndex = 0;
+
+            //methods
+            foreach (var method in _result.Methods)
+            {
+                var task = Task.Run(() => ProcessMethod(method, _sourceInterfaceTypeInfo));
+                tasks[taskIndex++] = task;
+            }
+
+            //events
+            foreach (var @event in _result.Events)
+            {
+                var task = Task.Run(() => ProcessEvent(@event, _sourceInterfaceTypeInfo));
+                tasks[taskIndex++] = task;
+            }
+
+            //properties
+            foreach (var property in _result.Properties)
+            {
+                var task = Task.Run(() => ProcessProperty(property, _sourceInterfaceTypeInfo));
+                tasks[taskIndex++] = task;
+            }
+
+            Task.WaitAll(tasks);
+        }
+
+        //foreach asset: get ignore, one way, preset asset name and entity name
+        void ReadOriginalAsset(HashSet<string> usedAssetNames, HashSet<string> usedClassNames, Stack<MemberInfo> parentPath)
+        {
             foreach (var method in _sourceInterfaceTypeInfo.GetMethods())
             {
                 var item = new RemoteAgencyMethodInfo
                 {
-                    AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames)
+                    AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames),
+                    Asset = method
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(method, i => i.IsIgnored, out var assetIgnored))
@@ -101,7 +141,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 var item = new RemoteAgencyEventInfo()
                 {
                     AssetName = GetAssetNameSpecified(@event, parentPath, usedAssetNames),
-                    Delegate = @event.EventHandlerType
+                    Delegate = @event.EventHandlerType,
+                    Asset = @event
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(@event, item.Delegate, i => i.IsIgnored,
@@ -220,7 +261,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 var item = new RemoteAgencyPropertyInfo()
                 {
-                    AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames)
+                    AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames),
+                    Asset = property
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored))
@@ -298,23 +340,97 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 _result.Properties.Add(item);
             }
+        }
 
-            //autoname
+        //foreach asset: auto naming
+        void AutoNaming(HashSet<string> usedAssetNames, HashSet<string> usedClassNames, Stack<MemberInfo> parentPath)
+        {
+            foreach (var method in _result.Methods)
+            {
+                if (string.IsNullOrEmpty(method.AssetName))
+                {
+                    method.AssetName = GetAssetAutoName(method.Asset.Name, usedAssetNames);
+                }
 
+                if (string.IsNullOrEmpty(method.ParameterEntityName))
+                {
+                    method.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "Parameter",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(method.ReturnValueEntityName))
+                {
+                    method.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "ReturnValue",
+                        usedClassNames);
+                }
+            }
 
+            foreach (var @event in _result.Events)
+            {
+                if (string.IsNullOrEmpty(@event.AssetName))
+                {
+                    @event.AssetName = GetAssetAutoName(@event.Asset.Name, usedAssetNames);
+                }
 
-            //methods
+                if (string.IsNullOrEmpty(@event.AddingRequestEntityName))
+                {
+                    @event.AddingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingRequest",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(@event.AddingResponseEntityName))
+                {
+                    @event.AddingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingResponse",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(@event.RemovingRequestEntityName))
+                {
+                    @event.RemovingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingRequest",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(@event.RemovingResponseEntityName))
+                {
+                    @event.RemovingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingResponse",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(@event.RaisingNotificationEntityName))
+                {
+                    @event.RaisingNotificationEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingNotification",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(@event.RaisingFeedbackEntityName))
+                {
+                    @event.RaisingFeedbackEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingFeedback",
+                        usedClassNames);
+                }
+            }
+           
+            foreach (var property in _result.Properties)
+            {
+                if (string.IsNullOrEmpty(property.AssetName))
+                {
+                    property.AssetName = GetAssetAutoName(property.Asset.Name, usedAssetNames);
+                }
 
-
-
-            //events
-
-
-            //properties
-
-
-
-            //
+                if (string.IsNullOrEmpty(property.GettingRequestEntityName))
+                {
+                    property.GettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingRequest",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(property.GettingResponseEntityName))
+                {
+                    property.GettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingResponse",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(property.SettingRequestEntityName))
+                {
+                    property.SettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingRequest",
+                        usedClassNames);
+                }
+                if (string.IsNullOrEmpty(property.SettingResponseEntityName))
+                {
+                    property.SettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingResponse",
+                        usedClassNames);
+                }
+            }
         }
 
         TValue GetValueFromAttribute<TAttribute, TValue>(MemberInfo memberInfo, Func<TAttribute, TValue> selector, out TAttribute attribute,
@@ -353,6 +469,35 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
             used.Add(attribute.AssetName);
             return attribute.AssetName;
+        }
+
+        string GetEntityAutoName(string classNameBase, string assetName, string usage, HashSet<string> used)
+            => GetAutoName(GetDefaultEntityTypeName(classNameBase, assetName, usage), used);
+
+        string GetAssetAutoName(string assetName, HashSet<string> used)
+            => GetAutoName(assetName, used);
+
+        string GetPropertyAutoName(string propertyName, HashSet<string> used)
+            => GetAutoName(propertyName, used);
+
+        string GetAutoName(string nameBase, HashSet<string> used)
+        {
+            if (used.Contains(nameBase))
+            {
+                int index = 1;
+                while (true)
+                {
+                    var name = $"{nameBase}_{index}";
+                    if (!used.Contains(name))
+                    {
+                        return name;
+                    }
+                }
+            }
+            else
+            {
+                return nameBase;
+            }
         }
     }
 }

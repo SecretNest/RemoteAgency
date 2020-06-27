@@ -10,19 +10,18 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        List<RemoteAgencyGenericParameterInfo> ProcessGenericParameter(Type member, Stack<MemberInfo> memberParentPath, bool includePassThroughAttribute)
+        List<RemoteAgencyGenericParameterInfo> ProcessGenericParameter(MemberInfo memberInfo, Type[] genericArguments, Stack<MemberInfo> memberParentPath)
         {
             List<RemoteAgencyGenericParameterInfo> result = new List<RemoteAgencyGenericParameterInfo>();
 
-            var types = member.GetGenericArguments();
-            if (types.Length > 0)
+            if (genericArguments.Length > 0)
             {
-                memberParentPath.Push(member);
-                foreach (var type in member.GetGenericArguments())
+                memberParentPath.Push(memberInfo);
+                foreach (var type in genericArguments)
                 {
                     var item = new RemoteAgencyGenericParameterInfo();
 
-                    if (includePassThroughAttribute)
+                    if (_includeAttributePassThrough)
                     {
                         item.AttributePassThroughs = GetAttributePassThrough(type, memberParentPath);
                     }

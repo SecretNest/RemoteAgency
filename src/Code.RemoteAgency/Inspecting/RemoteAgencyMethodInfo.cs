@@ -6,7 +6,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyMethodInfo : RemoteAgencyAssetInfoBase
     {
-        public List<List<RemoteAgencyGenericParameterInfo>> AssetLevelGenericParameters { get; set; } //method only
+        public List<RemoteAgencyGenericParameterInfo> AssetLevelGenericParameters { get; set; }
 
         public string ParameterEntityName { get; set; }
         public List<RemoteAgencyParameterInfo> ParameterEntityProperties { get; set; }
