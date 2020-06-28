@@ -8,6 +8,6 @@ namespace SecretNest.RemoteAgency.Inspecting
     {
         public Type Type { get; set; }
 
-        public List<RemoteAgencyAttributePassThrough> AttributePassThroughs { get; set; }
+        public List<RemoteAgencyAttributePassThrough> PassThroughAttributes { get; set; }
     }
 }

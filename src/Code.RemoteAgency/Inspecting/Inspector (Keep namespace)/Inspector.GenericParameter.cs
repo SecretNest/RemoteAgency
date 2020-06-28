@@ -23,7 +23,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     if (_includeProxyOnlyInfo)
                     {
-                        item.AttributePassThroughs = GetAttributePassThrough(type, memberParentPath);
+                        item.PassThroughAttributes = GetAttributePassThrough(type, memberParentPath);
                     }
 
                     item.Type = type;

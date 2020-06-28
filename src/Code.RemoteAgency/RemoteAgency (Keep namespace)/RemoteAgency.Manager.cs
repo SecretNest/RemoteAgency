@@ -9,6 +9,22 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
         readonly ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>> _managingObjects = new ConcurrentDictionary<Guid, RemoteAgencyManagingObject<TEntityBase>>(); //key: instanceId
+        private int _waitingTimeForDisposing = 90000; //90 secs
+
+        /// <summary>
+        /// Gets or sets the waiting time in milliseconds for waiting a managing object to complete all communication operations before being disposed.
+        /// </summary>
+        /// <remarks>The code waiting for response will throw a <see cref="ObjectDisposedException"/> when the communication operation is halt due to disposing.</remarks>
+        public int WaitingTimeForDisposing
+        {
+            get => _waitingTimeForDisposing;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException();
+                _waitingTimeForDisposing = value;
+            }
+        }
 
         /// <summary>
         /// Unlinks specified remote proxy from the event registered in service wrapper objects.

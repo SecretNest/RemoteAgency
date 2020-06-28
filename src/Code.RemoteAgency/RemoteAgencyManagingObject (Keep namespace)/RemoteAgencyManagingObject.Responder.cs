@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -24,11 +25,11 @@ namespace SecretNest.RemoteAgency
                 if (responder.GetResult(millisecondsTimeout, out var response))
                 {
                     _responders.TryRemove(message.MessageId, out _);
-                    if (message.Exception != null)
+                    if (response.Exception != null)
                     {
-                        if (message.IsEmptyMessage)
+                        if (response.IsEmptyMessage)
                         {
-                            throw message.Exception;
+                            throw response.Exception;
                         }
                     }
                     return response;
@@ -38,6 +39,36 @@ namespace SecretNest.RemoteAgency
                     _responders.TryRemove(message.MessageId, out _);
                     throw new AccessingTimeOutException(message);
                 }
+            }
+        }
+
+        bool WaitingForRespondersClosed()
+        {
+            DateTime timeoutTime = DateTime.Now.AddMilliseconds(_getWaitingTimeForDisposingCallback());
+            while (_responders.Count > 0)
+            {
+                var first = _responders.Values.FirstOrDefault();
+                if (first == null) continue;
+
+                int timeout = (int)(timeoutTime - DateTime.Now).TotalMilliseconds;
+                if (timeout <= 0) return false;
+
+                if (!first.WaitOnly(timeout))
+                    return false;
+            }
+
+            return true; //all responders are closed gracefully. no need to close forcibly.
+        }
+
+        void ForceCloseAllResponders()
+        {
+            if (_responders.Count > 0)
+            {
+                var message = CreateEmptyMessage();
+                message.Exception = new ObjectDisposedException("RemoteAgency", "Remote Agency instance issues a force closing operation for all communication operations which are still in waiting for response due to disposing.");
+
+                foreach(var value in _responders.Values)
+                    value.SetWhenEmpty(message);
             }
         }
 
@@ -55,9 +86,20 @@ namespace SecretNest.RemoteAgency
 
             readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
 
+            public bool WaitOnly(int millisecondsTimeout)
+            {
+                return _waitHandle?.WaitOne(millisecondsTimeout) == true;
+            }
+
             public void SetResult(IRemoteAgencyMessage value)
             {
                 _value = value;
+                _waitHandle?.Set();
+            }
+
+            public void SetWhenEmpty(IRemoteAgencyMessage value)
+            {
+                if (_value == null) _value = value;
                 _waitHandle?.Set();
             }
 

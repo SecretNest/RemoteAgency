@@ -61,7 +61,6 @@ namespace SecretNest.RemoteAgency
         }
 
 
-
         #region IDisposable Support
         private bool _disposedValue;
 
@@ -78,8 +77,6 @@ namespace SecretNest.RemoteAgency
                     RemoveAllManagingObjects(true);
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
                 _disposedValue = true;
             }
         }

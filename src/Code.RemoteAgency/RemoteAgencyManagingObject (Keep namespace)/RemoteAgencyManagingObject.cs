@@ -13,12 +13,14 @@ namespace SecretNest.RemoteAgency
         private Action<Exception> _sendExceptionToManagerCallback; //redirect exception in user code
         private Func<IRemoteAgencyMessage> _createEmptyMessageCallback;
         protected int DefaultTimeOutTime { get; }
+        private Func<int> _getWaitingTimeForDisposingCallback; //get WaitingTimeForDisposing.
+
 
         #region Constructors
 
         private RemoteAgencyManagingObject(ref Guid instanceId,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
         {
             if (instanceId == Guid.Empty)
             {
@@ -30,13 +32,14 @@ namespace SecretNest.RemoteAgency
             _sendExceptionToManagerCallback = sendExceptionToManagerCallback;
             _createEmptyMessageCallback = createEmptyMessageCallback;
             DefaultTimeOutTime = defaultTimeoutTime;
+            _getWaitingTimeForDisposingCallback = getWaitingTimeForDisposingCallback;
         }
 
         protected RemoteAgencyManagingObject(ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : this(ref instanceId, sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             InitializeThreadLock(threadLockMode);
         }
@@ -44,9 +47,9 @@ namespace SecretNest.RemoteAgency
         protected RemoteAgencyManagingObject(ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : this(ref instanceId, sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             InitializeThreadLock(threadLockTaskSchedulerName, tryGetTaskSchedulerCallback);
         }
@@ -61,6 +64,8 @@ namespace SecretNest.RemoteAgency
             }
             finally
             {
+                if (!WaitingForRespondersClosed())
+                    ForceCloseAllResponders();
                 DisposeThreadLock();
                 _createEmptyMessageCallback = null;
                 _sendMessageToManagerCallback = null;
@@ -89,19 +94,19 @@ namespace SecretNest.RemoteAgency
     {
         protected RemoteAgencyManagingObject(ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
         }
 
         protected RemoteAgencyManagingObject(ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
         }
     }
@@ -204,9 +209,9 @@ namespace SecretNest.RemoteAgency
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
             Func<IRemoteAgencyMessage> createEmptyMessageCallback, 
-            bool isStickyModeEnabled, int defaultTimeoutTime)
+            bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _proxyObject = proxyObject;
             _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
@@ -231,10 +236,10 @@ namespace SecretNest.RemoteAgency
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
             Func<IRemoteAgencyMessage> createEmptyMessageCallback, 
-            bool isStickyModeEnabled, int defaultTimeoutTime)
+            bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback, 
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _proxyObject = proxyObject;
             _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
@@ -302,9 +307,9 @@ namespace SecretNest.RemoteAgency
         public RemoteAgencyManagingObjectServiceWrapper(IServiceWrapperCommunicate serviceWrapperObject,
             ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _serviceWrapperObject = serviceWrapperObject;
             _serviceWrapperObject.SendEventMessageCallback = ProcessEventMessageReceivedFromInside;
@@ -315,10 +320,10 @@ namespace SecretNest.RemoteAgency
             ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime)
+            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback,
-                createEmptyMessageCallback, defaultTimeoutTime)
+                createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _serviceWrapperObject = serviceWrapperObject;
             _serviceWrapperObject.SendEventMessageCallback = ProcessEventMessageReceivedFromInside;

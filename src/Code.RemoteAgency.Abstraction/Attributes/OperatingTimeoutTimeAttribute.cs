@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// 1 Attributes specified in method, property and event.
     /// 2 Attributes specified in delegate related to event.
     /// 3 Attributes specified in interface.
-    /// 4 Default value: set while building assembly.
+    /// 4 Default value: set while initializing. In this mode, only one value for all kinds of operations is set.
     /// </para>
     /// <para>Set value to 0 to use the default value.</para>
     /// </remarks>

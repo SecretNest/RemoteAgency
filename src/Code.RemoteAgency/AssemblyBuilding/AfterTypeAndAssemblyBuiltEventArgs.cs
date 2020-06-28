@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
     /// <summary>
     /// Represents an argument of the <see cref="RemoteAgency.AfterTypeAndAssemblyBuilt"/>.
     /// </summary>
-    public class AfterTypeAndAssemblyBuiltEventArgs : EventArgs
+    public class AfterTypeAndAssemblyBuiltEventArgs : EventArgs, IDisposable
     {
         /// <summary>
         /// Gets the type of source interface.
@@ -37,12 +37,16 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// </summary>
         public Assembly Assembly { get; }
 
-        private readonly Lazy<byte[]> _image;
-
         /// <summary>
-        /// Gets the image of the built assembly.
+        /// Saves the built assembly to the file specified.
         /// </summary>
-        public byte[] AssemblyImage => _image.Value;
+        /// <param name="assemblyFileName"></param>
+        public void Save(string assemblyFileName)
+        {
+            _saveFileCallback(assemblyFileName);
+        }
+
+        private Action<string> _saveFileCallback;
 
         /// <summary>
         /// Initializes an instance of AfterTypeAndAssemblyBuiltEventArgs.
@@ -52,23 +56,33 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="builtServiceWrapper">Type of built service wrapper.</param>
         /// <param name="builtEntities">Types of built entities.</param>
         /// <param name="assembly">Built assembly.</param>
-        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly)
+        /// <param name="saveFileCallback">Callback for saving assembly to file</param>
+        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, Action<string> saveFileCallback)
         {
             SourceInterface = sourceInterface;
             BuiltProxy = builtProxy;
             BuiltServiceWrapper = builtServiceWrapper;
             BuiltEntities = builtEntities;
             Assembly = assembly;
+            _saveFileCallback = saveFileCallback;
+        }
 
-            _image = new Lazy<byte[]>(() =>
+        /// <summary>
+        /// Disposes of the resources (other than memory) used by this instance.
+        /// </summary>
+        /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, Assembly);
-                    return stream.ToArray();
-                }
-            });
+                _saveFileCallback = null;
+            }
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }
