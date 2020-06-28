@@ -10,12 +10,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\EntityPropertyNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\EntityNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\AssetNameConflictException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\EntityPropertyNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.GenericParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Property.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InvalidParameterAttributeDataException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InvalidReturnValueAttributeDataException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyAttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.AttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Template.cs" />
@@ -24,7 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyAssetInfoBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyPropertyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyGenericParameterInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyGenericArgumentInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyInterfaceBasicInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\RemoteAgencyInterfaceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\InvalidAttributeDataException.cs" />

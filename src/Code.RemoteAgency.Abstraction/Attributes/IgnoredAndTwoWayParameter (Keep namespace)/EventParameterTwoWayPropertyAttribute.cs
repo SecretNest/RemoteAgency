@@ -25,8 +25,9 @@ namespace SecretNest.RemoteAgency.Attributes
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
         /// <param name="helperClass">Type of the helper class.</param>
+        /// <param name="disable">Disable the function specified with this helper class.</param>
         /// <seealso cref="ParameterTwoWayPropertyAttribute.HelperClass"/>
-        public EventParameterTwoWayPropertyAttribute(string parameterName, Type helperClass) : base(helperClass)
+        public EventParameterTwoWayPropertyAttribute(string parameterName, Type helperClass, bool disable = false) : base(helperClass, disable)
         {
             ParameterName = parameterName;
         }
@@ -36,11 +37,12 @@ namespace SecretNest.RemoteAgency.Attributes
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
         /// <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
-        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
         /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
+        /// <param name="disable">Disable the function specified with this property or field.</param>
         public EventParameterTwoWayPropertyAttribute(string parameterName, string propertyNameInParameter,
-            string responseEntityPropertyName = null, bool isIncludedWhenExceptionThrown = false) : base(
-            propertyNameInParameter, responseEntityPropertyName, isIncludedWhenExceptionThrown)
+            string responseEntityPropertyName = null, bool isIncludedWhenExceptionThrown = false, bool disable = false) : base(
+            propertyNameInParameter, responseEntityPropertyName, isIncludedWhenExceptionThrown, disable)
         {
             ParameterName = parameterName;
         }

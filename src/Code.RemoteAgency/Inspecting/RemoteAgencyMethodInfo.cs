@@ -6,7 +6,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyMethodInfo : RemoteAgencyAssetInfoBase
     {
-        public List<RemoteAgencyGenericParameterInfo> AssetLevelGenericParameters { get; set; }
+        public List<RemoteAgencyGenericArgumentInfo> AssetLevelGenericArguments { get; set; }
+        public List<RemoteAgencyAttributePassThrough> ReturnValuePassThroughAttributes { get; set; }
 
         public string ParameterEntityName { get; set; }
         public List<RemoteAgencyParameterInfo> ParameterEntityProperties { get; set; }
@@ -15,5 +16,6 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyReturnValueInfo> ReturnValueEntityProperties { get; set; }
 
         public int MethodCallingTimeout { get; set; }
+
     }
 }

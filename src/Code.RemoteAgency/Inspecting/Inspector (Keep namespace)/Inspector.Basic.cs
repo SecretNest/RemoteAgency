@@ -84,9 +84,5 @@ namespace SecretNest.RemoteAgency.Inspecting
             return classNameBase + "_ServiceWrapper";
         }
 
-        static string GetDefaultEntityTypeName(string classNameBase, string assetName, string usage)
-        {
-            return $"{classNameBase}_{assetName}_{usage}";
-        }
     }
 }

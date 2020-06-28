@@ -28,14 +28,22 @@ namespace SecretNest.RemoteAgency.Attributes
         public bool IsIncludedWhenExceptionThrown { get; }
 
         /// <summary>
+        /// Gets the preferred property name in response entity.
+        /// </summary>
+        /// <remark>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remark>
+        public string ResponseEntityPropertyName { get; }
+
+        /// <summary>
         /// Initializes an instance of ParameterTwoWayAttribute.
         /// </summary>
         /// <param name="isTwoWay">Whether this parameter should be included in return entity. Default value is <see langword="true" />.</param>
         /// <param name="isIncludedWhenExceptionThrown">Whether this parameter should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="true" />.</param>
-        public ParameterTwoWayAttribute(bool isTwoWay = true, bool isIncludedWhenExceptionThrown = true)
+        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
+        public ParameterTwoWayAttribute(bool isTwoWay = true, bool isIncludedWhenExceptionThrown = true, string responseEntityPropertyName = null)
         {
             IsTwoWay = isTwoWay;
             IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
+            ResponseEntityPropertyName = responseEntityPropertyName;
         }
     }
 }

@@ -9,21 +9,26 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        List<RemoteAgencyAttributePassThrough> GetAttributePassThrough(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath)
+        List<RemoteAgencyAttributePassThrough> GetAttributePassThrough(ICustomAttributeProvider dataSource, Func<string, Attribute, InvalidAttributeDataException> creatingExceptionCallback)
         {
             List<RemoteAgencyAttributePassThrough> result = new List<RemoteAgencyAttributePassThrough>();
 
+            if (!_includesProxyOnlyInfo)
+                return result;
+
             var attributePassThroughAttributes =
-                memberInfo.GetCustomAttributes<AttributePassThroughAttribute>().ToArray();
+                dataSource.GetCustomAttributes(typeof(AttributePassThroughAttribute), true).Cast<AttributePassThroughAttribute>().ToArray();
             if (attributePassThroughAttributes.Length == 0)
                 return result;
 
             var attributePassThroughIndexBasedParameterAttributes =
-                memberInfo.GetCustomAttributes<AttributePassThroughIndexBasedParameterAttribute>()
-                    .ToLookup(i => i.AttributeId);
+                dataSource.GetCustomAttributes(typeof(AttributePassThroughIndexBasedParameterAttribute), true)
+                    .ToLookup(i => ((AttributePassThroughIndexBasedParameterAttribute) i).AttributeId,
+                        i => (AttributePassThroughIndexBasedParameterAttribute) i);
             var attributePassThroughPropertyAttributes =
-                memberInfo.GetCustomAttributes<AttributePassThroughPropertyAttribute>()
-                    .ToLookup(i => i.AttributeId);
+                dataSource.GetCustomAttributes(typeof(AttributePassThroughPropertyAttribute), true)
+                    .ToLookup(i => ((AttributePassThroughPropertyAttribute) i).AttributeId,
+                        i => (AttributePassThroughPropertyAttribute) i);
 
             HashSet<string> processedAttributeId = new HashSet<string>();
             foreach (var attributePassThroughAttribute in attributePassThroughAttributes)
@@ -31,9 +36,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 //Avoid process with same attribute id.
                 if (attributePassThroughAttribute.AttributeId != null)
                 {
-                    if (processedAttributeId.Contains(attributePassThroughAttribute.AttributeId))
+                    if (!processedAttributeId.Add(attributePassThroughAttribute.AttributeId))
                         continue;
-                    processedAttributeId.Add(attributePassThroughAttribute.AttributeId);
                 }
 
                 var mainRecord = new RemoteAgencyAttributePassThrough
@@ -56,9 +60,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                         if (attributePassThroughAttribute.AttributeConstructorParameters.Length >
                             attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
                         {
-                            throw new InvalidAttributeDataException(
+                            throw creatingExceptionCallback(
                                 $"Length of {nameof(attributePassThroughAttribute.AttributeConstructorParameters)} can not exceed the length of {nameof(attributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
-                                attributePassThroughAttribute, memberInfo, memberParentPath);
+                                attributePassThroughAttribute);
                         }
 
                         for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameters.Length; i++)
@@ -80,19 +84,17 @@ namespace SecretNest.RemoteAgency.Inspecting
                             linkedAttributePassThroughIndexBasedParameterAttributes)
                         {
                             //Avoid process with same index.
-                            if (setIndices.Contains(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
+                            if (!setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
                                 continue;
                             else if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
                                 attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
                             {
-                                throw new InvalidAttributeDataException(
+                                throw creatingExceptionCallback(
                                     $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
-                                    attributePassThroughIndexBasedParameterAttribute, memberInfo, memberParentPath);
+                                    attributePassThroughIndexBasedParameterAttribute);
                             }
                             else
                             {
-                                setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex);
-
                                 parameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
                                     attributePassThroughIndexBasedParameterAttribute.Value;
                             }
@@ -117,9 +119,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     foreach (var attributePassThroughPropertyAttribute in linkedAttributePassThroughPropertyAttributes)
                     {
                         //Avoid process with same property.
-                        if (setProperties.Contains(attributePassThroughPropertyAttribute.PropertyName))
+                        if (!setProperties.Add(attributePassThroughPropertyAttribute.PropertyName))
                             continue;
-                        setProperties.Add(attributePassThroughPropertyAttribute.PropertyName);
 
                         mainRecord.AttributeProperties.Add(new KeyValuePair<string, object>(
                             attributePassThroughPropertyAttribute.PropertyName,

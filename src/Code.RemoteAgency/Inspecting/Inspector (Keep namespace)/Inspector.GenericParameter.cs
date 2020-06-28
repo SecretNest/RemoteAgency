@@ -10,23 +10,21 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        List<RemoteAgencyGenericParameterInfo> ProcessGenericParameter(MemberInfo memberInfo, Type[] genericArguments, Stack<MemberInfo> memberParentPath)
+        List<RemoteAgencyGenericArgumentInfo> ProcessGenericArgument(MemberInfo memberInfo, Type[] genericArguments, Stack<MemberInfo> memberParentPath)
         {
-            List<RemoteAgencyGenericParameterInfo> result = new List<RemoteAgencyGenericParameterInfo>();
+            List<RemoteAgencyGenericArgumentInfo> result = new List<RemoteAgencyGenericArgumentInfo>();
 
             if (genericArguments.Length > 0)
             {
                 memberParentPath.Push(memberInfo);
-                foreach (var type in genericArguments)
+                foreach (var genericArgument in genericArguments)
                 {
-                    var item = new RemoteAgencyGenericParameterInfo();
-
-                    if (_includeProxyOnlyInfo)
+                    var item = new RemoteAgencyGenericArgumentInfo
                     {
-                        item.PassThroughAttributes = GetAttributePassThrough(type, memberParentPath);
-                    }
+                        PassThroughAttributes = GetAttributePassThrough(genericArgument, (m, a) => new InvalidAttributeDataException(m, a, genericArgument, memberParentPath)),
+                        GenericArgument = genericArgument
+                    };
 
-                    item.Type = type;
                     result.Add(item);
                 }
 

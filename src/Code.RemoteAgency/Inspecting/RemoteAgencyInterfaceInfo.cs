@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyPropertyInfo> Properties { get; set; }
 
         public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
-        public List<RemoteAgencyGenericParameterInfo> InterfaceLevelGenericParameters { get; set; }
+        public List<RemoteAgencyGenericArgumentInfo> InterfaceLevelGenericArguments { get; set; }
 
         public ThreadLockMode ThreadLockMode { get; set; }
         public string TaskSchedulerName { get; set; }

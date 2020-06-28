@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public MemberInfo Asset { get; set; }
 
         public bool IsIgnored { get; set; }
-        public bool WillThrowException { get; set; }
+        public bool WillThrowExceptionWhileCalling { get; set; }
         
         public bool IsOneWay { get; set; }
 

@@ -12,11 +12,17 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="ParameterTwoWayPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
     /// <para><see cref="EventParameterTwoWayPropertyAttribute"/> can be marked on event, with higher priority than <see cref="ParameterTwoWayPropertyAttribute"/> with the same parameter.</para>
     /// <para>Without <see cref="EventParameterTwoWayPropertyAttribute"/> or <see cref="ParameterTwoWayPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef".</para>
+    /// <para>This attribute can only be marked on the parameter without "ref / ByRef" and "out / Out".</para>
     /// <para>By specifying this on properties, only set operating will be affected.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
     public class ParameterTwoWayPropertyAttribute : Attribute
     {
+        /// <summary>
+        /// Gets whether properties or fields specified should be included in return entity.
+        /// </summary>
+        public bool IsTwoWay { get; }
+
         /// <summary>
         /// Gets whether this is in simple mode.
         /// </summary>
@@ -53,25 +59,29 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Initializes an instance of the ParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="false"/>.
         /// </summary>
         /// <param name="helperClass">Type of the helper class.</param>
+        /// <param name="disable">Disable the function specified with this helper class.</param>
         /// <seealso cref="HelperClass"/>
-        public ParameterTwoWayPropertyAttribute(Type helperClass)
+        public ParameterTwoWayPropertyAttribute(Type helperClass, bool disable = false)
         {
             HelperClass = helperClass;
             IsSimpleMode = false;
+            IsTwoWay = !disable;
         }
 
         /// <summary>
         /// Initializes an instance of the ParameterTwoWayPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="true"/>.
         /// </summary>
         /// <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
-        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
         /// <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
-        public ParameterTwoWayPropertyAttribute(string propertyNameInParameter, string responseEntityPropertyName = null, bool isIncludedWhenExceptionThrown = false)
+        /// <param name="disable">Disable the function specified with this property or field.</param>
+        public ParameterTwoWayPropertyAttribute(string propertyNameInParameter, string responseEntityPropertyName = null, bool isIncludedWhenExceptionThrown = false, bool disable = false)
         {
             PropertyNameInParameter = propertyNameInParameter;
             ResponseEntityPropertyName = responseEntityPropertyName;
             IsSimpleMode = true;
             IsIncludedWhenExceptionThrown = isIncludedWhenExceptionThrown;
+            IsTwoWay = !disable;
         }
     }
 }
