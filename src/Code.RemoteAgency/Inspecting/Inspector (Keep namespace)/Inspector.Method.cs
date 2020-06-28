@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,14 +47,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                         method.ParameterEntityProperties =
                             ProcessParameterForIgnoredAndThrowExceptionAsset(methodInfo.GetParameters(), parentPath);
                         method.ReturnValueEntityProperties =
-                            ProcessReturnValueForIgnoredAndThrowExceptionAsset(methodInfo, parentPath);
+                            ProcessReturnValueForIgnoredAndThrowExceptionAsset();
                     }
                     else
                     {
                         method.ParameterEntityProperties = ProcessParameterForIgnoredAsset(methodInfo.GetParameters(),
                             parentPath, out var outputParameterNamesForSettingDefault);
                         method.ReturnValueEntityProperties =
-                            ProcessReturnValueForIgnoredAsset(methodInfo, parentPath, outputParameterNamesForSettingDefault);
+                            ProcessReturnValueForIgnoredOrOneWayAsset(methodInfo, outputParameterNamesForSettingDefault);
                     }
                 }
                 else
@@ -68,7 +69,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     parentPath, out var outputParameterNamesForSettingDefault);
                 if (_includesProxyOnlyInfo)
                 {
-                    method.ReturnValueEntityProperties = ProcessReturnValueForOneWayAsset(methodInfo, parentPath,
+                    method.ReturnValueEntityProperties = ProcessReturnValueForIgnoredOrOneWayAsset(methodInfo,
                         outputParameterNamesForSettingDefault);
                 }
                 else
@@ -135,25 +136,56 @@ namespace SecretNest.RemoteAgency.Inspecting
             List<RemoteAgencyParameterInfo> result = new List<RemoteAgencyParameterInfo>();
             outputParameterNamesForSettingDefault = new List<Tuple<Type, string>>();
 
-            HashSet<string> usedPropertyNames = new HashSet<string>(); //could be duplicated cause by the case changing :)
+            HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
+            HashSet<string> ignoredParameters= new HashSet<string>();
 
             foreach (var parameter in parameters)
             {
-                if (GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
-                    continue;
-
                 var parameterInfo = new RemoteAgencyParameterInfo
                 {
                     Parameter = parameter,
-                    PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath)),
-                    PropertyName = GetPropertyAutoName(parameter.Name, usedPropertyNames)
+                    PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath))
                 };
 
-                result.Add(parameterInfo);
-
-                if (parameter.IsOut)
+                if (GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
                 {
+                    ignoredParameters.Add(parameter.Name);
+                }
+                else if (parameter.IsOut)
+                {
+                    ignoredParameters.Add(parameter.Name);
                     outputParameterNamesForSettingDefault.Add(new Tuple<Type, string>(parameter.ParameterType, parameter.Name));
+                }
+                else
+                {
+                    var requiredPropertyName =
+                        GetValueFromAttribute<CustomizedParameterEntityPropertyNameAttribute, string>(parameter,
+                            i => i.EntityPropertyName, out var customizedParameterEntityPropertyNameAttribute);
+                    if (!string.IsNullOrEmpty(requiredPropertyName))
+                    {
+                        if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
+                        {
+                            throw new EntityPropertyNameConflictException(
+                                $"The property name specified conflicts with others in parameter entity.",
+                                customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
+                        }
+                    }
+
+                    parameterInfo.PropertyName = requiredPropertyName;
+                }
+
+                result.Add(parameterInfo);
+            }
+
+            //assign auto name
+            foreach (var parameter in result)
+            {
+                if (string.IsNullOrEmpty(parameter.PropertyName))
+                {
+                    var parameterName = parameter.Parameter.Name;
+                    if (!ignoredParameters.Contains(parameterName))
+                        parameter.PropertyName =
+                            GetPropertyAutoName(parameterName, usedPropertyNamesInParameterEntity);
                 }
             }
 
@@ -169,31 +201,37 @@ namespace SecretNest.RemoteAgency.Inspecting
             usedPropertyNamesInReturnValue = new HashSet<string>();
 
             HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
-            
+            HashSet<string> ignoredParameters= new HashSet<string>();
+        
             foreach (var parameter in parameters)
             {
-                if (GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
-                    continue;
-
-                var requiredPropertyName =
-                    GetValueFromAttribute<CustomizedParameterEntityPropertyNameAttribute, string>(parameter,
-                        i => i.EntityPropertyName, out var customizedParameterEntityPropertyNameAttribute);
-                if (!string.IsNullOrEmpty(requiredPropertyName))
-                {
-                    if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
-                    {
-                        throw new EntityPropertyNameConflictException(
-                            $"The property name specified conflicts with others in parameter entity.",
-                            customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
-                    }
-                }
-                
                 var parameterInfo = new RemoteAgencyParameterInfo
                 {
                     Parameter = parameter,
-                    PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath)),
-                    PropertyName = requiredPropertyName
+                    PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath))
                 };
+
+                if (parameter.IsOut || GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
+                {
+                    ignoredParameters.Add(parameter.Name);
+                }
+                else
+                {
+                    var requiredPropertyName =
+                        GetValueFromAttribute<CustomizedParameterEntityPropertyNameAttribute, string>(parameter,
+                            i => i.EntityPropertyName, out var customizedParameterEntityPropertyNameAttribute);
+                    if (!string.IsNullOrEmpty(requiredPropertyName))
+                    {
+                        if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
+                        {
+                            throw new EntityPropertyNameConflictException(
+                                $"The property name specified conflicts with others in parameter entity.",
+                                customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
+                        }
+                    }
+
+                    parameterInfo.PropertyName = requiredPropertyName;
+                }
                 
                 result.Add(parameterInfo);
 
@@ -233,7 +271,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             twoWayPropertyAttribute, parameter, memberPath);
                     #endregion
                 }
-                else
+                else if (!ignoredParameters.Contains(parameter.Name)) //not out, not byref, not ignored => check two way
                 {
                     #region Two way propery
                     var twoWayAttribute = parameter.GetCustomAttribute<ParameterTwoWayAttribute>();
@@ -382,8 +420,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 if (string.IsNullOrEmpty(parameter.PropertyName))
                 {
-                    parameter.PropertyName =
-                        GetPropertyAutoName(parameter.Parameter.Name, usedPropertyNamesInParameterEntity);
+                    var parameterName = parameter.Parameter.Name;
+                    if (!ignoredParameters.Contains(parameterName))
+                        parameter.PropertyName =
+                            GetPropertyAutoName(parameterName, usedPropertyNamesInParameterEntity);
                 }
             }
 
@@ -404,7 +444,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             public Type DataType { get; set; }
         }
 
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredAsset(MethodInfo asset, Stack<MemberInfo> memberPath,
+        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredOrOneWayAsset(MethodInfo asset,
             List<Tuple<Type, string>> outputParameterNamesForSettingDefault)
         {
             List<RemoteAgencyReturnValueInfo> result = new List<RemoteAgencyReturnValueInfo>();
@@ -420,50 +460,25 @@ namespace SecretNest.RemoteAgency.Inspecting
                 result.Add(item);
             }
 
-            if (!GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset.ReturnTypeCustomAttributes, i => i.IsIgnored,
-                out _) &&
-                !GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset, i => i.IsIgnored, out _))
+            if (asset.ReturnType != typeof(void))
             {
-                GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(asset.ReturnTypeCustomAttributes,
-                        i => i.EntityPropertyName, out var customizedReturnValueEntityPropertyNameAttribute);
-                if (customizedReturnValueEntityPropertyNameAttribute == null)
-                    GetValueFromAttribute(asset, i => i.EntityPropertyName,
-                        out customizedReturnValueEntityPropertyNameAttribute);
-
-                if (asset.ReturnType != typeof(void))
+                RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
                 {
-                    RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
-                    {
-                        DataType = asset.ReturnType,
-                        ShouldSetToDefault = true,
-                        IsReturnValue = true
-                    };
-                    result.Add(item);
-                }
-                else
-                {
-                    throw new InvalidReturnValueAttributeDataException(
-                        $"{nameof(CustomizedReturnValueEntityPropertyNameAttribute)} can only be used on the asset with return value.",
-                        customizedReturnValueEntityPropertyNameAttribute, memberPath);
-                }
+                    DataType = asset.ReturnType,
+                    ShouldSetToDefault = true,
+                    IsReturnValue = true
+                };
+                result.Add(item);
             }
 
             return result;
         }
 
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredAndThrowExceptionAsset(MethodInfo asset, Stack<MemberInfo> memberPath)
+        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredAndThrowExceptionAsset()
         {
             List<RemoteAgencyReturnValueInfo> result = new List<RemoteAgencyReturnValueInfo>();
 
             return result;
-        }
-
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForOneWayAsset(MethodInfo asset, Stack<MemberInfo> memberPath,
-            List<Tuple<Type, string>> outputParameterNamesForSettingDefault)
-        {
-            List<RemoteAgencyReturnValueInfo> result = new List<RemoteAgencyReturnValueInfo>();
-
-
         }
 
         List<RemoteAgencyReturnValueInfo> ProcessReturnValue(MethodInfo asset, Stack<MemberInfo> memberPath,
@@ -472,7 +487,34 @@ namespace SecretNest.RemoteAgency.Inspecting
 
 
 
+            
+            //if (!GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset.ReturnTypeCustomAttributes, i => i.IsIgnored,
+            //    out _) &&
+            //    !GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset, i => i.IsIgnored, out _))
+            //{
+            //    GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(asset.ReturnTypeCustomAttributes,
+            //            i => i.EntityPropertyName, out var customizedReturnValueEntityPropertyNameAttribute);
+            //    if (customizedReturnValueEntityPropertyNameAttribute == null)
+            //        GetValueFromAttribute(asset, i => i.EntityPropertyName,
+            //            out customizedReturnValueEntityPropertyNameAttribute);
 
+            //    if (asset.ReturnType != typeof(void))
+            //    {
+            //        RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
+            //        {
+            //            DataType = asset.ReturnType,
+            //            ShouldSetToDefault = true,
+            //            IsReturnValue = true
+            //        };
+            //        result.Add(item);
+            //    }
+            //    else
+            //    {
+            //        throw new InvalidReturnValueAttributeDataException(
+            //            $"{nameof(CustomizedReturnValueEntityPropertyNameAttribute)} can only be used on the asset with return value.",
+            //            customizedReturnValueEntityPropertyNameAttribute, memberPath);
+            //    }
+            //}
 
 
             //after processing return value, dont forget FoundOutputParameter   for each assign name (ResponseEntityPropertyName)  GetPropertyAutoName(parameter.Name, usedPropertyNames)   
