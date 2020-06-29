@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughIndexBasedParameterAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughFieldAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\AssetIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\PropertyGetOneWayOperatingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterTwoWayAttribute.cs" />
@@ -54,6 +55,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

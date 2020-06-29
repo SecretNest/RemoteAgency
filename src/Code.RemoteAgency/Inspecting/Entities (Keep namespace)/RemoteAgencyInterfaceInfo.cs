@@ -27,19 +27,16 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int DefaultPropertyGettingTimeout { get; set; } //set before building
         public int DefaultPropertySettingTimeout { get; set; } //set before building
 
-        public IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface)
+        public IEnumerable<EntityBuilding> GetEntities()
         {
             foreach(var asset in Methods)
-            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
-                SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
                 yield return entity;
             foreach (var asset in Events)
-            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
-                SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
                 yield return entity;
             foreach (var asset in Properties)
-            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
-                SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
                 yield return entity;
         }
     }

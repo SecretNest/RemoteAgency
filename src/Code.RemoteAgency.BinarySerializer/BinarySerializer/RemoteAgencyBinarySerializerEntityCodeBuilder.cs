@@ -11,10 +11,20 @@ namespace SecretNest.RemoteAgency.BinarySerializer
     public class RemoteAgencyBinarySerializerEntityCodeBuilder : EntityCodeBuilderBase
     {
         /// <inheritdoc />
-        public override Type BuildEntity(ModuleBuilder targetModule, EntityBuilding entityBuilding)
+        public override Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
+            SetSerializable(typeBuilder);
+
             //TODO: write code here.
             throw new NotImplementedException();
+        }
+
+        void SetSerializable(TypeBuilder typeBuilder)
+        {
+            var ctorInfo = typeof(SerializableAttribute).GetConstructor(Type.EmptyTypes);
+            var attributeBuilder = new CustomAttributeBuilder(ctorInfo ?? throw new InvalidOperationException(),
+                Array.Empty<object>());
+            typeBuilder.SetCustomAttribute(attributeBuilder);
         }
 
         /// <inheritdoc />

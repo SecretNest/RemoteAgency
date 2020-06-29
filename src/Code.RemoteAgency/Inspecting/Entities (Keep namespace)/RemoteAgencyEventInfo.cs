@@ -25,8 +25,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int EventRemovingTimeout { get; set; }
         public int EventRaisingTimeout { get; set; }
 
-        public override IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface,
-            List<Attribute> interfaceLevelAttributes)
+        public override IEnumerable<EntityBuilding> GetEntities(List<Attribute> interfaceLevelAttributes)
         {
             if (!string.IsNullOrEmpty(RaisingNotificationEntityName))
             {
@@ -36,8 +35,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuilding entity = new EntityBuilding(RaisingNotificationEntityName, entityClassParentClass,
-                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
+                EntityBuilding entity = new EntityBuilding(RaisingNotificationEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
 
                 yield return entity;
             }
@@ -47,8 +45,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 List<EntityProperty> properties = RaisingFeedbackEntityProperties.Select(i =>
                     new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
 
-                EntityBuilding entity = new EntityBuilding(RaisingFeedbackEntityName, entityClassParentClass,
-                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
+                EntityBuilding entity = new EntityBuilding(RaisingFeedbackEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
 
                 yield return entity;
             }

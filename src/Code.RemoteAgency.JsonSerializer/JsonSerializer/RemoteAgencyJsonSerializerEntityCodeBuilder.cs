@@ -12,12 +12,11 @@ namespace SecretNest.RemoteAgency.JsonSerializer
     public class RemoteAgencyJsonSerializerEntityCodeBuilder : EntityCodeBuilderBase
     {
         /// <inheritdoc />
-        public override Type BuildEntity(ModuleBuilder targetModule, EntityBuilding entityBuilding)
+        public override Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
             //TODO: write code here.
             throw new NotImplementedException();
         }
-
 
         /// <inheritdoc />
         public override Type InterfaceLevelAttributeBaseType => null;

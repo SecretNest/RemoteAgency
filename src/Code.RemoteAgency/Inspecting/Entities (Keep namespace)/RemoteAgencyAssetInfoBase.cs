@@ -21,7 +21,6 @@ namespace SecretNest.RemoteAgency.Inspecting
         
         public LocalExceptionHandlingMode LocalExceptionHandlingMode { get; set; }
 
-        public abstract IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface,
-            List<Attribute> interfaceLevelAttributes);
+        public abstract IEnumerable<EntityBuilding> GetEntities(List<Attribute> interfaceLevelAttributes);
     }
 }

@@ -15,16 +15,6 @@ namespace SecretNest.RemoteAgency
         public string EntityClassName { get; }
 
         /// <summary>
-        /// Gets the type of the parent of entity class.
-        /// </summary>
-        public Type EntityClassParentClass { get; }
-
-        /// <summary>
-        /// Gets the type of the interface to be implemented explicitly.
-        /// </summary>
-        public Type EntityClassInterface { get; }
-
-        /// <summary>
         /// Gets properties other than in interface.
         /// </summary>
         public IReadOnlyList<EntityProperty> Properties { get; }
@@ -51,19 +41,14 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of EntityBuilding.
         /// </summary>
         /// <param name="entityClassName">Name of the entity class.</param>
-        /// <param name="entityClassParentClass">Type of the parent of entity class.</param>
-        /// <param name="entityClassInterface">Type of the interface to be implemented explicitly.</param>
         /// <param name="properties">Properties other than in interface.</param>
         /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
         /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
         /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
-        public EntityBuilding(string entityClassName, Type entityClassParentClass, Type entityClassInterface,
-            IReadOnlyList<EntityProperty> properties, IReadOnlyList<Attribute> interfaceLevelAttributes,
+        public EntityBuilding(string entityClassName, IReadOnlyList<EntityProperty> properties, IReadOnlyList<Attribute> interfaceLevelAttributes,
             IReadOnlyList<Attribute> assetLevelAttributes, IReadOnlyList<Attribute> delegateLevelAttributes)
         {
             EntityClassName = entityClassName;
-            EntityClassParentClass = entityClassParentClass;
-            EntityClassInterface = entityClassInterface;
             Properties = properties;
             InterfaceLevelAttributes = interfaceLevelAttributes;
             AssetLevelAttributes = assetLevelAttributes;

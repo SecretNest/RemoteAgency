@@ -37,6 +37,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyReturnValueInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.ParameterAndReturnValue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.InstanceBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\ExceptionRedirectedEventArgs.cs" />

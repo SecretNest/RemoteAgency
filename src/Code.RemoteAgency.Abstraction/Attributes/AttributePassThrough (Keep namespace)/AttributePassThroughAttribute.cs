@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When using a constructor with all parameters specified in orders, sets types of parameters of constructor to <see cref="AttributeConstructorParameterTypes"/> and values to <see cref="AttributeConstructorParameters"/>. When the length of <see cref="AttributeConstructorParameters"/> is smaller than the length of <see cref="AttributeConstructorParameterTypes"/>, the missing parameters will not be passed into the constructor. <see cref="AttributeId"/> is not required.</para>
     /// <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <see cref="AttributeConstructorParameterTypes"/> and leading values to <see cref="AttributeConstructorParameters"/>. Marks the rest one by one using <see cref="AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// <para>When properties need to be set while initializing, marks the properties one by one using <see cref="AttributePassThroughPropertyAttribute"/>. The <see cref="AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
+    /// <para>When fields need to be set while initializing, marks the fields one by one using <see cref="AttributePassThroughFieldAttribute"/>. The <see cref="AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// </remarks>
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
@@ -21,7 +22,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets the id of the instance of the attribute.
         /// </summary>
-        /// <remarks><para>This id is designed for linking <see cref="AttributePassThroughAttribute"/> with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="AttributePassThroughPropertyAttribute"/> on the same member. When no need to mark with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> or <see cref="AttributePassThroughPropertyAttribute"/>, this value is optional.</para>
+        /// <remarks><para>This id is designed for linking <see cref="AttributePassThroughAttribute"/> with <see cref="AttributePassThroughIndexBasedParameterAttribute"/>, <see cref="AttributePassThroughPropertyAttribute"/> and <see cref="AttributePassThroughFieldAttribute"/> on the same member. When no need to mark with <see cref="AttributePassThroughIndexBasedParameterAttribute"/> or <see cref="AttributePassThroughPropertyAttribute"/>, this value is optional.</para>
         /// </remarks>
         public string AttributeId { get; }
 
@@ -53,7 +54,7 @@ namespace SecretNest.RemoteAgency.Attributes
             Attribute = attribute;
 
             if (attributeConstructorParameterTypes == null)
-                attributeConstructorParameterTypes = new Type[0];
+                attributeConstructorParameterTypes = Type.EmptyTypes;
             AttributeConstructorParameterTypes = attributeConstructorParameterTypes;
 
             if (attributeConstructorParameters != null &&

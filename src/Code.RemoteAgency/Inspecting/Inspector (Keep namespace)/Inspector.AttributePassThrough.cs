@@ -29,6 +29,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                 dataSource.GetCustomAttributes(typeof(AttributePassThroughPropertyAttribute), true)
                     .ToLookup(i => ((AttributePassThroughPropertyAttribute) i).AttributeId,
                         i => (AttributePassThroughPropertyAttribute) i);
+            var attributePassThroughFieldAttributes =
+                dataSource.GetCustomAttributes(typeof(AttributePassThroughFieldAttribute), true)
+                    .ToLookup(i => ((AttributePassThroughFieldAttribute) i).AttributeId,
+                        i => (AttributePassThroughFieldAttribute) i);
 
             HashSet<string> processedAttributeId = new HashSet<string>();
             foreach (var attributePassThroughAttribute in attributePassThroughAttributes)
@@ -46,7 +50,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     AttributeConstructorParameterTypes =
                         attributePassThroughAttribute.AttributeConstructorParameterTypes,
                     AttributeConstructorParameters = new List<KeyValuePair<int, object>>(),
-                    AttributeProperties = new List<KeyValuePair<string, object>>()
+                    AttributeProperties = new List<KeyValuePair<string, object>>(),
+                    AttributeFields = new List<KeyValuePair<string, object>>()
                 };
 
                 if (attributePassThroughAttribute.AttributeConstructorParameterTypes.Length != 0)
@@ -125,6 +130,23 @@ namespace SecretNest.RemoteAgency.Inspecting
                         mainRecord.AttributeProperties.Add(new KeyValuePair<string, object>(
                             attributePassThroughPropertyAttribute.PropertyName,
                             attributePassThroughPropertyAttribute.Value));
+                    }
+                    
+                    HashSet<string> setFields = new HashSet<string>();
+
+                    var linkedAttributePassThroughFieldAttributes =
+                        attributePassThroughFieldAttributes[attributePassThroughAttribute.AttributeId]
+                            .OrderBy(i => i.Order);
+
+                    foreach (var attributePassThroughFieldAttribute in linkedAttributePassThroughFieldAttributes)
+                    {
+                        //Avoid process with same property.
+                        if (!setFields.Add(attributePassThroughFieldAttribute.FieldName))
+                            continue;
+
+                        mainRecord.AttributeFields.Add(new KeyValuePair<string, object>(
+                            attributePassThroughFieldAttribute.FieldName,
+                            attributePassThroughFieldAttribute.Value));
                     }
                 }
 
