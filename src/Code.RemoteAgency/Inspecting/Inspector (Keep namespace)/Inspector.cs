@@ -125,6 +125,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             Task.WaitAll(tasks);
         }
 
+        private const string AutoNamePlaceHolder = "<<<AutoNameRequired>>>";
+
         //foreach asset: get ignore, one way, preset asset name and entity name
         void ReadOriginalAsset(HashSet<string> usedAssetNames, HashSet<string> usedClassNames,
             Stack<MemberInfo> parentPath)
@@ -133,7 +135,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 var item = new RemoteAgencyMethodInfo
                 {
-                    AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames),
+                    AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames, AutoNamePlaceHolder),
                     Asset = method
                 };
 
@@ -161,6 +163,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.ParameterEntityName = customizedEntityName.ParameterEntityName;
                         }
+                        else
+                        {
+                            item.ParameterEntityName = AutoNamePlaceHolder;
+                        }
 
                         if (!item.IsOneWay && !string.IsNullOrEmpty(customizedEntityName.ReturnValueEntityName))
                         {
@@ -173,6 +179,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.ReturnValueEntityName = customizedEntityName.ReturnValueEntityName;
                         }
+                        else
+                        {
+                            item.ReturnValueEntityName = AutoNamePlaceHolder;
+                        }
                     }
                 }
 
@@ -183,7 +193,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 var item = new RemoteAgencyEventInfo()
                 {
-                    AssetName = GetAssetNameSpecified(@event, parentPath, usedAssetNames),
+                    AssetName = GetAssetNameSpecified(@event, parentPath, usedAssetNames, AutoNamePlaceHolder),
                     Delegate = @event.EventHandlerType,
                     Asset = @event
                 };
@@ -225,6 +235,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.AddingRequestEntityName = customizedEntityName.AddingRequestEntityName;
                         }
+                        else
+                        {
+                            item.AddingRequestEntityName = AutoNamePlaceHolder;
+                        }
 
                         if (!string.IsNullOrEmpty(customizedEntityName.AddingResponseEntityName))
                         {
@@ -236,6 +250,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                             }
 
                             item.AddingResponseEntityName = customizedEntityName.AddingResponseEntityName;
+                        }
+                        else
+                        {
+                            item.AddingResponseEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!string.IsNullOrEmpty(customizedEntityName.RemovingRequestEntityName))
@@ -249,6 +267,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.RemovingRequestEntityName = customizedEntityName.RemovingRequestEntityName;
                         }
+                        else
+                        {
+                            item.RemovingRequestEntityName = AutoNamePlaceHolder;
+                        }
 
                         if (!string.IsNullOrEmpty(customizedEntityName.RemovingResponseEntityName))
                         {
@@ -260,6 +282,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                             }
 
                             item.RemovingResponseEntityName = customizedEntityName.RemovingResponseEntityName;
+                        }
+                        else
+                        {
+                            item.RemovingResponseEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!string.IsNullOrEmpty(customizedEntityName.RaisingNotificationEntityName))
@@ -273,6 +299,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.RaisingNotificationEntityName = customizedEntityName.RaisingNotificationEntityName;
                         }
+                        else
+                        {
+                            item.RaisingNotificationEntityName = AutoNamePlaceHolder;
+                        }
 
                         if (!item.IsOneWay && !string.IsNullOrEmpty(customizedEntityName.RaisingFeedbackEntityName))
                         {
@@ -284,6 +314,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                             }
 
                             item.RaisingFeedbackEntityName = customizedEntityName.RaisingFeedbackEntityName;
+                        }
+                        else
+                        {
+                            item.RaisingFeedbackEntityName = AutoNamePlaceHolder;
                         }
 
                         if (current == item.Delegate)
@@ -298,7 +332,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 var item = new RemoteAgencyPropertyInfo()
                 {
-                    AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames),
+                    AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames, AutoNamePlaceHolder),
                     Asset = property
                 };
 
@@ -331,6 +365,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.GettingRequestEntityName = customizedGetEntityName.RequestEntityName;
                         }
+                        else
+                        {
+                            item.GettingRequestEntityName = AutoNamePlaceHolder;
+                        }
 
                         if (!item.IsOneWay && !string.IsNullOrEmpty(customizedGetEntityName.ResponseEntityName))
                         {
@@ -342,6 +380,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                             }
 
                             item.GettingResponseEntityName = customizedGetEntityName.ResponseEntityName;
+                        }
+                        else
+                        {
+                            item.GettingResponseEntityName = AutoNamePlaceHolder;
                         }
                     }
 
@@ -384,17 +426,17 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             foreach (var method in _result.Methods)
             {
-                if (string.IsNullOrEmpty(method.AssetName))
+                if (method.AssetName == AutoNamePlaceHolder)
                 {
                     method.AssetName = GetAssetAutoName(method.Asset.Name, usedAssetNames);
                 }
 
-                if (string.IsNullOrEmpty(method.ParameterEntityName))
+                if (method.ParameterEntityName == AutoNamePlaceHolder)
                 {
                     method.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "Parameter",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(method.ReturnValueEntityName))
+                if (method.ReturnValueEntityName == AutoNamePlaceHolder)
                 {
                     method.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "ReturnValue",
                         usedClassNames);
@@ -403,37 +445,37 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             foreach (var @event in _result.Events)
             {
-                if (string.IsNullOrEmpty(@event.AssetName))
+                if (@event.AssetName == AutoNamePlaceHolder)
                 {
                     @event.AssetName = GetAssetAutoName(@event.Asset.Name, usedAssetNames);
                 }
 
-                if (string.IsNullOrEmpty(@event.AddingRequestEntityName))
+                if (@event.AddingRequestEntityName == AutoNamePlaceHolder)
                 {
                     @event.AddingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingRequest",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(@event.AddingResponseEntityName))
+                if (@event.AddingResponseEntityName == AutoNamePlaceHolder)
                 {
                     @event.AddingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingResponse",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(@event.RemovingRequestEntityName))
+                if (@event.RemovingRequestEntityName == AutoNamePlaceHolder)
                 {
                     @event.RemovingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingRequest",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(@event.RemovingResponseEntityName))
+                if (@event.RemovingResponseEntityName == AutoNamePlaceHolder)
                 {
                     @event.RemovingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingResponse",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(@event.RaisingNotificationEntityName))
+                if (@event.RaisingNotificationEntityName == AutoNamePlaceHolder)
                 {
                     @event.RaisingNotificationEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingNotification",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(@event.RaisingFeedbackEntityName))
+                if (@event.RaisingFeedbackEntityName == AutoNamePlaceHolder)
                 {
                     @event.RaisingFeedbackEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingFeedback",
                         usedClassNames);
@@ -442,27 +484,27 @@ namespace SecretNest.RemoteAgency.Inspecting
            
             foreach (var property in _result.Properties)
             {
-                if (string.IsNullOrEmpty(property.AssetName))
+                if (property.AssetName == AutoNamePlaceHolder)
                 {
                     property.AssetName = GetAssetAutoName(property.Asset.Name, usedAssetNames);
                 }
 
-                if (string.IsNullOrEmpty(property.GettingRequestEntityName))
+                if (property.GettingRequestEntityName == AutoNamePlaceHolder)
                 {
                     property.GettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingRequest",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(property.GettingResponseEntityName))
+                if (property.GettingResponseEntityName == AutoNamePlaceHolder)
                 {
                     property.GettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingResponse",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(property.SettingRequestEntityName))
+                if (property.SettingRequestEntityName == AutoNamePlaceHolder)
                 {
                     property.SettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingRequest",
                         usedClassNames);
                 }
-                if (string.IsNullOrEmpty(property.SettingResponseEntityName))
+                if (property.SettingResponseEntityName == AutoNamePlaceHolder)
                 {
                     property.SettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingResponse",
                         usedClassNames);
@@ -494,11 +536,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
 
-        string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used)
+        string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used, string defaultValue)
         {
             var attribute = memberInfo.GetCustomAttribute<CustomizedAssetNameAttribute>();
             if (attribute == null || string.IsNullOrEmpty(attribute.AssetName))
-                return null;
+                return defaultValue;
             if (used.Contains(attribute.AssetName))
             {
                 throw new AssetNameConflictException($"The asset name specified conflicts with others.",

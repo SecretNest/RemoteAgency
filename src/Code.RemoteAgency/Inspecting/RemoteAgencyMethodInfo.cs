@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyParameterInfo> ParameterEntityProperties { get; set; }
 
         public string ReturnValueEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfo> ReturnValueEntityProperties { get; set; }
+        public List<RemoteAgencyReturnValueInfoBase> ReturnValueEntityProperties { get; set; }
 
         public int MethodCallingTimeout { get; set; }
 

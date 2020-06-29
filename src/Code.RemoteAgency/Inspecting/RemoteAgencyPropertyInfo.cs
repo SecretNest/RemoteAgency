@@ -15,12 +15,12 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public string GettingRequestEntityName { get; set; }
         public string GettingResponseEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfo> GettingResponseEntityProperties { get; set; }
+        public List<RemoteAgencyReturnValueInfoBase> GettingResponseEntityProperties { get; set; }
 
         public string SettingRequestEntityName { get; set; }
         public List<RemoteAgencyParameterInfo> SettingRequestEntityProperties { get; set; }
         public string SettingResponseEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfo> SettingResponseEntityProperties { get; set; }
+        public List<RemoteAgencyReturnValueInfoBase> SettingResponseEntityProperties { get; set; }
 
         public int PropertyGettingTimeout { get; set; }
         public int PropertySettingTimeout { get; set; }

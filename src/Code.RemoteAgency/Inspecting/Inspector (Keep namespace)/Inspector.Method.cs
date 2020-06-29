@@ -1,10 +1,8 @@
-﻿using System;
+﻿using SecretNest.RemoteAgency.Attributes;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -17,7 +15,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
             parentPath.Push(@interface);
 
-            MethodInfo methodInfo = (MethodInfo) method.Asset;
+            MethodInfo methodInfo = (MethodInfo)method.Asset;
             method.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(methodInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
@@ -44,77 +42,87 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     if (method.WillThrowExceptionWhileCalling)
                     {
-                        method.ParameterEntityProperties =
-                            ProcessParameterForIgnoredAndThrowExceptionAsset(methodInfo.GetParameters(), parentPath);
-                        method.ReturnValueEntityProperties =
-                            ProcessReturnValueForIgnoredAndThrowExceptionAsset();
+                        ProcessParameterForIgnoredAndThrowExceptionAsset(methodInfo.GetParameters(),
+                            parentPath, out var parameters);
+                        method.ParameterEntityProperties = parameters;
+                        method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
                     }
                     else
                     {
-                        method.ParameterEntityProperties = ProcessParameterForIgnoredAsset(methodInfo.GetParameters(),
-                            parentPath, out var outputParameterNamesForSettingDefault);
-                        method.ReturnValueEntityProperties =
-                            ProcessReturnValueForIgnoredOrOneWayAsset(methodInfo, outputParameterNamesForSettingDefault);
+                        ProcessParameterAndReturnValueForIgnoredAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
+                            parentPath, out var parameters, out var returnValues);
+                        method.ParameterEntityProperties = parameters;
+                        method.ReturnValueEntityProperties = returnValues;
                     }
                 }
                 else
                 {
                     method.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
-                    method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfo>();
+                    method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
                 }
             }
             else if (method.IsOneWay)
             {
-                method.ParameterEntityProperties = ProcessParameterForOneWayAsset(methodInfo.GetParameters(),
-                    parentPath, out var outputParameterNamesForSettingDefault);
-                if (_includesProxyOnlyInfo)
-                {
-                    method.ReturnValueEntityProperties = ProcessReturnValueForIgnoredOrOneWayAsset(methodInfo,
-                        outputParameterNamesForSettingDefault);
-                }
-                else
-                {
-                    method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfo>();
-                }
+                ProcessParameterAndReturnValueForOneWayAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
+                    parentPath, out var parameters, out var returnValues);
+                method.ParameterEntityProperties = parameters;
+                method.ReturnValueEntityProperties = returnValues;
             }
             else
             {
                 //normal
-                method.ParameterEntityProperties = ProcessParameter(methodInfo.GetParameters(), parentPath,
-                    out var outputParameters, out var usedPropertyNamesInReturnValue);
-                method.ReturnValueEntityProperties = ProcessReturnValue(methodInfo, parentPath, outputParameters,
-                    usedPropertyNamesInReturnValue);
+                ProcessParameterAndReturnValueForNormalAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
+                    parentPath, methodInfo.ReturnTypeCustomAttributes, methodInfo, out var parameters,
+                    out var returnValues);
+                method.ParameterEntityProperties = parameters;
+                method.ReturnValueEntityProperties = returnValues;
             }
         }
 
-        List<RemoteAgencyParameterInfo> ProcessParameterForIgnoredAsset(ParameterInfo[] parameters, Stack<MemberInfo> memberPath,
-            out List<Tuple<Type, string>> outputParameterNamesForSettingDefault)
+        void ProcessParameterAndReturnValueForIgnoredAsset(ParameterInfo[] parameters, Type returnType,
+            Stack<MemberInfo> memberPath, out List<RemoteAgencyParameterInfo> parameterEntityProperties,
+            out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties)
         {
-            List<RemoteAgencyParameterInfo> result = new List<RemoteAgencyParameterInfo>();
-            outputParameterNamesForSettingDefault = new List<Tuple<Type, string>>();
+            parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
+            returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
             foreach (var parameter in parameters)
             {
                 var parameterInfo = new RemoteAgencyParameterInfo
                 {
                     Parameter = parameter,
-                    PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath))
+                    PassThroughAttributes = GetAttributePassThrough(parameter,
+                        (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath))
                 };
 
-                result.Add(parameterInfo);
+                parameterEntityProperties.Add(parameterInfo);
 
                 if (parameter.IsOut)
                 {
-                    outputParameterNamesForSettingDefault.Add(new Tuple<Type, string>(parameter.ParameterType, parameter.Name));
+                    RemoteAgencyReturnValueInfoFromParameterDefaultValue item =
+                        new RemoteAgencyReturnValueInfoFromParameterDefaultValue()
+                        {
+                            Parameter = parameter
+                        };
+                    returnValueEntityProperties.Add(item);
                 }
             }
 
-            return result;
+            if (returnType != typeof(void))
+            {
+                RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
+                    new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
+                    {
+                        ReturnValueDataType = returnType
+                    };
+                returnValueEntityProperties.Add(item);
+            }
         }
 
-        List<RemoteAgencyParameterInfo> ProcessParameterForIgnoredAndThrowExceptionAsset(ParameterInfo[] parameters, Stack<MemberInfo> memberPath)
+        void ProcessParameterForIgnoredAndThrowExceptionAsset(ParameterInfo[] parameters,
+            Stack<MemberInfo> memberPath, out List<RemoteAgencyParameterInfo> parameterEntityProperties)
         {
-            List<RemoteAgencyParameterInfo> result = new List<RemoteAgencyParameterInfo>();
+            parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
 
             foreach (var parameter in parameters)
             {
@@ -124,20 +132,19 @@ namespace SecretNest.RemoteAgency.Inspecting
                     PassThroughAttributes = GetAttributePassThrough(parameter, (m, a) => new InvalidParameterAttributeDataException(m, a, parameter, memberPath))
                 };
 
-                result.Add(parameterInfo);
+                parameterEntityProperties.Add(parameterInfo);
             }
-
-            return result;
         }
-        
-        List<RemoteAgencyParameterInfo> ProcessParameterForOneWayAsset(ParameterInfo[] parameters, Stack<MemberInfo> memberPath,
-            out List<Tuple<Type, string>> outputParameterNamesForSettingDefault)
+
+
+        void ProcessParameterAndReturnValueForOneWayAsset(ParameterInfo[] parameters, Type returnType,
+            Stack<MemberInfo> memberPath, out List<RemoteAgencyParameterInfo> parameterEntityProperties,
+            out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties)
         {
-            List<RemoteAgencyParameterInfo> result = new List<RemoteAgencyParameterInfo>();
-            outputParameterNamesForSettingDefault = new List<Tuple<Type, string>>();
+            parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
+            returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
             HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
-            HashSet<string> ignoredParameters= new HashSet<string>();
 
             foreach (var parameter in parameters)
             {
@@ -149,12 +156,19 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
                 {
-                    ignoredParameters.Add(parameter.Name);
+                    //ignored
                 }
                 else if (parameter.IsOut)
                 {
-                    ignoredParameters.Add(parameter.Name);
-                    outputParameterNamesForSettingDefault.Add(new Tuple<Type, string>(parameter.ParameterType, parameter.Name));
+                    if (_includesProxyOnlyInfo) //one way server won't process return value
+                    {
+                        RemoteAgencyReturnValueInfoFromParameterDefaultValue item =
+                            new RemoteAgencyReturnValueInfoFromParameterDefaultValue()
+                            {
+                                Parameter = parameter
+                            };
+                        returnValueEntityProperties.Add(item);
+                    }
                 }
                 else
                 {
@@ -169,40 +183,50 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 $"The property name specified conflicts with others in parameter entity.",
                                 customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
                         }
+                        parameterInfo.PropertyName = requiredPropertyName;
                     }
-
-                    parameterInfo.PropertyName = requiredPropertyName;
+                    else
+                    {
+                        parameterInfo.PropertyName = AutoNamePlaceHolder;
+                    }
                 }
 
-                result.Add(parameterInfo);
+                parameterEntityProperties.Add(parameterInfo);
+            }
+
+            if (_includesProxyOnlyInfo) //one way server won't process return value
+            {
+                if (returnType != typeof(void))
+                {
+                    RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
+                        new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
+                        {
+                            ReturnValueDataType = returnType
+                        };
+                    returnValueEntityProperties.Add(item);
+                }
             }
 
             //assign auto name
-            foreach (var parameter in result)
+            foreach (var parameter in parameterEntityProperties)
             {
-                if (string.IsNullOrEmpty(parameter.PropertyName))
-                {
-                    var parameterName = parameter.Parameter.Name;
-                    if (!ignoredParameters.Contains(parameterName))
-                        parameter.PropertyName =
-                            GetPropertyAutoName(parameterName, usedPropertyNamesInParameterEntity);
-                }
+                if (parameter.PropertyName == AutoNamePlaceHolder)
+                    parameter.PropertyName =
+                        GetPropertyAutoName(parameter.Parameter.Name, usedPropertyNamesInParameterEntity);
             }
-
-            return result;
         }
 
-
-        List<RemoteAgencyParameterInfo> ProcessParameter(ParameterInfo[] parameters, Stack<MemberInfo> memberPath,
-            out List<FoundOutputParameter> outputParameters, out HashSet<string> usedPropertyNamesInReturnValue)
+        void ProcessParameterAndReturnValueForNormalAsset(ParameterInfo[] parameters, Type returnType,
+            Stack<MemberInfo> memberPath, ICustomAttributeProvider returnValueAttributeProviderHighPriority,
+            ICustomAttributeProvider returnValueAttributeProvider, out List<RemoteAgencyParameterInfo> parameterEntityProperties,
+            out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties)
         {
-            List<RemoteAgencyParameterInfo> result = new List<RemoteAgencyParameterInfo>();
-            outputParameters = new List<FoundOutputParameter>();
-            usedPropertyNamesInReturnValue = new HashSet<string>();
+            parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
+            returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
             HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
-            HashSet<string> ignoredParameters= new HashSet<string>();
-        
+            HashSet<string> usedPropertyNamesInReturnValueEntity = new HashSet<string>();
+
             foreach (var parameter in parameters)
             {
                 var parameterInfo = new RemoteAgencyParameterInfo
@@ -213,7 +237,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (parameter.IsOut || GetValueFromAttribute<ParameterIgnoredAttribute, bool>(parameter, i => i.IsIgnored, out _))
                 {
-                    ignoredParameters.Add(parameter.Name);
+                    //ignored in parameter entity
                 }
                 else
                 {
@@ -228,14 +252,17 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 $"The property name specified conflicts with others in parameter entity.",
                                 customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
                         }
+                        parameterInfo.PropertyName = requiredPropertyName;
                     }
-
-                    parameterInfo.PropertyName = requiredPropertyName;
+                    else
+                    {
+                        parameterInfo.PropertyName = AutoNamePlaceHolder;
+                    }
                 }
-                
-                result.Add(parameterInfo);
 
-                if (parameter.IsOut || parameterInfo.GetType().IsByRef)
+                parameterEntityProperties.Add(parameterInfo);
+
+                if (parameter.IsOut || parameter.ParameterType.IsByRef)
                 {
                     #region Out/Ref
                     var isTwoWay = GetValueFromAttribute<ParameterTwoWayAttribute, bool>(parameter, i => i.IsTwoWay,
@@ -244,23 +271,26 @@ namespace SecretNest.RemoteAgency.Inspecting
                     {
                         string name = twoWayAttribute?.ResponseEntityPropertyName;
                         if (!string.IsNullOrEmpty(name))
-                            if (!usedPropertyNamesInReturnValue.Add(name))
+                        {
+                            if (!usedPropertyNamesInReturnValueEntity.Add(name))
                             {
                                 throw new EntityPropertyNameConflictException(
                                     $"The property name specified conflicts with others in return value entity.",
                                     twoWayAttribute, parameter, memberPath);
                             }
-
-
-                        FoundOutputParameter outputParameter = new FoundOutputParameter()
+                        }
+                        else
                         {
-                            Parameter = parameter,
-                            IsIncludedWhenExceptionThrown =
-                                twoWayAttribute?.IsIncludedWhenExceptionThrown ?? false,
-                            ResponseEntityPropertyName = name,
-                            DataType = parameter.ParameterType
+                            name = AutoNamePlaceHolder;
+                        }
+
+                        RemoteAgencyReturnValueInfoFromParameter returnProperty = new RemoteAgencyReturnValueInfoFromParameter()
+                        {
+                            PropertyName = name,
+                            IsIncludedWhenExceptionThrown = twoWayAttribute?.IsIncludedWhenExceptionThrown ?? false,
+                            Parameter = parameter
                         };
-                        outputParameters.Add(outputParameter);
+                        returnValueEntityProperties.Add(returnProperty);
                     }
 
                     var twoWayPropertyAttribute = parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().FirstOrDefault();
@@ -271,7 +301,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             twoWayPropertyAttribute, parameter, memberPath);
                     #endregion
                 }
-                else if (!ignoredParameters.Contains(parameter.Name)) //not out, not byref, not ignored => check two way
+                else
                 {
                     #region Two way propery
                     var twoWayAttribute = parameter.GetCustomAttribute<ParameterTwoWayAttribute>();
@@ -300,24 +330,32 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 if (field != null)
                                 {
                                     #region Simple mode on field
-                                    if (!string.IsNullOrEmpty(twoWayPropertyAttribute.ResponseEntityPropertyName))
-                                        if (!usedPropertyNamesInReturnValue.Add(
-                                            twoWayPropertyAttribute.ResponseEntityPropertyName))
+
+                                    string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                    if (!string.IsNullOrEmpty(name))
+                                    {
+                                        if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                         {
                                             throw new EntityPropertyNameConflictException(
                                                 "The property name specified conflicts with others in return value entity.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
                                         }
-
-                                    FoundOutputParameter outputParameter = new FoundOutputParameter()
+                                    }
+                                    else
                                     {
-                                        Parameter = parameter,
-                                        IsField = true,
-                                        DataType = field.FieldType,
-                                        ResponseEntityPropertyName = twoWayPropertyAttribute.ResponseEntityPropertyName,
-                                        IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown
-                                    };
-                                    outputParameters.Add(outputParameter);
+                                        name = AutoNamePlaceHolder;
+                                    }
+
+                                    RemoteAgencyReturnValueInfoFromParameterField returnProperty =
+                                        new RemoteAgencyReturnValueInfoFromParameterField()
+                                        {
+                                            PropertyName = name,
+                                            IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                            ParameterField = field,
+                                            Parameter = parameter
+                                        };
+
+                                    returnValueEntityProperties.Add(returnProperty);
                                     #endregion
                                 }
                                 else
@@ -336,24 +374,30 @@ namespace SecretNest.RemoteAgency.Inspecting
                                                 "The property name specified is not writable.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
 
-                                        if (!string.IsNullOrEmpty(twoWayPropertyAttribute.ResponseEntityPropertyName))
-                                            if (!usedPropertyNamesInReturnValue.Add(
-                                                twoWayPropertyAttribute.ResponseEntityPropertyName))
+                                        string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                        if (!string.IsNullOrEmpty(name))
+                                        {
+                                            if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                             {
                                                 throw new EntityPropertyNameConflictException(
                                                     "The property name specified conflicts with others in return value entity.",
                                                     twoWayPropertyAttribute, parameter, memberPath);
                                             }
-
-                                        FoundOutputParameter outputParameter = new FoundOutputParameter()
+                                        }
+                                        else
                                         {
-                                            Parameter = parameter,
-                                            IsProperty = true,
-                                            DataType = property.PropertyType,
-                                            ResponseEntityPropertyName = twoWayPropertyAttribute.ResponseEntityPropertyName,
-                                            IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown
-                                        };
-                                        outputParameters.Add(outputParameter);
+                                            name = AutoNamePlaceHolder;
+                                        }
+
+                                        RemoteAgencyReturnValueInfoFromParameterProperty returnProperty =
+                                            new RemoteAgencyReturnValueInfoFromParameterProperty()
+                                            {
+                                                PropertyName = name,
+                                                IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                                ParameterProperty = property,
+                                                Parameter = parameter
+                                            };
+                                        returnValueEntityProperties.Add(returnProperty);
                                         #endregion
                                     }
                                     else
@@ -384,27 +428,32 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             throw new InvalidParameterAttributeDataException(
                                                 $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
-                                      
-                                        if (!string.IsNullOrEmpty(twoWayHelperAttribute.ResponseEntityPropertyName))
-                                            if (!usedPropertyNamesInReturnValue.Add(
-                                                twoWayHelperAttribute.ResponseEntityPropertyName))
+
+                                        string name = twoWayHelperAttribute.ResponseEntityPropertyName;
+                                        if (!string.IsNullOrEmpty(name))
+                                        {
+                                            if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                             {
                                                 throw new EntityPropertyNameConflictException(
                                                     $"The property name specified for property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
                                                     twoWayPropertyAttribute, parameter, memberPath);
                                             }
-
-                                        FoundOutputParameter outputParameter = new FoundOutputParameter()
+                                        }
+                                        else
                                         {
-                                            Parameter = parameter,
-                                            IsHelperClass = true,
-                                            HelperClass = twoWayPropertyAttribute.HelperClass,
-                                            PropertyInHelperClass = propertyInHelperClass,
-                                            DataType = propertyInHelperClass.PropertyType,
-                                            ResponseEntityPropertyName = twoWayHelperAttribute.ResponseEntityPropertyName,
-                                            IsIncludedWhenExceptionThrown = twoWayHelperAttribute.IsIncludedWhenExceptionThrown
-                                        };
-                                        outputParameters.Add(outputParameter);
+                                            name = AutoNamePlaceHolder;
+                                        }
+
+                                        RemoteAgencyReturnValueInfoFromParameterHelperProperty returnProperty =
+                                            new RemoteAgencyReturnValueInfoFromParameterHelperProperty()
+                                            {
+                                                PropertyName = name,
+                                                IsIncludedWhenExceptionThrown = twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
+                                                ParameterHelperClass = twoWayPropertyAttribute.HelperClass,
+                                                ParameterHelperProperty = propertyInHelperClass,
+                                                Parameter = parameter
+                                            };
+                                        returnValueEntityProperties.Add(returnProperty);
                                     }
                                 }
                                 #endregion
@@ -415,109 +464,49 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
             }
 
-            //assign auto name
-            foreach (var parameter in result)
+            //return value
+            if (!GetValueFromAttribute<ReturnIgnoredAttribute, bool>(returnValueAttributeProviderHighPriority, i => i.IsIgnored,
+                    out _) &&
+                !GetValueFromAttribute<ReturnIgnoredAttribute, bool>(returnValueAttributeProvider, i => i.IsIgnored, out _))
             {
-                if (string.IsNullOrEmpty(parameter.PropertyName))
+                var returnValuePropertyName = GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(returnValueAttributeProviderHighPriority,
+                    i => i.EntityPropertyName, out var customizedReturnValueEntityPropertyNameAttribute);
+                if (customizedReturnValueEntityPropertyNameAttribute == null)
+                    returnValuePropertyName = GetValueFromAttribute(returnValueAttributeProvider, i => i.EntityPropertyName,
+                        out customizedReturnValueEntityPropertyNameAttribute);
+
+                if (returnType != typeof(void))
                 {
-                    var parameterName = parameter.Parameter.Name;
-                    if (!ignoredParameters.Contains(parameterName))
-                        parameter.PropertyName =
-                            GetPropertyAutoName(parameterName, usedPropertyNamesInParameterEntity);
+                    RemoteAgencyReturnValueInfoFromReturnValue item = new RemoteAgencyReturnValueInfoFromReturnValue()
+                    {
+                        PropertyName = returnValuePropertyName,
+                        ReturnValueDataType = returnType
+                    };
+                    returnValueEntityProperties.Add(item);
+                }
+                else
+                {
+                    throw new InvalidReturnValueAttributeDataException(
+                        $"{nameof(CustomizedReturnValueEntityPropertyNameAttribute)} can only be used on the asset with return value.",
+                        customizedReturnValueEntityPropertyNameAttribute, memberPath);
                 }
             }
 
-            return result;
-        }
-
-        class FoundOutputParameter
-        {
-            public ParameterInfo Parameter { get; set; }
-            public bool IsIncludedWhenExceptionThrown { get; set; }
-            public string ResponseEntityPropertyName { get; set; }
-
-            public bool IsProperty { get; set; }
-            public bool IsField { get; set; }
-            public bool IsHelperClass { get; set; }
-            public PropertyInfo PropertyInHelperClass { get; set; }
-            public Type HelperClass { get; set; }
-            public Type DataType { get; set; }
-        }
-
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredOrOneWayAsset(MethodInfo asset,
-            List<Tuple<Type, string>> outputParameterNamesForSettingDefault)
-        {
-            List<RemoteAgencyReturnValueInfo> result = new List<RemoteAgencyReturnValueInfo>();
-
-            foreach (var output in outputParameterNamesForSettingDefault)
+            //assign auto name
+            foreach (var parameter in parameterEntityProperties)
             {
-                RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
-                {
-                    ParameterName = output.Item2,
-                    DataType = output.Item1,
-                    ShouldSetToDefault = true
-                };
-                result.Add(item);
+                if (parameter.PropertyName == AutoNamePlaceHolder)
+                    parameter.PropertyName =
+                        GetPropertyAutoName(parameter.Parameter.Name, usedPropertyNamesInParameterEntity);
             }
-
-            if (asset.ReturnType != typeof(void))
+            foreach (var returnValue in returnValueEntityProperties)
             {
-                RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
+                if (returnValue.IsIncludedInEntity && returnValue.PropertyName == AutoNamePlaceHolder)
                 {
-                    DataType = asset.ReturnType,
-                    ShouldSetToDefault = true,
-                    IsReturnValue = true
-                };
-                result.Add(item);
+                    returnValue.PropertyName =
+                        GetPropertyAutoName(returnValue.GetDefaultPropertyName(), usedPropertyNamesInReturnValueEntity);
+                }
             }
-
-            return result;
-        }
-
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValueForIgnoredAndThrowExceptionAsset()
-        {
-            List<RemoteAgencyReturnValueInfo> result = new List<RemoteAgencyReturnValueInfo>();
-
-            return result;
-        }
-
-        List<RemoteAgencyReturnValueInfo> ProcessReturnValue(MethodInfo asset, Stack<MemberInfo> memberPath,
-            List<FoundOutputParameter> outputParameters, HashSet<string> usedPropertyNamesInReturnValue)
-        {
-
-
-
-            
-            //if (!GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset.ReturnTypeCustomAttributes, i => i.IsIgnored,
-            //    out _) &&
-            //    !GetValueFromAttribute<ReturnIgnoredAttribute, bool>(asset, i => i.IsIgnored, out _))
-            //{
-            //    GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(asset.ReturnTypeCustomAttributes,
-            //            i => i.EntityPropertyName, out var customizedReturnValueEntityPropertyNameAttribute);
-            //    if (customizedReturnValueEntityPropertyNameAttribute == null)
-            //        GetValueFromAttribute(asset, i => i.EntityPropertyName,
-            //            out customizedReturnValueEntityPropertyNameAttribute);
-
-            //    if (asset.ReturnType != typeof(void))
-            //    {
-            //        RemoteAgencyReturnValueInfo item = new RemoteAgencyReturnValueInfo()
-            //        {
-            //            DataType = asset.ReturnType,
-            //            ShouldSetToDefault = true,
-            //            IsReturnValue = true
-            //        };
-            //        result.Add(item);
-            //    }
-            //    else
-            //    {
-            //        throw new InvalidReturnValueAttributeDataException(
-            //            $"{nameof(CustomizedReturnValueEntityPropertyNameAttribute)} can only be used on the asset with return value.",
-            //            customizedReturnValueEntityPropertyNameAttribute, memberPath);
-            //    }
-            //}
-
-
-            //after processing return value, dont forget FoundOutputParameter   for each assign name (ResponseEntityPropertyName)  GetPropertyAutoName(parameter.Name, usedPropertyNames)   
         }
     }
 }
