@@ -9,13 +9,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-
         void ProcessProperty(RemoteAgencyPropertyInfo property, TypeInfo @interface,
             LocalExceptionHandlingMode interfaceLevelLocalExceptionHandlingMode,
             int interfaceLevelPropertyGettingTimeout, int interfaceLevelPropertySettingTimeout)
         {
-            Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
-            parentPath.Push(@interface);
+            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            memberPath.Push(@interface);
+            memberPath.Push(property.Asset);
 
             PropertyInfo propertyInfo = (PropertyInfo) property.Asset;
             property.LocalExceptionHandlingMode =

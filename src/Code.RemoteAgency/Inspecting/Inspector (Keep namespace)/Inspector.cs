@@ -33,8 +33,6 @@ namespace SecretNest.RemoteAgency.Inspecting
             _result.InterfaceLevelPassThroughAttributes =
                 GetAttributePassThrough(_sourceInterfaceTypeInfo,
                     (m, a) => new InvalidAttributeDataException(m, a, _sourceInterface, parentPath));
-            _result.InterfaceLevelGenericArguments =
-                ProcessGenericArgument(_sourceInterfaceTypeInfo, _sourceInterface.GetGenericArguments(), parentPath);
             if (_includesProxyOnlyInfo)
                 _result.IsProxyStickyTargetSite =
                     GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(_sourceInterface, i => i.IsSticky,
@@ -74,8 +72,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                 interfaceLevelPropertySettingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.PropertySettingTimeout;
             }
 
-            //assets start
+            //NOTE: at this point, interface is pushed into parentPath.
             parentPath.Push(_sourceInterface);
+
+            _result.InterfaceLevelGenericArguments =
+                ProcessGenericArgument(_sourceInterface.GetGenericArguments(), parentPath);
+
+            //assets start
             var usedClassNames = new HashSet<string>
             {
                 _result.ProxyTypeName, _result.ServiceWrapperTypeName
@@ -168,20 +171,23 @@ namespace SecretNest.RemoteAgency.Inspecting
                             item.ParameterEntityName = AutoNamePlaceHolder;
                         }
 
-                        if (!item.IsOneWay && !string.IsNullOrEmpty(customizedEntityName.ReturnValueEntityName))
+                        if (!item.IsOneWay)
                         {
-                            if (!usedClassNames.Add(customizedEntityName.ReturnValueEntityName))
+                            if (!string.IsNullOrEmpty(customizedEntityName.ReturnValueEntityName))
                             {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for return values conflicts with others.",
-                                    customizedEntityName, method, parentPath);
-                            }
+                                if (!usedClassNames.Add(customizedEntityName.ReturnValueEntityName))
+                                {
+                                    throw new EntityNameConflictException(
+                                        $"The entity name specified for return values conflicts with others.",
+                                        customizedEntityName, method, parentPath);
+                                }
 
-                            item.ReturnValueEntityName = customizedEntityName.ReturnValueEntityName;
-                        }
-                        else
-                        {
-                            item.ReturnValueEntityName = AutoNamePlaceHolder;
+                                item.ReturnValueEntityName = customizedEntityName.ReturnValueEntityName;
+                            }
+                            else
+                            {
+                                item.ReturnValueEntityName = AutoNamePlaceHolder;
+                            }
                         }
                     }
                 }
@@ -304,20 +310,23 @@ namespace SecretNest.RemoteAgency.Inspecting
                             item.RaisingNotificationEntityName = AutoNamePlaceHolder;
                         }
 
-                        if (!item.IsOneWay && !string.IsNullOrEmpty(customizedEntityName.RaisingFeedbackEntityName))
+                        if (!item.IsOneWay)
                         {
-                            if (!usedClassNames.Add(customizedEntityName.RaisingFeedbackEntityName))
+                            if (!string.IsNullOrEmpty(customizedEntityName.RaisingFeedbackEntityName))
                             {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for feedback of event raising conflicts with others.",
-                                    customizedEntityName, current, parentPath);
-                            }
+                                if (!usedClassNames.Add(customizedEntityName.RaisingFeedbackEntityName))
+                                {
+                                    throw new EntityNameConflictException(
+                                        $"The entity name specified for feedback of event raising conflicts with others.",
+                                        customizedEntityName, current, parentPath);
+                                }
 
-                            item.RaisingFeedbackEntityName = customizedEntityName.RaisingFeedbackEntityName;
-                        }
-                        else
-                        {
-                            item.RaisingFeedbackEntityName = AutoNamePlaceHolder;
+                                item.RaisingFeedbackEntityName = customizedEntityName.RaisingFeedbackEntityName;
+                            }
+                            else
+                            {
+                                item.RaisingFeedbackEntityName = AutoNamePlaceHolder;
+                            }
                         }
 
                         if (current == item.Delegate)
@@ -370,20 +379,23 @@ namespace SecretNest.RemoteAgency.Inspecting
                             item.GettingRequestEntityName = AutoNamePlaceHolder;
                         }
 
-                        if (!item.IsOneWay && !string.IsNullOrEmpty(customizedGetEntityName.ResponseEntityName))
+                        if (!item.IsOneWay)
                         {
-                            if (!usedClassNames.Add(customizedGetEntityName.ResponseEntityName))
+                            if (!string.IsNullOrEmpty(customizedGetEntityName.ResponseEntityName))
                             {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for response of getting conflicts with others.",
-                                    customizedGetEntityName, property, parentPath);
-                            }
+                                if (!usedClassNames.Add(customizedGetEntityName.ResponseEntityName))
+                                {
+                                    throw new EntityNameConflictException(
+                                        $"The entity name specified for response of getting conflicts with others.",
+                                        customizedGetEntityName, property, parentPath);
+                                }
 
-                            item.GettingResponseEntityName = customizedGetEntityName.ResponseEntityName;
-                        }
-                        else
-                        {
-                            item.GettingResponseEntityName = AutoNamePlaceHolder;
+                                item.GettingResponseEntityName = customizedGetEntityName.ResponseEntityName;
+                            }
+                            else
+                            {
+                                item.GettingResponseEntityName = AutoNamePlaceHolder;
+                            }
                         }
                     }
 
@@ -402,17 +414,28 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                             item.SettingRequestEntityName = customizedSetEntityName.RequestEntityName;
                         }
-
-                        if (!item.IsOneWay && !string.IsNullOrEmpty(customizedSetEntityName.ResponseEntityName))
+                        else
                         {
-                            if (!usedClassNames.Add(customizedSetEntityName.ResponseEntityName))
-                            {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for response of setting conflicts with others.",
-                                    customizedSetEntityName, property, parentPath);
-                            }
+                            item.SettingRequestEntityName = AutoNamePlaceHolder;
+                        }
 
-                            item.SettingResponseEntityName = customizedSetEntityName.ResponseEntityName;
+                        if (!item.IsOneWay)
+                        {
+                            if (!string.IsNullOrEmpty(customizedSetEntityName.ResponseEntityName))
+                            {
+                                if (!usedClassNames.Add(customizedSetEntityName.ResponseEntityName))
+                                {
+                                    throw new EntityNameConflictException(
+                                        $"The entity name specified for response of setting conflicts with others.",
+                                        customizedSetEntityName, property, parentPath);
+                                }
+
+                                item.SettingResponseEntityName = customizedSetEntityName.ResponseEntityName;
+                            }
+                            else
+                            {
+                                item.SettingResponseEntityName = AutoNamePlaceHolder;
+                            }
                         }
                     }
                 }
@@ -517,6 +540,21 @@ namespace SecretNest.RemoteAgency.Inspecting
             where TAttribute : Attribute
         {
             attribute = memberInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>().FirstOrDefault();
+            if (attribute == null)
+                return defaultValue;
+            else
+                return selector(attribute);
+        }
+        
+        TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
+            Func<TAttribute, TValue> selector, out TAttribute attribute, Dictionary<string, TAttribute> overrides,
+            TValue defaultValue = default)
+            where TAttribute : Attribute
+        {
+            // ReSharper disable once AssignNullToNotNullAttribute
+            if (overrides == null || overrides.TryGetValue(parameterInfo.Name, out attribute))
+                attribute = parameterInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>()
+                    .FirstOrDefault();
             if (attribute == null)
                 return defaultValue;
             else

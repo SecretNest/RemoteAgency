@@ -22,6 +22,10 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
+    <DefineConstants>netfx</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
   </PropertyGroup>

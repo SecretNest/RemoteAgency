@@ -133,5 +133,14 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             return result;
         }
+
+        void FillAttributePassThroughOnParameters(List<RemoteAgencyParameterInfo> parameterEntityProperties, Func<string, Attribute, ParameterInfo, InvalidAttributeDataException> creatingExceptionCallback)
+        {
+            foreach (var parameterInfo in parameterEntityProperties)
+            {
+                parameterInfo.PassThroughAttributes = GetAttributePassThrough(parameterInfo.Parameter,
+                    (m, a) => creatingExceptionCallback(m, a, parameterInfo.Parameter));
+            }
+        }
     }
 }
