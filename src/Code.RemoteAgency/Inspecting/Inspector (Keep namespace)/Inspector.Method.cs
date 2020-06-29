@@ -25,6 +25,12 @@ namespace SecretNest.RemoteAgency.Inspecting
                 GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo,
                     i => i.Timeout, out _, interfaceLevelMethodCallingTimeout);
 
+            if (_serializerAssetLevelAttributeBaseType != null)
+            {
+                method.SerializerAssetLevelAttributes =
+                    methodInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+            }
+
             //generic parameter
             method.AssetLevelGenericArguments = ProcessGenericArgument(methodInfo.GetGenericArguments(), memberPath);
 
@@ -36,38 +42,35 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (method.IsIgnored)
             {
+                method.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
                 if (_includesProxyOnlyInfo)
                 {
+                    var parameterInfo = methodInfo.GetParameters();
                     if (method.WillThrowExceptionWhileCalling)
                     {
-                        ProcessParameterForIgnoredAndThrowExceptionAsset(methodInfo.GetParameters(),
-                            out var parameters);
-                        FillAttributePassThroughOnParameters(parameters,
+                        method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
                             (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                        method.ParameterEntityProperties = parameters;
                         method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
                     }
                     else
                     {
-                        ProcessParameterAndReturnValueForIgnoredAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
-                            out var parameters, out var returnValues);
-                        FillAttributePassThroughOnParameters(parameters,
+                        ProcessParameterAndReturnValueForIgnoredAsset(parameterInfo, methodInfo.ReturnType, out var returnValues);
+                        method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
                             (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                        method.ParameterEntityProperties = parameters;
                         method.ReturnValueEntityProperties = returnValues;
                     }
                 }
                 else
                 {
-                    method.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
                     method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
                 }
             }
             else if (method.IsOneWay)
             {
-                ProcessParameterAndReturnValueForOneWayAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
-                    memberPath, out var parameters, out var returnValues);
-                FillAttributePassThroughOnParameters(parameters,
+                var parameterInfo = methodInfo.GetParameters();
+                ProcessParameterAndReturnValueForOneWayAsset(parameterInfo, methodInfo.ReturnType,
+                    memberPath, out var parameters, out var returnValues, _includesProxyOnlyInfo);
+                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
                     (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
                 method.ParameterEntityProperties = parameters;
                 method.ReturnValueEntityProperties = returnValues;
@@ -75,10 +78,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             else
             {
                 //normal
-                ProcessParameterAndReturnValueForNormalAsset(methodInfo.GetParameters(), methodInfo.ReturnType,
+                var parameterInfo = methodInfo.GetParameters();
+                ProcessParameterAndReturnValueForNormalAsset(parameterInfo, methodInfo.ReturnType, methodInfo.ReturnTypeCustomAttributes,
                     memberPath, new[] {methodInfo.ReturnTypeCustomAttributes, methodInfo}, out var parameters,
                     out var returnValues);
-                FillAttributePassThroughOnParameters(parameters,
+                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
                     (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
                 method.ParameterEntityProperties = parameters;
                 method.ReturnValueEntityProperties = returnValues;

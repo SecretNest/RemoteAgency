@@ -29,6 +29,18 @@ namespace SecretNest.RemoteAgency.Inspecting
             @event.EventRemovingTimeout = timeoutTime?.EventRemovingTimeout ?? interfaceLevelEventRemovingTimeout;
             @event.EventRaisingTimeout = timeoutTime?.EventRaisingTimeout ?? interfaceLevelEventRaisingTimeout;
 
+            if (_serializerAssetLevelAttributeBaseType != null)
+            {
+                @event.SerializerAssetLevelAttributes =
+                    eventInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+            }
+
+            if (_serializerDelegateLevelAttributeBaseType != null)
+            {
+                @event.SerializerDelegateLevelAttributes =
+                    eventInfo.EventHandlerType.GetCustomAttributes(_serializerDelegateLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+            }
+
             //asset level pass through attributes
             @event.AssetLevelPassThroughAttributes = GetAttributePassThrough(eventInfo,
                 (m, a) => new InvalidAttributeDataException(m, a, memberPath));
@@ -68,8 +80,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 if (@event.IsOneWay)
                 {
                     ProcessParameterAndReturnValueForOneWayAsset(parameterInfo, returnType, memberPath,
-                        out var parameters, out var returnValues, eventLevelParameterIgnoredAttributes,
-                        eventLevelParameterEntityPropertyNameAttributes);
+                        out var parameters, out var returnValues, _includesServiceWrapperOnlyInfo, 
+                        eventLevelParameterIgnoredAttributes, eventLevelParameterEntityPropertyNameAttributes);
                     @event.RaisingNotificationEntityProperties = parameters;
                     @event.RaisingFeedbackEntityProperties = returnValues;
                 }
@@ -82,7 +94,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                         eventLevelParameterTwoWayAttributes.TryAdd(attribute.ParameterName, attribute);
                     }
 
-                    ProcessParameterAndReturnValueForNormalAsset(parameterInfo, returnType, memberPath,
+                    ProcessParameterAndReturnValueForNormalAsset(parameterInfo, returnType, delegateMethod.ReturnTypeCustomAttributes, memberPath,
                         new[] {eventInfo, delegateMethod.ReturnTypeCustomAttributes, delegateMethod},
                         out var parameters, out var returnValues, eventLevelParameterIgnoredAttributes,
                         eventLevelParameterEntityPropertyNameAttributes, eventLevelParameterTwoWayAttributes);

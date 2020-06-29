@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -24,5 +25,55 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public int PropertyGettingTimeout { get; set; }
         public int PropertySettingTimeout { get; set; }
+
+        public override IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface,
+            List<Attribute> interfaceLevelAttributes)
+        {
+            if (!string.IsNullOrEmpty(GettingRequestEntityName))
+            {
+                List<EntityProperty> properties = new List<EntityProperty>();
+
+                EntityBuilding entity = new EntityBuilding(GettingRequestEntityName, entityClassParentClass,
+                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+
+                yield return entity;
+            }
+
+            if (!string.IsNullOrEmpty(GettingResponseEntityName))
+            {
+                List<EntityProperty> properties = GettingResponseEntityProperties.Select(i =>
+                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+
+                EntityBuilding entity = new EntityBuilding(GettingResponseEntityName, entityClassParentClass,
+                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+
+                yield return entity;
+            }
+
+            if (!string.IsNullOrEmpty(SettingRequestEntityName))
+            {
+                List<EntityProperty> properties = SettingRequestEntityProperties.Select(i =>
+                        new EntityProperty(i.DataType, i.PropertyName,
+                            i.SerializerParameterLevelAttributes
+                                .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
+                    .ToList();
+
+                EntityBuilding entity = new EntityBuilding(SettingRequestEntityName, entityClassParentClass,
+                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+
+                yield return entity;
+            }
+
+            if (!string.IsNullOrEmpty(SettingResponseEntityName))
+            {
+                List<EntityProperty> properties = SettingResponseEntityProperties.Select(i =>
+                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+
+                EntityBuilding entity = new EntityBuilding(SettingResponseEntityName, entityClassParentClass,
+                    entityClassInterface, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+
+                yield return entity;
+            }
+        }
     }
 }

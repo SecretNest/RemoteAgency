@@ -17,18 +17,9 @@ namespace SecretNest.RemoteAgency
         /// Builds an entity class type.
         /// </summary>
         /// <param name="targetModule">Module to place the entity class.</param>
-        /// <param name="entityClassName">Name of the entity class.</param>
-        /// <param name="entityClassParentClass">Type of the parent of entity class.</param>
-        /// <param name="entityClassInterface">Type of the interface to be implemented explicitly.</param>
-        /// <param name="properties">Properties other than in interface.</param>
-        /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="InterfaceLevelAttributeBaseType"/> in interface level.<remarks>This will contains nothing when <see cref="InterfaceLevelAttributeBaseType"/> is set to null.</remarks></param>
-        /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="AssetLevelAttributeBaseType"/> in asset level.<remarks>This will contains nothing when <see cref="AssetLevelAttributeBaseType"/> is set to null.</remarks></param>
-        /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.<remarks>This will contains nothing when <see cref="DelegateLevelAttributeBaseType"/> is set to null.</remarks></param>
+        /// <param name="entityBuilding">Entity to be built in this method.</param>
         /// <returns>Type of the built entity class.</returns>
-        public abstract Type BuildEntity(ModuleBuilder targetModule, string entityClassName,
-            Type entityClassParentClass, Type entityClassInterface, List<EntityProperty> properties,
-            List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes,
-            List<Attribute> delegateLevelAttributes);
+        public abstract Type BuildEntity(ModuleBuilder targetModule, EntityBuilding entityBuilding);
 
         /// <summary>
         /// Gets the type of the base class of attributes which are used to mark metadata on interface level.

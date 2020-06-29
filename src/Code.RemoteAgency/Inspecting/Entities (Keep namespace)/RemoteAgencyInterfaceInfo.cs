@@ -15,6 +15,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
         public List<RemoteAgencyGenericArgumentInfo> InterfaceLevelGenericArguments { get; set; }
 
+        public List<Attribute> SerializerInterfaceLevelAttributes { get; set; }
+
         public ThreadLockMode ThreadLockMode { get; set; }
         public string TaskSchedulerName { get; set; }
 
@@ -25,5 +27,20 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int DefaultPropertyGettingTimeout { get; set; } //set before building
         public int DefaultPropertySettingTimeout { get; set; } //set before building
 
+        public IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface)
+        {
+            foreach(var asset in Methods)
+            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
+                SerializerInterfaceLevelAttributes))
+                yield return entity;
+            foreach (var asset in Events)
+            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
+                SerializerInterfaceLevelAttributes))
+                yield return entity;
+            foreach (var asset in Properties)
+            foreach (var entity in asset.GetEntities(entityClassParentClass, entityClassInterface,
+                SerializerInterfaceLevelAttributes))
+                yield return entity;
+        }
     }
 }

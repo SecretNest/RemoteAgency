@@ -25,6 +25,14 @@ namespace SecretNest.RemoteAgency.Inspecting
             property.PropertyGettingTimeout = timeoutTime?.PropertyGettingTimeout ?? interfaceLevelPropertyGettingTimeout;
             property.PropertySettingTimeout = timeoutTime?.PropertySettingTimeout ?? interfaceLevelPropertySettingTimeout;
 
+            if (_serializerAssetLevelAttributeBaseType != null)
+            {
+                property.SerializerAssetLevelAttributes =
+                    propertyInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+            }
+
+
+
         }
     }
 }

@@ -11,9 +11,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
     public class RemoteAgencyBinarySerializerEntityCodeBuilder : EntityCodeBuilderBase
     {
         /// <inheritdoc />
-        public override Type BuildEntity(ModuleBuilder targetModule, string entityClassName, Type entityClassParentClass,
-            Type entityClassInterface, List<EntityProperty> properties, List<Attribute> interfaceLevelAttributes, List<Attribute> assetLevelAttributes,
-            List<Attribute> delegateLevelAttributes)
+        public override Type BuildEntity(ModuleBuilder targetModule, EntityBuilding entityBuilding)
         {
             //TODO: write code here.
             throw new NotImplementedException();

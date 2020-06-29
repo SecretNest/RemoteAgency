@@ -14,13 +14,24 @@ namespace SecretNest.RemoteAgency.Inspecting
         private readonly TypeInfo _sourceInterfaceTypeInfo;
         private readonly RemoteAgencyInterfaceInfo _result;
         private readonly bool _includesProxyOnlyInfo;
+        private readonly bool _includesServiceWrapperOnlyInfo;
 
-        public Inspector(Type sourceInterface, bool includesProxyOnlyInfo)
+        private Type _serializerInterfaceLevelAttributeBaseType;
+        private Type _serializerAssetLevelAttributeBaseType;
+        private Type _serializerDelegateLevelAttributeBaseType;
+        private Type _serializerParameterLevelAttributeBaseType;
+
+        public Inspector(Type sourceInterface, bool includesProxyOnlyInfo, bool includesServiceWrapperOnlyInfo, Type serializerInterfaceLevelAttributeBaseType, Type serializerAssetLevelAttributeBaseType, Type serializerDelegateLevelAttributeBaseType, Type serializerParameterLevelAttributeBaseType)
         {
             _sourceInterface = sourceInterface;
             _sourceInterfaceTypeInfo = sourceInterface.GetTypeInfo();
             _result = new RemoteAgencyInterfaceInfo();
             _includesProxyOnlyInfo = includesProxyOnlyInfo;
+            _includesServiceWrapperOnlyInfo = includesServiceWrapperOnlyInfo;
+            _serializerInterfaceLevelAttributeBaseType = serializerInterfaceLevelAttributeBaseType;
+            _serializerAssetLevelAttributeBaseType = serializerAssetLevelAttributeBaseType;
+            _serializerDelegateLevelAttributeBaseType = serializerDelegateLevelAttributeBaseType;
+            _serializerParameterLevelAttributeBaseType = serializerParameterLevelAttributeBaseType;
             SetInterfaceTypeBasicInfo(_result, _sourceInterface, _sourceInterfaceTypeInfo);
         }
 
@@ -74,6 +85,12 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             //NOTE: at this point, interface is pushed into parentPath.
             parentPath.Push(_sourceInterface);
+
+            if (_serializerInterfaceLevelAttributeBaseType != null)
+            {
+                _result.SerializerInterfaceLevelAttributes =
+                    _sourceInterface.GetCustomAttributes(_serializerInterfaceLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+            }
 
             _result.InterfaceLevelGenericArguments =
                 ProcessGenericArgument(_sourceInterface.GetGenericArguments(), parentPath);

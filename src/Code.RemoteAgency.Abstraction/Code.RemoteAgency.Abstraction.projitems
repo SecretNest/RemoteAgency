@@ -44,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IManagedObjectCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IProxyCommunicate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityBuilding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer %28Keep namespace%29\EntityCodeBuilderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IServiceWrapperCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRemoteAgencyMessage.cs" />

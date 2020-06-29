@@ -17,7 +17,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         public bool IsOneWay { get; set; }
 
         public List<RemoteAgencyAttributePassThrough> AssetLevelPassThroughAttributes { get; set; }
-
+        public List<Attribute> SerializerAssetLevelAttributes { get; set; }
+        
         public LocalExceptionHandlingMode LocalExceptionHandlingMode { get; set; }
+
+        public abstract IEnumerable<EntityBuilding> GetEntities(Type entityClassParentClass, Type entityClassInterface,
+            List<Attribute> interfaceLevelAttributes);
     }
 }
