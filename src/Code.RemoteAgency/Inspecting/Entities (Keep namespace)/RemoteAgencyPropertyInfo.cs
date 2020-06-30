@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -14,12 +15,16 @@ namespace SecretNest.RemoteAgency.Inspecting
             set => IsOneWay = value;
         }
 
+        public Type DataType => ((PropertyInfo) Asset).PropertyType;
+
+        public List<Attribute> SerializerParameterLevelAttributes { get; set; } //will be linked to the *OnAsset property in RemoteAgencyValueInfo* class.
+
         public string GettingRequestEntityName { get; set; }
         public string GettingResponseEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfoBase> GettingResponseEntityProperties { get; set; }
+        public RemoteAgencyReturnValueInfoBase GettingResponseEntityProperty { get; set; }
 
         public string SettingRequestEntityName { get; set; }
-        public List<RemoteAgencyParameterInfo> SettingRequestEntityProperties { get; set; }
+        public string SettingRequestEntityValuePropertyName { get; set; }
         public string SettingResponseEntityName { get; set; }
         public List<RemoteAgencyReturnValueInfoBase> SettingResponseEntityProperties { get; set; }
 
@@ -39,8 +44,11 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(GettingResponseEntityName))
             {
-                List<EntityProperty> properties = GettingResponseEntityProperties.Select(i =>
-                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+                List<EntityProperty> properties = new List<EntityProperty>()
+                {
+                    new EntityProperty(GettingResponseEntityProperty.DataType, GettingResponseEntityProperty.PropertyName, GettingResponseEntityProperty.GetEntityPropertyAttributes().ToList())
+                };
+                //when GettingResponseEntityName is not null nor empty, the type of GettingResponseEntityProperty will be RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue.
 
                 EntityBuilding entity = new EntityBuilding(GettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
 
@@ -49,11 +57,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(SettingRequestEntityName))
             {
-                List<EntityProperty> properties = SettingRequestEntityProperties.Select(i =>
-                        new EntityProperty(i.DataType, i.PropertyName,
-                            i.SerializerParameterLevelAttributes
-                                .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
-                    .ToList();
+                List<EntityProperty> properties = new List<EntityProperty>()
+                {
+                    new EntityProperty(DataType, SettingRequestEntityValuePropertyName, SerializerParameterLevelAttributes.Select(i=>new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).ToList())
+                };
 
                 EntityBuilding entity = new EntityBuilding(SettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
 

@@ -39,6 +39,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Gets the type of the base class of attributes which are used to mark metadata on parameter level.
         /// </summary>
+        /// <remarks>The parameter level attributes will be searched from parameter of method, parameter of delegate and property itself.</remarks>
         public abstract Type ParameterLevelAttributeBaseType { get; }
 
         /// <summary>

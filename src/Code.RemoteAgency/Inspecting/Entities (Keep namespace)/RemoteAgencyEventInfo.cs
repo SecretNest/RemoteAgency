@@ -42,8 +42,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(RaisingFeedbackEntityName))
             {
-                List<EntityProperty> properties = RaisingFeedbackEntityProperties.Select(i =>
-                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+                List<EntityProperty> properties = RaisingFeedbackEntityProperties.Where(i => i.IsIncludedInEntity)
+                    .Select(i =>
+                        new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
+                    .ToList();
 
                 EntityBuilding entity = new EntityBuilding(RaisingFeedbackEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
 

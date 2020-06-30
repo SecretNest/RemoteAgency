@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When <see cref="IsTwoWay"/> is set to <see langword="false" />, or <see cref="IsIncludedWhenExceptionThrown"/> is set to <see langword="false" /> when exception thrown, the parameter will be set to default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
     /// <para>By specifying this on properties, only set operating will be affected.</para>
     /// </remark>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
     public class ParameterTwoWayAttribute : Attribute
     {
         /// <summary>

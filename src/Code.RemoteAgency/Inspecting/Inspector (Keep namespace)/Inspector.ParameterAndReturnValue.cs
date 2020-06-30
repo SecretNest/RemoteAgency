@@ -9,6 +9,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
+        //method, event
         void ProcessParameterAndReturnValueForIgnoredAsset(ParameterInfo[] parameters, Type returnType,
             out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties)
         {
@@ -38,16 +39,20 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
+        //method, event
         void ProcessParameterAndReturnValueForOneWayAsset(ParameterInfo[] parameters, Type returnType,
             Stack<MemberInfo> memberPath, out List<RemoteAgencyParameterInfo> parameterEntityProperties,
             out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties, bool includeCallerOnlyInfo,
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
-            Dictionary<string, CustomizedParameterEntityPropertyNameAttribute> eventLevelParameterEntityPropertyNameAttributes = null)
+            Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
+                eventLevelParameterEntityPropertyNameAttributes = null)
         {
             parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
-            HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
+            HashSet<string>
+                usedPropertyNamesInParameterEntity =
+                    new HashSet<string>(); //could be duplicated cause by the case changing :)
 
             foreach (var parameter in parameters)
             {
@@ -77,7 +82,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (_serializerParameterLevelAttributeBaseType != null)
                     {
                         parameterInfo.SerializerParameterLevelAttributes =
-                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                .Cast<Attribute>().ToList();
                     }
 
                     var requiredPropertyName =
@@ -92,6 +98,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 $"The property name specified conflicts with others in parameter entity.",
                                 customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
                         }
+
                         parameterInfo.PropertyName = requiredPropertyName;
                     }
                     else
@@ -127,23 +134,28 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         //method, event
-        void ProcessParameterAndReturnValueForNormalAsset(ParameterInfo[] parameters, Type returnType, ICustomAttributeProvider returnTypeCustomAttributes,
+        void ProcessParameterAndReturnValueForNormalAsset(ParameterInfo[] parameters, Type returnType,
+            ICustomAttributeProvider returnTypeCustomAttributes,
             Stack<MemberInfo> memberPath, ICustomAttributeProvider[] returnValueAttributeProviders,
             out List<RemoteAgencyParameterInfo> parameterEntityProperties,
             out List<RemoteAgencyReturnValueInfoBase> returnValueEntityProperties,
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
-            Dictionary<string, CustomizedParameterEntityPropertyNameAttribute> eventLevelParameterEntityPropertyNameAttributes = null,
+            Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
+                eventLevelParameterEntityPropertyNameAttributes = null,
             Dictionary<string, ParameterTwoWayAttribute> eventLevelParameterTwoWayAttributes = null)
         {
             parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
-            HashSet<string> usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
+            HashSet<string>
+                usedPropertyNamesInParameterEntity =
+                    new HashSet<string>(); //could be duplicated cause by the case changing :)
             HashSet<string> usedPropertyNamesInReturnValueEntity = new HashSet<string>();
 
             foreach (var parameter in parameters)
             {
-                if (parameter.IsOut || GetValueFromAttribute(parameter, i => i.IsIgnored, out _, eventLevelParameterIgnoredAttributes))
+                if (parameter.IsOut || GetValueFromAttribute(parameter, i => i.IsIgnored, out _,
+                    eventLevelParameterIgnoredAttributes))
                 {
                     //ignored in parameter entity
                 }
@@ -157,7 +169,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (_serializerParameterLevelAttributeBaseType != null)
                     {
                         parameterInfo.SerializerParameterLevelAttributes =
-                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                .Cast<Attribute>().ToList();
                     }
 
                     var requiredPropertyName =
@@ -169,9 +182,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                         if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
                         {
                             throw new EntityPropertyNameConflictException(
-                                $"The property name specified conflicts with others in parameter entity.",
+                                "The property name specified conflicts with others in parameter entity.",
                                 customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
                         }
+
                         parameterInfo.PropertyName = requiredPropertyName;
                     }
                     else
@@ -197,7 +211,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             if (!usedPropertyNamesInReturnValueEntity.Add(name))
                             {
                                 throw new EntityPropertyNameConflictException(
-                                    $"The property name specified conflicts with others in return value entity.",
+                                    "The property name specified conflicts with others in return value entity.",
                                     twoWayAttribute, parameter, memberPath);
                             }
                         }
@@ -206,31 +220,37 @@ namespace SecretNest.RemoteAgency.Inspecting
                             name = AutoNamePlaceHolder;
                         }
 
-                        RemoteAgencyReturnValueInfoFromParameter returnProperty = new RemoteAgencyReturnValueInfoFromParameter()
-                        {
-                            PropertyName = name,
-                            IsIncludedWhenExceptionThrown = twoWayAttribute?.IsIncludedWhenExceptionThrown ?? false,
-                            Parameter = parameter
-                        };
+                        RemoteAgencyReturnValueInfoFromParameter returnProperty =
+                            new RemoteAgencyReturnValueInfoFromParameter()
+                            {
+                                PropertyName = name,
+                                IsIncludedWhenExceptionThrown = twoWayAttribute?.IsIncludedWhenExceptionThrown ?? false,
+                                Parameter = parameter
+                            };
                         if (_serializerParameterLevelAttributeBaseType != null)
                         {
                             returnProperty.SerializerParameterLevelAttributes =
-                                parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                    .Cast<Attribute>().ToList();
                         }
+
                         returnValueEntityProperties.Add(returnProperty);
                     }
 
-                    var twoWayPropertyAttribute = parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().FirstOrDefault();
+                    var twoWayPropertyAttribute = parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>()
+                        .FirstOrDefault();
 
                     if (twoWayPropertyAttribute != null)
                         throw new InvalidParameterAttributeDataException(
                             $"{nameof(ParameterTwoWayPropertyAttribute)} can only be used on the parameter without \"ref / ByRef\" and \"out / Out\"",
                             twoWayPropertyAttribute, parameter, memberPath);
+
                     #endregion
                 }
                 else
                 {
                     #region Two way propery
+
                     var twoWayAttribute = parameter.GetCustomAttribute<ParameterTwoWayAttribute>();
 
                     if (twoWayAttribute != null)
@@ -238,7 +258,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                             $"{nameof(ParameterTwoWayAttribute)} can only be used on the parameter with \"ref / ByRef\" and \"out / Out\".",
                             twoWayAttribute, parameter, memberPath);
 
-                    var twoWayPropertyAttributes = parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().ToArray();
+                    var twoWayPropertyAttributes =
+                        parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().ToArray();
                     if (twoWayPropertyAttributes.Length > 0)
                     {
                         HashSet<string> processedProperties = new HashSet<string>();
@@ -277,18 +298,23 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         new RemoteAgencyReturnValueInfoFromParameterField()
                                         {
                                             PropertyName = name,
-                                            IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                            IsIncludedWhenExceptionThrown =
+                                                twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
                                             ParameterField = field,
                                             Parameter = parameter
                                         };
                                     if (_serializerParameterLevelAttributeBaseType != null)
                                     {
                                         returnProperty.SerializerParameterLevelAttributes =
-                                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                            parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType,
+                                                true).Cast<Attribute>().ToList();
                                         returnProperty.SerializerParameterLevelAttributesOnField =
-                                            field.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                            field.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                                .Cast<Attribute>().ToList();
                                     }
+
                                     returnValueEntityProperties.Add(returnProperty);
+
                                     #endregion
                                 }
                                 else
@@ -298,6 +324,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     if (property != null)
                                     {
                                         #region Simple mode on property
+
                                         if (!property.CanRead)
                                             throw new InvalidParameterAttributeDataException(
                                                 "The property name specified is not readable.",
@@ -326,18 +353,25 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             new RemoteAgencyReturnValueInfoFromParameterProperty()
                                             {
                                                 PropertyName = name,
-                                                IsIncludedWhenExceptionThrown = twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                                IsIncludedWhenExceptionThrown = twoWayPropertyAttribute
+                                                    .IsIncludedWhenExceptionThrown,
                                                 ParameterProperty = property,
                                                 Parameter = parameter
                                             };
                                         if (_serializerParameterLevelAttributeBaseType != null)
                                         {
                                             returnProperty.SerializerParameterLevelAttributes =
-                                                parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                                parameter.GetCustomAttributes(
+                                                        _serializerParameterLevelAttributeBaseType, true)
+                                                    .Cast<Attribute>()
+                                                    .ToList();
                                             returnProperty.SerializerParameterLevelAttributesOnProperty =
-                                                property.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                                property.GetCustomAttributes(_serializerParameterLevelAttributeBaseType,
+                                                    true).Cast<Attribute>().ToList();
                                         }
+
                                         returnValueEntityProperties.Add(returnProperty);
+
                                         #endregion
                                     }
                                     else
@@ -351,6 +385,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             else
                             {
                                 #region Helper class mode
+
                                 if (!processedHelpers.Add(twoWayPropertyAttribute.HelperClass))
                                     continue;
 
@@ -388,7 +423,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             new RemoteAgencyReturnValueInfoFromParameterHelperProperty()
                                             {
                                                 PropertyName = name,
-                                                IsIncludedWhenExceptionThrown = twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
+                                                IsIncludedWhenExceptionThrown =
+                                                    twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
                                                 ParameterHelperClass = twoWayPropertyAttribute.HelperClass,
                                                 ParameterHelperProperty = propertyInHelperClass,
                                                 Parameter = parameter
@@ -396,17 +432,25 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         if (_serializerParameterLevelAttributeBaseType != null)
                                         {
                                             returnProperty.SerializerParameterLevelAttributes =
-                                                parameter.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                                parameter.GetCustomAttributes(
+                                                        _serializerParameterLevelAttributeBaseType, true)
+                                                    .Cast<Attribute>()
+                                                    .ToList();
                                             returnProperty.SerializerParameterLevelAttributesOnHelperProperty =
-                                                propertyInHelperClass.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                                                propertyInHelperClass
+                                                    .GetCustomAttributes(_serializerParameterLevelAttributeBaseType,
+                                                        true).Cast<Attribute>().ToList();
                                         }
+
                                         returnValueEntityProperties.Add(returnProperty);
                                     }
                                 }
+
                                 #endregion
                             }
                         }
                     }
+
                     #endregion
                 }
             }
@@ -424,11 +468,14 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!isReturnValueIgnored)
             {
-                CustomizedReturnValueEntityPropertyNameAttribute customizedReturnValueEntityPropertyNameAttribute = null;
+                CustomizedReturnValueEntityPropertyNameAttribute
+                    customizedReturnValueEntityPropertyNameAttribute = null;
                 foreach (var returnValueAttributeProvider in returnValueAttributeProviders)
                 {
-                    customizedReturnValueEntityPropertyNameAttribute = GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, CustomizedReturnValueEntityPropertyNameAttribute>(
-                        returnValueAttributeProvider, i => i, out _);
+                    customizedReturnValueEntityPropertyNameAttribute =
+                        GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute,
+                            CustomizedReturnValueEntityPropertyNameAttribute>(
+                            returnValueAttributeProvider, i => i, out _);
                     if (customizedReturnValueEntityPropertyNameAttribute != null)
                         break;
                 }
@@ -441,7 +488,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     {
                         throw new EntityPropertyNameConflictException(
                             "The property name specified conflicts with others in return value entity.",
-                            customizedReturnValueEntityPropertyNameAttribute, memberPath);
+                            customizedReturnValueEntityPropertyNameAttribute,
+                            EntityPropertyNameConflictExceptionCausedMemberType.ReturnValue, memberPath);
                     }
                 }
                 else
@@ -459,8 +507,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (_serializerParameterLevelAttributeBaseType != null)
                     {
                         item.SerializerParameterLevelAttributesOnReturnValue =
-                            returnTypeCustomAttributes.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                            returnTypeCustomAttributes
+                                .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>()
+                                .ToList();
                     }
+
                     returnValueEntityProperties.Add(item);
                 }
                 else
@@ -478,12 +529,255 @@ namespace SecretNest.RemoteAgency.Inspecting
                     parameter.PropertyName =
                         GetPropertyAutoName(parameter.Parameter.Name, usedPropertyNamesInParameterEntity);
             }
+
             foreach (var returnValue in returnValueEntityProperties)
             {
                 if (returnValue.IsIncludedInEntity && returnValue.PropertyName == AutoNamePlaceHolder)
                 {
                     returnValue.PropertyName =
                         GetPropertyAutoName(returnValue.GetDefaultPropertyName(), usedPropertyNamesInReturnValueEntity);
+                }
+            }
+        }
+
+        //property
+        void ProcessSettingResponseForIgnoredProperty(Type dataType,
+            out List<RemoteAgencyReturnValueInfoBase> responseEntityProperties)
+        {
+            responseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>()
+            {
+                new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
+                {
+                    ReturnValueDataType = dataType
+                }
+            };
+        }
+
+        //property
+        void ProcessGettingResponseForOneWayProperty(Type dataType,
+            out RemoteAgencyReturnValueInfoBase responseEntityProperty)
+        {
+            if (_includesProxyOnlyInfo)
+            {
+                RemoteAgencyReturnValueInfoFromAssetPropertyReturnValueDefaultValue item =
+                    new RemoteAgencyReturnValueInfoFromAssetPropertyReturnValueDefaultValue()
+                    {
+                        ReturnValueDataType = dataType
+                    };
+
+                responseEntityProperty = item;
+            }
+            else
+            {
+                responseEntityProperty = null;
+            }
+        }
+
+        //property
+        void ProcessGettingResponseForNormalProperty(PropertyInfo property,
+            List<Attribute> serializerParameterLevelAttributesOnAsset,
+            out RemoteAgencyReturnValueInfoBase responseEntityProperty)
+        {
+            var name = GetValueFromAttribute<CustomizedPropertyGetResponsePropertyNameAttribute, string>(property,
+                i => i.EntityPropertyName, out _, "Value");
+
+            RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue item =
+                new RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue()
+                {
+                    PropertyName = name,
+                    ReturnValueDataType = property.PropertyType,
+                    SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
+                };
+            responseEntityProperty = item;
+        }
+
+
+        //property
+        void ProcessSettingResponseForNormalProperty(PropertyInfo assetProperty,
+            List<Attribute> serializerParameterLevelAttributesOnAsset, Stack<MemberInfo> memberPath,
+            out List<RemoteAgencyReturnValueInfoBase> responseEntityProperties)
+        {
+            responseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+
+            //ParameterTwoWayPropertyAttribute
+            var twoWayPropertyAttributes = assetProperty.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().ToArray();
+            if (twoWayPropertyAttributes.Length > 0)
+            {
+                HashSet<string> usedPropertyNamesInReturnValueEntity = new HashSet<string>();
+                HashSet<string> processedProperties = new HashSet<string>();
+                HashSet<Type> processedHelpers = new HashSet<Type>();
+
+                foreach (var twoWayPropertyAttribute in twoWayPropertyAttributes)
+                {
+                    if (twoWayPropertyAttribute.IsSimpleMode)
+                    {
+                        if (!processedProperties.Add(twoWayPropertyAttribute.PropertyNameInParameter))
+                            continue;
+
+                        var dataType = assetProperty.PropertyType;
+
+                        var field = dataType.GetField(twoWayPropertyAttribute.PropertyNameInParameter);
+                        if (field != null)
+                        {
+                            #region Simple mode on field
+
+                            string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                if (!usedPropertyNamesInReturnValueEntity.Add(name))
+                                {
+                                    throw new EntityPropertyNameConflictException(
+                                        "The property name specified conflicts with others in return value entity.",
+                                        twoWayPropertyAttribute,
+                                        EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
+                                }
+                            }
+                            else
+                            {
+                                name = AutoNamePlaceHolder;
+                            }
+
+                            RemoteAgencyReturnValueInfoFromAssetPropertyValueField returnProperty =
+                                new RemoteAgencyReturnValueInfoFromAssetPropertyValueField()
+                                {
+                                    PropertyName = name,
+                                    IsIncludedWhenExceptionThrown =
+                                        twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                    ParameterField = field,
+                                    SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
+                                };
+                            if (_serializerParameterLevelAttributeBaseType != null)
+                            {
+                                returnProperty.SerializerParameterLevelAttributesOnField =
+                                    field.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                        .Cast<Attribute>().ToList();
+                            }
+
+                            responseEntityProperties.Add(returnProperty);
+
+                            #endregion
+                        }
+                        else
+                        {
+                            var property =
+                                dataType.GetProperty(twoWayPropertyAttribute.PropertyNameInParameter);
+                            if (property != null)
+                            {
+                                #region Simple mode on property
+
+                                if (!property.CanRead)
+                                    throw new InvalidAttributeDataException(
+                                        "The property name specified is not readable.",
+                                        twoWayPropertyAttribute, memberPath);
+                                if (!property.CanWrite)
+                                    throw new InvalidAttributeDataException(
+                                        "The property name specified is not writable.",
+                                        twoWayPropertyAttribute, memberPath);
+
+                                string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                if (!string.IsNullOrEmpty(name))
+                                {
+                                    if (!usedPropertyNamesInReturnValueEntity.Add(name))
+                                    {
+                                        throw new EntityPropertyNameConflictException(
+                                            "The property name specified conflicts with others in return value entity.",
+                                            twoWayPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
+                                    }
+                                }
+                                else
+                                {
+                                    name = AutoNamePlaceHolder;
+                                }
+
+                                RemoteAgencyReturnValueInfoFromAssetPropertyValueProperty returnProperty =
+                                    new RemoteAgencyReturnValueInfoFromAssetPropertyValueProperty()
+                                    {
+                                        PropertyName = name,
+                                        IsIncludedWhenExceptionThrown =
+                                            twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                        ParameterProperty = property,
+                                        SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
+                                    };
+                                if (_serializerParameterLevelAttributeBaseType != null)
+                                {
+                                    returnProperty.SerializerParameterLevelAttributesOnProperty =
+                                        property.GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                            .Cast<Attribute>().ToList();
+                                }
+
+                                responseEntityProperties.Add(returnProperty);
+
+                                #endregion
+                            }
+                            else
+                            {
+                                throw new InvalidAttributeDataException(
+                                    "The property name specified is not a public property, nor a public field.",
+                                    twoWayPropertyAttribute, memberPath);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        #region Helper class mode
+
+                        if (!processedHelpers.Add(twoWayPropertyAttribute.HelperClass))
+                            continue;
+
+                        var propertiesInHelperClass = twoWayPropertyAttribute.HelperClass.GetProperties();
+                        foreach (var propertyInHelperClass in propertiesInHelperClass)
+                        {
+                            if (GetValueFromAttribute<TwoWayHelperAttribute, bool>(propertyInHelperClass,
+                                i => i.IsTwoWay, out var twoWayHelperAttribute))
+                            {
+                                if (!propertyInHelperClass.CanRead)
+                                    throw new InvalidAttributeDataException(
+                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                        twoWayPropertyAttribute, memberPath);
+                                if (!propertyInHelperClass.CanWrite)
+                                    throw new InvalidAttributeDataException(
+                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                        twoWayPropertyAttribute, memberPath);
+
+                                string name = twoWayHelperAttribute.ResponseEntityPropertyName;
+                                if (!string.IsNullOrEmpty(name))
+                                {
+                                    if (!usedPropertyNamesInReturnValueEntity.Add(name))
+                                    {
+                                        throw new EntityPropertyNameConflictException(
+                                            $"The property name specified for property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
+                                            twoWayPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
+                                    }
+                                }
+                                else
+                                {
+                                    name = AutoNamePlaceHolder;
+                                }
+
+                                RemoteAgencyReturnValueInfoFromAssetPropertyValueHelperProperty returnProperty =
+                                    new RemoteAgencyReturnValueInfoFromAssetPropertyValueHelperProperty()
+                                    {
+                                        PropertyName = name,
+                                        IsIncludedWhenExceptionThrown =
+                                            twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
+                                        ParameterHelperClass = twoWayPropertyAttribute.HelperClass,
+                                        ParameterHelperProperty = propertyInHelperClass,
+                                        SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
+                                    };
+                                if (_serializerParameterLevelAttributeBaseType != null)
+                                {
+                                    returnProperty.SerializerParameterLevelAttributesOnHelperProperty =
+                                        propertyInHelperClass
+                                            .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                                            .Cast<Attribute>().ToList();
+                                }
+
+                                responseEntityProperties.Add(returnProperty);
+                            }
+                        }
+
+                        #endregion
+                    }
                 }
             }
         }

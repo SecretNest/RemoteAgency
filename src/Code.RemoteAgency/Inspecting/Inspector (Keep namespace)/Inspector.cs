@@ -362,8 +362,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     Asset = property
                 };
 
-                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored)
-                )
+                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored))
                 {
                     item.IsIgnored = true;
                     item.WillThrowExceptionWhileCalling = assetIgnored.WillThrowException;
@@ -396,7 +395,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             item.GettingRequestEntityName = AutoNamePlaceHolder;
                         }
 
-                        if (!item.IsOneWay)
+                        if (!item.IsGettingOneWay)
                         {
                             if (!string.IsNullOrEmpty(customizedGetEntityName.ResponseEntityName))
                             {
@@ -436,7 +435,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             item.SettingRequestEntityName = AutoNamePlaceHolder;
                         }
 
-                        if (!item.IsOneWay)
+                        if (!item.IsSettingOneWay)
                         {
                             if (!string.IsNullOrEmpty(customizedSetEntityName.ResponseEntityName))
                             {

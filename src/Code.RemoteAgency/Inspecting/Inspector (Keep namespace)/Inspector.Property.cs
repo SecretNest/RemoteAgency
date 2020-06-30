@@ -31,8 +31,62 @@ namespace SecretNest.RemoteAgency.Inspecting
                     propertyInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>().ToList();
             }
 
+            //asset level pass through attributes
+            property.AssetLevelPassThroughAttributes = GetAttributePassThrough(propertyInfo,
+                (m, a) => new InvalidAttributeDataException(m, a, memberPath));
 
+            if (property.IsIgnored)
+            {
+                if (property.WillThrowExceptionWhileCalling)
+                {
+                    //property.GettingResponseEntityProperty = null;
+                    //property.SettingRequestEntityValuePropertyName = null;
+                    property.SettingResponseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+                }
+                else
+                {
+                    ProcessSettingResponseForIgnoredProperty(property.DataType, out var response);
+                    property.SettingResponseEntityProperties = response;
+                }
+            }
+            else
+            {
+                property.SerializerParameterLevelAttributes = propertyInfo
+                    .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>()
+                    .ToList();
 
+                //getting
+                if (property.IsGettingOneWay)
+                {
+                    ProcessGettingResponseForOneWayProperty(property.DataType, out var response);
+                    property.GettingResponseEntityProperty = response;
+                }
+                else
+                {
+                    //normal getting
+                    ProcessGettingResponseForNormalProperty(propertyInfo, property.SerializerParameterLevelAttributes,
+                        out var response);
+                    property.GettingResponseEntityProperty = response;
+                }
+
+                //setting
+                property.SettingRequestEntityValuePropertyName =
+                    GetValueFromAttribute<CustomizedPropertySetRequestPropertyNameAttribute, string>(propertyInfo,
+                        i => i.EntityPropertyName, out _, "Value");
+
+                if (property.IsSettingOneWay)
+                {
+                    property.SettingResponseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+                }
+                else
+                {
+                    //normal setting
+                    ProcessSettingResponseForNormalProperty(propertyInfo, property.SerializerParameterLevelAttributes,
+                        memberPath, out var response);
+                    property.SettingResponseEntityProperties = response;
+                }
+
+            }
         }
     }
 }

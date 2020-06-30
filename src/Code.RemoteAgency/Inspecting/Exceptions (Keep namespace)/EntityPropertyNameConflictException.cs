@@ -15,13 +15,13 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// <summary>
         /// Gets the parameter which the attribute is on.
         /// </summary>
-        /// <remarks>Only valid when <see cref="IsCausedByReturnValue"/> is set to <see langword="false"/>.</remarks>
+        /// <remarks>Only valid when <see cref="CausedMemberType"/> is set to <see cref="EntityPropertyNameConflictExceptionCausedMemberType"/>.Parameter.</remarks>
         public ParameterInfo Parameter { get; }
 
         /// <summary>
-        /// Gets whether this exception is caused by the attribute marked about the return value.
+        /// Gets the member type where this exception is caused.
         /// </summary>
-        public bool IsCausedByReturnValue { get; }
+        public EntityPropertyNameConflictExceptionCausedMemberType CausedMemberType { get; }
 
         /// <summary>
         /// Initializes an instance of EntityPropertyNameConflictException.
@@ -33,6 +33,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public EntityPropertyNameConflictException(string message, Attribute attribute, ParameterInfo parameter, Stack<MemberInfo> memberPath) : base(message, attribute, memberPath)
         {
             Parameter = parameter;
+            CausedMemberType = EntityPropertyNameConflictExceptionCausedMemberType.Parameter;
         }
 
         /// <summary>
@@ -46,6 +47,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public EntityPropertyNameConflictException(string message, Attribute attribute, ParameterInfo parameter, MemberInfo memberInfo, Stack<MemberInfo> memberParentPath) : base(message, attribute, memberInfo, memberParentPath)
         {
             Parameter = parameter;
+            CausedMemberType = EntityPropertyNameConflictExceptionCausedMemberType.Parameter;
         }
 
         /// <summary>
@@ -53,10 +55,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// </summary>
         /// <param name="message">Exception message.</param>
         /// <param name="attribute">Attribute that cause this exception.</param>
+        /// <param name="causedMemberType">Member type where this exception is caused.</param>
         /// <param name="memberPath">Member path.</param>
-        public EntityPropertyNameConflictException(string message, Attribute attribute, Stack<MemberInfo> memberPath) : base(message, attribute, memberPath)
+        public EntityPropertyNameConflictException(string message, Attribute attribute, EntityPropertyNameConflictExceptionCausedMemberType causedMemberType, Stack<MemberInfo> memberPath) : base(message, attribute, memberPath)
         {
-            IsCausedByReturnValue = true;
+            CausedMemberType = causedMemberType;
         }
 
         /// <summary>
@@ -65,10 +68,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// <param name="message">Exception message.</param>
         /// <param name="attribute">Attribute that cause this exception.</param>
         /// <param name="memberInfo">Member where this attribute is marked on.</param>
+        /// <param name="causedMemberType">Member type where this exception is caused.</param>
         /// <param name="memberParentPath">Parent path.</param>
-        public EntityPropertyNameConflictException(string message, Attribute attribute, MemberInfo memberInfo, Stack<MemberInfo> memberParentPath) : base(message, attribute, memberInfo, memberParentPath)
+        public EntityPropertyNameConflictException(string message, Attribute attribute, MemberInfo memberInfo, EntityPropertyNameConflictExceptionCausedMemberType causedMemberType, Stack<MemberInfo> memberParentPath) : base(message, attribute, memberInfo, memberParentPath)
         {
-            IsCausedByReturnValue = true;
+            CausedMemberType = causedMemberType;
         }
 
         /// <summary>
@@ -79,7 +83,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         protected EntityPropertyNameConflictException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Parameter = (ParameterInfo) info.GetValue("Parameter", typeof(ParameterInfo));
-            IsCausedByReturnValue = info.GetBoolean("IsCausedByReturnValue");
+            CausedMemberType = (EntityPropertyNameConflictExceptionCausedMemberType) Enum.Parse(
+                typeof(EntityPropertyNameConflictExceptionCausedMemberType), info.GetString("CausedMemberType"));
         }
         
         /// <inheritdoc />
@@ -87,8 +92,28 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             base.GetObjectData(info, context);
             info.AddValue("Parameter", Parameter);
-            info.AddValue("IsCausedByReturnValue", IsCausedByReturnValue);
+            info.AddValue("CausedMemberType", CausedMemberType.ToString());
         }
 
+    }
+
+    /// <summary>
+    /// Contains a list of the type of member which can cause <see cref="EntityPropertyNameConflictException"/>.
+    /// </summary>
+    public enum EntityPropertyNameConflictExceptionCausedMemberType
+    {
+        /// <summary>
+        /// Parameter.
+        /// </summary>
+        /// <remarks>The parameter object should be set to <see cref="EntityPropertyNameConflictException.Parameter"/>.</remarks>
+        Parameter,
+        /// <summary>
+        /// Return value.
+        /// </summary>
+        ReturnValue,
+        /// <summary>
+        /// Property
+        /// </summary>
+        Property
     }
 }

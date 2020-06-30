@@ -36,8 +36,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(ReturnValueEntityName))
             {
-                List<EntityProperty> properties = ReturnValueEntityProperties.Select(i =>
-                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+                List<EntityProperty> properties = ReturnValueEntityProperties.Where(i => i.IsIncludedInEntity)
+                    .Select(i =>
+                        new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
+                    .ToList();
 
                 EntityBuilding entity = new EntityBuilding(ReturnValueEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
 

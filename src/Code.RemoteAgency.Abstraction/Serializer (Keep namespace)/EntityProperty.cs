@@ -90,6 +90,10 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Attribute marked on the property of the helper class linked to the parameter.
         /// </summary>
-        PropertyOfHelper
+        PropertyOfHelper,
+        /// <summary>
+        /// Attribute marked on the property as the asset in the interface.
+        /// </summary>
+        AssetProperty
     }
 }

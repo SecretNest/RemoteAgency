@@ -7,12 +7,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyParameterInfo
     {
-        public string PropertyName { get; set; } //Null: no need to put in entity
+        public string PropertyName { get; set; }
         public ParameterInfo Parameter { get; set; }
 
         public List<Attribute> SerializerParameterLevelAttributes { get; set; }
-
-        public bool IsIncludedInEntity => !string.IsNullOrEmpty(PropertyName);
 
         public Type DataType => Parameter.ParameterType;
         public string ParameterName => Parameter.Name;

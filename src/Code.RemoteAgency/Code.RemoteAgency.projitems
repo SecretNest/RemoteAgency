@@ -49,7 +49,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BeforeTypeCreatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BuiltClassType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\FastActivator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helper\NamingHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.EmptyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Factory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.IO.cs" />
