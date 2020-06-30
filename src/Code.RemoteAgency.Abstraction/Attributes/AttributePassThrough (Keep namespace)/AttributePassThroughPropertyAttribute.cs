@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies a property value to be passed while initializing an instance of attribute.
     /// </summary>
     /// <remarks>This attribute works with <see cref="AttributePassThroughAttribute"/> with the value <see cref="AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="AttributeId"/>.</remarks>
-    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Property |
+    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class AttributePassThroughPropertyAttribute : Attribute

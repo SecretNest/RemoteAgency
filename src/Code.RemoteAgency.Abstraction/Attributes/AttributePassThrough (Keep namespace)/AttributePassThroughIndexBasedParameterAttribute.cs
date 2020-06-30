@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks><para>This attribute works with <see cref="AttributePassThroughAttribute"/> with the value <see cref="AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="AttributeId"/>.</para>
     /// <para>Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</para></remarks>
-    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Property |
+    [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class AttributePassThroughIndexBasedParameterAttribute : Attribute
