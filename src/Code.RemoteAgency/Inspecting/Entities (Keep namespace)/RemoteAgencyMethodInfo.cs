@@ -7,7 +7,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyMethodInfo : RemoteAgencyAssetInfoBase
     {
-        public List<RemoteAgencyGenericArgumentInfo> AssetLevelGenericArguments { get; set; }
+        public List<RemoteAgencyGenericParameterInfo> AssetLevelGenericParameters { get; set; }
         public Dictionary<string, List<RemoteAgencyAttributePassThrough>> ParameterPassThroughAttributes { get; set; }
         public List<RemoteAgencyAttributePassThrough> ReturnValuePassThroughAttributes { get; set; }
 
@@ -19,8 +19,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public int MethodCallingTimeout { get; set; }
 
-        public override IEnumerable<EntityBuilding> GetEntities(List<Attribute> interfaceLevelAttributes)
+        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters)
         {
+            var methodGenericParameters = interfaceLevelGenericParameters.Concat(AssetLevelGenericParameters).ToList();
+
             if (!string.IsNullOrEmpty(ParameterEntityName))
             {
                 List<EntityProperty> properties = ParameterEntityProperties.Select(i =>
@@ -29,7 +31,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuilding entity = new EntityBuilding(ParameterEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(ParameterEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters);
 
                 yield return entity;
             }
@@ -41,7 +43,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                         new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                     .ToList();
 
-                EntityBuilding entity = new EntityBuilding(ReturnValueEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(ReturnValueEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters);
 
                 yield return entity;
             }

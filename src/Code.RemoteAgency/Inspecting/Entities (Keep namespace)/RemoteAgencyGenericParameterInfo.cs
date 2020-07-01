@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
-    class RemoteAgencyGenericArgumentInfo
+    class RemoteAgencyGenericParameterInfo
     {
-        public Type GenericArgument { get; set; }
+        public Type GenericParameter { get; set; }
 
         public List<RemoteAgencyAttributePassThrough> PassThroughAttributes { get; set; }
     }

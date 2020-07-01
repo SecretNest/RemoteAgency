@@ -15,6 +15,11 @@ namespace SecretNest.RemoteAgency
         public string EntityClassName { get; }
 
         /// <summary>
+        /// Gets the generic parameters of this entity class.
+        /// </summary>
+        public Type[] GenericParameters { get; }
+
+        /// <summary>
         /// Gets properties other than in interface.
         /// </summary>
         public IReadOnlyList<EntityProperty> Properties { get; }
@@ -45,14 +50,16 @@ namespace SecretNest.RemoteAgency
         /// <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
         /// <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
         /// <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events. This will be set to <see langword="null"/> when <see cref="EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
+        /// <param name="genericParameters">Generic parameters of this entity class.</param>
         public EntityBuilding(string entityClassName, IReadOnlyList<EntityProperty> properties, IReadOnlyList<Attribute> interfaceLevelAttributes,
-            IReadOnlyList<Attribute> assetLevelAttributes, IReadOnlyList<Attribute> delegateLevelAttributes)
+            IReadOnlyList<Attribute> assetLevelAttributes, IReadOnlyList<Attribute> delegateLevelAttributes, Type[] genericParameters)
         {
             EntityClassName = entityClassName;
             Properties = properties;
             InterfaceLevelAttributes = interfaceLevelAttributes;
             AssetLevelAttributes = assetLevelAttributes;
             DelegateLevelAttributes = delegateLevelAttributes;
+            GenericParameters = genericParameters;
         }
     }
 }

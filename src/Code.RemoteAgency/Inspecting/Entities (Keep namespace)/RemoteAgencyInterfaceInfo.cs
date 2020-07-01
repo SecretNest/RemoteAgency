@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
@@ -13,7 +14,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyPropertyInfo> Properties { get; set; }
 
         public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
-        public List<RemoteAgencyGenericArgumentInfo> InterfaceLevelGenericArguments { get; set; }
+        public List<RemoteAgencyGenericParameterInfo> InterfaceLevelGenericParameters { get; set; }
 
         public List<Attribute> SerializerInterfaceLevelAttributes { get; set; }
 
@@ -27,16 +28,16 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int DefaultPropertyGettingTimeout { get; set; } //set before building
         public int DefaultPropertySettingTimeout { get; set; } //set before building
 
-        public IEnumerable<EntityBuilding> GetEntities()
+        public IEnumerable<EntityBuildingExtended> GetEntities()
         {
             foreach(var asset in Methods)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
                 yield return entity;
             foreach (var asset in Events)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
                 yield return entity;
             foreach (var asset in Properties)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
                 yield return entity;
         }
     }

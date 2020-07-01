@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int EventRemovingTimeout { get; set; }
         public int EventRaisingTimeout { get; set; }
 
-        public override IEnumerable<EntityBuilding> GetEntities(List<Attribute> interfaceLevelAttributes)
+        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters)
         {
             if (!string.IsNullOrEmpty(RaisingNotificationEntityName))
             {
@@ -35,7 +35,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuilding entity = new EntityBuilding(RaisingNotificationEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
+                EntityBuildingExtended entity = new EntityBuildingExtended(RaisingNotificationEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes, interfaceLevelGenericParameters);
 
                 yield return entity;
             }
@@ -47,7 +47,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                         new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                     .ToList();
 
-                EntityBuilding entity = new EntityBuilding(RaisingFeedbackEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes);
+                EntityBuildingExtended entity = new EntityBuildingExtended(RaisingFeedbackEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes, interfaceLevelGenericParameters);
 
                 yield return entity;
             }

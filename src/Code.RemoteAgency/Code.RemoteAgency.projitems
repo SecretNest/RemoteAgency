@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DictionaryTryAddHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\EntityBuildingExtended.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\EntityNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\AssetNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\EntityPropertyNameConflictException.cs" />
@@ -27,7 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyAssetInfoBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyPropertyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyGenericArgumentInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyGenericParameterInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyInterfaceBasicInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyInterfaceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\InvalidAttributeDataException.cs" />
@@ -69,6 +70,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //generic parameter
-            method.AssetLevelGenericArguments = ProcessGenericArgument(methodInfo.GetGenericArguments(), memberPath);
+            method.AssetLevelGenericParameters = ProcessGenericArgument(methodInfo.GetGenericArguments(), memberPath);
 
             //asset level pass through attributes
             method.AssetLevelPassThroughAttributes = GetAttributePassThrough(methodInfo,

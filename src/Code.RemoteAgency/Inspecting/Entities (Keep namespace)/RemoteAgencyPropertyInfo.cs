@@ -31,13 +31,13 @@ namespace SecretNest.RemoteAgency.Inspecting
         public int PropertyGettingTimeout { get; set; }
         public int PropertySettingTimeout { get; set; }
 
-        public override IEnumerable<EntityBuilding> GetEntities(List<Attribute> interfaceLevelAttributes)
+        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters)
         {
             if (!string.IsNullOrEmpty(GettingRequestEntityName))
             {
                 List<EntityProperty> properties = new List<EntityProperty>();
 
-                EntityBuilding entity = new EntityBuilding(GettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(GettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
 
                 yield return entity;
             }
@@ -50,7 +50,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 };
                 //when GettingResponseEntityName is not null nor empty, the type of GettingResponseEntityProperty will be RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue.
 
-                EntityBuilding entity = new EntityBuilding(GettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(GettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
 
                 yield return entity;
             }
@@ -62,7 +62,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     new EntityProperty(DataType, SettingRequestEntityValuePropertyName, SerializerParameterLevelAttributes.Select(i=>new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).ToList())
                 };
 
-                EntityBuilding entity = new EntityBuilding(SettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(SettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
 
                 yield return entity;
             }
@@ -72,7 +72,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 List<EntityProperty> properties = SettingResponseEntityProperties.Select(i =>
                     new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
 
-                EntityBuilding entity = new EntityBuilding(SettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null);
+                EntityBuildingExtended entity = new EntityBuildingExtended(SettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
 
                 yield return entity;
             }

@@ -82,11 +82,16 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (useField)
             {
-                return useProperty ? new CustomAttributeBuilder(ctorInfo, parameters, propertyInfo, propertyValue, fieldInfo, fieldValue) : new CustomAttributeBuilder(ctorInfo, parameters, fieldInfo, fieldValue);
+                return useProperty
+                    ? new CustomAttributeBuilder(ctorInfo, parameters, propertyInfo, propertyValue, fieldInfo,
+                        fieldValue)
+                    : new CustomAttributeBuilder(ctorInfo, parameters, fieldInfo, fieldValue);
             }
             else
             {
-                return useProperty ? new CustomAttributeBuilder(ctorInfo, parameters, propertyInfo, propertyValue) : new CustomAttributeBuilder(ctorInfo, parameters);
+                return useProperty
+                    ? new CustomAttributeBuilder(ctorInfo, parameters, propertyInfo, propertyValue)
+                    : new CustomAttributeBuilder(ctorInfo, parameters);
             }
         }
     }

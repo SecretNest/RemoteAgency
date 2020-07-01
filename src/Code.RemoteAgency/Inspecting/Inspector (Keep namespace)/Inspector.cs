@@ -92,7 +92,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     _sourceInterface.GetCustomAttributes(_serializerInterfaceLevelAttributeBaseType, true).Cast<Attribute>().ToList();
             }
 
-            _result.InterfaceLevelGenericArguments =
+            _result.InterfaceLevelGenericParameters =
                 ProcessGenericArgument(_sourceInterface.GetGenericArguments(), parentPath);
 
             //assets start
