@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
@@ -42,15 +44,23 @@ namespace SecretNest.RemoteAgency
 
         void Emit(RemoteAgencyInterfaceBasicInfo basicInfo, 
             bool isProxyRequired, bool isServiceWrapperRequired,
-            out Type builtProxy, out Type builtServiceWrapper, out List<Type> builtEntities, out AssemblyBuilder assemblyBuilder)
+            out Type builtProxy, out Type builtServiceWrapper, out List<Type> builtEntities, out AssemblyBuilder assemblyBuilder, out ModuleBuilder moduleBuilder)
         {
             AssemblyName assemblyName = new AssemblyName(basicInfo.AssemblyName);
 
-            assemblyBuilder =
+            assemblyBuilder = 
+#if netfx
                 Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+#else
+                AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+#endif
 
-            ModuleBuilder moduleBuilder =
+            moduleBuilder =
+#if netfx
                 assemblyBuilder.DefineDynamicModule("RemoteAgency", basicInfo.ClassNameBase + ".dll");
+#else
+                assemblyBuilder.DefineDynamicModule("RemoteAgency");
+#endif
 
             Inspector inspector = new Inspector(basicInfo, isProxyRequired, isServiceWrapperRequired,
                 _entityCodeBuilder.InterfaceLevelAttributeBaseType, _entityCodeBuilder.AssetLevelAttributeBaseType,
@@ -66,9 +76,52 @@ namespace SecretNest.RemoteAgency
 
             builtEntities = EmitEntities(moduleBuilder, info);
 
-            builtProxy = isProxyRequired ? EmitProxy(moduleBuilder, info) : null;
+            Task emitProxy;
+            TypeBuilder proxyTypeBuilder;
 
-            builtServiceWrapper = isServiceWrapperRequired ? EmitServiceWrapper(moduleBuilder, info) : null;
+            if (isProxyRequired) //star task
+            {
+                proxyTypeBuilder = moduleBuilder.DefineType(basicInfo.ProxyTypeName,
+                    /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
+                    new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
+
+                emitProxy = Task.Run(() => EmitProxy(proxyTypeBuilder, info));
+            }
+            else
+            {
+                emitProxy = null;
+                proxyTypeBuilder = null;
+            }
+
+            if (isServiceWrapperRequired) //run
+            {
+                var typeBuilder = moduleBuilder.DefineType(basicInfo.ServiceWrapperTypeName,
+                    /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
+                    new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
+
+                EmitServiceWrapper(typeBuilder, info);
+
+                BeforeTypeCreated?.Invoke(this, new BeforeTypeCreatedEventArgs(typeBuilder, basicInfo.SourceInterface, BuiltClassType.ServiceWrapper));
+
+                builtServiceWrapper = typeBuilder.CreateType();
+            }
+            else
+            {
+                builtServiceWrapper = null;
+            }
+
+            if (isProxyRequired) //finish task
+            {
+                emitProxy.Wait();
+
+                BeforeTypeCreated?.Invoke(this, new BeforeTypeCreatedEventArgs(proxyTypeBuilder, basicInfo.SourceInterface, BuiltClassType.Proxy));
+
+                builtProxy = proxyTypeBuilder.CreateType();
+            }
+            else
+            {
+                builtProxy = null;
+            }
         }
     }
 }

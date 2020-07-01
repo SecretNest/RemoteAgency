@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
-        Type EmitProxy(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        void EmitProxy(TypeBuilder typeBuilder, RemoteAgencyInterfaceInfo info)
         {
             //TODO: write code here to build proxy
 

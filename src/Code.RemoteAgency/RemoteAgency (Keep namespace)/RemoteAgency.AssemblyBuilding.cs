@@ -74,15 +74,19 @@ namespace SecretNest.RemoteAgency
             if (!needBuild)
                 return;
 
+            Emit(basicInfo, isProxyRequired, isServiceWrapperRequired, out builtProxy, out builtServiceWrapper, out var entities, out var assemblyBuilder, out var moduleBuilder);
 
+            BeforeAssemblyCreated?.Invoke(this,
+                new BeforeAssemblyCreatedEventArgs(assemblyBuilder, moduleBuilder, basicInfo.SourceInterface,
+                    builtProxy, builtServiceWrapper, entities));
 
-            
-
-
-
-            //TODO: write code here to build proxy and/or service wrapper.
-
-            throw new NotImplementedException();
+            AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder, 
+#if netfx
+                assemblyBuilder.Save
+#else
+                null
+#endif
+                ));
         }
 
         /// <summary>

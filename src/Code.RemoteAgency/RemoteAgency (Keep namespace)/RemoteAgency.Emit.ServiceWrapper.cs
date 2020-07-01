@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
-        Type EmitServiceWrapper(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        void EmitServiceWrapper(TypeBuilder typeBuilder, RemoteAgencyInterfaceInfo info)
         {
             //TODO: write code here to build service wrapper.
             throw new Exception();

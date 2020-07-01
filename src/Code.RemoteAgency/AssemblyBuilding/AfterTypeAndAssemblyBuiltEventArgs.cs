@@ -40,10 +40,16 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <summary>
         /// Saves the built assembly to the file specified.
         /// </summary>
-        /// <param name="assemblyFileName"></param>
+        /// <param name="assemblyFileName">File name to be written to.</param>
+        /// <remarks>Assembly saving is not supported by .net core. This method is only for .net framework.</remarks>
+        /// <exception cref="NotSupportedException">Thrown when called in .net core app.</exception>
         public void Save(string assemblyFileName)
         {
+#if netfx
             _saveFileCallback(assemblyFileName);
+#else
+            throw new NotSupportedException("Assembly saving is not supported by .net core.");
+#endif
         }
 
         private Action<string> _saveFileCallback;
@@ -56,7 +62,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="builtServiceWrapper">Type of built service wrapper.</param>
         /// <param name="builtEntities">Types of built entities.</param>
         /// <param name="assembly">Built assembly.</param>
-        /// <param name="saveFileCallback">Callback for saving assembly to file</param>
+        /// <param name="saveFileCallback">Callback for saving assembly to file.</param>
         internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, Action<string> saveFileCallback)
         {
             SourceInterface = sourceInterface;
