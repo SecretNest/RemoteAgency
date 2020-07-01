@@ -40,6 +40,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.InstanceBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.Proxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Emit.ServiceWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.Responder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\BeforeMessageProcessingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs (Keep namespace)\ExceptionRedirectedEventArgs.cs" />

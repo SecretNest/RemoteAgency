@@ -325,13 +325,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     {
                                         #region Simple mode on property
 
-                                        if (!property.CanRead)
+                                        if (property.GetGetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                "The property name specified is not readable.",
+                                                "The property name specified is not readable publicly.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
-                                        if (!property.CanWrite)
+                                        if (property.GetSetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                "The property name specified is not writable.",
+                                                "The property name specified is not writable publicly.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
 
                                         string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
@@ -395,13 +395,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     if (GetValueFromAttribute<TwoWayHelperAttribute, bool>(propertyInHelperClass,
                                         i => i.IsTwoWay, out var twoWayHelperAttribute))
                                     {
-                                        if (!propertyInHelperClass.CanRead)
+                                        if (propertyInHelperClass.GetGetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
-                                        if (!propertyInHelperClass.CanWrite)
+                                        if (propertyInHelperClass.GetSetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
                                                 twoWayPropertyAttribute, parameter, memberPath);
 
                                         string name = twoWayHelperAttribute.ResponseEntityPropertyName;
@@ -665,13 +665,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                             {
                                 #region Simple mode on property
 
-                                if (!property.CanRead)
+                                if (property.GetGetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        "The property name specified is not readable.",
+                                        "The property name specified is not readable publicly.",
                                         twoWayPropertyAttribute, memberPath);
-                                if (!property.CanWrite)
+                                if (property.GetSetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        "The property name specified is not writable.",
+                                        "The property name specified is not writable publicly.",
                                         twoWayPropertyAttribute, memberPath);
 
                                 string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
@@ -730,13 +730,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                             if (GetValueFromAttribute<TwoWayHelperAttribute, bool>(propertyInHelperClass,
                                 i => i.IsTwoWay, out var twoWayHelperAttribute))
                             {
-                                if (!propertyInHelperClass.CanRead)
+                                if (propertyInHelperClass.GetGetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
                                         twoWayPropertyAttribute, memberPath);
-                                if (!propertyInHelperClass.CanWrite)
+                                if (propertyInHelperClass.GetSetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable.",
+                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
                                         twoWayPropertyAttribute, memberPath);
 
                                 string name = twoWayHelperAttribute.ResponseEntityPropertyName;

@@ -10,29 +10,26 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        private readonly Type _sourceInterface;
         private readonly TypeInfo _sourceInterfaceTypeInfo;
         private readonly RemoteAgencyInterfaceInfo _result;
         private readonly bool _includesProxyOnlyInfo;
         private readonly bool _includesServiceWrapperOnlyInfo;
 
-        private Type _serializerInterfaceLevelAttributeBaseType;
-        private Type _serializerAssetLevelAttributeBaseType;
-        private Type _serializerDelegateLevelAttributeBaseType;
-        private Type _serializerParameterLevelAttributeBaseType;
+        private readonly Type _serializerInterfaceLevelAttributeBaseType;
+        private readonly Type _serializerAssetLevelAttributeBaseType;
+        private readonly Type _serializerDelegateLevelAttributeBaseType;
+        private readonly Type _serializerParameterLevelAttributeBaseType;
 
-        public Inspector(Type sourceInterface, bool includesProxyOnlyInfo, bool includesServiceWrapperOnlyInfo, Type serializerInterfaceLevelAttributeBaseType, Type serializerAssetLevelAttributeBaseType, Type serializerDelegateLevelAttributeBaseType, Type serializerParameterLevelAttributeBaseType)
+        public Inspector(RemoteAgencyInterfaceBasicInfo basicInfo, bool includesProxyOnlyInfo, bool includesServiceWrapperOnlyInfo, Type serializerInterfaceLevelAttributeBaseType, Type serializerAssetLevelAttributeBaseType, Type serializerDelegateLevelAttributeBaseType, Type serializerParameterLevelAttributeBaseType)
         {
-            _sourceInterface = sourceInterface;
-            _sourceInterfaceTypeInfo = sourceInterface.GetTypeInfo();
-            _result = new RemoteAgencyInterfaceInfo();
+            _sourceInterfaceTypeInfo = _result.SourceInterface.GetTypeInfo();
+            _result = new RemoteAgencyInterfaceInfo(basicInfo);
             _includesProxyOnlyInfo = includesProxyOnlyInfo;
             _includesServiceWrapperOnlyInfo = includesServiceWrapperOnlyInfo;
             _serializerInterfaceLevelAttributeBaseType = serializerInterfaceLevelAttributeBaseType;
             _serializerAssetLevelAttributeBaseType = serializerAssetLevelAttributeBaseType;
             _serializerDelegateLevelAttributeBaseType = serializerDelegateLevelAttributeBaseType;
             _serializerParameterLevelAttributeBaseType = serializerParameterLevelAttributeBaseType;
-            SetInterfaceTypeBasicInfo(_result, _sourceInterface, _sourceInterfaceTypeInfo);
         }
 
         public RemoteAgencyInterfaceInfo InterfaceTypeInfo => _result;
@@ -43,21 +40,21 @@ namespace SecretNest.RemoteAgency.Inspecting
             Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
             _result.InterfaceLevelPassThroughAttributes =
                 GetAttributePassThrough(_sourceInterfaceTypeInfo,
-                    (m, a) => new InvalidAttributeDataException(m, a, _sourceInterface, parentPath));
+                    (m, a) => new InvalidAttributeDataException(m, a, _result.SourceInterface, parentPath));
             if (_includesProxyOnlyInfo)
                 _result.IsProxyStickyTargetSite =
-                    GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(_sourceInterface, i => i.IsSticky,
+                    GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(_result.SourceInterface, i => i.IsSticky,
                         out _);
             _result.ThreadLockMode =
-                GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(_sourceInterface, i => i.ThreadLockMode,
+                GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(_result.SourceInterface, i => i.ThreadLockMode,
                     out var threadLockAttribute, ThreadLockMode.None);
             if (_result.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
                 _result.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
             var interfaceLevelLocalExceptionHandlingMode =
-                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_sourceInterface,
+                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_result.SourceInterface,
                     i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Redirect);
             var interfaceLevelOperatingTimeoutTimeAttribute =
-                _sourceInterface.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
+                _result.SourceInterface.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
             int interfaceLevelMethodCallingTimeout,
                 interfaceLevelEventAddingTimeout,
                 interfaceLevelEventRemovingTimeout,
@@ -84,16 +81,16 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //NOTE: at this point, interface is pushed into parentPath.
-            parentPath.Push(_sourceInterface);
+            parentPath.Push(_result.SourceInterface);
 
             if (_serializerInterfaceLevelAttributeBaseType != null)
             {
                 _result.SerializerInterfaceLevelAttributes =
-                    _sourceInterface.GetCustomAttributes(_serializerInterfaceLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                    _result.SourceInterface.GetCustomAttributes(_serializerInterfaceLevelAttributeBaseType, true).Cast<Attribute>().ToList();
             }
 
             _result.InterfaceLevelGenericParameters =
-                ProcessGenericArgument(_sourceInterface.GetGenericArguments(), parentPath);
+                ProcessGenericArgument(_result.SourceInterface.GetGenericArguments(), parentPath);
 
             //assets start
             var usedClassNames = new HashSet<string>

@@ -9,7 +9,7 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency<TSerialized, TEntityBase>
+    partial class RemoteAgency
     {
         List<Type> EmitEntities(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
         {
@@ -18,18 +18,18 @@ namespace SecretNest.RemoteAgency
             var buildings = entitiesInfo.Select(entityInfo =>
             {
                 var typeBuilder = moduleBuilder.DefineType(entityInfo.EntityClassName,
-                    /*TypeAttributes.Class | */TypeAttributes.Public, typeof(TEntityBase),
+                    /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
-                if (entityInfo.GenericParameters.Count > 0)
+                if (entityInfo.GenericParametersInfo.Count > 0)
                 {
                     GenericTypeParameterBuilder[] typeParams =
-                        typeBuilder.DefineGenericParameters(entityInfo.GenericParameters
+                        typeBuilder.DefineGenericParameters(entityInfo.GenericParametersInfo
                             .Select(i => i.GenericParameter.Name).ToArray());
 
-                    for (int i = 0; i < entityInfo.GenericParameters.Count; i++)
+                    for (int i = 0; i < entityInfo.GenericParametersInfo.Count; i++)
                     {
-                        var genericTypeInfo = entityInfo.GenericParameters[i];
+                        var genericTypeInfo = entityInfo.GenericParametersInfo[i];
                         foreach (var customAttribute in genericTypeInfo.PassThroughAttributes)
                         {
                             typeParams[i].SetCustomAttribute(customAttribute.GetAttributeBuilder());

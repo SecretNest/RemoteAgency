@@ -9,6 +9,19 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyInterfaceInfo : RemoteAgencyInterfaceBasicInfo
     {
+        public RemoteAgencyInterfaceInfo(RemoteAgencyInterfaceBasicInfo basicInfo)
+        {
+            SourceInterface = basicInfo.SourceInterface;
+            IsSourceInterfaceGenericType = basicInfo.IsSourceInterfaceGenericType;
+            SourceInterfaceGenericArguments = basicInfo.SourceInterfaceGenericArguments;
+            AssemblyName = basicInfo.AssemblyName;
+            ClassNameBase = basicInfo.ClassNameBase;
+            ProxyTypeName = basicInfo.ProxyTypeName;
+            ServiceWrapperTypeName = basicInfo.ServiceWrapperTypeName;
+        }
+
+        public bool IsProxyStickyTargetSite { get; set; }
+
         public List<RemoteAgencyMethodInfo> Methods { get; set; }
         public List<RemoteAgencyEventInfo> Events { get; set; }
         public List<RemoteAgencyPropertyInfo> Properties { get; set; }

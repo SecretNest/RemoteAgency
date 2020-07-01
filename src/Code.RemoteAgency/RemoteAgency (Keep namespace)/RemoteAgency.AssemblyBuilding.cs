@@ -2,9 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
-using Microsoft.SqlServer.Server;
-using SecretNest.RemoteAgency.Helper;
 using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Inspecting;
 
@@ -12,6 +11,8 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
+        private const int DefaultTimeout = 90000;
+
         /// <summary>
         /// Occurs before type building finished.
         /// </summary>
@@ -43,7 +44,43 @@ namespace SecretNest.RemoteAgency
             bool isProxyRequired, bool isServiceWrapperRequired,
             out Type builtProxy, out Type builtServiceWrapper)
         {
-            //TODO: write code here.
+            var basicInfo = Inspector.GetBasicInfo(sourceInterface);
+
+            bool needBuild = false;
+            if (isProxyRequired)
+            {
+                if (!TryGetType(basicInfo.AssemblyName, basicInfo.ProxyTypeName, out builtProxy))
+                {
+                    needBuild = true;
+                }
+            }
+            else
+            {
+                builtProxy = null;
+            }
+
+            if (isServiceWrapperRequired)
+            {
+                if (!TryGetType(basicInfo.AssemblyName, basicInfo.ServiceWrapperTypeName, out builtServiceWrapper))
+                {
+                    needBuild = true;
+                }
+            }
+            else
+            {
+                builtServiceWrapper = null;
+            }
+
+            if (!needBuild)
+                return;
+
+
+
+            
+
+
+
+            //TODO: write code here to build proxy and/or service wrapper.
 
             throw new NotImplementedException();
         }

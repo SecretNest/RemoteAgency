@@ -132,7 +132,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.BeforeSending,
                     (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
-            return emptyMessage;
+            return (TEntityBase) emptyMessage;
         }
 
         void AfterMessageReceivedProcess(ref TEntityBase message, out bool shouldTerminate)
@@ -158,7 +158,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
                     (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
-            return emptyMessage;
+            return (TEntityBase) emptyMessage;
         }
 
         TEntityBase AfterMessageReceivedProcess_GenerateExceptionForSendingBack(
@@ -172,7 +172,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
                     (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
-            return emptyMessage;
+            return (TEntityBase) emptyMessage;
         }
     }
 }
