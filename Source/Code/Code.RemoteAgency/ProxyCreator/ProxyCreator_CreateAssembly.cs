@@ -51,8 +51,8 @@ namespace SecretNest.RemoteAgency
             usedAssemblies.Add(assemblyNameRemoteAgencyBase.FullName, new Tuple<AssemblyName, string>(assemblyNameRemoteAgencyBase, null));
             var assemblyNameDataContract = typeof(DataContractAttribute).GetTypeInfo().Assembly.GetName();
             usedAssemblies.Add(assemblyNameDataContract.FullName, new Tuple<AssemblyName, string>(assemblyNameDataContract, null));
-            var assemblyMameInterface = interfaceTypeInfo.Assembly.GetName();
-            usedAssemblies.Add(assemblyMameInterface.FullName, new Tuple<AssemblyName, string>(assemblyMameInterface, null));
+            var assemblyNameInterface = interfaceTypeInfo.Assembly.GetName();
+            usedAssemblies.Add(assemblyNameInterface.FullName, new Tuple<AssemblyName, string>(assemblyNameInterface, null));
             GetTypeFullNameParameter getTypeFullNameParameter = new GetTypeFullNameParameter(usedTypes, usedAssemblies, totalSourceBuilder);
             var entityBaseTypeName = typeof(TEntityBase).GetFullName(getTypeFullNameParameter, null);
             var entitySerializedTypeName = typeof(TSerialized).GetFullName(getTypeFullNameParameter, null);
