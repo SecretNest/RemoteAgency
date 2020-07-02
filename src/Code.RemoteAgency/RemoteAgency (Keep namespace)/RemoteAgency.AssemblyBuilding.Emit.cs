@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
@@ -74,18 +75,18 @@ namespace SecretNest.RemoteAgency
             info.DefaultPropertyGettingTimeout = DefaultPropertyGettingTimeoutForBuilding;
             info.DefaultPropertySettingTimeout = DefaultPropertySettingTimeoutForBuilding;
 
-            builtEntities = EmitEntities(moduleBuilder, info);
+            var buildingEntityTasks = CreateEmitEntityTasks(moduleBuilder, info);
 
-            Task emitProxy;
-            TypeBuilder proxyTypeBuilder;
+            Task emitProxy, emitServiceWrapper;
+            TypeBuilder proxyTypeBuilder, serviceWrapperTypeBuilder;
 
-            if (isProxyRequired) //star task
+            if (isProxyRequired)
             {
                 proxyTypeBuilder = moduleBuilder.DefineType(basicInfo.ProxyTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
 
-                emitProxy = Task.Run(() => EmitProxy(proxyTypeBuilder, info));
+                emitProxy = new Task(() => EmitProxy(proxyTypeBuilder, info));
             }
             else
             {
@@ -93,24 +94,27 @@ namespace SecretNest.RemoteAgency
                 proxyTypeBuilder = null;
             }
 
-            if (isServiceWrapperRequired) //run
+            if (isServiceWrapperRequired) 
             {
-                var typeBuilder = moduleBuilder.DefineType(basicInfo.ServiceWrapperTypeName,
+                serviceWrapperTypeBuilder = moduleBuilder.DefineType(basicInfo.ServiceWrapperTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
                     new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
 
-                EmitServiceWrapper(typeBuilder, info);
-
-                BeforeTypeCreated?.Invoke(this, new BeforeTypeCreatedEventArgs(typeBuilder, basicInfo.SourceInterface, BuiltClassType.ServiceWrapper));
-
-                builtServiceWrapper = typeBuilder.CreateType();
+                emitServiceWrapper = new Task(() => EmitServiceWrapper(serviceWrapperTypeBuilder, info));
             }
             else
             {
-                builtServiceWrapper = null;
+                emitServiceWrapper = null;
+                serviceWrapperTypeBuilder = null;
             }
 
-            if (isProxyRequired) //finish task
+            buildingEntityTasks.ForEach(i => i.Start());
+            emitProxy?.Start();
+            emitServiceWrapper?.Start();
+
+            builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
+
+            if (isProxyRequired) 
             {
                 // ReSharper disable once AsyncConverter.AsyncWait
                 emitProxy.Wait();
@@ -122,6 +126,20 @@ namespace SecretNest.RemoteAgency
             else
             {
                 builtProxy = null;
+            }
+
+            if (isServiceWrapperRequired)
+            {
+                // ReSharper disable once AsyncConverter.AsyncWait
+                emitServiceWrapper.Wait();
+
+                BeforeTypeCreated?.Invoke(this, new BeforeTypeCreatedEventArgs(serviceWrapperTypeBuilder, basicInfo.SourceInterface, BuiltClassType.ServiceWrapper));
+
+                builtServiceWrapper = serviceWrapperTypeBuilder.CreateType();
+            }
+            else
+            {
+                builtServiceWrapper = null;
             }
         }
     }
