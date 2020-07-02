@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Creates proxy of the interface specified.
         /// </summary>
-        /// <typeparam name="TInterface">Interface of the service to be implemented by this proxy.</typeparam>
+        /// <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
         /// <param name="targetSiteId">Target site id of the created proxy instance.</param>
         /// <param name="targetInstanceId">Target instance id of the created proxy instance.</param>
         /// <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set to <see cref="Guid"/>.Empty.</param>
@@ -29,7 +29,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Creates proxy of the interface specified.
         /// </summary>
-        /// <param name="sourceInterface">Type of the interface of the service to be implemented by this proxy.</param>
+        /// <param name="sourceInterface">Type of the service contract interface to be implemented by this proxy.</param>
         /// <param name="targetSiteId">Target site id of the created proxy instance.</param>
         /// <param name="targetInstanceId">Target instance id of the created proxy instance.</param>
         /// <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set to <see cref="Guid"/>.Empty.</param>
@@ -94,7 +94,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Creates service wrapper of the interface and the service object specified.
         /// </summary>
-        /// <typeparam name="TInterface">Interface of the service to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</typeparam>
+        /// <typeparam name="TInterface">Service contract interface of the service to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</typeparam>
         /// <param name="serviceObject">The service object to be wrapped.</param>
         /// <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set to <see cref="Guid"/>.Empty.</param>
         /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Default value is 90000 (90 sec).</param>
@@ -109,7 +109,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Creates service wrapper of the interface and the service object specified.
         /// </summary>
-        /// <param name="sourceInterface">Type of interface of the service to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</param>
+        /// <param name="sourceInterface">Type of service contract interface to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</param>
         /// <param name="serviceObject">The service object to be wrapped.</param>
         /// <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set to <see cref="Guid"/>.Empty.</param>
         /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Default value is 90000 (90 sec).</param>
