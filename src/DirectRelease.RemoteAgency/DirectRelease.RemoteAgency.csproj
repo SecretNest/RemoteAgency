@@ -49,6 +49,8 @@
 
   <Import Project="..\Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems" Label="Shared" />
 
+  <Import Project="..\Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems" Label="Shared" />
+
 </Project>
 
 

@@ -16,6 +16,8 @@ namespace SecretNest.RemoteAgency
         /// <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         public Guid SiteId { get; set; }
 
+        Guid GetSiteId() => SiteId;
+
         /// <summary>
         /// Instance of entity code builder.
         /// </summary>
@@ -54,7 +56,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
         public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(entityCodeBuilder, siteId, typeof(TEntityBase))
         {
-            this._serializingHelper = serializingHelper;
+            _serializingHelper = serializingHelper;
 
 
         }

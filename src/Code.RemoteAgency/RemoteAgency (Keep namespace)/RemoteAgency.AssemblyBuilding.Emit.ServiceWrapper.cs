@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
         void EmitServiceWrapper(TypeBuilder typeBuilder, RemoteAgencyInterfaceInfo info)
         {
             //TODO: write code here to build service wrapper.
+
             throw new Exception();
         }
     }
