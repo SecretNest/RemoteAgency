@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency
         private Action<Exception> _sendExceptionToManagerCallback; //redirect exception in user code
         private Func<IRemoteAgencyMessage> _createEmptyMessageCallback;
         protected int DefaultTimeOutTime { get; }
-        private Func<int> _getWaitingTimeForDisposingCallback; //get WaitingTimeForDisposing.
+        private readonly Func<int> _getWaitingTimeForDisposingCallback; //get WaitingTimeForDisposing.
 
 
         #region Constructors

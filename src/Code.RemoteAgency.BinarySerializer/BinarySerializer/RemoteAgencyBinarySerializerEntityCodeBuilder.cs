@@ -14,9 +14,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         public override Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
             SetSerializable(typeBuilder);
-
-            //TODO: write code here.
-            throw new NotImplementedException();
+            return PlainEntityBodyBuilder.BuildEntity(typeBuilder, entityBuilding);
         }
 
         void SetSerializable(TypeBuilder typeBuilder)

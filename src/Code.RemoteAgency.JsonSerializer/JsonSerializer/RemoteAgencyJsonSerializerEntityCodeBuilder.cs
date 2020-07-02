@@ -14,8 +14,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// <inheritdoc />
         public override Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
-            //TODO: write code here.
-            throw new NotImplementedException();
+            return PlainEntityBodyBuilder.BuildEntity(typeBuilder, entityBuilding);
         }
 
         /// <inheritdoc />

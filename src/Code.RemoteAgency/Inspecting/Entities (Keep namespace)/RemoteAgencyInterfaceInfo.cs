@@ -18,9 +18,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             ClassNameBase = basicInfo.ClassNameBase;
             ProxyTypeName = basicInfo.ProxyTypeName;
             ServiceWrapperTypeName = basicInfo.ServiceWrapperTypeName;
+            IsProxyStickyTargetSite = basicInfo.IsProxyStickyTargetSite;
+            ThreadLockMode = basicInfo.ThreadLockMode;
+            TaskSchedulerName = basicInfo.TaskSchedulerName;
         }
-
-        public bool IsProxyStickyTargetSite { get; set; }
 
         public List<RemoteAgencyMethodInfo> Methods { get; set; }
         public List<RemoteAgencyEventInfo> Events { get; set; }
@@ -30,9 +31,6 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyGenericParameterInfo> InterfaceLevelGenericParameters { get; set; }
 
         public List<Attribute> SerializerInterfaceLevelAttributes { get; set; }
-
-        public ThreadLockMode ThreadLockMode { get; set; }
-        public string TaskSchedulerName { get; set; }
 
         public int DefaultMethodCallingTimeout { get; set; } //set before building
         public int DefaultEventAddingTimeout { get; set; } //set before building

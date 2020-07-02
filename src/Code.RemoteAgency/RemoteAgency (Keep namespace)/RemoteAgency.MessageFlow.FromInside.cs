@@ -6,24 +6,24 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
-        //TODO: Link ProcessMessageReceivedFromInside to the managing object
-
-        void ProcessMessageReceivedFromInside(TEntityBase message)
+        void ProcessMessageReceivedFromInside(IRemoteAgencyMessage message)
         {
-            ((IRemoteAgencyMessage) message).SenderSiteId = SiteId;
+            message.SenderSiteId = SiteId;
+
+            var entityMessage = (TEntityBase) message;
 
             //internal routing
-            if (((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
+            if (message.TargetSiteId == SiteId)
             {
-                ProcessMessageReceivedAfterFiltering(message);
+                ProcessMessageReceivedAfterFiltering(entityMessage);
             }
 
-            BeforeMessageSendingProcess(ref message, out bool shouldTerminate);
+            BeforeMessageSendingProcess(ref entityMessage, out bool shouldTerminate);
 
             if (shouldTerminate)
                 return;
 
-            ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(message);
+            ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(entityMessage);
         }
 
         void ProcessMessageReceivedFromInsideBypassFiltering(TEntityBase message)

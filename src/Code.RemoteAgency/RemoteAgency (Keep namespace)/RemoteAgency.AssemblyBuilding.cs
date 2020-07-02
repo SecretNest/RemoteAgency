@@ -34,18 +34,16 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Builds an assembly contains built types.
         /// </summary>
-        /// <param name="sourceInterface">Type of the source interface.</param>
+        /// <param name="basicInfo">Basic info of the source interface.</param>
         /// <param name="isProxyRequired">Whether proxy is required to be built.</param>
         /// <param name="isServiceWrapperRequired">Whether service wrapper is required to be built.</param>
         /// <param name="builtProxy">Type of built proxy. When proxy is not built, the value is <see langword="null"/>.</param>
         /// <param name="builtServiceWrapper">Type of built service wrapper. When service wrapper is not built, the value is <see langword="null"/>.</param>
         /// <remarks>Caution: This should not be called if types exist in application domain.</remarks>
-        protected void BuildAssembly(Type sourceInterface,
+        private protected void BuildAssembly(RemoteAgencyInterfaceBasicInfo basicInfo,
             bool isProxyRequired, bool isServiceWrapperRequired,
             out Type builtProxy, out Type builtServiceWrapper)
         {
-            var basicInfo = Inspector.GetBasicInfo(sourceInterface);
-
             bool needBuild = false;
             if (isProxyRequired)
             {
@@ -97,7 +95,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="type">Type object specified.</param>
         /// <exception cref="TypeLoadException">Thrown when the type request cannot be found in the assembly specified.</exception>
         /// <returns>Result.</returns>
-        protected bool TryGetType(string assemblyName, string typeName, out Type type)
+        private static bool TryGetType(string assemblyName, string typeName, out Type type)
         {
             Assembly assembly;
             try

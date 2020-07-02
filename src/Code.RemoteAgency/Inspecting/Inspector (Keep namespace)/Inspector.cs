@@ -41,15 +41,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             _result.InterfaceLevelPassThroughAttributes =
                 GetAttributePassThrough(_sourceInterfaceTypeInfo,
                     (m, a) => new InvalidAttributeDataException(m, a, _result.SourceInterface, parentPath));
-            if (_includesProxyOnlyInfo)
-                _result.IsProxyStickyTargetSite =
-                    GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(_result.SourceInterface, i => i.IsSticky,
-                        out _);
-            _result.ThreadLockMode =
-                GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(_result.SourceInterface, i => i.ThreadLockMode,
-                    out var threadLockAttribute, ThreadLockMode.None);
-            if (_result.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
-                _result.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
+
             var interfaceLevelLocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_result.SourceInterface,
                     i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Redirect);
@@ -548,7 +540,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
-        TValue GetValueFromAttribute<TAttribute, TValue>(ICustomAttributeProvider memberInfo, Func<TAttribute, TValue> selector, out TAttribute attribute,
+        static TValue GetValueFromAttribute<TAttribute, TValue>(ICustomAttributeProvider memberInfo, Func<TAttribute, TValue> selector, out TAttribute attribute,
             TValue defaultValue = default)
             where TAttribute : Attribute
         {
@@ -559,7 +551,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
         
-        TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
+        static  TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
             Func<TAttribute, TValue> selector, out TAttribute attribute, Dictionary<string, TAttribute> overrides,
             TValue defaultValue = default)
             where TAttribute : Attribute
@@ -574,7 +566,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
 
-        TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,
+        static   TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,
             TValue defaultValue = default)
             where TAttribute : Attribute
         {
@@ -587,7 +579,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
 
-        string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used, string defaultValue)
+        static string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used, string defaultValue)
         {
             var attribute = memberInfo.GetCustomAttribute<CustomizedAssetNameAttribute>();
             if (attribute == null || string.IsNullOrEmpty(attribute.AssetName))
@@ -607,13 +599,13 @@ namespace SecretNest.RemoteAgency.Inspecting
             return $"{classNameBase}_{assetName}_{usage}";
         }
 
-        string GetEntityAutoName(string classNameBase, string assetName, string usage, HashSet<string> used)
+        static   string GetEntityAutoName(string classNameBase, string assetName, string usage, HashSet<string> used)
             => GetAutoName(GetDefaultEntityTypeName(classNameBase, assetName, usage), used);
 
-        string GetAssetAutoName(string assetName, HashSet<string> used)
+        static string GetAssetAutoName(string assetName, HashSet<string> used)
             => GetAutoName(assetName, used);
 
-        string GetPropertyAutoName(string name, HashSet<string> used)
+        static string GetPropertyAutoName(string name, HashSet<string> used)
         {
             if (char.IsLower(name[0]))
             {
@@ -622,8 +614,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             return GetAutoName(name, used);
         }
             
-
-        string GetAutoName(string nameBase, HashSet<string> used)
+        static string GetAutoName(string nameBase, HashSet<string> used)
         {
             if (used.Contains(nameBase))
             {

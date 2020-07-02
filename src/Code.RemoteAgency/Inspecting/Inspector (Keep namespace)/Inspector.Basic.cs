@@ -9,16 +9,16 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        public static RemoteAgencyInterfaceBasicInfo GetBasicInfo(Type sourceInterface)
+        public static RemoteAgencyInterfaceBasicInfo GetBasicInfo(Type sourceInterface, bool includesProxyOnlyInfo)
         {
             var basicInfo = new RemoteAgencyInterfaceBasicInfo();
 
-            SetInterfaceTypeBasicInfo(basicInfo, sourceInterface, sourceInterface.GetTypeInfo());
+            SetInterfaceTypeBasicInfo(basicInfo, sourceInterface, sourceInterface.GetTypeInfo(), includesProxyOnlyInfo);
 
             return basicInfo;
         }
 
-        static void SetInterfaceTypeBasicInfo(RemoteAgencyInterfaceBasicInfo basicInfo, Type sourceInterface, TypeInfo typeInfo)
+        static void SetInterfaceTypeBasicInfo(RemoteAgencyInterfaceBasicInfo basicInfo, Type sourceInterface, TypeInfo typeInfo, bool includesProxyOnlyInfo)
         {
             if (sourceInterface.IsGenericType)
             {
@@ -44,6 +44,18 @@ namespace SecretNest.RemoteAgency.Inspecting
             basicInfo.ServiceWrapperTypeName = string.IsNullOrEmpty(customized?.ServiceWrapperClassName)
                 ? GetDefaultServiceWrapperTypeName(basicInfo.ClassNameBase)
                 : customized.ServiceWrapperClassName;
+
+            basicInfo.ThreadLockMode =
+                GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(basicInfo.SourceInterface, i => i.ThreadLockMode,
+                    out var threadLockAttribute, ThreadLockMode.None);
+            if (basicInfo.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
+                basicInfo.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
+
+            if (includesProxyOnlyInfo)
+                basicInfo.IsProxyStickyTargetSite =
+                    GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(basicInfo.SourceInterface,
+                        i => i.IsSticky,
+                        out _);
         }
 
         static string GetClassNameBase(Type sourceInterface)
