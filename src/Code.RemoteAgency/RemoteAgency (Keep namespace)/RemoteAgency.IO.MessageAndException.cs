@@ -33,9 +33,9 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Sets an exception as the result of a message waiting for response and break the waiting.
         /// </summary>
-        /// <param name="instanceId"></param>
-        /// <param name="messageId"></param>
-        /// <param name="exception"></param>
+        /// <param name="instanceId">Id of proxy or service wrapper instance.</param>
+        /// <param name="messageId">Message id.</param>
+        /// <param name="exception">The exception object to be passed.</param>
         /// <seealso cref="OperatingTimeoutTimeAttribute"/>
         public void SetExceptionAsResponse(Guid instanceId, Guid messageId, Exception exception)
         {

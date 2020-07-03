@@ -14,7 +14,7 @@
     <Name>Sandcastle</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
-    <OutputPath>..\..\docs\helpv2\</OutputPath>
+    <OutputPath>..\..\docs\help.v2\</OutputPath>
     <HtmlHelpName>Doc</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
@@ -57,10 +57,22 @@
 <NamespaceSummaryItem name="SecretNest.RemoteAgency.JsonSerializer" isDocumented="True">Contains Json serializer for Remote Agency.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="SecretNest.RemoteAgency.Helper" isDocumented="True">Contains helper classes of Remote Agency.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="SecretNest.RemoteAgency.Inspecting" isDocumented="True">Contains exceptions which could be thrown while inspecting.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="False" /></NamespaceSummaries>
+<NamespaceSummaryItem name="(global)" isDocumented="False" />
+<NamespaceSummaryItem name="SecretNest.TaskSchedulers" isDocumented="False" /></NamespaceSummaries>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
-    <PlugInConfigurations />
+    <PlugInConfigurations>
+      <PlugInConfig id="Assembly Binding Redirection" enabled="True">
+        <configuration useGAC="false">
+          <assemblyBinding />
+          <ignoreIfUnresolved>
+            <assemblyIdentity name="BusinessObjects.Licensing.KeycodeDecoder" />
+            <assemblyIdentity name="Microsoft.VisualStudio.TestTools.UITest.Playback" />
+            <assemblyIdentity name="SecretNest.SequentialScheduler" />
+          </ignoreIfUnresolved>
+        </configuration>
+      </PlugInConfig>
+    </PlugInConfigurations>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

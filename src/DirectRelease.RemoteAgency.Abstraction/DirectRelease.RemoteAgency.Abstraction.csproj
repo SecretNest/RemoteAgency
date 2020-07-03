@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
-    <PackageId>SecretNest.RemoteAgency.Base</PackageId>
+    <PackageId>SecretNest.RemoteAgency.Abstraction</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
     <Product>Remote Agency</Product>
@@ -18,13 +18,13 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <AssemblyName>SecretNest.RemoteAgency.Base</AssemblyName>
+    <AssemblyName>SecretNest.RemoteAgency.Abstraction</AssemblyName>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
-    <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
-  </PropertyGroup>-->
+  <PropertyGroup>
+    <DocumentationFile>RemoteAgency.Abstraction.xml</DocumentationFile>
+  </PropertyGroup>
 
   <Import Project="..\Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems" Label="Shared" />
 

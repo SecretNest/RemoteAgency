@@ -19,7 +19,7 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
+    <AssemblyName>SecretNest.RemoteAgency.Neat</AssemblyName>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
@@ -27,9 +27,9 @@
     <DefineConstants>netfx</DefineConstants>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
-    <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
-  </PropertyGroup>-->
+  <PropertyGroup>
+    <DocumentationFile>RemoteAgency.Neat.xml</DocumentationFile>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />

@@ -1,0 +1,1683 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SecretNest.RemoteAgency.Abstraction</name>
+    </assembly>
+    <members>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute">
+            <summary>
+            Specifies an attribute should be marked at the same place of built proxy class.
+            </summary>
+            <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
+            <para>When using the parameterless constructor of target attribute, <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> are not required.</para>
+            <para>When using a constructor with all parameters specified in orders, sets types of parameters of constructor to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and values to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/>. When the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> is smaller than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/>, the missing parameters will not be passed into the constructor. <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is not required.</para>
+            <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and leading values to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/>. Marks the rest one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
+            <para>When properties need to be set while initializing, marks the properties one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
+            <para>When fields need to be set while initializing, marks the fields one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId">
+            <summary>
+            Gets the id of the instance of the attribute.
+            </summary>
+            <remarks><para>This id is designed for linking <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/> on the same member. When no need to mark with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>, this value is optional.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.Attribute">
+            <summary>
+            Gets the type of the attribute.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes">
+            <summary>
+            Gets the types to identify the constructor of attribute.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters">
+            <summary>
+            Gets the parameters used in constructor. The length can not exceed the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/>.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.#ctor(System.Type,System.Type[],System.Object[],System.String)">
+            <summary>
+            Initializes an instance of AttributePassThroughAttribute.
+            </summary>
+            <param name="attribute">Type of the attribute.</param>
+            <param name="attributeConstructorParameterTypes">Types to identify the constructor of attribute. Default value is <see langword="null"/>. Set the value to <see langword="null"/> or empty array to use parameterless constructor.</param>
+            <param name="attributeConstructorParameters">Parameters used in constructor. The length can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
+            <param name="attributeId"></param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute">
+            <summary>
+            Specifies a parameter value to be passed while constructing an instance of attribute.
+            </summary>
+            <remarks><para>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>.</para>
+            <para>Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId">
+            <summary>
+            Gets the id of the instance of the attribute.
+            </summary>
+            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.ParameterIndex">
+            <summary>
+            Gets the index of the parameter.
+            </summary>
+            <returns><para>The value cannot be equal or larger than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>.</para>
+            <para>When the index is smaller than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>, the parameter in <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> with the index specified by <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.ParameterIndex"/> is replaced with <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.Value"/>.</para></returns>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.Value">
+            <summary>
+            Gets the value of the parameter.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.#ctor(System.String,System.Int32,System.Object)">
+            <summary>
+            Initializes an instance of AttributePassThroughIndexBasedParameterAttribute.
+            </summary>
+            <param name="attributeId">Id of the instance of the attribute. This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</param>
+            <param name="parameterIndex">Index of the parameter.</param>
+            <param name="value">Value of the parameter.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute">
+            <summary>
+            Specifies a property value to be passed while initializing an instance of attribute.
+            </summary>
+            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/>.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId">
+            <summary>
+            Gets the id of the instance of the attribute.
+            </summary>
+            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.Order">
+            <summary>
+            Gets the order for setting the property. All setting operations are performed sequentially. Default value is 0.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.PropertyName">
+            <summary>
+            Gets the name of the property.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.Value">
+            <summary>
+            Gets the value of the property.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.#ctor(System.String,System.String,System.Object,System.Int32)">
+            <summary>
+            Initializes an instance of AttributePassThroughPropertyAttribute.
+            </summary>
+            <param name="attributeId">Id of the instance of the attribute. This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">Value of the property.</param>
+            <param name="order">Order for setting the property. All setting operations are performed sequentially. Default value is 0.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute">
+            <summary>
+            Specifies a field value to be passed while initializing an instance of attribute.
+            </summary>
+            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/>.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId">
+            <summary>
+            Gets the id of the instance of the attribute.
+            </summary>
+            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.Order">
+            <summary>
+            Gets the order for setting the field. All setting operations are performed sequentially. Default value is 0.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.FieldName">
+            <summary>
+            Gets the name of the field.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.Value">
+            <summary>
+            Gets the value of the field.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.#ctor(System.String,System.String,System.Object,System.Int32)">
+            <summary>
+            Initializes an instance of AttributePassThroughFieldAttribute.
+            </summary>
+            <param name="attributeId">Id of the instance of the attribute. This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="value">Value of the field.</param>
+            <param name="order">Order for setting the field. All setting operations are performed sequentially. Default value is 0.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute">
+            <summary>
+            Specifies the asset is ignored from type building.
+            </summary>
+            <remarks><para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, any access to this asset will not be transferred or relayed. When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException"/> is set to <see langword="true"/>, a <see cref="T:System.NotImplementedException"/> will be thrown when accessing, or default value will be used as returning like one way operating enabled.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, all other attributes except <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
+            <para>When this attribute is absent, the ignored mode is disabled.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored">
+            <summary>
+            Gets whether the asset is ignored.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException">
+            <summary>
+            Gets whether an exception should be thrown while accessing this asset.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes an instance of AssetIgnoredAttribute.
+            </summary>
+            <param name="isIgnored">Whether the asset is ignored. Default value is true.</param>
+            <param name="willThrownException">Whether an exception should be thrown while accessing this asset. Default value is true.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute">
+            <summary>
+            Specifies the property get operating should be one way. No response is required.
+            </summary>
+            <remarks>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.IsOneWay"/> is set to <see langword="true"/>, the getting operating return the default value to the caller due to lack of response. Any exception raised from the user code on target site will not be transferred to the caller site.</para>
+            <para>By specifying this on properties, only getting operating is affected. If one way setting operating is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute"/>.</para>
+            <para>When this attribute is absent, the one way mode on property getting operating of this asset is disabled.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.IsOneWay">
+            <summary>
+            Gets whether the property get operating is one way.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of PropertyGetOneWayOperatingAttribute.
+            </summary>
+            <param name="isOneWay">Whether the property get operating is one way. Default value is true.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute">
+            <summary>
+            Specifies a parameter of the event should be send back to the caller.
+            </summary>
+            <remark>
+            <para>This attribute is only available for parameters marked with "ref / ByRef" and "out / Out". For sending a property within a parameter, use <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> instead.</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute"/>.</para>
+            <para>When this attribute is absent, the value of the parameter will be send back to the caller only when no exception thrown.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsTwoWay"/> is set to <see langword="false" />, or <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsIncludedWhenExceptionThrown"/> is set to <see langword="false" /> when exception thrown, the parameter will be set to default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
+            </remark>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute.ParameterName">
+            <summary>
+            Gets the parameter name of the event.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute.#ctor(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initializes an instance of EventParameterTwoWayAttribute.
+            </summary>
+            <param name="parameterName">Parameter name of the event.</param>
+            <param name="isTwoWay">Whether this parameter should be included in return entity. Default value is <see langword="true" />.</param>
+            <param name="isIncludedWhenExceptionThrown">Whether this parameter should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="true" />.</param>
+            <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute">
+            <summary>
+            Specifies the parameter should be send back to the caller.
+            </summary>
+            <remark>
+            <para>This attribute is only available for parameters marked with "ref / ByRef" and "out / Out". For sending a property within a parameter, use <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> instead.</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute"/> can be marked on event, with higher priority than <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute"/> with the same parameter.</para>
+            <para>When this attribute is absent, the value of the parameter will be send back to the caller only when no exception thrown.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsTwoWay"/> is set to <see langword="false" />, or <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsIncludedWhenExceptionThrown"/> is set to <see langword="false" /> when exception thrown, the parameter will be set to default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
+            <para>By specifying this on properties, only set operating will be affected.</para>
+            </remark>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsTwoWay">
+            <summary>
+            Gets whether this parameter should be included in return entity.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsIncludedWhenExceptionThrown">
+            <summary>
+            Gets whether this parameter should be included in return entity when exception thrown by the user code on the remote site. Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.IsTwoWay"/> is set to <see langword="true"/>.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.ResponseEntityPropertyName">
+            <summary>
+            Gets the preferred property name in response entity.
+            </summary>
+            <remark>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remark>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute.#ctor(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initializes an instance of ParameterTwoWayAttribute.
+            </summary>
+            <param name="isTwoWay">Whether this parameter should be included in return entity. Default value is <see langword="true" />.</param>
+            <param name="isIncludedWhenExceptionThrown">Whether this parameter should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="true" />.</param>
+            <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute">
+            <summary>
+            Specifies the property is a helper for accessing two way property of a parameter. 
+            </summary>
+            <remarks>The property should be public readable and writable with the same type as the property pointed.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.IsTwoWay">
+            <summary>
+            Gets whether this parameter should be included in return entity.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.ResponseEntityPropertyName">
+            <summary>
+            Gets the preferred property name in response entity.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.IsIncludedWhenExceptionThrown">
+            <summary>
+            Gets whether this property should be included in return entity when exception thrown by the user code on the remote site.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.#ctor(System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Initializes an instance of TwoWayHelperAttribute.
+            </summary>
+            <param name="isTwoWay">Whether this parameter should be included in return entity. Default value is <see langword="true" />.</param>
+            <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+            <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute">
+            <summary>
+            Specifies the names of entity classes generated for event adding, removing and raising.
+            </summary>
+            <remarks><para>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the entity name is chosen automatically.</para>
+            <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.AddingRequestEntityName">
+            <summary>
+            Gets the name of the entity class for processing event adding request.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.AddingResponseEntityName">
+            <summary>
+            Gets the name of the entity class for processing event adding response.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RemovingRequestEntityName">
+            <summary>
+            Gets the name of the entity class for processing event removing response.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RemovingResponseEntityName">
+            <summary>
+            Gets the name of the entity class for processing event removing response.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RaisingNotificationEntityName">
+            <summary>
+            Gets the name of the entity class for processing event raising notification.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RaisingFeedbackEntityName">
+            <summary>
+            Gets the name of the entity class for processing event raising feedback.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes an instance of CustomizedEventEntityNameAttribute.
+            </summary>
+            <param name="addingRequestEntityName">Name of the entity class for processing event adding request. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="addingResponseEntityName">Name of the entity class for processing event adding response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="removingRequestEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="removingResponseEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute">
+            <summary>
+            Specifies the proxy built from this interface is target site sticky or not.
+            </summary>
+            <remarks><para>Due to routing mechanism, like load-balancing, the actual target site may not the same as requested.</para>
+            <para>When sticky mode disabled, every message is sent with the target site id set as the parameter when adding the proxy object to the Remote Agency instance. This will make the load-balancing works well and distribute accesses among target sites.</para>
+            <para>When sticky mode enabled, source site id of the first response message received is stored and used as the target site id for later messages. This will make all accesses stick to one of the target sites. It should be noted that when the chosen site is no longer responding, the proxy should be reset to restore it to the original state.</para>
+            <para>When this attribute is absent, the target site sticky mode is off.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute.IsSticky">
+            <summary>
+            Gets whether the proxy built from this interface is target site sticky.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of ProxyTargetSiteStickyAttribute.
+            </summary>
+            <param name="isSticky">Whether the proxy built from this interface is target site sticky. Default value is true.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute">
+            <summary>
+            Specifies the return value of the asset is ignored from type building.
+            </summary>
+            <remarks>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, the return value of the asset, if exists, will not be sent back the caller.</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute"/> affect the return value only. For ignoring from all responses, use <see cref="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute"/> instead.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
+            <para>By specifying this on properties, only get operating will be affected.</para>
+            <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
+            <para>The one marked on the return value has higher priority than the one marked on the same member (method, event or delegate).</para>
+            <para>Without <see cref="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute"/> specified, no return value is ignored.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute.IsIgnored">
+            <summary>
+            Gets whether the return value is ignored.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of ReturnIgnoredAttribute.
+            </summary>
+            <param name="isIgnored">Whether the return value is ignored. Default value is true.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute">
+            <summary>
+            Specifies a parameter of the event should or should not be transferred to remote site.
+            </summary>
+            <remarks>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute"/>.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute"/> on or in the same parameter of the asset and the delegate related to the asset if the asset is an event, will be ignored.</para>
+            <para>Without <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute"/> specified, no parameter is ignored.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute.ParameterName">
+            <summary>
+            Gets the parameter name of the event.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes an instance of the EventParameterIgnoredAttribute.
+            </summary>
+            <param name="parameterName">Parameter name of the event.</param>
+            <param name="isIgnored">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute">
+            <summary>
+            Specifies the name of proxy, service wrapper and assembly to be generated.
+            </summary>
+            <remarks>
+            <para>This attribute cannot be inherited by derived classes and overriding members.</para>
+            <para>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the name not specified is chosen automatically.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute.ProxyClassName">
+            <summary>
+            Gets the name of proxy class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute.ServiceWrapperClassName">
+            <summary>
+            Gets the name of service wrapper class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute.AssemblyName">
+            <summary>
+            Gets the name of assembly.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes an instance of the CustomizedAssemblyNameAttribute.
+            </summary>
+            <param name="proxyClassName">Name of proxy class. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="serviceWrapperClassName">Name of service wrapper class. When the value is <see langword="null"/> or empty string,name is chosen automatically. Default value is <see langword="null"/>.</param>
+            <param name="assemblyName">Name of assembly. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute">
+            <summary>
+            Specifies the name of the asset.
+            </summary>
+            <remarks>When this attribute is not present, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute.AssetName"/> is set to <see langword="null"/> or empty string, the asset name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute.AssetName">
+            <summary>
+            Gets the asset name. When the value is <see langword="null"/> or empty string, the name of the asset is the same as the name of Method, Event or Property.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the CustomizedAssetNameAttribute.
+            </summary>
+            <param name="assetName">Asset name. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute">
+            <summary>
+            Specifies property name for a parameter in entity class of the event.
+            </summary>
+            <remarks><para><see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute"/>.</para>
+            <para>For the parameter is not described by either <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute"/>, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute.ParameterName">
+            <summary>
+            Gets the parameter name of the event.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes an instance of the CustomizedEventParameterEntityPropertyNameAttribute.
+            </summary>
+            <param name="parameterName">Parameter name of the event.</param>
+            <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute">
+            <summary>
+            Specifies the operating should be one way. No response is required.
+            </summary>
+            <remarks>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay"/> is set to <see langword="true"/>, any output parameters and return value will always be set to default value due to lack of response, any exception raised from the user code on target site will not be transferred to the caller site.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay"/> is set to <see langword="true"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute.ResponseEntityName"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute.ResponseEntityName"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute.ReturnValueEntityName"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RaisingFeedbackEntityName"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
+            <para>By specifying this on event, only event raising operating is affected. Event adding and removing are always two way.</para>
+            <para>By specifying this on properties, only setting operating is affected. If one way getting operating, which gets from a property but ignore the result and exception from the caller, is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute"/>.</para>
+            <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
+            <para>When this attribute is absent, the one way mode of this asset other than property get operating is disabled.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay">
+            <summary>
+            Gets whether the operating is one way.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of AssetOneWayOperatingAttribute.
+            </summary>
+            <param name="isOneWay">Whether the operating is one way. Default value is true.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute">
+            <summary>
+            Specifies the time out setting of this asset.
+            </summary>
+            <remarks>
+            <para>
+            Priority:
+            1 Attributes specified in method, property and event.
+            2 Attributes specified in delegate related to event.
+            3 Attributes specified in interface.
+            4 Default value: set while building.
+            5 Default value: set while initializing. In this mode, only one value for all kinds of operations is set.
+            </para>
+            <para>Set value to 0 to use the value from lower priority position.</para>
+            </remarks>
+            <seealso cref="T:SecretNest.RemoteAgency.AccessingTimeOutException"/>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.Timeout">
+            <summary>
+            Gets the length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.Mode">
+            <summary>
+            Gets the chosen mode for timeout setting.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.EventAddingTimeout">
+            <summary>
+            Gets the length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.EventRemovingTimeout">
+            <summary>
+            Gets the length of time for waiting response for event removing, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.EventRaisingTimeout">
+            <summary>
+            Gets the length of time for waiting response for event raising, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.PropertyGettingTimeout">
+            <summary>
+            Gets the length of time for waiting response for property getting, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.PropertySettingTimeout">
+            <summary>
+            Gets the length of time for waiting response for property setting, in milliseconds; or -1 to indicate that the waiting does not time out.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor">
+            <summary>
+            Initializes an instance of the OperatingTimeoutTimeAttribute to use the default value.
+            </summary>
+            <remarks>To set specific value or values, uses other constructors.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes an instance of the OperatingTimeoutTimeAttribute with simple mode.
+            </summary>
+            <param name="timeout">The length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <remarks><para>All timeout settings will be set as the value specified by <paramref name="timeout"/>.</para>
+            <para>To set the timeout for event adding, removing and raising separately, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32,System.Int32)"/> instead.</para>
+            <para>To set the timeout for property getting and setting separately, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32)"/> instead.</para>
+            </remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes an instance of the OperatingTimeoutTimeAttribute with event mode.
+            </summary>
+            <param name="eventAddingTimeout">The length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <param name="eventRemovingTimeout">The length of time for waiting response for event removing, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <param name="eventRaisingTimeout">The length of time for waiting response for event raising, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <remarks><para>This constructor is for setting the timeout for event adding, removing and raising separately only. To set to the same value, or set for asset other than event, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32)"/> instead.</para>
+            <para>To set the timeout for property getting and setting separately, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32)"/> instead.</para>
+            </remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes an instance of the OperatingTimeoutTimeAttribute with property mode.
+            </summary>
+            <param name="propertyGettingTimeout">The length of time for waiting response for property getting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <param name="propertySettingTimeout">The length of time for waiting response for property setting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+            <remarks><para>This constructor is for setting the timeout for property getting and setting separately only. To set to the same value, or set for asset other than property, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32)"/> instead.</para>
+            <para>To set the timeout for event adding, removing and raising separately, uses <see cref="M:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.#ctor(System.Int32,System.Int32,System.Int32)"/> instead.</para>
+            </remarks>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode">
+            <summary>
+            Mode choosing for timeout setting.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode.Default">
+            <summary>
+            Uses default set by Remote Agency instance.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode.Simple">
+            <summary>
+            Uses the value set by <see cref="P:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute.Timeout"/>.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode.Event">
+            <summary>
+            Uses the value set by 
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode.Property">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute">
+            <summary>
+            Specifies the names of the entity classes generated for holding parameters and return value of this asset.
+            </summary>
+            <remarks>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the entity name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute.ParameterEntityName">
+            <summary>
+            Gets the name of the entity class generated for holding parameters of this asset.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute.ReturnValueEntityName">
+            <summary>
+            Gets the name of the entity class generated for holding two way parameters, output parameters and return value of this asset.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes an instance of the CustomizedMethodEntityNameAttribute.
+            </summary>
+            <param name="parameterEntityName">Name of the entity class generated for holding parameters of this asset. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+            <param name="returnValueEntityName">Name of the entity class generated for holding two way parameters, output parameters and return value of this asset. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute">
+            <summary>
+            Specifies property name for the parameter in entity class.
+            </summary>
+            <remarks><para>When this attribute is not present, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute"/> can be marked on event, with higher priority than <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute"/> with the same parameter.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName">
+            <summary>
+            Gets the property name in entity class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the CustomizedParameterEntityPropertyNameAttribute.
+            </summary>
+            <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute">
+            <summary>
+            Specifies the name of the entity class generated for holding the request and response of getting this property.
+            </summary>
+            <remarks>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the entity name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute.RequestEntityName">
+            <summary>
+            Gets the name entity class generated for holding the request of getting this property.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute.ResponseEntityName">
+            <summary>
+            Gets the name entity class generated for holding the response of getting this property.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes an instance of the CustomizedPropertyGetEntityNameAttribute.
+            </summary>
+            <param name="requestEntityName">Name entity class generated for holding the request of getting this property. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+            <param name="responseEntityName">Name entity class generated for holding the response of getting this property. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute">
+            <summary>
+            Specifies property name in entity class generated for holding the response of getting this property.
+            </summary>
+            <remarks>When this attribute is not present, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute.EntityPropertyName">
+            <summary>
+            Gets the property name in entity class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the CustomizedPropertyGetResponsePropertyNameAttribute.
+            </summary>
+            <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute">
+            <summary>
+            Specifies the name of the entity class generated for holding the request and response of setting this property.
+            </summary>
+            <remarks>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the entity name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute.RequestEntityName">
+            <summary>
+            Gets the name entity class generated for holding the request of setting this property.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute.ResponseEntityName">
+            <summary>
+            Gets the name entity class generated for holding the response of setting this property.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes an instance of the CustomizedPropertySetEntityNameAttribute.
+            </summary>
+            <param name="requestEntityName">Name entity class generated for holding the request of setting this property. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+            <param name="responseEntityName">Name entity class generated for holding the response of setting this property. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute">
+            <summary>
+            Specifies property name in entity class generated for holding the request of setting this property.
+            </summary>
+            <remarks>When this attribute is not present, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute.EntityPropertyName">
+            <summary>
+            Gets the property name in entity class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the CustomizedPropertySetRequestPropertyNameAttribute.
+            </summary>
+            <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute">
+            <summary>
+            Specifies property name for return value in entity class.
+            </summary>
+            <remarks>
+            <para>When this attribute is not present, or <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
+            <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
+            <para>The one marked on the return value has higher priority than the one marked on the same member (method, event or delegate).</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute.EntityPropertyName">
+            <summary>
+            Gets the property name in entity class.
+            </summary>
+            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the CustomizedReturnValueEntityPropertyNameAttribute.
+            </summary>
+            <param name="entityPropertyName">Property name in entity class. When the value is <see langword="null"/> or empty string, name is chosen automatically.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute">
+            <summary>
+            Specifies the parameter should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.
+            </summary>
+            <remarks>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute"/> can be marked on event, with higher priority than <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute"/> with the same parameter.</para>
+            <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute.IsIgnored"/> is set to <see langword="true"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute"/> on or in the same parameter of the asset and the delegate related to the asset if the asset is an event, will be ignored.</para>
+            <para>Without <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute"/> specified, no parameter is ignored.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute.IsIgnored">
+            <summary>
+            Gets whether this parameter is excluded from parameter entity. If set to true, this parameter should not be transferred to remote site.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes an instance of the ParameterIgnoredAttribute.
+            </summary>
+            <param name="isIgnored">Ignored from parameter. If set to true, this parameter should not be transferred to remote site.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute">
+            <summary>
+            Specifies a parameter of the event contains a property or field which value should be send back to the caller.
+            </summary>
+            <remarks>
+            <para>When a parameter contains properties or fields which may be changed on the target site and need to be sent back to the caller, use <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> on related properties.</para>
+            <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/>.</para>
+            <para>Without <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef".</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute.ParameterName">
+            <summary>
+            Gets the parameter name of the event.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute.#ctor(System.String,System.Type,System.Boolean)">
+            <summary>
+            Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> will be set to <see langword="false"/>.
+            </summary>
+            <param name="parameterName">Parameter name of the event.</param>
+            <param name="helperClass">Type of the helper class.</param>
+            <param name="disable">Disable the function specified with this helper class.</param>
+            <seealso cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.HelperClass"/>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute.#ctor(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes an instance of the EventParameterTwoWayPropertyAttribute. <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> will be set to <see langword="true"/>.
+            </summary>
+            <param name="parameterName">Parameter name of the event.</param>
+            <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
+            <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
+            <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
+            <param name="disable">Disable the function specified with this property or field.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute">
+            <summary>
+            Specifies the local exception handling mode.
+            </summary>
+            <remarks><para>The attribute declared with interface has lower priority on all assets within the interface. The default setting is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Redirect if this attribute is absent.</para>
+            <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
+            <para>This attribute affects the following: method in service wrapper, event adding and removing in service wrapper, property getting and setting in service wrapper and event raising in proxy.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode">
+            <summary>
+            Gets the setting of local exception handling mode.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.#ctor(SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode)">
+            <summary>
+            Initializes an instance of the LocalExceptionHandlingAttribute.
+            </summary>
+            <param name="mode">Local exception handling mode.</param>
+            <remarks>The default setting is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Suppress if this attribute absents.</remarks>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode">
+            <summary>
+            Contains a list of local exception handling mode.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Throw">
+            <summary>
+            Throws exceptions in place.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Suppress">
+            <summary>
+            Suppresses exceptions.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Redirect">
+            <summary>
+            Redirects exceptions to the handler specified. Throws when handler is absent.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute">
+            <summary>
+            Specifies the parameter contains a property or field which value should be send back to the caller.
+            </summary>
+            <remarks>
+            <para>When a parameter contains properties or fields which may be changed on the target site and need to be sent back to the caller, use <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> on related properties.</para>
+            <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
+            <para><see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> can be marked on event, with higher priority than <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> with the same parameter.</para>
+            <para>Without <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute"/> or <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef".</para>
+            <para>This attribute can only be marked on the parameter without "ref / ByRef" and "out / Out".</para>
+            <para>By specifying this on properties, only set operating will be affected.</para>
+            </remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsTwoWay">
+            <summary>
+            Gets whether properties or fields specified should be included in return entity.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode">
+            <summary>
+            Gets whether this is in simple mode.
+            </summary>
+            <remarks>When the value is <see langword="true"/>, property specified by <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="T:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.IsTwoWay"/> set to <see langword="true"/> are used as the helper fow two way property accessing.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.PropertyNameInParameter">
+            <summary>
+            Gets the property name in the parameter which need to be sent back to the caller.
+            </summary>
+            <remarks>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> is set to <see langword="true"/>.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.HelperClass">
+            <summary>
+            Gets the type of the helper class.
+            </summary>
+            <remarks><para>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> is set to <see langword="false"/>.</para>
+            <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="T:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute.IsTwoWay"/> set to <see langword="true"/> are used as the helper fow two way property accessing.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.ResponseEntityPropertyName">
+            <summary>
+            Gets the preferred property name in response entity.
+            </summary>
+            <remarks><para>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> is set to <see langword="false"/>.</para>
+            <para>When the value is <see langword="null"/> or empty string, name is chosen automatically.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsIncludedWhenExceptionThrown">
+            <summary>
+            Gets whether this property should be included in return entity when exception thrown by the user code on the remote site.
+            </summary>
+            <remarks>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> is set to <see langword="false"/>.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.#ctor(System.Type,System.Boolean)">
+            <summary>
+            Initializes an instance of the ParameterTwoWayPropertyAttribute. <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> will be set to <see langword="false"/>.
+            </summary>
+            <param name="helperClass">Type of the helper class.</param>
+            <param name="disable">Disable the function specified with this helper class.</param>
+            <seealso cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.HelperClass"/>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes an instance of the ParameterTwoWayPropertyAttribute. <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute.IsSimpleMode"/> will be set to <see langword="true"/>.
+            </summary>
+            <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
+            <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>
+            <param name="isIncludedWhenExceptionThrown">Whether this property should be included in return entity when exception thrown by the user code on the remote site. Default value is <see langword="false" />.</param>
+            <param name="disable">Disable the function specified with this property or field.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute">
+            <summary>
+            Declares the source thread(s) should be used while accessing assets within.
+            </summary>
+            <remarks><para>The default mode is <see cref="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.None"/> if this attribute is absent.</para>
+            <para>In proxy, only event assets are affected.</para>
+            <para>In service wrapper, method and property assets are affected.</para></remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute.ThreadLockMode">
+            <summary>
+            Gets thread choosing for accessing assets. 
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute.TaskSchedulerName">
+            <summary>
+            Gets the name of the task scheduler to be used while accessing assets within. Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute.ThreadLockMode"/> is set to <see cref="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/>.
+            </summary>
+            <remarks>One task scheduler with the same name should be added to the instance of Remote Agency before processing the interface related.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute.#ctor(SecretNest.RemoteAgency.Attributes.ThreadLockMode)">
+            <summary>
+            Initializes an instance of ThreadLockAttribute.
+            </summary>
+            <param name="threadLockMode">Thread lock mode. <see cref="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/> is not supported by this constructor.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute.#ctor(System.String)">
+            <summary>
+            Initializes an instance of ThreadLockAttribute with the name of the task scheduler specified.
+            </summary>
+            <param name="taskSchedulerName">Name of the task scheduler to be used while accessing assets within.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.ThreadLockMode">
+            <summary>
+            Thread choosing for accessing assets.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.None">
+            <summary>
+            Not specified. The same thread of sending message to Remote Agency will be used to access asset specified.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.SynchronizationContext">
+            <summary>
+            Always use SynchronizationContext to access assets within this object.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.AnyButSameThread">
+            <summary>
+            Always use one thread to access assets within this object.
+            </summary>
+            <remarks>This is not supported by neat version of Remote Agency due to lack of built-in SequentialScheduler.</remarks>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified">
+            <summary>
+            Always use the TaskScheduler specified by name to access assets within this object.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.AccessingTimeOutException">
+            <summary>
+            The exception that is thrown when the accessing is timed out.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.AccessingTimeOutException.OriginalMessage">
+            <summary>
+            Gets the message which causes this exception thrown.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AccessingTimeOutException.#ctor(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Initializes an instance of AccessingTimeOutException.
+            </summary>
+            <param name="originalMessage">Message which causes this exception thrown.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AccessingTimeOutException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the AccessingTimeOutException class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AccessingTimeOutException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:SecretNest.RemoteAgency.SendTwoWayMessageCallback">
+            <summary>
+            Sends a message out and gets a response message.
+            </summary>
+            <param name="message">Message to be sent.</param>
+            <param name="timeout">Timeout in millisecond.</param>
+            <returns>Response message. Value <see langword="null" /> will be returned if no return required by <paramref name="message"/>.</returns>
+            <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.SendOneWayMessageCallback">
+            <summary>
+            Sends a message out.
+            </summary>
+            <param name="message">Message to be sent.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.SendEmptyMessageCallback">
+            <summary>
+            Sends an empty message out.
+            </summary>
+            <param name="messageType">Message type.</param>
+            <param name="assetName">Asset name.</param>
+            <param name="timeout">Timeout in millisecond.</param>
+            <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.ProxyStickyTargetSiteQueryCallback">
+            <summary>
+            Queries the proxy sticky target site setting state.
+            </summary>
+            <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
+            <param name="defaultTargetSiteId">Will be set as default target site id.</param>
+            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set to <see langword="null"/> if no sticky target set yet.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.AssetNotFoundException">
+            <summary>
+            The exception that is thrown when the asset specified cannot be found.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.OriginalMessage">
+            <summary>
+            Gets the message which causes this exception thrown.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.AssetName">
+            <summary>
+            Gets the asset name.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.MessageType">
+            <summary>
+            Gets the message type.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssetNotFoundException.#ctor(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Initializes an instance of the AssetNotFoundException.
+            </summary>
+            <param name="originalMessage">Message which causes this exception thrown.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssetNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the AssetNotFoundException class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssetNotFoundException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.Message">
+            <summary>
+            Gets the error message of the current exception.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssetNotFoundException.ToString">
+            <summary>
+            Creates and returns a string representation of the current exception.
+            </summary>
+            <returns>A string representation of the current exception.</returns>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.InstanceNotFoundException">
+            <summary>
+            The exception that is thrown when the object specified by instance id cannot be found in target instance of Remote Agency.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.InstanceNotFoundException.OriginalMessage">
+            <summary>
+            Gets the message which causes this exception thrown.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.InstanceNotFoundException.InstanceId">
+            <summary>
+            Gets the id of the instance that cannot be found.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.InstanceNotFoundException.ExceptionThrownSiteId">
+            <summary>
+            Gets the site id of the Remote Agency instance which throws the exception.
+            </summary>
+            <returns>Due to routing mechanism, like load-balancing, the actual target site may not the same as requested in the message. This property contains the site id of the site id of the actual Remote Agency site.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.InstanceNotFoundException.#ctor(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Guid)">
+            <summary>
+            Initializes an instance of InstanceNotFoundException.
+            </summary>
+            <param name="originalMessage">Message which causes this exception thrown.</param>
+            <param name="exceptionThrownSiteId">Site id of the Remote Agency instance which throws the exception.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.InstanceNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the InstanceNotFoundException class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.InstanceNotFoundException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.InstanceNotFoundException.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:SecretNest.RemoteAgency.IManagedObjectCommunicate">
+            <summary>
+            Represents a created managed object that can communicate with Remote Agency.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IManagedObjectCommunicate.GetSiteIdCallback">
+            <summary>
+            Will be called when site id is required.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IManagedObjectCommunicate.CloseRequestedByManagingObject">
+            <summary>
+            Sends messages to all relevant objects and closes the functions of this object.
+            </summary>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.IProxyCommunicate">
+            <summary>
+            Represents a created proxy object that can communicate with Remote Agency.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.InstanceId">
+            <summary>
+            Gets or sets the id of this proxy instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteResetCallback">
+            <summary>
+            Will be called for resetting the proxy sticky target site to the original state.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteQueryCallback">
+            <summary>
+            Will be called for querying the proxy sticky target site state.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendMethodMessageCallback">
+            <summary>
+            Will be called while a method calling message need to be sent to a remote site and get response of it.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayMethodMessageCallback">
+            <summary>
+            Will be called while a method calling message need to be sent to a remote site without getting response.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendEventAddingMessageCallback">
+            <summary>
+            Will be called while an event adding is requested.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendEventRemovingMessageCallback">
+            <summary>
+            Will be called while an event removing is requested.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes an event raising message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes an event raising message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendPropertyGetMessageCallback">
+            <summary>
+            Will be called while a property getting message need to be sent to a remote site and get response of it.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayPropertyGetMessageCallback">
+            <summary>
+            Will be called while a property getting message need to be sent to a remote site without getting response.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendPropertySetMessageCallback">
+            <summary>
+            Will be called while a property setting message need to be sent to a remote site and get response of it.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayPropertySetMessageCallback">
+            <summary>
+            Will be called while a property setting message need to be sent to a remote site without getting response.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.EntityBuilding">
+            <summary>
+            Represents an entity class to be created.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.EntityClassName">
+            <summary>
+            Gets the name of the entity class.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.GenericParameters">
+            <summary>
+            Gets the generic parameters of this entity class.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.Properties">
+            <summary>
+            Gets properties other than in interface.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.InterfaceLevelAttributes">
+            <summary>
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level.
+            </summary>
+            <remarks>This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set to <see langword="null"/>.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.AssetLevelAttributes">
+            <summary>
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level.
+            </summary>
+            <remarks>This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set to <see langword="null"/>.</remarks>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityBuilding.DelegateLevelAttributes">
+            <summary>
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.
+            </summary>
+            <remarks>This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set to <see langword="null"/>.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EntityBuilding.#ctor(System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityProperty},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Type[])">
+            <summary>
+            Initializes an instance of EntityBuilding.
+            </summary>
+            <param name="entityClassName">Name of the entity class.</param>
+            <param name="properties">Properties other than in interface.</param>
+            <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level. This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
+            <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level. This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
+            <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events. This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set to <see langword="null"/>.</param>
+            <param name="genericParameters">Generic parameters of this entity class.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.EntityCodeBuilderBase">
+            <summary>
+            Provides code generation for entity classes. This is an abstract class.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EntityCodeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)">
+            <summary>
+            Builds an entity class type.
+            </summary>
+            <param name="typeBuilder">Builder of the entity class.</param>
+            <param name="entityBuilding">Info of entity to be built in this method.</param>
+            <returns>Type of the built entity class.</returns>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType">
+            <summary>
+            Gets the type of the base class of attributes which are used to mark metadata on interface level.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType">
+            <summary>
+            Gets the type of the base class of attributes which are used to mark metadata on asset level.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType">
+            <summary>
+            Gets the type of the base class of attributes which are used to mark metadata on delegate level. Only works with processing events.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType">
+            <summary>
+            Gets the type of the base class of attributes which are used to mark metadata on parameter level.
+            </summary>
+            <remarks>The parameter level attributes will be searched from parameter of method, parameter of delegate and property itself.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EntityCodeBuilderBase.CreateEmptyMessage">
+            <summary>
+            Creates an empty message which is allowed to be serialized.
+            </summary>
+            <returns>Empty message.</returns>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.IServiceWrapperCommunicate">
+            <summary>
+            Represents a created service wrapper object that can communicate with Remote Agency.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessMethodMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a method calling message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessOneWayMethodMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a one way method calling message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessEventAddingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes an event adding.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessEventRemovingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes an event removing.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IServiceWrapperCommunicate.SendEventMessageCallback">
+            <summary>
+            Will be called while an event raising message need to be sent to a remote site and get response of it.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IServiceWrapperCommunicate.SendOneWayEventMessageCallback">
+            <summary>
+            Will be called while an event raising message need to be sent to a remote site without getting response.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessPropertyGettingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a property getting message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessOneWayPropertyGettingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a property getting message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessPropertySettingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a property setting message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessOneWayPropertySettingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
+            <summary>
+            Processes a property setting message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Unlinks specified remote proxy from the event registered in service wrapper objects.
+            </summary>
+            <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
+            <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.IRemoteAgencyMessage">
+            <summary>
+            Defines the common properties contained in messages.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.SenderSiteId">
+            <summary>
+            Gets or sets the site id of the source Remote Agency instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.TargetSiteId">
+            <summary>
+            Gets or sets the site id of the target Remote Agency instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.SenderInstanceId">
+            <summary>
+            Gets or sets the instance id of the source proxy or service wrapper.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.TargetInstanceId">
+            <summary>
+            Gets or sets the instance id of the target proxy or service wrapper.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.MessageType">
+            <summary>
+            Gets or sets the message type.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.AssetName">
+            <summary>
+            Gets or sets the asset name.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.MessageId">
+            <summary>
+            Gets or sets the message id.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.Exception">
+            <summary>
+            Gets or sets the exception object.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.IsOneWay">
+            <summary>
+            Gets or sets whether this message is one way (do not need any response).
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.IsEmptyMessage">
+            <summary>
+            Gets whether this message is empty, not containing parameters required by asset.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.MessageType">
+            <summary>
+            Contains a list of message type
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.Method">
+            <summary>
+            Declares this message is related to a method calling or the returning of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.EventAdd">
+            <summary>
+            Declares this message is related to adding event handler or the result of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.EventRemove">
+            <summary>
+            Declares this message is related to removing event handler or the result of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.Event">
+            <summary>
+            Declares this message is related to an event raised or the returning of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.PropertyGet">
+            <summary>
+            Declares this message is related to getting value of a property or the returning of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.PropertySet">
+            <summary>
+            Declares this message is related to setting value of a property or the result of it.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageType.SpecialCommand">
+            <summary>
+            Declares this message is a system reserved message.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.MessageProcessTerminatedException">
+            <summary>
+            The exception to indicate a message processing is terminated.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.MessageProcessTerminatedException.TerminatedMessage">
+            <summary>
+            Gets the terminated message.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.MessageProcessTerminatedException.TerminatedPosition">
+            <summary>
+            Gets the position where the message is terminated.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.MessageProcessTerminatedException.ToString">
+            <summary>
+            Creates and returns a string representation of the current exception.
+            </summary>
+            <returns>A string representation of the current exception.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.MessageProcessTerminatedException.#ctor(System.String,SecretNest.RemoteAgency.MessageProcessTerminatedPosition,SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Initializes an instance of the MessageProcessTerminatedException.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="terminatedPosition">Position where the message is terminated.</param>
+            <param name="terminatedMessage">Terminated message.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.MessageProcessTerminatedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the MessageProcessTerminatedException class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.MessageProcessTerminatedException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:SecretNest.RemoteAgency.MessageProcessTerminatedPosition">
+            <summary>
+            Defines the position where the message can be terminated.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageProcessTerminatedPosition.BeforeSending">
+            <summary>
+            Before sending
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.MessageProcessTerminatedPosition.AfterReceived">
+            <summary>
+            After received
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.EntityProperty">
+            <summary>
+            Represents a property to be created in entity class.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityProperty.Type">
+            <summary>
+            Gets the type of the property.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityProperty.Name">
+            <summary>
+            Gets the name of the property.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityProperty.Attributes">
+            <summary>
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
+            </summary>
+            <remarks>This will be set to <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> is set to <see langword="null"/>.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EntityProperty.#ctor(System.Type,System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityPropertyAttribute})">
+            <summary>
+            Initializes an instance of EntityProperty.
+            </summary>
+            <param name="type">Type of the property.</param>
+            <param name="name">Name of the property.</param>
+            <param name="attributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.EntityPropertyAttribute">
+            <summary>
+            Represents an attribute that marked for this property.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityPropertyAttribute.Position">
+            <summary>
+            Gets the position where the attribute marked.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.EntityPropertyAttribute.Attribute">
+            <summary>
+            Gets the attribute marked.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EntityPropertyAttribute.#ctor(SecretNest.RemoteAgency.AttributePosition,System.Attribute)">
+            <summary>
+            Initializes an instance of EntityPropertyAttribute.
+            </summary>
+            <param name="position">Position where the attribute marked.</param>
+            <param name="attribute">Attribute marked.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.AttributePosition">
+            <summary>
+            Contains a list of position where the attribute can be found.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.ReturnValue">
+            <summary>
+            Attribute marked on return value.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.Parameter">
+            <summary>
+            Attribute marked on parameter.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.FieldOfParameter">
+            <summary>
+            Attribute marked on the field of the entity class defined the parameter.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.PropertyOfParameter">
+            <summary>
+            Attribute marked on the property of the entity class defined the parameter.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.PropertyOfHelper">
+            <summary>
+            Attribute marked on the property of the helper class linked to the parameter.
+            </summary>
+        </member>
+        <member name="F:SecretNest.RemoteAgency.AttributePosition.AssetProperty">
+            <summary>
+            Attribute marked on the property as the asset in the interface.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.SerializingHelperBase`2">
+            <summary>
+            Provides serializing and deserializing methods for entities. This is an abstract class.
+            </summary>
+            <typeparam name="TSerialized">Type of the serialized data.</typeparam>
+            <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.SerializingHelperBase`2.Serialize(`1)">
+            <summary>
+            Serializes the entity object.
+            </summary>
+            <param name="original">The entity object to be serialized.</param>
+            <returns>Serialized data.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.SerializingHelperBase`2.SerializeWithExceptionRedirection(`1,System.Exception@)">
+            <summary>
+            Serializes the entity object with exception redirection.
+            </summary>
+            <param name="original">The entity object to be serialized.</param>
+            <param name="serializingException">The exception occurred in serializing process.</param>
+            <returns>Serialized data.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.SerializingHelperBase`2.Deserialize(`0)">
+            <summary>
+            Deserializes the data to the original format.
+            </summary>
+            <param name="serialized">The serialized data to be deserialized.</param>
+            <returns>Entity object.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.SerializingHelperBase`2.DeserializeWithExceptionTolerance(`0,System.Exception@)">
+            <summary>
+            Deserializes the data to the original format with exception redirection.
+            </summary>
+            <param name="serialized">The serialized data to be deserialized.</param>
+            <param name="deserializingException">The exception occurred in deserializing process.</param>
+            <returns>Entity object.</returns>
+        </member>
+    </members>
+</doc>
