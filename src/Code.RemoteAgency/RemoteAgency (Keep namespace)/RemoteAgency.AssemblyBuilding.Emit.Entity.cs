@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
-        List<Type> EmitEntities(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        List<Task<Type>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
         {
             var entitiesInfo = info.GetEntities();
 
@@ -55,10 +55,7 @@ namespace SecretNest.RemoteAgency
                 return new Task<Type>(() => EntityCodeBuilder.BuildEntity(typeBuilder, entityInfo));
             }).ToList();
 
-            buildings.ForEach(i => i.Start());
-
-            // ReSharper disable once AsyncConverter.AsyncWait
-            return buildings.Select(i => i.Result).ToList();
+            return buildings;
         }
     }
 }
