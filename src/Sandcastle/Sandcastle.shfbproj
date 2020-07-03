@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which assemblies to include from solution and
+				 project documentation sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>c158d1a7-213e-449d-8791-152cea833953</ProjectGuid>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
+    <AssemblyName>Sandcastle</AssemblyName>
+    <RootNamespace>Sandcastle</RootNamespace>
+    <Name>Sandcastle</Name>
+    <!-- SHFB properties -->
+    <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
+    <OutputPath>..\..\docs\helpv2\</OutputPath>
+    <HtmlHelpName>Doc</HtmlHelpName>
+    <Language>en-US</Language>
+    <TransformComponentArguments>
+      <Argument Key="logoFile" Value="Help.png" xmlns="" />
+      <Argument Key="logoHeight" Value="" xmlns="" />
+      <Argument Key="logoWidth" Value="" xmlns="" />
+      <Argument Key="logoAltText" Value="" xmlns="" />
+      <Argument Key="logoPlacement" Value="left" xmlns="" />
+      <Argument Key="logoAlignment" Value="left" xmlns="" />
+      <Argument Key="maxVersionParts" Value="" xmlns="" />
+    </TransformComponentArguments>
+    <HelpFileFormat>Markdown</HelpFileFormat>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <PresentationStyle>Markdown</PresentationStyle>
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <IndentHtml>False</IndentHtml>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <HelpTitle>Remote Agency</HelpTitle>
+    <HelpFileVersion>2.0.0.0</HelpFileVersion>
+    <NamingMethod>MemberName</NamingMethod>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <NamespaceGrouping>False</NamespaceGrouping>
+    <MaximumGroupParts>3</MaximumGroupParts>
+    <Preliminary>False</Preliminary>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <ProjectSummary>Remote Agency is built for making the communicating among components in different computers easier.</ProjectSummary>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\DirectRelease.RemoteAgency\DirectRelease.RemoteAgency.csproj" />
+      <DocumentationSource sourceFile="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />
+    </DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency" isDocumented="True">Remote Agency from SecretNest.info.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.AssemblyBuilding" isDocumented="True">Contains event args and related entities for assembly building.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.Attributes" isDocumented="True">Contains attributes for turning behavior of Remote Agency.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.BinarySerializer" isDocumented="True">Contains binary serializer for Remote Agency.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.JsonSerializer" isDocumented="True">Contains Json serializer for Remote Agency.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.Helper" isDocumented="True">Contains helper classes of Remote Agency.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="SecretNest.RemoteAgency.Inspecting" isDocumented="True">Contains exceptions which could be thrown while inspecting.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="(global)" isDocumented="False" /></NamespaceSummaries>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
+    <PlugInConfigurations />
+  </PropertyGroup>
+  <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
+			 the build.  The others are optional common platform types that may appear. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Content" />
+    <Folder Include="Content\Attributes" />
+    <Folder Include="Content\VersionHistory" />
+    <Folder Include="icons" />
+    <Folder Include="media" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\VersionHistory\v1.0.0.0.aml" />
+    <None Include="Content\VersionHistory\VersionHistory.aml" />
+    <None Include="Content\Welcome.aml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ContentLayout Include="ContentLayout.content" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\Help.png">
+      <ImageId>Help</ImageId>
+      <AlternateText>Help</AlternateText>
+    </Content>
+  </ItemGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+  <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
+			 evaluated correctly. -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+</Project>

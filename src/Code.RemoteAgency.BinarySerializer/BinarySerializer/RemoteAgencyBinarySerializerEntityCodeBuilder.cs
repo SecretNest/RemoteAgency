@@ -5,7 +5,8 @@ using System.Reflection.Emit;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.BinarySerializer
-{    /// <summary>
+{
+    /// <summary>
     /// Provides code generating for entity classes working with <see cref="RemoteAgencyBinarySerializer"/>
     /// </summary>
     public class RemoteAgencyBinarySerializerEntityCodeBuilder : EntityCodeBuilderBase

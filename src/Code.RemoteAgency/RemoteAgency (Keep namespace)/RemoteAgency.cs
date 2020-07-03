@@ -5,10 +5,10 @@ using System.Text;
 namespace SecretNest.RemoteAgency
 {
     /// <summary>
-    /// Remote Agency from SecretNest.info. 
+    /// Remote Agency from SecretNest.info. This is an abstract class.
     /// </summary>
     /// <seealso cref="RemoteAgency{TSerialized, TEntityBase}"/>
-    public abstract partial class RemoteAgency
+    public abstract partial class RemoteAgency : IDisposable
     {
         /// <summary>
         /// Gets or sets the site id of this instance.
@@ -16,12 +16,10 @@ namespace SecretNest.RemoteAgency
         /// <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         public Guid SiteId { get; set; }
 
-        Guid GetSiteId() => SiteId;
-
         /// <summary>
         /// Instance of entity code builder.
         /// </summary>
-        protected readonly EntityCodeBuilderBase _entityCodeBuilder;
+        protected readonly EntityCodeBuilderBase EntityCodeBuilder;
 
         /// <summary>
         /// Initializes the instance of Remote Agency.
@@ -32,44 +30,11 @@ namespace SecretNest.RemoteAgency
         protected RemoteAgency(EntityCodeBuilderBase entityCodeBuilder, Guid siteId, Type entityBase)
         {
             SiteId = siteId == Guid.Empty ? Guid.NewGuid() : siteId;
-            _entityCodeBuilder = entityCodeBuilder;
+            EntityCodeBuilder = entityCodeBuilder;
             _entityBase = entityBase;
         }
 
         private readonly Type _entityBase;
-    }
-
-    /// <summary>
-    /// Remote Agency from SecretNest.info. 
-    /// </summary>
-    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-    /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
-    public sealed partial class RemoteAgency<TSerialized, TEntityBase> : RemoteAgency, IDisposable
-    {
-        private readonly SerializingHelperBase<TSerialized, TEntityBase> _serializingHelper;
-
-        /// <summary>
-        /// Initializes an instance of Remote Agency.
-        /// </summary>
-        /// <param name="serializingHelper">Serializer helper.</param>
-        /// <param name="entityCodeBuilder">Entity code builder.</param>
-        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
-        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(entityCodeBuilder, siteId, typeof(TEntityBase))
-        {
-            _serializingHelper = serializingHelper;
-
-
-        }
-
-
-        /// <summary>
-        /// Placeholder
-        /// </summary>
-        /// <param name="cancelMessagesInWaiting"></param>
-        public void RemoveAllManagingObjects(bool cancelMessagesInWaiting)
-        {
-        }
-
 
         #region IDisposable Support
         private bool _disposedValue;
@@ -78,13 +43,13 @@ namespace SecretNest.RemoteAgency
         /// Disposes of the resources (other than memory) used by this instance.
         /// </summary>
         /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
-        void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {
                 if (disposing)
                 {
-                    RemoveAllManagingObjects(true);
+                    CloseAllInstances();
                 }
 
                 _disposedValue = true;
@@ -100,5 +65,26 @@ namespace SecretNest.RemoteAgency
             Dispose(disposing: true);
         }
         #endregion
+    }
+
+    /// <summary>
+    /// Remote Agency from SecretNest.info. 
+    /// </summary>
+    /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
+    /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
+    public sealed partial class RemoteAgency<TSerialized, TEntityBase> : RemoteAgency
+    {
+        private readonly SerializingHelperBase<TSerialized, TEntityBase> _serializingHelper;
+
+        /// <summary>
+        /// Initializes an instance of Remote Agency.
+        /// </summary>
+        /// <param name="serializingHelper">Serializer helper.</param>
+        /// <param name="entityCodeBuilder">Entity code builder.</param>
+        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
+        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(entityCodeBuilder, siteId, typeof(TEntityBase))
+        {
+            _serializingHelper = serializingHelper;
+        }
     }
 }

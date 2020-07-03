@@ -41,7 +41,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Initializes an instance of ThreadLockAttribute with the name of the task scheduler specified.
         /// </summary>
-        /// <param name="taskSchedulerName"></param>
+        /// <param name="taskSchedulerName">Name of the task scheduler to be used while accessing assets within.</param>
         public ThreadLockAttribute(string taskSchedulerName)
         {
             ThreadLockMode = ThreadLockMode.TaskSchedulerSpecified;

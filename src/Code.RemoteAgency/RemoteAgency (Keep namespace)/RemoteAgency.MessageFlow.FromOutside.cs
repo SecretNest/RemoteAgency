@@ -4,6 +4,11 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
+    partial class RemoteAgency
+    {
+        private protected abstract bool FindManagingObjectAndSendMessage(IRemoteAgencyMessage message);
+    }
+
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
         void ProcessMessageReceivedFromOutside(TEntityBase message)
@@ -21,9 +26,8 @@ namespace SecretNest.RemoteAgency
 
         void ProcessMessageReceivedAfterFiltering(IRemoteAgencyMessage message)
         {
-            if (_managingObjects.TryGetValue(message.TargetInstanceId, out var managingObject))
+            if (FindManagingObjectAndSendMessage(message))
             {
-                ProcessMessageReceivedOnManagingObject(managingObject, message);
             }
             else if (message.IsOneWay)
             {
@@ -40,6 +44,19 @@ namespace SecretNest.RemoteAgency
             IRemoteAgencyMessage message)
         {
             managingObject.ProcessMessageReceivedFromOutside(message);
+        }
+
+        private protected override bool FindManagingObjectAndSendMessage(IRemoteAgencyMessage message)
+        {
+            if (_managingObjects.TryGetValue(message.TargetInstanceId, out var managingObject))
+            {
+                ProcessMessageReceivedOnManagingObject(managingObject, message);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

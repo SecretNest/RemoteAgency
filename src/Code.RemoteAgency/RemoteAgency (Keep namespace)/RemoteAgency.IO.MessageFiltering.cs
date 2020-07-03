@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using SecretNest.RemoteAgency.MessageFiltering;
 
 namespace SecretNest.RemoteAgency
 {

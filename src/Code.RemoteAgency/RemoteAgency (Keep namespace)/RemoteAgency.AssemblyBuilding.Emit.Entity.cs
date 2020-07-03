@@ -52,7 +52,7 @@ namespace SecretNest.RemoteAgency
                     }
                 }
 
-                return new Task<Type>(() => _entityCodeBuilder.BuildEntity(typeBuilder, entityInfo));
+                return new Task<Type>(() => EntityCodeBuilder.BuildEntity(typeBuilder, entityInfo));
             }).ToList();
 
             buildings.ForEach(i => i.Start());

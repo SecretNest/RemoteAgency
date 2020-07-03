@@ -62,7 +62,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.MessageFlow.FromOutside.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.TaskScheduler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Template.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.ThreadLock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgencyManagingObject %28Keep namespace%29\RemoteAgencyManagingObject.FromOutside.cs" />

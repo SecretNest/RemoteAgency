@@ -63,8 +63,8 @@ namespace SecretNest.RemoteAgency
 #endif
 
             Inspector inspector = new Inspector(basicInfo, isProxyRequired, isServiceWrapperRequired,
-                _entityCodeBuilder.InterfaceLevelAttributeBaseType, _entityCodeBuilder.AssetLevelAttributeBaseType,
-                _entityCodeBuilder.DelegateLevelAttributeBaseType, _entityCodeBuilder.ParameterLevelAttributeBaseType);
+                EntityCodeBuilder.InterfaceLevelAttributeBaseType, EntityCodeBuilder.AssetLevelAttributeBaseType,
+                EntityCodeBuilder.DelegateLevelAttributeBaseType, EntityCodeBuilder.ParameterLevelAttributeBaseType);
 
             var info = inspector.InterfaceTypeInfo;
             info.DefaultMethodCallingTimeout = DefaultMethodCallingTimeoutForBuilding;

@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency
         /// Builds an entity class type.
         /// </summary>
         /// <param name="typeBuilder">Builder of the entity class.</param>
-        /// <param name="entityBuilding">Entity to be built in this method.</param>
+        /// <param name="entityBuilding">Info of entity to be built in this method.</param>
         /// <returns>Type of the built entity class.</returns>
         public abstract Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding);
 

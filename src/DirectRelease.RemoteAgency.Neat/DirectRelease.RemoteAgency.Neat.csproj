@@ -27,9 +27,9 @@
     <DefineConstants>netfx</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />

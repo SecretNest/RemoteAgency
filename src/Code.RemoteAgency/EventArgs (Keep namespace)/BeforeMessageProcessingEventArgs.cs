@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SecretNest.RemoteAgency.MessageFiltering
+namespace SecretNest.RemoteAgency
 {
     /// <summary>
     /// Represents a message to be checked for sending or processing after received. This is an abstract class.
@@ -60,7 +60,7 @@ namespace SecretNest.RemoteAgency.MessageFiltering
         }
 
         /// <summary>
-        /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver. Cannot be used when <see cref="MessageDirection"/> is <see cref="SecretNest.RemoteAgency.MessageFiltering.MessageDirection.Sending"/>.
+        /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver. Cannot be used when <see cref="MessageDirection"/> is <see cref="SecretNest.RemoteAgency.MessageDirection.Sending"/>.
         /// </summary>
         /// <param name="message">Message of the exception.</param>
         /// <remarks>Caution: This may cause the sender throw <see cref="AccessingTimeOutException"/> if <see cref="MessageBodyEventArgsBase.IsOneWay"/> is set to <see langword="false"/>.</remarks>

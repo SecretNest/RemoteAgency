@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     { 
-        private SequentialScheduler _sequentialScheduler = null;
+        private SequentialScheduler _sequentialScheduler;
 
         void PrepareSequentialScheduler()
         {

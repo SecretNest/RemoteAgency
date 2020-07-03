@@ -42,6 +42,9 @@ namespace SecretNest.RemoteAgency
             }
         }
 
+        public void SetRespondDirectly(IRemoteAgencyMessage message)
+            => OnResponseReceived(message);
+
         protected abstract void ProcessMethodMessageReceived(IRemoteAgencyMessage message);
 
         protected abstract void ProcessEventAddMessageReceived(IRemoteAgencyMessage message);
@@ -206,7 +209,7 @@ namespace SecretNest.RemoteAgency
 
         protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
-             //nothing to do.
+            //nothing to do.
         }
     }
 }

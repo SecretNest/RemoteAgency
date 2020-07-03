@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency
         /// Redirects an exception.
         /// </summary>
         /// <param name="exception">Exception to be redirected.</param>
-        protected void RedirectException(Exception exception)
+        private protected void RedirectException(Exception exception)
         {
             if (ExceptionRedirected == null)
             {
@@ -28,6 +28,20 @@ namespace SecretNest.RemoteAgency
                 var e = new ExceptionRedirectedEventArgs(exception);
                 ExceptionRedirected(this, e);
             }
+        }
+
+        /// <summary>
+        /// Sets an exception as the result of a message waiting for response and break the waiting.
+        /// </summary>
+        /// <param name="instanceId"></param>
+        /// <param name="messageId"></param>
+        /// <param name="exception"></param>
+        /// <seealso cref="OperatingTimeoutTimeAttribute"/>
+        public void SetExceptionAsResponse(Guid instanceId, Guid messageId, Exception exception)
+        {
+            var message = GenerateEmptyMessage(Guid.Empty, Guid.Empty, instanceId, MessageType.SpecialCommand,
+                $"<Inserted by {nameof(SetExceptionAsResponse)}.>", messageId, exception, true);
+            FindManagingObjectAndSendMessage(message);
         }
     }
 
@@ -47,6 +61,7 @@ namespace SecretNest.RemoteAgency
         /// Processes a serialized message received.
         /// </summary>
         /// <param name="serializedMessage">Received serialized message.</param>
+        /// <event cref="AfterMessageReceived">Raised after deserialized before further processing.</event>
         public void ProcessReceivedSerializedMessage(TSerialized serializedMessage)
         {
             var message = Deserialize(serializedMessage);
@@ -57,6 +72,7 @@ namespace SecretNest.RemoteAgency
         /// Processes a message received.
         /// </summary>
         /// <param name="message">Received message.</param>
+        /// <event cref="AfterMessageReceived">Raised after deserialized before further processing.</event>
         public void ProcessReceivedMessage(TEntityBase message)
         {
             ProcessReceivedMessage((IRemoteAgencyMessage) message);
@@ -66,6 +82,7 @@ namespace SecretNest.RemoteAgency
         /// Processes a message received.
         /// </summary>
         /// <param name="message">Received message.</param>
+        /// <event cref="AfterMessageReceived">Raised after deserialized before further processing.</event>
         public void ProcessReceivedMessage(IRemoteAgencyMessage message)
         {
             ProcessMessageReceivedFromOutside((TEntityBase)message); //Casting for security only.

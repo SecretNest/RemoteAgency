@@ -22,9 +22,9 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <DocumentationFile>bin\RemoteAgency.Base.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <Import Project="..\Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems" Label="Shared" />
 
