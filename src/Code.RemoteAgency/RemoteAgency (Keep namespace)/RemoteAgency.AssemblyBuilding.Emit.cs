@@ -112,6 +112,7 @@ namespace SecretNest.RemoteAgency
             emitProxy?.Start();
             emitServiceWrapper?.Start();
 
+            // ReSharper disable once AsyncConverter.AsyncWait
             builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
 
             if (isProxyRequired) 
