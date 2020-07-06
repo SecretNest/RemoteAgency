@@ -189,6 +189,14 @@
           </table>
         </para>
       </content>
+      <sections>
+        <section>
+          <title>Example</title>
+          <content>
+            <para>If there is an attribute <c>MyOwnAttribute</c> is defined like <codeReference>AttributePassThroughExample#Attribute</codeReference>, user can define such a interface <codeReference>AttributePassThroughExample#Interface</codeReference> which will be analyzed to generate <codeReference>AttributePassThroughExample#Proxy</codeReference> as the proxy class.</para>
+          </content>
+        </section>
+      </sections>
     </section>
     <section address="CustomizedName">
       <title>Customized Name</title>

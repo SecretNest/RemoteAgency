@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This is an example code snippets file -->
+<examples>
+  <item id="AttributePassThroughExample#Attribute">
+    <sampleCode language="CSharp">
+      public class MyOwnAttribute : Attribute
+      {
+        public string MyProperty { get; set; }
+        public int MyField;
+
+        public MyOwnAttribute(string a, int b = 0, bool c = false)
+        {
+        }
+      }
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+      Public Class MyOwnAttribute
+        Inherits Attribute
+
+        Public Property MyProperty As String
+        Public MyField As Integer
+
+        Public Sub New(a As String, Optional b As Integer = 0, Optional c As Boolean = False)
+        End Sub
+      End Class
+    </sampleCode>
+  </item>
+
+  <item id="AttributePassThroughExample#Interface">
+    <sampleCode language="CSharp">
+      public interface IMyService
+      {
+        [AttributePassThrough(typeof(MyOwnAttribute),
+          new[] {typeof(string), typeof(int), typeof(bool)},
+          new object[] {"ValueOfA"},
+          "IdOfThisInstance")]
+        [AttributePassThroughIndexBasedParameter("IdOfThisInstance", 2, true)]
+        [AttributePassThroughProperty("IdOfThisInstance", nameof(MyOwnAttribute.MyProperty), "PropertyValue")]
+        [AttributePassThroughField("IdOfThisInstance", nameof(MyOwnAttribute.MyField), 123)]
+        void MyMethod();
+      }
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+      Public Interface IMyService
+        &lt;AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New String() {"ValueOfA"}, "IdOfThisInstance")&gt;
+        &lt;AttributePassThroughIndexBasedParameter("IdOfThisInstance", 2, True)&gt;
+        &lt;AttributePassThroughProperty("IdOfThisInstance", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")&gt;
+        &lt;AttributePassThroughField("IdOfThisInstance", NameOf(MyOwnAttribute.MyField), 123)&gt;
+        Sub MyMethod()
+      End Interface
+    </sampleCode>
+  </item>
+
+  <item id="AttributePassThroughExample#Proxy">
+    <sampleCode language="CSharp">
+      public class MyService_Proxy : IMyService
+      {
+        [MyOwn("ValueOfA", c: true, MyProperty = "PropertyValue", MyField = 123)]
+        public void MyMethod()
+        {
+          //...
+        }
+      }
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+      Public Class MyService_Proxy
+        Implements IMyService
+
+        &lt;MyOwn("ValueOfA", , True, MyProperty:="PropertyValue", MyField:=123)&gt;
+        Public Sub MyMethod() Implements IMyService.MyMethod
+          '...
+        End Sub
+      End Class
+    </sampleCode>
+  </item>
+</examples>
+
