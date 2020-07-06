@@ -87,17 +87,17 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
                 else
                 {
-                    Dictionary<string, ParameterTwoWayAttribute> eventLevelParameterTwoWayAttributes =
-                        new Dictionary<string, ParameterTwoWayAttribute>();
-                    foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterTwoWayAttribute>())
+                    Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes =
+                        new Dictionary<string, ParameterReturnRequiredAttribute>();
+                    foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterReturnRequiredAttribute>())
                     {
-                        eventLevelParameterTwoWayAttributes.TryAdd(attribute.ParameterName, attribute);
+                        eventLevelParameterReturnRequiredAttributes.TryAdd(attribute.ParameterName, attribute);
                     }
 
                     ProcessParameterAndReturnValueForNormalAsset(parameterInfo, returnType, delegateMethod.ReturnTypeCustomAttributes, memberPath,
                         new[] {eventInfo, delegateMethod.ReturnTypeCustomAttributes, delegateMethod},
                         out var parameters, out var returnValues, eventLevelParameterIgnoredAttributes,
-                        eventLevelParameterEntityPropertyNameAttributes, eventLevelParameterTwoWayAttributes);
+                        eventLevelParameterEntityPropertyNameAttributes, eventLevelParameterReturnRequiredAttributes);
                     @event.RaisingNotificationEntityProperties = parameters;
                     @event.RaisingFeedbackEntityProperties = returnValues;
                 }

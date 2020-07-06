@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When sticky mode enabled, source site id of the first response message received is stored and used as the target site id for later messages. This will make all accesses stick to one of the target sites. It should be noted that when the chosen site is no longer responding, the proxy should be reset to restore it to the original state.</para>
     /// <para>When this attribute is absent, the target site sticky mode is off.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class ProxyStickyTargetSiteAttribute : Attribute
     {

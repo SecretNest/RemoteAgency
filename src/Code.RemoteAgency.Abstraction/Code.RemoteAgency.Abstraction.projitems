@@ -15,14 +15,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughFieldAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\AssetIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\PropertyGetOneWayOperatingAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterTwoWayAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\TwoWayHelperAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterReturnRequiredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterReturnRequiredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ReturnRequiredPropertyHelperAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyStickyTargetSiteAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ReturnIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedClassNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AssetNotFoundException.cs" />
@@ -37,10 +37,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertySetEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertySetRequestPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedReturnValueEntityPropertyNameAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterIgnoredAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\EventParameterTwoWayPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterIgnoredAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterReturnRequiredPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndTwoWayParameter %28Keep namespace%29\ParameterTwoWayPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterReturnRequiredPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IManagedObjectCommunicate.cs" />
@@ -55,5 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndOneWayAsset %28Keep namespace%29\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

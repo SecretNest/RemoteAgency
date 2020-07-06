@@ -10,6 +10,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <remarks><para><see cref="CustomizedParameterEntityPropertyNameAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/>.</para>
     /// <para>For the parameter is not described by either <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> or <see cref="CustomizedParameterEntityPropertyNameAttribute"/>, or <see cref="CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class CustomizedEventParameterEntityPropertyNameAttribute : CustomizedParameterEntityPropertyNameAttribute
     {

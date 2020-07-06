@@ -142,7 +142,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
-            Dictionary<string, ParameterTwoWayAttribute> eventLevelParameterTwoWayAttributes = null)
+            Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes = null)
         {
             parameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             returnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
@@ -201,18 +201,18 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     #region Out/Ref
 
-                    var isTwoWay = GetValueFromAttribute(parameter, i => i.IsTwoWay, out var twoWayAttribute,
-                        eventLevelParameterTwoWayAttributes, true); //default value is true
-                    if (isTwoWay)
+                    var isIncludedInReturning = GetValueFromAttribute(parameter, i => i.IsIncludedInReturning, out var returnRequiredAttribute,
+                        eventLevelParameterReturnRequiredAttributes, true); //default value is true
+                    if (isIncludedInReturning)
                     {
-                        string name = twoWayAttribute?.ResponseEntityPropertyName;
+                        string name = returnRequiredAttribute?.ResponseEntityPropertyName;
                         if (!string.IsNullOrEmpty(name))
                         {
                             if (!usedPropertyNamesInReturnValueEntity.Add(name))
                             {
                                 throw new EntityPropertyNameConflictException(
                                     "The property name specified conflicts with others in return value entity.",
-                                    twoWayAttribute, parameter, memberPath);
+                                    returnRequiredAttribute, parameter, memberPath);
                             }
                         }
                         else
@@ -224,7 +224,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             new RemoteAgencyReturnValueInfoFromParameter()
                             {
                                 PropertyName = name,
-                                IsIncludedWhenExceptionThrown = twoWayAttribute?.IsIncludedWhenExceptionThrown ?? false,
+                                IsIncludedWhenExceptionThrown = returnRequiredAttribute?.IsIncludedWhenExceptionThrown ?? false,
                                 Parameter = parameter
                             };
                         if (_serializerParameterLevelAttributeBaseType != null)
@@ -237,56 +237,56 @@ namespace SecretNest.RemoteAgency.Inspecting
                         returnValueEntityProperties.Add(returnProperty);
                     }
 
-                    var twoWayPropertyAttribute = parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>()
+                    var returnRequiredPropertyAttribute = parameter.GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>()
                         .FirstOrDefault();
 
-                    if (twoWayPropertyAttribute != null)
+                    if (returnRequiredPropertyAttribute != null)
                         throw new InvalidParameterAttributeDataException(
-                            $"{nameof(ParameterTwoWayPropertyAttribute)} can only be used on the parameter without \"ref / ByRef\" and \"out / Out\"",
-                            twoWayPropertyAttribute, parameter, memberPath);
+                            $"{nameof(ParameterReturnRequiredPropertyAttribute)} can only be used on the parameter without \"ref / ByRef\" and \"out / Out\"",
+                            returnRequiredPropertyAttribute, parameter, memberPath);
 
                     #endregion
                 }
                 else
                 {
-                    #region Two way propery
+                    #region Return required propery
 
-                    var twoWayAttribute = parameter.GetCustomAttribute<ParameterTwoWayAttribute>();
+                    var returnRequiredAttribute = parameter.GetCustomAttribute<ParameterReturnRequiredAttribute>();
 
-                    if (twoWayAttribute != null)
+                    if (returnRequiredAttribute != null)
                         throw new InvalidParameterAttributeDataException(
-                            $"{nameof(ParameterTwoWayAttribute)} can only be used on the parameter with \"ref / ByRef\" and \"out / Out\".",
-                            twoWayAttribute, parameter, memberPath);
+                            $"{nameof(ParameterReturnRequiredAttribute)} can only be used on the parameter with \"ref / ByRef\" and \"out / Out\".",
+                            returnRequiredAttribute, parameter, memberPath);
 
-                    var twoWayPropertyAttributes =
-                        parameter.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().ToArray();
-                    if (twoWayPropertyAttributes.Length > 0)
+                    var returnRequiredPropertyAttributes =
+                        parameter.GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToArray();
+                    if (returnRequiredPropertyAttributes.Length > 0)
                     {
                         HashSet<string> processedProperties = new HashSet<string>();
                         HashSet<Type> processedHelpers = new HashSet<Type>();
 
-                        foreach (var twoWayPropertyAttribute in twoWayPropertyAttributes)
+                        foreach (var returnRequiredPropertyAttribute in returnRequiredPropertyAttributes)
                         {
-                            if (twoWayPropertyAttribute.IsSimpleMode)
+                            if (returnRequiredPropertyAttribute.IsSimpleMode)
                             {
-                                if (!processedProperties.Add(twoWayPropertyAttribute.PropertyNameInParameter))
+                                if (!processedProperties.Add(returnRequiredPropertyAttribute.PropertyNameInParameter))
                                     continue;
 
                                 var parameterType = parameter.ParameterType;
 
-                                var field = parameterType.GetField(twoWayPropertyAttribute.PropertyNameInParameter);
+                                var field = parameterType.GetField(returnRequiredPropertyAttribute.PropertyNameInParameter);
                                 if (field != null)
                                 {
                                     #region Simple mode on field
 
-                                    string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                    string name = returnRequiredPropertyAttribute.ResponseEntityPropertyName;
                                     if (!string.IsNullOrEmpty(name))
                                     {
                                         if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                         {
                                             throw new EntityPropertyNameConflictException(
                                                 "The property name specified conflicts with others in return value entity.",
-                                                twoWayPropertyAttribute, parameter, memberPath);
+                                                returnRequiredPropertyAttribute, parameter, memberPath);
                                         }
                                     }
                                     else
@@ -299,7 +299,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         {
                                             PropertyName = name,
                                             IsIncludedWhenExceptionThrown =
-                                                twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                                returnRequiredPropertyAttribute.IsIncludedWhenExceptionThrown,
                                             ParameterField = field,
                                             Parameter = parameter
                                         };
@@ -320,7 +320,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 else
                                 {
                                     var property =
-                                        parameterType.GetProperty(twoWayPropertyAttribute.PropertyNameInParameter);
+                                        parameterType.GetProperty(returnRequiredPropertyAttribute.PropertyNameInParameter);
                                     if (property != null)
                                     {
                                         #region Simple mode on property
@@ -328,20 +328,20 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         if (property.GetGetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
                                                 "The property name specified is not readable publicly.",
-                                                twoWayPropertyAttribute, parameter, memberPath);
+                                                returnRequiredPropertyAttribute, parameter, memberPath);
                                         if (property.GetSetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
                                                 "The property name specified is not writable publicly.",
-                                                twoWayPropertyAttribute, parameter, memberPath);
+                                                returnRequiredPropertyAttribute, parameter, memberPath);
 
-                                        string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                        string name = returnRequiredPropertyAttribute.ResponseEntityPropertyName;
                                         if (!string.IsNullOrEmpty(name))
                                         {
                                             if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                             {
                                                 throw new EntityPropertyNameConflictException(
                                                     "The property name specified conflicts with others in return value entity.",
-                                                    twoWayPropertyAttribute, parameter, memberPath);
+                                                    returnRequiredPropertyAttribute, parameter, memberPath);
                                             }
                                         }
                                         else
@@ -353,7 +353,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             new RemoteAgencyReturnValueInfoFromParameterProperty()
                                             {
                                                 PropertyName = name,
-                                                IsIncludedWhenExceptionThrown = twoWayPropertyAttribute
+                                                IsIncludedWhenExceptionThrown = returnRequiredPropertyAttribute
                                                     .IsIncludedWhenExceptionThrown,
                                                 ParameterProperty = property,
                                                 Parameter = parameter
@@ -378,7 +378,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     {
                                         throw new InvalidParameterAttributeDataException(
                                             "The property name specified is not a public property, nor a public field.",
-                                            twoWayPropertyAttribute, parameter, memberPath);
+                                            returnRequiredPropertyAttribute, parameter, memberPath);
                                     }
                                 }
                             }
@@ -386,32 +386,32 @@ namespace SecretNest.RemoteAgency.Inspecting
                             {
                                 #region Helper class mode
 
-                                if (!processedHelpers.Add(twoWayPropertyAttribute.HelperClass))
+                                if (!processedHelpers.Add(returnRequiredPropertyAttribute.HelperClass))
                                     continue;
 
-                                var propertiesInHelperClass = twoWayPropertyAttribute.HelperClass.GetProperties();
+                                var propertiesInHelperClass = returnRequiredPropertyAttribute.HelperClass.GetProperties();
                                 foreach (var propertyInHelperClass in propertiesInHelperClass)
                                 {
-                                    if (GetValueFromAttribute<TwoWayHelperAttribute, bool>(propertyInHelperClass,
-                                        i => i.IsTwoWay, out var twoWayHelperAttribute))
+                                    if (GetValueFromAttribute<ReturnRequiredPropertyHelperAttribute, bool>(propertyInHelperClass,
+                                        i => i.IsIncludedInReturning, out var returnRequiredHelperAttribute))
                                     {
                                         if (propertyInHelperClass.GetGetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
-                                                twoWayPropertyAttribute, parameter, memberPath);
+                                                $"The property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} is not readable publicly.",
+                                                returnRequiredPropertyAttribute, parameter, memberPath);
                                         if (propertyInHelperClass.GetSetMethod() == null)
                                             throw new InvalidParameterAttributeDataException(
-                                                $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
-                                                twoWayPropertyAttribute, parameter, memberPath);
+                                                $"The property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} is not readable publicly.",
+                                                returnRequiredPropertyAttribute, parameter, memberPath);
 
-                                        string name = twoWayHelperAttribute.ResponseEntityPropertyName;
+                                        string name = returnRequiredHelperAttribute.ResponseEntityPropertyName;
                                         if (!string.IsNullOrEmpty(name))
                                         {
                                             if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                             {
                                                 throw new EntityPropertyNameConflictException(
-                                                    $"The property name specified for property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
-                                                    twoWayPropertyAttribute, parameter, memberPath);
+                                                    $"The property name specified for property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
+                                                    returnRequiredPropertyAttribute, parameter, memberPath);
                                             }
                                         }
                                         else
@@ -424,8 +424,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             {
                                                 PropertyName = name,
                                                 IsIncludedWhenExceptionThrown =
-                                                    twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
-                                                ParameterHelperClass = twoWayPropertyAttribute.HelperClass,
+                                                    returnRequiredHelperAttribute.IsIncludedWhenExceptionThrown,
+                                                ParameterHelperClass = returnRequiredPropertyAttribute.HelperClass,
                                                 ParameterHelperProperty = propertyInHelperClass,
                                                 Parameter = parameter
                                             };
@@ -599,36 +599,36 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             responseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
-            //ParameterTwoWayPropertyAttribute
-            var twoWayPropertyAttributes = assetProperty.GetCustomAttributes<ParameterTwoWayPropertyAttribute>().ToArray();
-            if (twoWayPropertyAttributes.Length > 0)
+            //ParameterReturnRequiredPropertyAttribute
+            var returnRequiredPropertyAttributes = assetProperty.GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToArray();
+            if (returnRequiredPropertyAttributes.Length > 0)
             {
                 HashSet<string> usedPropertyNamesInReturnValueEntity = new HashSet<string>();
                 HashSet<string> processedProperties = new HashSet<string>();
                 HashSet<Type> processedHelpers = new HashSet<Type>();
 
-                foreach (var twoWayPropertyAttribute in twoWayPropertyAttributes)
+                foreach (var returnRequiredPropertyAttribute in returnRequiredPropertyAttributes)
                 {
-                    if (twoWayPropertyAttribute.IsSimpleMode)
+                    if (returnRequiredPropertyAttribute.IsSimpleMode)
                     {
-                        if (!processedProperties.Add(twoWayPropertyAttribute.PropertyNameInParameter))
+                        if (!processedProperties.Add(returnRequiredPropertyAttribute.PropertyNameInParameter))
                             continue;
 
                         var dataType = assetProperty.PropertyType;
 
-                        var field = dataType.GetField(twoWayPropertyAttribute.PropertyNameInParameter);
+                        var field = dataType.GetField(returnRequiredPropertyAttribute.PropertyNameInParameter);
                         if (field != null)
                         {
                             #region Simple mode on field
 
-                            string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                            string name = returnRequiredPropertyAttribute.ResponseEntityPropertyName;
                             if (!string.IsNullOrEmpty(name))
                             {
                                 if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                 {
                                     throw new EntityPropertyNameConflictException(
                                         "The property name specified conflicts with others in return value entity.",
-                                        twoWayPropertyAttribute,
+                                        returnRequiredPropertyAttribute,
                                         EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
                                 }
                             }
@@ -642,7 +642,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 {
                                     PropertyName = name,
                                     IsIncludedWhenExceptionThrown =
-                                        twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                        returnRequiredPropertyAttribute.IsIncludedWhenExceptionThrown,
                                     ParameterField = field,
                                     SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
                                 };
@@ -660,7 +660,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                         else
                         {
                             var property =
-                                dataType.GetProperty(twoWayPropertyAttribute.PropertyNameInParameter);
+                                dataType.GetProperty(returnRequiredPropertyAttribute.PropertyNameInParameter);
                             if (property != null)
                             {
                                 #region Simple mode on property
@@ -668,20 +668,20 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 if (property.GetGetMethod() == null)
                                     throw new InvalidAttributeDataException(
                                         "The property name specified is not readable publicly.",
-                                        twoWayPropertyAttribute, memberPath);
+                                        returnRequiredPropertyAttribute, memberPath);
                                 if (property.GetSetMethod() == null)
                                     throw new InvalidAttributeDataException(
                                         "The property name specified is not writable publicly.",
-                                        twoWayPropertyAttribute, memberPath);
+                                        returnRequiredPropertyAttribute, memberPath);
 
-                                string name = twoWayPropertyAttribute.ResponseEntityPropertyName;
+                                string name = returnRequiredPropertyAttribute.ResponseEntityPropertyName;
                                 if (!string.IsNullOrEmpty(name))
                                 {
                                     if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                     {
                                         throw new EntityPropertyNameConflictException(
                                             "The property name specified conflicts with others in return value entity.",
-                                            twoWayPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
+                                            returnRequiredPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
                                     }
                                 }
                                 else
@@ -694,7 +694,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     {
                                         PropertyName = name,
                                         IsIncludedWhenExceptionThrown =
-                                            twoWayPropertyAttribute.IsIncludedWhenExceptionThrown,
+                                            returnRequiredPropertyAttribute.IsIncludedWhenExceptionThrown,
                                         ParameterProperty = property,
                                         SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
                                     };
@@ -713,7 +713,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             {
                                 throw new InvalidAttributeDataException(
                                     "The property name specified is not a public property, nor a public field.",
-                                    twoWayPropertyAttribute, memberPath);
+                                    returnRequiredPropertyAttribute, memberPath);
                             }
                         }
                     }
@@ -721,32 +721,32 @@ namespace SecretNest.RemoteAgency.Inspecting
                     {
                         #region Helper class mode
 
-                        if (!processedHelpers.Add(twoWayPropertyAttribute.HelperClass))
+                        if (!processedHelpers.Add(returnRequiredPropertyAttribute.HelperClass))
                             continue;
 
-                        var propertiesInHelperClass = twoWayPropertyAttribute.HelperClass.GetProperties();
+                        var propertiesInHelperClass = returnRequiredPropertyAttribute.HelperClass.GetProperties();
                         foreach (var propertyInHelperClass in propertiesInHelperClass)
                         {
-                            if (GetValueFromAttribute<TwoWayHelperAttribute, bool>(propertyInHelperClass,
-                                i => i.IsTwoWay, out var twoWayHelperAttribute))
+                            if (GetValueFromAttribute<ReturnRequiredPropertyHelperAttribute, bool>(propertyInHelperClass,
+                                i => i.IsIncludedInReturning, out var returnRequiredHelperAttribute))
                             {
                                 if (propertyInHelperClass.GetGetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
-                                        twoWayPropertyAttribute, memberPath);
+                                        $"The property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} is not readable publicly.",
+                                        returnRequiredPropertyAttribute, memberPath);
                                 if (propertyInHelperClass.GetSetMethod() == null)
                                     throw new InvalidAttributeDataException(
-                                        $"The property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} is not readable publicly.",
-                                        twoWayPropertyAttribute, memberPath);
+                                        $"The property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} is not readable publicly.",
+                                        returnRequiredPropertyAttribute, memberPath);
 
-                                string name = twoWayHelperAttribute.ResponseEntityPropertyName;
+                                string name = returnRequiredHelperAttribute.ResponseEntityPropertyName;
                                 if (!string.IsNullOrEmpty(name))
                                 {
                                     if (!usedPropertyNamesInReturnValueEntity.Add(name))
                                     {
                                         throw new EntityPropertyNameConflictException(
-                                            $"The property name specified for property {propertyInHelperClass.Name} in helper class {twoWayPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
-                                            twoWayPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
+                                            $"The property name specified for property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} conflicts with others in return value entity.",
+                                            returnRequiredPropertyAttribute, EntityPropertyNameConflictExceptionCausedMemberType.Property, memberPath);
                                     }
                                 }
                                 else
@@ -759,8 +759,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     {
                                         PropertyName = name,
                                         IsIncludedWhenExceptionThrown =
-                                            twoWayHelperAttribute.IsIncludedWhenExceptionThrown,
-                                        ParameterHelperClass = twoWayPropertyAttribute.HelperClass,
+                                            returnRequiredHelperAttribute.IsIncludedWhenExceptionThrown,
+                                        ParameterHelperClass = returnRequiredPropertyAttribute.HelperClass,
                                         ParameterHelperProperty = propertyInHelperClass,
                                         SerializerParameterLevelAttributesOnAsset = serializerParameterLevelAttributesOnAsset
                                     };

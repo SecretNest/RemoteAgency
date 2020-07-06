@@ -1,18 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="54b2e0fb-7a41-44f2-8800-831e473db023" visible="True" isDefault="true" isSelected="true" title="Welcome to the [TODO: Add project name]">
+  <Topic id="54b2e0fb-7a41-44f2-8800-831e473db023" visible="True" isDefault="true" title="Welcome to the Remote Agency">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>
   </Topic>
-  <Topic id="32d8086d-6b51-4ca9-9dcf-6e1be9282355" visible="True" isExpanded="true" title="Version History">
+  <Topic id="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" visible="True" title="Attributes" />
+  <Topic id="32d8086d-6b51-4ca9-9dcf-6e1be9282355" visible="True" isSelected="true" title="Version History">
     <HelpKeywords>
       <HelpKeyword index="K" term="version, history" />
     </HelpKeywords>
-    <Topic id="d6c97845-5e7e-4803-8bce-58790fb774ff" visible="True" title="Version 1.0.0.0">
-      <HelpKeywords>
-        <HelpKeyword index="K" term="version, 1.0.0.0" />
-      </HelpKeywords>
-    </Topic>
   </Topic>
 </Topics>

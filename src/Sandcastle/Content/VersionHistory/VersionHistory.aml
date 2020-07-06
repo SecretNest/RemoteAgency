@@ -2,24 +2,33 @@
 <topic id="32d8086d-6b51-4ca9-9dcf-6e1be9282355" revisionNumber="1">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
-			<para>The topics in this section describe the various changes made to the [TODO: Project Title] over the
+			<para>The topics in this section describe the various changes made to the Remote Agency over the
 life of the project.</para>
 		</introduction>
 
 		<section>
 			<title>Version History</title>
 			<content>
-				<para>Select a version below to see a description of its changes.</para>
-
 				<list class="bullet">
 					<listItem>
-						<para><link xlink:href="d6c97845-5e7e-4803-8bce-58790fb774ff" /></para>
+						<para>Version: 2.0.0</para>
+						<para>Caution: Contains multiple break changes.</para>
+						<para>Merges serializer to main package.</para>
+						<para>Changes to use IL directly from Roslyn compiling.</para>
+            <para>Combines some attributes.</para>
+						<para>Adds function: Thread lock: specify the running thread / task scheduler for running assets.</para>
+						<para>Changes to use Json and binary serializer instead of Data Contract serializer.</para>
+						<para>Changes the interfaces of Remote Agency.</para>
+            <para>Changes the name of RemoteAgency.Base to RemoteAgency.Abstraction.</para>
+						<para>Adds a RemoteAgency.Neat with all functions but built-in serializers and the reference of <externalLink><linkText>Sequential Scheduler</linkText><linkUri>https://github.com/SecretNest/SequentialScheduler/</linkUri></externalLink>.</para>
+						<para>Removes .Net Standard from target due to limitation of System.Reflection.Emit.</para>
+						<para>Removes assembly output, saving built assembly to file, in .Net Core due to limitation of System.Reflection.Emit.</para>
 					</listItem>
 
 					<listItem>
-						<para>[TODO: Add links to each specific version page]</para>
-					</listItem>
-
+						<para>Version 1.x</para>
+						<para>Check <externalLink><linkText>version 1 doc</linkText><linkUri>https://remoteagency.docs.secretnest.info/help.v1</linkUri></externalLink> for details.</para>
+          </listItem>
 				</list>
 
 			</content>

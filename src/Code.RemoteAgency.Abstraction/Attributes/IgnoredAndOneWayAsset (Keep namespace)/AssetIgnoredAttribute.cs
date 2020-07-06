@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When <see cref="IsIgnored"/> is set to <see langword="true"/>, all other attributes except <see cref="AttributePassThroughAttribute"/>, <see cref="AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="AttributePassThroughPropertyAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
     /// <para>When this attribute is absent, the ignored mode is disabled.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class AssetIgnoredAttribute : Attribute
     {

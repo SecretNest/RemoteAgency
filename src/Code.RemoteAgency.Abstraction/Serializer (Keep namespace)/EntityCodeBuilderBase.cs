@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// Provides code generation for entity classes. This is an abstract class.
     /// </summary>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#SerializerAdditional" />
     public abstract class EntityCodeBuilderBase
     {
         /// <summary>

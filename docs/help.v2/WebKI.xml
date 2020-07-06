@@ -361,7 +361,6 @@
   </HelpKINode>
   <HelpKINode Title="CustomizedReturnValueEntityPropertyNameAttribute.CustomizedReturnValueEntityPropertyNameAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute__ctor.htm" />
   <HelpKINode Title="CustomizedReturnValueEntityPropertyNameAttribute.EntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute_EntityPropertyName.htm" />
-  <HelpKINode Title="Default enumeration member" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
   <HelpKINode Title="DefaultEventAddingTimeoutForBuilding property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventAddingTimeoutForBuilding.htm" />
   <HelpKINode Title="DefaultEventRaisingTimeoutForBuilding property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventRaisingTimeoutForBuilding.htm" />
   <HelpKINode Title="DefaultEventRemovingTimeoutForBuilding property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventRemovingTimeoutForBuilding.htm" />
@@ -458,10 +457,7 @@
   <HelpKINode Title="EntityPropertyNameConflictException.GetObjectData method" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException_GetObjectData.htm" />
   <HelpKINode Title="EntityPropertyNameConflictException.Parameter property" Url="html/P_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException_Parameter.htm" />
   <HelpKINode Title="EntityPropertyNameConflictExceptionCausedMemberType enumeration" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictExceptionCausedMemberType.htm" />
-  <HelpKINode Title="Event enumeration member">
-    <HelpKINode Title="MessageType Enumeration" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
-    <HelpKINode Title="OperatingTimeoutTimeMode Enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Event enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
   <HelpKINode Title="EventAdd enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
   <HelpKINode Title="EventAddingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventAddingTimeout.htm" />
   <HelpKINode Title="EventParameterIgnoredAttribute class">
@@ -472,22 +468,22 @@
   </HelpKINode>
   <HelpKINode Title="EventParameterIgnoredAttribute.EventParameterIgnoredAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute__ctor.htm" />
   <HelpKINode Title="EventParameterIgnoredAttribute.ParameterName property" Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute_ParameterName.htm" />
-  <HelpKINode Title="EventParameterTwoWayAttribute class">
-    <HelpKINode Title="EventParameterTwoWayAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredAttribute class">
+    <HelpKINode Title="EventParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="EventParameterTwoWayAttribute.EventParameterTwoWayAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute__ctor.htm" />
-  <HelpKINode Title="EventParameterTwoWayAttribute.ParameterName property" Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute_ParameterName.htm" />
-  <HelpKINode Title="EventParameterTwoWayPropertyAttribute class">
-    <HelpKINode Title="EventParameterTwoWayPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute.htm" />
-    <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredAttribute.EventParameterReturnRequiredAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute__ctor.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredAttribute.ParameterName property" Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute_ParameterName.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredPropertyAttribute class">
+    <HelpKINode Title="EventParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="EventParameterTwoWayPropertyAttribute.EventParameterTwoWayPropertyAttribute constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute__ctor.htm" />
-  <HelpKINode Title="EventParameterTwoWayPropertyAttribute.ParameterName property" Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute_ParameterName.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredPropertyAttribute.EventParameterReturnRequiredPropertyAttribute constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor.htm" />
+  <HelpKINode Title="EventParameterReturnRequiredPropertyAttribute.ParameterName property" Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute_ParameterName.htm" />
   <HelpKINode Title="EventRaisingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRaisingTimeout.htm" />
   <HelpKINode Title="EventRemove enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
   <HelpKINode Title="EventRemovingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRemovingTimeout.htm" />
@@ -550,7 +546,7 @@
     <HelpKINode Title="MessageProcessTerminatedException.GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_GetObjectData.htm" />
   </HelpKINode>
   <HelpKINode Title="GetSiteIdCallback property" Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_GetSiteIdCallback.htm" />
-  <HelpKINode Title="HelperClass property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_HelperClass.htm" />
+  <HelpKINode Title="HelperClass property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_HelperClass.htm" />
   <HelpKINode Title="IManagedObjectCommunicate interface">
     <HelpKINode Title="IManagedObjectCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm" />
@@ -681,10 +677,15 @@
     <HelpKINode Title="ParameterIgnoredAttribute.IsIgnored Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute_IsIgnored.htm" />
     <HelpKINode Title="ReturnIgnoredAttribute.IsIgnored Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute_IsIgnored.htm" />
   </HelpKINode>
+  <HelpKINode Title="IsIncludedInReturning property">
+    <HelpKINode Title="ParameterReturnRequiredAttribute.IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedInReturning.htm" />
+    <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedInReturning.htm" />
+    <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedInReturning.htm" />
+  </HelpKINode>
   <HelpKINode Title="IsIncludedWhenExceptionThrown property">
-    <HelpKINode Title="ParameterTwoWayAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_IsIncludedWhenExceptionThrown.htm" />
-    <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsIncludedWhenExceptionThrown.htm" />
-    <HelpKINode Title="TwoWayHelperAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_IsIncludedWhenExceptionThrown.htm" />
+    <HelpKINode Title="ParameterReturnRequiredAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedWhenExceptionThrown.htm" />
+    <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedWhenExceptionThrown.htm" />
+    <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedWhenExceptionThrown.htm" />
   </HelpKINode>
   <HelpKINode Title="IsOneWay property">
     <HelpKINode Title="AssetOneWayOperatingAttribute.IsOneWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute_IsOneWay.htm" />
@@ -692,13 +693,8 @@
     <HelpKINode Title="MessageBodyEventArgsBase.IsOneWay Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_IsOneWay.htm" />
     <HelpKINode Title="PropertyGetOneWayOperatingAttribute.IsOneWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute_IsOneWay.htm" />
   </HelpKINode>
-  <HelpKINode Title="IsSimpleMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsSimpleMode.htm" />
+  <HelpKINode Title="IsSimpleMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsSimpleMode.htm" />
   <HelpKINode Title="IsSticky property" Url="html/P_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute_IsSticky.htm" />
-  <HelpKINode Title="IsTwoWay property">
-    <HelpKINode Title="ParameterTwoWayAttribute.IsTwoWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_IsTwoWay.htm" />
-    <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsTwoWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsTwoWay.htm" />
-    <HelpKINode Title="TwoWayHelperAttribute.IsTwoWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_IsTwoWay.htm" />
-  </HelpKINode>
   <HelpKINode Title="LocalExceptionHandlingAttribute class">
     <HelpKINode Title="LocalExceptionHandlingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm" />
     <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute__ctor.htm" />
@@ -787,7 +783,6 @@
     <HelpKINode Title="MessageBodyEventArgsBase.MessageType Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_MessageType.htm" />
   </HelpKINode>
   <HelpKINode Title="Method enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
-  <HelpKINode Title="Mode property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_Mode.htm" />
   <HelpKINode Title="ModuleBuilder property" Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs_ModuleBuilder.htm" />
   <HelpKINode Title="Name property" Url="html/P_SecretNest_RemoteAgency_EntityProperty_Name.htm" />
   <HelpKINode Title="None enumeration member" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockMode.htm" />
@@ -810,12 +805,10 @@
   <HelpKINode Title="OperatingTimeoutTimeAttribute.EventAddingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventAddingTimeout.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.EventRaisingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRaisingTimeout.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.EventRemovingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRemovingTimeout.htm" />
-  <HelpKINode Title="OperatingTimeoutTimeAttribute.Mode property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_Mode.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.OperatingTimeoutTimeAttribute constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.PropertyGettingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_PropertyGettingTimeout.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.PropertySettingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_PropertySettingTimeout.htm" />
   <HelpKINode Title="OperatingTimeoutTimeAttribute.Timeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_Timeout.htm" />
-  <HelpKINode Title="OperatingTimeoutTimeMode enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
   <HelpKINode Title="Order property">
     <HelpKINode Title="AttributePassThroughFieldAttribute.Order Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_Order.htm" />
     <HelpKINode Title="AttributePassThroughPropertyAttribute.Order Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_Order.htm" />
@@ -851,32 +844,32 @@
   <HelpKINode Title="ParameterName property">
     <HelpKINode Title="CustomizedEventParameterEntityPropertyNameAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute_ParameterName.htm" />
     <HelpKINode Title="EventParameterIgnoredAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute_ParameterName.htm" />
-    <HelpKINode Title="EventParameterTwoWayAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute_ParameterName.htm" />
-    <HelpKINode Title="EventParameterTwoWayPropertyAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute_ParameterName.htm" />
+    <HelpKINode Title="EventParameterReturnRequiredAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute_ParameterName.htm" />
+    <HelpKINode Title="EventParameterReturnRequiredPropertyAttribute.ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute_ParameterName.htm" />
   </HelpKINode>
-  <HelpKINode Title="ParameterTwoWayAttribute class">
-    <HelpKINode Title="ParameterTwoWayAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute.htm" />
+  <HelpKINode Title="ParameterReturnRequiredAttribute class">
+    <HelpKINode Title="ParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="ParameterTwoWayAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_IsIncludedWhenExceptionThrown.htm" />
-  <HelpKINode Title="ParameterTwoWayAttribute.IsTwoWay property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_IsTwoWay.htm" />
-  <HelpKINode Title="ParameterTwoWayAttribute.ParameterTwoWayAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute__ctor.htm" />
-  <HelpKINode Title="ParameterTwoWayAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_ResponseEntityPropertyName.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute class">
-    <HelpKINode Title="ParameterTwoWayPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute.htm" />
-    <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute.htm" />
+  <HelpKINode Title="ParameterReturnRequiredAttribute.IsIncludedInReturning property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedInReturning.htm" />
+  <HelpKINode Title="ParameterReturnRequiredAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedWhenExceptionThrown.htm" />
+  <HelpKINode Title="ParameterReturnRequiredAttribute.ParameterReturnRequiredAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute__ctor.htm" />
+  <HelpKINode Title="ParameterReturnRequiredAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_ResponseEntityPropertyName.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute class">
+    <HelpKINode Title="ParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.HelperClass property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_HelperClass.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsIncludedWhenExceptionThrown.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsSimpleMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsSimpleMode.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.IsTwoWay property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_IsTwoWay.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.ParameterTwoWayPropertyAttribute constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute__ctor.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.PropertyNameInParameter property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_PropertyNameInParameter.htm" />
-  <HelpKINode Title="ParameterTwoWayPropertyAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_ResponseEntityPropertyName.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.HelperClass property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_HelperClass.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.IsIncludedInReturning property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedInReturning.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedWhenExceptionThrown.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.IsSimpleMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsSimpleMode.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.ParameterReturnRequiredPropertyAttribute constructor" Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_PropertyNameInParameter.htm" />
+  <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_ResponseEntityPropertyName.htm" />
   <HelpKINode Title="Position property" Url="html/P_SecretNest_RemoteAgency_EntityPropertyAttribute_Position.htm" />
   <HelpKINode Title="ProcessEventAddingMessage method">
     <HelpKINode Title="IServiceWrapperCommunicate.ProcessEventAddingMessage Method " Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_ProcessEventAddingMessage.htm" />
@@ -897,10 +890,7 @@
   <HelpKINode Title="ProcessReceivedMessage method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedMessage.htm" />
   <HelpKINode Title="ProcessReceivedSerializedMessage method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedSerializedMessage.htm" />
   <HelpKINode Title="Properties property" Url="html/P_SecretNest_RemoteAgency_EntityBuilding_Properties.htm" />
-  <HelpKINode Title="Property enumeration member">
-    <HelpKINode Title="EntityPropertyNameConflictExceptionCausedMemberType Enumeration" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictExceptionCausedMemberType.htm" />
-    <HelpKINode Title="OperatingTimeoutTimeMode Enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Property enumeration member" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictExceptionCausedMemberType.htm" />
   <HelpKINode Title="PropertyGet enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
   <HelpKINode Title="PropertyGetOneWayOperatingAttribute class">
     <HelpKINode Title="PropertyGetOneWayOperatingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm" />
@@ -912,7 +902,7 @@
   <HelpKINode Title="PropertyGetOneWayOperatingAttribute.PropertyGetOneWayOperatingAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute__ctor.htm" />
   <HelpKINode Title="PropertyGettingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_PropertyGettingTimeout.htm" />
   <HelpKINode Title="PropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_PropertyName.htm" />
-  <HelpKINode Title="PropertyNameInParameter property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_PropertyNameInParameter.htm" />
+  <HelpKINode Title="PropertyNameInParameter property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_PropertyNameInParameter.htm" />
   <HelpKINode Title="PropertyOfHelper enumeration member" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
   <HelpKINode Title="PropertyOfParameter enumeration member" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
   <HelpKINode Title="PropertySet enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
@@ -1093,9 +1083,9 @@
     <HelpKINode Title="CustomizedPropertySetEntityNameAttribute.ResponseEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute_ResponseEntityName.htm" />
   </HelpKINode>
   <HelpKINode Title="ResponseEntityPropertyName property">
-    <HelpKINode Title="ParameterTwoWayAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute_ResponseEntityPropertyName.htm" />
-    <HelpKINode Title="ParameterTwoWayPropertyAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute_ResponseEntityPropertyName.htm" />
-    <HelpKINode Title="TwoWayHelperAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_ResponseEntityPropertyName.htm" />
+    <HelpKINode Title="ParameterReturnRequiredAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_ResponseEntityPropertyName.htm" />
+    <HelpKINode Title="ParameterReturnRequiredPropertyAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_ResponseEntityPropertyName.htm" />
+    <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_ResponseEntityPropertyName.htm" />
   </HelpKINode>
   <HelpKINode Title="ReturnIgnoredAttribute class">
     <HelpKINode Title="ReturnIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm" />
@@ -1105,6 +1095,16 @@
   </HelpKINode>
   <HelpKINode Title="ReturnIgnoredAttribute.IsIgnored property" Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute_IsIgnored.htm" />
   <HelpKINode Title="ReturnIgnoredAttribute.ReturnIgnoredAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute__ctor.htm" />
+  <HelpKINode Title="ReturnRequiredPropertyHelperAttribute class">
+    <HelpKINode Title="ReturnRequiredPropertyHelperAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning property" Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedInReturning.htm" />
+  <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedWhenExceptionThrown.htm" />
+  <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_ResponseEntityPropertyName.htm" />
+  <HelpKINode Title="ReturnRequiredPropertyHelperAttribute.ReturnRequiredPropertyHelperAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute__ctor.htm" />
   <HelpKINode Title="ReturnValue enumeration member">
     <HelpKINode Title="AttributePosition Enumeration" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
     <HelpKINode Title="EntityPropertyNameConflictExceptionCausedMemberType Enumeration" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictExceptionCausedMemberType.htm" />
@@ -1142,21 +1142,20 @@
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.EventParameterTwoWayAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayAttribute.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.EventParameterTwoWayPropertyAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterTwoWayPropertyAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingMode.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeMode enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterTwoWayAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayAttribute.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterTwoWayPropertyAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterTwoWayPropertyAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ThreadLockAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.ThreadLockMode enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockMode.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.TwoWayHelperAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgs(Of TSerialized, TEntityBase) class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgs&lt;TSerialized, TEntityBase&gt; class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm" />
@@ -1292,7 +1291,6 @@
   <HelpKINode Title="SetToReplaceWithExceptionAndReturn method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToReplaceWithExceptionAndReturn.htm" />
   <HelpKINode Title="SetToTerminateAndReturnException method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToTerminateAndReturnException.htm" />
   <HelpKINode Title="SetToTerminateSilently method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToTerminateSilently.htm" />
-  <HelpKINode Title="Simple enumeration member" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeMode.htm" />
   <HelpKINode Title="SiteId property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_SiteId.htm" />
   <HelpKINode Title="SourceInterface property">
     <HelpKINode Title="AfterTypeAndAssemblyBuiltEventArgs.SourceInterface Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_SourceInterface.htm" />
@@ -1338,16 +1336,6 @@
   <HelpKINode Title="TryAddTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_TryAddTaskScheduler.htm" />
   <HelpKINode Title="TryGetTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_TryGetTaskScheduler.htm" />
   <HelpKINode Title="TryRemoveTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_TryRemoveTaskScheduler.htm" />
-  <HelpKINode Title="TwoWayHelperAttribute class">
-    <HelpKINode Title="TwoWayHelperAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TwoWayHelperAttribute.IsIncludedWhenExceptionThrown property" Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_IsIncludedWhenExceptionThrown.htm" />
-  <HelpKINode Title="TwoWayHelperAttribute.IsTwoWay property" Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_IsTwoWay.htm" />
-  <HelpKINode Title="TwoWayHelperAttribute.ResponseEntityPropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute_ResponseEntityPropertyName.htm" />
-  <HelpKINode Title="TwoWayHelperAttribute.TwoWayHelperAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_TwoWayHelperAttribute__ctor.htm" />
   <HelpKINode Title="Type property" Url="html/P_SecretNest_RemoteAgency_EntityProperty_Type.htm" />
   <HelpKINode Title="TypeBuilder property" Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_TypeBuilder.htm" />
   <HelpKINode Title="Value property">
@@ -1356,7 +1344,6 @@
     <HelpKINode Title="AttributePassThroughPropertyAttribute.Value Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_Value.htm" />
   </HelpKINode>
   <HelpKINode Title="version">
-    <HelpKINode Title="1.0.0.0" Url="html/d6c97845-5e7e-4803-8bce-58790fb774ff.htm" />
     <HelpKINode Title="history" Url="html/32d8086d-6b51-4ca9-9dcf-6e1be9282355.htm" />
   </HelpKINode>
   <HelpKINode Title="WaitingTimeForDisposing property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_WaitingTimeForDisposing.htm" />

@@ -16,6 +16,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>The one marked on the return value has higher priority than the one marked on the same member (method, event or delegate).</para>
     /// <para>Without <see cref="AssetOneWayOperatingAttribute"/>, <see cref="PropertyGetOneWayOperatingAttribute"/> or <see cref="ReturnIgnoredAttribute"/> specified, no return value is ignored.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = true, AllowMultiple = false)]
     public class ReturnIgnoredAttribute : Attribute
     {

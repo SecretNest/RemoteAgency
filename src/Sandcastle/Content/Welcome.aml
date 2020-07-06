@@ -2,51 +2,190 @@
 <topic id="54b2e0fb-7a41-44f2-8800-831e473db023" revisionNumber="1">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
-			<para>This is a sample conceptual topic.  You can use this as a starting point for adding more conceptual
-content to your help project.</para>
+      <para>
+        <externalLink>
+          <linkText>Remote Agency</linkText>
+          <linkUri>https://secretnest.info/RemoteAgency</linkUri>
+        </externalLink> is built for making the communicating among components in different computers easier.</para>
+      <para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
+      <para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <externalLink>
+        <linkText>Remote Hub</linkText>
+        <linkUri>https://secretnest.info/RemoteHub</linkUri>
+      </externalLink>.</para>
 		</introduction>
 
 		<section>
 			<title>Getting Started</title>
 			<content>
-				<para>To get started, add a documentation source to the project (a Visual Studio solution, project, or
-assembly and XML comments file).  See the <legacyBold>Getting Started</legacyBold> topics in the Sandcastle Help
-File Builder's help file for more information.  The following default items are included in this project:</para>
+				<para>Welcome to Remote Agency.</para>
 
+				<para>Remote Agency aims to a part of the technical solution for accessing a remote object, only management and serialization, but not network transportation.</para>
+        <para>
+          <externalLink>
+            <linkText>Remote Hub</linkText>
+            <linkUri>https://secretnest.info/RemoteHub</linkUri>
+          </externalLink>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
+
+        <para>The original way we used daily:</para>
+				<mediaLink>
+					<image placement="center" xlink:href="Original"/>
+				</mediaLink>
+				<para>could be transferred to:</para>
+				<mediaLink>
+					<image placement="center" xlink:href="NewStructure"/>
+				</mediaLink>
+				<para>The things user should handle:</para>
 				<list class="bullet">
 					<listItem>
-						<para><localUri>ContentLayout.content</localUri> - Use the content layout file to manage the
-conceptual content in the project and define its layout in the table of contents.</para>
+						<para>User code as usual;</para>
 					</listItem>
-
 					<listItem>
-						<para>The <localUri>.\media</localUri> folder - Place images in this folder that you will reference
-from conceptual content using <codeInline>medialLink</codeInline> or <codeInline>mediaLinkInline</codeInline>
-elements.  If you will not have any images in the file, you may remove this folder.</para>
+						<para>Server object as usual;</para>
 					</listItem>
-
 					<listItem>
-						<para>The <localUri>.\icons</localUri> folder - This contains a default logo for the help file.  You
-may replace it or remove it and the folder if not wanted.  If removed or if you change the file name, update
-the <ui>Transform Args</ui> project properties page by removing or changing the filename in the
-<codeInline>logoFile</codeInline> transform argument.  Note that unlike images referenced from conceptual topics,
-the logo file should have its <legacyBold>BuildAction</legacyBold> property set to <codeInline>Content</codeInline>.</para>
+						<para>A service contract interface, including all methods, properties and events, which clients should access;</para>
 					</listItem>
-
 					<listItem>
-						<para>The <localUri>.\Content</localUri> folder - Use this to store your conceptual topics.  You may
-name the files and organize them however you like.  One suggestion is to lay the files out on disk as you have
-them in the content layout file as shown in this project but the choice is yours.  Files can be added via the
-Solution Explorer or from within the content layout file editor.  Files must appear in the content layout file
-in order to be compiled into the help file.</para>
+						<para>Reference to Remote Agency;</para>
+					</listItem>
+					<listItem>
+						<para>The transportation among Remote Agency Manager objects, using <externalLink><linkText>Remote Hub</linkText><linkUri>https://secretnest.info/RemoteHub</linkUri></externalLink></para>
 					</listItem>
 				</list>
-
-				<para>See the <legacyBold>Conceptual Content</legacyBold> topics in the Sandcastle Help File Builder's
-help file for more information.  See the <legacyBold> Sandcastle MAML Guide</legacyBold> for details on Microsoft
-Assistance Markup Language (MAML) which is used to create these topics.</para>
+				<para>The things Remote Agency cares:</para>
+				<list class="bullet">
+					<listItem>
+						<para>Creating types based on the service contract interfaces (access modifier must be public);</para>
+					</listItem>
+          <listItem>
+						<para>Creating proxy and service wrapper objects;</para>
+          </listItem>
+					<listItem>
+						<para>Handling the serialization and packing process;</para>
+					</listItem>
+					<listItem>
+						<para>Catching and playing back exceptions on remote sites; etc.</para>
+					</listItem>
+				</list>
 			</content>
 		</section>
+
+		<section>
+			<title>Released packages</title>
+			<content>
+				<para>Currently, 3 packages are officially released on NuGet:</para>
+				<table>
+					<tableHeader>
+						<row>
+							<entry>
+								<para>Name</para>
+							</entry>
+							<entry>
+								<para>Description</para>
+							</entry>
+							<entry>
+								<para>Package</para>
+							</entry>
+							<entry>
+								<para>Documentation</para>
+							</entry>
+						</row>
+					</tableHeader>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency</para>
+						</entry>
+						<entry>
+							<para>Main library.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.Abstraction</para>
+						</entry>
+						<entry>
+							<para>Interfaces, attributes and exceptions (other than thrown while building) of Remote Agency.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Abstraction/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="5dad6464-9089-44e2-b945-e94a953defde" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.Neat</para>
+						</entry>
+						<entry>
+							<para>All functions in main library except serializers and reference of Sequential Scheduler.</para>
+						</entry>
+						<entry>
+							<para>
+								<externalLink>
+									<linkText>NuGet</linkText>
+									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Neat/</linkUri>
+								</externalLink>
+							</para>
+						</entry>
+						<entry>
+							<para>Integrated with main library.</para>
+						</entry>
+					</row>
+				</table>
+			</content>
+		</section>
+
+    <section>
+      <title>Supported frameworks</title>
+      <content>
+        <para>Remote Agency is built in dotnet core app 2.1 / 3.1 and dotnet framework 4.6.1.</para>
+      </content>
+    </section>
+    <section>
+      <title>Licenses</title>
+      <content>
+        <para>SecretNest.RemoteAgency packages are licensed under <externalLink>
+            <linkText>MIT</linkText>
+            <linkUri>https://github.com/SecretNest/RemoteAgency/tree/v2/LICENSE</linkUri>
+          </externalLink>. You can copy and redistribute the material in any medium or format
+          for any purpose, even commercially. Source code is available at <externalLink>
+            <linkText>Github</linkText>
+            <linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
+          </externalLink>.
+        </para>
+      </content>
+    </section>
+    <section>
+      <title>Links</title>
+      <content>
+        <para>Issues, requests and source code: <externalLink>
+            <linkText>Github</linkText>
+            <linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </section>
 
 		<relatedTopics>
 			<link xlink:href="32d8086d-6b51-4ca9-9dcf-6e1be9282355" />

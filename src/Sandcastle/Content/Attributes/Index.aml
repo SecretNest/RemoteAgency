@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <summary>
+      <para>Remote Agency allows users to customize the behavior of Remote Agency by providing attributes.</para>
+    </summary>
+
+    <introduction>
+      <autoOutline />
+      <para>Attributes can be marked on the interface and its related delegate for customizing behavior of Remote Agency.</para>
+    </introduction>
+
+    <section address="InterfaceLevel">
+      <title>Interface Level</title>
+      <content>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute</codeEntityReference></para></entry>
+              <entry><para>Designate the task scheduler should be used while accessing assets within.</para></entry>
+              <entry></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the proxy built from this interface is target site sticky or not.</para></entry>
+              <entry></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the local exception handling mode.</para></entry>
+              <entry><para>Can also be used on asset level which has higher priority.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the timeout settings of this asset.</para></entry>
+              <entry><para>Can also be used on asset level which has higher priority.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="AssetLevel">
+      <title>Asset Level</title>
+      <content>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the asset is ignored from type building.</para></entry>
+              <entry><para></para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the operating should be one way. No response is required.</para></entry>
+              <entry><para></para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute</codeEntityReference></para></entry>
+              <entry><para>PropertyGetOneWayOperatingAttribute</para></entry>
+              <entry><para>Valid on property only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the return value of the asset is ignored from type building.</para></entry>
+              <entry><para>Can also be used on return value level which has higher priority.</para><para>Can also be used on delegate level when applying on event which has lower priority.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="ParameterLevel">
+      <title>Parameter Level</title>
+      <content>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the parameter should or should not be transferred to remote site. If this attribute absent, the default behavior is transferring all parameters.</para></entry>
+              <entry><para>Valid on parameter of asset, including method and delegate of event.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the parameter should be send back to the caller.</para></entry>
+              <entry><para>Valid on parameter of asset, including method and delegate of event. The parameter should be marked with "Ref / ByRef" or "out / Out".</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a property or field which value should be send back to the caller is contained in the parameter.</para></entry>
+              <entry><para>Valid on parameter of asset, including method and delegate of event. The parameter should not be marked with "Ref / ByRef" or "out / Out".</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the property is a helper for accessing property of a parameter.</para></entry>
+              <entry><para>Valid on property within helper class.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="ParameterLevelEventOnly">
+      <title>Parameter Level for Event</title>
+      <content>
+        <para>Due to no parameter or return value is directly coded while defining an event, some related attribute need to be marked on asset or delegate when required.</para>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a parameter of the event should or should not be transferred to remote site.</para></entry>
+              <entry><para>Valid on event only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a parameter of the event should be send back to the caller.</para></entry>
+              <entry><para>Valid on event only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a property or field which value should be send back to the caller is contained in a parameter of the event.</para></entry>
+              <entry><para>Valid on event only.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="AttributePassThrough">
+      <title>Attribute Pass Through</title>
+      <content>
+        <para>Specifies attributes should be marked on and in the created proxy class. It's required when passing the proxy instance to user code which need to check attributes on and in it.</para>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies an attribute should be marked at the same place of built proxy class.</para></entry>
+              <entry><para>Valid on interface, method, event, property, parameter, generic parameter and return value.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a parameter value to be passed while constructing an instance of attribute.</para></entry>
+              <entry><para>Valid on an object marked with the same AttributeId of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference>.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a property value to be passed while initializing an instance of attribute.</para></entry>
+              <entry><para>Valid on an object marked with the same AttributeId of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference>.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies a field value to be passed while initializing an instance of attribute.</para></entry>
+              <entry><para>Valid on an object marked with the same AttributeId of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference>.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="CustomizedName">
+      <title>Customized Name</title>
+      <content>
+        <para>Names are chosen automatically by default. Specified name is used instead when attributes below are marked.</para>
+        <para>
+          <table>
+            <tableHeader>
+              <row>
+                <entry><para>Name</para></entry>
+                <entry><para>Description</para></entry>
+                <entry><para>Remark</para></entry>
+              </row>
+            </tableHeader>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the name of proxy, service wrapper and assembly to be generated.</para></entry>
+              <entry><para>Valid on interface only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the name of the asset.</para></entry>
+              <entry><para>Valid on method, event and property.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the names of the entity classes generated for holding parameters and return value of this asset.</para></entry>
+              <entry><para>Valid on method only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the names of entity classes generated for event adding, removing and raising.</para></entry>
+              <entry><para>Valid on event only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedEventParameterEntityPropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies property name for a parameter in entity class of the event.</para></entry>
+              <entry><para>Valid on event only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the name of the entity class generated for holding the request and response of getting this property.</para></entry>
+              <entry><para>Valid on property only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies property name in entity class generated for holding the response of getting this property.</para></entry>
+              <entry><para>Valid on property only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies the name of the entity class generated for holding the request and response of setting this property.</para></entry>
+              <entry><para>Valid on property only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies property name in entity class generated for holding the request of setting this property.</para></entry>
+              <entry><para>Valid on property only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedParameterEntityPropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies property name for the parameter in entity class.</para></entry>
+              <entry><para>Valid on parameter of method and delegate of event only.</para></entry>
+            </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies property name for return value in entity class.</para></entry>
+              <entry><para>Valid on method, event, delegate of event, and return value of method and delegate.</para></entry>
+            </row>
+          </table>
+        </para>
+      </content>
+    </section>
+    <section address="SerializerAdditional">
+      <title>Serializer Required Additional Attributes</title>
+      <content>
+        <para>The chosen serializer may contain some functions that can be customized. When required, serializer defines several attributes and specify the types of them through <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference> and <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference>. When these 4 properties are not set as null / Nothing, attributes with the type specified or its derived classes marked on the object will be collected and transferred to the entity code builder of serializer.</para>
+        <para>The built in serializer, binary and Json, do not have any additional attributes required.</para>
+      </content>
+    </section>
+    <section address="Example">
+      <title>Example</title>
+      <content>
+        <para><codeReference>AttributeExample#ThreadLockAttribute</codeReference> indicates all assets within this interface on server side should be accessed only in synchronization context, instead of the thread passing the message to Remote Agency. <codeReference>AttributeExample#CustomizedClassName</codeReference> replaces the default name of assembly to be built with "MyApp".
+        </para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

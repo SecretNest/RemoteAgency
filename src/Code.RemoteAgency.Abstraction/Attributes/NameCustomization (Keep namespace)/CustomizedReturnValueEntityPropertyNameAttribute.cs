@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
     /// <para>The one marked on the return value has higher priority than the one marked on the same member (method, event or delegate).</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Event | AttributeTargets.Delegate | AttributeTargets.ReturnValue, Inherited = true, AllowMultiple = false)]
     public class CustomizedReturnValueEntityPropertyNameAttribute : Attribute
     {

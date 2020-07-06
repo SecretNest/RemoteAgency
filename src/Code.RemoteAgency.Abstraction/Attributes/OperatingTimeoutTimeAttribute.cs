@@ -5,7 +5,7 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Specifies the time out setting of this asset.
+    /// Specifies the timeout settings of this asset.
     /// </summary>
     /// <remarks>
     /// <para>
@@ -19,6 +19,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>Set value to 0 to use the value from lower priority position.</para>
     /// </remarks>
     /// <seealso cref="AccessingTimeOutException"/>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class OperatingTimeoutTimeAttribute : Attribute
     {
@@ -26,11 +27,6 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.
         /// </summary>
         public int Timeout { get; }
-
-        /// <summary>
-        /// Gets the chosen mode for timeout setting.
-        /// </summary>
-        public OperatingTimeoutTimeMode Mode { get; }
 
         /// <summary>
         /// Gets the length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.
@@ -63,7 +59,6 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <remarks>To set specific value or values, uses other constructors.</remarks>
         public OperatingTimeoutTimeAttribute()
         {
-            Mode = OperatingTimeoutTimeMode.Default;
             //Timeout = 0;
             //EventAddingTimeout = 0;
             //EventRemovingTimeout = 0;
@@ -73,16 +68,13 @@ namespace SecretNest.RemoteAgency.Attributes
         }
 
         /// <summary>
-        /// Initializes an instance of the OperatingTimeoutTimeAttribute with simple mode.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute with only one value for all waiting time.
         /// </summary>
         /// <param name="timeout">The length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <remarks><para>All timeout settings will be set as the value specified by <paramref name="timeout"/>.</para>
-        /// <para>To set the timeout for event adding, removing and raising separately, uses <see cref="OperatingTimeoutTimeAttribute(int, int, int)"/> instead.</para>
-        /// <para>To set the timeout for property getting and setting separately, uses <see cref="OperatingTimeoutTimeAttribute(int, int)"/> instead.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int timeout)
         {
-            Mode = OperatingTimeoutTimeMode.Simple;
             Timeout = timeout;
             EventAddingTimeout = timeout;
             EventRemovingTimeout = timeout;
@@ -92,17 +84,15 @@ namespace SecretNest.RemoteAgency.Attributes
         }
 
         /// <summary>
-        /// Initializes an instance of the OperatingTimeoutTimeAttribute with event mode.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute with settings dedicated for event.
         /// </summary>
         /// <param name="eventAddingTimeout">The length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="eventRemovingTimeout">The length of time for waiting response for event removing, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="eventRaisingTimeout">The length of time for waiting response for event raising, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <remarks><para>This constructor is for setting the timeout for event adding, removing and raising separately only. To set to the same value, or set for asset other than event, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
-        /// <para>To set the timeout for property getting and setting separately, uses <see cref="OperatingTimeoutTimeAttribute(int, int)"/> instead.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int eventAddingTimeout, int eventRemovingTimeout, int eventRaisingTimeout)
         {
-            Mode = OperatingTimeoutTimeMode.Event;
             //Timeout = 0;
             EventAddingTimeout = eventAddingTimeout;
             EventRemovingTimeout = eventRemovingTimeout;
@@ -112,16 +102,14 @@ namespace SecretNest.RemoteAgency.Attributes
         }
         
         /// <summary>
-        /// Initializes an instance of the OperatingTimeoutTimeAttribute with property mode.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute with settings dedicated for property.
         /// </summary>
         /// <param name="propertyGettingTimeout">The length of time for waiting response for property getting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="propertySettingTimeout">The length of time for waiting response for property setting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <remarks><para>This constructor is for setting the timeout for property getting and setting separately only. To set to the same value, or set for asset other than property, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
-        /// <para>To set the timeout for event adding, removing and raising separately, uses <see cref="OperatingTimeoutTimeAttribute(int, int, int)"/> instead.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int propertyGettingTimeout, int propertySettingTimeout)
         {
-            Mode = OperatingTimeoutTimeMode.Property;
             //Timeout = 0;
             //EventAddingTimeout = 0;
             //EventRemovingTimeout = 0;
@@ -129,28 +117,24 @@ namespace SecretNest.RemoteAgency.Attributes
             PropertyGettingTimeout = propertyGettingTimeout;
             PropertySettingTimeout = propertySettingTimeout;
         }
-    }
-
-    /// <summary>
-    /// Mode choosing for timeout setting.
-    /// </summary>
-    public enum OperatingTimeoutTimeMode
-    {
         /// <summary>
-        /// Uses default set by Remote Agency instance.
+        /// Initializes an instance of the OperatingTimeoutTimeAttribute with all settings specified.
         /// </summary>
-        Default,
-        /// <summary>
-        /// Uses the value set by <see cref="OperatingTimeoutTimeAttribute.Timeout"/>.
-        /// </summary>
-        Simple,
-        /// <summary>
-        /// Uses the value set by 
-        /// </summary>
-        Event,
-        /// <summary>
-        /// 
-        /// </summary>
-        Property
+        /// <param name="methodCallingTimeout">The length of time for waiting response for method calling, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <param name="eventAddingTimeout">The length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <param name="eventRemovingTimeout">The length of time for waiting response for event removing, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <param name="eventRaisingTimeout">The length of time for waiting response for event raising, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <param name="propertyGettingTimeout">The length of time for waiting response for property getting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <param name="propertySettingTimeout">The length of time for waiting response for property setting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
+        /// <remarks>This constructor is designed for interface level which need to specify timeout for all kinds of assets.</remarks>
+        public OperatingTimeoutTimeAttribute(int methodCallingTimeout, int eventAddingTimeout, int eventRemovingTimeout, int eventRaisingTimeout, int propertyGettingTimeout, int propertySettingTimeout)
+        {
+            Timeout = methodCallingTimeout;
+            EventAddingTimeout = eventAddingTimeout;
+            EventRemovingTimeout = eventRemovingTimeout;
+            EventRaisingTimeout = eventRaisingTimeout;
+            PropertyGettingTimeout = propertyGettingTimeout;
+            PropertySettingTimeout = propertySettingTimeout;
+        }
     }
 }

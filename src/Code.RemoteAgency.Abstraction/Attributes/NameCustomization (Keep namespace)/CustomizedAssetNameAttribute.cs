@@ -8,6 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies the name of the asset.
     /// </summary>
     /// <remarks>When this attribute is not present, or <see cref="AssetName"/> is set to <see langword="null"/> or empty string, the asset name is chosen automatically.</remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event, Inherited = true, AllowMultiple = false)]
     public class CustomizedAssetNameAttribute : Attribute
     {

@@ -14,6 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When properties need to be set while initializing, marks the properties one by one using <see cref="AttributePassThroughPropertyAttribute"/>. The <see cref="AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// <para>When fields need to be set while initializing, marks the fields one by one using <see cref="AttributePassThroughFieldAttribute"/>. The <see cref="AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]

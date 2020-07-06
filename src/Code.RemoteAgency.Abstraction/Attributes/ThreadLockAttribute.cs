@@ -5,11 +5,12 @@ using System.Text;
 namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
-    /// Declares the source thread(s) should be used while accessing assets within.
+    /// Designate the task scheduler should be used while accessing assets within.
     /// </summary>
     /// <remarks><para>The default mode is <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.None"/> if this attribute is absent.</para>
     /// <para>In proxy, only event assets are affected.</para>
     /// <para>In service wrapper, method and property assets are affected.</para></remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public class ThreadLockAttribute : Attribute
     {

@@ -8,10 +8,12 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the local exception handling mode.
     /// </summary>
-    /// <remarks><para>The attribute declared with interface has lower priority on all assets within the interface. The default setting is <see cref="LocalExceptionHandlingMode"/>.Redirect if this attribute is absent.</para>
+    /// <remarks>
+    /// <para>This attribute affects the code being called remotely: method in service wrapper, event adding and removing in service wrapper, property getting and setting in service wrapper and event raising in proxy.</para>
+    /// <para>The attribute declared with interface has lower priority on all assets within the interface. The default setting is <see cref="LocalExceptionHandlingMode"/>.Redirect if this attribute is absent.</para>
     /// <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
-    /// <para>This attribute affects the following: method in service wrapper, event adding and removing in service wrapper, property getting and setting in service wrapper and event raising in proxy.</para>
     /// </remarks>
+    /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class LocalExceptionHandlingAttribute : Attribute
     {
