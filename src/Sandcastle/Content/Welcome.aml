@@ -26,14 +26,20 @@
             <linkUri>https://secretnest.info/RemoteHub</linkUri>
           </externalLink>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
 
-        <para>The original way we used daily:</para>
+        <para>The original way we used daily</para>
 				<mediaLink>
-					<image placement="center" xlink:href="Original"/>
+					<image placement="left" xlink:href="Picture1"/>
 				</mediaLink>
-				<para>could be transferred to:</para>
+				<para>could be transferred to</para>
 				<mediaLink>
-					<image placement="center" xlink:href="NewStructure"/>
+					<image placement="left" xlink:href="Picture2"/>
 				</mediaLink>
+				<para>with designed interface as service contract. Service object should implement the interface. This is finished by architecture or summary design.</para>
+				<para>Now, with the instances of Remote Agency and the object created by it, the structure is changed to</para>
+        <mediaLink>
+          <image placement="left" xlink:href="Picture3"/>
+        </mediaLink>
+				<para>and communication between instances of Remote Agency are serialized.</para>
 				<para>The things user should handle:</para>
 				<list class="bullet">
 					<listItem>

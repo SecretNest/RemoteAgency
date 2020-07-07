@@ -107,10 +107,12 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Attributes\Index.aml" />
+    <None Include="Content\Concept.aml" />
     <None Include="Content\Releases\Abstraction\Index.aml" />
     <None Include="Content\Releases\Main\Index.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
+    <None Include="Resources.pptx" />
   </ItemGroup>
   <ItemGroup>
     <ContentLayout Include="ContentLayout.content" />
@@ -122,18 +124,22 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="media\NewStructure.PNG">
-      <ImageId>NewStructure</ImageId>
-      <AlternateText>New Structure</AlternateText>
-    </Image>
-    <Image Include="media\Original.PNG">
-      <ImageId>Original</ImageId>
-      <AlternateText>Original</AlternateText>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <CodeSnippets Include="Content\Attributes\AttributeExamples.snippets" />
     <CodeSnippets Include="Content\Attributes\AttributePassThroughExamples.snippets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\Picture1.png">
+      <ImageId>Picture1</ImageId>
+      <AlternateText>Orifinal</AlternateText>
+    </Image>
+    <Image Include="media\Picture2.png">
+      <ImageId>Picture2</ImageId>
+      <AlternateText>Orifinal with Contract</AlternateText>
+    </Image>
+    <Image Include="media\Picture3.png">
+      <ImageId>Picture3</ImageId>
+      <AlternateText>New Structure</AlternateText>
+    </Image>
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
