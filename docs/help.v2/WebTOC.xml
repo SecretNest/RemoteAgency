@@ -2,51 +2,55 @@
 <HelpTOC>
 
   <HelpTOCNode Title="Welcome to the Remote Agency" Url="html/54b2e0fb-7a41-44f2-8800-831e473db023.htm" />
+  <HelpTOCNode Id="ff2479e0-2a73-4dd5-8a34-86ee9caa9fa2" Title="Components">
+    <HelpTOCNode Title="RemoteAgency and RemoteAgency.Neat" Url="html/e84a4d5d-59a8-43fa-9dca-67fcdffaefd5.htm" />
+    <HelpTOCNode Title="RemoteAgency.Abstraction" Url="html/5dad6464-9089-44e2-b945-e94a953defde.htm" />
+  </HelpTOCNode>
   <HelpTOCNode Title="Attributes" Url="html/14c3caef-7392-4f68-b7eb-d0bb014a2e4c.htm" />
   <HelpTOCNode Title="Version History" Url="html/32d8086d-6b51-4ca9-9dcf-6e1be9282355.htm" />
-  <HelpTOCNode Id="2bb9e1e1-c42a-4a69-841e-232eb159f7b0" Title="SecretNest.RemoteAgency" Url="html/N_SecretNest_RemoteAgency.htm">
-    <HelpTOCNode Id="10f5bfd3-d1e2-449b-b7fd-15365eefd916" Title="AccessingTimeOutException Class" Url="html/T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
+  <HelpTOCNode Id="26dd4020-7f00-4083-afb0-c18a9f62ba95" Title="SecretNest.RemoteAgency" Url="html/N_SecretNest_RemoteAgency.htm">
+    <HelpTOCNode Id="9eedebe7-a14f-4c2e-9beb-f8d130ce2925" Title="AccessingTimeOutException Class" Url="html/T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
       <HelpTOCNode Title="AccessingTimeOutException Constructor " Url="html/M_SecretNest_RemoteAgency_AccessingTimeOutException__ctor.htm" />
-      <HelpTOCNode Id="5af20b43-39c7-4b48-818e-db6ea09ef3af" Title="AccessingTimeOutException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
+      <HelpTOCNode Id="150da57f-6b1e-451b-98f4-11188d128547" Title="AccessingTimeOutException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
         <HelpTOCNode Title="OriginalMessage Property " Url="html/P_SecretNest_RemoteAgency_AccessingTimeOutException_OriginalMessage.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="8303d9de-ffce-4869-93e5-5dcba5d9e9ba" Title="AccessingTimeOutException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
+      <HelpTOCNode Id="5d0eba79-6f49-404c-84aa-1c4b383edd90" Title="AccessingTimeOutException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AccessingTimeOutException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_AccessingTimeOutException_GetObjectData.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="39e3c06f-56ea-4961-b1a9-526f9659f8c4" Title="AssetNotFoundException Class" Url="html/T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
+    <HelpTOCNode Id="22d7b79d-bacb-4635-803e-f52d698cee14" Title="AssetNotFoundException Class" Url="html/T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
       <HelpTOCNode Title="AssetNotFoundException Constructor " Url="html/M_SecretNest_RemoteAgency_AssetNotFoundException__ctor.htm" />
-      <HelpTOCNode Id="6bc5ab0d-fb38-4700-87b2-11f2e1bcd38f" Title="AssetNotFoundException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
+      <HelpTOCNode Id="cb73e1b2-e10f-42a2-8ce1-76798325c52c" Title="AssetNotFoundException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_AssetName.htm" />
         <HelpTOCNode Title="Message Property " Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_Message.htm" />
         <HelpTOCNode Title="MessageType Property " Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_MessageType.htm" />
         <HelpTOCNode Title="OriginalMessage Property " Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_OriginalMessage.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="5ab7b4ba-77c0-477c-92c4-5273db32d5c2" Title="AssetNotFoundException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
+      <HelpTOCNode Id="217d5e55-22e7-43e5-a69e-1fbdc82a2b3e" Title="AssetNotFoundException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssetNotFoundException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_AssetNotFoundException_GetObjectData.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_SecretNest_RemoteAgency_AssetNotFoundException_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="AttributePosition Enumeration" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
-    <HelpTOCNode Id="8a1cb4f4-0cf0-41bb-96ee-e95d9b64aee9" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
+    <HelpTOCNode Id="3097570f-8959-4ce8-8bb1-c73bfcfabac3" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
       <HelpTOCNode Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Constructor " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2__ctor.htm" />
-      <HelpTOCNode Id="34eb53e1-56e2-4bff-aff3-132e0b2c35d1" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
+      <HelpTOCNode Id="e88610cb-2444-49cc-bd5f-a1014e12867f" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
         <HelpTOCNode Title="IncludeTerminatedMessageInException Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_IncludeTerminatedMessageInException.htm" />
         <HelpTOCNode Title="MessageBody Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_MessageBody.htm" />
         <HelpTOCNode Title="MessageBodyGeneric Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_MessageBodyGeneric.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="358f6485-4ba5-43a5-ba0e-0029d5c18aac" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
+      <HelpTOCNode Id="f43329c2-d16e-42bd-9967-612ff5817a6b" Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2.htm">
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_Serialize.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="087c17b1-3709-436b-8a3e-7f506dde570e" Title="BeforeMessageProcessingEventArgsBase Class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
+    <HelpTOCNode Id="dcac1c9c-c366-41f3-95e4-7654edeeab5b" Title="BeforeMessageProcessingEventArgsBase Class" Url="html/T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
       <HelpTOCNode Title="BeforeMessageProcessingEventArgsBase Constructor " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase__ctor.htm" />
-      <HelpTOCNode Id="953d769f-c231-4c72-a7fb-6e7992b44e55" Title="BeforeMessageProcessingEventArgsBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
+      <HelpTOCNode Id="3553cbfe-b839-43c4-8860-370279fc871e" Title="BeforeMessageProcessingEventArgsBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
         <HelpTOCNode Title="FurtherProcessing Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_FurtherProcessing.htm" />
         <HelpTOCNode Title="MessageDirection Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_MessageDirection.htm" />
         <HelpTOCNode Title="MessageOfMessageProcessTerminatedException Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_MessageOfMessageProcessTerminatedException.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="262f117d-1219-4def-badc-f3472b2bd264" Title="BeforeMessageProcessingEventArgsBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
+      <HelpTOCNode Id="7745dba7-3077-4434-8602-ae3102e399c4" Title="BeforeMessageProcessingEventArgsBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase.htm">
         <HelpTOCNode Title="SetToContinue Method " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToContinue.htm" />
         <HelpTOCNode Title="SetToReplaceWithException Method " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToReplaceWithException.htm" />
         <HelpTOCNode Title="SetToReplaceWithExceptionAndReturn Method " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToReplaceWithExceptionAndReturn.htm" />
@@ -54,9 +58,9 @@
         <HelpTOCNode Title="SetToTerminateSilently Method " Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToTerminateSilently.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="1272db2f-34ef-4919-8551-ffec689dcb6b" Title="EntityBuilding Class" Url="html/T_SecretNest_RemoteAgency_EntityBuilding.htm">
+    <HelpTOCNode Id="09f897c3-7ac0-4b0e-b21b-b20eb91386aa" Title="EntityBuilding Class" Url="html/T_SecretNest_RemoteAgency_EntityBuilding.htm">
       <HelpTOCNode Title="EntityBuilding Constructor " Url="html/M_SecretNest_RemoteAgency_EntityBuilding__ctor.htm" />
-      <HelpTOCNode Id="98e52696-c2ef-4781-b4a6-d4e5aab7824a" Title="EntityBuilding Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityBuilding.htm">
+      <HelpTOCNode Id="da02d0e0-08c3-4624-9243-6e1d69eb858e" Title="EntityBuilding Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityBuilding.htm">
         <HelpTOCNode Title="AssetLevelAttributes Property " Url="html/P_SecretNest_RemoteAgency_EntityBuilding_AssetLevelAttributes.htm" />
         <HelpTOCNode Title="DelegateLevelAttributes Property " Url="html/P_SecretNest_RemoteAgency_EntityBuilding_DelegateLevelAttributes.htm" />
         <HelpTOCNode Title="EntityClassName Property " Url="html/P_SecretNest_RemoteAgency_EntityBuilding_EntityClassName.htm" />
@@ -66,73 +70,73 @@
       </HelpTOCNode>
       <HelpTOCNode Title="EntityBuilding Methods" Url="html/Methods_T_SecretNest_RemoteAgency_EntityBuilding.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="0a1c32ed-853d-4b2f-ad18-7c38104415b3" Title="EntityCodeBuilderBase Class" Url="html/T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
+    <HelpTOCNode Id="c8c8a969-fd8d-48e0-bdf3-aa4634e26e8f" Title="EntityCodeBuilderBase Class" Url="html/T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
       <HelpTOCNode Title="EntityCodeBuilderBase Constructor " Url="html/M_SecretNest_RemoteAgency_EntityCodeBuilderBase__ctor.htm" />
-      <HelpTOCNode Id="9ee58ffc-f55a-403f-bb7f-8b1bfce7480f" Title="EntityCodeBuilderBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
+      <HelpTOCNode Id="7b3f68ad-df40-4731-955c-e0f3adc6755d" Title="EntityCodeBuilderBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
         <HelpTOCNode Title="AssetLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_EntityCodeBuilderBase_AssetLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="DelegateLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_EntityCodeBuilderBase_DelegateLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="InterfaceLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_EntityCodeBuilderBase_InterfaceLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="ParameterLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_EntityCodeBuilderBase_ParameterLevelAttributeBaseType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e1fab8d2-60b7-4082-8d1a-0cb62e6322db" Title="EntityCodeBuilderBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
+      <HelpTOCNode Id="26a122e4-f870-4db9-b21b-49866d284aba" Title="EntityCodeBuilderBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_EntityCodeBuilderBase.htm">
         <HelpTOCNode Title="BuildEntity Method " Url="html/M_SecretNest_RemoteAgency_EntityCodeBuilderBase_BuildEntity.htm" />
         <HelpTOCNode Title="CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_EntityCodeBuilderBase_CreateEmptyMessage.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="3486f4aa-19e8-4b87-85c8-89521879c8d6" Title="EntityProperty Class" Url="html/T_SecretNest_RemoteAgency_EntityProperty.htm">
+    <HelpTOCNode Id="76efa62d-720a-4f14-aa25-d3ef11215582" Title="EntityProperty Class" Url="html/T_SecretNest_RemoteAgency_EntityProperty.htm">
       <HelpTOCNode Title="EntityProperty Constructor " Url="html/M_SecretNest_RemoteAgency_EntityProperty__ctor.htm" />
-      <HelpTOCNode Id="e9355e88-3323-4a4a-8c11-1e3b52639f72" Title="EntityProperty Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityProperty.htm">
+      <HelpTOCNode Id="a48f4e79-88b5-4c47-aa7b-d4f567b5ac6e" Title="EntityProperty Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityProperty.htm">
         <HelpTOCNode Title="Attributes Property " Url="html/P_SecretNest_RemoteAgency_EntityProperty_Attributes.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P_SecretNest_RemoteAgency_EntityProperty_Name.htm" />
         <HelpTOCNode Title="Type Property " Url="html/P_SecretNest_RemoteAgency_EntityProperty_Type.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EntityProperty Methods" Url="html/Methods_T_SecretNest_RemoteAgency_EntityProperty.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="491659fc-144b-483d-8967-c2c157e72f94" Title="EntityPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_EntityPropertyAttribute.htm">
+    <HelpTOCNode Id="0d933bd7-a450-4212-a3dd-a6bc77fa1926" Title="EntityPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_EntityPropertyAttribute.htm">
       <HelpTOCNode Title="EntityPropertyAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_EntityPropertyAttribute__ctor.htm" />
-      <HelpTOCNode Id="3840c52f-92a9-408a-a0be-6755e498860d" Title="EntityPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityPropertyAttribute.htm">
+      <HelpTOCNode Id="389e8125-988d-4dfb-b008-ccf324af7577" Title="EntityPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_EntityPropertyAttribute.htm">
         <HelpTOCNode Title="Attribute Property " Url="html/P_SecretNest_RemoteAgency_EntityPropertyAttribute_Attribute.htm" />
         <HelpTOCNode Title="Position Property " Url="html/P_SecretNest_RemoteAgency_EntityPropertyAttribute_Position.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EntityPropertyAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_EntityPropertyAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="7b4c37ab-fa73-47ae-8729-2e42fcec3a1d" Title="ExceptionRedirectedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs.htm">
+    <HelpTOCNode Id="ed7a57da-04f0-4f6b-a9a6-28e081c951ea" Title="ExceptionRedirectedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs.htm">
       <HelpTOCNode Title="ExceptionRedirectedEventArgs Constructor " Url="html/M_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs__ctor.htm" />
-      <HelpTOCNode Id="e5f85d61-ce2e-438c-8367-997eed326862" Title="ExceptionRedirectedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs.htm">
+      <HelpTOCNode Id="070274b9-ccd5-4519-be6a-8a251accf83b" Title="ExceptionRedirectedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs.htm">
         <HelpTOCNode Title="RedirectedException Property " Url="html/P_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs_RedirectedException.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ExceptionRedirectedEventArgs Methods" Url="html/Methods_T_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="415d714e-ed3c-43ca-a031-08c7e1bfcbc8" Title="IManagedObjectCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
-      <HelpTOCNode Id="32511471-f134-4578-a034-401042505be9" Title="IManagedObjectCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
+    <HelpTOCNode Id="b135ed78-932b-4df3-a538-938735189bb8" Title="IManagedObjectCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
+      <HelpTOCNode Id="48743355-3024-4517-ba77-d4f84f3053bb" Title="IManagedObjectCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
         <HelpTOCNode Title="GetSiteIdCallback Property " Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_GetSiteIdCallback.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="6bbdc10d-d7dc-4c47-bf50-204d275b9a30" Title="IManagedObjectCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
+      <HelpTOCNode Id="def1a5a7-a784-462b-9ed9-8738b1864e65" Title="IManagedObjectCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm">
         <HelpTOCNode Title="CloseRequestedByManagingObject Method " Url="html/M_SecretNest_RemoteAgency_IManagedObjectCommunicate_CloseRequestedByManagingObject.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="492dd6d3-aad3-4aa8-8f52-4579986658a7" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Interface" Url="html/T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
-      <HelpTOCNode Id="c72db6b0-28ab-46a1-a46b-142bf994c09b" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
+    <HelpTOCNode Id="83fba1f5-4bc8-444c-923e-29a0847aa978" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Interface" Url="html/T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
+      <HelpTOCNode Id="e87f27b4-a770-4fae-94bc-032958198ccb" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
         <HelpTOCNode Title="MessageBody Property " Url="html/P_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2_MessageBody.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="cd017f40-4ffa-46d4-a00b-d2b573c3f64f" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
+      <HelpTOCNode Id="20231029-2db3-41d5-8c72-ba7c1faa4a18" Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm">
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2_Serialize.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e121fadd-2474-4c47-a5ba-1fa490becfb1" Title="InstanceNotFoundException Class" Url="html/T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
+    <HelpTOCNode Id="12a682cb-c8b6-4114-8918-23e04f00f4cd" Title="InstanceNotFoundException Class" Url="html/T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
       <HelpTOCNode Title="InstanceNotFoundException Constructor " Url="html/M_SecretNest_RemoteAgency_InstanceNotFoundException__ctor.htm" />
-      <HelpTOCNode Id="8fc0bdae-0264-4cc0-9005-2229e030898b" Title="InstanceNotFoundException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
+      <HelpTOCNode Id="42f2d291-ff16-4691-b4ce-b75a6bd52897" Title="InstanceNotFoundException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
         <HelpTOCNode Title="ExceptionThrownSiteId Property " Url="html/P_SecretNest_RemoteAgency_InstanceNotFoundException_ExceptionThrownSiteId.htm" />
         <HelpTOCNode Title="InstanceId Property " Url="html/P_SecretNest_RemoteAgency_InstanceNotFoundException_InstanceId.htm" />
         <HelpTOCNode Title="OriginalMessage Property " Url="html/P_SecretNest_RemoteAgency_InstanceNotFoundException_OriginalMessage.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="0cafe31b-2b19-4aa0-8eec-0ef8ee3885af" Title="InstanceNotFoundException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
+      <HelpTOCNode Id="810f76e1-1d0c-42e5-a63f-a833b6c18d79" Title="InstanceNotFoundException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_InstanceNotFoundException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_InstanceNotFoundException_GetObjectData.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_SecretNest_RemoteAgency_InstanceNotFoundException_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f1b41888-e22e-44e1-b297-3d41a87583e3" Title="IProxyCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
-      <HelpTOCNode Id="93a5fa29-1ad5-4c86-8766-c9cd74741007" Title="IProxyCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
+    <HelpTOCNode Id="ebeab4f3-bee5-48d5-86e5-7e33189adc6d" Title="IProxyCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
+      <HelpTOCNode Id="4efb1c83-3da4-4822-a93c-f9934e931ab9" Title="IProxyCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
         <HelpTOCNode Title="InstanceId Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_InstanceId.htm" />
         <HelpTOCNode Title="ProxyStickyTargetSiteQueryCallback Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_ProxyStickyTargetSiteQueryCallback.htm" />
         <HelpTOCNode Title="ProxyStickyTargetSiteResetCallback Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_ProxyStickyTargetSiteResetCallback.htm" />
@@ -145,13 +149,13 @@
         <HelpTOCNode Title="SendPropertyGetMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_SendPropertyGetMessageCallback.htm" />
         <HelpTOCNode Title="SendPropertySetMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_SendPropertySetMessageCallback.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="7316f3a8-862c-4949-8a7e-2590d10bbc6d" Title="IProxyCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
+      <HelpTOCNode Id="bb80c683-3a83-4ee7-bd88-ced8a90a0e87" Title="IProxyCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IProxyCommunicate.htm">
         <HelpTOCNode Title="ProcessEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_ProcessEventRaisingMessage.htm" />
         <HelpTOCNode Title="ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_ProcessOneWayEventRaisingMessage.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0f6caf10-4c49-4838-b46f-acc4e1001d0f" Title="IRemoteAgencyMessage Interface" Url="html/T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm">
-      <HelpTOCNode Id="0656ef51-610a-4bbf-a481-0b7f74a696dd" Title="IRemoteAgencyMessage Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm">
+    <HelpTOCNode Id="b2afb112-3617-420d-99fb-1513e2fb241e" Title="IRemoteAgencyMessage Interface" Url="html/T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm">
+      <HelpTOCNode Id="2a382e01-1974-4b94-b970-2b4adbc53f6f" Title="IRemoteAgencyMessage Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_AssetName.htm" />
         <HelpTOCNode Title="Exception Property " Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_Exception.htm" />
         <HelpTOCNode Title="IsEmptyMessage Property " Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_IsEmptyMessage.htm" />
@@ -164,12 +168,12 @@
         <HelpTOCNode Title="TargetSiteId Property " Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_TargetSiteId.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7193b395-7e7c-4e2a-832a-8fc85629151e" Title="IServiceWrapperCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
-      <HelpTOCNode Id="f022ff8f-ef1c-480e-9ab6-dce8d04c065d" Title="IServiceWrapperCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
+    <HelpTOCNode Id="639b36cf-ff4c-4807-9fce-34ab8aefec35" Title="IServiceWrapperCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
+      <HelpTOCNode Id="b17a96b1-b078-44b3-b77b-a63c23f23099" Title="IServiceWrapperCommunicate Properties" Url="html/Properties_T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
         <HelpTOCNode Title="SendEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_IServiceWrapperCommunicate_SendEventMessageCallback.htm" />
         <HelpTOCNode Title="SendOneWayEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_IServiceWrapperCommunicate_SendOneWayEventMessageCallback.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f56981a2-6f57-4138-84d9-53d89b23e2e1" Title="IServiceWrapperCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
+      <HelpTOCNode Id="1c1e2864-7f94-4b72-ba35-56b14ba08bca" Title="IServiceWrapperCommunicate Methods" Url="html/Methods_T_SecretNest_RemoteAgency_IServiceWrapperCommunicate.htm">
         <HelpTOCNode Title="OnRemoteProxyClosing Method " Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_OnRemoteProxyClosing.htm" />
         <HelpTOCNode Title="ProcessEventAddingMessage Method " Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_ProcessEventAddingMessage.htm" />
         <HelpTOCNode Title="ProcessEventRemovingMessage Method " Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_ProcessEventRemovingMessage.htm" />
@@ -181,19 +185,19 @@
         <HelpTOCNode Title="ProcessPropertySettingMessage Method " Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_ProcessPropertySettingMessage.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5ddbeb45-eced-4aed-b381-bd23a0cb384c" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
+    <HelpTOCNode Id="eeb63456-055c-484e-8f4c-7dbc7d0eb44f" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
       <HelpTOCNode Title="MessageBodyEventArgs(TSerialized, TEntityBase) Constructor " Url="html/M_SecretNest_RemoteAgency_MessageBodyEventArgs_2__ctor.htm" />
-      <HelpTOCNode Id="83daab76-f7c4-4e9a-89ab-06e88646e3ca" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
+      <HelpTOCNode Id="14110cd4-74cb-42f3-a0bc-07a08e9152c3" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
         <HelpTOCNode Title="MessageBody Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgs_2_MessageBody.htm" />
         <HelpTOCNode Title="MessageBodyGeneric Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgs_2_MessageBodyGeneric.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="edcb34a3-9ec9-4af7-917b-eb3da3e0cab2" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
+      <HelpTOCNode Id="bd0d7aec-b489-4f65-b37a-6f77a10587c3" Title="MessageBodyEventArgs(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_MessageBodyEventArgs_2.htm">
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_MessageBodyEventArgs_2_Serialize.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cfea2995-94ab-4563-9fbd-493cad207a4e" Title="MessageBodyEventArgsBase Class" Url="html/T_SecretNest_RemoteAgency_MessageBodyEventArgsBase.htm">
+    <HelpTOCNode Id="84211069-8509-4ed0-8293-26d6a254652b" Title="MessageBodyEventArgsBase Class" Url="html/T_SecretNest_RemoteAgency_MessageBodyEventArgsBase.htm">
       <HelpTOCNode Title="MessageBodyEventArgsBase Constructor " Url="html/M_SecretNest_RemoteAgency_MessageBodyEventArgsBase__ctor.htm" />
-      <HelpTOCNode Id="34f48d76-83d4-4efd-8e99-dc1b657b37f3" Title="MessageBodyEventArgsBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageBodyEventArgsBase.htm">
+      <HelpTOCNode Id="9ed969da-98d8-4407-af4e-ca03e7288dc7" Title="MessageBodyEventArgsBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageBodyEventArgsBase.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_AssetName.htm" />
         <HelpTOCNode Title="Exception Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_Exception.htm" />
         <HelpTOCNode Title="IsEmptyMessage Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_IsEmptyMessage.htm" />
@@ -210,13 +214,13 @@
     </HelpTOCNode>
     <HelpTOCNode Title="MessageDirection Enumeration" Url="html/T_SecretNest_RemoteAgency_MessageDirection.htm" />
     <HelpTOCNode Title="MessageFurtherProcessing Enumeration" Url="html/T_SecretNest_RemoteAgency_MessageFurtherProcessing.htm" />
-    <HelpTOCNode Id="4dd5e824-a96a-4406-905c-f0cf3f5023d7" Title="MessageProcessTerminatedException Class" Url="html/T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
+    <HelpTOCNode Id="e7a267a0-1e31-4a54-80be-86516d9434e0" Title="MessageProcessTerminatedException Class" Url="html/T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
       <HelpTOCNode Title="MessageProcessTerminatedException Constructor " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException__ctor.htm" />
-      <HelpTOCNode Id="cbe1bec7-9f9c-482c-a38f-8e009ebef036" Title="MessageProcessTerminatedException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
+      <HelpTOCNode Id="6919c1ed-2952-49f4-ad5a-9613b21c0bbd" Title="MessageProcessTerminatedException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
         <HelpTOCNode Title="TerminatedMessage Property " Url="html/P_SecretNest_RemoteAgency_MessageProcessTerminatedException_TerminatedMessage.htm" />
         <HelpTOCNode Title="TerminatedPosition Property " Url="html/P_SecretNest_RemoteAgency_MessageProcessTerminatedException_TerminatedPosition.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="986af747-68ec-4216-82c3-29e3f64301d8" Title="MessageProcessTerminatedException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
+      <HelpTOCNode Id="1c05b07d-cfff-4baf-a93f-14cda002e63b" Title="MessageProcessTerminatedException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_GetObjectData.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_ToString.htm" />
       </HelpTOCNode>
@@ -224,9 +228,9 @@
     <HelpTOCNode Title="MessageProcessTerminatedPosition Enumeration" Url="html/T_SecretNest_RemoteAgency_MessageProcessTerminatedPosition.htm" />
     <HelpTOCNode Title="MessageType Enumeration" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
     <HelpTOCNode Title="ProxyStickyTargetSiteQueryCallback Delegate" Url="html/T_SecretNest_RemoteAgency_ProxyStickyTargetSiteQueryCallback.htm" />
-    <HelpTOCNode Id="b963db1b-1269-4665-938a-e1d6eab12d97" Title="RemoteAgency Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency.htm">
+    <HelpTOCNode Id="7d75e144-d45d-45e3-bf57-4f102011419a" Title="RemoteAgency Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency.htm">
       <HelpTOCNode Title="RemoteAgency Constructor " Url="html/M_SecretNest_RemoteAgency_RemoteAgency__ctor.htm" />
-      <HelpTOCNode Id="e8f7f411-72be-446f-afb0-cc3588111dd1" Title="RemoteAgency Properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency.htm">
+      <HelpTOCNode Id="20fac5cc-0e6f-410a-855c-60b343491644" Title="RemoteAgency Properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency.htm">
         <HelpTOCNode Title="DefaultEventAddingTimeoutForBuilding Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventAddingTimeoutForBuilding.htm" />
         <HelpTOCNode Title="DefaultEventRaisingTimeoutForBuilding Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventRaisingTimeoutForBuilding.htm" />
         <HelpTOCNode Title="DefaultEventRemovingTimeoutForBuilding Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_DefaultEventRemovingTimeoutForBuilding.htm" />
@@ -236,7 +240,7 @@
         <HelpTOCNode Title="SiteId Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_SiteId.htm" />
         <HelpTOCNode Title="WaitingTimeForDisposing Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_WaitingTimeForDisposing.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="77a89dcd-fa0c-4236-98e0-d158db31bef8" Title="RemoteAgency Methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency.htm">
+      <HelpTOCNode Id="504f6521-9b90-47f5-b356-4ba382519f53" Title="RemoteAgency Methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency.htm">
         <HelpTOCNode Title="CloseAllInstances Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CloseAllInstances.htm" />
         <HelpTOCNode Title="CloseInstance Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CloseInstance.htm" />
         <HelpTOCNode Title="CloseProxy Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CloseProxy.htm" />
@@ -245,11 +249,11 @@
         <HelpTOCNode Title="CreateServiceWrapper Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CreateServiceWrapper.htm" />
         <HelpTOCNode Title="CreateWithBinarySerializer Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CreateWithBinarySerializer.htm" />
         <HelpTOCNode Title="CreateWithJsonSerializer Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_CreateWithJsonSerializer.htm" />
-        <HelpTOCNode Id="785f5689-4d48-4432-8405-6fc2a3756c99" Title="Dispose Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_Dispose.htm">
+        <HelpTOCNode Id="92f3a0ee-c40a-4bb7-8410-fe18e22a16c9" Title="Dispose Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_Dispose.htm" />
           <HelpTOCNode Title="Dispose Method (Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_Dispose_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="948df10d-2031-4a3a-9bde-13049a13f393" Title="GenerateEmptyMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_GenerateEmptyMessage.htm">
+        <HelpTOCNode Id="7189effa-3303-47fc-adf7-685ae11a7df9" Title="GenerateEmptyMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_GenerateEmptyMessage.htm">
           <HelpTOCNode Title="GenerateEmptyMessage Method (Guid, Guid, MessageType, String, Guid, Exception)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_GenerateEmptyMessage.htm" />
           <HelpTOCNode Title="GenerateEmptyMessage Method (Guid, Guid, Guid, MessageType, String, Guid, Exception, Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_GenerateEmptyMessage_1.htm" />
         </HelpTOCNode>
@@ -263,43 +267,43 @@
         <HelpTOCNode Title="TryGetTaskScheduler Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_TryGetTaskScheduler.htm" />
         <HelpTOCNode Title="TryRemoveTaskScheduler Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_TryRemoveTaskScheduler.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="36ea6ee9-bbd6-438b-b057-4ae56749b345" Title="RemoteAgency Events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency.htm">
+      <HelpTOCNode Id="f7767c90-638c-4712-bf65-e46b646dbd45" Title="RemoteAgency Events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency.htm">
         <HelpTOCNode Title="AfterTypeAndAssemblyBuilt Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_AfterTypeAndAssemblyBuilt.htm" />
         <HelpTOCNode Title="BeforeAssemblyCreated Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_BeforeAssemblyCreated.htm" />
         <HelpTOCNode Title="BeforeTypeCreated Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_BeforeTypeCreated.htm" />
         <HelpTOCNode Title="ExceptionRedirected Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_ExceptionRedirected.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="9896354d-50f0-4e92-9d8b-f31f69ed2b4f" Title="RemoteAgency Fields" Url="html/Fields_T_SecretNest_RemoteAgency_RemoteAgency.htm">
+      <HelpTOCNode Id="360be47c-6e56-45c0-9772-f093d8e97f09" Title="RemoteAgency Fields" Url="html/Fields_T_SecretNest_RemoteAgency_RemoteAgency.htm">
         <HelpTOCNode Title="EntityCodeBuilder Field" Url="html/F_SecretNest_RemoteAgency_RemoteAgency_EntityCodeBuilder.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e8ec4319-a183-4c22-8e80-e90d278f25ed" Title="RemoteAgency(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
+    <HelpTOCNode Id="4a452348-5540-4ed2-81af-c7b8e55e0359" Title="RemoteAgency(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
       <HelpTOCNode Title="RemoteAgency(TSerialized, TEntityBase) Constructor " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2__ctor.htm" />
-      <HelpTOCNode Id="eb5bd795-2b89-41eb-9523-03908e03fea9" Title="RemoteAgency(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
+      <HelpTOCNode Id="7416ccf8-343e-47b4-ab6a-9f05402a9376" Title="RemoteAgency(TSerialized, TEntityBase) Properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
         <HelpTOCNode Title="BypassSystemMessagesFromFiltering Property " Url="html/P_SecretNest_RemoteAgency_RemoteAgency_2_BypassSystemMessagesFromFiltering.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="fa8c859a-49bd-4d09-8c48-f6c27d1ecf13" Title="RemoteAgency(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
+      <HelpTOCNode Id="91cc3b0e-b218-4273-b820-b2544628f917" Title="RemoteAgency(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
         <HelpTOCNode Title="CloseAllInstances Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseAllInstances.htm" />
         <HelpTOCNode Title="CloseInstance Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseInstance.htm" />
-        <HelpTOCNode Id="4be225a7-80be-4128-8a39-d05df7f0f64d" Title="CreateProxy Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm">
+        <HelpTOCNode Id="435c8ff8-c62e-4f45-9acc-442d0916c033" Title="CreateProxy Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm">
           <HelpTOCNode Title="CreateProxy(TInterface) Method (Guid, Guid, Guid, Int32, Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy__1.htm" />
           <HelpTOCNode Title="CreateProxy Method (Type, Guid, Guid, Guid, Int32, Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="111f9d3d-1bda-4e5b-86ce-c6742091c1f8" Title="CreateServiceWrapper Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm">
+        <HelpTOCNode Id="b7874032-ec64-4947-a208-37c354da1af4" Title="CreateServiceWrapper Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm">
           <HelpTOCNode Title="CreateServiceWrapper(TInterface) Method (TInterface, Guid, Int32, Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper__1.htm" />
           <HelpTOCNode Title="CreateServiceWrapper Method (Type, Object, Guid, Int32, Boolean)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Deserialize Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Deserialize.htm" />
         <HelpTOCNode Title="OnRemoteProxyClosing Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_OnRemoteProxyClosing.htm" />
         <HelpTOCNode Title="OnRemoteServiceWrapperClosing Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_OnRemoteServiceWrapperClosing.htm" />
-        <HelpTOCNode Id="bf3e1ac0-3b7c-4c6a-9304-5c816b7a3156" Title="ProcessReceivedMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedMessage.htm">
+        <HelpTOCNode Id="d001f8a3-f78c-48ce-afed-737f9f4cc17a" Title="ProcessReceivedMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedMessage.htm">
           <HelpTOCNode Title="ProcessReceivedMessage Method (TEntityBase)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedMessage_1.htm" />
           <HelpTOCNode Title="ProcessReceivedMessage Method (IRemoteAgencyMessage)" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedMessage.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="ProcessReceivedSerializedMessage Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_ProcessReceivedSerializedMessage.htm" />
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Serialize.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="b45d4e15-f4ed-46e3-87ae-bc64e1223431" Title="RemoteAgency(TSerialized, TEntityBase) Events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
+      <HelpTOCNode Id="77a9a140-58b0-4a15-bfc3-301511f5c1ca" Title="RemoteAgency(TSerialized, TEntityBase) Events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency_2.htm">
         <HelpTOCNode Title="AfterMessageReceived Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_2_AfterMessageReceived.htm" />
         <HelpTOCNode Title="BeforeMessageSending Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_2_BeforeMessageSending.htm" />
         <HelpTOCNode Title="MessageForSendingPrepared Event" Url="html/E_SecretNest_RemoteAgency_RemoteAgency_2_MessageForSendingPrepared.htm" />
@@ -308,9 +312,9 @@
     <HelpTOCNode Title="SendEmptyMessageCallback Delegate" Url="html/T_SecretNest_RemoteAgency_SendEmptyMessageCallback.htm" />
     <HelpTOCNode Title="SendOneWayMessageCallback Delegate" Url="html/T_SecretNest_RemoteAgency_SendOneWayMessageCallback.htm" />
     <HelpTOCNode Title="SendTwoWayMessageCallback Delegate" Url="html/T_SecretNest_RemoteAgency_SendTwoWayMessageCallback.htm" />
-    <HelpTOCNode Id="3db655fa-0c09-45c6-9fca-0962d1ce89bb" Title="SerializingHelperBase(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_SerializingHelperBase_2.htm">
+    <HelpTOCNode Id="caf94d68-7efe-4943-ae12-7ddcea23387d" Title="SerializingHelperBase(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_SerializingHelperBase_2.htm">
       <HelpTOCNode Title="SerializingHelperBase(TSerialized, TEntityBase) Constructor " Url="html/M_SecretNest_RemoteAgency_SerializingHelperBase_2__ctor.htm" />
-      <HelpTOCNode Id="d745979e-f00c-4d27-8010-b7223189306b" Title="SerializingHelperBase(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_SerializingHelperBase_2.htm">
+      <HelpTOCNode Id="85cbe8ec-ff75-4eeb-a420-bca1eb973f75" Title="SerializingHelperBase(TSerialized, TEntityBase) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_SerializingHelperBase_2.htm">
         <HelpTOCNode Title="Deserialize Method " Url="html/M_SecretNest_RemoteAgency_SerializingHelperBase_2_Deserialize.htm" />
         <HelpTOCNode Title="DeserializeWithExceptionTolerance Method " Url="html/M_SecretNest_RemoteAgency_SerializingHelperBase_2_DeserializeWithExceptionTolerance.htm" />
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_SerializingHelperBase_2_Serialize.htm" />
@@ -318,26 +322,26 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="dfe533f3-eead-4d3b-b72a-886d1562787d" Title="SecretNest.RemoteAgency.AssemblyBuilding" Url="html/N_SecretNest_RemoteAgency_AssemblyBuilding.htm">
-    <HelpTOCNode Id="8acbc9d9-68f2-41f5-a3d8-075eb6630c11" Title="AfterTypeAndAssemblyBuiltEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
-      <HelpTOCNode Id="bd4c12a7-0dfb-4651-8864-c9fa28bcac7c" Title="AfterTypeAndAssemblyBuiltEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
+  <HelpTOCNode Id="c8b9f8eb-129b-4ab9-9571-49e54a56184a" Title="SecretNest.RemoteAgency.AssemblyBuilding" Url="html/N_SecretNest_RemoteAgency_AssemblyBuilding.htm">
+    <HelpTOCNode Id="7fc77f5c-9bd8-4b6b-8aae-97468879c11f" Title="AfterTypeAndAssemblyBuiltEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
+      <HelpTOCNode Id="05b8c14f-66c6-4755-a02f-8bf4b694289e" Title="AfterTypeAndAssemblyBuiltEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
         <HelpTOCNode Title="Assembly Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Assembly.htm" />
         <HelpTOCNode Title="BuiltEntities Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_BuiltEntities.htm" />
         <HelpTOCNode Title="BuiltProxy Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_BuiltProxy.htm" />
         <HelpTOCNode Title="BuiltServiceWrapper Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_BuiltServiceWrapper.htm" />
         <HelpTOCNode Title="SourceInterface Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_SourceInterface.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="858ec3a4-841d-46c5-88e4-7c9c928e09a0" Title="AfterTypeAndAssemblyBuiltEventArgs Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
-        <HelpTOCNode Id="5cad3261-a4fa-48cc-a050-621f2eb8cdc8" Title="Dispose Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Dispose.htm">
+      <HelpTOCNode Id="5bd49128-de0e-4205-8955-e4248b0520f9" Title="AfterTypeAndAssemblyBuiltEventArgs Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs.htm">
+        <HelpTOCNode Id="df5fb8e0-2d00-4884-8f79-a6c36af3a6e6" Title="Dispose Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Dispose.htm" />
           <HelpTOCNode Title="Dispose Method (Boolean)" Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Dispose_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Save Method " Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_AfterTypeAndAssemblyBuiltEventArgs_Save.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="bce6cdf1-597b-4a99-8f65-3945ca6a78e7" Title="BeforeAssemblyCreatedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm">
+    <HelpTOCNode Id="9ba51792-cf02-4653-a969-63d3743c6026" Title="BeforeAssemblyCreatedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm">
       <HelpTOCNode Title="BeforeAssemblyCreatedEventArgs Constructor " Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs__ctor.htm" />
-      <HelpTOCNode Id="27c519aa-304d-40be-8bf7-6b562a7d5f19" Title="BeforeAssemblyCreatedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm">
+      <HelpTOCNode Id="5eae7f0f-5548-4ced-943b-57ffe7441c8a" Title="BeforeAssemblyCreatedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm">
         <HelpTOCNode Title="AssemblyBuilder Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs_AssemblyBuilder.htm" />
         <HelpTOCNode Title="BuiltEntities Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs_BuiltEntities.htm" />
         <HelpTOCNode Title="BuiltProxy Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs_BuiltProxy.htm" />
@@ -347,9 +351,9 @@
       </HelpTOCNode>
       <HelpTOCNode Title="BeforeAssemblyCreatedEventArgs Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="94cfcacf-6901-4880-a22e-6e24b71f1931" Title="BeforeTypeCreatedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm">
+    <HelpTOCNode Id="81c7280f-05f1-4a4a-a366-9f79b310a587" Title="BeforeTypeCreatedEventArgs Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm">
       <HelpTOCNode Title="BeforeTypeCreatedEventArgs Constructor " Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs__ctor.htm" />
-      <HelpTOCNode Id="b109e690-2631-45b7-ba63-2109d9ff3e67" Title="BeforeTypeCreatedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm">
+      <HelpTOCNode Id="b900d98e-5f1a-42db-8db2-88ee7f313efe" Title="BeforeTypeCreatedEventArgs Properties" Url="html/Properties_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm">
         <HelpTOCNode Title="BuiltClassType Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_BuiltClassType.htm" />
         <HelpTOCNode Title="SourceInterface Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_SourceInterface.htm" />
         <HelpTOCNode Title="TypeBuilder Property " Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_TypeBuilder.htm" />
@@ -357,42 +361,42 @@
       <HelpTOCNode Title="BeforeTypeCreatedEventArgs Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="BuiltClassType Enumeration" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BuiltClassType.htm" />
-    <HelpTOCNode Id="9e5d3b0e-f625-438b-b247-1416f34cba3a" Title="FastActivator Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm">
-      <HelpTOCNode Id="c7cdd62d-d355-4df5-b0a7-9bb2387a9901" Title="FastActivator Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm">
-        <HelpTOCNode Id="512b4571-fc3f-4d81-912f-602ddf43821d" Title="CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance.htm">
+    <HelpTOCNode Id="ee0cd375-7b5d-4d46-b084-5e8b15b5b926" Title="FastActivator Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm">
+      <HelpTOCNode Id="905a8229-d962-4166-bf2b-afb5cb4f8b9e" Title="FastActivator Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm">
+        <HelpTOCNode Id="3206e3a7-5143-4f61-a4d6-018f83e5184c" Title="CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance.htm">
           <HelpTOCNode Title="CreateInstance Method (Type)" Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance.htm" />
           <HelpTOCNode Title="CreateInstance(T) Method (Type)" Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance__1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7fb40549-e3cb-4667-b871-3a8e474c5ac6" Title="FastActivator(TArg) Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm">
-      <HelpTOCNode Id="73b88ffa-6121-4a64-b8d0-2fd1857c6343" Title="FastActivator(TArg) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm">
-        <HelpTOCNode Id="a62ac6c8-580f-4d0b-a2e5-74a7b82b7ed9" Title="CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm">
+    <HelpTOCNode Id="205cca47-f402-4e41-8ad8-cf9ed9e92447" Title="FastActivator(TArg) Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm">
+      <HelpTOCNode Id="e634f7d6-e750-43ec-a23c-29c8c7633548" Title="FastActivator(TArg) Methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm">
+        <HelpTOCNode Id="b58ef022-a445-48c7-918e-260da0934b60" Title="CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm">
           <HelpTOCNode Title="CreateInstance Method (Type, TArg)" Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm" />
           <HelpTOCNode Title="CreateInstance(T) Method (Type, TArg)" Url="html/M_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance__1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="08e1e151-afd2-49eb-87d6-ff9ce8b8c299" Title="SecretNest.RemoteAgency.Attributes" Url="html/N_SecretNest_RemoteAgency_Attributes.htm">
-    <HelpTOCNode Id="c63cfb9d-179c-40c2-9998-7b2d533c2d6b" Title="AssetIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm">
+  <HelpTOCNode Id="db9b014d-8564-45cc-8264-105a7170551e" Title="SecretNest.RemoteAgency.Attributes" Url="html/N_SecretNest_RemoteAgency_Attributes.htm">
+    <HelpTOCNode Id="a077bab2-13a9-46df-a021-89a4a0a8e7a9" Title="AssetIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm">
       <HelpTOCNode Title="AssetIgnoredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute__ctor.htm" />
-      <HelpTOCNode Id="de28b8f2-d3a2-433d-9b53-4f0451208935" Title="AssetIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm">
+      <HelpTOCNode Id="34bce405-d426-4bf1-bc82-98fe227ec2a2" Title="AssetIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm">
         <HelpTOCNode Title="IsIgnored Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute_IsIgnored.htm" />
         <HelpTOCNode Title="WillThrowException Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute_WillThrowException.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="AssetIgnoredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="e189261b-3f87-4180-8c77-e7aea0b0b427" Title="AssetOneWayOperatingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm">
+    <HelpTOCNode Id="27cf4d96-7411-425d-8f1d-a988c398322e" Title="AssetOneWayOperatingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm">
       <HelpTOCNode Title="AssetOneWayOperatingAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute__ctor.htm" />
-      <HelpTOCNode Id="91af5320-e052-439e-934d-c4106ba78d1d" Title="AssetOneWayOperatingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm">
+      <HelpTOCNode Id="d0e372b5-5e1b-463f-8086-b3b25cbe2a1e" Title="AssetOneWayOperatingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm">
         <HelpTOCNode Title="IsOneWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute_IsOneWay.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="AssetOneWayOperatingAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="b70b2594-7e40-49db-9287-be54073375bc" Title="AttributePassThroughAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm">
+    <HelpTOCNode Id="071c8e93-388b-40ef-91e6-d00fd70fbf0b" Title="AttributePassThroughAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm">
       <HelpTOCNode Title="AttributePassThroughAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute__ctor.htm" />
-      <HelpTOCNode Id="9401a249-0ae7-4edf-ab75-c3b37b5c2580" Title="AttributePassThroughAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm">
+      <HelpTOCNode Id="90849f5f-1924-44d1-9c87-81f00eec0202" Title="AttributePassThroughAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm">
         <HelpTOCNode Title="Attribute Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_Attribute.htm" />
         <HelpTOCNode Title="AttributeConstructorParameters Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_AttributeConstructorParameters.htm" />
         <HelpTOCNode Title="AttributeConstructorParameterTypes Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_AttributeConstructorParameterTypes.htm" />
@@ -400,9 +404,9 @@
       </HelpTOCNode>
       <HelpTOCNode Title="AttributePassThroughAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4e3dfac8-5a3b-4003-9358-1e3035fa27b9" Title="AttributePassThroughFieldAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm">
+    <HelpTOCNode Id="273b9471-79c2-4a9b-80c4-74f788462aa0" Title="AttributePassThroughFieldAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm">
       <HelpTOCNode Title="AttributePassThroughFieldAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute__ctor.htm" />
-      <HelpTOCNode Id="6236a52e-faa6-4790-97b5-2a97eabdb50b" Title="AttributePassThroughFieldAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm">
+      <HelpTOCNode Id="150119ac-c6e5-47b3-9092-06e924e6f94c" Title="AttributePassThroughFieldAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm">
         <HelpTOCNode Title="AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_AttributeId.htm" />
         <HelpTOCNode Title="FieldName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_FieldName.htm" />
         <HelpTOCNode Title="Order Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_Order.htm" />
@@ -410,18 +414,18 @@
       </HelpTOCNode>
       <HelpTOCNode Title="AttributePassThroughFieldAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="40f4260c-ccf3-4968-9c48-f3286737e68c" Title="AttributePassThroughIndexBasedParameterAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm">
+    <HelpTOCNode Id="2d791f53-c827-4d24-9f3b-82ca40d92a80" Title="AttributePassThroughIndexBasedParameterAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm">
       <HelpTOCNode Title="AttributePassThroughIndexBasedParameterAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute__ctor.htm" />
-      <HelpTOCNode Id="be8708ad-dfbc-46ea-83ee-dc064da9b0f8" Title="AttributePassThroughIndexBasedParameterAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm">
+      <HelpTOCNode Id="0db55bd9-6e93-482e-88e1-238d73141153" Title="AttributePassThroughIndexBasedParameterAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm">
         <HelpTOCNode Title="AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_AttributeId.htm" />
         <HelpTOCNode Title="ParameterIndex Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_ParameterIndex.htm" />
         <HelpTOCNode Title="Value Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_Value.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="AttributePassThroughIndexBasedParameterAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="ec605b70-6912-4ab6-b32e-e4ec2819a0cd" Title="AttributePassThroughPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm">
+    <HelpTOCNode Id="57daa910-7359-418e-af29-2aed36139267" Title="AttributePassThroughPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm">
       <HelpTOCNode Title="AttributePassThroughPropertyAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute__ctor.htm" />
-      <HelpTOCNode Id="39333bdb-993f-456f-9f2c-5fe03dd9eedb" Title="AttributePassThroughPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm">
+      <HelpTOCNode Id="af9f092a-474c-4e57-8bd1-f7af6173238d" Title="AttributePassThroughPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm">
         <HelpTOCNode Title="AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_AttributeId.htm" />
         <HelpTOCNode Title="Order Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_Order.htm" />
         <HelpTOCNode Title="PropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_PropertyName.htm" />
@@ -429,25 +433,25 @@
       </HelpTOCNode>
       <HelpTOCNode Title="AttributePassThroughPropertyAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="3ff9dcac-e61e-4ce3-9661-ef24157454ef" Title="CustomizedAssetNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute.htm">
+    <HelpTOCNode Id="27aa1aa1-5ae0-4e16-a234-666c504fd97c" Title="CustomizedAssetNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute.htm">
       <HelpTOCNode Title="CustomizedAssetNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="5d57d5ba-444a-4ba8-bc6d-5d62a488ba2d" Title="CustomizedAssetNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute.htm">
+      <HelpTOCNode Id="6dd7e37b-3be7-478d-9108-ceb8a2716bec" Title="CustomizedAssetNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute_AssetName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedAssetNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedAssetNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="b627f3ba-b884-467c-814f-a84af2b57835" Title="CustomizedClassNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute.htm">
+    <HelpTOCNode Id="7ec74a7a-e600-48a9-bae1-25516395e850" Title="CustomizedClassNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute.htm">
       <HelpTOCNode Title="CustomizedClassNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="89d5c0ab-71f6-424b-a19a-fc5055131e9d" Title="CustomizedClassNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute.htm">
+      <HelpTOCNode Id="aefb7f05-b87b-4c3d-a291-7b6a4dca65ce" Title="CustomizedClassNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute.htm">
         <HelpTOCNode Title="AssemblyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute_AssemblyName.htm" />
         <HelpTOCNode Title="ProxyClassName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute_ProxyClassName.htm" />
         <HelpTOCNode Title="ServiceWrapperClassName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute_ServiceWrapperClassName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedClassNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a6226d5a-9d8c-4c9e-8d1b-9ff1e0c72529" Title="CustomizedEventEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute.htm">
+    <HelpTOCNode Id="cc4f14a7-059e-4bf7-a9eb-a32edee783bb" Title="CustomizedEventEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute.htm">
       <HelpTOCNode Title="CustomizedEventEntityNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="c410966f-62b5-40ec-b064-4afbb4e5bf93" Title="CustomizedEventEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute.htm">
+      <HelpTOCNode Id="d84c86f6-428a-470d-b07a-e24d82635194" Title="CustomizedEventEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute.htm">
         <HelpTOCNode Title="AddingRequestEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute_AddingRequestEntityName.htm" />
         <HelpTOCNode Title="AddingResponseEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute_AddingResponseEntityName.htm" />
         <HelpTOCNode Title="RaisingFeedbackEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute_RaisingFeedbackEntityName.htm" />
@@ -457,106 +461,106 @@
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedEventEntityNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="95175ada-80e4-431f-8a2a-0a489b5e5cd4" Title="CustomizedEventParameterEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute.htm">
+    <HelpTOCNode Id="cab415cf-7eab-4cb5-bdcb-b657c0e31842" Title="CustomizedEventParameterEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute.htm">
       <HelpTOCNode Title="CustomizedEventParameterEntityPropertyNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="59c5db13-a58b-42ef-b360-7eca8814aea2" Title="CustomizedEventParameterEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute.htm">
+      <HelpTOCNode Id="d5a97cd6-d87b-45e0-a282-5cf10e3f186f" Title="CustomizedEventParameterEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute.htm">
         <HelpTOCNode Title="ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute_ParameterName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedEventParameterEntityPropertyNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedEventParameterEntityPropertyNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="d0c88750-ccda-4602-a7c6-f1b6d3c49be3" Title="CustomizedMethodEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute.htm">
+    <HelpTOCNode Id="30b73bcb-47fb-43ca-a16d-fc3212f5e7e8" Title="CustomizedMethodEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute.htm">
       <HelpTOCNode Title="CustomizedMethodEntityNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="539954db-a109-4f7e-a259-132d4c21742e" Title="CustomizedMethodEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute.htm">
+      <HelpTOCNode Id="b1f39c20-f2fd-4ddb-be40-97789b592e9b" Title="CustomizedMethodEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute.htm">
         <HelpTOCNode Title="ParameterEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute_ParameterEntityName.htm" />
         <HelpTOCNode Title="ReturnValueEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute_ReturnValueEntityName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedMethodEntityNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedMethodEntityNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="6a63fc76-9e25-4c40-87a5-c0503041f766" Title="CustomizedParameterEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute.htm">
+    <HelpTOCNode Id="c7dc9007-d3be-488a-b372-4398e3b20a05" Title="CustomizedParameterEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute.htm">
       <HelpTOCNode Title="CustomizedParameterEntityPropertyNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="65fd1205-2d33-48db-b5cf-1050972fcdec" Title="CustomizedParameterEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute.htm">
+      <HelpTOCNode Id="40887b01-8e0a-4c8a-9b7d-4349ee8b4096" Title="CustomizedParameterEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute_EntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedParameterEntityPropertyNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedParameterEntityPropertyNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="95f5af34-4c83-412d-86c9-dfa284d62a52" Title="CustomizedPropertyGetEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute.htm">
+    <HelpTOCNode Id="ef68ba29-3451-431b-ba21-6101f83c1edb" Title="CustomizedPropertyGetEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute.htm">
       <HelpTOCNode Title="CustomizedPropertyGetEntityNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="9af4ca13-8e98-4f16-8f1e-9a905ef2bebe" Title="CustomizedPropertyGetEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute.htm">
+      <HelpTOCNode Id="a077937e-3e99-4e00-98be-a33394cc8bd2" Title="CustomizedPropertyGetEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute.htm">
         <HelpTOCNode Title="RequestEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute_RequestEntityName.htm" />
         <HelpTOCNode Title="ResponseEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute_ResponseEntityName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertyGetEntityNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetEntityNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="51a71ee3-c627-4d54-a79c-fb803a371fac" Title="CustomizedPropertyGetResponsePropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute.htm">
+    <HelpTOCNode Id="0b185292-145c-42d8-a152-d934e68cfe42" Title="CustomizedPropertyGetResponsePropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute.htm">
       <HelpTOCNode Title="CustomizedPropertyGetResponsePropertyNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="10507206-d83a-472b-9aac-23485719700b" Title="CustomizedPropertyGetResponsePropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute.htm">
+      <HelpTOCNode Id="0a3e98b7-0cf6-473b-a1f0-2b07f85bfd2c" Title="CustomizedPropertyGetResponsePropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute_EntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertyGetResponsePropertyNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertyGetResponsePropertyNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="3bec7a36-21f9-4988-bc47-a3a005c489b7" Title="CustomizedPropertySetEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute.htm">
+    <HelpTOCNode Id="cca6decf-b0d5-4bf6-8748-84eac4789651" Title="CustomizedPropertySetEntityNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute.htm">
       <HelpTOCNode Title="CustomizedPropertySetEntityNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="e51e53d4-30e9-4ae9-b205-92343f07e43c" Title="CustomizedPropertySetEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute.htm">
+      <HelpTOCNode Id="b99ac429-1cc1-47d7-969e-453b9bfe4fdf" Title="CustomizedPropertySetEntityNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute.htm">
         <HelpTOCNode Title="RequestEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute_RequestEntityName.htm" />
         <HelpTOCNode Title="ResponseEntityName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute_ResponseEntityName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertySetEntityNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetEntityNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="c620c84b-78ae-4f4c-8998-d0053ad70b86" Title="CustomizedPropertySetRequestPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm">
+    <HelpTOCNode Id="f0d5652b-5f08-4f63-b262-f8ff47e5ab84" Title="CustomizedPropertySetRequestPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm">
       <HelpTOCNode Title="CustomizedPropertySetRequestPropertyNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="82f865a3-3bd0-4534-b858-d07b6fa8049e" Title="CustomizedPropertySetRequestPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm">
+      <HelpTOCNode Id="2cb7e591-051c-47e6-b7de-1399582d439f" Title="CustomizedPropertySetRequestPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute_EntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedPropertySetRequestPropertyNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedPropertySetRequestPropertyNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="84c87869-d09a-44e8-b3d2-78bbfb3cba2c" Title="CustomizedReturnValueEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm">
+    <HelpTOCNode Id="210de1b0-df8a-49a5-b67d-e264d4d8ae20" Title="CustomizedReturnValueEntityPropertyNameAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm">
       <HelpTOCNode Title="CustomizedReturnValueEntityPropertyNameAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute__ctor.htm" />
-      <HelpTOCNode Id="c5395598-2e7b-4827-a3a5-2443818206fb" Title="CustomizedReturnValueEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm">
+      <HelpTOCNode Id="f5eec66b-aa74-4306-90a2-c152f4f8b4f6" Title="CustomizedReturnValueEntityPropertyNameAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm">
         <HelpTOCNode Title="EntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute_EntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CustomizedReturnValueEntityPropertyNameAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_CustomizedReturnValueEntityPropertyNameAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4c74788b-03ef-487f-a11c-bc1e7a3625a8" Title="EventParameterIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm">
+    <HelpTOCNode Id="ffc52781-51e7-46be-b824-02e7e0944aa8" Title="EventParameterIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm">
       <HelpTOCNode Title="EventParameterIgnoredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute__ctor.htm" />
-      <HelpTOCNode Id="9cf867f6-658d-4196-8d59-0b92b8accc5b" Title="EventParameterIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm">
+      <HelpTOCNode Id="da475401-5b11-48fa-b7a5-503b2f953dfd" Title="EventParameterIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm">
         <HelpTOCNode Title="ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute_ParameterName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EventParameterIgnoredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterIgnoredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a3db52b6-0b42-4c98-aa47-b62c0b57dfb2" Title="EventParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm">
+    <HelpTOCNode Id="a91be3e1-df38-463d-b2c9-8a5fabc6a24b" Title="EventParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm">
       <HelpTOCNode Title="EventParameterReturnRequiredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute__ctor.htm" />
-      <HelpTOCNode Id="94ebe90d-081b-4e8a-90c4-a3d6af855502" Title="EventParameterReturnRequiredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm">
+      <HelpTOCNode Id="80e1e82c-4fb4-4613-814d-4b0961027bdf" Title="EventParameterReturnRequiredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm">
         <HelpTOCNode Title="ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute_ParameterName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EventParameterReturnRequiredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="6c6838a0-025f-4504-ba51-10f2c4ca3ddd" Title="EventParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm">
-      <HelpTOCNode Id="fb2d18e8-3f1f-41f7-b8ea-9d5d2354b163" Title="EventParameterReturnRequiredPropertyAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor.htm">
+    <HelpTOCNode Id="2f4f3f57-7aaf-4556-936a-6ad64a3fd692" Title="EventParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm">
+      <HelpTOCNode Id="1443bd33-c1f6-4118-af32-ce8f5dbecc30" Title="EventParameterReturnRequiredPropertyAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor.htm">
         <HelpTOCNode Title="EventParameterReturnRequiredPropertyAttribute Constructor (String, Type, Boolean)" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor_1.htm" />
         <HelpTOCNode Title="EventParameterReturnRequiredPropertyAttribute Constructor (String, String, String, Boolean, Boolean)" Url="html/M_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute__ctor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="606760f8-78d3-446b-8011-c7981706e1fc" Title="EventParameterReturnRequiredPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm">
+      <HelpTOCNode Id="0729d460-21fd-4617-8888-c5b97a481a53" Title="EventParameterReturnRequiredPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm">
         <HelpTOCNode Title="ParameterName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute_ParameterName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EventParameterReturnRequiredPropertyAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="15f0af27-8841-4b60-8538-09e80700d68a" Title="LocalExceptionHandlingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm">
+    <HelpTOCNode Id="d68a08d3-f062-4aeb-a22c-3e738b5b5b3b" Title="LocalExceptionHandlingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm">
       <HelpTOCNode Title="LocalExceptionHandlingAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute__ctor.htm" />
-      <HelpTOCNode Id="3ee9ee86-dc90-401b-becd-2cdc1b3cee20" Title="LocalExceptionHandlingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm">
+      <HelpTOCNode Id="de665ec7-949b-4e81-a1ea-e10c025d1913" Title="LocalExceptionHandlingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm">
         <HelpTOCNode Title="LocalExceptionHandlingMode Property " Url="html/P_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute_LocalExceptionHandlingMode.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="LocalExceptionHandlingAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="LocalExceptionHandlingMode Enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingMode.htm" />
-    <HelpTOCNode Id="b7d33642-f28a-42ae-ab80-54657a11b2f0" Title="OperatingTimeoutTimeAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm">
-      <HelpTOCNode Id="9d3cddd0-712b-48e3-b0ff-5a70801a9f72" Title="OperatingTimeoutTimeAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor.htm">
+    <HelpTOCNode Id="37323878-db9d-4e8d-b13a-3efd12ebd8b3" Title="OperatingTimeoutTimeAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm">
+      <HelpTOCNode Id="14c3dd0a-a6c6-43b2-b06c-4ee663fc81d9" Title="OperatingTimeoutTimeAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor.htm">
         <HelpTOCNode Title="OperatingTimeoutTimeAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor.htm" />
         <HelpTOCNode Title="OperatingTimeoutTimeAttribute Constructor (Int32)" Url="html/M_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor_1.htm" />
         <HelpTOCNode Title="OperatingTimeoutTimeAttribute Constructor (Int32, Int32)" Url="html/M_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor_2.htm" />
         <HelpTOCNode Title="OperatingTimeoutTimeAttribute Constructor (Int32, Int32, Int32)" Url="html/M_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor_3.htm" />
         <HelpTOCNode Title="OperatingTimeoutTimeAttribute Constructor (Int32, Int32, Int32, Int32, Int32, Int32)" Url="html/M_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute__ctor_4.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="96782823-c39a-4082-ac93-a24c1c5aad6a" Title="OperatingTimeoutTimeAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm">
+      <HelpTOCNode Id="fe68c118-501e-4df8-9187-48496f1a8f31" Title="OperatingTimeoutTimeAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm">
         <HelpTOCNode Title="EventAddingTimeout Property " Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventAddingTimeout.htm" />
         <HelpTOCNode Title="EventRaisingTimeout Property " Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRaisingTimeout.htm" />
         <HelpTOCNode Title="EventRemovingTimeout Property " Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_EventRemovingTimeout.htm" />
@@ -566,28 +570,28 @@
       </HelpTOCNode>
       <HelpTOCNode Title="OperatingTimeoutTimeAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="9556312a-43e5-465c-a3d8-32544c6926b9" Title="ParameterIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm">
+    <HelpTOCNode Id="8b37b4b8-add8-437a-934f-dc5e12101cdf" Title="ParameterIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm">
       <HelpTOCNode Title="ParameterIgnoredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute__ctor.htm" />
-      <HelpTOCNode Id="5eccd821-2051-41e3-8874-d3fa74e7ff3f" Title="ParameterIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm">
+      <HelpTOCNode Id="e96b80ce-43c3-4f89-a0d0-329e87c26372" Title="ParameterIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm">
         <HelpTOCNode Title="IsIgnored Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute_IsIgnored.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ParameterIgnoredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="8ac7e949-36cd-443c-b824-58350c6be3f0" Title="ParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm">
+    <HelpTOCNode Id="68c1a39c-61c3-4a92-a9e8-c25d1cee4bd7" Title="ParameterReturnRequiredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm">
       <HelpTOCNode Title="ParameterReturnRequiredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute__ctor.htm" />
-      <HelpTOCNode Id="476698a9-8839-42a6-bd7c-764b415a2a79" Title="ParameterReturnRequiredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm">
+      <HelpTOCNode Id="6c7af873-6117-4ef8-8388-044195c880f8" Title="ParameterReturnRequiredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm">
         <HelpTOCNode Title="IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedInReturning.htm" />
         <HelpTOCNode Title="IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_IsIncludedWhenExceptionThrown.htm" />
         <HelpTOCNode Title="ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute_ResponseEntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ParameterReturnRequiredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="6a898bb2-e047-4643-83c9-853be970f558" Title="ParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm">
-      <HelpTOCNode Id="d88543ea-16ca-418e-910f-036e18ff6056" Title="ParameterReturnRequiredPropertyAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor.htm">
+    <HelpTOCNode Id="48942954-547c-4484-899d-7bd09598a99e" Title="ParameterReturnRequiredPropertyAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm">
+      <HelpTOCNode Id="3c404306-82de-4f34-8ce7-212b2b286a75" Title="ParameterReturnRequiredPropertyAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor.htm">
         <HelpTOCNode Title="ParameterReturnRequiredPropertyAttribute Constructor (Type, Boolean)" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor_1.htm" />
         <HelpTOCNode Title="ParameterReturnRequiredPropertyAttribute Constructor (String, String, Boolean, Boolean)" Url="html/M_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute__ctor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d59bc12e-d458-4817-aa51-9f6bb50da9d1" Title="ParameterReturnRequiredPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm">
+      <HelpTOCNode Id="353e6a71-db18-49c9-88a3-91d9eb33d1b5" Title="ParameterReturnRequiredPropertyAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm">
         <HelpTOCNode Title="HelperClass Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_HelperClass.htm" />
         <HelpTOCNode Title="IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedInReturning.htm" />
         <HelpTOCNode Title="IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_IsIncludedWhenExceptionThrown.htm" />
@@ -597,42 +601,42 @@
       </HelpTOCNode>
       <HelpTOCNode Title="ParameterReturnRequiredPropertyAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="e462e30d-2ddd-4bc1-a184-89bba8b2b730" Title="PropertyGetOneWayOperatingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm">
+    <HelpTOCNode Id="c373600b-8a31-425e-8b91-fd914db8dac2" Title="PropertyGetOneWayOperatingAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm">
       <HelpTOCNode Title="PropertyGetOneWayOperatingAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute__ctor.htm" />
-      <HelpTOCNode Id="acd4115a-a73d-48c7-9db8-282b58442c0d" Title="PropertyGetOneWayOperatingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm">
+      <HelpTOCNode Id="0f20b9f2-c45f-4fc2-a922-a629232bd9c5" Title="PropertyGetOneWayOperatingAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm">
         <HelpTOCNode Title="IsOneWay Property " Url="html/P_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute_IsOneWay.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="PropertyGetOneWayOperatingAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_PropertyGetOneWayOperatingAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a457284c-4c00-49fe-8257-50aaf4d85886" Title="ProxyStickyTargetSiteAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm">
+    <HelpTOCNode Id="0b6aceb0-3ab1-4c72-ad3d-0865addac1b1" Title="ProxyStickyTargetSiteAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm">
       <HelpTOCNode Title="ProxyStickyTargetSiteAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute__ctor.htm" />
-      <HelpTOCNode Id="223c37a8-ed43-4f51-a4b2-8115130ddba9" Title="ProxyStickyTargetSiteAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm">
+      <HelpTOCNode Id="1b0d3db5-2d30-4c73-847f-00d69eada722" Title="ProxyStickyTargetSiteAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm">
         <HelpTOCNode Title="IsSticky Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute_IsSticky.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ProxyStickyTargetSiteAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ProxyStickyTargetSiteAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="9a763ed2-a327-433d-bb59-ed11ad21cae8" Title="ReturnIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm">
+    <HelpTOCNode Id="ee6ddf4c-01c4-4e27-bf2a-ef1bc66b9e02" Title="ReturnIgnoredAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm">
       <HelpTOCNode Title="ReturnIgnoredAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute__ctor.htm" />
-      <HelpTOCNode Id="e99e99d5-6125-45db-babf-174c5fd17033" Title="ReturnIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm">
+      <HelpTOCNode Id="c65b5faa-6d36-4ba8-a8d3-c0a1211fd8ae" Title="ReturnIgnoredAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm">
         <HelpTOCNode Title="IsIgnored Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute_IsIgnored.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ReturnIgnoredAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="0bd40e3c-7268-4f6f-b1e2-2d03ca31604c" Title="ReturnRequiredPropertyHelperAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm">
+    <HelpTOCNode Id="d67a1d1c-f6f1-43f0-adee-31b92b35155b" Title="ReturnRequiredPropertyHelperAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm">
       <HelpTOCNode Title="ReturnRequiredPropertyHelperAttribute Constructor " Url="html/M_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute__ctor.htm" />
-      <HelpTOCNode Id="563742d6-cb1b-4574-8819-5689c119aa96" Title="ReturnRequiredPropertyHelperAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm">
+      <HelpTOCNode Id="31843c6b-4a6a-4241-9083-634215591407" Title="ReturnRequiredPropertyHelperAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm">
         <HelpTOCNode Title="IsIncludedInReturning Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedInReturning.htm" />
         <HelpTOCNode Title="IsIncludedWhenExceptionThrown Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_IsIncludedWhenExceptionThrown.htm" />
         <HelpTOCNode Title="ResponseEntityPropertyName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute_ResponseEntityPropertyName.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ReturnRequiredPropertyHelperAttribute Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="8a263c08-f7ae-4877-aae6-005415361cef" Title="ThreadLockAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute.htm">
-      <HelpTOCNode Id="e2d3ac0b-9dd0-40cf-b85c-d88ef072b069" Title="ThreadLockAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute__ctor.htm">
+    <HelpTOCNode Id="a1a2fcb8-e094-4077-a3e5-5140d308aaba" Title="ThreadLockAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute.htm">
+      <HelpTOCNode Id="f73a95da-afd3-4304-b405-5ab649a89d86" Title="ThreadLockAttribute Constructor " Url="html/Overload_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute__ctor.htm">
         <HelpTOCNode Title="ThreadLockAttribute Constructor (String)" Url="html/M_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute__ctor_1.htm" />
         <HelpTOCNode Title="ThreadLockAttribute Constructor (ThreadLockMode)" Url="html/M_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute__ctor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e3936734-f225-4077-b49c-609071b0bee3" Title="ThreadLockAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute.htm">
+      <HelpTOCNode Id="6f0c1621-f7bb-4c8a-ad2a-76f1fb55b32e" Title="ThreadLockAttribute Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute.htm">
         <HelpTOCNode Title="TaskSchedulerName Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute_TaskSchedulerName.htm" />
         <HelpTOCNode Title="ThreadLockMode Property " Url="html/P_SecretNest_RemoteAgency_Attributes_ThreadLockAttribute_ThreadLockMode.htm" />
       </HelpTOCNode>
@@ -640,58 +644,58 @@
     </HelpTOCNode>
     <HelpTOCNode Title="ThreadLockMode Enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_ThreadLockMode.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="b6fb0377-39ee-4304-b8b6-b163794b9259" Title="SecretNest.RemoteAgency.BinarySerializer" Url="html/N_SecretNest_RemoteAgency_BinarySerializer.htm">
-    <HelpTOCNode Id="85333f35-7e06-4035-b039-06dfa7bdc861" Title="RemoteAgencyBinaryEmptyMessage Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinaryEmptyMessage.htm">
+  <HelpTOCNode Id="fda3522b-c9d0-43f7-bb9b-b6806e66acb7" Title="SecretNest.RemoteAgency.BinarySerializer" Url="html/N_SecretNest_RemoteAgency_BinarySerializer.htm">
+    <HelpTOCNode Id="2f32002a-b6c8-41d7-a4cf-f65dfd1ada1b" Title="RemoteAgencyBinaryEmptyMessage Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinaryEmptyMessage.htm">
       <HelpTOCNode Title="RemoteAgencyBinaryEmptyMessage Constructor " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinaryEmptyMessage__ctor.htm" />
       <HelpTOCNode Title="RemoteAgencyBinaryEmptyMessage Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinaryEmptyMessage.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="5fa8c2b9-8a4a-45b3-8306-6d5c44c881b5" Title="RemoteAgencyBinarySerializer Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer.htm">
+    <HelpTOCNode Id="0834daee-b9e0-4304-9574-0685de8846d2" Title="RemoteAgencyBinarySerializer Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer.htm">
       <HelpTOCNode Title="RemoteAgencyBinarySerializer Constructor " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer__ctor.htm" />
-      <HelpTOCNode Id="46def261-0f8a-4e92-92c6-e4b62e2d48f3" Title="RemoteAgencyBinarySerializer Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer.htm">
+      <HelpTOCNode Id="c52dc44a-8df9-4d6b-a144-2d186e8b822c" Title="RemoteAgencyBinarySerializer Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer.htm">
         <HelpTOCNode Title="Deserialize Method " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer_Deserialize.htm" />
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer_Serialize.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="3942fba2-28cc-476d-b1ae-a91f72f7d6a3" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
+    <HelpTOCNode Id="7ce67b98-d07f-41e1-81f6-71f8f510223c" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
       <HelpTOCNode Title="RemoteAgencyBinarySerializerEntityCodeBuilder Constructor " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder__ctor.htm" />
-      <HelpTOCNode Id="4d214190-4982-49d0-a54f-fc1abbfcc3e5" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
+      <HelpTOCNode Id="3a8fd405-62d9-46a2-ba99-2a032ab1373d" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Properties" Url="html/Properties_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
         <HelpTOCNode Title="AssetLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_AssetLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="DelegateLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_DelegateLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="InterfaceLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_InterfaceLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="ParameterLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_ParameterLevelAttributeBaseType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="194756e6-d34b-4adb-af01-6beb9d7f41b7" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
-        <HelpTOCNode Id="207b4763-172d-48ca-a2b6-46fcb8eea3ae" Title="BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_BuildEntity.htm">
+      <HelpTOCNode Id="17b72be5-d10c-4823-912a-18c8dff2d81e" Title="RemoteAgencyBinarySerializerEntityCodeBuilder Methods" Url="html/Methods_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder.htm">
+        <HelpTOCNode Id="d62d6880-abcc-4b60-ac92-75d79ea4b75d" Title="BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_BuildEntity.htm">
           <HelpTOCNode Title="BuildEntity Method (TypeBuilder, EntityBuilding)" Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_BuildEntity.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityCodeBuilder_CreateEmptyMessage.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="111dd222-5fe1-4171-9afa-d5bf04f40d3e" Title="SecretNest.RemoteAgency.Helper" Url="html/N_SecretNest_RemoteAgency_Helper.htm">
-    <HelpTOCNode Id="6e63e04b-f233-4c4c-8713-797c65af97c4" Title="EventRouterBase Class" Url="html/T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
+  <HelpTOCNode Id="8b1ed713-c22d-45f9-aaa4-e02cefdf6ab4" Title="SecretNest.RemoteAgency.Helper" Url="html/N_SecretNest_RemoteAgency_Helper.htm">
+    <HelpTOCNode Id="20ce8490-c0d4-463d-ac25-790d8777e0d0" Title="EventRouterBase Class" Url="html/T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
       <HelpTOCNode Title="EventRouterBase Constructor " Url="html/M_SecretNest_RemoteAgency_Helper_EventRouterBase__ctor.htm" />
-      <HelpTOCNode Id="9f55db6e-6815-40d7-9981-260e4022d024" Title="EventRouterBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
+      <HelpTOCNode Id="dc7e3421-aa5e-4b4b-9d29-280204e30468" Title="EventRouterBase Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
         <HelpTOCNode Title="AssetName Property " Url="html/P_SecretNest_RemoteAgency_Helper_EventRouterBase_AssetName.htm" />
         <HelpTOCNode Title="RemoteInstanceId Property " Url="html/P_SecretNest_RemoteAgency_Helper_EventRouterBase_RemoteInstanceId.htm" />
         <HelpTOCNode Title="RemoteSiteId Property " Url="html/P_SecretNest_RemoteAgency_Helper_EventRouterBase_RemoteSiteId.htm" />
         <HelpTOCNode Title="SendEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_Helper_EventRouterBase_SendEventMessageCallback.htm" />
         <HelpTOCNode Title="SendOneWayEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_Helper_EventRouterBase_SendOneWayEventMessageCallback.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="0dfebead-df79-4b66-98e5-4a1df10e58c0" Title="EventRouterBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
+      <HelpTOCNode Id="633571f6-844d-4f5b-8c7b-59e904cf906e" Title="EventRouterBase Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Helper_EventRouterBase.htm">
         <HelpTOCNode Title="AddHandler Method " Url="html/M_SecretNest_RemoteAgency_Helper_EventRouterBase_AddHandler.htm" />
         <HelpTOCNode Title="CloseRequestedByManagingObject Method " Url="html/M_SecretNest_RemoteAgency_Helper_EventRouterBase_CloseRequestedByManagingObject.htm" />
         <HelpTOCNode Title="RemoveHandler Method " Url="html/M_SecretNest_RemoteAgency_Helper_EventRouterBase_RemoveHandler.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="951abc76-ca95-4946-a504-49b6d5c7810f" Title="ServiceWrapperEventHelper Class" Url="html/T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
+    <HelpTOCNode Id="a7919047-6508-4179-82c3-3791c3a0a096" Title="ServiceWrapperEventHelper Class" Url="html/T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
       <HelpTOCNode Title="ServiceWrapperEventHelper Constructor " Url="html/M_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper__ctor.htm" />
-      <HelpTOCNode Id="59782cb1-056c-413f-820f-83efa784dae9" Title="ServiceWrapperEventHelper Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
+      <HelpTOCNode Id="95e68239-d36b-4963-b6c0-c82bd4c03758" Title="ServiceWrapperEventHelper Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
         <HelpTOCNode Title="SendEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_SendEventMessageCallback.htm" />
         <HelpTOCNode Title="SendOneWayEventMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_SendOneWayEventMessageCallback.htm" />
         <HelpTOCNode Title="ServiceObject Property " Url="html/P_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_ServiceObject.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="01fb3765-aa09-4d30-846c-6be598cc3d68" Title="ServiceWrapperEventHelper Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
+      <HelpTOCNode Id="ecf3b5f6-8519-42e7-94ab-925fb701d753" Title="ServiceWrapperEventHelper Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper.htm">
         <HelpTOCNode Title="AddBuilder Method " Url="html/M_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_AddBuilder.htm" />
         <HelpTOCNode Title="CloseRequestedByManagingObject Method " Url="html/M_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_CloseRequestedByManagingObject.htm" />
         <HelpTOCNode Title="OnRemoteProxyClosing Method " Url="html/M_SecretNest_RemoteAgency_Helper_ServiceWrapperEventHelper_OnRemoteProxyClosing.htm" />
@@ -700,9 +704,9 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="337273ec-b4c0-4a7f-8ab0-ce5c37b3b333" Title="SecretNest.RemoteAgency.Inspecting" Url="html/N_SecretNest_RemoteAgency_Inspecting.htm">
-    <HelpTOCNode Id="40f0a0b3-1d8a-49a0-801e-8d77f48440c1" Title="AssetNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException.htm">
-      <HelpTOCNode Id="98e75b4b-72cf-464d-ad5c-4fdae21763b6" Title="AssetNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException__ctor.htm">
+  <HelpTOCNode Id="59c9e110-2475-44e3-99a8-3facfccb2825" Title="SecretNest.RemoteAgency.Inspecting" Url="html/N_SecretNest_RemoteAgency_Inspecting.htm">
+    <HelpTOCNode Id="db710b63-2509-47a3-b522-304dee5555d6" Title="AssetNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException.htm">
+      <HelpTOCNode Id="a149e801-e005-4431-b27d-5488935635d1" Title="AssetNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException__ctor.htm">
         <HelpTOCNode Title="AssetNameConflictException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException__ctor.htm" />
         <HelpTOCNode Title="AssetNameConflictException Constructor (String, Attribute, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException__ctor_1.htm" />
         <HelpTOCNode Title="AssetNameConflictException Constructor (String, Attribute, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException__ctor_2.htm" />
@@ -711,8 +715,8 @@
       <HelpTOCNode Title="AssetNameConflictException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException.htm" />
       <HelpTOCNode Title="AssetNameConflictException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_AssetNameConflictException.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="83953b87-ac58-4138-9f6a-8d38e0f06103" Title="EntityNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException.htm">
-      <HelpTOCNode Id="dfeb5dd5-2383-4ea6-912d-62e927441b7d" Title="EntityNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException__ctor.htm">
+    <HelpTOCNode Id="ad7a5356-00db-475d-bfbb-bcff1cfe6235" Title="EntityNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException.htm">
+      <HelpTOCNode Id="f9896980-d039-4819-ae81-a82a94468e20" Title="EntityNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException__ctor.htm">
         <HelpTOCNode Title="EntityNameConflictException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException__ctor.htm" />
         <HelpTOCNode Title="EntityNameConflictException Constructor (String, Attribute, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException__ctor_1.htm" />
         <HelpTOCNode Title="EntityNameConflictException Constructor (String, Attribute, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException__ctor_2.htm" />
@@ -721,55 +725,55 @@
       <HelpTOCNode Title="EntityNameConflictException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException.htm" />
       <HelpTOCNode Title="EntityNameConflictException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_EntityNameConflictException.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="df2869b1-93f2-404a-b89e-faa42a3d3f06" Title="EntityPropertyNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
-      <HelpTOCNode Id="bfd15342-1c1c-40a1-be33-b925145d5245" Title="EntityPropertyNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor.htm">
+    <HelpTOCNode Id="ecb85cae-6187-4a6b-b470-0aee8d7a8222" Title="EntityPropertyNameConflictException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
+      <HelpTOCNode Id="a3ec5baf-619e-4745-8d96-d31f2a78916a" Title="EntityPropertyNameConflictException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor.htm">
         <HelpTOCNode Title="EntityPropertyNameConflictException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor.htm" />
         <HelpTOCNode Title="EntityPropertyNameConflictException Constructor (String, Attribute, EntityPropertyNameConflictExceptionCausedMemberType, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor_1.htm" />
         <HelpTOCNode Title="EntityPropertyNameConflictException Constructor (String, Attribute, ParameterInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor_3.htm" />
         <HelpTOCNode Title="EntityPropertyNameConflictException Constructor (String, Attribute, MemberInfo, EntityPropertyNameConflictExceptionCausedMemberType, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor_2.htm" />
         <HelpTOCNode Title="EntityPropertyNameConflictException Constructor (String, Attribute, ParameterInfo, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException__ctor_4.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e08ad9f3-6fcf-4fc1-b610-7d995b16d67e" Title="EntityPropertyNameConflictException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
+      <HelpTOCNode Id="a5465455-366a-49db-b8e5-2688fe1d1b0a" Title="EntityPropertyNameConflictException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
         <HelpTOCNode Title="CausedMemberType Property " Url="html/P_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException_CausedMemberType.htm" />
         <HelpTOCNode Title="Parameter Property " Url="html/P_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException_Parameter.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="465aa36a-82d6-412f-9c05-3500861b8feb" Title="EntityPropertyNameConflictException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
+      <HelpTOCNode Id="afa7f51a-9a95-474a-a75e-89ac9ec6485a" Title="EntityPropertyNameConflictException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException_GetObjectData.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="EntityPropertyNameConflictException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictException.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="EntityPropertyNameConflictExceptionCausedMemberType Enumeration" Url="html/T_SecretNest_RemoteAgency_Inspecting_EntityPropertyNameConflictExceptionCausedMemberType.htm" />
-    <HelpTOCNode Id="8babb872-b2bc-456d-810d-da5f3e31750e" Title="InvalidAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
-      <HelpTOCNode Id="d6bf14ea-39c0-458f-be7f-23337bc60304" Title="InvalidAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor.htm">
+    <HelpTOCNode Id="f962d549-ca92-4c31-a054-43715bbf12cc" Title="InvalidAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
+      <HelpTOCNode Id="11c71287-12bb-43ca-a11b-7bd330d9ea9f" Title="InvalidAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor.htm">
         <HelpTOCNode Title="InvalidAttributeDataException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor.htm" />
         <HelpTOCNode Title="InvalidAttributeDataException Constructor (String, Attribute, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor_1.htm" />
         <HelpTOCNode Title="InvalidAttributeDataException Constructor (String, Attribute, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor_2.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="bc016403-32a0-4e28-ad78-d6df4cb94c0f" Title="InvalidAttributeDataException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
+      <HelpTOCNode Id="2e90b1ce-bea3-4f5b-ab5f-0ba182f15f4c" Title="InvalidAttributeDataException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
         <HelpTOCNode Title="Attribute Property " Url="html/P_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException_Attribute.htm" />
         <HelpTOCNode Title="MemberPath Property " Url="html/P_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException_MemberPath.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e9f8f8c0-d453-41e2-9bf2-1d93f99b8551" Title="InvalidAttributeDataException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
+      <HelpTOCNode Id="8231fab0-0b90-4812-92fe-2d28e9a2a6ea" Title="InvalidAttributeDataException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException_GetObjectData.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="InvalidAttributeDataException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="1fab83e5-1f0b-4046-8746-64ccd2aaadf7" Title="InvalidParameterAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
-      <HelpTOCNode Id="c4109e49-f988-47d0-961b-f72c3a9b9394" Title="InvalidParameterAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException__ctor.htm">
+    <HelpTOCNode Id="63b69045-edcb-45c1-afb6-9e864ceebbfd" Title="InvalidParameterAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
+      <HelpTOCNode Id="a412e6b0-ff33-418c-8340-e8464dd63315" Title="InvalidParameterAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException__ctor.htm">
         <HelpTOCNode Title="InvalidParameterAttributeDataException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException__ctor.htm" />
         <HelpTOCNode Title="InvalidParameterAttributeDataException Constructor (String, Attribute, ParameterInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException__ctor_1.htm" />
         <HelpTOCNode Title="InvalidParameterAttributeDataException Constructor (String, Attribute, ParameterInfo, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException__ctor_2.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="81ab7d49-968e-4081-8383-36093915c66f" Title="InvalidParameterAttributeDataException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
+      <HelpTOCNode Id="115794f6-ce8c-4265-bea3-3cb8c9d4abc7" Title="InvalidParameterAttributeDataException Properties" Url="html/Properties_T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
         <HelpTOCNode Title="Parameter Property " Url="html/P_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException_Parameter.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="34823d87-ff0a-4675-b01d-a30327a3c5b5" Title="InvalidParameterAttributeDataException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
+      <HelpTOCNode Id="a8dca264-eb41-4912-b353-a0f2906ced01" Title="InvalidParameterAttributeDataException Methods" Url="html/Methods_T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm">
         <HelpTOCNode Title="GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException_GetObjectData.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="InvalidParameterAttributeDataException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="73e4a97f-7e6f-4fbe-b5e6-0460ec3deb76" Title="InvalidReturnValueAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException.htm">
-      <HelpTOCNode Id="fd124c69-35ce-4883-9c93-a53431f6180d" Title="InvalidReturnValueAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException__ctor.htm">
+    <HelpTOCNode Id="17273adc-b5b6-4d78-83d2-06be056c4763" Title="InvalidReturnValueAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException.htm">
+      <HelpTOCNode Id="235acf9f-2623-4953-8e34-08751dfb89b9" Title="InvalidReturnValueAttributeDataException Constructor " Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException__ctor.htm">
         <HelpTOCNode Title="InvalidReturnValueAttributeDataException Constructor (SerializationInfo, StreamingContext)" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException__ctor.htm" />
         <HelpTOCNode Title="InvalidReturnValueAttributeDataException Constructor (String, Attribute, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException__ctor_1.htm" />
         <HelpTOCNode Title="InvalidReturnValueAttributeDataException Constructor (String, Attribute, MemberInfo, Stack(MemberInfo))" Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException__ctor_2.htm" />
@@ -779,28 +783,28 @@
       <HelpTOCNode Title="InvalidReturnValueAttributeDataException Events" Url="html/Events_T_SecretNest_RemoteAgency_Inspecting_InvalidReturnValueAttributeDataException.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="a34dea1e-797a-4b15-87c8-f12be0aec327" Title="SecretNest.RemoteAgency.JsonSerializer" Url="html/N_SecretNest_RemoteAgency_JsonSerializer.htm">
-    <HelpTOCNode Id="8e7a7505-c15c-4878-889b-24d5fa342384" Title="RemoteAgencyJsonEmptyMessage Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonEmptyMessage.htm">
+  <HelpTOCNode Id="288395dc-ffe0-43c9-b7f9-2effa4ea8872" Title="SecretNest.RemoteAgency.JsonSerializer" Url="html/N_SecretNest_RemoteAgency_JsonSerializer.htm">
+    <HelpTOCNode Id="f41ff0b8-fb34-43c9-8acf-4db2d4fca80a" Title="RemoteAgencyJsonEmptyMessage Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonEmptyMessage.htm">
       <HelpTOCNode Title="RemoteAgencyJsonEmptyMessage Constructor " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonEmptyMessage__ctor.htm" />
       <HelpTOCNode Title="RemoteAgencyJsonEmptyMessage Methods" Url="html/Methods_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonEmptyMessage.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="0de53a15-c598-4efa-b9d4-18443ef8f35e" Title="RemoteAgencyJsonSerializer Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer.htm">
+    <HelpTOCNode Id="856df377-c2de-4181-bc5a-68dfee6e7dec" Title="RemoteAgencyJsonSerializer Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer.htm">
       <HelpTOCNode Title="RemoteAgencyJsonSerializer Constructor " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer__ctor.htm" />
-      <HelpTOCNode Id="0e54700a-36bc-4023-8c35-fb8013eb5fa7" Title="RemoteAgencyJsonSerializer Methods" Url="html/Methods_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer.htm">
+      <HelpTOCNode Id="01a2e094-5200-48a4-9c6b-6d2d3e4f5147" Title="RemoteAgencyJsonSerializer Methods" Url="html/Methods_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer.htm">
         <HelpTOCNode Title="Deserialize Method " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer_Deserialize.htm" />
         <HelpTOCNode Title="Serialize Method " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializer_Serialize.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a7e94975-73b3-4e36-b085-a70cc9865cc8" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
+    <HelpTOCNode Id="738808d1-19a5-485a-b11f-1cee25a74532" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Class" Url="html/T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
       <HelpTOCNode Title="RemoteAgencyJsonSerializerEntityCodeBuilder Constructor " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder__ctor.htm" />
-      <HelpTOCNode Id="87b181b0-4195-4eec-8137-02a8d64d72f6" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Properties" Url="html/Properties_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
+      <HelpTOCNode Id="753a1635-4c65-464b-9743-96d0afb26fc7" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Properties" Url="html/Properties_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
         <HelpTOCNode Title="AssetLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_AssetLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="DelegateLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_DelegateLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="InterfaceLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_InterfaceLevelAttributeBaseType.htm" />
         <HelpTOCNode Title="ParameterLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_ParameterLevelAttributeBaseType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="648346f9-aa72-4672-85bc-1c1046095df4" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Methods" Url="html/Methods_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
-        <HelpTOCNode Id="befe7e40-9527-4699-a5ca-f6a623cb7003" Title="BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_BuildEntity.htm">
+      <HelpTOCNode Id="02fa58ae-2de4-4692-8409-5c1a0851e4db" Title="RemoteAgencyJsonSerializerEntityCodeBuilder Methods" Url="html/Methods_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder.htm">
+        <HelpTOCNode Id="71cbc3f4-89e3-4336-a130-4f522d8f36bb" Title="BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_BuildEntity.htm">
           <HelpTOCNode Title="BuildEntity Method (TypeBuilder, EntityBuilding)" Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_BuildEntity.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityCodeBuilder_CreateEmptyMessage.htm" />

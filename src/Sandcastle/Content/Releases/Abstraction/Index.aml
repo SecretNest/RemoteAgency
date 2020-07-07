@@ -4,86 +4,72 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <!--
-    <summary>
-      <para>Optional summary abstract</para>  Abstraction
-    </summary>
-    -->
-
     <introduction>
-      <!-- Uncomment this to generate an outline of the section and sub-section
-           titles.  Specify a numeric value as the inner text to limit it to
-           a specific number of sub-topics when creating the outline.  Specify
-           zero (0) to limit it to top-level sections only.  -->
-      <!-- <autoOutline /> -->
-
-      <para>Required introduction</para>
+      <para>SecretNest.RemoteAgency.Abstraction is the library contains interfaces, attributes and exceptions (other than thrown while building) of Remote Agency.</para>
+      <para>This library is for the project which needs to work with, but not hosts a instance of Remote Agency, like a project contains services or an extended serializer. For the project referenced SecretNest.RemoteAgency or SecretNest.RemoteAgency.Neat, SecretNest.RemoteAgency.Abstraction is referenced automatically without manual operation required.</para>
     </introduction>
 
-    <!-- Add one or more top-level section elements.  These are collapsible.
-         If using <autoOutline />, add an address attribute to identify it
-         and specify a title so that it can be jumped to with a hyperlink. -->
-    <section address="Section1">
-      <title>Optional section title</title>
+    <section>
+      <title>Included components</title>
       <content>
-        <!-- Uncomment this to create a sub-section outline
-        <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <list class="bullet">
+          <listItem>
+            <para><link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link></para>
+          </listItem>
+          <listItem>
+            <para>Exceptions</para>
+            <list class="nobullet">
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.AccessingTimeOutException</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.AssetNotFoundException</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.InstanceNotFoundException</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.MessageProcessTerminatedException</codeEntityReference></para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>Serializer base</para>
+            <list class="nobullet">
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.EntityCodeBuilderBase</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.SerializingHelperBase`2</codeEntityReference></para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>Interface for entity classes: <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.IRemoteAgencyMessage</codeEntityReference></para>
+          </listItem>
+          <listItem>
+            <para>Interfaces for proxies and service wrappers</para>
+            <list class="nobullet">
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.IManagedObjectCommunicate</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.IProxyCommunicate</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.IServiceWrapperCommunicate</codeEntityReference></para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>Delegates and enums used by those above.</para>
+          </listItem>
+        </list>
       </content>
-      <!-- If a section contains a sections element, its content creates
-           sub-sections.  These are not collapsible.L
-      <sections>
-          <section address="SubSection1">
-              <title>Sub-section 1</title>
-              <content>
-                  <para>Sub-section content.</para>
-              </content>
-          </section>
-          <section address="SubSection2">
-              <title>Sub-section 2</title>
-              <content>
-                  <para>Sub-section content.</para>
-              </content>
-          </section>
-      </sections> -->
     </section>
 
     <relatedTopics>
-      <!-- One or more of the following:
-           - A local link
-           - An external link
-           - A code entity reference
-
-      <link xlink:href="Other Topic's ID"/>
-      <link xlink:href="Other Topic's ID">Link inner text</link>
-
-      <externalLink>
-          <linkText>Link text</linkText>
-          <linkAlternateText>Optional alternate link text</linkAlternateText>
-          <linkUri>URI</linkUri>
-      </externalLink>
-
-      <codeEntityReference>API member ID</codeEntityReference>
-
-      Examples:
-
-      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-      <externalLink>
-          <linkText>SHFB on GitHub</linkText>
-          <linkAlternateText>Go to GitHub</linkAlternateText>
-          <linkUri>https://GitHub.com/EWSoftware/SHFB</linkUri>
-      </externalLink>
-
-      <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-      <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-      <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-      -->
+      <link xlink:href="54b2e0fb-7a41-44f2-8800-831e473db023#packages">Released packages</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

@@ -51,16 +51,17 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="SecretNest.RemoteAgency" isDocumented="True">Remote Agency from SecretNest.info.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.AssemblyBuilding" isDocumented="True">Contains event args and related entities for assembly building.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.Attributes" isDocumented="True">Contains attributes for turning behavior of Remote Agency.
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.AssemblyBuilding" isDocumented="True">Contains event args and related entities for assembly building.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.Attributes" isDocumented="True">Contains attributes for turning behavior of Remote Agency.
 
 Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for details.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.BinarySerializer" isDocumented="True">Contains binary serializer for Remote Agency.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.JsonSerializer" isDocumented="True">Contains Json serializer for Remote Agency.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.Helper" isDocumented="True">Contains helper classes of Remote Agency.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SecretNest.RemoteAgency.Inspecting" isDocumented="True">Contains exceptions which could be thrown while inspecting.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="SecretNest.TaskSchedulers" isDocumented="False" /></NamespaceSummaries>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.BinarySerializer" isDocumented="True">Contains binary serializer for Remote Agency.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.JsonSerializer" isDocumented="True">Contains Json serializer for Remote Agency.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.Helper" isDocumented="True">Contains helper classes of Remote Agency.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SecretNest.RemoteAgency.Inspecting" isDocumented="True">Contains exceptions which could be thrown while inspecting.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="(global)" isDocumented="False" />
+      <NamespaceSummaryItem name="SecretNest.TaskSchedulers" isDocumented="False" />
+    </NamespaceSummaries>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
     <PlugInConfigurations>
