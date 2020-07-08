@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Closes all proxy and service wrapper objects.
         /// </summary>
+        /// <exception cref="AggregateException">Thrown when exception occurred while disposing instances.</exception>
         public abstract void CloseAllInstances();
 
         /// <summary>
@@ -19,6 +20,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="instanceId">Instance id of the proxy or service wrapper to be closed.</param>
         /// <returns>Result. <see langword="true"/> when instance is located and closed; <see langword="false"/> when instance is not found.</returns>
+        /// <exception cref="AggregateException">Thrown when exception occurred while disposing instance.</exception>
         public abstract bool CloseInstance(Guid instanceId);
 
         /// <summary>
