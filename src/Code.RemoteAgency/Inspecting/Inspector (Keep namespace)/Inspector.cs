@@ -551,7 +551,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
         
-        static  TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
+        static TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
             Func<TAttribute, TValue> selector, out TAttribute attribute, Dictionary<string, TAttribute> overrides,
             TValue defaultValue = default)
             where TAttribute : Attribute
@@ -566,18 +566,30 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return selector(attribute);
         }
 
-        static   TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,
+        static TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,
             TValue defaultValue = default)
             where TAttribute : Attribute
         {
             attribute = memberInfo.GetCustomAttribute<TAttribute>();
             if (attribute == null)
-                attribute = @delegate.GetCustomAttribute<TAttribute>();
-            if (attribute == null)
-                return defaultValue;
+            {
+                return GetValueFromAttribute(@delegate, selector, out attribute, defaultValue);
+            }
             else
-                return selector(attribute);
+            {
+                var value = selector(attribute);
+                if (value.Equals(defaultValue))
+                {
+                    return GetValueFromAttribute(@delegate, selector, out attribute, defaultValue);
+                }
+                else
+                {
+                    return value;
+                }
+            }
         }
+
+
 
         static string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used, string defaultValue)
         {

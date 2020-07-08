@@ -10,9 +10,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <remarks>
     /// <para>
     /// Priority:
-    /// 1 Attributes specified in method, property and event.
-    /// 2 Attributes specified in delegate related to event.
-    /// 3 Attributes specified in interface.
+    /// 1 Attributes specified on method, property and event.
+    /// 2 Attributes specified on delegate related to event.
+    /// 3 Attributes specified on interface.
     /// 4 Default value: set while building.
     /// 5 Default value: set while initializing. In this mode, only one value for all kinds of operations is set.
     /// </para>

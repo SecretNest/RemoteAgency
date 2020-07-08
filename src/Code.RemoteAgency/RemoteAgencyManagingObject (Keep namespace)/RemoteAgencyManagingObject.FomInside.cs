@@ -75,6 +75,14 @@ namespace SecretNest.RemoteAgency
                 throw response.Exception;
         }
 
+        void ProcessOneWayEventRemoveMessageReceivedFromInside(MessageType messageType, string assetName)
+        {
+            var message = CreateEmptyMessage();
+            message.AssetName = assetName;
+            PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.EventRemove, false);
+            ProcessPreparedRequestMessageReceivedFromInside(message);
+        }
+
         IRemoteAgencyMessage ProcessPropertyGetMessageReceivedFromInside(IRemoteAgencyMessage message, int timeout)
         {
             PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.PropertyGet, false);

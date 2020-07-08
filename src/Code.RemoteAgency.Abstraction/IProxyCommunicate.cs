@@ -45,6 +45,11 @@ namespace SecretNest.RemoteAgency
         /// Will be called while an event removing is requested.
         /// </summary>
         SendEmptyMessageCallback SendEventRemovingMessageCallback { get; set; }
+
+        /// <summary>
+        /// Will be called while an event removing is requested. Only for disposing object.
+        /// </summary>
+        SendOneWayEmptyMessageCallback SendOneWayEventRemovingMessageCallback { get; set; }
         
         /// <summary>
         /// Processes an event raising message and returns response.

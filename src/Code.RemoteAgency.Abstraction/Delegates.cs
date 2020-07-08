@@ -30,6 +30,14 @@ namespace SecretNest.RemoteAgency
     public delegate void SendEmptyMessageCallback(MessageType messageType, string assetName, int timeout);
 
     /// <summary>
+    /// Sends an empty message out.
+    /// </summary>
+    /// <param name="messageType">Message type.</param>
+    /// <param name="assetName">Asset name.</param>
+    /// <exception cref="AccessingTimeOutException">Thrown when timed out.</exception>
+    public delegate void SendOneWayEmptyMessageCallback(MessageType messageType, string assetName);
+
+    /// <summary>
     /// Queries the proxy sticky target site setting state.
     /// </summary>
     /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>

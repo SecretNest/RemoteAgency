@@ -193,6 +193,7 @@ namespace SecretNest.RemoteAgency
                 _proxyObject.ProxyStickyTargetSiteResetCallback = null;
                 _proxyObject.ProxyStickyTargetSiteQueryCallback = null;
                 _proxyObject.SendEventRemovingMessageCallback = null;
+                _proxyObject.SendOneWayEventRemovingMessageCallback = null;
                 _proxyObject.SendMethodMessageCallback = null;
                 _proxyObject.SendOneWayMethodMessageCallback = null;
                 _proxyObject.SendOneWayPropertyGetMessageCallback = null;
@@ -221,6 +222,7 @@ namespace SecretNest.RemoteAgency
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
             _proxyObject.SendEventAddingMessageCallback = ProcessEventAddMessageReceivedFromInside;
             _proxyObject.SendEventRemovingMessageCallback = ProcessEventRemoveMessageReceivedFromInside;
+            _proxyObject.SendOneWayEventRemovingMessageCallback = ProcessOneWayEventRemoveMessageReceivedFromInside;
             _proxyObject.SendPropertyGetMessageCallback = ProcessPropertyGetMessageReceivedFromInside;
             _proxyObject.SendPropertySetMessageCallback = ProcessPropertySetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertyGetMessageCallback = ProcessOneWayPropertyGetMessageReceivedFromInside;
@@ -249,6 +251,7 @@ namespace SecretNest.RemoteAgency
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
             _proxyObject.SendEventAddingMessageCallback = ProcessEventAddMessageReceivedFromInside;
             _proxyObject.SendEventRemovingMessageCallback = ProcessEventRemoveMessageReceivedFromInside;
+            _proxyObject.SendOneWayEventRemovingMessageCallback = ProcessOneWayEventRemoveMessageReceivedFromInside;
             _proxyObject.SendPropertyGetMessageCallback = ProcessPropertyGetMessageReceivedFromInside;
             _proxyObject.SendPropertySetMessageCallback = ProcessPropertySetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertyGetMessageCallback = ProcessOneWayPropertyGetMessageReceivedFromInside;
