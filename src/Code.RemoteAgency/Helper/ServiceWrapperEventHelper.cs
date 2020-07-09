@@ -15,8 +15,8 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         public object ServiceObject { get; set; }
 
-        Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<EventRouterBase>>>> _routers
-            = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<EventRouterBase>>>>();
+        Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>> _routers
+            = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>>();
 
         /// <summary>
         /// Processes an event adding.
@@ -48,17 +48,17 @@ namespace SecretNest.RemoteAgency.Helper
                 {
                     if (!_routers.TryGetValue(message.SenderSiteId, out var routersPerSite))
                     {
-                        routersPerSite = new Dictionary<Guid, Dictionary<string, List<EventRouterBase>>>();
+                        routersPerSite = new Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>();
                         _routers[message.SenderSiteId] = routersPerSite;
                     }
                     if (!routersPerSite.TryGetValue(message.SenderInstanceId, out var routerPerInstance))
                     {
-                        routerPerInstance = new Dictionary<string, List<EventRouterBase>>();
+                        routerPerInstance = new Dictionary<string, List<ServiceWrapperEventRouterBase>>();
                         routersPerSite[message.SenderInstanceId] = routerPerInstance;
                     }
                     if (!routerPerInstance.TryGetValue(message.AssetName, out var routerPerAsset))
                     {
-                        routerPerAsset = new List<EventRouterBase>();
+                        routerPerAsset = new List<ServiceWrapperEventRouterBase>();
                         routerPerInstance[message.AssetName] = routerPerAsset;
                     }
                     routerPerAsset.Add(router);
@@ -177,7 +177,7 @@ namespace SecretNest.RemoteAgency.Helper
             }
         }
 
-        void RemoveRouterPerInstance(Dictionary<string, List<EventRouterBase>> routerPerInstance, List<Exception> exceptions)
+        void RemoveRouterPerInstance(Dictionary<string, List<ServiceWrapperEventRouterBase>> routerPerInstance, List<Exception> exceptions)
         {
             foreach(var i in routerPerInstance.Values)
             foreach (var router in i)
@@ -233,14 +233,14 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         public SendOneWayMessageCallback SendOneWayEventMessageCallback { get; set; }
 
-        private Dictionary<string, Func<object, EventRouterBase>> _builders = new Dictionary<string, Func<object, EventRouterBase>>();
+        private Dictionary<string, Func<object, ServiceWrapperEventRouterBase>> _builders = new Dictionary<string, Func<object, ServiceWrapperEventRouterBase>>();
 
         /// <summary>
         /// Adds a builder callback.
         /// </summary>
         /// <param name="assetName">Name of the event.</param>
         /// <param name="callback">Callback for creating an instance of a derived class of EventRouterBase.</param>
-        public void AddBuilder(string assetName, Func<object, EventRouterBase> callback)
+        public void AddBuilder(string assetName, Func<object, ServiceWrapperEventRouterBase> callback)
         {
             _builders[assetName] = callback;
         }
@@ -249,7 +249,7 @@ namespace SecretNest.RemoteAgency.Helper
     /// <summary>
     /// Defines a helper class to be implanted into built assembly for handling an event handler in service wrapper. This is an abstract class.
     /// </summary>
-    public abstract class EventRouterBase
+    public abstract class ServiceWrapperEventRouterBase
     {
         /// <summary>
         /// Gets or sets the asset name.

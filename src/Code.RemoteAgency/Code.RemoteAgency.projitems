@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DictionaryTryAddHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ProxyEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\EntityBuildingExtended.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\EntityNameConflictException.cs" />
