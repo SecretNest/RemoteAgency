@@ -7,19 +7,16 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class EntityBuildingExtended : EntityBuilding
     {
-        public List<RemoteAgencyGenericParameterInfo> GenericParametersInfo { get; }
+        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> GenericParameterPassThroughAttributes { get; }
 
         public EntityBuildingExtended(string entityClassName, IReadOnlyList<EntityProperty> properties,
             IReadOnlyList<Attribute> interfaceLevelAttributes, IReadOnlyList<Attribute> assetLevelAttributes,
-            IReadOnlyList<Attribute> delegateLevelAttributes, List<RemoteAgencyGenericParameterInfo> genericParameters) : base(entityClassName,
-            properties, interfaceLevelAttributes, assetLevelAttributes, delegateLevelAttributes, GetGenericTypes(genericParameters))
+            IReadOnlyList<Attribute> delegateLevelAttributes, Type[] genericParameters,
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>> genericParameterPassThroughAttributes) : base(
+            entityClassName, properties, interfaceLevelAttributes, assetLevelAttributes, delegateLevelAttributes,
+            genericParameters)
         {
-            GenericParametersInfo = genericParameters;
-        }
-
-        static Type[] GetGenericTypes(List<RemoteAgencyGenericParameterInfo> genericParameters)
-        {
-            return genericParameters.Select(i => i.GenericParameter).ToArray();
+            GenericParameterPassThroughAttributes = genericParameterPassThroughAttributes;
         }
     }
 }

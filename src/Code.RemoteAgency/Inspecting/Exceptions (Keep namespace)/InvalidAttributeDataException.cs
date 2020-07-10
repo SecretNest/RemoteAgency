@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public InvalidAttributeDataException(string message, Attribute attribute, Stack<MemberInfo> memberPath) : base(message)
         {
             Attribute = attribute;
-            MemberPath = memberPath;
+            MemberPath = new Stack<MemberInfo>(memberPath);
         }
 
         /// <summary>

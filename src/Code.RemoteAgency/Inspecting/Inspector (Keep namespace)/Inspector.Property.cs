@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
+using SecretNest.RemoteAgency.Helper;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -21,71 +22,82 @@ namespace SecretNest.RemoteAgency.Inspecting
             property.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(propertyInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
-            var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
-            property.PropertyGettingTimeout = timeoutTime?.PropertyGettingTimeout ?? interfaceLevelPropertyGettingTimeout;
-            property.PropertySettingTimeout = timeoutTime?.PropertySettingTimeout ?? interfaceLevelPropertySettingTimeout;
 
             if (_serializerAssetLevelAttributeBaseType != null)
             {
                 property.SerializerAssetLevelAttributes =
-                    propertyInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                    propertyInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
+                        .ToList();
             }
 
             //asset level pass through attributes
             property.AssetLevelPassThroughAttributes = GetAttributePassThrough(propertyInfo,
                 (m, a) => new InvalidAttributeDataException(m, a, memberPath));
 
+            var getMethod = propertyInfo.GetGetMethod();
+            var setMethod = propertyInfo.GetSetMethod();
+
+            property.IsGettable = propertyInfo.GetGetMethod() != null;
+            property.IsSettable = propertyInfo.GetSetMethod() != null;
+
             if (property.IsIgnored)
             {
-                if (property.WillThrowExceptionWhileCalling)
-                {
-                    //property.GettingResponseEntityProperty = null;
-                    //property.SettingRequestEntityValuePropertyName = null;
-                    property.SettingResponseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
-                }
-                else
-                {
-                    ProcessSettingResponseForIgnoredProperty(property.DataType, out var response);
-                    property.SettingResponseEntityProperties = response;
-                }
+                ProcessMethodBodyForIgnoredAsset(getMethod, property.WillThrowExceptionWhileCalling,
+                    property.GettingMethodBodyInfo);
+                ProcessMethodBodyForIgnoredAsset(setMethod, property.WillThrowExceptionWhileCalling,
+                    property.SettingMethodBodyInfo);
             }
             else
             {
-                property.SerializerParameterLevelAttributes = propertyInfo
-                    .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>()
-                    .ToList();
+                var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
 
-                //getting
-                if (property.IsGettingOneWay)
-                {
-                    ProcessGettingResponseForOneWayProperty(property.DataType, out var response);
-                    property.GettingResponseEntityProperty = response;
-                }
-                else
-                {
-                    //normal getting
-                    ProcessGettingResponseForNormalProperty(propertyInfo, property.SerializerParameterLevelAttributes,
-                        out var response);
-                    property.GettingResponseEntityProperty = response;
-                }
+                List<Attribute> valueParameterSerializerParameterLevelAttributesOverride = propertyInfo
+                    .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
+                    .Cast<Attribute>().ToList();
 
-                //setting
-                property.SettingRequestEntityValuePropertyName =
-                    GetValueFromAttribute<CustomizedPropertySetRequestPropertyNameAttribute, string>(propertyInfo,
-                        i => i.EntityPropertyName, out _, "Value");
+                if (property.IsGettable)
+                {
+                    //getting
+                    if (property.IsGettingOneWay)
+                    {
+                        ProcessMethodBodyForOneWayAsset(getMethod, memberPath, _includesProxyOnlyInfo,
+                            property.GettingMethodBodyInfo, null, null,
+                            valueParameterSerializerParameterLevelAttributesOverride);
+                    }
+                    else
+                    {
+                        //normal getting
+                        var gettingTimeout =
+                            timeoutTime?.PropertyGettingTimeout ?? interfaceLevelPropertyGettingTimeout;
 
-                if (property.IsSettingOneWay)
-                {
-                    property.SettingResponseEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
-                }
-                else
-                {
-                    //normal setting
-                    ProcessSettingResponseForNormalProperty(propertyInfo, property.SerializerParameterLevelAttributes,
-                        memberPath, out var response);
-                    property.SettingResponseEntityProperties = response;
+                        ProcessMethodBodyForNormalAsset(getMethod, memberPath,
+                            new ICustomAttributeProvider[] {propertyInfo}, gettingTimeout,
+                            property.GettingMethodBodyInfo, null, null, null,
+                            valueParameterSerializerParameterLevelAttributesOverride);
+                    }
                 }
 
+                if (property.IsSettable)
+                {
+                    //setting
+                    if (property.IsSettingOneWay)
+                    {
+                        ProcessMethodBodyForOneWayAsset(setMethod, memberPath, _includesProxyOnlyInfo,
+                            property.SettingMethodBodyInfo, null, null,
+                            valueParameterSerializerParameterLevelAttributesOverride);
+                    }
+                    else
+                    {
+                        //normal setting
+                        var settingTimeout =
+                            timeoutTime?.PropertySettingTimeout ?? interfaceLevelPropertySettingTimeout;
+
+                        ProcessMethodBodyForNormalAsset(setMethod, memberPath,
+                            new ICustomAttributeProvider[] {propertyInfo}, settingTimeout,
+                            property.SettingMethodBodyInfo, null, null, null,
+                            valueParameterSerializerParameterLevelAttributesOverride);
+                    }
+                }
             }
         }
     }

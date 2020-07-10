@@ -156,13 +156,29 @@ namespace SecretNest.RemoteAgency.Inspecting
             return result;
         }
 
-        Dictionary<string, List<RemoteAgencyAttributePassThrough>> FillAttributePassThroughOnParameters(ParameterInfo[] parameters, Func<string, Attribute, ParameterInfo, InvalidAttributeDataException> creatingExceptionCallback)
+        Dictionary<string, List<RemoteAgencyAttributePassThrough>> FillAttributePassThroughOnParameters(
+            ParameterInfo[] parameters,
+            Func<string, Attribute, ParameterInfo, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>> result = new Dictionary<string, List<RemoteAgencyAttributePassThrough>>(parameters.Length);
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>> result =
+                new Dictionary<string, List<RemoteAgencyAttributePassThrough>>(parameters.Length);
             foreach (var parameterInfo in parameters)
             {
                 result[parameterInfo.Name] = GetAttributePassThrough(parameterInfo,
                     (m, a) => creatingExceptionCallback(m, a, parameterInfo));
+            }
+
+            return result;
+        }
+
+        Dictionary<string, List<RemoteAgencyAttributePassThrough>> FillAttributePassThroughOnGenericParameters(
+            Type[] genericParameters, Func<string, Attribute, MemberInfo, InvalidAttributeDataException> creatingExceptionCallback)
+        {
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>> result =
+                new Dictionary<string, List<RemoteAgencyAttributePassThrough>>(genericParameters.Length);
+            foreach (var typeInfo in genericParameters)
+            {
+                result[typeInfo.Name] = GetAttributePassThrough(typeInfo, (m, a) => creatingExceptionCallback(m, a, typeInfo));
             }
 
             return result;

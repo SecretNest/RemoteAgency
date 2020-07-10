@@ -39,9 +39,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         public ParameterInfo Parameter { get; set; }
     }
 
-    abstract class RemoteAgencyReturnValueInfoFromReturnValueDefaultValueBase : RemoteAgencyReturnValueInfoBase
+    class RemoteAgencyReturnValueInfoFromReturnValueDefaultValue : RemoteAgencyReturnValueInfoBase
     {
         public override Type DataType => ReturnValueDataType;
+        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ReturnValueDefaultValue;
         public override bool IsIncludedInEntity => false;
         public override string GetDefaultPropertyName() => throw new NotSupportedException();
         public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
@@ -52,28 +53,12 @@ namespace SecretNest.RemoteAgency.Inspecting
         public Type ReturnValueDataType { get; set; }
     }
 
-    class RemoteAgencyReturnValueInfoFromReturnValueDefaultValue : RemoteAgencyReturnValueInfoFromReturnValueDefaultValueBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ReturnValueDefaultValue;
-    }
-
-    class RemoteAgencyReturnValueInfoFromAssetPropertyReturnValueDefaultValue : RemoteAgencyReturnValueInfoFromReturnValueDefaultValueBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.AssetPropertyReturnValueDefaultValue;
-    }
-
-    abstract class RemoteAgencyReturnValueInfoFromReturnValueBase : RemoteAgencyReturnValueInfoBase
+    class RemoteAgencyReturnValueInfoFromReturnValue : RemoteAgencyReturnValueInfoBase
     {
         public override Type DataType => ReturnValueDataType;
+        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ReturnValue;
         public override bool IsIncludedInEntity => true;
         public override string GetDefaultPropertyName() => "ReturnValue";
-
-        public Type ReturnValueDataType { get; set; }
-    }
-
-    class RemoteAgencyReturnValueInfoFromReturnValue : RemoteAgencyReturnValueInfoFromReturnValueBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ReturnValue;
         public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
         {
             return SerializerParameterLevelAttributesOnReturnValue.Select(i =>
@@ -81,18 +66,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         public List<Attribute> SerializerParameterLevelAttributesOnReturnValue { get; set; }
-    }
-
-    class RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue : RemoteAgencyReturnValueInfoFromReturnValueBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.AssetPropertyReturnValue;
-        public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
-        {
-            return SerializerParameterLevelAttributesOnAsset.Select(i =>
-                new EntityPropertyAttribute(AttributePosition.AssetProperty, i));
-        }
-
-        public List<Attribute> SerializerParameterLevelAttributesOnAsset { get; set; }
+        public Type ReturnValueDataType { get; set; }
     }
 
     class RemoteAgencyReturnValueInfoFromParameter : RemoteAgencyReturnValueInfoBase, IRemoteAgencyReturnValueInfoIncludedWhenExceptionThrown
@@ -137,34 +111,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<Attribute> SerializerParameterLevelAttributes { get; set; }
     }
 
-    class RemoteAgencyReturnValueInfoFromAssetPropertyValueField : RemoteAgencyReturnValueInfoFromFieldBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.AssetPropertyValueField;
-        public override string GetDefaultPropertyName() => ParameterField.Name;
-        public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
-        {
-            return SerializerParameterLevelAttributesOnAsset.Select(i =>
-                new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).Union(
-                SerializerParameterLevelAttributesOnField.Select(i =>
-                    new EntityPropertyAttribute(AttributePosition.FieldOfParameter, i)));
-        }
-
-        public List<Attribute> SerializerParameterLevelAttributesOnAsset { get; set; }
-    }
-
-    abstract class RemoteAgencyReturnValueInfoFromPropertyBase : RemoteAgencyReturnValueInfoBase,
+    class RemoteAgencyReturnValueInfoFromParameterProperty : RemoteAgencyReturnValueInfoBase,
         IRemoteAgencyReturnValueInfoIncludedWhenExceptionThrown
     {
         public override Type DataType => ParameterProperty.PropertyType;
         public override bool IsIncludedInEntity => true;
-
-        public PropertyInfo ParameterProperty { get; set; }
-        public bool IsIncludedWhenExceptionThrown { get; set; }
-        public List<Attribute> SerializerParameterLevelAttributesOnProperty { get; set; }
-    }
-
-    class RemoteAgencyReturnValueInfoFromParameterProperty : RemoteAgencyReturnValueInfoFromPropertyBase
-    {
         public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ParameterProperty;
         public override string GetDefaultPropertyName() => Parameter.Name + "_" + ParameterProperty.Name;
         public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
@@ -177,37 +128,18 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public ParameterInfo Parameter { get; set; }
         public List<Attribute> SerializerParameterLevelAttributes { get; set; }
+
+        public PropertyInfo ParameterProperty { get; set; }
+        public bool IsIncludedWhenExceptionThrown { get; set; }
+        public List<Attribute> SerializerParameterLevelAttributesOnProperty { get; set; }
     }
 
-    class RemoteAgencyReturnValueInfoFromAssetPropertyValueProperty : RemoteAgencyReturnValueInfoFromPropertyBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.AssetPropertyValueProperty;
-        public override string GetDefaultPropertyName() => ParameterProperty.Name;
-        public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
-        {
-            return SerializerParameterLevelAttributesOnAsset.Select(i =>
-                new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).Union(
-                SerializerParameterLevelAttributesOnProperty.Select(i =>
-                    new EntityPropertyAttribute(AttributePosition.PropertyOfParameter, i)));
-        }
 
-        public List<Attribute> SerializerParameterLevelAttributesOnAsset { get; set; }
-    }
-
-    abstract class RemoteAgencyReturnValueInfoFromHelperPropertyBase : RemoteAgencyReturnValueInfoBase,
+    class RemoteAgencyReturnValueInfoFromParameterHelperProperty : RemoteAgencyReturnValueInfoBase,
         IRemoteAgencyReturnValueInfoIncludedWhenExceptionThrown
     {
         public override Type DataType => ParameterHelperProperty.PropertyType;
         public override bool IsIncludedInEntity => true;
-
-        public Type ParameterHelperClass { get; set; }
-        public PropertyInfo ParameterHelperProperty { get; set; }
-        public bool IsIncludedWhenExceptionThrown { get; set; }
-        public List<Attribute> SerializerParameterLevelAttributesOnHelperProperty { get; set; }
-    }
-
-    class RemoteAgencyReturnValueInfoFromParameterHelperProperty : RemoteAgencyReturnValueInfoFromHelperPropertyBase
-    {
         public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.ParameterHelperProperty;
         public override string GetDefaultPropertyName() => Parameter.Name + "_" + ParameterHelperProperty.Name;
         public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
@@ -219,37 +151,21 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         public ParameterInfo Parameter { get; set; }
-        public List<Attribute> SerializerParameterLevelAttributes { get; set; }
-    } 
-
-    class RemoteAgencyReturnValueInfoFromAssetPropertyValueHelperProperty : RemoteAgencyReturnValueInfoFromHelperPropertyBase
-    {
-        public override RemoteAgencyReturnValueSource ReturnValueSource => RemoteAgencyReturnValueSource.AssetPropertyValueHelperProperty;
-        public override string GetDefaultPropertyName() => ParameterHelperProperty.Name;
-        public override IEnumerable<EntityPropertyAttribute> GetEntityPropertyAttributes()
-        {
-            return SerializerParameterLevelAttributesOnAsset.Select(i =>
-                new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).Union(
-                SerializerParameterLevelAttributesOnHelperProperty.Select(i =>
-                    new EntityPropertyAttribute(AttributePosition.PropertyOfHelper, i)));
-        }
-
-        public List<Attribute> SerializerParameterLevelAttributesOnAsset { get; set; }
-    } 
+        public List<Attribute> SerializerParameterLevelAttributes { get; set; } 
+        public Type ParameterHelperClass { get; set; }
+        public PropertyInfo ParameterHelperProperty { get; set; }
+        public bool IsIncludedWhenExceptionThrown { get; set; }
+        public List<Attribute> SerializerParameterLevelAttributesOnHelperProperty { get; set; }
+    }
 
     enum RemoteAgencyReturnValueSource
     {
         ParameterDefaultValue,
         ReturnValueDefaultValue,
-        AssetPropertyReturnValueDefaultValue,
         ReturnValue,
-        AssetPropertyReturnValue,
         Parameter,
         ParameterField,
-        AssetPropertyValueField,
         ParameterProperty,
-        AssetPropertyValueProperty,
-        ParameterHelperProperty,
-        AssetPropertyValueHelperProperty
+        ParameterHelperProperty
     }
 }

@@ -21,6 +21,9 @@ namespace SecretNest.RemoteAgency.Inspecting
         
         public LocalExceptionHandlingMode LocalExceptionHandlingMode { get; set; }
 
-        public abstract IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters);
+        public abstract IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
+            Type[] interfaceLevelGenericParameters,
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+                interfaceLevelGenericParameterPassThroughAttributes);
     }
 }

@@ -21,10 +21,6 @@ namespace SecretNest.RemoteAgency.Inspecting
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(methodInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
 
-            method.MethodCallingTimeout =
-                GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo,
-                    i => i.Timeout, out _, interfaceLevelMethodCallingTimeout);
-
             if (_serializerAssetLevelAttributeBaseType != null)
             {
                 method.SerializerAssetLevelAttributes =
@@ -32,60 +28,39 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //generic parameter
-            method.AssetLevelGenericParameters = ProcessGenericArgument(methodInfo.GetGenericArguments(), memberPath);
+            method.AssetLevelGenericParameters = methodInfo.GetGenericArguments();
+            method.AssetLevelGenericParameterPassThroughAttributes = FillAttributePassThroughOnGenericParameters(method.AssetLevelGenericParameters,
+                (m, a, t) => new InvalidAttributeDataException(m, a, t, memberPath));
 
-            //asset level pass through attributes
-            method.AssetLevelPassThroughAttributes = GetAttributePassThrough(methodInfo,
-                (m, a) => new InvalidAttributeDataException(m, a, memberPath));
-            method.ReturnValuePassThroughAttributes = GetAttributePassThrough(methodInfo.ReturnTypeCustomAttributes,
-                (m, a) => new InvalidReturnValueAttributeDataException(m, a, memberPath));
+            //pass through attributes
+            if (_includesProxyOnlyInfo)
+            {
+                method.AssetLevelPassThroughAttributes = GetAttributePassThrough(methodInfo,
+                    (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+                method.ReturnValuePassThroughAttributes = GetAttributePassThrough(methodInfo.ReturnTypeCustomAttributes,
+                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, memberPath));
+
+                var parameterInfo = methodInfo.GetParameters();
+                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
+                    (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
+            }
 
             if (method.IsIgnored)
             {
-                method.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
-                if (_includesProxyOnlyInfo)
-                {
-                    var parameterInfo = methodInfo.GetParameters();
-                    if (method.WillThrowExceptionWhileCalling)
-                    {
-                        method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
-                            (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                        method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
-                    }
-                    else
-                    {
-                        ProcessParameterAndReturnValueForIgnoredAsset(parameterInfo, methodInfo.ReturnType, out var returnValues);
-                        method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
-                            (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                        method.ReturnValueEntityProperties = returnValues;
-                    }
-                }
-                else
-                {
-                    method.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
-                }
+                ProcessMethodBodyForIgnoredAsset(methodInfo, method.WillThrowExceptionWhileCalling,
+                    method.MethodBodyInfo);
             }
             else if (method.IsOneWay)
             {
-                var parameterInfo = methodInfo.GetParameters();
-                ProcessParameterAndReturnValueForOneWayAsset(parameterInfo, methodInfo.ReturnType,
-                    memberPath, out var parameters, out var returnValues, _includesProxyOnlyInfo);
-                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
-                    (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                method.ParameterEntityProperties = parameters;
-                method.ReturnValueEntityProperties = returnValues;
+                ProcessMethodBodyForOneWayAsset(methodInfo, memberPath, _includesProxyOnlyInfo, method.MethodBodyInfo);
             }
             else
             {
                 //normal
-                var parameterInfo = methodInfo.GetParameters();
-                ProcessParameterAndReturnValueForNormalAsset(parameterInfo, methodInfo.ReturnType, methodInfo.ReturnTypeCustomAttributes,
-                    memberPath, new[] {methodInfo.ReturnTypeCustomAttributes, methodInfo}, out var parameters,
-                    out var returnValues);
-                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
-                    (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
-                method.ParameterEntityProperties = parameters;
-                method.ReturnValueEntityProperties = returnValues;
+                ProcessMethodBodyForNormalAsset(methodInfo, memberPath,
+                    new[] {methodInfo.ReturnTypeCustomAttributes, methodInfo},
+                    GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo, i => i.Timeout, out _,
+                        interfaceLevelMethodCallingTimeout), method.MethodBodyInfo);
             }
         }
     }

@@ -28,7 +28,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyPropertyInfo> Properties { get; set; }
 
         public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
-        public List<RemoteAgencyGenericParameterInfo> InterfaceLevelGenericParameters { get; set; }
+        public Type[] InterfaceLevelGenericParameters { get; set; }
+
+        public Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+            InterfaceLevelGenericParameterPassThroughAttributes { get; set; }
 
         public List<Attribute> SerializerInterfaceLevelAttributes { get; set; }
 
@@ -41,14 +44,17 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public IEnumerable<EntityBuildingExtended> GetEntities()
         {
-            foreach(var asset in Methods)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
+            foreach (var asset in Methods)
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes,
+                InterfaceLevelGenericParameters, InterfaceLevelGenericParameterPassThroughAttributes))
                 yield return entity;
             foreach (var asset in Events)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes,
+                InterfaceLevelGenericParameters, InterfaceLevelGenericParameterPassThroughAttributes))
                 yield return entity;
             foreach (var asset in Properties)
-            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes, InterfaceLevelGenericParameters))
+            foreach (var entity in asset.GetEntities(SerializerInterfaceLevelAttributes,
+                InterfaceLevelGenericParameters, InterfaceLevelGenericParameterPassThroughAttributes))
                 yield return entity;
         }
     }

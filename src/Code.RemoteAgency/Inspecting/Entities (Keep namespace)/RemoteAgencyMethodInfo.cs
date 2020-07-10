@@ -7,43 +7,56 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyMethodInfo : RemoteAgencyAssetInfoBase
     {
-        public List<RemoteAgencyGenericParameterInfo> AssetLevelGenericParameters { get; set; }
+        public Type[] AssetLevelGenericParameters { get; set; }
+        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> AssetLevelGenericParameterPassThroughAttributes { get; set; }
+
         public Dictionary<string, List<RemoteAgencyAttributePassThrough>> ParameterPassThroughAttributes { get; set; }
         public List<RemoteAgencyAttributePassThrough> ReturnValuePassThroughAttributes { get; set; }
 
-        public string ParameterEntityName { get; set; }
-        public List<RemoteAgencyParameterInfo> ParameterEntityProperties { get; set; }
+        public RemoteAgencyMethodBodyInfo MethodBodyInfo { get; set; }
 
-        public string ReturnValueEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfoBase> ReturnValueEntityProperties { get; set; }
-
-        public int MethodCallingTimeout { get; set; }
-
-        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters)
+        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
+            Type[] interfaceLevelGenericParameters,
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+                interfaceLevelGenericParameterPassThroughAttributes)
         {
-            var methodGenericParameters = interfaceLevelGenericParameters.Concat(AssetLevelGenericParameters).ToList();
+            Type[] methodGenericParameters =
+                new Type[interfaceLevelGenericParameters.Length + AssetLevelGenericParameters.Length];
+            Array.Copy(interfaceLevelGenericParameters, methodGenericParameters,
+                interfaceLevelGenericParameters.Length);
+            Array.Copy(AssetLevelGenericParameters, 0, methodGenericParameters, interfaceLevelGenericParameters.Length,
+                AssetLevelGenericParameters.Length);
 
-            if (!string.IsNullOrEmpty(ParameterEntityName))
+            var methodGenericParameterPassThroughAttributes =
+                interfaceLevelGenericParameterPassThroughAttributes.Concat(
+                    AssetLevelGenericParameterPassThroughAttributes).ToDictionary(i => i.Key, i => i.Value);
+
+            if (!string.IsNullOrEmpty(MethodBodyInfo.ParameterEntityName))
             {
-                List<EntityProperty> properties = ParameterEntityProperties.Select(i =>
+                List<EntityProperty> properties = MethodBodyInfo.ParameterEntityProperties.Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName,
                             i.SerializerParameterLevelAttributes
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(ParameterEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters);
+                EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ParameterEntityName,
+                    properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
+                    methodGenericParameterPassThroughAttributes);
 
                 yield return entity;
             }
 
-            if (!string.IsNullOrEmpty(ReturnValueEntityName))
+            if (!string.IsNullOrEmpty(MethodBodyInfo.ReturnValueEntityName))
             {
-                List<EntityProperty> properties = ReturnValueEntityProperties.Where(i => i.IsIncludedInEntity)
+                List<EntityProperty> properties = MethodBodyInfo.ReturnValueEntityProperties
+                    .Where(i => i.IsIncludedInEntity)
                     .Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(ReturnValueEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters);
+                EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ReturnValueEntityName,
+                    properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
+                    methodGenericParameterPassThroughAttributes);
 
                 yield return entity;
             }

@@ -21,24 +21,25 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
-                if (entityInfo.GenericParametersInfo.Count > 0)
+                if (entityInfo.GenericParameters.Length > 0)
                 {
-                    GenericTypeParameterBuilder[] typeParams =
-                        typeBuilder.DefineGenericParameters(entityInfo.GenericParametersInfo
-                            .Select(i => i.GenericParameter.Name).ToArray());
+                    GenericTypeParameterBuilder[] typeParams = 
+                        typeBuilder.DefineGenericParameters(entityInfo.GenericParameters
+                            .Select(i => i.Name).ToArray());
 
-                    for (int i = 0; i < entityInfo.GenericParametersInfo.Count; i++)
+                    for (int i = 0; i < entityInfo.GenericParameters.Length; i++)
                     {
-                        var genericTypeInfo = entityInfo.GenericParametersInfo[i];
-                        foreach (var customAttribute in genericTypeInfo.PassThroughAttributes)
+                        var genericType = entityInfo.GenericParameters[i];
+                        var passThroughAttributes = entityInfo.GenericParameterPassThroughAttributes[genericType.Name];
+                        foreach (var customAttribute in passThroughAttributes)
                         {
                             typeParams[i].SetCustomAttribute(customAttribute.GetAttributeBuilder());
                         }
 
                         typeParams[i]
-                            .SetGenericParameterAttributes(genericTypeInfo.GenericParameter.GenericParameterAttributes);
+                            .SetGenericParameterAttributes(genericType.GenericParameterAttributes);
 
-                        var typeConstraints = genericTypeInfo.GenericParameter.GetGenericParameterConstraints();
+                        var typeConstraints = genericType.GetGenericParameterConstraints();
                         if (typeConstraints.Length > 0)
                         {
                             var baseType = typeConstraints.FirstOrDefault(t => t.IsClass);

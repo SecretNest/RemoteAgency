@@ -308,30 +308,6 @@
             <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para></remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
         </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.AddingRequestEntityName">
-            <summary>
-            Gets the name of the entity class for processing event adding request.
-            </summary>
-            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.AddingResponseEntityName">
-            <summary>
-            Gets the name of the entity class for processing event adding response.
-            </summary>
-            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RemovingRequestEntityName">
-            <summary>
-            Gets the name of the entity class for processing event removing response.
-            </summary>
-            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RemovingResponseEntityName">
-            <summary>
-            Gets the name of the entity class for processing event removing response.
-            </summary>
-            <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
-        </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RaisingNotificationEntityName">
             <summary>
             Gets the name of the entity class for processing event raising notification.
@@ -344,14 +320,10 @@
             </summary>
             <remarks>When the value is <see langword="null"/> or empty string, name is chosen automatically.</remarks>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.#ctor(System.String,System.String)">
             <summary>
             Initializes an instance of CustomizedEventEntityNameAttribute.
             </summary>
-            <param name="addingRequestEntityName">Name of the entity class for processing event adding request. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
-            <param name="addingResponseEntityName">Name of the entity class for processing event adding response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
-            <param name="removingRequestEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
-            <param name="removingResponseEntityName">Name of the entity class for processing event removing response. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
             <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
             <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
         </member>
@@ -533,9 +505,9 @@
             <remarks>
             <para>
             Priority:
-            1 Attributes specified in method, property and event.
-            2 Attributes specified in delegate related to event.
-            3 Attributes specified in interface.
+            1 Attributes specified on method, property and event.
+            2 Attributes specified on delegate related to event.
+            3 Attributes specified on interface.
             4 Default value: set while building.
             5 Default value: set while initializing. In this mode, only one value for all kinds of operations is set.
             </para>
@@ -1054,6 +1026,14 @@
             <param name="timeout">Timeout in millisecond.</param>
             <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
         </member>
+        <member name="T:SecretNest.RemoteAgency.SendOneWayEmptyMessageCallback">
+            <summary>
+            Sends an empty message out.
+            </summary>
+            <param name="messageType">Message type.</param>
+            <param name="assetName">Asset name.</param>
+            <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
+        </member>
         <member name="T:SecretNest.RemoteAgency.ProxyStickyTargetSiteQueryCallback">
             <summary>
             Queries the proxy sticky target site setting state.
@@ -1204,6 +1184,11 @@
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendEventRemovingMessageCallback">
             <summary>
             Will be called while an event removing is requested.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayEventRemovingMessageCallback">
+            <summary>
+            Will be called while an event removing is requested. Only for disposing object.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">

@@ -22,12 +22,6 @@ namespace SecretNest.RemoteAgency.Inspecting
             @event.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(eventInfo, @event.Delegate,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
-            var timeoutTime = GetValueFromAttribute<OperatingTimeoutTimeAttribute, OperatingTimeoutTimeAttribute>(
-                eventInfo, @event.Delegate,
-                i => i, out _);
-            @event.EventAddingTimeout = timeoutTime?.EventAddingTimeout ?? interfaceLevelEventAddingTimeout;
-            @event.EventRemovingTimeout = timeoutTime?.EventRemovingTimeout ?? interfaceLevelEventRemovingTimeout;
-            @event.EventRaisingTimeout = timeoutTime?.EventRaisingTimeout ?? interfaceLevelEventRaisingTimeout;
 
             if (_serializerAssetLevelAttributeBaseType != null)
             {
@@ -42,26 +36,19 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //asset level pass through attributes
-            @event.AssetLevelPassThroughAttributes = GetAttributePassThrough(eventInfo,
-                (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+            if (_includesProxyOnlyInfo)
+                @event.AssetLevelPassThroughAttributes = GetAttributePassThrough(eventInfo,
+                    (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+
+            var raiseMethod = eventInfo.GetRaiseMethod();
 
             if (@event.IsIgnored)
             {
-                @event.RaisingNotificationEntityProperties = new List<RemoteAgencyParameterInfo>();
-                if (@event.WillThrowExceptionWhileCalling)
-                {
-                    @event.RaisingFeedbackEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
-                }
-                else
-                {
-                    GetParameterAndReturnValueOfEvent(@event, out var parameterInfo, out var returnType, out _);
-                    ProcessParameterAndReturnValueForIgnoredAsset(parameterInfo, returnType, out var returnValues);
-                    @event.RaisingFeedbackEntityProperties = returnValues;
-                }
+                ProcessMethodBodyForIgnoredAsset(raiseMethod, @event.WillThrowExceptionWhileCalling,
+                    @event.RaisingMethodBodyInfo);
             }
             else
             {
-                GetParameterAndReturnValueOfEvent(@event, out var parameterInfo, out var returnType, out var delegateMethod);
                 Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes =
                     new Dictionary<string, ParameterIgnoredAttribute>();
                 foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterIgnoredAttribute>())
@@ -79,14 +66,22 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (@event.IsOneWay)
                 {
-                    ProcessParameterAndReturnValueForOneWayAsset(parameterInfo, returnType, memberPath,
-                        out var parameters, out var returnValues, _includesServiceWrapperOnlyInfo, 
-                        eventLevelParameterIgnoredAttributes, eventLevelParameterEntityPropertyNameAttributes);
-                    @event.RaisingNotificationEntityProperties = parameters;
-                    @event.RaisingFeedbackEntityProperties = returnValues;
+                    ProcessMethodBodyForOneWayAsset(raiseMethod, memberPath, _includesServiceWrapperOnlyInfo,
+                        @event.RaisingMethodBodyInfo, eventLevelParameterIgnoredAttributes,
+                        eventLevelParameterEntityPropertyNameAttributes);
                 }
                 else
                 {
+                    //normal
+                    var delegateMethod = @event.Delegate.GetMethod("Invoke");
+
+                    var timeoutTime = GetValueFromAttribute<OperatingTimeoutTimeAttribute, OperatingTimeoutTimeAttribute>(
+                        eventInfo, @event.Delegate,
+                        i => i, out _);
+                    @event.AddingMethodBodyInfo.Timeout = timeoutTime?.EventAddingTimeout ?? interfaceLevelEventAddingTimeout;
+                    @event.RemovingMethodBodyInfo.Timeout = timeoutTime?.EventRemovingTimeout ?? interfaceLevelEventRemovingTimeout;
+                    var eventRaisingTimeout = timeoutTime?.EventRaisingTimeout ?? interfaceLevelEventRaisingTimeout;
+
                     Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes =
                         new Dictionary<string, ParameterReturnRequiredAttribute>();
                     foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterReturnRequiredAttribute>())
@@ -94,24 +89,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                         eventLevelParameterReturnRequiredAttributes.TryAdd(attribute.ParameterName, attribute);
                     }
 
-                    ProcessParameterAndReturnValueForNormalAsset(parameterInfo, returnType, delegateMethod.ReturnTypeCustomAttributes, memberPath,
+                    ProcessMethodBodyForNormalAsset(raiseMethod, memberPath,
+                        // ReSharper disable once PossibleNullReferenceException
                         new[] {eventInfo, delegateMethod.ReturnTypeCustomAttributes, delegateMethod},
-                        out var parameters, out var returnValues, eventLevelParameterIgnoredAttributes,
+                        eventRaisingTimeout, @event.RaisingMethodBodyInfo, eventLevelParameterIgnoredAttributes,
                         eventLevelParameterEntityPropertyNameAttributes, eventLevelParameterReturnRequiredAttributes);
-                    @event.RaisingNotificationEntityProperties = parameters;
-                    @event.RaisingFeedbackEntityProperties = returnValues;
                 }
             }
 
-        }
-
-        void GetParameterAndReturnValueOfEvent(RemoteAgencyEventInfo @event, out ParameterInfo[] parameters,
-            out Type returnType, out MethodInfo delegateMethod)
-        {
-            delegateMethod = @event.Delegate.GetMethod("Invoke");
-            // ReSharper disable once PossibleNullReferenceException
-            parameters = delegateMethod.GetParameters();
-            returnType = delegateMethod.ReturnType;
         }
     }
 }

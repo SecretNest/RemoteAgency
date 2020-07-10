@@ -17,64 +17,79 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public Type DataType => ((PropertyInfo) Asset).PropertyType;
 
-        public List<Attribute> SerializerParameterLevelAttributes { get; set; } //will be linked to the *OnAsset property in RemoteAgencyValueInfo* class.
+        public bool IsGettable { get; set; }
+        public bool IsSettable { get; set; }
 
-        public string GettingRequestEntityName { get; set; }
-        public string GettingResponseEntityName { get; set; }
-        public RemoteAgencyReturnValueInfoBase GettingResponseEntityProperty { get; set; }
+        public RemoteAgencyMethodBodyInfo GettingMethodBodyInfo { get; set; }
+        public RemoteAgencyMethodBodyInfo SettingMethodBodyInfo { get; set; }
 
-        public string SettingRequestEntityName { get; set; }
-        public string SettingRequestEntityValuePropertyName { get; set; }
-        public string SettingResponseEntityName { get; set; }
-        public List<RemoteAgencyReturnValueInfoBase> SettingResponseEntityProperties { get; set; }
-
-        public int PropertyGettingTimeout { get; set; }
-        public int PropertySettingTimeout { get; set; }
-
-        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, List<RemoteAgencyGenericParameterInfo> interfaceLevelGenericParameters)
+        public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, Type[] interfaceLevelGenericParameters,
+            Dictionary<string, List<RemoteAgencyAttributePassThrough>> interfaceLevelGenericParameterPassThroughAttributes)
         {
-            if (!string.IsNullOrEmpty(GettingRequestEntityName))
+            if (IsGettable)
             {
-                List<EntityProperty> properties = new List<EntityProperty>();
-
-                EntityBuildingExtended entity = new EntityBuildingExtended(GettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
-
-                yield return entity;
-            }
-
-            if (!string.IsNullOrEmpty(GettingResponseEntityName))
-            {
-                List<EntityProperty> properties = new List<EntityProperty>()
+                if (!string.IsNullOrEmpty(GettingMethodBodyInfo.ParameterEntityName))
                 {
-                    new EntityProperty(GettingResponseEntityProperty.DataType, GettingResponseEntityProperty.PropertyName, GettingResponseEntityProperty.GetEntityPropertyAttributes().ToList())
-                };
-                //when GettingResponseEntityName is not null nor empty, the type of GettingResponseEntityProperty will be RemoteAgencyReturnValueInfoFromAssetPropertyReturnValue.
+                    List<EntityProperty> properties = GettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
+                            new EntityProperty(i.DataType, i.PropertyName,
+                                i.SerializerParameterLevelAttributes
+                                    .Select(j => new EntityPropertyAttribute(AttributePosition.AssetProperty, j)).ToList()))
+                        .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(GettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
+                    EntityBuildingExtended entity = new EntityBuildingExtended(GettingMethodBodyInfo.ParameterEntityName, properties,
+                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes);
 
-                yield return entity;
-            }
+                    yield return entity;
+                }
 
-            if (!string.IsNullOrEmpty(SettingRequestEntityName))
-            {
-                List<EntityProperty> properties = new List<EntityProperty>()
+                if (!string.IsNullOrEmpty(GettingMethodBodyInfo.ReturnValueEntityName))
                 {
-                    new EntityProperty(DataType, SettingRequestEntityValuePropertyName, SerializerParameterLevelAttributes.Select(i=>new EntityPropertyAttribute(AttributePosition.AssetProperty, i)).ToList())
-                };
+                    List<EntityProperty> properties = GettingMethodBodyInfo.ReturnValueEntityProperties
+                        .Where(i => i.IsIncludedInEntity)
+                        .Select(i =>
+                            new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
+                        .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(SettingRequestEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
+                    EntityBuildingExtended entity = new EntityBuildingExtended(GettingMethodBodyInfo.ReturnValueEntityName, properties,
+                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes);
 
-                yield return entity;
+                    yield return entity;
+                }
             }
 
-            if (!string.IsNullOrEmpty(SettingResponseEntityName))
+            if (IsSettable)
             {
-                List<EntityProperty> properties = SettingResponseEntityProperties.Select(i =>
-                    new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList())).ToList();
+                if (!string.IsNullOrEmpty(SettingMethodBodyInfo.ParameterEntityName))
+                {
+                    List<EntityProperty> properties = SettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
+                            new EntityProperty(i.DataType, i.PropertyName,
+                                i.SerializerParameterLevelAttributes
+                                    .Select(j => new EntityPropertyAttribute(AttributePosition.AssetProperty, j)).ToList()))
+                        .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(SettingResponseEntityName, properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, interfaceLevelGenericParameters);
+                    EntityBuildingExtended entity = new EntityBuildingExtended(SettingMethodBodyInfo.ParameterEntityName, properties,
+                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes);
 
-                yield return entity;
+                    yield return entity;
+                }
+
+                if (!string.IsNullOrEmpty(SettingMethodBodyInfo.ReturnValueEntityName))
+                {
+                    List<EntityProperty> properties = SettingMethodBodyInfo.ReturnValueEntityProperties
+                        .Where(i => i.IsIncludedInEntity)
+                        .Select(i =>
+                            new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
+                        .ToList();
+
+                    EntityBuildingExtended entity = new EntityBuildingExtended(SettingMethodBodyInfo.ReturnValueEntityName, properties,
+                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes);
+
+                    yield return entity;
+                }
             }
         }
     }

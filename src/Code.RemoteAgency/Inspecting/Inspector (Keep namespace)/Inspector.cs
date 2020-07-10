@@ -37,10 +37,13 @@ namespace SecretNest.RemoteAgency.Inspecting
         public void Process()
         {
             //interface level
-            Stack<MemberInfo> parentPath = new Stack<MemberInfo>();
-            _result.InterfaceLevelPassThroughAttributes =
-                GetAttributePassThrough(_sourceInterfaceTypeInfo,
-                    (m, a) => new InvalidAttributeDataException(m, a, _result.SourceInterface, parentPath));
+            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            memberPath.Push(_result.SourceInterface);
+
+            if (_includesProxyOnlyInfo)
+                _result.InterfaceLevelPassThroughAttributes =
+                    GetAttributePassThrough(_sourceInterfaceTypeInfo,
+                        (m, a) => new InvalidAttributeDataException(m, a, memberPath));
 
             var interfaceLevelLocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_result.SourceInterface,
@@ -72,17 +75,16 @@ namespace SecretNest.RemoteAgency.Inspecting
                 interfaceLevelPropertySettingTimeout = interfaceLevelOperatingTimeoutTimeAttribute.PropertySettingTimeout;
             }
 
-            //NOTE: at this point, interface is pushed into parentPath.
-            parentPath.Push(_result.SourceInterface);
-
             if (_serializerInterfaceLevelAttributeBaseType != null)
             {
                 _result.SerializerInterfaceLevelAttributes =
                     _result.SourceInterface.GetCustomAttributes(_serializerInterfaceLevelAttributeBaseType, true).Cast<Attribute>().ToList();
             }
 
-            _result.InterfaceLevelGenericParameters =
-                ProcessGenericArgument(_result.SourceInterface.GetGenericArguments(), parentPath);
+            _result.InterfaceLevelGenericParameters = _result.SourceInterface.GetGenericArguments();
+            _result.InterfaceLevelGenericParameterPassThroughAttributes =
+                FillAttributePassThroughOnGenericParameters(_result.InterfaceLevelGenericParameters,
+                    (m, a, t) => new InvalidAttributeDataException(m, a, t, memberPath));
 
             //assets start
             var usedClassNames = new HashSet<string>
@@ -96,10 +98,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             _result.Properties = new List<RemoteAgencyPropertyInfo>();
 
             //foreach asset: get ignore, one way, preset asset name and entity name
-            ReadOriginalAsset(usedAssetNames, usedClassNames, parentPath);
+            ReadOriginalAsset(usedAssetNames, usedClassNames, memberPath);
 
             //foreach asset: auto naming
-            AutoNaming(usedAssetNames, usedClassNames, parentPath);
+            AutoNaming(usedAssetNames, usedClassNames, memberPath);
 
             Task[] tasks = new Task[_result.Methods.Count + _result.Events.Count + _result.Properties.Count];
             int taskIndex = 0;
@@ -145,7 +147,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 var item = new RemoteAgencyMethodInfo
                 {
                     AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames, AutoNamePlaceHolder),
-                    Asset = method
+                    Asset = method,
+                    MethodBodyInfo = new RemoteAgencyMethodBodyInfo()
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(method, i => i.IsIgnored, out var assetIgnored))
@@ -170,11 +173,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     customizedEntityName, method, parentPath);
                             }
 
-                            item.ParameterEntityName = customizedEntityName.ParameterEntityName;
+                            item.MethodBodyInfo.ParameterEntityName = customizedEntityName.ParameterEntityName;
                         }
                         else
                         {
-                            item.ParameterEntityName = AutoNamePlaceHolder;
+                            item.MethodBodyInfo.ParameterEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!item.IsOneWay)
@@ -188,11 +191,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         customizedEntityName, method, parentPath);
                                 }
 
-                                item.ReturnValueEntityName = customizedEntityName.ReturnValueEntityName;
+                                item.MethodBodyInfo.ReturnValueEntityName = customizedEntityName.ReturnValueEntityName;
                             }
                             else
                             {
-                                item.ReturnValueEntityName = AutoNamePlaceHolder;
+                                item.MethodBodyInfo.ReturnValueEntityName = AutoNamePlaceHolder;
                             }
                         }
                     }
@@ -207,7 +210,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     AssetName = GetAssetNameSpecified(@event, parentPath, usedAssetNames, AutoNamePlaceHolder),
                     Delegate = @event.EventHandlerType,
-                    Asset = @event
+                    Asset = @event,
+                    RaisingMethodBodyInfo = new RemoteAgencyMethodBodyInfo(),
+                    AddingMethodBodyInfo = new RemoteAgencySimpleMethodBodyInfo(),
+                    RemovingMethodBodyInfo = new RemoteAgencySimpleMethodBodyInfo()
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(@event, item.Delegate, i => i.IsIgnored,
@@ -236,70 +242,6 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     if (customizedEntityName != null)
                     {
-                        if (!string.IsNullOrEmpty(customizedEntityName.AddingRequestEntityName))
-                        {
-                            if (!usedClassNames.Add(customizedEntityName.AddingRequestEntityName))
-                            {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for request of event adding conflicts with others.",
-                                    customizedEntityName, current, parentPath);
-                            }
-
-                            item.AddingRequestEntityName = customizedEntityName.AddingRequestEntityName;
-                        }
-                        else
-                        {
-                            item.AddingRequestEntityName = AutoNamePlaceHolder;
-                        }
-
-                        if (!string.IsNullOrEmpty(customizedEntityName.AddingResponseEntityName))
-                        {
-                            if (!usedClassNames.Add(customizedEntityName.AddingResponseEntityName))
-                            {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for response of event adding conflicts with others.",
-                                    customizedEntityName, current, parentPath);
-                            }
-
-                            item.AddingResponseEntityName = customizedEntityName.AddingResponseEntityName;
-                        }
-                        else
-                        {
-                            item.AddingResponseEntityName = AutoNamePlaceHolder;
-                        }
-
-                        if (!string.IsNullOrEmpty(customizedEntityName.RemovingRequestEntityName))
-                        {
-                            if (!usedClassNames.Add(customizedEntityName.RemovingRequestEntityName))
-                            {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for request of event removing conflicts with others.",
-                                    customizedEntityName, current, parentPath);
-                            }
-
-                            item.RemovingRequestEntityName = customizedEntityName.RemovingRequestEntityName;
-                        }
-                        else
-                        {
-                            item.RemovingRequestEntityName = AutoNamePlaceHolder;
-                        }
-
-                        if (!string.IsNullOrEmpty(customizedEntityName.RemovingResponseEntityName))
-                        {
-                            if (!usedClassNames.Add(customizedEntityName.RemovingResponseEntityName))
-                            {
-                                throw new EntityNameConflictException(
-                                    $"The entity name specified for response of event removing conflicts with others.",
-                                    customizedEntityName, current, parentPath);
-                            }
-
-                            item.RemovingResponseEntityName = customizedEntityName.RemovingResponseEntityName;
-                        }
-                        else
-                        {
-                            item.RemovingResponseEntityName = AutoNamePlaceHolder;
-                        }
-
                         if (!string.IsNullOrEmpty(customizedEntityName.RaisingNotificationEntityName))
                         {
                             if (!usedClassNames.Add(customizedEntityName.RaisingNotificationEntityName))
@@ -309,11 +251,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     customizedEntityName, current, parentPath);
                             }
 
-                            item.RaisingNotificationEntityName = customizedEntityName.RaisingNotificationEntityName;
+                            item.RaisingMethodBodyInfo.ParameterEntityName = customizedEntityName.RaisingNotificationEntityName;
                         }
                         else
                         {
-                            item.RaisingNotificationEntityName = AutoNamePlaceHolder;
+                            item.RaisingMethodBodyInfo.ParameterEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!item.IsOneWay)
@@ -327,11 +269,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         customizedEntityName, current, parentPath);
                                 }
 
-                                item.RaisingFeedbackEntityName = customizedEntityName.RaisingFeedbackEntityName;
+                                item.RaisingMethodBodyInfo.ReturnValueEntityName = customizedEntityName.RaisingFeedbackEntityName;
                             }
                             else
                             {
-                                item.RaisingFeedbackEntityName = AutoNamePlaceHolder;
+                                item.RaisingMethodBodyInfo.ReturnValueEntityName = AutoNamePlaceHolder;
                             }
                         }
 
@@ -348,7 +290,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                 var item = new RemoteAgencyPropertyInfo()
                 {
                     AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames, AutoNamePlaceHolder),
-                    Asset = property
+                    Asset = property,
+                    GettingMethodBodyInfo = new RemoteAgencyMethodBodyInfo(),
+                    SettingMethodBodyInfo = new RemoteAgencyMethodBodyInfo()
                 };
 
                 if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored))
@@ -377,11 +321,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     customizedGetEntityName, property, parentPath);
                             }
 
-                            item.GettingRequestEntityName = customizedGetEntityName.RequestEntityName;
+                            item.GettingMethodBodyInfo.ParameterEntityName = customizedGetEntityName.RequestEntityName;
                         }
                         else
                         {
-                            item.GettingRequestEntityName = AutoNamePlaceHolder;
+                            item.GettingMethodBodyInfo.ParameterEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!item.IsGettingOneWay)
@@ -395,11 +339,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         customizedGetEntityName, property, parentPath);
                                 }
 
-                                item.GettingResponseEntityName = customizedGetEntityName.ResponseEntityName;
+                                item.GettingMethodBodyInfo.ReturnValueEntityName = customizedGetEntityName.ResponseEntityName;
                             }
                             else
                             {
-                                item.GettingResponseEntityName = AutoNamePlaceHolder;
+                                item.GettingMethodBodyInfo.ReturnValueEntityName = AutoNamePlaceHolder;
                             }
                         }
                     }
@@ -417,11 +361,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                     customizedSetEntityName, property, parentPath);
                             }
 
-                            item.SettingRequestEntityName = customizedSetEntityName.RequestEntityName;
+                            item.SettingMethodBodyInfo.ParameterEntityName = customizedSetEntityName.RequestEntityName;
                         }
                         else
                         {
-                            item.SettingRequestEntityName = AutoNamePlaceHolder;
+                            item.SettingMethodBodyInfo.ParameterEntityName = AutoNamePlaceHolder;
                         }
 
                         if (!item.IsSettingOneWay)
@@ -435,11 +379,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         customizedSetEntityName, property, parentPath);
                                 }
 
-                                item.SettingResponseEntityName = customizedSetEntityName.ResponseEntityName;
+                                item.SettingMethodBodyInfo.ReturnValueEntityName = customizedSetEntityName.ResponseEntityName;
                             }
                             else
                             {
-                                item.SettingResponseEntityName = AutoNamePlaceHolder;
+                                item.SettingMethodBodyInfo.ReturnValueEntityName = AutoNamePlaceHolder;
                             }
                         }
                     }
@@ -459,14 +403,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                     method.AssetName = GetAssetAutoName(method.Asset.Name, usedAssetNames);
                 }
 
-                if (method.ParameterEntityName == AutoNamePlaceHolder)
+                if (method.MethodBodyInfo.ParameterEntityName == AutoNamePlaceHolder)
                 {
-                    method.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "Parameter",
+                    method.MethodBodyInfo.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "Parameter",
                         usedClassNames);
                 }
-                if (method.ReturnValueEntityName == AutoNamePlaceHolder)
+                if (method.MethodBodyInfo.ReturnValueEntityName == AutoNamePlaceHolder)
                 {
-                    method.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "ReturnValue",
+                    method.MethodBodyInfo.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, method.AssetName, "ReturnValue",
                         usedClassNames);
                 }
             }
@@ -478,34 +422,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                     @event.AssetName = GetAssetAutoName(@event.Asset.Name, usedAssetNames);
                 }
 
-                if (@event.AddingRequestEntityName == AutoNamePlaceHolder)
+                if (@event.RaisingMethodBodyInfo.ParameterEntityName == AutoNamePlaceHolder)
                 {
-                    @event.AddingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingRequest",
+                    @event.RaisingMethodBodyInfo.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingNotification",
                         usedClassNames);
                 }
-                if (@event.AddingResponseEntityName == AutoNamePlaceHolder)
+                if (@event.RaisingMethodBodyInfo.ReturnValueEntityName == AutoNamePlaceHolder)
                 {
-                    @event.AddingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "AddingResponse",
-                        usedClassNames);
-                }
-                if (@event.RemovingRequestEntityName == AutoNamePlaceHolder)
-                {
-                    @event.RemovingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingRequest",
-                        usedClassNames);
-                }
-                if (@event.RemovingResponseEntityName == AutoNamePlaceHolder)
-                {
-                    @event.RemovingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RemovingResponse",
-                        usedClassNames);
-                }
-                if (@event.RaisingNotificationEntityName == AutoNamePlaceHolder)
-                {
-                    @event.RaisingNotificationEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingNotification",
-                        usedClassNames);
-                }
-                if (@event.RaisingFeedbackEntityName == AutoNamePlaceHolder)
-                {
-                    @event.RaisingFeedbackEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingFeedback",
+                    @event.RaisingMethodBodyInfo.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, @event.AssetName, "RaisingFeedback",
                         usedClassNames);
                 }
             }
@@ -517,24 +441,24 @@ namespace SecretNest.RemoteAgency.Inspecting
                     property.AssetName = GetAssetAutoName(property.Asset.Name, usedAssetNames);
                 }
 
-                if (property.GettingRequestEntityName == AutoNamePlaceHolder)
+                if (property.GettingMethodBodyInfo.ParameterEntityName == AutoNamePlaceHolder)
                 {
-                    property.GettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingRequest",
+                    property.GettingMethodBodyInfo.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingRequest",
                         usedClassNames);
                 }
-                if (property.GettingResponseEntityName == AutoNamePlaceHolder)
+                if (property.GettingMethodBodyInfo.ReturnValueEntityName == AutoNamePlaceHolder)
                 {
-                    property.GettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingResponse",
+                    property.GettingMethodBodyInfo.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "GettingResponse",
                         usedClassNames);
                 }
-                if (property.SettingRequestEntityName == AutoNamePlaceHolder)
+                if (property.SettingMethodBodyInfo.ParameterEntityName == AutoNamePlaceHolder)
                 {
-                    property.SettingRequestEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingRequest",
+                    property.SettingMethodBodyInfo.ParameterEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingRequest",
                         usedClassNames);
                 }
-                if (property.SettingResponseEntityName == AutoNamePlaceHolder)
+                if (property.SettingMethodBodyInfo.ReturnValueEntityName == AutoNamePlaceHolder)
                 {
-                    property.SettingResponseEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingResponse",
+                    property.SettingMethodBodyInfo.ReturnValueEntityName = GetEntityAutoName(_result.ClassNameBase, property.AssetName, "SettingResponse",
                         usedClassNames);
                 }
             }

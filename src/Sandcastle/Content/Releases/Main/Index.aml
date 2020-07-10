@@ -34,10 +34,22 @@
           </listItem>
           <listItem>
             <para>Properties</para>
+            <list class="nobullet">
+              <listItem>
+                <para>Method: get and set</para>
+              </listItem>
+              <listItem>
+                <para>Indexer</para>
+              </listItem>
+            </list>
           </listItem>
           <listItem>
             <para>Events</para>
             <list class="nobullet">
+              <listItem>
+                <para>Method: add, remove and raise</para>
+                <para>Note: Other methods are not supported.</para>
+              </listItem>
               <listItem>
                 <para>Parameters: params, out, ref and default value</para>
               </listItem>
