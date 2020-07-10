@@ -51,7 +51,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
 
-                List<Attribute> valueParameterSerializerParameterLevelAttributesOverride = propertyInfo
+                List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForProperty = propertyInfo
                     .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
                     .Cast<Attribute>().ToList();
 
@@ -61,8 +61,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (property.IsGettingOneWay)
                     {
                         ProcessMethodBodyForOneWayAsset(getMethod, memberPath, _includesProxyOnlyInfo,
-                            property.GettingMethodBodyInfo, null, null,
-                            valueParameterSerializerParameterLevelAttributesOverride);
+                            property.GettingMethodBodyInfo, null, null, null);
                     }
                     else
                     {
@@ -70,21 +69,35 @@ namespace SecretNest.RemoteAgency.Inspecting
                         var gettingTimeout =
                             timeoutTime?.PropertyGettingTimeout ?? interfaceLevelPropertyGettingTimeout;
 
+                        var isReturnValueIgnored =
+                            GetValueFromAttribute<ReturnIgnoredAttribute, bool>(propertyInfo, i => i.IsIgnored,
+                                out _);
+
+                        string returnValuePropertyNameSpecifiedByAttribute =
+                            GetValueFromAttribute<CustomizedPropertyGetResponsePropertyNameAttribute, string>(
+                                propertyInfo, i => i.EntityPropertyName,
+                                out var customizedPropertyGetResponsePropertyNameAttribute);
+
                         ProcessMethodBodyForNormalAsset(getMethod, memberPath,
-                            new ICustomAttributeProvider[] {propertyInfo}, gettingTimeout,
+                            gettingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedPropertyGetResponsePropertyNameAttribute,
                             property.GettingMethodBodyInfo, null, null, null,
-                            valueParameterSerializerParameterLevelAttributesOverride);
+                            valueParameterSerializerParameterLevelAttributesOverrideForProperty, null);
                     }
                 }
 
                 if (property.IsSettable)
                 {
+                    var propertyValuePropertyName =
+                        GetValueFromAttribute<CustomizedPropertySetRequestPropertyNameAttribute, string>(propertyInfo,
+                            i => i.EntityPropertyName, out var customizedPropertySetRequestPropertyNameAttribute);
+
                     //setting
                     if (property.IsSettingOneWay)
                     {
                         ProcessMethodBodyForOneWayAsset(setMethod, memberPath, _includesProxyOnlyInfo,
                             property.SettingMethodBodyInfo, null, null,
-                            valueParameterSerializerParameterLevelAttributesOverride);
+                            valueParameterSerializerParameterLevelAttributesOverrideForProperty,
+                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute);
                     }
                     else
                     {
@@ -93,9 +106,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                             timeoutTime?.PropertySettingTimeout ?? interfaceLevelPropertySettingTimeout;
 
                         ProcessMethodBodyForNormalAsset(setMethod, memberPath,
-                            new ICustomAttributeProvider[] {propertyInfo}, settingTimeout,
+                            settingTimeout, true, null, null,
                             property.SettingMethodBodyInfo, null, null, null,
-                            valueParameterSerializerParameterLevelAttributesOverride);
+                            null, valueParameterSerializerParameterLevelAttributesOverrideForProperty,
+                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute);
                     }
                 }
             }

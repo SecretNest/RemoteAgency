@@ -41,14 +41,16 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
-        private const string propertyValueName = "value";
+        private const string PropertyValueName = "value";
 
         void ProcessMethodBodyForOneWayAsset(MethodInfo methodInfo, Stack<MemberInfo> memberPath,
             bool includeCallerOnlyInfo, RemoteAgencyMethodBodyInfo target,
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
-            List<Attribute> valueParameterSerializerParameterLevelAttributesOverride = null)
+            List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting = null,
+            string propertyValuePropertyNameSpecifiedByAttribute = null,
+            Attribute propertyValuePropertyNameSpecifyingAttribute = null)
         {
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
@@ -87,10 +89,11 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     if (_serializerParameterLevelAttributeBaseType != null)
                     {
-                        if (valueParameterSerializerParameterLevelAttributesOverride != null && parameter.Name == propertyValueName)
+                        if (valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting != null && parameter.Name == PropertyValueName)
                         {
+                            //only used in property. SerializerParameterLevelAttribute for return value is defined on the property asset.
                             parameterInfo.SerializerParameterLevelAttributes =
-                                valueParameterSerializerParameterLevelAttributesOverride;
+                                valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting;
                         }
                         else
                         {
@@ -100,17 +103,30 @@ namespace SecretNest.RemoteAgency.Inspecting
                         }
                     }
 
-                    var requiredPropertyName =
-                        GetValueFromAttribute(parameter, i => i.EntityPropertyName,
-                            out var customizedParameterEntityPropertyNameAttribute,
-                            eventLevelParameterEntityPropertyNameAttributes);
+                    string requiredPropertyName;
+                    Attribute requiredPropertyNameSpecifyingAttribute;
+                    if (!string.IsNullOrEmpty(propertyValuePropertyNameSpecifiedByAttribute) &&
+                        parameter.Name == PropertyValueName)
+                    {
+                        requiredPropertyName = propertyValuePropertyNameSpecifiedByAttribute;
+                        requiredPropertyNameSpecifyingAttribute = propertyValuePropertyNameSpecifyingAttribute;
+                    }
+                    else
+                    {
+                        requiredPropertyName =
+                            GetValueFromAttribute(parameter, i => i.EntityPropertyName,
+                                out var customizedParameterEntityPropertyNameAttribute,
+                                eventLevelParameterEntityPropertyNameAttributes);
+                        requiredPropertyNameSpecifyingAttribute = customizedParameterEntityPropertyNameAttribute;
+                    }
+
                     if (!string.IsNullOrEmpty(requiredPropertyName))
                     {
                         if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
                         {
                             throw new EntityPropertyNameConflictException(
                                 $"The property name specified conflicts with others in parameter entity.",
-                                customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
+                                requiredPropertyNameSpecifyingAttribute, parameter, memberPath);
                         }
 
                         parameterInfo.PropertyName = requiredPropertyName;
@@ -147,12 +163,16 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         void ProcessMethodBodyForNormalAsset(MethodInfo methodInfo, Stack<MemberInfo> memberPath,
-            ICustomAttributeProvider[] returnValueAttributeProviders, int timeOut, RemoteAgencyMethodBodyInfo target,
+            int timeOut, bool isReturnValueIgnored, string returnValuePropertyNameSpecifiedByAttribute, Attribute returnValuePropertyNameSpecifyingAttribute,
+            RemoteAgencyMethodBodyInfo target, 
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
             Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes = null,
-            List<Attribute> valueParameterSerializerParameterLevelAttributesOverride = null)
+            List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertyGetting = null,
+            List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting = null,
+            string propertyValuePropertyNameSpecifiedByAttribute = null,
+            Attribute propertyValuePropertyNameSpecifyingAttribute = null)
         {
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
@@ -182,9 +202,11 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     if (_serializerParameterLevelAttributeBaseType != null)
                     {
-                        if (valueParameterSerializerParameterLevelAttributesOverride != null && parameter.Name == propertyValueName)
+                        if (valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting != null && parameter.Name == PropertyValueName)
                         {
-                            parameterInfo.SerializerParameterLevelAttributes = valueParameterSerializerParameterLevelAttributesOverride;
+                            //only used in property. SerializerParameterLevelAttribute for return value is defined on the property asset.
+                            parameterInfo.SerializerParameterLevelAttributes =
+                                valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting;
                         }
                         else
                         {
@@ -194,17 +216,30 @@ namespace SecretNest.RemoteAgency.Inspecting
                         }
                     }
 
-                    var requiredPropertyName =
-                        GetValueFromAttribute(parameter, i => i.EntityPropertyName,
-                            out var customizedParameterEntityPropertyNameAttribute,
-                            eventLevelParameterEntityPropertyNameAttributes);
+                    string requiredPropertyName;
+                    Attribute requiredPropertyNameSpecifyingAttribute;
+                    if (!string.IsNullOrEmpty(propertyValuePropertyNameSpecifiedByAttribute) &&
+                        parameter.Name == PropertyValueName)
+                    {
+                        requiredPropertyName = propertyValuePropertyNameSpecifiedByAttribute;
+                        requiredPropertyNameSpecifyingAttribute = propertyValuePropertyNameSpecifyingAttribute;
+                    }
+                    else
+                    {
+                        requiredPropertyName =
+                            GetValueFromAttribute(parameter, i => i.EntityPropertyName,
+                                out var customizedParameterEntityPropertyNameAttribute,
+                                eventLevelParameterEntityPropertyNameAttributes);
+                        requiredPropertyNameSpecifyingAttribute = customizedParameterEntityPropertyNameAttribute;
+                    }
+
                     if (!string.IsNullOrEmpty(requiredPropertyName))
                     {
                         if (!usedPropertyNamesInParameterEntity.Add(requiredPropertyName))
                         {
                             throw new EntityPropertyNameConflictException(
                                 "The property name specified conflicts with others in parameter entity.",
-                                customizedParameterEntityPropertyNameAttribute, parameter, memberPath);
+                                requiredPropertyNameSpecifyingAttribute, parameter, memberPath);
                         }
 
                         parameterInfo.PropertyName = requiredPropertyName;
@@ -477,70 +512,50 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //return value
-            bool isReturnValueIgnored = false;
-            foreach (var returnValueAttributeProvider in returnValueAttributeProviders)
+            if (!isReturnValueIgnored && returnType != typeof(void))
             {
-                isReturnValueIgnored =
-                    GetValueFromAttribute<ReturnIgnoredAttribute, bool>(returnValueAttributeProvider, i => i.IsIgnored,
-                        out _);
-                if (isReturnValueIgnored)
-                    break;
-            }
+                string returnValuePropertyName;
 
-            if (!isReturnValueIgnored)
-            {
-                CustomizedReturnValueEntityPropertyNameAttribute
-                    customizedReturnValueEntityPropertyNameAttribute = null;
-                foreach (var returnValueAttributeProvider in returnValueAttributeProviders)
+                if (!string.IsNullOrEmpty(returnValuePropertyNameSpecifiedByAttribute))
                 {
-                    customizedReturnValueEntityPropertyNameAttribute =
-                        GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute,
-                            CustomizedReturnValueEntityPropertyNameAttribute>(
-                            returnValueAttributeProvider, i => i, out _);
-                    if (customizedReturnValueEntityPropertyNameAttribute != null)
-                        break;
-                }
-
-                var returnValuePropertyName = customizedReturnValueEntityPropertyNameAttribute?.EntityPropertyName;
-
-                if (!string.IsNullOrEmpty(returnValuePropertyName))
-                {
-                    if (!usedPropertyNamesInReturnValueEntity.Add(returnValuePropertyName))
+                    if (!usedPropertyNamesInReturnValueEntity.Add(returnValuePropertyNameSpecifiedByAttribute))
                     {
                         throw new EntityPropertyNameConflictException(
                             "The property name specified conflicts with others in return value entity.",
-                            customizedReturnValueEntityPropertyNameAttribute,
+                            returnValuePropertyNameSpecifyingAttribute,
                             EntityPropertyNameConflictExceptionCausedMemberType.ReturnValue, memberPath);
                     }
+
+                    returnValuePropertyName = returnValuePropertyNameSpecifiedByAttribute;
                 }
                 else
                 {
                     returnValuePropertyName = AutoNamePlaceHolder;
                 }
 
-                if (returnType != typeof(void))
+                RemoteAgencyReturnValueInfoFromReturnValue item = new RemoteAgencyReturnValueInfoFromReturnValue()
                 {
-                    RemoteAgencyReturnValueInfoFromReturnValue item = new RemoteAgencyReturnValueInfoFromReturnValue()
+                    PropertyName = returnValuePropertyName,
+                    ReturnValueDataType = returnType
+                };
+                if (_serializerParameterLevelAttributeBaseType != null)
+                {
+                    if (valueParameterSerializerParameterLevelAttributesOverrideForPropertyGetting != null)
                     {
-                        PropertyName = returnValuePropertyName,
-                        ReturnValueDataType = returnType
-                    };
-                    if (_serializerParameterLevelAttributeBaseType != null)
+                        //only used in property. SerializerParameterLevelAttribute for return value is defined on the property asset.
+                        item.SerializerParameterLevelAttributesOnReturnValue =
+                            valueParameterSerializerParameterLevelAttributesOverrideForPropertyGetting;
+                    }
+                    else
                     {
                         item.SerializerParameterLevelAttributesOnReturnValue =
                             methodInfo.ReturnTypeCustomAttributes
                                 .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true).Cast<Attribute>()
                                 .ToList();
                     }
+                }
 
-                    target.ReturnValueEntityProperties.Add(item);
-                }
-                else
-                {
-                    throw new InvalidReturnValueAttributeDataException(
-                        $"{nameof(CustomizedReturnValueEntityPropertyNameAttribute)} can only be used on the asset with return value.",
-                        customizedReturnValueEntityPropertyNameAttribute, memberPath);
-                }
+                target.ReturnValueEntityProperties.Add(item);
             }
 
             //assign auto name

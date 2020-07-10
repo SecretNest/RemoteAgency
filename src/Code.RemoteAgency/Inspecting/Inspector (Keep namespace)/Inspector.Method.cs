@@ -57,10 +57,28 @@ namespace SecretNest.RemoteAgency.Inspecting
             else
             {
                 //normal
+                var isReturnValueIgnored =
+                    GetValueFromAttribute<ReturnIgnoredAttribute, bool>(methodInfo.ReturnTypeCustomAttributes, i => i.IsIgnored,
+                        out var returnIgnoredAttribute);
+                if (returnIgnoredAttribute == null)
+                {
+                    isReturnValueIgnored =
+                        GetValueFromAttribute(methodInfo, i => i.IsIgnored, out returnIgnoredAttribute);
+                }
+
+                string returnValuePropertyNameSpecifiedByAttribute =
+                    GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
+                        methodInfo.ReturnTypeCustomAttributes, i => i.EntityPropertyName,
+                        out var customizedReturnValueEntityPropertyNameAttribute);
+                if (customizedReturnValueEntityPropertyNameAttribute == null)
+                {
+                    returnValuePropertyNameSpecifiedByAttribute = GetValueFromAttribute(methodInfo,
+                        i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
+                }
+
                 ProcessMethodBodyForNormalAsset(methodInfo, memberPath,
-                    new[] {methodInfo.ReturnTypeCustomAttributes, methodInfo},
-                    GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo, i => i.Timeout, out _,
-                        interfaceLevelMethodCallingTimeout), method.MethodBodyInfo);
+                    GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo, i => i.Timeout, out _, interfaceLevelMethodCallingTimeout),
+                    isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedReturnValueEntityPropertyNameAttribute, method.MethodBodyInfo);
             }
         }
     }

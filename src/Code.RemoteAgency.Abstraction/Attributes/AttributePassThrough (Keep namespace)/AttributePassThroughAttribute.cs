@@ -16,7 +16,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
-                    AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
+                    AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue | 
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class AttributePassThroughAttribute : Attribute
     {

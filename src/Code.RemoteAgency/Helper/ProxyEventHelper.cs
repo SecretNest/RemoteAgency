@@ -24,7 +24,6 @@ namespace SecretNest.RemoteAgency.Helper
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>
         public void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
         {
             throw new NotImplementedException();
