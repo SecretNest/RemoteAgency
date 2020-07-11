@@ -5,13 +5,13 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    abstract partial class RemoteAgencyManagingObject : IDisposable
+    abstract partial class RemoteAgencyManagingObject
     {
         public Guid InstanceId { get; }
 
         private Action<IRemoteAgencyMessage> _sendMessageToManagerCallback; //send message out
         private Action<Exception> _sendExceptionToManagerCallback; //redirect exception in user code
-        private Func<IRemoteAgencyMessage> _createEmptyMessageCallback;
+        private CreateEmptyMessageCallback _createEmptyMessageCallback;
         protected int DefaultTimeOutTime { get; }
         private readonly Func<int> _getWaitingTimeForDisposingCallback; //get WaitingTimeForDisposing.
 
@@ -20,7 +20,7 @@ namespace SecretNest.RemoteAgency
 
         private RemoteAgencyManagingObject(ref Guid instanceId,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
         {
             if (instanceId == Guid.Empty)
             {
@@ -37,7 +37,7 @@ namespace SecretNest.RemoteAgency
 
         protected RemoteAgencyManagingObject(ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : this(ref instanceId, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
@@ -47,7 +47,7 @@ namespace SecretNest.RemoteAgency
         protected RemoteAgencyManagingObject(ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : this(ref instanceId, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
@@ -56,11 +56,11 @@ namespace SecretNest.RemoteAgency
 
         #endregion
 
-        public virtual void Dispose()
+        public void Dispose(bool sendSpecialCommand)
         {
             try
             {
-                CloseManagingObject();
+                CloseManagingObject(sendSpecialCommand);
             }
             finally
             {
@@ -85,7 +85,7 @@ namespace SecretNest.RemoteAgency
         {
         }
 
-        protected abstract void CloseManagingObject();
+        protected abstract void CloseManagingObject(bool sendSpecialCommand);
 
         #endregion
     }
@@ -94,7 +94,7 @@ namespace SecretNest.RemoteAgency
     {
         protected RemoteAgencyManagingObject(ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
@@ -103,7 +103,7 @@ namespace SecretNest.RemoteAgency
         protected RemoteAgencyManagingObject(ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
@@ -149,6 +149,8 @@ namespace SecretNest.RemoteAgency
                     _stickyTargetSiteId = null;
                 }
             }
+
+            CallOnRemoteClosed(_proxyObject.OnRemoteServiceWrapperClosing, siteId, serviceWrapperInstanceId);
         }
 
         //requested from managed object, which requested by user called on RemoteAgency.ResetProxyStickyTargetSite
@@ -169,11 +171,11 @@ namespace SecretNest.RemoteAgency
 
         #endregion
 
-        protected override void CloseManagingObject() //requested by manager
+        protected override void CloseManagingObject(bool sendSpecialCommand) //requested by manager
         {
             try
             {
-                CallSimpleMethod(_proxyObject.CloseRequestedByManagingObject);
+                CallCloseRequestedByManagingObject(_proxyObject.CloseRequestedByManagingObject, sendSpecialCommand);
             }
             catch (AggregateException e)
             {
@@ -193,13 +195,15 @@ namespace SecretNest.RemoteAgency
                 _proxyObject.ProxyStickyTargetSiteResetCallback = null;
                 _proxyObject.ProxyStickyTargetSiteQueryCallback = null;
                 _proxyObject.SendEventRemovingMessageCallback = null;
-                _proxyObject.SendOneWayEventRemovingMessageCallback = null;
                 _proxyObject.SendMethodMessageCallback = null;
                 _proxyObject.SendOneWayMethodMessageCallback = null;
                 _proxyObject.SendOneWayPropertyGetMessageCallback = null;
                 _proxyObject.SendOneWayPropertySetMessageCallback = null;
                 _proxyObject.SendPropertyGetMessageCallback = null;
                 _proxyObject.SendPropertySetMessageCallback = null;
+                _proxyObject.SendOneWaySpecialCommandMessageCallback = null;
+                _proxyObject.CreateEmptyMessageCallback = null;
+
                 _proxyObject = null;
             }
         }
@@ -209,7 +213,7 @@ namespace SecretNest.RemoteAgency
         public RemoteAgencyManagingObjectProxy(IProxyCommunicate proxyObject, ref Guid instanceId,
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, 
+            CreateEmptyMessageCallback createEmptyMessageCallback, 
             bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
@@ -222,11 +226,12 @@ namespace SecretNest.RemoteAgency
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
             _proxyObject.SendEventAddingMessageCallback = ProcessEventAddMessageReceivedFromInside;
             _proxyObject.SendEventRemovingMessageCallback = ProcessEventRemoveMessageReceivedFromInside;
-            _proxyObject.SendOneWayEventRemovingMessageCallback = ProcessOneWayEventRemoveMessageReceivedFromInside;
             _proxyObject.SendPropertyGetMessageCallback = ProcessPropertyGetMessageReceivedFromInside;
             _proxyObject.SendPropertySetMessageCallback = ProcessPropertySetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertyGetMessageCallback = ProcessOneWayPropertyGetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertySetMessageCallback = ProcessOneWayPropertySetMessageReceivedFromInside;
+            _proxyObject.SendOneWaySpecialCommandMessageCallback = ProcessOneWaySpecialCommandMessageReceivedFromInside;
+            _proxyObject.CreateEmptyMessageCallback = createEmptyMessageCallback;
 
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
@@ -237,7 +242,7 @@ namespace SecretNest.RemoteAgency
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, 
+            CreateEmptyMessageCallback createEmptyMessageCallback, 
             bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback, 
@@ -251,11 +256,12 @@ namespace SecretNest.RemoteAgency
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
             _proxyObject.SendEventAddingMessageCallback = ProcessEventAddMessageReceivedFromInside;
             _proxyObject.SendEventRemovingMessageCallback = ProcessEventRemoveMessageReceivedFromInside;
-            _proxyObject.SendOneWayEventRemovingMessageCallback = ProcessOneWayEventRemoveMessageReceivedFromInside;
             _proxyObject.SendPropertyGetMessageCallback = ProcessPropertyGetMessageReceivedFromInside;
             _proxyObject.SendPropertySetMessageCallback = ProcessPropertySetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertyGetMessageCallback = ProcessOneWayPropertyGetMessageReceivedFromInside;
             _proxyObject.SendOneWayPropertySetMessageCallback = ProcessOneWayPropertySetMessageReceivedFromInside;
+            _proxyObject.SendOneWaySpecialCommandMessageCallback = ProcessOneWaySpecialCommandMessageReceivedFromInside;
+            _proxyObject.CreateEmptyMessageCallback = createEmptyMessageCallback;
 
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
@@ -274,16 +280,16 @@ namespace SecretNest.RemoteAgency
         //requested by manager: RemoteAgency.OnRemoteProxyClosing
         public override void OnProxyClosing(Guid siteId, Guid? proxyInstanceId)
         {
-            CallOnClosing(_serviceWrapperObject.OnRemoteProxyClosing, siteId, proxyInstanceId);
+            CallOnRemoteClosed(_serviceWrapperObject.OnRemoteProxyClosing, siteId, proxyInstanceId);
         }
 
         #endregion
 
-        protected override void CloseManagingObject() //requested by manager
+        protected override void CloseManagingObject(bool sendSpecialCommand) //requested by manager
         {
             try
             {
-                CallSimpleMethod(_serviceWrapperObject.CloseRequestedByManagingObject);
+                CallCloseRequestedByManagingObject(_serviceWrapperObject.CloseRequestedByManagingObject, sendSpecialCommand);
             }
             catch (AggregateException e)
             {
@@ -301,6 +307,8 @@ namespace SecretNest.RemoteAgency
                 _serviceWrapperObject.GetSiteIdCallback = null;
                 _serviceWrapperObject.SendEventMessageCallback = null;
                 _serviceWrapperObject.SendOneWayEventMessageCallback = null;
+                _serviceWrapperObject.SendOneWaySpecialCommandMessageCallback = null;
+                _serviceWrapperObject.CreateEmptyMessageCallback = null;
                 _serviceWrapperObject = null;
             }
         }
@@ -310,20 +318,22 @@ namespace SecretNest.RemoteAgency
         public RemoteAgencyManagingObjectServiceWrapper(IServiceWrapperCommunicate serviceWrapperObject,
             ref Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _serviceWrapperObject = serviceWrapperObject;
             _serviceWrapperObject.SendEventMessageCallback = ProcessEventMessageReceivedFromInside;
             _serviceWrapperObject.SendOneWayEventMessageCallback = ProcessOneWayEventMessageReceivedFromInside;
+            _serviceWrapperObject.SendOneWaySpecialCommandMessageCallback = ProcessOneWaySpecialCommandMessageReceivedFromInside;
+            _serviceWrapperObject.CreateEmptyMessageCallback = createEmptyMessageCallback;
         }
 
         public RemoteAgencyManagingObjectServiceWrapper(IServiceWrapperCommunicate serviceWrapperObject,
             ref Guid instanceId, string threadLockTaskSchedulerName,
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
-            Func<IRemoteAgencyMessage> createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            CreateEmptyMessageCallback createEmptyMessageCallback, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
@@ -331,6 +341,8 @@ namespace SecretNest.RemoteAgency
             _serviceWrapperObject = serviceWrapperObject;
             _serviceWrapperObject.SendEventMessageCallback = ProcessEventMessageReceivedFromInside;
             _serviceWrapperObject.SendOneWayEventMessageCallback = ProcessOneWayEventMessageReceivedFromInside;
+            _serviceWrapperObject.SendOneWaySpecialCommandMessageCallback = ProcessOneWaySpecialCommandMessageReceivedFromInside;
+            _serviceWrapperObject.CreateEmptyMessageCallback = createEmptyMessageCallback;
         }
         #endregion
     }

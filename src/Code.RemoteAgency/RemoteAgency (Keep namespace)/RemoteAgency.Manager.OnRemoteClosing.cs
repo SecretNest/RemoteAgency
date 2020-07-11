@@ -37,7 +37,7 @@ namespace SecretNest.RemoteAgency
         public abstract void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null);
 
         /// <summary>
-        /// Resets sticky target site of all affected proxies when the service wrapper is closing.
+        /// Resets sticky target site of all affected proxies and unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
         /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>

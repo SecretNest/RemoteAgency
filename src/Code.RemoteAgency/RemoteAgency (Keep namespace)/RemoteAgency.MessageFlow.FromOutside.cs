@@ -26,6 +26,27 @@ namespace SecretNest.RemoteAgency
 
         void ProcessMessageReceivedAfterFiltering(IRemoteAgencyMessage message)
         {
+            if (message.MessageType == MessageType.SpecialCommand)
+            {
+                try
+                {
+                    if (message.AssetName == Const.SpecialCommandServiceWrapperDisposed)
+                    {
+                        OnRemoteServiceWrapperClosing(message.SenderSiteId, message.SenderInstanceId);
+                        return;
+                    }
+                    else if (message.AssetName == Const.SpecialCommandProxyDisposed)
+                    {
+                        OnRemoteProxyClosing(message.SenderSiteId, message.SenderInstanceId);
+                        return;
+                    }
+                }
+                catch (Exception e)
+                {
+                    RedirectException(e);
+                }
+            }
+
             if (FindManagingObjectAndSendMessage(message))
             {
             }

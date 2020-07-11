@@ -12,8 +12,9 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Closes all proxy and service wrapper objects.
         /// </summary>
+        /// <param name="sendSpecialCommand">Whether need to send special command to notify the remote site. Default is <see langword="true"/>.</param>
         /// <exception cref="AggregateException">Thrown when exception occurred while disposing instances.</exception>
-        public abstract void CloseAllInstances();
+        public abstract void CloseAllInstances(bool sendSpecialCommand = true);
 
         /// <summary>
         /// Closes the proxy or service wrapper by instance id.
@@ -37,6 +38,8 @@ namespace SecretNest.RemoteAgency
             var instanceId = obj.InstanceId;
             return CloseInstance(instanceId);
         }
+
+
     }
 
     partial class RemoteAgency<TSerialized, TEntityBase>
@@ -46,7 +49,7 @@ namespace SecretNest.RemoteAgency
         {
             if (_managingObjects.TryRemove(instanceId, out var removed))
             {
-                removed.Dispose();
+                removed.Dispose(true);
                 return true;
             }
             else
@@ -56,13 +59,13 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <inheritdoc />
-        public override void CloseAllInstances()
+        public override void CloseAllInstances(bool sendSpecialCommand = true)
         {
             while (_managingObjects.Count > 0)
             {
                 var items = _managingObjects.ToArray();
 
-                var tasks = Array.ConvertAll(items, i => Task.Run(() => i.Value.Dispose()));
+                var tasks = Array.ConvertAll(items, i => Task.Run(() => i.Value.Dispose(sendSpecialCommand)));
                 foreach (var item in items)
                     _managingObjects.TryRemove(item.Key, out _);
 

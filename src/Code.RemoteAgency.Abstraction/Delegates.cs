@@ -21,23 +21,6 @@ namespace SecretNest.RemoteAgency
     public delegate void SendOneWayMessageCallback(IRemoteAgencyMessage message);
 
     /// <summary>
-    /// Sends an empty message out.
-    /// </summary>
-    /// <param name="messageType">Message type.</param>
-    /// <param name="assetName">Asset name.</param>
-    /// <param name="timeout">Timeout in millisecond.</param>
-    /// <exception cref="AccessingTimeOutException">Thrown when timed out.</exception>
-    public delegate void SendEmptyMessageCallback(MessageType messageType, string assetName, int timeout);
-
-    /// <summary>
-    /// Sends an empty message out.
-    /// </summary>
-    /// <param name="messageType">Message type.</param>
-    /// <param name="assetName">Asset name.</param>
-    /// <exception cref="AccessingTimeOutException">Thrown when timed out.</exception>
-    public delegate void SendOneWayEmptyMessageCallback(MessageType messageType, string assetName);
-
-    /// <summary>
     /// Queries the proxy sticky target site setting state.
     /// </summary>
     /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
@@ -46,4 +29,9 @@ namespace SecretNest.RemoteAgency
     public delegate void ProxyStickyTargetSiteQueryCallback(out bool isEnabled, out Guid defaultTargetSiteId,
         out Guid? stickyTargetSiteId);
 
+    /// <summary>
+    /// Creates an empty message which is allowed to be serialized.
+    /// </summary>
+    /// <returns>Empty message.</returns>
+    public delegate IRemoteAgencyMessage CreateEmptyMessageCallback();
 }

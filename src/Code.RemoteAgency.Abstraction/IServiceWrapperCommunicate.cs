@@ -42,12 +42,12 @@ namespace SecretNest.RemoteAgency
         void ProcessEventRemovingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode);
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
         /// </summary>
         SendTwoWayMessageCallback SendEventMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
         /// </summary>
         SendOneWayMessageCallback SendOneWayEventMessageCallback { get; set; }
 
@@ -88,7 +88,6 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
         /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
-        /// <exception cref="AggregateException">When exceptions occurred.</exception>
         void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null);
     }
 }

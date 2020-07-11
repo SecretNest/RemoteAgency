@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SecretNest.RemoteAgency.Helper
 {
@@ -15,6 +18,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         public object ServiceObject { get; set; }
 
+        //siteid, instanceid, asset, routers
         Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>> _routers
             = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>>();
 
@@ -201,21 +205,54 @@ namespace SecretNest.RemoteAgency.Helper
         /// <summary>
         /// Sends messages to all relevant objects and closes the functions of this object.
         /// </summary>
+        /// <param name="sendSpecialCommand">Whether need to send special command.</param>
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
-        public void CloseRequestedByManagingObject()
+        public void CloseRequestedByManagingObject(bool sendSpecialCommand)
         {
             _builders.Clear();
             _builders = null;
 
             List<Exception> exceptions = new List<Exception>();
+            Guid[] sites;
 
             lock (_routers)
             {
+                if (sendSpecialCommand)
+                    sites = _routers.Keys.ToArray();
+                else
+                    sites = null;
+
                 foreach (var i in _routers.Values)
                 foreach (var j in i.Values)
                     RemoveRouterPerInstance(j, exceptions);
                 _routers = null;
             }
+
+            SendEventMessageCallback = null;
+            SendOneWayEventMessageCallback = null;
+
+            if (sendSpecialCommand)
+            {
+                var tasks = Array.ConvertAll(sites,
+                    siteId => Task.Run(() =>
+                    {
+                        var message = CreateEmptyMessageCallback();
+                        message.AssetName = Const.SpecialCommandServiceWrapperDisposed;
+                        message.TargetInstanceId = siteId;
+                        SendOneWaySpecialCommandMessageCallback(message);
+                    }));
+                try
+                {
+                    Task.WaitAll(tasks);
+                }
+                catch (AggregateException e)
+                {
+                    exceptions.AddRange(e.InnerExceptions);
+                }
+            }
+
+            CreateEmptyMessageCallback = null;
+            SendOneWaySpecialCommandMessageCallback = null;
 
             if (exceptions.Count > 0)
             {
@@ -224,14 +261,25 @@ namespace SecretNest.RemoteAgency.Helper
         }
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
         /// </summary>
         public SendTwoWayMessageCallback SendEventMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
         /// </summary>
         public SendOneWayMessageCallback SendOneWayEventMessageCallback { get; set; }
+
+        /// <summary>
+        /// Gets or sets the callback for a delegate which will be called while a special command message need to be sent to a remote site without getting response.
+        /// </summary>
+        public SendOneWayMessageCallback SendOneWaySpecialCommandMessageCallback { get; set; }
+        //Const.SpecialCommandServiceWrapperDisposed
+
+        /// <summary>
+        /// Gets or sets the callback for a delegate which will be called while an empty message need to be created.
+        /// </summary>
+        private CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
 
         private Dictionary<string, Func<object, ServiceWrapperEventRouterBase>> _builders = new Dictionary<string, Func<object, ServiceWrapperEventRouterBase>>();
 

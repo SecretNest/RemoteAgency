@@ -26,6 +26,19 @@ namespace SecretNest.RemoteAgency
             //local site id will be set by manager.
             _sendMessageToManagerCallback(message);
         }
+
+        protected void PrepareRequestMessageReceivedFromInside(IRemoteAgencyMessage message, MessageType messageType, bool isOneWay)
+        {
+            message.MessageId = Guid.NewGuid();
+            //message.AssetName set while generating.
+            message.IsOneWay = isOneWay;
+            //message.Exception = null;
+            message.SenderInstanceId = InstanceId;
+            //message.SenderSiteId leave to manager.
+            //message.TargetInstanceId set while generating.
+            //message.TargetSiteId set while generating.
+            message.MessageType = messageType;
+        }
     }
 
     partial class RemoteAgencyManagingObjectProxy<TEntityBase>
@@ -55,32 +68,17 @@ namespace SecretNest.RemoteAgency
             ProcessPreparedRequestMessageReceivedFromInside(message);
         }
 
-        void ProcessEventAddMessageReceivedFromInside(MessageType messageType, string assetName, int timeout)
+        IRemoteAgencyMessage ProcessEventAddMessageReceivedFromInside(IRemoteAgencyMessage message, int timeout)
         {
-            var message = CreateEmptyMessage();
-            message.AssetName = assetName;
             PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.EventAdd, false);
-            var response = ProcessRequestAndWaitResponse(message, ProcessPreparedRequestMessageReceivedFromInside, timeout);
-            if (response.Exception != null)
-                throw response.Exception;
+            return ProcessRequestAndWaitResponse(message, ProcessPreparedRequestMessageReceivedFromInside, timeout);
         }
 
-        void ProcessEventRemoveMessageReceivedFromInside(MessageType messageType, string assetName, int timeout)
+        IRemoteAgencyMessage ProcessEventRemoveMessageReceivedFromInside(IRemoteAgencyMessage message, int timeout)
         {
-            var message = CreateEmptyMessage();
-            message.AssetName = assetName;
-            PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.EventRemove, false);
-            var response = ProcessRequestAndWaitResponse(message, ProcessPreparedRequestMessageReceivedFromInside, timeout);
-            if (response.Exception != null)
-                throw response.Exception;
-        }
-
-        void ProcessOneWayEventRemoveMessageReceivedFromInside(MessageType messageType, string assetName)
-        {
-            var message = CreateEmptyMessage();
-            message.AssetName = assetName;
-            PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.EventRemove, false);
-            ProcessPreparedRequestMessageReceivedFromInside(message);
+            //target is already specified inside message.
+            PrepareRequestMessageReceivedFromInside(message, MessageType.EventRemove, false); 
+            return ProcessRequestAndWaitResponse(message, ProcessPreparedRequestMessageReceivedFromInside, timeout);
         }
 
         IRemoteAgencyMessage ProcessPropertyGetMessageReceivedFromInside(IRemoteAgencyMessage message, int timeout)
@@ -106,23 +104,17 @@ namespace SecretNest.RemoteAgency
             PrepareDefaultTargetRequestMessageReceivedFromInside(message, MessageType.PropertySet, true);
             ProcessPreparedRequestMessageReceivedFromInside(message);
         }
+
+        void ProcessOneWaySpecialCommandMessageReceivedFromInside(IRemoteAgencyMessage message)
+        {
+            //target is already specified inside message.
+            PrepareRequestMessageReceivedFromInside(message, MessageType.SpecialCommand, true);
+            ProcessPreparedRequestMessageReceivedFromInside(message);
+        }
     }
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
     {
-        void PrepareRequestMessageReceivedFromInside(IRemoteAgencyMessage message, MessageType messageType, bool isOneWay)
-        {
-            message.MessageId = Guid.NewGuid();
-            //message.AssetName set while generating.
-            message.IsOneWay = isOneWay;
-            //message.Exception = null;
-            message.SenderInstanceId = InstanceId;
-            //message.SenderSiteId leave to manager.
-            //message.TargetInstanceId set while generating.
-            //message.TargetSiteId set while generating.
-            message.MessageType = messageType;
-        }
-
         IRemoteAgencyMessage ProcessEventMessageReceivedFromInside(IRemoteAgencyMessage message, int timeout)
         {
             PrepareRequestMessageReceivedFromInside(message, MessageType.Event, false);
@@ -135,5 +127,10 @@ namespace SecretNest.RemoteAgency
             ProcessPreparedRequestMessageReceivedFromInside(message);
         }
 
+        void ProcessOneWaySpecialCommandMessageReceivedFromInside(IRemoteAgencyMessage message)
+        {
+            PrepareRequestMessageReceivedFromInside(message, MessageType.SpecialCommand, true);
+            ProcessPreparedRequestMessageReceivedFromInside(message);
+        }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
+﻿using SecretNest.RemoteAgency.Attributes;
+using System;
 using System.Threading.Tasks;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
@@ -25,11 +21,11 @@ namespace SecretNest.RemoteAgency
             => _processThreadLockWithoutReturn(callback, message, out exception,
                 out localExceptionHandlingMode);
 
-        protected void CallSimpleMethod(Action callback)
-            => _callCallSimpleMethod(callback);
+        protected void CallCloseRequestedByManagingObject(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand)
+            => _callCloseRequestedByManagingObjectCaller(callback, sendSpecialCommand);
 
-        protected void CallOnClosing(AccessOnClosing callback, Guid siteId, Guid? instanceId)
-            => _callOnClosing(callback, siteId, instanceId);
+        protected void CallOnRemoteClosed(AccessOnRemoteClosed callback, Guid siteId, Guid? instanceId)
+            => _callOnRemoteClosed(callback, siteId, instanceId);
 
         #endregion
 
@@ -37,22 +33,23 @@ namespace SecretNest.RemoteAgency
 
         private AccessWithReturnCaller _processThreadLockWithReturn;
         private AccessWithoutReturnCaller _processThreadLockWithoutReturn;
-        private CallCallSimpleMethodCaller _callCallSimpleMethod;
-        private CallOnClosingCaller _callOnClosing;
+        private CallCloseRequestedByManagingObjectCaller _callCloseRequestedByManagingObjectCaller;
+        private CallOnRemoteClosedCaller _callOnRemoteClosed;
 
         protected delegate IRemoteAgencyMessage AccessWithReturn(IRemoteAgencyMessage message, out Exception exception,
             out LocalExceptionHandlingMode localExceptionHandlingMode);
         protected delegate void AccessWithoutReturn(IRemoteAgencyMessage message,
             out LocalExceptionHandlingMode localExceptionHandlingMode);
-        protected delegate void AccessOnClosing(Guid siteId, Guid? instanceId);
+        protected delegate void AccessCloseRequestedByManagingObject(bool sendSpecialCommand);
+        protected delegate void AccessOnRemoteClosed(Guid siteId, Guid? instanceId);
 
         delegate void AccessWithReturnCaller(AccessWithReturn callback, IRemoteAgencyMessage message,
             out IRemoteAgencyMessage response, out Exception exception,
             out LocalExceptionHandlingMode localExceptionHandlingMode);
         delegate void AccessWithoutReturnCaller(AccessWithoutReturn callback, IRemoteAgencyMessage message,
             out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode);
-        delegate void CallCallSimpleMethodCaller(Action callback);
-        delegate void CallOnClosingCaller(AccessOnClosing callback, Guid siteId, Guid? instanceId);
+        delegate void CallCloseRequestedByManagingObjectCaller(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand);
+        delegate void CallOnRemoteClosedCaller(AccessOnRemoteClosed callback, Guid siteId, Guid? instanceId);
 
         void InitializeThreadLock(ThreadLockMode threadLockMode)
         {
@@ -61,22 +58,22 @@ namespace SecretNest.RemoteAgency
                 case ThreadLockMode.None:
                     _processThreadLockWithReturn = ProcessWithNoThreadLock;
                     _processThreadLockWithoutReturn = ProcessWithNoThreadLock;
-                    _callCallSimpleMethod = CallSimpleMethodWithNoThreadLock;
-                    _callOnClosing = CallOnClosingWithNoThreadLock;
+                    _callCloseRequestedByManagingObjectCaller = CallCloseRequestedByManagingObjectWithNoThreadLock;
+                    _callOnRemoteClosed = CallOnRemoteClosedWithNoThreadLock;
                     break;
                 case ThreadLockMode.SynchronizationContext:
                     _taskFactory = new TaskFactory(TaskScheduler.FromCurrentSynchronizationContext());
                     _processThreadLockWithReturn = ProcessWithTaskScheduler;
                     _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
-                    _callCallSimpleMethod = CallSimpleMethodWithTaskScheduler;
-                    _callOnClosing = CallOnClosingWithTaskScheduler;
+                    _callCloseRequestedByManagingObjectCaller = CallCloseRequestedByManagingObjectWithTaskScheduler;
+                    _callOnRemoteClosed = CallOnRemoteClosedWithTaskScheduler;
                     break;
                 case ThreadLockMode.AnyButSameThread:
                     PrepareSequentialScheduler();
                     _processThreadLockWithReturn = ProcessWithTaskScheduler;
                     _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
-                    _callCallSimpleMethod = CallSimpleMethodWithTaskScheduler;
-                    _callOnClosing = CallOnClosingWithTaskScheduler;
+                    _callCloseRequestedByManagingObjectCaller = CallCloseRequestedByManagingObjectWithTaskScheduler;
+                    _callOnRemoteClosed = CallOnRemoteClosedWithTaskScheduler;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(threadLockMode), threadLockMode, null);
@@ -90,8 +87,8 @@ namespace SecretNest.RemoteAgency
                 _taskFactory = new TaskFactory(selectedTaskScheduler);
                 _processThreadLockWithReturn = ProcessWithTaskScheduler;
                 _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
-                _callCallSimpleMethod = CallSimpleMethodWithTaskScheduler;
-                _callOnClosing = CallOnClosingWithTaskScheduler;
+                _callCloseRequestedByManagingObjectCaller = CallCloseRequestedByManagingObjectWithTaskScheduler;
+                _callOnRemoteClosed = CallOnRemoteClosedWithTaskScheduler;
             }
             else
             {
@@ -104,8 +101,8 @@ namespace SecretNest.RemoteAgency
             _taskFactory = null;
             _processThreadLockWithReturn = null;
             _processThreadLockWithoutReturn = null;
-            _callCallSimpleMethod = null;
-            _callOnClosing = null;
+            _callCloseRequestedByManagingObjectCaller = null;
+            _callOnRemoteClosed = null;
 
             DisposeSequentialScheduler();
         }
@@ -131,12 +128,12 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void CallSimpleMethodWithNoThreadLock(Action callback)
+        void CallCloseRequestedByManagingObjectWithNoThreadLock(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand)
         {
-            callback();
+            callback(sendSpecialCommand);
         }
 
-        void CallOnClosingWithNoThreadLock(AccessOnClosing callback, Guid siteId, Guid? instanceId)
+        void CallOnRemoteClosedWithNoThreadLock(AccessOnRemoteClosed callback, Guid siteId, Guid? instanceId)
         {
             callback(siteId, instanceId);
         }
@@ -205,19 +202,19 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        async void CallSimpleMethodWithTaskScheduler(Action callback)
+        async void CallCloseRequestedByManagingObjectWithTaskScheduler(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand)
         {
             try
             {
                 await _taskFactory
-                    .StartNew(callback).ConfigureAwait(false);
+                    .StartNew(() => callback(sendSpecialCommand)).ConfigureAwait(false);
             }
             catch (TaskCanceledException)
             {
             }
         }
 
-        async void CallOnClosingWithTaskScheduler(AccessOnClosing callback, Guid siteId, Guid? instanceId)
+        async void CallOnRemoteClosedWithTaskScheduler(AccessOnRemoteClosed callback, Guid siteId, Guid? instanceId)
         {
             try
             {

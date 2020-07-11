@@ -34,9 +34,9 @@ namespace SecretNest.RemoteAgency
                 case MessageType.PropertySet:
                     ProcessPropertySetMessageReceived(message);
                     break;
-                case MessageType.SpecialCommand:
-                    ProcessSpecialCommandMessageReceived(message);
-                    break;
+                //case MessageType.SpecialCommand:
+                //    ProcessSpecialCommandMessageReceived(message);
+                //    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(IRemoteAgencyMessage.MessageType));
             }
@@ -57,7 +57,7 @@ namespace SecretNest.RemoteAgency
 
         protected abstract void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message);
 
-        protected abstract void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message);
+        //protected abstract void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message);
 
         protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback, AccessWithoutReturn withoutReturnCallback)
         {
@@ -139,10 +139,10 @@ namespace SecretNest.RemoteAgency
             OnResponseReceived(message);
         }
 
-        protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
-        {
-            //nothing to do.
-        }
+        //protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
+        //{
+        //    //nothing to do.
+        //}
 
         void SetStickyTargetId(IRemoteAgencyMessage message)
         {
@@ -207,9 +207,9 @@ namespace SecretNest.RemoteAgency
                 _serviceWrapperObject.ProcessOneWayPropertySettingMessage);
         }
 
-        protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
-        {
-            //nothing to do.
-        }
+        //protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
+        //{
+        //    //nothing to do.
+        //}
     }
 }

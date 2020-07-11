@@ -9,6 +9,11 @@ namespace SecretNest.RemoteAgency.Helper
     /// </summary>
     public class ProxyEventHelper
     {
+        //note: addevent: no need target;
+        //note: removevent: need target;
+       
+
+
         /// <summary>
         /// Processes an event raising message and returns response.
         /// </summary>
@@ -30,19 +35,25 @@ namespace SecretNest.RemoteAgency.Helper
         }
 
         /// <summary>
-        /// Will be called while an event adding is requested.
+        /// Gets or sets the callback for a delegate which will be called while an event adding is requested.
         /// </summary>
-        SendEmptyMessageCallback SendEventAddingMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendEventAddingMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event removing is requested.
+        /// Gets or sets the callback for a delegate which will be called while an event removing is requested.
         /// </summary>
-        SendEmptyMessageCallback SendEventRemovingMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendEventRemovingMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event removing is requested. Only for disposing object.
+        /// Gets or sets the callback for a delegate which will be called while a special command message need to be sent to a remote site without getting response.
         /// </summary>
-        SendOneWayEmptyMessageCallback SendOneWayEventRemovingMessageCallback { get; set; }
+        SendOneWayMessageCallback SendOneWaySpecialCommandMessageCallback { get; set; }
+        //Const.SpecialCommandProxyDisposed
+
+        /// <summary>
+        /// Gets or sets the callback for a delegate which will be called while an empty message need to be created.
+        /// </summary>
+        private CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
 
         /// <summary>
         /// Will be called when proxy is disposing.
@@ -55,7 +66,6 @@ namespace SecretNest.RemoteAgency.Helper
 
         public void AddRouter(string assetName, ProxyEventRouterBase router)
         {
-
         }
     }
 

@@ -17,39 +17,34 @@ namespace SecretNest.RemoteAgency
         Guid InstanceId { get; set; }
 
         /// <summary>
-        /// Will be called for resetting the proxy sticky target site to the original state.
+        /// Gets or sets the callback for a delegate which will be called for resetting the proxy sticky target site to the original state.
         /// </summary>
         Action ProxyStickyTargetSiteResetCallback { get; set; }
 
         /// <summary>
-        /// Will be called for querying the proxy sticky target site state.
+        /// Gets or sets the callback for a delegate which will be called for querying the proxy sticky target site state.
         /// </summary>
         ProxyStickyTargetSiteQueryCallback ProxyStickyTargetSiteQueryCallback { get; set; }
 
         /// <summary>
-        /// Will be called while a method calling message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while a method calling message need to be sent to a remote site and get response of it.
         /// </summary>
         SendTwoWayMessageCallback SendMethodMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while a method calling message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while a method calling message need to be sent to a remote site without getting response.
         /// </summary>
         SendOneWayMessageCallback SendOneWayMethodMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event adding is requested.
+        /// Gets or sets the callback for a delegate which will be called while an event adding is requested.
         /// </summary>
-        SendEmptyMessageCallback SendEventAddingMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendEventAddingMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event removing is requested.
+        /// Gets or sets the callback for a delegate which will be called while an event removing is requested.
         /// </summary>
-        SendEmptyMessageCallback SendEventRemovingMessageCallback { get; set; }
-
-        /// <summary>
-        /// Will be called while an event removing is requested. Only for disposing object.
-        /// </summary>
-        SendOneWayEmptyMessageCallback SendOneWayEventRemovingMessageCallback { get; set; }
+        SendTwoWayMessageCallback SendEventRemovingMessageCallback { get; set; }
         
         /// <summary>
         /// Processes an event raising message and returns response.
@@ -68,23 +63,31 @@ namespace SecretNest.RemoteAgency
         void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode);
 
         /// <summary>
-        /// Will be called while a property getting message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while a property getting message need to be sent to a remote site and get response of it.
         /// </summary>
         SendTwoWayMessageCallback SendPropertyGetMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while a property getting message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while a property getting message need to be sent to a remote site without getting response.
         /// </summary>
         SendOneWayMessageCallback SendOneWayPropertyGetMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while a property setting message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while a property setting message need to be sent to a remote site and get response of it.
         /// </summary>
         SendTwoWayMessageCallback SendPropertySetMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while a property setting message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while a property setting message need to be sent to a remote site without getting response.
         /// </summary>
         SendOneWayMessageCallback SendOneWayPropertySetMessageCallback { get; set; }
+
+        /// <summary>
+        /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
+        /// </summary>
+        /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
+        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+        /// <remarks>Should be called when a service wrapper is closing and some proxies managed by the local Remote Agency instance have the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+        void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null);
     }
 }
