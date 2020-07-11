@@ -1017,23 +1017,6 @@
             </summary>
             <param name="message">Message to be sent.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.SendEmptyMessageCallback">
-            <summary>
-            Sends an empty message out.
-            </summary>
-            <param name="messageType">Message type.</param>
-            <param name="assetName">Asset name.</param>
-            <param name="timeout">Timeout in millisecond.</param>
-            <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
-        </member>
-        <member name="T:SecretNest.RemoteAgency.SendOneWayEmptyMessageCallback">
-            <summary>
-            Sends an empty message out.
-            </summary>
-            <param name="messageType">Message type.</param>
-            <param name="assetName">Asset name.</param>
-            <exception cref="T:SecretNest.RemoteAgency.AccessingTimeOutException">Thrown when timed out.</exception>
-        </member>
         <member name="T:SecretNest.RemoteAgency.ProxyStickyTargetSiteQueryCallback">
             <summary>
             Queries the proxy sticky target site setting state.
@@ -1041,6 +1024,12 @@
             <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
             <param name="defaultTargetSiteId">Will be set as default target site id.</param>
             <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set to <see langword="null"/> if no sticky target set yet.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.CreateEmptyMessageCallback">
+            <summary>
+            Creates an empty message which is allowed to be serialized.
+            </summary>
+            <returns>Empty message.</returns>
         </member>
         <member name="T:SecretNest.RemoteAgency.AssetNotFoundException">
             <summary>
@@ -1137,14 +1126,25 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IManagedObjectCommunicate.GetSiteIdCallback">
             <summary>
-            Will be called when site id is required.
+            Gets or sets the callback for a delegate which will be called when site id is required.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.IManagedObjectCommunicate.CloseRequestedByManagingObject">
+        <member name="M:SecretNest.RemoteAgency.IManagedObjectCommunicate.CloseRequestedByManagingObject(System.Boolean)">
             <summary>
             Sends messages to all relevant objects and closes the functions of this object.
             </summary>
+            <param name="sendSpecialCommand">Whether need to send special command.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IManagedObjectCommunicate.SendOneWaySpecialCommandMessageCallback">
+            <summary>
+            Gets or sets the callback for a delegate which will be called while a special command message need to be sent to a remote site without getting response.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IManagedObjectCommunicate.CreateEmptyMessageCallback">
+            <summary>
+            Gets or sets the callback for a delegate which will be called while an empty message need to be created.
+            </summary>
         </member>
         <member name="T:SecretNest.RemoteAgency.IProxyCommunicate">
             <summary>
@@ -1158,37 +1158,32 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteResetCallback">
             <summary>
-            Will be called for resetting the proxy sticky target site to the original state.
+            Gets or sets the callback for a delegate which will be called for resetting the proxy sticky target site to the original state.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteQueryCallback">
             <summary>
-            Will be called for querying the proxy sticky target site state.
+            Gets or sets the callback for a delegate which will be called for querying the proxy sticky target site state.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendMethodMessageCallback">
             <summary>
-            Will be called while a method calling message need to be sent to a remote site and get response of it.
+            Gets or sets the callback for a delegate which will be called while a method calling message need to be sent to a remote site and get response of it.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayMethodMessageCallback">
             <summary>
-            Will be called while a method calling message need to be sent to a remote site without getting response.
+            Gets or sets the callback for a delegate which will be called while a method calling message need to be sent to a remote site without getting response.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendEventAddingMessageCallback">
             <summary>
-            Will be called while an event adding is requested.
+            Gets or sets the callback for a delegate which will be called while an event adding is requested.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendEventRemovingMessageCallback">
             <summary>
-            Will be called while an event removing is requested.
-            </summary>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayEventRemovingMessageCallback">
-            <summary>
-            Will be called while an event removing is requested. Only for disposing object.
+            Gets or sets the callback for a delegate which will be called while an event removing is requested.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
@@ -1209,23 +1204,31 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendPropertyGetMessageCallback">
             <summary>
-            Will be called while a property getting message need to be sent to a remote site and get response of it.
+            Gets or sets the callback for a delegate which will be called while a property getting message need to be sent to a remote site and get response of it.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayPropertyGetMessageCallback">
             <summary>
-            Will be called while a property getting message need to be sent to a remote site without getting response.
+            Gets or sets the callback for a delegate which will be called while a property getting message need to be sent to a remote site without getting response.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendPropertySetMessageCallback">
             <summary>
-            Will be called while a property setting message need to be sent to a remote site and get response of it.
+            Gets or sets the callback for a delegate which will be called while a property setting message need to be sent to a remote site and get response of it.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendOneWayPropertySetMessageCallback">
             <summary>
-            Will be called while a property setting message need to be sent to a remote site without getting response.
+            Gets or sets the callback for a delegate which will be called while a property setting message need to be sent to a remote site without getting response.
             </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
+            </summary>
+            <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
+            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+            <remarks>Should be called when a service wrapper is closing and some proxies managed by the local Remote Agency instance have the sticky target site pointed to the site managing the closing service wrapper.</remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.EntityBuilding">
             <summary>
@@ -1354,12 +1357,12 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IServiceWrapperCommunicate.SendEventMessageCallback">
             <summary>
-            Will be called while an event raising message need to be sent to a remote site and get response of it.
+            Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IServiceWrapperCommunicate.SendOneWayEventMessageCallback">
             <summary>
-            Will be called while an event raising message need to be sent to a remote site without getting response.
+            Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessPropertyGettingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
@@ -1400,7 +1403,6 @@
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
             <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
-            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
         <member name="T:SecretNest.RemoteAgency.IRemoteAgencyMessage">
             <summary>

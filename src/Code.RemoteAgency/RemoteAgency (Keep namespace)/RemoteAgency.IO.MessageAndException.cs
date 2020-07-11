@@ -43,6 +43,25 @@ namespace SecretNest.RemoteAgency
                 $"<Inserted by {nameof(SetExceptionAsResponse)}.>", messageId, exception, true);
             FindManagingObjectAndSendMessage(message);
         }
+
+        /// <summary>
+        /// Tries to gets id of all waiting messages.
+        /// </summary>
+        /// <param name="instanceId">Id of proxy or service wrapper instance.</param>
+        /// <param name="messageIds">Id of all waiting messages.</param>
+        /// <returns>Whether the instance is found.</returns>
+        public abstract bool TryGetWaitingMessageIds(Guid instanceId, out List<Guid> messageIds);
+        
+        /// <summary>
+        /// Tries to get information of a waiting message.
+        /// </summary>
+        /// <param name="instanceId">Id of proxy or service wrapper instance.</param>
+        /// <param name="messageId">Message id.</param>
+        /// <param name="sentMessage">The request message of this waiting one, which is sent.</param>
+        /// <param name="startWaiting">The time of waiting started. It can be default value of DateTime when waiting is not started.</param>
+        /// <returns>Whether the waiting message is found.</returns>
+        public abstract bool TryGetWaitingMessage(Guid instanceId, Guid messageId, out IRemoteAgencyMessage sentMessage,
+            out DateTime startWaiting);
     }
 
     partial class RemoteAgency<TSerialized, TEntityBase>
@@ -86,6 +105,54 @@ namespace SecretNest.RemoteAgency
         public void ProcessReceivedMessage(IRemoteAgencyMessage message)
         {
             ProcessMessageReceivedFromOutside((TEntityBase)message); //Casting for security only.
+        }
+
+        /// <inheritdoc />
+        public override bool TryGetWaitingMessageIds(Guid instanceId, out List<Guid> messageIds)
+        {
+            if (_managingObjects.TryGetValue(instanceId, out var managingObject))
+            {
+                messageIds = managingObject.GetWaitingMessageIds();
+                return true;
+            }
+            else
+            {
+                messageIds = default;
+                return false;
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool TryGetWaitingMessage(Guid instanceId, Guid messageId, out IRemoteAgencyMessage sentMessage,
+            out DateTime startWaiting)
+        {
+            if (_managingObjects.TryGetValue(instanceId, out var managingObject))
+            {
+                return managingObject.TryGetWaitingMessage(messageId, out sentMessage, out startWaiting);
+            }
+            else
+            {
+                sentMessage = default;
+                startWaiting = default;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get information of a waiting message.
+        /// </summary>
+        /// <param name="instanceId">Id of proxy or service wrapper instance.</param>
+        /// <param name="messageId">Message id.</param>
+        /// <param name="sentMessage">The request message of this waiting one, which is sent.</param>
+        /// <param name="startWaiting">The time of waiting started. It can be default value of DateTime when waiting is not started.</param>
+        /// <returns>Whether the waiting message is found.</returns>
+        public bool TryGetWaitingMessage(Guid instanceId, Guid messageId, out TEntityBase sentMessage,
+            out DateTime startWaiting)
+        {
+            var result = TryGetWaitingMessage(instanceId, messageId, out IRemoteAgencyMessage sentMessageGeneric,
+                out startWaiting);
+            sentMessage = (TEntityBase) sentMessageGeneric;
+            return result;
         }
     }
 }

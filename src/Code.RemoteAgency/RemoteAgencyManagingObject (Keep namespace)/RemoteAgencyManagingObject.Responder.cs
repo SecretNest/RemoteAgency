@@ -11,13 +11,32 @@ namespace SecretNest.RemoteAgency
     {
         readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ConcurrentDictionary<Guid, ResponderItem>();
 
+        public List<Guid> GetWaitingMessageIds() => _responders.Keys.ToList();
+
+        public bool TryGetWaitingMessage(Guid messageId, out IRemoteAgencyMessage sentMessage,
+            out DateTime startWaiting)
+        {
+            if (_responders.TryGetValue(messageId, out var responder))
+            {
+                sentMessage = responder.SentMessage;
+                startWaiting = responder.StartWaiting;
+                return true;
+            }
+            else
+            {
+                sentMessage = default;
+                startWaiting = default;
+                return false;
+            }
+        }
+
         protected IRemoteAgencyMessage ProcessRequestAndWaitResponse(IRemoteAgencyMessage message,
             Action<IRemoteAgencyMessage> afterPreparedCallback, int millisecondsTimeout)
         {
             if (millisecondsTimeout == 0)
                 millisecondsTimeout = DefaultTimeOutTime;
 
-            using (ResponderItem responder = new ResponderItem())
+            using (ResponderItem responder = new ResponderItem(message))
             {
                 _responders[message.MessageId] = responder;
                 afterPreparedCallback(message);
@@ -82,7 +101,14 @@ namespace SecretNest.RemoteAgency
 
         class ResponderItem : IDisposable
         {
+            public IRemoteAgencyMessage SentMessage { get; private set; }
+            public DateTime StartWaiting { get; private set; }
             private IRemoteAgencyMessage _value;
+
+            public ResponderItem(IRemoteAgencyMessage sentMessage)
+            {
+                SentMessage = sentMessage;
+            }
 
             readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
 
@@ -105,6 +131,7 @@ namespace SecretNest.RemoteAgency
 
             public bool GetResult(int millisecondsTimeout, out IRemoteAgencyMessage value)
             {
+                StartWaiting = DateTime.Now;
                 if (_waitHandle.WaitOne(millisecondsTimeout))
                 {
                     value = _value;
@@ -120,6 +147,7 @@ namespace SecretNest.RemoteAgency
             public void Dispose()
             {
                 _waitHandle?.Dispose();
+                SentMessage = default;
             }
         }
     }

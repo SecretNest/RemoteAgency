@@ -64,6 +64,11 @@ namespace SecretNest.RemoteAgency.Helper
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds a builder.
+        /// </summary>
+        /// <param name="assetName">Name of the event.</param>
+        /// <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
         public void AddRouter(string assetName, ProxyEventRouterBase router)
         {
         }
