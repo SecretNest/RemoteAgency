@@ -17,32 +17,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Defines the further processing of this message.
         /// </summary>
-        public MessageFurtherProcessing FurtherProcessing
-        {
-            get => _furtherProcessing;
-            set
-            {
-                if (IsOneWay)
-                {
-                    if (value == MessageFurtherProcessing.TerminateAndReturnException)
-                    {
-                        _furtherProcessing = MessageFurtherProcessing.TerminateSilently;
-                    }
-                    else if (value == MessageFurtherProcessing.ReplaceWithExceptionAndReturn)
-                    {
-                        _furtherProcessing = MessageFurtherProcessing.ReplaceWithException;
-                    }
-                    else
-                    {
-                        _furtherProcessing = value;
-                    }
-                }
-                else
-                {
-                    _furtherProcessing = value;
-                }
-            }
-        }
+        public MessageFurtherProcessing FurtherProcessing => _furtherProcessing;
 
         /// <summary>
         /// Gets text will be used as the message of <see cref="MessageProcessTerminatedException"/>.
