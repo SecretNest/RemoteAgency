@@ -207,7 +207,7 @@ namespace SecretNest.RemoteAgency.Helper
             _builders.Clear();
             _builders = null;
 
-            List<Exception> exceptions = new List<Exception>();
+            var exceptions = new List<Exception>();
             Guid[] sites;
 
             lock (_routers)

@@ -8,6 +8,7 @@ namespace SecretNest.RemoteAgency
     /// <summary>
     /// The exception that is thrown when the asset specified cannot be found.
     /// </summary>
+    /// <remarks>When one way is not set on the caller side (proxy for methods and properties, service wrapper for events) but set on the other side, AssetNotFoundException will be sent back to the caller. On the contrary, the message will be dropped without processing on the other side.</remarks>
     [Serializable]
     public sealed class AssetNotFoundException : Exception
     {

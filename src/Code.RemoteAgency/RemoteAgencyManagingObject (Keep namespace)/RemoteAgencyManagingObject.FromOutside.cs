@@ -155,16 +155,16 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
     {
-        void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithoutReturn withoutReturnCallback) //when add and remove event handler
+        void ProcessRequestAndSendResponse(IRemoteAgencyMessage message, AccessWithoutReturn withoutReturnCallback) //when add and remove event handler
         {
             ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out var exception, out var localExceptionHandlingMode);
 
-            if (!message.IsOneWay)
-            {
-                var response = CreateEmptyMessage();
-                response.Exception = exception;
-                ProcessResponseMessageReceivedFromInside(response, message);
-            }
+            //if (!message.IsOneWay) //event adding and removing are always two way.
+            //{
+            var response = CreateEmptyMessage();
+            response.Exception = exception;
+            ProcessResponseMessageReceivedFromInside(response, message);
+            //}
 
             ThrowExceptionWhenNecessary(message.AssetName, exception, localExceptionHandlingMode);
         }
@@ -179,7 +179,7 @@ namespace SecretNest.RemoteAgency
         protected override void ProcessEventAddMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessEventAddingMessage);
+            ProcessRequestAndSendResponse(message, _serviceWrapperObject.ProcessEventAddingMessage);
         }
         
         protected override void ProcessEventMessageReceived(IRemoteAgencyMessage message)
@@ -191,13 +191,14 @@ namespace SecretNest.RemoteAgency
         protected override void ProcessEventRemoveMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessEventRemovingMessage);
+            ProcessRequestAndSendResponse(message, _serviceWrapperObject.ProcessEventRemovingMessage);
         }
 
         protected override void ProcessPropertyGetMessageReceived(IRemoteAgencyMessage message)
         {
             //request
-            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertyGettingMessage, _serviceWrapperObject.ProcessOneWayPropertyGettingMessage);
+            ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertyGettingMessage,
+                _serviceWrapperObject.ProcessOneWayPropertyGettingMessage);
         }
 
         protected override void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message)

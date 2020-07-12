@@ -88,6 +88,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
         /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+        /// <exception cref="AggregateException">When exceptions occurred.</exception>
         void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null);
     }
 }
