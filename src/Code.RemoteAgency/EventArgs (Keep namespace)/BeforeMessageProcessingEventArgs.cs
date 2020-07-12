@@ -22,9 +22,20 @@ namespace SecretNest.RemoteAgency
             get => _furtherProcessing;
             set
             {
-                if (IsOneWay && value == MessageFurtherProcessing.TerminateAndReturnException)
+                if (IsOneWay)
                 {
-                    _furtherProcessing = MessageFurtherProcessing.TerminateSilently;
+                    if (value == MessageFurtherProcessing.TerminateAndReturnException)
+                    {
+                        _furtherProcessing = MessageFurtherProcessing.TerminateSilently;
+                    }
+                    else if (value == MessageFurtherProcessing.ReplaceWithExceptionAndReturn)
+                    {
+                        _furtherProcessing = MessageFurtherProcessing.ReplaceWithException;
+                    }
+                    else
+                    {
+                        _furtherProcessing = value;
+                    }
                 }
                 else
                 {

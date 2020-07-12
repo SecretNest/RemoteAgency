@@ -1035,6 +1035,7 @@
             <summary>
             The exception that is thrown when the asset specified cannot be found.
             </summary>
+            <remarks>When one way is not set on the caller side (proxy for methods and properties, service wrapper for events) but set on the other side, AssetNotFoundException will be sent back to the caller. On the contrary, the message will be dropped without processing on the other side.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.OriginalMessage">
             <summary>
@@ -1228,7 +1229,7 @@
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
             <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
-            <remarks>Should be called when a service wrapper is closing and some proxies managed by the local Remote Agency instance have the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
         <member name="T:SecretNest.RemoteAgency.EntityBuilding">
             <summary>
@@ -1403,6 +1404,7 @@
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
             <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
         <member name="T:SecretNest.RemoteAgency.IRemoteAgencyMessage">
             <summary>

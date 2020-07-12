@@ -9,20 +9,6 @@
             Defines a helper class to be implanted into built assembly for event servicing in proxy.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
-            <summary>
-            Processes an event raising message and returns response.
-            </summary>
-            <param name="message">Message to be processed.</param>
-            <param name="exception">Exception thrown while running user code.</param>
-            <returns>Message contains the data to be returned.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
-            <summary>
-            Processes an event raising message.
-            </summary>
-            <param name="message">Message to be processed.</param>
-        </member>
         <member name="P:SecretNest.RemoteAgency.Helper.ProxyEventHelper.SendEventAddingMessageCallback">
             <summary>
             Gets or sets the callback for a delegate which will be called while an event adding is requested.
@@ -43,22 +29,52 @@
             Gets or sets the callback for a delegate which will be called while an empty message need to be created.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.OnDisposing(System.Exception@)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
             <summary>
-            Will be called when proxy is disposing.
+            Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
             </summary>
-            <param name="exception">Exception occurred while disposing. When no exception, the value will be set to <see langword="null"/>.</param>
+            <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
+            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.CloseRequestedByManagingObject(System.Boolean)">
+            <summary>
+            Sends messages to all relevant objects and closes the functions of this object.
+            </summary>
+            <param name="sendSpecialCommand">Whether need to send special command.</param>
+            <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.AddRouter(System.String,SecretNest.RemoteAgency.Helper.ProxyEventRouterBase)">
+            <summary>
+            Adds a builder.
+            </summary>
+            <param name="assetName">Name of the event.</param>
+            <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an event handler in proxy. This is an abstract class.
             </summary>
         </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
+            <summary>
+            Processes an event raising message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Processes an event raising message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an event handler in proxy. This is an abstract class.
             </summary>
-            <typeparam name="T">Type of the delegate of event.</typeparam>
+            <typeparam name="TDelegate">Delegate of event.</typeparam>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.ProcessEventAdding(`0)">
             <summary>
@@ -72,29 +88,51 @@
             </summary>
             <param name="value">Handler.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper">
+        <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`2">
+            <summary>
+            Defines a helper class to be implanted into built assembly for handling an one way event handler in proxy. This is an abstract class.
+            </summary>
+            <typeparam name="TDelegate">Delegate of event.</typeparam>
+            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3">
+            <summary>
+            Defines a helper class to be implanted into built assembly for handling an two way event handler in proxy. This is an abstract class.
+            </summary>
+            <typeparam name="TDelegate">Delegate of event.</typeparam>
+            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+            <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.#ctor(System.Int32)">
+            <summary>
+            Initialize an instance of ProxyEventRouterBase.
+            </summary>
+            <param name="timeout">Timeout for waiting for the response of event raising.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1">
             <summary>
             Defines a helper class to be implanted into built assembly for event servicing in service wrapper.
             </summary>
+            <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.ServiceObject">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.ServiceObject">
             <summary>
             Gets or sets the service object.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.ProcessEventAddingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.ProcessEventAddingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
             <summary>
             Processes an event adding.
             </summary>
             <param name="message">Message to be processed.</param>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.ProcessEventRemovingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.ProcessEventRemovingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
             <summary>
             Processes an event removing.
             </summary>
             <param name="message">Message to be processed.</param>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})">
             <summary>
             Unlinks specified remote proxy from the event registered in service wrapper objects.
             </summary>
@@ -102,84 +140,109 @@
             <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.CloseRequestedByManagingObject(System.Boolean)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.CloseRequestedByManagingObject(System.Boolean)">
             <summary>
             Sends messages to all relevant objects and closes the functions of this object.
             </summary>
             <param name="sendSpecialCommand">Whether need to send special command.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.SendEventMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.SendEventMessageCallback">
             <summary>
             Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.SendOneWayEventMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.SendOneWayEventMessageCallback">
             <summary>
             Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.SendOneWaySpecialCommandMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.SendOneWaySpecialCommandMessageCallback">
             <summary>
             Gets or sets the callback for a delegate which will be called while a special command message need to be sent to a remote site without getting response.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.CreateEmptyMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.CreateEmptyMessageCallback">
             <summary>
             Gets or sets the callback for a delegate which will be called while an empty message need to be created.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper.AddBuilder(System.String,System.Func{System.Object,SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase})">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.AddBuilder(System.String,System.Func{SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase{`0}})">
             <summary>
             Adds a builder callback.
             </summary>
             <param name="assetName">Name of the event.</param>
             <param name="callback">Callback for creating an instance of a derived class of EventRouterBase.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase">
+        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an event handler in service wrapper. This is an abstract class.
             </summary>
+            <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.AssetName">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.AssetName">
             <summary>
             Gets or sets the asset name.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.RemoteSiteId">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.RemoteSiteId">
             <summary>
             Gets or sets the remote site id. Remote site is the site contains event handler.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.RemoteInstanceId">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.RemoteInstanceId">
             <summary>
             Gets or sets the remote instance id. Remote instance is the instance contains event handler.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.SendEventMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.SendEventMessageCallback">
             <summary>
-            Will be called while an event raising message need to be sent to a remote site and get response of it.
+            Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.SendOneWayEventMessageCallback">
+        <member name="P:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.SendOneWayEventMessageCallback">
             <summary>
-            Will be called while an event raising message need to be sent to a remote site without getting response.
+            Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.CloseRequestedByManagingObject">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.CloseRequestedByManagingObject(`0)">
             <summary>
             Sends message to relevant object and closes the functions of this object.
             </summary>
+            <param name="serviceObject">Service object.</param>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.RemoveHandler">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.RemoveHandler(`0)">
             <summary>
             Removes the handler.
             </summary>
+            <param name="serviceObject">Service object.</param>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase.AddHandler">
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`1.AddHandler(`0)">
             <summary>
             Adds the handler.
             </summary>
+            <param name="serviceObject">Service object.</param>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`2">
+            <summary>
+            Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
+            </summary>
+            <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`3">
+            <summary>
+            Defines a helper class to be implanted into built assembly for handling a two way event handler in service wrapper. This is an abstract class.
+            </summary>
+            <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+            <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`3.#ctor(System.Int32)">
+            <summary>
+            Initialize an instance of ServiceWrapperEventRouterBase.
+            </summary>
+            <param name="timeout">Timeout for waiting for the response of event raising.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Inspecting.EntityNameConflictException">
             <summary>

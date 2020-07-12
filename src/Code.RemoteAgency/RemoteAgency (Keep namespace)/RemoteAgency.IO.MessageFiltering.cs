@@ -130,7 +130,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.BeforeSending,
-                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default)));
             return (TEntityBase) emptyMessage;
         }
 
@@ -156,7 +156,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
-                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default)));
             return (TEntityBase) emptyMessage;
         }
 
@@ -170,7 +170,7 @@ namespace SecretNest.RemoteAgency
                 ((IRemoteAgencyMessage) originalMessage).AssetName,
                 ((IRemoteAgencyMessage) originalMessage).MessageId,
                 new MessageProcessTerminatedException(exceptionMessage, MessageProcessTerminatedPosition.AfterReceived,
-                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default(TEntityBase))));
+                    (IRemoteAgencyMessage) (includeTerminatedMessage ? originalMessage : default)));
             return (TEntityBase) emptyMessage;
         }
     }
