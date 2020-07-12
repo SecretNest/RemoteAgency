@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks>
     /// <para>This attribute cannot be inherited by derived classes and overriding members.</para>
-    /// <para>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the name not specified is chosen automatically.</para>
+    /// <para>When this attribute is not present, or name is set as <see langword="null"/> or empty string, the name not specified is chosen automatically.</para>
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = false, AllowMultiple = false)]

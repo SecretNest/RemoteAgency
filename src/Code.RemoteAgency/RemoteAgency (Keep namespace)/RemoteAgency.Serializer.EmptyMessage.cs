@@ -7,7 +7,7 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgency
     {
         /// <summary>
-        /// Creates an empty message with sender instance id set to <see cref="Guid.Empty"/> and one way is <see langword="true"/>.
+        /// Creates an empty message with sender instance id set as <see cref="Guid"/>.Empty and one way is <see langword="true"/>.
         /// </summary>
         /// <param name="targetSiteId">Target site id.</param>
         /// <param name="targetInstanceId">Target instance id.</param>

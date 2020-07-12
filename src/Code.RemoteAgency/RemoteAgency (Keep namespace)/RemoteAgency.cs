@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency
         /// Initializes the instance of Remote Agency.
         /// </summary>
         /// <param name="entityCodeBuilder">Entity code builder.</param>
-        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
+        /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty.</param>
         /// <param name="entityBase">Type of the entity base.</param>
         protected RemoteAgency(EntityCodeBuilderBase entityCodeBuilder, Guid siteId, Type entityBase)
         {
@@ -81,7 +81,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="serializingHelper">Serializer helper.</param>
         /// <param name="entityCodeBuilder">Entity code builder.</param>
-        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid.Empty"/>.</param>
+        /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty.</param>
         public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(entityCodeBuilder, siteId, typeof(TEntityBase))
         {
             _serializingHelper = serializingHelper;

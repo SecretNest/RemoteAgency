@@ -15,7 +15,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// <summary>
         /// Gets the parameter which the attribute is on.
         /// </summary>
-        /// <remarks>Only valid when <see cref="CausedMemberType"/> is set to <see cref="EntityPropertyNameConflictExceptionCausedMemberType"/>.Parameter.</remarks>
+        /// <remarks>Only valid when <see cref="CausedMemberType"/> is set as <see cref="EntityPropertyNameConflictExceptionCausedMemberType"/>.Parameter.</remarks>
         public ParameterInfo Parameter { get; }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         /// <summary>
         /// Parameter.
         /// </summary>
-        /// <remarks>The parameter object should be set to <see cref="EntityPropertyNameConflictException.Parameter"/>.</remarks>
+        /// <remarks>The parameter object should be set as <see cref="EntityPropertyNameConflictException.Parameter"/>.</remarks>
         Parameter,
         /// <summary>
         /// Return value.

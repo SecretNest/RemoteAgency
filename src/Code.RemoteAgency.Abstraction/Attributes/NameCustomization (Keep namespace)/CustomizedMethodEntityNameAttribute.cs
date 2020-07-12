@@ -7,7 +7,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies the names of the entity classes generated for holding parameters and return value of this asset.
     /// </summary>
-    /// <remarks>When this attribute is not present, or name is set to <see langword="null"/> or empty string, the entity name is chosen automatically.</remarks>
+    /// <remarks>When this attribute is not present, or name is set as <see langword="null"/> or empty string, the entity name is chosen automatically.</remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class CustomizedMethodEntityNameAttribute : Attribute

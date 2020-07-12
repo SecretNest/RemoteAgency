@@ -22,7 +22,7 @@ namespace SecretNest.RemoteAgency.Attributes
         public string ParameterName { get; }
 
         /// <summary>
-        /// Initializes an instance of the EventParameterReturnRequiredPropertyAttribute. <see cref="ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> will be set to <see langword="false"/>.
+        /// Initializes an instance of the EventParameterReturnRequiredPropertyAttribute. <see cref="ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> will be set as <see langword="false"/>.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
         /// <param name="helperClass">Type of the helper class.</param>
@@ -34,7 +34,7 @@ namespace SecretNest.RemoteAgency.Attributes
         }
 
         /// <summary>
-        /// Initializes an instance of the EventParameterReturnRequiredPropertyAttribute. <see cref="ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> will be set to <see langword="true"/>.
+        /// Initializes an instance of the EventParameterReturnRequiredPropertyAttribute. <see cref="ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> will be set as <see langword="true"/>.
         /// </summary>
         /// <param name="parameterName">Parameter name of the event.</param>
         /// <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>

@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
     /// <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-    /// <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set to <see langword="null"/> if no sticky target set yet.</param>
+    /// <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
     public delegate void ProxyStickyTargetSiteQueryCallback(out bool isEnabled, out Guid defaultTargetSiteId,
         out Guid? stickyTargetSiteId);
 
