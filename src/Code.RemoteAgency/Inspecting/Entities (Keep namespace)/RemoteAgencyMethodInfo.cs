@@ -41,7 +41,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ParameterEntityName,
                     properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
-                    methodGenericParameterPassThroughAttributes);
+                    methodGenericParameterPassThroughAttributes,
+                    type => MethodBodyInfo.ParameterEntity = type);
 
                 yield return entity;
             }
@@ -56,7 +57,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ReturnValueEntityName,
                     properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
-                    methodGenericParameterPassThroughAttributes);
+                    methodGenericParameterPassThroughAttributes,
+                    type => MethodBodyInfo.ReturnValueEntity = type);
 
                 yield return entity;
             }

@@ -76,6 +76,10 @@ namespace SecretNest.RemoteAgency
             info.DefaultPropertySettingTimeout = DefaultPropertySettingTimeoutForBuilding;
 
             var buildingEntityTasks = CreateEmitEntityTasks(moduleBuilder, info);
+            buildingEntityTasks.ForEach(i => i.Start());
+            // ReSharper disable once AsyncConverter.AsyncWait
+            builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
+
 
             Task emitProxy, emitServiceWrapper;
             TypeBuilder proxyTypeBuilder, serviceWrapperTypeBuilder;
@@ -86,7 +90,7 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
 
-                emitProxy = new Task(() => EmitProxy(proxyTypeBuilder, info));
+                emitProxy = Task.Run(() => EmitProxy(proxyTypeBuilder, info));
             }
             else
             {
@@ -100,20 +104,13 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
                     new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
 
-                emitServiceWrapper = new Task(() => EmitServiceWrapper(serviceWrapperTypeBuilder, info));
+                emitServiceWrapper = Task.Run(() => EmitServiceWrapper(serviceWrapperTypeBuilder, info));
             }
             else
             {
                 emitServiceWrapper = null;
                 serviceWrapperTypeBuilder = null;
             }
-
-            buildingEntityTasks.ForEach(i => i.Start());
-            emitProxy?.Start();
-            emitServiceWrapper?.Start();
-
-            // ReSharper disable once AsyncConverter.AsyncWait
-            builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
 
             if (isProxyRequired) 
             {
