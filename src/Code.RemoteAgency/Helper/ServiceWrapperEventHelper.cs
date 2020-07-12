@@ -11,16 +11,17 @@ namespace SecretNest.RemoteAgency.Helper
     /// <summary>
     /// Defines a helper class to be implanted into built assembly for event servicing in service wrapper.
     /// </summary>
-    public class ServiceWrapperEventHelper
+    /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+    public class ServiceWrapperEventHelper<TServiceContractInterface>
     {
         /// <summary>
         /// Gets or sets the service object.
         /// </summary>
-        public object ServiceObject { get; set; }
+        public TServiceContractInterface ServiceObject { get; set; }
 
         //siteid, instanceid, asset, routers
-        Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>> _routers
-            = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>>();
+        Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>>> _routers
+            = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>>>();
 
         /// <summary>
         /// Processes an event adding.
@@ -30,7 +31,7 @@ namespace SecretNest.RemoteAgency.Helper
         {
             if (_builders.TryGetValue(message.AssetName, out var builder))
             {
-                var router = builder(ServiceObject);
+                var router = builder();
                 router.SendEventMessageCallback = SendEventMessageCallback;
                 router.SendOneWayEventMessageCallback = SendOneWayEventMessageCallback;
                 router.AssetName = message.AssetName;
@@ -38,7 +39,7 @@ namespace SecretNest.RemoteAgency.Helper
                 router.RemoteInstanceId = message.SenderInstanceId;
                 try
                 {
-                    router.AddHandler();
+                    router.AddHandler(ServiceObject);
                 }
                 catch 
                 {
@@ -52,17 +53,17 @@ namespace SecretNest.RemoteAgency.Helper
                 {
                     if (!_routers.TryGetValue(message.SenderSiteId, out var routersPerSite))
                     {
-                        routersPerSite = new Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase>>>();
+                        routersPerSite = new Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>>();
                         _routers[message.SenderSiteId] = routersPerSite;
                     }
                     if (!routersPerSite.TryGetValue(message.SenderInstanceId, out var routerPerInstance))
                     {
-                        routerPerInstance = new Dictionary<string, List<ServiceWrapperEventRouterBase>>();
+                        routerPerInstance = new Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>();
                         routersPerSite[message.SenderInstanceId] = routerPerInstance;
                     }
                     if (!routerPerInstance.TryGetValue(message.AssetName, out var routerPerAsset))
                     {
-                        routerPerAsset = new List<ServiceWrapperEventRouterBase>();
+                        routerPerAsset = new List<ServiceWrapperEventRouterBase<TServiceContractInterface>>();
                         routerPerInstance[message.AssetName] = routerPerAsset;
                     }
                     routerPerAsset.Add(router);
@@ -99,7 +100,7 @@ namespace SecretNest.RemoteAgency.Helper
 
                 try
                 {
-                    router.RemoveHandler();
+                    router.RemoveHandler(ServiceObject);
                 }
                 finally
                 {
@@ -148,7 +149,6 @@ namespace SecretNest.RemoteAgency.Helper
                         List<Exception> exceptions = new List<Exception>();
                         RemoveRouterPerInstance(routerPerInstance, exceptions);
 
-
                         if (routersPerSite.Count > 1)
                         {
                             routersPerSite.Remove(proxyInstanceId.Value);
@@ -181,23 +181,18 @@ namespace SecretNest.RemoteAgency.Helper
             }
         }
 
-        void RemoveRouterPerInstance(Dictionary<string, List<ServiceWrapperEventRouterBase>> routerPerInstance, List<Exception> exceptions)
+        void RemoveRouterPerInstance(Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>> routerPerInstance, List<Exception> exceptions)
         {
             foreach(var i in routerPerInstance.Values)
             foreach (var router in i)
             {
                 try
                 {
-                    router.RemoveHandler();
+                    router.CloseRequestedByManagingObject(ServiceObject);
                 }
                 catch (Exception e)
                 {
                     exceptions.Add(e);
-                }
-                finally
-                {
-                    router.SendEventMessageCallback = null;
-                    router.SendOneWayEventMessageCallback = null;
                 }
             }
         }
@@ -281,14 +276,14 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         private CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
 
-        private Dictionary<string, Func<object, ServiceWrapperEventRouterBase>> _builders = new Dictionary<string, Func<object, ServiceWrapperEventRouterBase>>();
+        private Dictionary<string, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>>> _builders = new Dictionary<string, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>>>();
 
         /// <summary>
         /// Adds a builder callback.
         /// </summary>
         /// <param name="assetName">Name of the event.</param>
         /// <param name="callback">Callback for creating an instance of a derived class of EventRouterBase.</param>
-        public void AddBuilder(string assetName, Func<object, ServiceWrapperEventRouterBase> callback)
+        public void AddBuilder(string assetName, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>> callback)
         {
             _builders[assetName] = callback;
         }
@@ -297,7 +292,8 @@ namespace SecretNest.RemoteAgency.Helper
     /// <summary>
     /// Defines a helper class to be implanted into built assembly for handling an event handler in service wrapper. This is an abstract class.
     /// </summary>
-    public abstract class ServiceWrapperEventRouterBase
+    /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+    public abstract class ServiceWrapperEventRouterBase<TServiceContractInterface>
     {
         /// <summary>
         /// Gets or sets the asset name.
@@ -315,23 +311,31 @@ namespace SecretNest.RemoteAgency.Helper
         public Guid RemoteInstanceId { get; set; }
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site and get response of it.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site and get response of it.
         /// </summary>
         public SendTwoWayMessageCallback SendEventMessageCallback { get; set; }
 
         /// <summary>
-        /// Will be called while an event raising message need to be sent to a remote site without getting response.
+        /// Gets or sets the callback for a delegate which will be called while an event raising message need to be sent to a remote site without getting response.
         /// </summary>
         public SendOneWayMessageCallback SendOneWayEventMessageCallback { get; set; }
+
+        private protected void SetMessageProperties(IRemoteAgencyMessage message)
+        {
+            message.AssetName = AssetName;
+            message.TargetInstanceId = RemoteInstanceId;
+            message.TargetSiteId = RemoteSiteId;
+        }
 
         /// <summary>
         /// Sends message to relevant object and closes the functions of this object.
         /// </summary>
-        public void CloseRequestedByManagingObject()
+        /// <param name="serviceObject">Service object.</param>
+        public void CloseRequestedByManagingObject(TServiceContractInterface serviceObject)
         {
             try
             {
-                RemoveHandler();
+                RemoveHandler(serviceObject);
             }
             finally
             {
@@ -343,12 +347,57 @@ namespace SecretNest.RemoteAgency.Helper
         /// <summary>
         /// Removes the handler.
         /// </summary>
-        public abstract void RemoveHandler();
+        /// <param name="serviceObject">Service object.</param>
+        public abstract void RemoveHandler(TServiceContractInterface serviceObject);
 
         /// <summary>
         /// Adds the handler.
         /// </summary>
-        public abstract void AddHandler();
+        /// <param name="serviceObject">Service object.</param>
+        public abstract void AddHandler(TServiceContractInterface serviceObject);
 
+    }
+
+    /// <summary>
+    /// Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
+    /// </summary>
+    /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+    /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+    public abstract class ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity> : ServiceWrapperEventRouterBase<TServiceContractInterface>
+        where TParameterEntity : IRemoteAgencyMessage
+    {
+        private protected void SendMessage(TParameterEntity message)
+        {
+            SetMessageProperties(message);
+            SendOneWayEventMessageCallback(message);
+        }
+    }
+
+    /// <summary>
+    /// Defines a helper class to be implanted into built assembly for handling a two way event handler in service wrapper. This is an abstract class.
+    /// </summary>
+    /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
+    /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+    /// <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
+    public abstract class ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity, TReturnValueEntity> : ServiceWrapperEventRouterBase<TServiceContractInterface>
+        where TParameterEntity : IRemoteAgencyMessage
+    {
+        private readonly int _timeout;
+
+        /// <summary>
+        /// Initialize an instance of ServiceWrapperEventRouterBase.
+        /// </summary>
+        /// <param name="timeout">Timeout for waiting for the response of event raising.</param>
+        protected ServiceWrapperEventRouterBase(int timeout)
+        {
+            _timeout = timeout;
+        }
+
+        private protected TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message)
+        {
+            SetMessageProperties(message);
+            var response = SendEventMessageCallback(message, _timeout);
+            return (TReturnValueEntity) response;
+        }
     }
 }
