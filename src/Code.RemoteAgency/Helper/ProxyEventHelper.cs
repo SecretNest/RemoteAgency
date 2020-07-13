@@ -117,7 +117,20 @@ namespace SecretNest.RemoteAgency.Helper
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     public abstract class ProxyEventRouterBase<TDelegate>: ProxyEventRouterBase
     {
+        private readonly int _addingTimeout, _removingTimeout;
+
         private List<Tuple<Guid, Guid>> _targetSiteIdAndInstanceId = new List<Tuple<Guid, Guid>>();
+
+        /// <summary>
+        /// Initializes an instance of ProxyEventRouterBase.
+        /// </summary>
+        /// <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+        /// <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout)
+        {
+            _addingTimeout = addingTimeout;
+            _removingTimeout = removingTimeout;
+        }
 
         /// <summary>
         /// Processes an event adding.
@@ -128,6 +141,16 @@ namespace SecretNest.RemoteAgency.Helper
             var message = ProxyEventHelper.CreateEmptyMessageCallback();
             message.AssetName = AssetName;
 
+            var response = ProxyEventHelper.SendEventAddingMessageCallback(message, _addingTimeout);
+            if (response.Exception != null)
+                throw response.Exception;
+            else
+            {
+                lock (_targetSiteIdAndInstanceId)
+                {
+                    _targetSiteIdAndInstanceId.Add(new Tuple<Guid, Guid>(response.SenderSiteId, response.SenderInstanceId));
+                }
+            }
         }
 
         /// <summary>
@@ -154,6 +177,15 @@ namespace SecretNest.RemoteAgency.Helper
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Initializes an instance of ProxyEventRouterBase.
+        /// </summary>
+        /// <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+        /// <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout) : base(addingTimeout, removingTimeout)
+        {
+        }
     }
 
     /// <summary>
@@ -169,10 +201,12 @@ namespace SecretNest.RemoteAgency.Helper
         /// <summary>
         /// Initialize an instance of ProxyEventRouterBase.
         /// </summary>
-        /// <param name="timeout">Timeout for waiting for the response of event raising.</param>
-        protected ProxyEventRouterBase(int timeout)
+        /// <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+        /// <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+        /// <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
+        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout, int raisingTimeout) : base(addingTimeout, removingTimeout)
         {
-            _timeout = timeout;
+            _timeout = raisingTimeout;
         }
 
         /// <inheritdoc />
