@@ -11,31 +11,29 @@ namespace SecretNest.RemoteAgency.Helper
     {
         //note: addevent: no need target;
         //note: removevent: need target;
-       
 
-
-
+        private Dictionary<string, ProxyEventRouterBase> _routers = new Dictionary<string, ProxyEventRouterBase>();
 
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called while an event adding is requested.
         /// </summary>
-        SendTwoWayMessageCallback SendEventAddingMessageCallback { get; set; }
+        public SendTwoWayMessageCallback SendEventAddingMessageCallback { get; set; }
 
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called while an event removing is requested.
         /// </summary>
-        SendTwoWayMessageCallback SendEventRemovingMessageCallback { get; set; }
+        public SendTwoWayMessageCallback SendEventRemovingMessageCallback { get; set; }
 
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called while a special command message need to be sent to a remote site without getting response.
         /// </summary>
-        SendOneWayMessageCallback SendOneWaySpecialCommandMessageCallback { get; set; }
+        public SendOneWayMessageCallback SendOneWaySpecialCommandMessageCallback { get; set; }
         //Const.SpecialCommandProxyDisposed
 
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called while an empty message need to be created.
         /// </summary>
-        private CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
+        public CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
 
         /// <summary>
         /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
@@ -65,6 +63,9 @@ namespace SecretNest.RemoteAgency.Helper
         /// <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
         public void AddRouter(string assetName, ProxyEventRouterBase router)
         {
+            _routers[assetName] = router;
+            router.AssetName = assetName;
+            router.ProxyEventHelper = this;
         }
     }
 
@@ -74,23 +75,39 @@ namespace SecretNest.RemoteAgency.Helper
     public abstract class ProxyEventRouterBase
     {
         /// <summary>
+        /// Gets or sets the helper instance.
+        /// </summary>
+        public ProxyEventHelper ProxyEventHelper { get;set; }
+
+        /// <summary>
+        /// Gets or sets the asset name.
+        /// </summary>
+        public string AssetName { get; set; }
+
+        /// <summary>
         /// Processes an event raising message and returns response.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
         /// <returns>Message contains the data to be returned.</returns>
-        public IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception)
+        public virtual IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message,
+            out Exception exception)
         {
-            throw new NotImplementedException();
+            var result = ProxyEventHelper.CreateEmptyMessageCallback();
+            //for sending a feedback, no property of message need to be assigned here.
+
+            exception = new AssetNotFoundException(message);
+
+            return result;
         }
 
         /// <summary>
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        public void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        public virtual void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
         {
-            throw new NotImplementedException();
+            //nothing to do here.
         }
     }
 
@@ -100,7 +117,7 @@ namespace SecretNest.RemoteAgency.Helper
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     public abstract class ProxyEventRouterBase<TDelegate>: ProxyEventRouterBase
     {
-
+        private List<Tuple<Guid, Guid>> _targetSiteIdAndInstanceId = new List<Tuple<Guid, Guid>>();
 
         /// <summary>
         /// Processes an event adding.
@@ -108,6 +125,8 @@ namespace SecretNest.RemoteAgency.Helper
         /// <param name="value">Handler.</param>
         public void ProcessEventAdding(TDelegate value)
         {
+            var message = ProxyEventHelper.CreateEmptyMessageCallback();
+            message.AssetName = AssetName;
 
         }
 
@@ -117,6 +136,8 @@ namespace SecretNest.RemoteAgency.Helper
         /// <param name="value">Handler.</param>
         public void ProcessEventRemoving(TDelegate value)
         {
+            var message = ProxyEventHelper.CreateEmptyMessageCallback();
+
 
         }
     }
@@ -128,7 +149,11 @@ namespace SecretNest.RemoteAgency.Helper
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
     public abstract class ProxyEventRouterBase<TDelegate, TParameterEntity> : ProxyEventRouterBase<TDelegate>
     {
-
+        /// <inheritdoc />
+        public override void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -150,6 +175,10 @@ namespace SecretNest.RemoteAgency.Helper
             _timeout = timeout;
         }
 
-
+        /// <inheritdoc />
+        public override IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
