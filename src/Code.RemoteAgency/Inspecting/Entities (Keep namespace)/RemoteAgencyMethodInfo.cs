@@ -7,6 +7,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     class RemoteAgencyMethodInfo : RemoteAgencyAssetInfoBase
     {
+        public bool NeedHelperMethod => AssetLevelGenericParameters.Length > 0;
+
         public Type[] AssetLevelGenericParameters { get; set; }
         public Dictionary<string, List<RemoteAgencyAttributePassThrough>> AssetLevelGenericParameterPassThroughAttributes { get; set; }
 
