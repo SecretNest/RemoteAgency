@@ -376,7 +376,6 @@ namespace SecretNest.RemoteAgency.Helper
         ProxyEventRouterBase<TDelegate, TParameterEntity, TReturnValueEntity> : ProxyEventRouterBase<TDelegate>
         where TParameterEntity : IRemoteAgencyMessage
         where TReturnValueEntity : IRemoteAgencyMessage
-
     {
         private readonly int _timeout;
 
