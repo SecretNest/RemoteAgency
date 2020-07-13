@@ -363,7 +363,9 @@ namespace SecretNest.RemoteAgency.Helper
     /// </summary>
     /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
-    public abstract class ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity> : ServiceWrapperEventRouterBase<TServiceContractInterface>
+    public abstract class
+        ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity> : ServiceWrapperEventRouterBase<
+            TServiceContractInterface>
         where TParameterEntity : IRemoteAgencyMessage
     {
         private protected void SendMessage(TParameterEntity message)
@@ -379,8 +381,11 @@ namespace SecretNest.RemoteAgency.Helper
     /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
     /// <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
-    public abstract class ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity, TReturnValueEntity> : ServiceWrapperEventRouterBase<TServiceContractInterface>
+    public abstract class
+        ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity, TReturnValueEntity> :
+            ServiceWrapperEventRouterBase<TServiceContractInterface>
         where TParameterEntity : IRemoteAgencyMessage
+        where TReturnValueEntity : IRemoteAgencyMessage
     {
         private readonly int _timeout;
 

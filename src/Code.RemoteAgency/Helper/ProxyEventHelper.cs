@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SecretNest.RemoteAgency.Helper
 {
@@ -9,9 +11,6 @@ namespace SecretNest.RemoteAgency.Helper
     /// </summary>
     public class ProxyEventHelper
     {
-        //note: addevent: no need target;
-        //note: removevent: need target;
-
         private Dictionary<string, ProxyEventRouterBase> _routers = new Dictionary<string, ProxyEventRouterBase>();
 
         /// <summary>
@@ -43,7 +42,10 @@ namespace SecretNest.RemoteAgency.Helper
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
         public void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null)
         {
-
+            foreach (var router in _routers.Values)
+            {
+                router.OnRemoteServiceWrapperClosing(siteId, serviceWrapperInstanceId);
+            }
         }
 
         /// <summary>
@@ -53,7 +55,46 @@ namespace SecretNest.RemoteAgency.Helper
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
         public void CloseRequestedByManagingObject(bool sendSpecialCommand)
         {
+            if (sendSpecialCommand)
+            {
+                Dictionary<Guid, HashSet<Guid>> targets = new Dictionary<Guid, HashSet<Guid>>(); //site id, instance id
+                foreach (var router in _routers.Values)
+                foreach (var id in router.GetTargetSiteIdAndInstanceIdThenClose())
+                {
+                    if (!targets.TryGetValue(id.Item1, out var hash))
+                    {
+                        hash = new HashSet<Guid>();
+                        targets[id.Item1] = hash;
+                    }
 
+                    hash.Add(id.Item2);
+                }
+
+                _routers.Clear();
+                _routers = null;
+
+                var ids = targets.SelectMany(s => s.Value.Select(i => new Tuple<Guid, Guid>(s.Key, i))).ToArray();
+
+                var tasks = Array.ConvertAll(ids, i => Task.Run(() =>
+                {
+                    var message = CreateEmptyMessageCallback();
+                    message.AssetName = Const.SpecialCommandProxyDisposed;
+                    message.TargetSiteId = i.Item1;
+                    message.TargetInstanceId = i.Item2;
+                    SendOneWaySpecialCommandMessageCallback(message);
+                }));
+
+                Task.WaitAll(tasks); //AggregateException
+            }
+            else
+            {
+                foreach (var router in _routers.Values)
+                {
+                    router.Close();
+                }
+                _routers.Clear();
+                _routers = null;
+            }
         }
 
         /// <summary>
@@ -67,6 +108,42 @@ namespace SecretNest.RemoteAgency.Helper
             router.AssetName = assetName;
             router.ProxyEventHelper = this;
         }
+
+        /// <summary>
+        /// Processes an event raising message and returns response.
+        /// </summary>
+        /// <param name="message">Message to be processed.</param>
+        /// <param name="exception">Exception thrown while running user code.</param>
+        /// <returns>Message contains the data to be returned.</returns>
+        public IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message,
+            out Exception exception)
+        {
+            if (_routers.TryGetValue(message.AssetName, out var router))
+            {
+                return router.ProcessEventRaisingMessage(message, out exception);
+            }
+            else
+            {
+                var result = CreateEmptyMessageCallback();
+                //for sending a feedback, no property of message need to be assigned here.
+
+                exception = new AssetNotFoundException(message);
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Processes an event raising message.
+        /// </summary>
+        /// <param name="message">Message to be processed.</param>
+        public virtual void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        {
+            if (_routers.TryGetValue(message.AssetName, out var router))
+            {
+                router.ProcessOneWayEventRaisingMessage(message);
+            }
+        }
     }
 
     /// <summary>
@@ -77,7 +154,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// <summary>
         /// Gets or sets the helper instance.
         /// </summary>
-        public ProxyEventHelper ProxyEventHelper { get;set; }
+        public ProxyEventHelper ProxyEventHelper { get; set; }
 
         /// <summary>
         /// Gets or sets the asset name.
@@ -109,6 +186,24 @@ namespace SecretNest.RemoteAgency.Helper
         {
             //nothing to do here.
         }
+
+        /// <summary>
+        /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
+        /// </summary>
+        /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
+        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+        public abstract void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null);
+
+        /// <summary>
+        /// Gets target site id and instance id then closes this object.
+        /// </summary>
+        /// <returns>Target site id and instance id.</returns>
+        public abstract List<Tuple<Guid, Guid>> GetTargetSiteIdAndInstanceIdThenClose();
+
+        /// <summary>
+        /// Closes this object.
+        /// </summary>
+        public abstract void Close();
     }
 
     /// <summary>
@@ -119,7 +214,15 @@ namespace SecretNest.RemoteAgency.Helper
     {
         private readonly int _addingTimeout, _removingTimeout;
 
-        private List<Tuple<Guid, Guid>> _targetSiteIdAndInstanceId = new List<Tuple<Guid, Guid>>();
+        private List<EventTarget> _targetSiteIdAndInstanceId = new List<EventTarget>();
+
+        class EventTarget
+        {
+            public Guid SiteId;
+            public Guid InstanceId;
+            public bool TargetDisposed;
+            public TDelegate Delegate;
+        }
 
         /// <summary>
         /// Initializes an instance of ProxyEventRouterBase.
@@ -148,7 +251,8 @@ namespace SecretNest.RemoteAgency.Helper
             {
                 lock (_targetSiteIdAndInstanceId)
                 {
-                    _targetSiteIdAndInstanceId.Add(new Tuple<Guid, Guid>(response.SenderSiteId, response.SenderInstanceId));
+                    _targetSiteIdAndInstanceId.Add(new EventTarget()
+                        {SiteId = response.SenderSiteId, InstanceId = response.SenderInstanceId, Delegate = value});
                 }
             }
         }
@@ -159,25 +263,91 @@ namespace SecretNest.RemoteAgency.Helper
         /// <param name="value">Handler.</param>
         public void ProcessEventRemoving(TDelegate value)
         {
-            var message = ProxyEventHelper.CreateEmptyMessageCallback();
+            lock (_targetSiteIdAndInstanceId)
+            {
+                // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault
+                var target = _targetSiteIdAndInstanceId.Where(i => i.Delegate.Equals(value)).FirstOrDefault();
+                if (target == null)
+                    return;
+                if (!target.TargetDisposed)
+                {
+                    var message = ProxyEventHelper.CreateEmptyMessageCallback();
+                    message.AssetName = AssetName;
+                    message.TargetSiteId = target.SiteId;
+                    message.TargetInstanceId = target.InstanceId;
+                    var response = ProxyEventHelper.SendEventRemovingMessageCallback(message, _removingTimeout);
+                    if (response.Exception != null)
+                        throw response.Exception;
+                }
 
+                _targetSiteIdAndInstanceId.Remove(target);
+            }
+        }
 
+        /// <inheritdoc />
+        public sealed override void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null)
+        {
+            lock (_targetSiteIdAndInstanceId)
+            {
+                if (serviceWrapperInstanceId.HasValue)
+                {
+                    foreach (var item in _targetSiteIdAndInstanceId)
+                    {
+                        if (item.SiteId == siteId && item.InstanceId == serviceWrapperInstanceId)
+                        {
+                            item.TargetDisposed = true;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in _targetSiteIdAndInstanceId)
+                    {
+                        if (item.SiteId == siteId)
+                        {
+                            item.TargetDisposed = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public sealed override List<Tuple<Guid, Guid>> GetTargetSiteIdAndInstanceIdThenClose()
+        {
+            List<Tuple<Guid, Guid>> result;
+            lock (_targetSiteIdAndInstanceId)
+            {
+                result = _targetSiteIdAndInstanceId.Where(i => !i.TargetDisposed)
+                    .Select(i => new Tuple<Guid, Guid>(i.SiteId, i.InstanceId)).ToList();
+            }
+            Close();
+            return result;
+        }
+
+        /// <inheritdoc />
+        public sealed override void Close()
+        {
+            lock (_targetSiteIdAndInstanceId)
+            {
+                _targetSiteIdAndInstanceId.Clear();
+            }
+
+            // ReSharper disable once InconsistentlySynchronizedField
+            _targetSiteIdAndInstanceId = null;
+
+            ProxyEventHelper = null;
         }
     }
-    
+
     /// <summary>
     /// Defines a helper class to be implanted into built assembly for handling an one way event handler in proxy. This is an abstract class.
     /// </summary>
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
     public abstract class ProxyEventRouterBase<TDelegate, TParameterEntity> : ProxyEventRouterBase<TDelegate>
+        where TParameterEntity : IRemoteAgencyMessage
     {
-        /// <inheritdoc />
-        public override void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Initializes an instance of ProxyEventRouterBase.
         /// </summary>
@@ -186,6 +356,14 @@ namespace SecretNest.RemoteAgency.Helper
         protected ProxyEventRouterBase(int addingTimeout, int removingTimeout) : base(addingTimeout, removingTimeout)
         {
         }
+
+        /// <inheritdoc />
+        public sealed override void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        {
+            Process((TParameterEntity) message);
+        }
+
+        private protected abstract void Process(TParameterEntity message);
     }
 
     /// <summary>
@@ -194,7 +372,11 @@ namespace SecretNest.RemoteAgency.Helper
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
     /// <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
-    public abstract class ProxyEventRouterBase<TDelegate, TParameterEntity, TReturnValueEntity> : ProxyEventRouterBase<TDelegate>
+    public abstract class
+        ProxyEventRouterBase<TDelegate, TParameterEntity, TReturnValueEntity> : ProxyEventRouterBase<TDelegate>
+        where TParameterEntity : IRemoteAgencyMessage
+        where TReturnValueEntity : IRemoteAgencyMessage
+
     {
         private readonly int _timeout;
 
@@ -204,15 +386,19 @@ namespace SecretNest.RemoteAgency.Helper
         /// <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
         /// <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
         /// <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
-        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout, int raisingTimeout) : base(addingTimeout, removingTimeout)
+        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout, int raisingTimeout) : base(addingTimeout,
+            removingTimeout)
         {
             _timeout = raisingTimeout;
         }
 
         /// <inheritdoc />
-        public override IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception)
+        public sealed override IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message,
+            out Exception exception)
         {
-            throw new NotImplementedException();
+            return Process((TParameterEntity) message, out exception);
         }
+
+        private protected abstract TReturnValueEntity Process(TParameterEntity message, out Exception exception);
     }
 }
