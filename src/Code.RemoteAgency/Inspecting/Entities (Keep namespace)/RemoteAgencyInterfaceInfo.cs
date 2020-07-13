@@ -27,6 +27,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyEventInfo> Events { get; set; }
         public List<RemoteAgencyPropertyInfo> Properties { get; set; }
 
+        public bool NeedEventHelper => Events.Any(i => !i.IsIgnored);
+
         public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
         public Type[] InterfaceLevelGenericParameters { get; set; }
 
