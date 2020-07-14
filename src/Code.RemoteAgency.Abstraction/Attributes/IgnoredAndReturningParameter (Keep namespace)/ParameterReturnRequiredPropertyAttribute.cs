@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When a parameter contains properties or fields which may be changed on the target site and need to be sent back to the caller, use <see cref="ParameterReturnRequiredPropertyAttribute"/> on related properties.</para>
     /// <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="ParameterReturnRequiredPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
     /// <para><see cref="EventParameterReturnRequiredPropertyAttribute"/> can be marked on event, with higher priority than <see cref="ParameterReturnRequiredPropertyAttribute"/> with the same parameter.</para>
-    /// <para>Without <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef".</para>
+    /// <para>Without <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef" or "out / Out".</para>
     /// <para>This attribute can only be marked on the parameter without "ref / ByRef" and "out / Out".</para>
     /// <para>By specifying this on properties, only set operating will be affected.</para>
     /// </remarks>

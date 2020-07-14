@@ -11,7 +11,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When a parameter contains properties or fields which may be changed on the target site and need to be sent back to the caller, use <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> on related properties.</para>
     /// <para>When a parameter marked with "ref / ByRef", the value of the parameter will be passed back to the caller. Due to lack of tracking information, regardless of whether this parameter contains changed properties or fields, the whole object will be transferred and replaced. If this is not the expected operation, use <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> on related properties and fields instead of marking "ref / ByRef".</para>
     /// <para><see cref="ParameterReturnRequiredPropertyAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="EventParameterReturnRequiredPropertyAttribute"/>.</para>
-    /// <para>Without <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef".</para></remarks>
+    /// <para>Without <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> specified, properties will not be send back to the caller unless the parameter is marked with "ref / ByRef" or "out / Out".</para>
+    /// <para>This attribute can only be marked for the parameter without "ref / ByRef" and "out / Out".</para>
+    /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevelEventOnly" />
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class EventParameterReturnRequiredPropertyAttribute : ParameterReturnRequiredPropertyAttribute

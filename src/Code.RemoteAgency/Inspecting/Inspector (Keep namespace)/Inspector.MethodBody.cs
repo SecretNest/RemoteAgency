@@ -169,10 +169,12 @@ namespace SecretNest.RemoteAgency.Inspecting
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
             Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes = null,
+            Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>> eventLevelParameterReturnRequiredPropertyAttributes = null,
             List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertyGetting = null,
             List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting = null,
             string propertyValuePropertyNameSpecifiedByAttribute = null,
-            Attribute propertyValuePropertyNameSpecifyingAttribute = null)
+            Attribute propertyValuePropertyNameSpecifyingAttribute = null,
+            List<ParameterReturnRequiredPropertyAttribute> propertyValueParameterReturnRequiredProperty = null)
         {
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
@@ -293,12 +295,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                         target.ReturnValueEntityProperties.Add(returnProperty);
                     }
 
-                    var returnRequiredPropertyAttribute = parameter.GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>()
-                        .FirstOrDefault();
+                    var returnRequiredPropertyAttribute =
+                        GetAttributes(parameter, eventLevelParameterReturnRequiredPropertyAttributes)
+                            .FirstOrDefault();
 
                     if (returnRequiredPropertyAttribute != null)
                         throw new InvalidParameterAttributeDataException(
-                            $"{nameof(ParameterReturnRequiredPropertyAttribute)} can only be used on the parameter without \"ref / ByRef\" and \"out / Out\"",
+                            $"{returnRequiredPropertyAttribute.GetType().Name} can only be used on the parameter without \"ref / ByRef\" and \"out / Out\"",
                             returnRequiredPropertyAttribute, parameter, memberPath);
 
                     #endregion
@@ -314,9 +317,12 @@ namespace SecretNest.RemoteAgency.Inspecting
                             $"{nameof(ParameterReturnRequiredAttribute)} can only be used on the parameter with \"ref / ByRef\" and \"out / Out\".",
                             returnRequiredAttribute, parameter, memberPath);
 
-                    var returnRequiredPropertyAttributes =
-                        parameter.GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToArray();
-                    if (returnRequiredPropertyAttributes.Length > 0)
+                    List<ParameterReturnRequiredPropertyAttribute> returnRequiredPropertyAttributes;
+                    if (propertyValueParameterReturnRequiredProperty != null && parameter.Name == PropertyValueName)
+                        returnRequiredPropertyAttributes = propertyValueParameterReturnRequiredProperty;
+                    else
+                        returnRequiredPropertyAttributes = GetAttributes(parameter, eventLevelParameterReturnRequiredPropertyAttributes);
+                    if (returnRequiredPropertyAttributes.Count > 0)
                     {
                         HashSet<string> processedProperties = new HashSet<string>();
                         HashSet<Type> processedHelpers = new HashSet<Type>();
@@ -444,6 +450,15 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                                 if (!processedHelpers.Add(returnRequiredPropertyAttribute.HelperClass))
                                     continue;
+
+                                var ctor = returnRequiredPropertyAttribute.HelperClass.GetConstructor(new[]
+                                    {parameter.ParameterType});
+                                if (ctor == null)
+                                {
+                                    throw new InvalidParameterAttributeDataException(
+                                        $"Publicly accessible constructor with one parameter of ${parameter.ParameterType} is not found in helper class {returnRequiredPropertyAttribute.HelperClass.FullName}",
+                                        returnRequiredPropertyAttribute, parameter, memberPath);
+                                }
 
                                 var propertiesInHelperClass = returnRequiredPropertyAttribute.HelperClass.GetProperties();
                                 foreach (var propertyInHelperClass in propertiesInHelperClass)

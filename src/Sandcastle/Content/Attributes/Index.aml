@@ -110,7 +110,7 @@
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference></para></entry>
               <entry><para>Specifies a property or field which value should be send back to the caller is contained in the parameter.</para></entry>
-              <entry><para>Valid on parameter of asset, including method and delegate of event. The parameter should not be marked with "Ref / ByRef" or "out / Out".</para></entry>
+              <entry><para>Valid on parameter of asset, including method and delegate of event, and property. When specifying this on properties, only set operating will be affected. The parameter should not be marked with "Ref / ByRef" or "out / Out".</para></entry>
             </row>
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference></para></entry>

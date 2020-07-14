@@ -481,13 +481,27 @@ namespace SecretNest.RemoteAgency.Inspecting
             where TAttribute : Attribute
         {
             // ReSharper disable once AssignNullToNotNullAttribute
-            if (overrides == null || overrides.TryGetValue(parameterInfo.Name, out attribute))
+            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name, out attribute))
                 attribute = parameterInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>()
                     .FirstOrDefault();
             if (attribute == null)
                 return defaultValue;
             else
                 return selector(attribute);
+        }
+
+        static List<TAttribute> GetAttributes<TAttribute>(ParameterInfo parameterInfo,
+            Dictionary<string, List<TAttribute>> overrides)
+            where TAttribute : Attribute
+        {
+            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name, out var attribute))
+            {
+                return parameterInfo.GetCustomAttributes<TAttribute>().ToList();
+            }
+            else
+            {
+                return attribute;
+            }
         }
 
         static TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,

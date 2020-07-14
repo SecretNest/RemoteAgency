@@ -79,8 +79,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 out var customizedPropertyGetResponsePropertyNameAttribute);
 
                         ProcessMethodBodyForNormalAsset(getMethod, memberPath,
-                            gettingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedPropertyGetResponsePropertyNameAttribute,
-                            property.GettingMethodBodyInfo, null, null, null,
+                            gettingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
+                            customizedPropertyGetResponsePropertyNameAttribute, property.GettingMethodBodyInfo, null,
+                            null, null, null,
                             valueParameterSerializerParameterLevelAttributesOverrideForProperty, null);
                     }
                 }
@@ -90,6 +91,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     var propertyValuePropertyName =
                         GetValueFromAttribute<CustomizedPropertySetRequestPropertyNameAttribute, string>(propertyInfo,
                             i => i.EntityPropertyName, out var customizedPropertySetRequestPropertyNameAttribute);
+                    var parameterReturnRequiredProperty = propertyInfo
+                        .GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToList();
 
                     //setting
                     if (property.IsSettingOneWay)
@@ -107,9 +110,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                         ProcessMethodBodyForNormalAsset(setMethod, memberPath,
                             settingTimeout, true, null, null,
-                            property.SettingMethodBodyInfo, null, null, null,
+                            property.SettingMethodBodyInfo, null, null, null, null,
                             null, valueParameterSerializerParameterLevelAttributesOverrideForProperty,
-                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute);
+                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute,
+                            parameterReturnRequiredProperty);
                     }
                 }
             }

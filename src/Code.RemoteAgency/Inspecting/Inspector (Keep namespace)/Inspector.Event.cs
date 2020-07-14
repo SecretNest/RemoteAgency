@@ -89,6 +89,21 @@ namespace SecretNest.RemoteAgency.Inspecting
                         eventLevelParameterReturnRequiredAttributes.TryAdd(attribute.ParameterName, attribute);
                     }
 
+                    Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>>
+                        eventLevelParameterReturnRequiredPropertyAttributes =
+                            new Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>>();
+                    foreach (var attribute in eventInfo
+                        .GetCustomAttributes<EventParameterReturnRequiredPropertyAttribute>())
+                    {
+                        if (!eventLevelParameterReturnRequiredPropertyAttributes.TryGetValue(attribute.ParameterName,
+                            out var list))
+                        {
+                            list = new List<ParameterReturnRequiredPropertyAttribute>();
+                            eventLevelParameterReturnRequiredPropertyAttributes[attribute.ParameterName] = list;
+                        }
+                        list.Add(attribute);
+                    }
+
                     var isReturnValueIgnored =
                         GetValueFromAttribute<ReturnIgnoredAttribute, bool>(eventInfo, i => i.IsIgnored,
                             out var returnIgnoredAttribute);
@@ -123,9 +138,12 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     ProcessMethodBodyForNormalAsset(raiseMethod, memberPath,
                         // ReSharper disable once PossibleNullReferenceException
-                        eventRaisingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedReturnValueEntityPropertyNameAttribute,
+                        eventRaisingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
+                        customizedReturnValueEntityPropertyNameAttribute,
                         @event.RaisingMethodBodyInfo,
-                        eventLevelParameterIgnoredAttributes, eventLevelParameterEntityPropertyNameAttributes, eventLevelParameterReturnRequiredAttributes);
+                        eventLevelParameterIgnoredAttributes, eventLevelParameterEntityPropertyNameAttributes,
+                        eventLevelParameterReturnRequiredAttributes,
+                        eventLevelParameterReturnRequiredPropertyAttributes);
                 }
             }
 
