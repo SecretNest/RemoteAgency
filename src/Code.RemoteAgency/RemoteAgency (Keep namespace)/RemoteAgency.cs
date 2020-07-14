@@ -17,20 +17,20 @@ namespace SecretNest.RemoteAgency
         public Guid SiteId { get; set; }
 
         /// <summary>
-        /// Instance of entity code builder.
+        /// Instance of entity type builder.
         /// </summary>
-        protected readonly EntityCodeBuilderBase EntityCodeBuilder;
+        protected readonly EntityTypeBuilderBase EntityTypeBuilder;
 
         /// <summary>
         /// Initializes the instance of Remote Agency.
         /// </summary>
-        /// <param name="entityCodeBuilder">Entity code builder.</param>
+        /// <param name="entityTypeBuilder">Entity type builder.</param>
         /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty.</param>
         /// <param name="entityBase">Type of the entity base.</param>
-        protected RemoteAgency(EntityCodeBuilderBase entityCodeBuilder, Guid siteId, Type entityBase)
+        protected RemoteAgency(EntityTypeBuilderBase entityTypeBuilder, Guid siteId, Type entityBase)
         {
             SiteId = siteId == Guid.Empty ? Guid.NewGuid() : siteId;
-            EntityCodeBuilder = entityCodeBuilder;
+            EntityTypeBuilder = entityTypeBuilder;
             _entityBase = entityBase;
         }
 
@@ -80,9 +80,9 @@ namespace SecretNest.RemoteAgency
         /// Initializes an instance of Remote Agency.
         /// </summary>
         /// <param name="serializingHelper">Serializer helper.</param>
-        /// <param name="entityCodeBuilder">Entity code builder.</param>
+        /// <param name="entityTypeBuilder">Entity type builder.</param>
         /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty.</param>
-        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid siteId) : base(entityCodeBuilder, siteId, typeof(TEntityBase))
+        public RemoteAgency(SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityTypeBuilderBase entityTypeBuilder, Guid siteId) : base(entityTypeBuilder, siteId, typeof(TEntityBase))
         {
             _serializingHelper = serializingHelper;
         }

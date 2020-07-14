@@ -37,7 +37,7 @@
             <para>Serializer base</para>
             <list class="nobullet">
               <listItem>
-                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.EntityCodeBuilderBase</codeEntityReference></para>
+                <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.EntityTypeBuilderBase</codeEntityReference></para>
               </listItem>
               <listItem>
                 <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.SerializingHelperBase`2</codeEntityReference></para>

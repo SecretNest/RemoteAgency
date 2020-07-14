@@ -612,7 +612,7 @@
             <param name="isOneWay">Whether the message is one-way.</param>
             <returns>Empty message.</returns>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityCodeBuilderBase,System.Nullable{System.Guid})">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})">
             <summary>
             Creates an instance of Remote Agency.
             </summary>
@@ -780,7 +780,7 @@
             Instance of entity code builder.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.#ctor(SecretNest.RemoteAgency.EntityCodeBuilderBase,System.Guid,System.Type)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
             <summary>
             Initializes the instance of Remote Agency.
             </summary>
@@ -930,7 +930,7 @@
             <param name="serialized">Serialized data.</param>
             <returns>Entity object.</returns>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.#ctor(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityCodeBuilderBase,System.Guid)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.#ctor(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid)">
             <summary>
             Initializes an instance of Remote Agency.
             </summary>

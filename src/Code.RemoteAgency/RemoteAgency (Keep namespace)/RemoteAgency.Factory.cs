@@ -12,24 +12,24 @@ namespace SecretNest.RemoteAgency
         /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
         /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
         /// <param name="serializingHelper">Serializer helper.</param>
-        /// <param name="entityCodeBuilder">Entity code builder.</param>
+        /// <param name="entityTypeBuilder">Entity type builder.</param>
         /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty or absent.</param>
         /// <returns>Created Remote Agency instance.</returns>
         public static RemoteAgency<TSerialized, TEntityBase> Create<TSerialized, TEntityBase>(
-            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid? siteId = null)
+            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityTypeBuilderBase entityTypeBuilder, Guid? siteId = null)
         {
             if (serializingHelper == null)
                 throw new ArgumentNullException(nameof(serializingHelper));
-            if (entityCodeBuilder == null)
-                throw new ArgumentNullException(nameof(entityCodeBuilder));
+            if (entityTypeBuilder == null)
+                throw new ArgumentNullException(nameof(entityTypeBuilder));
 
-            return CreateWithoutCheck(serializingHelper, entityCodeBuilder, siteId);
+            return CreateWithoutCheck(serializingHelper, entityTypeBuilder, siteId);
         }
 
         static RemoteAgency<TSerialized, TEntityBase> CreateWithoutCheck<TSerialized, TEntityBase>(
-            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityCodeBuilderBase entityCodeBuilder, Guid? siteId)
+            SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityTypeBuilderBase entityTypeBuilder, Guid? siteId)
         {
-            return new RemoteAgency<TSerialized, TEntityBase>(serializingHelper, entityCodeBuilder, siteId ?? Guid.Empty);
+            return new RemoteAgency<TSerialized, TEntityBase>(serializingHelper, entityTypeBuilder, siteId ?? Guid.Empty);
         }
     }
 }

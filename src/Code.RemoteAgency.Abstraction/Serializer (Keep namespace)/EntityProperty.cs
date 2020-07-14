@@ -20,9 +20,9 @@ namespace SecretNest.RemoteAgency
         public string Name { get; }
 
         /// <summary>
-        /// Gets the metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
+        /// Gets the metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
         /// </summary>
-        /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+        /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
         public IReadOnlyList<EntityPropertyAttribute> Attributes { get; }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="type">Type of the property.</param>
         /// <param name="name">Name of the property.</param>
-        /// <param name="attributes">Metadata objects marked with derived class specified by <see cref="EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.</param>
+        /// <param name="attributes">Metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.</param>
         public EntityProperty(Type type, string name, IReadOnlyList<EntityPropertyAttribute> attributes)
         {
             Type = type;

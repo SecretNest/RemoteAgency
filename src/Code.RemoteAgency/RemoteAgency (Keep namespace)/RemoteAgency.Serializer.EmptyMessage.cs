@@ -38,7 +38,7 @@ namespace SecretNest.RemoteAgency
         {
             Guid senderSiteId = SiteId;
 
-            var emptyMessage = EntityCodeBuilder.CreateEmptyMessage();
+            var emptyMessage = EntityTypeBuilder.CreateEmptyMessage();
             emptyMessage.SenderSiteId = senderSiteId;
             emptyMessage.TargetSiteId = targetSiteId;
             emptyMessage.SenderInstanceId = senderInstanceId;

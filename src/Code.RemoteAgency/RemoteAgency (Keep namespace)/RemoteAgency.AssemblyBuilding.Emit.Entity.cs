@@ -55,7 +55,7 @@ namespace SecretNest.RemoteAgency
 
                 return new Task<Type>(() =>
                 {
-                    var type = EntityCodeBuilder.BuildEntity(typeBuilder, entityInfo);
+                    var type = EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
                     entityInfo.SetResultCallback(type);
                     return type;
                 });

@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BinarySerializer\RemoteAgencyBinaryEmptyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BinarySerializer\RemoteAgencyBinarySerializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BinarySerializer\RemoteAgencyBinarySerializerEntityCodeBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BinarySerializer\RemoteAgencyBinarySerializerEntityTypeBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Factory.cs" />
   </ItemGroup>
 </Project>

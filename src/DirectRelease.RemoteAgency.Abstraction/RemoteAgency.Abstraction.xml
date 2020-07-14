@@ -1253,21 +1253,21 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityBuilding.InterfaceLevelAttributes">
             <summary>
-            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level.
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level.
             </summary>
-            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityBuilding.AssetLevelAttributes">
             <summary>
-            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level.
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> in asset level.
             </summary>
-            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityBuilding.DelegateLevelAttributes">
             <summary>
-            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.
             </summary>
-            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityBuilding.#ctor(System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityProperty},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Type[])">
             <summary>
@@ -1275,18 +1275,18 @@
             </summary>
             <param name="entityClassName">Name of the entity class.</param>
             <param name="properties">Properties other than in interface.</param>
-            <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
-            <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> in asset level. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
-            <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
+            <param name="interfaceLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
+            <param name="assetLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> in asset level. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
+            <param name="delegateLevelAttributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events. This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</param>
             <param name="genericParameters">Generic parameters of this entity class.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.EntityCodeBuilderBase">
+        <member name="T:SecretNest.RemoteAgency.EntityTypeBuilderBase">
             <summary>
             Provides code generation for entity classes. This is an abstract class.
             </summary>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#SerializerAdditional" />
         </member>
-        <member name="M:SecretNest.RemoteAgency.EntityCodeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)">
+        <member name="M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)">
             <summary>
             Builds an entity class type.
             </summary>
@@ -1294,28 +1294,28 @@
             <param name="entityBuilding">Info of entity to be built in this method.</param>
             <returns>Type of the built entity class.</returns>
         </member>
-        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.InterfaceLevelAttributeBaseType">
+        <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on interface level.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.AssetLevelAttributeBaseType">
+        <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on asset level.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.DelegateLevelAttributeBaseType">
+        <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on delegate level. Only works with processing events.
             </summary>
         </member>
-        <member name="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType">
+        <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on parameter level.
             </summary>
             <remarks>The parameter level attributes will be searched from parameter of method, parameter of delegate and property itself.</remarks>
         </member>
-        <member name="M:SecretNest.RemoteAgency.EntityCodeBuilderBase.CreateEmptyMessage">
+        <member name="M:SecretNest.RemoteAgency.EntityTypeBuilderBase.CreateEmptyMessage">
             <summary>
             Creates an empty message which is allowed to be serialized.
             </summary>
@@ -1572,9 +1572,9 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityProperty.Attributes">
             <summary>
-            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
+            Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
             </summary>
-            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityProperty.#ctor(System.Type,System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityPropertyAttribute})">
             <summary>
@@ -1582,7 +1582,7 @@
             </summary>
             <param name="type">Type of the property.</param>
             <param name="name">Name of the property.</param>
-            <param name="attributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityCodeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.</param>
+            <param name="attributes">Metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.EntityPropertyAttribute">
             <summary>

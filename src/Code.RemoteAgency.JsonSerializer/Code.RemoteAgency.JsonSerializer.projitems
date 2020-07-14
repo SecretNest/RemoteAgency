@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)JsonSerializer\RemoteAgencyJsonEmptyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonSerializer\RemoteAgencyJsonSerializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JsonSerializer\RemoteAgencyJsonSerializerEntityCodeBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonSerializer\RemoteAgencyJsonSerializerEntityTypeBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency.Factory.cs" />
   </ItemGroup>
 </Project>

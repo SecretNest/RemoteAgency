@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency
         /// <returns>Created Remote Agency instance.</returns>
         public static RemoteAgency<byte[], object> CreateWithBinarySerializer(Guid? siteId = null)
         {
-            return CreateWithoutCheck(new RemoteAgencyBinarySerializer(), new RemoteAgencyBinarySerializerEntityCodeBuilder(), siteId);
+            return CreateWithoutCheck(new RemoteAgencyBinarySerializer(), new RemoteAgencyBinarySerializerEntityTypeBuilder(), siteId);
         }
     }
 }
