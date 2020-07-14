@@ -359,7 +359,7 @@ namespace SecretNest.RemoteAgency.Helper
     }
 
     /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
+    /// Defines a helper class to be implanted into built assembly for handling an one-way event handler in service wrapper. This is an abstract class.
     /// </summary>
     /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
@@ -376,7 +376,7 @@ namespace SecretNest.RemoteAgency.Helper
     }
 
     /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling a two way event handler in service wrapper. This is an abstract class.
+    /// Defines a helper class to be implanted into built assembly for handling a two-way event handler in service wrapper. This is an abstract class.
     /// </summary>
     /// <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>

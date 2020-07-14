@@ -70,7 +70,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
                 else if (parameter.IsOut)
                 {
-                    if (includeCallerOnlyInfo) //one way server won't process return value
+                    if (includeCallerOnlyInfo) //one-way server won't process return value
                     {
                         RemoteAgencyReturnValueInfoFromParameterDefaultValue item =
                             new RemoteAgencyReturnValueInfoFromParameterDefaultValue()
@@ -140,7 +140,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
             }
 
-            if (includeCallerOnlyInfo) //one way server won't process return value
+            if (includeCallerOnlyInfo) //one-way server won't process return value
             {
                 if (returnType != typeof(void))
                 {

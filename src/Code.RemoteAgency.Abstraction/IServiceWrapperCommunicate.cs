@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency
         IRemoteAgencyMessage ProcessMethodMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode);
 
         /// <summary>
-        /// Processes a one way method calling message.
+        /// Processes a one-way method calling message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>

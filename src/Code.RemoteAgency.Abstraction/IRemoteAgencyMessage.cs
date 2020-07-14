@@ -48,7 +48,7 @@ namespace SecretNest.RemoteAgency
         Exception Exception { get; set; }
 
         /// <summary>
-        /// Gets or sets whether this message is one way (do not need any response).
+        /// Gets or sets whether this message is one-way (do not need any response).
         /// </summary>
         bool IsOneWay { get; set; }
 

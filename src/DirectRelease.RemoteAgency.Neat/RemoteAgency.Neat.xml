@@ -90,14 +90,14 @@
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`2">
             <summary>
-            Defines a helper class to be implanted into built assembly for handling an one way event handler in proxy. This is an abstract class.
+            Defines a helper class to be implanted into built assembly for handling an one-way event handler in proxy. This is an abstract class.
             </summary>
             <typeparam name="TDelegate">Delegate of event.</typeparam>
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3">
             <summary>
-            Defines a helper class to be implanted into built assembly for handling an two way event handler in proxy. This is an abstract class.
+            Defines a helper class to be implanted into built assembly for handling an two-way event handler in proxy. This is an abstract class.
             </summary>
             <typeparam name="TDelegate">Delegate of event.</typeparam>
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
@@ -225,14 +225,14 @@
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`2">
             <summary>
-            Defines a helper class to be implanted into built assembly for handling an one way event handler in service wrapper. This is an abstract class.
+            Defines a helper class to be implanted into built assembly for handling an one-way event handler in service wrapper. This is an abstract class.
             </summary>
             <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase`3">
             <summary>
-            Defines a helper class to be implanted into built assembly for handling a two way event handler in service wrapper. This is an abstract class.
+            Defines a helper class to be implanted into built assembly for handling a two-way event handler in service wrapper. This is an abstract class.
             </summary>
             <typeparam name="TServiceContractInterface">Service contract interface type.</typeparam>
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
@@ -588,7 +588,7 @@
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.GenerateEmptyMessage(System.Guid,System.Guid,SecretNest.RemoteAgency.MessageType,System.String,System.Guid,System.Exception)">
             <summary>
-            Creates an empty message with sender instance id set to <see cref="F:System.Guid.Empty"/> and one way is <see langword="true"/>.
+            Creates an empty message with sender instance id set to <see cref="F:System.Guid.Empty"/> and one-way is <see langword="true"/>.
             </summary>
             <param name="targetSiteId">Target site id.</param>
             <param name="targetInstanceId">Target instance id.</param>
@@ -609,7 +609,7 @@
             <param name="assetName">Asset name.</param>
             <param name="messageId">Message id.</param>
             <param name="exception">Exception.</param>
-            <param name="isOneWay">Whether the message is one way.</param>
+            <param name="isOneWay">Whether the message is one-way.</param>
             <returns>Empty message.</returns>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityCodeBuilderBase,System.Nullable{System.Guid})">
@@ -1181,7 +1181,7 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay">
             <summary>
-            Gets whether this message is one way (do not need any response).
+            Gets whether this message is one-way (do not need any response).
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsEmptyMessage">

@@ -51,7 +51,7 @@ namespace SecretNest.RemoteAgency
         public Exception Exception => MessageBodyGeneric.Exception;
 
         /// <summary>
-        /// Gets whether this message is one way (do not need any response).
+        /// Gets whether this message is one-way (do not need any response).
         /// </summary>
         public bool IsOneWay => MessageBodyGeneric.IsOneWay;
 

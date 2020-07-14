@@ -97,7 +97,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             _result.Events = new List<RemoteAgencyEventInfo>();
             _result.Properties = new List<RemoteAgencyPropertyInfo>();
 
-            //foreach asset: get ignore, one way, preset asset name and entity name
+            //foreach asset: get ignore, one-way, preset asset name and entity name
             ReadOriginalAsset(usedAssetNames, usedClassNames, memberPath);
 
             //foreach asset: auto naming
@@ -138,7 +138,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         private const string AutoNamePlaceHolder = "<<<AutoNameRequired>>>";
 
-        //foreach asset: get ignore, one way, preset asset name and entity name
+        //foreach asset: get ignore, one-way, preset asset name and entity name
         void ReadOriginalAsset(HashSet<string> usedAssetNames, HashSet<string> usedClassNames,
             Stack<MemberInfo> parentPath)
         {

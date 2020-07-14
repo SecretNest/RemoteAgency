@@ -7,7 +7,7 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgency
     {
         /// <summary>
-        /// Creates an empty message with sender instance id set as <see cref="Guid"/>.Empty and one way is <see langword="true"/>.
+        /// Creates an empty message with sender instance id set as <see cref="Guid"/>.Empty and one-way is <see langword="true"/>.
         /// </summary>
         /// <param name="targetSiteId">Target site id.</param>
         /// <param name="targetInstanceId">Target instance id.</param>
@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="assetName">Asset name.</param>
         /// <param name="messageId">Message id.</param>
         /// <param name="exception">Exception.</param>
-        /// <param name="isOneWay">Whether the message is one way.</param>
+        /// <param name="isOneWay">Whether the message is one-way.</param>
         /// <returns>Empty message.</returns>
         protected IRemoteAgencyMessage GenerateEmptyMessage(Guid senderInstanceId, Guid targetSiteId, Guid targetInstanceId, MessageType messageType,
             string assetName, Guid messageId, Exception exception, bool isOneWay)

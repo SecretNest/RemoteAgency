@@ -159,7 +159,7 @@ namespace SecretNest.RemoteAgency
         {
             ProcessThreadLockWithoutReturn(withoutReturnCallback, message, out var exception, out var localExceptionHandlingMode);
 
-            //if (!message.IsOneWay) //event adding and removing are always two way.
+            //if (!message.IsOneWay) //event adding and removing are always two-way.
             //{
             var response = CreateEmptyMessage();
             response.Exception = exception;

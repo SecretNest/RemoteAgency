@@ -341,7 +341,7 @@ namespace SecretNest.RemoteAgency.Helper
     }
 
     /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling an one way event handler in proxy. This is an abstract class.
+    /// Defines a helper class to be implanted into built assembly for handling an one-way event handler in proxy. This is an abstract class.
     /// </summary>
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
@@ -367,7 +367,7 @@ namespace SecretNest.RemoteAgency.Helper
     }
 
     /// <summary>
-    /// Defines a helper class to be implanted into built assembly for handling an two way event handler in proxy. This is an abstract class.
+    /// Defines a helper class to be implanted into built assembly for handling an two-way event handler in proxy. This is an abstract class.
     /// </summary>
     /// <typeparam name="TDelegate">Delegate of event.</typeparam>
     /// <typeparam name="TParameterEntity">Parameter entity type.</typeparam>

@@ -161,7 +161,7 @@
             <summary>
             Specifies the asset is ignored from type building.
             </summary>
-            <remarks><para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored"/> is set as <see langword="true"/>, any access to this asset will not be transferred or relayed. When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException"/> is set as <see langword="true"/>, a <see cref="T:System.NotImplementedException"/> will be thrown when accessing, or default value will be used as returning like one way operating enabled.</para>
+            <remarks><para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored"/> is set as <see langword="true"/>, any access to this asset will not be transferred or relayed. When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException"/> is set as <see langword="true"/>, a <see cref="T:System.NotImplementedException"/> will be thrown when accessing, or default value will be used as returning like one-way operating enabled.</para>
             <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.IsIgnored"/> is set as <see langword="true"/>, all other attributes except <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
             <para>When this attribute is absent, the ignored mode is disabled.</para>
             </remarks>
@@ -186,25 +186,25 @@
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute">
             <summary>
-            Specifies the property get operating should be one way. No response is required.
+            Specifies the property get operating should be one-way. No response is required.
             </summary>
             <remarks>
             <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.IsOneWay"/> is set as <see langword="true"/>, the getting operating return the default value to the caller due to lack of response. Any exception raised from the user code on target site will not be transferred to the caller site.</para>
-            <para>By specifying this on properties, only getting operating is affected. If one way setting operating is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute"/>.</para>
-            <para>When this attribute is absent, the one way mode on property getting operating of this asset is disabled.</para>
+            <para>By specifying this on properties, only getting operating is affected. If one-way setting operating is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute"/>.</para>
+            <para>When this attribute is absent, the one-way mode on property getting operating of this asset is disabled.</para>
             </remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.IsOneWay">
             <summary>
-            Gets whether the property get operating is one way.
+            Gets whether the property get operating is one-way.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute.#ctor(System.Boolean)">
             <summary>
             Initializes an instance of PropertyGetOneWayOperatingAttribute.
             </summary>
-            <param name="isOneWay">Whether the property get operating is one way. Default value is true.</param>
+            <param name="isOneWay">Whether the property get operating is one-way. Default value is true.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute">
             <summary>
@@ -475,28 +475,28 @@
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute">
             <summary>
-            Specifies the operating should be one way. No response is required.
+            Specifies the operating should be one-way. No response is required.
             </summary>
             <remarks>
             <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay"/> is set as <see langword="true"/>, any output parameters and return value will always be set as default value due to lack of response, any exception raised from the user code on target site will not be transferred to the caller site.</para>
             <para>When <see cref="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay"/> is set as <see langword="true"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetEntityNameAttribute.ResponseEntityName"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetEntityNameAttribute.ResponseEntityName"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedMethodEntityNameAttribute.ReturnValueEntityName"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.CustomizedEventEntityNameAttribute.RaisingFeedbackEntityName"/>, <see cref="T:SecretNest.RemoteAgency.Attributes.CustomizedReturnValueEntityPropertyNameAttribute"/> and <see cref="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute"/> on or in the same asset, and the delegate related to the asset if the asset is an event, will be ignored.</para>
             <para>By specifying this on event, only event raising operating is affected. Event adding and removing are always return required.</para>
-            <para>By specifying this on properties, only setting operating is affected. If one way getting operating, which gets from a property but ignore the result and exception from the caller, is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute"/>.</para>
+            <para>By specifying this on properties, only setting operating is affected. If one-way getting operating, which gets from a property but ignore the result and exception from the caller, is expected, mark the property with <see cref="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute"/>.</para>
             <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
-            <para>When this attribute is absent, the one way mode of this asset other than property get operating is disabled.</para>
+            <para>When this attribute is absent, the one-way mode of this asset other than property get operating is disabled.</para>
             </remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.IsOneWay">
             <summary>
-            Gets whether the operating is one way.
+            Gets whether the operating is one-way.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute.#ctor(System.Boolean)">
             <summary>
             Initializes an instance of AssetOneWayOperatingAttribute.
             </summary>
-            <param name="isOneWay">Whether the operating is one way. Default value is true.</param>
+            <param name="isOneWay">Whether the operating is one-way. Default value is true.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute">
             <summary>
@@ -1035,7 +1035,7 @@
             <summary>
             The exception that is thrown when the asset specified cannot be found.
             </summary>
-            <remarks>When one way is not set on the caller side (proxy for methods and properties, service wrapper for events) but set on the other side, AssetNotFoundException will be sent back to the caller. On the contrary, the message will be dropped without processing on the other side.</remarks>
+            <remarks>When one-way is not set on the caller side (proxy for methods and properties, service wrapper for events) but set on the other side, AssetNotFoundException will be sent back to the caller. On the contrary, the message will be dropped without processing on the other side.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.AssetNotFoundException.OriginalMessage">
             <summary>
@@ -1337,7 +1337,7 @@
         </member>
         <member name="M:SecretNest.RemoteAgency.IServiceWrapperCommunicate.ProcessOneWayMethodMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
             <summary>
-            Processes a one way method calling message.
+            Processes a one-way method calling message.
             </summary>
             <param name="message">Message to be processed.</param>
             <param name="localExceptionHandlingMode">Local exception handling mode.</param>
@@ -1453,7 +1453,7 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.IsOneWay">
             <summary>
-            Gets or sets whether this message is one way (do not need any response).
+            Gets or sets whether this message is one-way (do not need any response).
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.IsEmptyMessage">
