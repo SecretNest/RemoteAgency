@@ -104,15 +104,19 @@ namespace SecretNest.RemoteAgency
             {
                 managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
                     ref instanceId, targetSiteId, targetInstanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
-                    ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    defaultTimeout, GetWaitingTimeForDisposing);
+                    ProcessMessageReceivedFromInside, 
+                    (id, assetName, exception) =>
+                        RedirectException(sourceInterface, id, assetName, exception),
+                    EntityTypeBuilder.CreateEmptyMessage, defaultTimeout, GetWaitingTimeForDisposing);
             }
             else
             {
                 managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
                     ref instanceId, targetSiteId, targetInstanceId, basicInfo.ThreadLockMode,
-                    ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    defaultTimeout, GetWaitingTimeForDisposing);
+                    ProcessMessageReceivedFromInside, 
+                    (id, assetName, exception) =>
+                        RedirectException(sourceInterface, id, assetName, exception),
+                    EntityTypeBuilder.CreateEmptyMessage, defaultTimeout, GetWaitingTimeForDisposing);
             }
 
             if (_managingObjects.TryAdd(instanceId, managingObject))
@@ -193,15 +197,19 @@ namespace SecretNest.RemoteAgency
             {
                 managingObject = new RemoteAgencyManagingObjectServiceWrapper<TEntityBase>(
                     (IServiceWrapperCommunicate) item, ref instanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
-                    ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    defaultTimeout, GetWaitingTimeForDisposing);
+                    ProcessMessageReceivedFromInside,
+                    (id, assetName, exception) =>
+                        RedirectException(sourceInterface, id, assetName, exception),
+                    EntityTypeBuilder.CreateEmptyMessage, defaultTimeout, GetWaitingTimeForDisposing);
             }
             else
             {
                 managingObject = new RemoteAgencyManagingObjectServiceWrapper<TEntityBase>(
                     (IServiceWrapperCommunicate) item, ref instanceId, basicInfo.ThreadLockMode,
-                    ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    defaultTimeout, GetWaitingTimeForDisposing);
+                    ProcessMessageReceivedFromInside, 
+                    (id, assetName, exception) =>
+                        RedirectException(sourceInterface, id, assetName, exception),
+                    EntityTypeBuilder.CreateEmptyMessage, defaultTimeout, GetWaitingTimeForDisposing);
             }
 
             if (_managingObjects.TryAdd(instanceId, managingObject))

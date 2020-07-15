@@ -16,8 +16,11 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Redirects an exception.
         /// </summary>
+        /// <param name="serviceContractInterface">The type of the service contract interface.</param>
+        /// <param name="instanceId">Instance id of the instance which throws exception.</param>
+        /// <param name="assetName">The name of the asset which throws exception.</param>
         /// <param name="exception">Exception to be redirected.</param>
-        private protected void RedirectException(Exception exception)
+        private protected void RedirectException(Type serviceContractInterface, Guid instanceId, string assetName, Exception exception)
         {
             if (ExceptionRedirected == null)
             {
@@ -25,7 +28,7 @@ namespace SecretNest.RemoteAgency
             }
             else
             {
-                var e = new ExceptionRedirectedEventArgs(exception);
+                var e = new ExceptionRedirectedEventArgs(serviceContractInterface, instanceId, assetName, exception);
                 ExceptionRedirected(this, e);
             }
         }

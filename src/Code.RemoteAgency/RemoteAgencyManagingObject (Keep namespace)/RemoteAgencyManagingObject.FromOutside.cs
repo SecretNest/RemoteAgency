@@ -8,6 +8,21 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
+        protected void SetMessagePropertyFromRequest(IRemoteAgencyMessage message, IRemoteAgencyMessage requestMessage)
+        {
+            message.MessageId = requestMessage.MessageId;
+            message.AssetName = requestMessage.AssetName;
+            message.IsOneWay = true;
+            //message.Exception set by caller.
+            message.SenderInstanceId = InstanceId;
+            //message.SenderSiteId leave to manager.
+            message.TargetInstanceId = requestMessage.SenderInstanceId;
+            message.TargetSiteId = requestMessage.SenderSiteId;
+            message.MessageType = requestMessage.MessageType;
+
+            _sendMessageToManagerCallback(message);
+        }
+
         public void ProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
         {
             switch (message.MessageType)
@@ -30,16 +45,16 @@ namespace SecretNest.RemoteAgency
                 case MessageType.PropertySet:
                     ProcessPropertySetMessageReceived(message);
                     break;
-                //case MessageType.SpecialCommand:
-                //    ProcessSpecialCommandMessageReceived(message);
-                //    break;
+                case MessageType.SpecialCommand:
+                    ProcessSpecialCommandMessageReceived(message);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(IRemoteAgencyMessage.MessageType));
             }
         }
 
-        public void SetRespondDirectly(IRemoteAgencyMessage message)
-            => OnResponseReceived(message);
+        //public void SetRespondDirectly(IRemoteAgencyMessage message)
+        //    => OnResponseReceived(message);
 
         protected abstract void ProcessMethodMessageReceived(IRemoteAgencyMessage message);
 
@@ -53,7 +68,32 @@ namespace SecretNest.RemoteAgency
 
         protected abstract void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message);
 
-        //protected abstract void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message);
+        protected void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
+        {
+            if (message.AssetName == Const.SpecialCommandProxyPing)
+            {
+                if (message.IsOneWay)
+                {
+                    //pong
+                    OnResponseReceived(message);
+                }
+                else
+                {
+                    //ping -> send pong back
+
+                    try
+                    {
+                        var pong = CreateEmptyMessage();
+                        SetMessagePropertyFromRequest(pong, message);
+                    }
+                    catch (Exception e)
+                    {
+                        ThrowExceptionWhenNecessary($"<{nameof(MessageType.SpecialCommand)}>{message.AssetName}", e,
+                            LocalExceptionHandlingMode.Redirect);
+                    }
+                }
+            }
+        }
 
         protected void ProcessRequestAndSendResponseIfRequired(IRemoteAgencyMessage message, AccessWithReturn withReturnCallback, AccessWithoutReturn withoutReturnCallback)
         {
@@ -69,7 +109,7 @@ namespace SecretNest.RemoteAgency
                 ProcessThreadLockWithReturn(withReturnCallback, message, out var response, out exception, out localExceptionHandlingMode);
 
                 response.Exception = exception;
-                ProcessResponseMessageReceivedFromInside(response, message);
+                SetMessagePropertyFromRequest(response, message);
             }
 
             ThrowExceptionWhenNecessary(message.AssetName, exception, localExceptionHandlingMode);
@@ -85,7 +125,7 @@ namespace SecretNest.RemoteAgency
                 }
                 else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
                 {
-                    _sendExceptionToManagerCallback(exception);
+                    _sendExceptionToManagerCallback(InstanceId, assetName, exception);
                 }
             }
         }
@@ -129,11 +169,6 @@ namespace SecretNest.RemoteAgency
             //response
             OnResponseReceived(message);
         }
-
-        //protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
-        //{
-        //    //nothing to do.
-        //}
     }
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>
@@ -146,7 +181,7 @@ namespace SecretNest.RemoteAgency
             //{
             var response = CreateEmptyMessage();
             response.Exception = exception;
-            ProcessResponseMessageReceivedFromInside(response, message);
+            SetMessagePropertyFromRequest(response, message);
             //}
 
             ThrowExceptionWhenNecessary(message.AssetName, exception, localExceptionHandlingMode);
@@ -190,10 +225,5 @@ namespace SecretNest.RemoteAgency
             ProcessRequestAndSendResponseIfRequired(message, _serviceWrapperObject.ProcessPropertySettingMessage,
                 _serviceWrapperObject.ProcessOneWayPropertySettingMessage);
         }
-
-        //protected override void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
-        //{
-        //    //nothing to do.
-        //}
     }
 }

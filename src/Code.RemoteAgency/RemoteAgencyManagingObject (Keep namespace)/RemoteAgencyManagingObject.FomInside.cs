@@ -6,21 +6,6 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-        protected void ProcessResponseMessageReceivedFromInside(IRemoteAgencyMessage message, IRemoteAgencyMessage requestMessage)
-        {
-            message.MessageId = requestMessage.MessageId;
-            message.AssetName = requestMessage.AssetName;
-            message.IsOneWay = true;
-            //message.Exception set by caller.
-            message.SenderInstanceId = InstanceId;
-            //message.SenderSiteId leave to manager.
-            message.TargetInstanceId = requestMessage.SenderInstanceId;
-            message.TargetSiteId = requestMessage.SenderSiteId;
-            message.MessageType = requestMessage.MessageType;
-
-            _sendMessageToManagerCallback(message);
-        }
-
         protected void ProcessPreparedRequestMessageReceivedFromInside(IRemoteAgencyMessage message)
         {
             //local site id will be set by manager.

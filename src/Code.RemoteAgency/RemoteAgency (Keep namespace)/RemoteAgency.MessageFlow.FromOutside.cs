@@ -43,7 +43,8 @@ namespace SecretNest.RemoteAgency
                 }
                 catch (Exception e)
                 {
-                    RedirectException(e);
+                    RedirectException(null, Guid.Empty, 
+                        $"<{nameof(MessageType.SpecialCommand)}>{message.AssetName}", e);
                 }
             }
 
