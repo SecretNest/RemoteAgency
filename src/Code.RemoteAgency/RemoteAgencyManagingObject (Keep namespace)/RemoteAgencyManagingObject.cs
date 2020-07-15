@@ -154,14 +154,14 @@ namespace SecretNest.RemoteAgency
         }
 
         //requested from managed object, which requested by user called on RemoteAgency.ResetProxyStickyTargetSite
-        void ResetProxyStickyTargetSite() 
+        public void ResetProxyStickyTargetSite() 
         {
             if (_isStickyModeEnabled)
                 _stickyTargetSiteId = null;
         }
 
         //requested from managed object, which requested by user called on RemoteAgency.ProxyStickyTargetSiteQuery
-        void ProxyStickyTargetSiteQuery(out bool isEnabled, out Guid defaultTargetSiteId,
+        public void ProxyStickyTargetSiteQuery(out bool isEnabled, out Guid defaultTargetSiteId,
             out Guid? stickyTargetSiteId)
         {
             isEnabled = _isStickyModeEnabled;

@@ -68,7 +68,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Resets sticky target site of the proxy specified.
         /// </summary>
-        /// <param name="instanceId">Instance id of the proxy to be reset.</param>
+        /// <param name="instanceId">Instance id of the proxy to be queried.</param>
         /// <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the disposing of the target service wrapper.</remarks>
         /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
         public abstract void ResetProxyStickyTargetSite(Guid instanceId);
@@ -89,6 +89,16 @@ namespace SecretNest.RemoteAgency
 
             obj.ProxyStickyTargetSiteQueryCallback(out isEnabled, out defaultTargetSiteId, out stickyTargetSiteId);
         }
+
+        /// <summary>
+        /// Queries the proxy sticky target site setting state.
+        /// </summary>
+        /// <param name="instanceId">Instance id of the proxy to be queried.</param>
+        /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
+        /// <param name="defaultTargetSiteId">Will be set as default target site id.</param>
+        /// <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
+        public abstract void ProxyStickyTargetSiteQuery(Guid instanceId, out bool isEnabled, out Guid defaultTargetSiteId,
+            out Guid? stickyTargetSiteId);
     }
 
     partial class RemoteAgency<TSerialized, TEntityBase>
@@ -136,12 +146,38 @@ namespace SecretNest.RemoteAgency
                 var obj = managingObject as RemoteAgencyManagingObjectProxy<TEntityBase>;
                 if (obj == null)
                 {
-                    throw new ArgumentNullException(nameof(instanceId), $"Service object specified by argument {nameof(instanceId)} is not a proxy object.");
+                    throw new ArgumentException(nameof(instanceId), $"Object specified by argument {nameof(instanceId)} is not a proxy object.");
                 }
                 else
                 {
-                    
+                    obj.ResetProxyStickyTargetSite();
                 }
+            }
+            else
+            {
+                throw new ArgumentException(nameof(instanceId), $"Object specified by argument {nameof(instanceId)} is not found.");
+            }
+        }
+
+        /// <inheritdoc />
+        public override void ProxyStickyTargetSiteQuery(Guid instanceId, out bool isEnabled, out Guid defaultTargetSiteId,
+            out Guid? stickyTargetSiteId)
+        {
+            if (_managingObjects.TryGetValue(instanceId, out var managingObject))
+            {
+                var obj = managingObject as RemoteAgencyManagingObjectProxy<TEntityBase>;
+                if (obj == null)
+                {
+                    throw new ArgumentException(nameof(instanceId), $"Object specified by argument {nameof(instanceId)} is not a proxy object.");
+                }
+                else
+                {
+                    obj.ProxyStickyTargetSiteQuery(out isEnabled, out defaultTargetSiteId, out stickyTargetSiteId);
+                }
+            }
+            else
+            {
+                throw new ArgumentException(nameof(instanceId), $"Object specified by argument {nameof(instanceId)} is not found.");
             }
         }
     }

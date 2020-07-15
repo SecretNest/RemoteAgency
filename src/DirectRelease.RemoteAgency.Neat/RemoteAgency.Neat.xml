@@ -34,7 +34,7 @@
             Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
-            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.CloseRequestedByManagingObject(System.Boolean)">
@@ -51,9 +51,33 @@
             <param name="assetName">Name of the event.</param>
             <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
         </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
+            <summary>
+            Processes an event raising message and returns response.
+            </summary>
+            <param name="message">Message to be processed.</param>
+            <param name="exception">Exception thrown while running user code.</param>
+            <returns>Message contains the data to be returned.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Processes an event raising message.
+            </summary>
+            <param name="message">Message to be processed.</param>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an event handler in proxy. This is an abstract class.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.ProxyEventHelper">
+            <summary>
+            Gets or sets the helper instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.AssetName">
+            <summary>
+            Gets or sets the asset name.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
@@ -70,11 +94,36 @@
             </summary>
             <param name="message">Message to be processed.</param>
         </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
+            </summary>
+            <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
+            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.GetTargetSiteIdAndInstanceIdThenClose">
+            <summary>
+            Gets target site id and instance id then closes this object.
+            </summary>
+            <returns>Target site id and instance id.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.Close">
+            <summary>
+            Closes this object.
+            </summary>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an event handler in proxy. This is an abstract class.
             </summary>
             <typeparam name="TDelegate">Delegate of event.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes an instance of ProxyEventRouterBase.
+            </summary>
+            <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+            <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.ProcessEventAdding(`0)">
             <summary>
@@ -88,12 +137,31 @@
             </summary>
             <param name="value">Handler.</param>
         </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.GetTargetSiteIdAndInstanceIdThenClose">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`1.Close">
+            <inheritdoc />
+        </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`2">
             <summary>
             Defines a helper class to be implanted into built assembly for handling an one-way event handler in proxy. This is an abstract class.
             </summary>
             <typeparam name="TDelegate">Delegate of event.</typeparam>
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`2.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes an instance of ProxyEventRouterBase.
+            </summary>
+            <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+            <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`2.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <inheritdoc />
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3">
             <summary>
@@ -103,11 +171,16 @@
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
             <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.#ctor(System.Int32)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
             Initialize an instance of ProxyEventRouterBase.
             </summary>
-            <param name="timeout">Timeout for waiting for the response of event raising.</param>
+            <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+            <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+            <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
+            <inheritdoc />
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1">
             <summary>
@@ -137,7 +210,7 @@
             Unlinks specified remote proxy from the event registered in service wrapper objects.
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
-            <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked.</param>
+            <param name="proxyInstanceId">The instance id of the closing proxy. When set as null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper`1.CloseRequestedByManagingObject(System.Boolean)">
@@ -311,7 +384,7 @@
             <summary>
             Gets the parameter which the attribute is on.
             </summary>
-            <remarks>Only valid when <see cref="P:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictException.CausedMemberType"/> is set to <see cref="T:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictExceptionCausedMemberType"/>.Parameter.</remarks>
+            <remarks>Only valid when <see cref="P:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictException.CausedMemberType"/> is set as <see cref="T:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictExceptionCausedMemberType"/>.Parameter.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictException.CausedMemberType">
             <summary>
@@ -375,7 +448,7 @@
             <summary>
             Parameter.
             </summary>
-            <remarks>The parameter object should be set to <see cref="P:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictException.Parameter"/>.</remarks>
+            <remarks>The parameter object should be set as <see cref="P:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictException.Parameter"/>.</remarks>
         </member>
         <member name="F:SecretNest.RemoteAgency.Inspecting.EntityPropertyNameConflictExceptionCausedMemberType.ReturnValue">
             <summary>
@@ -562,7 +635,7 @@
             <param name="sourceInterface">Type of the service contract interface to be implemented by this proxy.</param>
             <param name="targetSiteId">Target site id of the created proxy instance.</param>
             <param name="targetInstanceId">Target instance id of the created proxy instance.</param>
-            <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set to <see cref="T:System.Guid"/>.Empty.</param>
+            <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set as <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
             <returns>Proxy instance.</returns>
@@ -577,7 +650,7 @@
             </summary>
             <param name="sourceInterface">Type of service contract interface to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</param>
             <param name="serviceObject">The service object to be wrapped.</param>
-            <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set to <see cref="T:System.Guid"/>.Empty.</param>
+            <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set as <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildProxyWithServiceWrapper">When building is required, builds proxy and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
             <returns>The id of the service wrapper instance created.</returns>
@@ -588,7 +661,7 @@
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.GenerateEmptyMessage(System.Guid,System.Guid,SecretNest.RemoteAgency.MessageType,System.String,System.Guid,System.Exception)">
             <summary>
-            Creates an empty message with sender instance id set to <see cref="F:System.Guid.Empty"/> and one-way is <see langword="true"/>.
+            Creates an empty message with sender instance id set as <see cref="T:System.Guid"/>.Empty and one-way is <see langword="true"/>.
             </summary>
             <param name="targetSiteId">Target site id.</param>
             <param name="targetInstanceId">Target instance id.</param>
@@ -619,8 +692,8 @@
             <typeparam name="TSerialized">Type of the serialized data.</typeparam>
             <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
             <param name="serializingHelper">Serializer helper.</param>
-            <param name="entityCodeBuilder">Entity code builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="F:System.Guid.Empty"/> or absent.</param>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set as <see cref="T:System.Guid"/>.Empty or absent.</param>
             <returns>Created Remote Agency instance.</returns>
         </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgency.ExceptionRedirected">
@@ -673,17 +746,22 @@
             Unlinks specified remote proxy from the event registered in service wrapper objects.
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
-            <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
-            <remarks><para>Should be called when a remote proxy closing happened without messages routed to <see cref="M:SecretNest.RemoteAgency.RemoteAgency`2.ProcessReceivedMessage(`1)"/> or <see cref="M:SecretNest.RemoteAgency.RemoteAgency`2.ProcessReceivedMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)"/>.</para>
-            <para>Service wrapper object manages links of all proxies which need to handle events. When remote proxy is disposed, messages for removing event handlers are sent to the service wrapper object. But when something wrong happened, network disconnected or proxy object crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper object which may cause lags or exceptions while processing events.</para></remarks>
+            <param name="proxyInstanceId">The instance id of the closing proxy. When set as null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+            <remarks>
+            <para>A message to notify the closing is sent automatically while remote proxy closing. Call this method manually if exception is thrown while processing the closing of the remote proxy.</para>
+            <para>Service wrapper manages links of all proxies which need to handle events. When remote proxy is closed, message for removing event handlers is sent to the service wrapper. But when something wrong happened, network disconnected or proxy crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper which may cause lags or exceptions while processing events.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
             <summary>
             Resets sticky target site of all affected proxies and unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
             </summary>
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
-            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to null, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
-            <remarks>Should be called when a service wrapper is closing and some proxies managed by the local Remote Agency instance have the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+            <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
+            <remarks>
+            <para>A message to notify the closing is sent automatically while remote service wrapper closing. Call this method manually if exception is thrown while processing the closing of the remote service wrapper.</para>
+            <para>Proxy manages links of all service wrappers which is registered as an event raiser. When remote service wrapper is closed, message for removing the link of the event handler is sent to the proxy. But when something wrong happened, network disconnected or service wrapper crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in proxy which may cause lags or exceptions while processing events.</para>
+            <para>Also, the sticky target site will be reset for the proxies which is pointing to this service wrapper.</para>
+            </remarks>
             <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.ResetProxyStickyTargetSite(System.Object)">
@@ -691,7 +769,15 @@
             Resets sticky target site of the proxy specified.
             </summary>
             <param name="proxy">Proxy to be reset.</param>
-            <remarks>Should be called when a service wrapper is closing and this proxy has the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+            <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the closing of the target service wrapper, or while looking forward to choosing another target site.</remarks>
+            <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ResetProxyStickyTargetSite(System.Guid)">
+            <summary>
+            Resets sticky target site of the proxy specified.
+            </summary>
+            <param name="instanceId">Instance id of the proxy to be queried.</param>
+            <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the disposing of the target service wrapper.</remarks>
             <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.ProxyStickyTargetSiteQuery(System.Object,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
@@ -701,7 +787,16 @@
             <param name="proxy">Proxy to be reset.</param>
             <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
             <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set to <see langword="null"/> if no sticky target set yet.</param>
+            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ProxyStickyTargetSiteQuery(System.Guid,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
+            <summary>
+            Queries the proxy sticky target site setting state.
+            </summary>
+            <param name="instanceId">Instance id of the proxy to be queried.</param>
+            <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
+            <param name="defaultTargetSiteId">Will be set as default target site id.</param>
+            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.TryAddTaskScheduler(System.String,System.Threading.Tasks.TaskScheduler)">
             <summary>
@@ -775,17 +870,17 @@
             </summary>
             <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         </member>
-        <member name="F:SecretNest.RemoteAgency.RemoteAgency.EntityCodeBuilder">
+        <member name="F:SecretNest.RemoteAgency.RemoteAgency.EntityTypeBuilder">
             <summary>
-            Instance of entity code builder.
+            Instance of entity type builder.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
             <summary>
             Initializes the instance of Remote Agency.
             </summary>
-            <param name="entityCodeBuilder">Entity code builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="F:System.Guid.Empty"/>.</param>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set as <see cref="T:System.Guid"/>.Empty.</param>
             <param name="entityBase">Type of the entity base.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.Dispose(System.Boolean)">
@@ -819,7 +914,7 @@
             <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
             <param name="targetSiteId">Target site id of the created proxy instance.</param>
             <param name="targetInstanceId">Target instance id of the created proxy instance.</param>
-            <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set to <see cref="T:System.Guid"/>.Empty.</param>
+            <param name="instanceId">Id of the created proxy instance. A new id is generated if value is set as <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
             <returns>Proxy instance.</returns>
@@ -837,7 +932,7 @@
             </summary>
             <typeparam name="TInterface">Service contract interface of the service to be implemented by this service wrapper and have been implemented by the <paramref name="serviceObject"/>.</typeparam>
             <param name="serviceObject">The service object to be wrapped.</param>
-            <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set to <see cref="T:System.Guid"/>.Empty.</param>
+            <param name="instanceId">Id of the created service wrapper instance. A new id is generated if value is set as <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildProxyWithServiceWrapper">When building is required, builds proxy and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
             <returns>The id of the service wrapper instance created.</returns>
@@ -897,6 +992,12 @@
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
             <inheritdoc />
         </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ResetProxyStickyTargetSite(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ProxyStickyTargetSiteQuery(System.Guid,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
+            <inheritdoc />
+        </member>
         <member name="P:SecretNest.RemoteAgency.RemoteAgency`2.BypassSystemMessagesFromFiltering">
             <summary>
             Gets or sets whether system messages should be bypassed from filtering. Default value is <see langword="true" />.
@@ -935,8 +1036,8 @@
             Initializes an instance of Remote Agency.
             </summary>
             <param name="serializingHelper">Serializer helper.</param>
-            <param name="entityCodeBuilder">Entity code builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="F:System.Guid.Empty"/>.</param>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set as <see cref="T:System.Guid"/>.Empty.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase">
             <summary>
@@ -957,7 +1058,7 @@
         </member>
         <member name="M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToContinue">
             <summary>
-            Lets Remote Agency continue processing.
+            Continues the message sending or processing.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToTerminateAndReturnException(System.String)">
@@ -971,7 +1072,7 @@
             Replaces this message by an instance of <see cref="T:SecretNest.RemoteAgency.MessageProcessTerminatedException" /> then sends it to the receiver. Cannot be used when <see cref="P:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.MessageDirection"/> is <see cref="F:SecretNest.RemoteAgency.MessageDirection.Sending"/>.
             </summary>
             <param name="message">Message of the exception.</param>
-            <remarks>Caution: This may cause the sender throw <see cref="T:SecretNest.RemoteAgency.AccessingTimeOutException"/> if <see cref="P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay"/> is set to <see langword="false"/>.</remarks>
+            <remarks>Caution: This may cause the sender throw <see cref="T:SecretNest.RemoteAgency.AccessingTimeOutException"/> if <see cref="P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay"/> is set as <see langword="false"/>.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToReplaceWithExceptionAndReturn(System.String)">
             <summary>
