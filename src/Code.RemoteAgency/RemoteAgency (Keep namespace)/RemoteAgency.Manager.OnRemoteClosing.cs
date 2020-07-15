@@ -32,8 +32,9 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
         /// <param name="proxyInstanceId">The instance id of the closing proxy. When set as null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
-        /// <remarks><para>Should be called when a remote proxy closing happened without messages routed to <see cref="RemoteAgency{TSerialized, TEntityBase}.ProcessReceivedMessage(TEntityBase)"/> or <see cref="RemoteAgency{TSerialized, TEntityBase}.ProcessReceivedMessage(IRemoteAgencyMessage)"/>.</para>
-        /// <para>Service wrapper object manages links of all proxies which need to handle events. When remote proxy is disposed, messages for removing event handlers are sent to the service wrapper object. But when something wrong happened, network disconnected or proxy object crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper object which may cause lags or exceptions while processing events.</para></remarks>
+        /// <remarks>
+        /// <para>A message to notify the closing is sent automatically while remote proxy closing. Call this method manually if exception is thrown while processing the closing of the remote proxy.</para>
+        /// <para>Service wrapper manages links of all proxies which need to handle events. When remote proxy is closed, message for removing event handlers is sent to the service wrapper. But when something wrong happened, network disconnected or proxy crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper which may cause lags or exceptions while processing events.</para></remarks>
         public abstract void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null);
 
         /// <summary>
@@ -41,7 +42,11 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
         /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
-        /// <remarks>Should be called when a service wrapper is closing and some proxies managed by the local Remote Agency instance have the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+        /// <remarks>
+        /// <para>A message to notify the closing is sent automatically while remote service wrapper closing. Call this method manually if exception is thrown while processing the closing of the remote service wrapper.</para>
+        /// <para>Proxy manages links of all service wrappers which is registered as an event raiser. When remote service wrapper is closed, message for removing the link of the event handler is sent to the proxy. But when something wrong happened, network disconnected or service wrapper crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in proxy which may cause lags or exceptions while processing events.</para>
+        /// <para>Also, the sticky target site will be reset for the proxies which is pointing to this service wrapper.</para>
+        /// </remarks>
         /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
         public abstract void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId);
 
@@ -49,7 +54,7 @@ namespace SecretNest.RemoteAgency
         /// Resets sticky target site of the proxy specified.
         /// </summary>
         /// <param name="proxy">Proxy to be reset.</param>
-        /// <remarks>Should be called when a service wrapper is closing and this proxy has the sticky target site pointed to the site managing the closing service wrapper.</remarks>
+        /// <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the closing of the target service wrapper, or while looking forward to choosing another target site.</remarks>
         /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
         public void ResetProxyStickyTargetSite(object proxy)
         {
@@ -59,6 +64,14 @@ namespace SecretNest.RemoteAgency
 
             obj.ProxyStickyTargetSiteResetCallback();
         }
+
+        /// <summary>
+        /// Resets sticky target site of the proxy specified.
+        /// </summary>
+        /// <param name="instanceId">Instance id of the proxy to be reset.</param>
+        /// <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the disposing of the target service wrapper.</remarks>
+        /// <seealso cref="ProxyStickyTargetSiteAttribute"/>
+        public abstract void ResetProxyStickyTargetSite(Guid instanceId);
 
         /// <summary>
         /// Queries the proxy sticky target site setting state.
@@ -112,6 +125,23 @@ namespace SecretNest.RemoteAgency
             foreach (var remoteAgencyManagingObject in _managingObjects.Values)
             {
                 remoteAgencyManagingObject.OnServiceWrapperClosing(siteId, serviceWrapperInstanceId);
+            }
+        }
+
+        /// <inheritdoc />
+        public override void ResetProxyStickyTargetSite(Guid instanceId)
+        {
+            if (_managingObjects.TryGetValue(instanceId, out var managingObject))
+            {
+                var obj = managingObject as RemoteAgencyManagingObjectProxy<TEntityBase>;
+                if (obj == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId), $"Service object specified by argument {nameof(instanceId)} is not a proxy object.");
+                }
+                else
+                {
+                    
+                }
             }
         }
     }
