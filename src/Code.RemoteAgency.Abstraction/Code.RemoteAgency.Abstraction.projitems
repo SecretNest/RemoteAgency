@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterReturnRequiredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ReturnRequiredPropertyHelperAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventEntityNameAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\ProxyStickyTargetSiteAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ReturnIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterIgnoredAttribute.cs" />

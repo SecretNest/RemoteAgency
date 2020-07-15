@@ -115,26 +115,6 @@ namespace SecretNest.RemoteAgency
     {
         private IProxyCommunicate _proxyObject;
 
-        #region Default Target (Sticky supported)
-
-        private readonly bool _isStickyModeEnabled;
-        private Guid? _stickyTargetSiteId = null;
-
-        Guid TargetSiteId
-        {
-            get
-            {
-                if (_isStickyModeEnabled && _stickyTargetSiteId.HasValue)
-                {
-                    return _stickyTargetSiteId.Value;
-                }
-                else
-                {
-                    return DefaultTargetSiteId;
-                }
-            }
-        }
-
         public Guid DefaultTargetSiteId { get; }
 
         public Guid DefaultTargetInstanceId { get; }
@@ -142,34 +122,8 @@ namespace SecretNest.RemoteAgency
         //requested by manager: RemoteAgency.OnRemoteServiceWrapperClosing
         public override void OnServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId) 
         {
-            if (_isStickyModeEnabled && _stickyTargetSiteId == siteId)
-            {
-                if (!serviceWrapperInstanceId.HasValue || serviceWrapperInstanceId == DefaultTargetInstanceId)
-                {
-                    _stickyTargetSiteId = null;
-                }
-            }
-
             CallOnRemoteClosed(_proxyObject.OnRemoteServiceWrapperClosing, siteId, serviceWrapperInstanceId);
         }
-
-        //requested from managed object, which requested by user called on RemoteAgency.ResetProxyStickyTargetSite
-        public void ResetProxyStickyTargetSite() 
-        {
-            if (_isStickyModeEnabled)
-                _stickyTargetSiteId = null;
-        }
-
-        //requested from managed object, which requested by user called on RemoteAgency.ProxyStickyTargetSiteQuery
-        public void ProxyStickyTargetSiteQuery(out bool isEnabled, out Guid defaultTargetSiteId,
-            out Guid? stickyTargetSiteId)
-        {
-            isEnabled = _isStickyModeEnabled;
-            defaultTargetSiteId = DefaultTargetSiteId;
-            stickyTargetSiteId = _stickyTargetSiteId;
-        }
-
-        #endregion
 
         protected override void CloseManagingObject(bool sendSpecialCommand) //requested by manager
         {
@@ -192,8 +146,6 @@ namespace SecretNest.RemoteAgency
             {
                 _proxyObject.SendEventAddingMessageCallback = null;
                 _proxyObject.GetSiteIdCallback = null;
-                _proxyObject.ProxyStickyTargetSiteResetCallback = null;
-                _proxyObject.ProxyStickyTargetSiteQueryCallback = null;
                 _proxyObject.SendEventRemovingMessageCallback = null;
                 _proxyObject.SendMethodMessageCallback = null;
                 _proxyObject.SendOneWayMethodMessageCallback = null;
@@ -214,13 +166,11 @@ namespace SecretNest.RemoteAgency
             Guid defaultTargetSiteId, Guid defaultTargetInstanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
             CreateEmptyMessageCallback createEmptyMessageCallback, 
-            bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockMode, sendMessageToManagerCallback, sendExceptionToManagerCallback,
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _proxyObject = proxyObject;
-            _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
-            _proxyObject.ProxyStickyTargetSiteQueryCallback = ProxyStickyTargetSiteQuery;
             _proxyObject.InstanceId = InstanceId;
             _proxyObject.SendMethodMessageCallback = ProcessMethodMessageReceivedFromInside;
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
@@ -235,7 +185,6 @@ namespace SecretNest.RemoteAgency
 
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
-            _isStickyModeEnabled = isStickyModeEnabled;
         }
 
         public RemoteAgencyManagingObjectProxy(IProxyCommunicate proxyObject, ref Guid instanceId,
@@ -243,14 +192,12 @@ namespace SecretNest.RemoteAgency
             TryGetTaskSchedulerCallback tryGetTaskSchedulerCallback,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Exception> sendExceptionToManagerCallback,
             CreateEmptyMessageCallback createEmptyMessageCallback, 
-            bool isStickyModeEnabled, int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
+            int defaultTimeoutTime, Func<int> getWaitingTimeForDisposingCallback)
             : base(ref instanceId, threadLockTaskSchedulerName, tryGetTaskSchedulerCallback,
                 sendMessageToManagerCallback, sendExceptionToManagerCallback, 
                 createEmptyMessageCallback, defaultTimeoutTime, getWaitingTimeForDisposingCallback)
         {
             _proxyObject = proxyObject;
-            _proxyObject.ProxyStickyTargetSiteResetCallback = ResetProxyStickyTargetSite;
-            _proxyObject.ProxyStickyTargetSiteQueryCallback = ProxyStickyTargetSiteQuery;
             _proxyObject.InstanceId = InstanceId;
             _proxyObject.SendMethodMessageCallback = ProcessMethodMessageReceivedFromInside;
             _proxyObject.SendOneWayMethodMessageCallback = ProcessOneWayMethodMessageReceivedFromInside;
@@ -265,7 +212,6 @@ namespace SecretNest.RemoteAgency
 
             DefaultTargetSiteId = defaultTargetSiteId;
             DefaultTargetInstanceId = defaultTargetInstanceId;
-            _isStickyModeEnabled = isStickyModeEnabled;
         }
 
         #endregion

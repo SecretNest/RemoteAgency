@@ -72,6 +72,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)DirectRelease\" />
     <Folder Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\" />
   </ItemGroup>
 </Project>

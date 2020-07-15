@@ -8,10 +8,6 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-        protected virtual void PreProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
-        {
-        }
-
         public void ProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
         {
             switch (message.MessageType)
@@ -97,11 +93,6 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgencyManagingObjectProxy<TEntityBase>
     {
-        protected override void PreProcessMessageReceivedFromOutside(IRemoteAgencyMessage message)
-        {
-            SetStickyTargetId(message);
-        }
-
         protected override void ProcessMethodMessageReceived(IRemoteAgencyMessage message)
         {
             //response
@@ -143,14 +134,6 @@ namespace SecretNest.RemoteAgency
         //{
         //    //nothing to do.
         //}
-
-        void SetStickyTargetId(IRemoteAgencyMessage message)
-        {
-            if (_isStickyModeEnabled && !_stickyTargetSiteId.HasValue)
-            {
-                _stickyTargetSiteId = message.SenderSiteId;
-            }
-        }
     }
 
     partial class RemoteAgencyManagingObjectServiceWrapper<TEntityBase>

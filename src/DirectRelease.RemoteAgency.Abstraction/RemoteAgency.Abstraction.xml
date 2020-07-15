@@ -327,28 +327,6 @@
             <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
             <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute">
-            <summary>
-            Specifies the proxy built from this interface is target site sticky or not.
-            </summary>
-            <remarks><para>Due to routing mechanism, like load-balancing, the actual target site may not the same as requested.</para>
-            <para>When sticky mode disabled, every message is sent with the target site id set as the parameter when adding the proxy object to the Remote Agency instance. This will make the load-balancing works well and distribute accesses among target sites.</para>
-            <para>When sticky mode enabled, source site id of the first response message received is stored and used as the target site id for later messages. This will make all accesses stick to one of the target sites. It should be noted that when the chosen site is no longer responding, the proxy should be reset to restore it to the original state.</para>
-            <para>When this attribute is absent, the target site sticky mode is off.</para>
-            </remarks>
-            <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute.IsSticky">
-            <summary>
-            Gets whether the proxy built from this interface is target site sticky.
-            </summary>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute.#ctor(System.Boolean)">
-            <summary>
-            Initializes an instance of ProxyTargetSiteStickyAttribute.
-            </summary>
-            <param name="isSticky">Whether the proxy built from this interface is target site sticky. Default value is true.</param>
-        </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute">
             <summary>
             Specifies the return value of the asset is ignored from type building.
@@ -1019,14 +997,6 @@
             </summary>
             <param name="message">Message to be sent.</param>
         </member>
-        <member name="T:SecretNest.RemoteAgency.ProxyStickyTargetSiteQueryCallback">
-            <summary>
-            Queries the proxy sticky target site setting state.
-            </summary>
-            <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
-            <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
-        </member>
         <member name="T:SecretNest.RemoteAgency.CreateEmptyMessageCallback">
             <summary>
             Creates an empty message which is allowed to be serialized.
@@ -1157,16 +1127,6 @@
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.InstanceId">
             <summary>
             Gets or sets the id of this proxy instance.
-            </summary>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteResetCallback">
-            <summary>
-            Gets or sets the callback for a delegate which will be called for resetting the proxy sticky target site to the original state.
-            </summary>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.ProxyStickyTargetSiteQueryCallback">
-            <summary>
-            Gets or sets the callback for a delegate which will be called for querying the proxy sticky target site state.
             </summary>
         </member>
         <member name="P:SecretNest.RemoteAgency.IProxyCommunicate.SendMethodMessageCallback">

@@ -18,7 +18,6 @@ namespace SecretNest.RemoteAgency.Inspecting
             ClassNameBase = basicInfo.ClassNameBase;
             ProxyTypeName = basicInfo.ProxyTypeName;
             ServiceWrapperTypeName = basicInfo.ServiceWrapperTypeName;
-            IsProxyStickyTargetSite = basicInfo.IsProxyStickyTargetSite;
             ThreadLockMode = basicInfo.ThreadLockMode;
             TaskSchedulerName = basicInfo.TaskSchedulerName;
         }

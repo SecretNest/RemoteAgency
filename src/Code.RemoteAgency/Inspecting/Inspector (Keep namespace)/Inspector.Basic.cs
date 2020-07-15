@@ -50,12 +50,6 @@ namespace SecretNest.RemoteAgency.Inspecting
                     out var threadLockAttribute, ThreadLockMode.None);
             if (basicInfo.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
                 basicInfo.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
-
-            if (includesProxyOnlyInfo)
-                basicInfo.IsProxyStickyTargetSite =
-                    GetValueFromAttribute<ProxyStickyTargetSiteAttribute, bool>(basicInfo.SourceInterface,
-                        i => i.IsSticky,
-                        out _);
         }
 
         static string GetClassNameBase(Type sourceInterface)

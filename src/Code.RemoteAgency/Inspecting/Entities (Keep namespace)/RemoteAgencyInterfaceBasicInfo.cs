@@ -14,7 +14,6 @@ namespace SecretNest.RemoteAgency.Inspecting
         public string ClassNameBase { get; set; }
         public string ProxyTypeName { get; set; }
         public string ServiceWrapperTypeName { get; set; }
-        public bool IsProxyStickyTargetSite { get; set; }
         public ThreadLockMode ThreadLockMode { get; set; }
         public string TaskSchedulerName { get; set; }
     }

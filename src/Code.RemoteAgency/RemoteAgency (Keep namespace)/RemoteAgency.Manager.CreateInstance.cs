@@ -105,14 +105,14 @@ namespace SecretNest.RemoteAgency
                 managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
                     ref instanceId, targetSiteId, targetInstanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
                     ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    basicInfo.IsProxyStickyTargetSite, defaultTimeout, GetWaitingTimeForDisposing);
+                    defaultTimeout, GetWaitingTimeForDisposing);
             }
             else
             {
                 managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
                     ref instanceId, targetSiteId, targetInstanceId, basicInfo.ThreadLockMode,
                     ProcessMessageReceivedFromInside, RedirectException, EntityTypeBuilder.CreateEmptyMessage,
-                    basicInfo.IsProxyStickyTargetSite, defaultTimeout, GetWaitingTimeForDisposing);
+                    defaultTimeout, GetWaitingTimeForDisposing);
             }
 
             if (_managingObjects.TryAdd(instanceId, managingObject))

@@ -21,15 +21,6 @@ namespace SecretNest.RemoteAgency
     public delegate void SendOneWayMessageCallback(IRemoteAgencyMessage message);
 
     /// <summary>
-    /// Queries the proxy sticky target site setting state.
-    /// </summary>
-    /// <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
-    /// <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-    /// <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
-    public delegate void ProxyStickyTargetSiteQueryCallback(out bool isEnabled, out Guid defaultTargetSiteId,
-        out Guid? stickyTargetSiteId);
-
-    /// <summary>
     /// Creates an empty message which is allowed to be serialized.
     /// </summary>
     /// <returns>Empty message.</returns>

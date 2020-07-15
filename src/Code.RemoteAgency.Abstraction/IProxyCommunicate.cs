@@ -17,16 +17,6 @@ namespace SecretNest.RemoteAgency
         Guid InstanceId { get; set; }
 
         /// <summary>
-        /// Gets or sets the callback for a delegate which will be called for resetting the proxy sticky target site to the original state.
-        /// </summary>
-        Action ProxyStickyTargetSiteResetCallback { get; set; }
-
-        /// <summary>
-        /// Gets or sets the callback for a delegate which will be called for querying the proxy sticky target site state.
-        /// </summary>
-        ProxyStickyTargetSiteQueryCallback ProxyStickyTargetSiteQueryCallback { get; set; }
-
-        /// <summary>
         /// Gets or sets the callback for a delegate which will be called while a method calling message need to be sent to a remote site and get response of it.
         /// </summary>
         SendTwoWayMessageCallback SendMethodMessageCallback { get; set; }

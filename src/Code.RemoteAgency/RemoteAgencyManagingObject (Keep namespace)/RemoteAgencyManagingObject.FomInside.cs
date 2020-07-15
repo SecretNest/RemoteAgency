@@ -52,7 +52,7 @@ namespace SecretNest.RemoteAgency
             message.SenderInstanceId = InstanceId;
             //message.SenderSiteId leave to manager.
             message.TargetInstanceId = DefaultTargetInstanceId;
-            message.TargetSiteId = TargetSiteId;
+            message.TargetSiteId = DefaultTargetSiteId;
             message.MessageType = messageType;
         }
 

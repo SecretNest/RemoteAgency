@@ -760,43 +760,7 @@
             <remarks>
             <para>A message to notify the closing is sent automatically while remote service wrapper closing. Call this method manually if exception is thrown while processing the closing of the remote service wrapper.</para>
             <para>Proxy manages links of all service wrappers which is registered as an event raiser. When remote service wrapper is closed, message for removing the link of the event handler is sent to the proxy. But when something wrong happened, network disconnected or service wrapper crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in proxy which may cause lags or exceptions while processing events.</para>
-            <para>Also, the sticky target site will be reset for the proxies which is pointing to this service wrapper.</para>
             </remarks>
-            <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ResetProxyStickyTargetSite(System.Object)">
-            <summary>
-            Resets sticky target site of the proxy specified.
-            </summary>
-            <param name="proxy">Proxy to be reset.</param>
-            <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the closing of the target service wrapper, or while looking forward to choosing another target site.</remarks>
-            <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ResetProxyStickyTargetSite(System.Guid)">
-            <summary>
-            Resets sticky target site of the proxy specified.
-            </summary>
-            <param name="instanceId">Instance id of the proxy to be queried.</param>
-            <remarks>Proxy sticky site will be automatically reset when the target remote site is closing. Call this method manually if exception is thrown while processing the disposing of the target service wrapper.</remarks>
-            <seealso cref="T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute"/>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ProxyStickyTargetSiteQuery(System.Object,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
-            <summary>
-            Queries the proxy sticky target site setting state.
-            </summary>
-            <param name="proxy">Proxy to be reset.</param>
-            <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
-            <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ProxyStickyTargetSiteQuery(System.Guid,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
-            <summary>
-            Queries the proxy sticky target site setting state.
-            </summary>
-            <param name="instanceId">Instance id of the proxy to be queried.</param>
-            <param name="isEnabled">Will be set as whether this function is enabled on this proxy.</param>
-            <param name="defaultTargetSiteId">Will be set as default target site id.</param>
-            <param name="stickyTargetSiteId">Will be set as sticky target site id. Value will be set as <see langword="null"/> if no sticky target set yet.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.TryAddTaskScheduler(System.String,System.Threading.Tasks.TaskScheduler)">
             <summary>
@@ -990,12 +954,6 @@
             <inheritdoc />
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})">
-            <inheritdoc />
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ResetProxyStickyTargetSite(System.Guid)">
-            <inheritdoc />
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ProxyStickyTargetSiteQuery(System.Guid,System.Boolean@,System.Guid@,System.Nullable{System.Guid}@)">
             <inheritdoc />
         </member>
         <member name="P:SecretNest.RemoteAgency.RemoteAgency`2.BypassSystemMessagesFromFiltering">

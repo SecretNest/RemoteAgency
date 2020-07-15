@@ -4,9 +4,10 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    class Const
+    static partial class Const
     {
         public const string SpecialCommandProxyDisposed = "ProxyDisposed";
         public const string SpecialCommandServiceWrapperDisposed = "ServiceWrapperDisposed";
+        public const string SpecialCommandProxyPing = "ProxyPing";
     }
 }

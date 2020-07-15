@@ -31,11 +31,6 @@
               <entry></entry>
             </row>
             <row>
-              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ProxyStickyTargetSiteAttribute</codeEntityReference></para></entry>
-              <entry><para>Specifies the proxy built from this interface is target site sticky or not.</para></entry>
-              <entry></entry>
-            </row>
-            <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference></para></entry>
               <entry><para>Specifies the local exception handling mode.</para></entry>
               <entry><para>Can also be used on asset level which has higher priority.</para></entry>
