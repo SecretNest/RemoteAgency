@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 
@@ -33,6 +34,27 @@ namespace SecretNest.RemoteAgency
         protected IRemoteAgencyMessage ProcessRequestAndWaitResponse(IRemoteAgencyMessage message,
             Action<IRemoteAgencyMessage> afterPreparedCallback, int millisecondsTimeout)
         {
+            if (TryProcessRequestAndWaitResponseWithoutException(message, afterPreparedCallback, millisecondsTimeout,
+                out var response))
+            {
+                if (response.Exception != null)
+                {
+                    if (response.IsEmptyMessage)
+                    {
+                        throw response.Exception;
+                    }
+                }
+                return response;
+            }
+            else
+            {
+                throw new AccessingTimeOutException(message);
+            }
+        }
+
+        protected bool TryProcessRequestAndWaitResponseWithoutException(IRemoteAgencyMessage message,
+            Action<IRemoteAgencyMessage> afterPreparedCallback, int millisecondsTimeout, out IRemoteAgencyMessage response)
+        {
             if (millisecondsTimeout == 0)
                 millisecondsTimeout = DefaultTimeOutTime;
 
@@ -41,22 +63,15 @@ namespace SecretNest.RemoteAgency
                 _responders[message.MessageId] = responder;
                 afterPreparedCallback(message);
 
-                if (responder.GetResult(millisecondsTimeout, out var response))
+                if (responder.GetResult(millisecondsTimeout, out response))
                 {
                     _responders.TryRemove(message.MessageId, out _);
-                    if (response.Exception != null)
-                    {
-                        if (response.IsEmptyMessage)
-                        {
-                            throw response.Exception;
-                        }
-                    }
-                    return response;
+                    return true;
                 }
                 else
                 {
                     _responders.TryRemove(message.MessageId, out _);
-                    throw new AccessingTimeOutException(message);
+                    return false;
                 }
             }
         }
@@ -114,7 +129,7 @@ namespace SecretNest.RemoteAgency
 
             public bool WaitOnly(int millisecondsTimeout)
             {
-                return _waitHandle?.WaitOne(millisecondsTimeout) == true;
+                return _waitHandle?.WaitOne(millisecondsTimeout) != false;
             }
 
             public void SetResult(IRemoteAgencyMessage value)

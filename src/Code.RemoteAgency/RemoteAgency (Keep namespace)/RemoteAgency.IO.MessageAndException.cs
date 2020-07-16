@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -48,6 +49,24 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <summary>
+        /// Occurs when a message is generated and ready to be sent.
+        /// </summary>
+        /// <remarks>This will be raised only when <see cref="RemoteAgency{TSerialized, TEntityBase}.MessageForSendingPrepared"/> is not handled.</remarks>
+        public event EventHandler<MessageBodyEventArgs> MessageForSendingPreparedGeneric;
+
+        private protected void RaiseMessageForSendingPreparedGeneric(MessageBodyEventArgs eventArgs)
+        {
+            MessageForSendingPreparedGeneric?.Invoke(this, eventArgs);
+        }
+
+        /// <summary>
+        /// Processes a message received.
+        /// </summary>
+        /// <param name="message">Received message.</param>
+        /// <event cref="RemoteAgency{TSerialized, TEntityBase}.AfterMessageReceived">Raised after deserialized before further processing.</event>
+        public abstract void ProcessReceivedMessage(IRemoteAgencyMessage message);
+
+        /// <summary>
         /// Tries to gets id of all waiting messages.
         /// </summary>
         /// <param name="instanceId">Id of proxy or service wrapper instance.</param>
@@ -72,11 +91,17 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Occurs when a message is generated and ready to be sent.
         /// </summary>
+        /// <remarks>If this event is not handled, <see cref="RemoteAgency.MessageForSendingPreparedGeneric"/> will be raised.</remarks>
         public event EventHandler<MessageBodyEventArgs<TSerialized, TEntityBase>> MessageForSendingPrepared;
 
         void SendMessageFinal(TEntityBase message)
         {
-            MessageForSendingPrepared?.Invoke(this, new MessageBodyEventArgs<TSerialized, TEntityBase>(message, Serialize));
+            var e = new MessageBodyEventArgs<TSerialized, TEntityBase>(message, Serialize);
+
+            if (MessageForSendingPrepared != null)
+                MessageForSendingPrepared.Invoke(this, e);
+            else
+                RaiseMessageForSendingPreparedGeneric(e);
         }
 
         /// <summary>
@@ -100,12 +125,8 @@ namespace SecretNest.RemoteAgency
             ProcessReceivedMessage((IRemoteAgencyMessage) message);
         }
 
-        /// <summary>
-        /// Processes a message received.
-        /// </summary>
-        /// <param name="message">Received message.</param>
-        /// <event cref="AfterMessageReceived">Raised after deserialized before further processing.</event>
-        public void ProcessReceivedMessage(IRemoteAgencyMessage message)
+        /// <inheritdoc />
+        public override void ProcessReceivedMessage(IRemoteAgencyMessage message)
         {
             ProcessMessageReceivedFromOutside((TEntityBase)message); //Casting for security only.
         }
