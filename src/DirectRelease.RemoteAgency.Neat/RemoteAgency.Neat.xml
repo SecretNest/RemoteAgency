@@ -702,10 +702,13 @@
             </summary>
             <seealso cref="T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute"/>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency.RedirectException(System.Exception)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.RedirectException(System.Type,System.Guid,System.String,System.Exception)">
             <summary>
             Redirects an exception.
             </summary>
+            <param name="serviceContractInterface">The type of the service contract interface.</param>
+            <param name="instanceId">Instance id of the instance which throws exception.</param>
+            <param name="assetName">The name of the asset which throws exception.</param>
             <param name="exception">Exception to be redirected.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.SetExceptionAsResponse(System.Guid,System.Guid,System.Exception)">
@@ -1138,15 +1141,33 @@
             Represents an redirected exception thrown from user code.
             </summary>
         </member>
+        <member name="P:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.ServiceContractInterface">
+            <summary>
+            Gets the type of the service contract interface.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.InstanceId">
+            <summary>
+            Gets the instance id of the instance which throws exception.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.AssetName">
+            <summary>
+            Gets the name of the asset which throws exception.
+            </summary>
+        </member>
         <member name="P:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.RedirectedException">
             <summary>
             Gets the exception thrown.
             </summary>
         </member>
-        <member name="M:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.#ctor(System.Exception)">
+        <member name="M:SecretNest.RemoteAgency.ExceptionRedirectedEventArgs.#ctor(System.Type,System.Guid,System.String,System.Exception)">
             <summary>
             Initializes an instance of ExceptionRedirectedEventArgs.
             </summary>
+            <param name="serviceContractInterface">The type of the service contract interface.</param>
+            <param name="instanceId">Instance id of the instance which throws exception.</param>
+            <param name="assetName">The name of the asset which throws exception.</param>
             <param name="exception">Exception thrown.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.IMessageBodyGenericEventArgs`2">
