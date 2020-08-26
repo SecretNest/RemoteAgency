@@ -13,28 +13,32 @@ namespace SecretNest.RemoteAgency
             var entityMessage = (TEntityBase) message;
 
             //internal routing
-            if (message.TargetSiteId == SiteId)
+            if (_loopbackAddressDetection && message.TargetSiteId == SiteId)
             {
                 ProcessMessageReceivedAfterFiltering(entityMessage);
             }
+            else
+            {
+                BeforeMessageSendingProcess(ref entityMessage, out bool shouldTerminate);
 
-            BeforeMessageSendingProcess(ref entityMessage, out bool shouldTerminate);
+                if (shouldTerminate)
+                    return;
 
-            if (shouldTerminate)
-                return;
-
-            ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(entityMessage);
+                ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(entityMessage);
+            }
         }
 
         void ProcessMessageReceivedFromInsideBypassFiltering(TEntityBase message)
         {
             //internal routing
-            if (((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
+            if (_loopbackAddressDetection && ((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
             {
                 ProcessMessageReceivedAfterFiltering(message);
             }
-
-            ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(message);
+            else
+            {
+                ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(message);
+            }
         }
 
         void ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(TEntityBase message)
