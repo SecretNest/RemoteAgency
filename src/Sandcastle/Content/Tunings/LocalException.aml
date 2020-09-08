@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Describes the behavior of handling exception occurred locally accessed by remote code.</para>
+    </introduction>
+
+    <section address="LocalException">
+      <title>Local Exception</title>
+      <content>
+        <para>When an asset is accessed by remote code, a method is called on service wrapper by a remote proxy for example, if an exception is thrown in the asset code block, it may not easy to be caught by user code. By default, Remote Agency suppresses all this kind of exception on the remote site, and sends them back to the caller instead.</para>
+        <para>If those exception need to be handed on the remote site also, marks the asset or the interface with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference> with <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode</codeEntityReference> (including the parameter of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.#ctor(SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode)</codeEntityReference>) other than <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Suppress</codeEntityReference>.</para>
+        <para><codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Throw</codeEntityReference> will make the exception thrown in place. <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode.Redirect</codeEntityReference> will let the exception transmit through <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency.ExceptionRedirected</codeEntityReference>. If no handler is registered, exception will be thrown.</para>
+        <para>In particular, the exception thrown while processing system level special messages like disposing of proxy or service wrapper and ping test, will always be redirected through <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency.ExceptionRedirected</codeEntityReference>, unless no handler is registered.</para>
+        <para>Note: This is only for the code that is being accessed by remote code. Exception thrown by the code within the local site, for example the problem occurred in proxy class while accessing a remote method, will not be affected by this setting.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

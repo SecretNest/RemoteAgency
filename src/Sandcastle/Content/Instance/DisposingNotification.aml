@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="8063be9a-3a43-4905-8778-072d57437e8b" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Notification could be generated and sent when proxy or service wrapper object disposed.</para>
+    </introduction>
+
+    <section address="AutoGen">
+      <title>Automatic generating</title>
+      <content>
+        <para>Since the registration of events needs to be consistent between the Proxy and Service Wrapper, when the Proxy or Service Wrapper is disposed, if any event is registered, a message will be sent to the remote site to notify the disposing happened. The message will be sent automatically while disposing.</para>
+      </content>
+    </section>
+
+    <section address="ManualGen">
+      <title>Manual notifying</title>
+      <content>
+        <para>But when exception is thrown while disposing or error occurred in network transportation for that message, the notification should be sent manually by calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference> (including <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference>) and <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference> (including <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference>).</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="bd599f96-a496-4309-8a6c-82f5e772989f" /> <!--Instance-->
+      <link xlink:href="9c3f74b5-3a60-464b-8f4e-85973938528c" /> <!--Concept-->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
