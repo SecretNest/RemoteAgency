@@ -37,9 +37,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.PlainEnti
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Sandcastle", "Sandcastle\Sandcastle.shfbproj", "{C158D1A7-213E-449D-8791-152CEA833953}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectForWritingExampleInCSharp", "..\docDemo\ProjectForWritingExampleInCSharp\ProjectForWritingExampleInCSharp.csproj", "{E7EF291C-A72B-4B09-B165-02446DF50AC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectForWritingExampleInCSharp", "..\docDemo\ProjectForWritingExampleInCSharp\ProjectForWritingExampleInCSharp.csproj", "{E7EF291C-A72B-4B09-B165-02446DF50AC6}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ProjectForWritingExampleInVB", "..\docDemo\ProjectForWritingExampleInVB\ProjectForWritingExampleInVB.vbproj", "{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "ProjectForWritingExampleInVB", "..\docDemo\ProjectForWritingExampleInVB\ProjectForWritingExampleInVB.vbproj", "{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C3D6473F-B21C-4B15-B2DA-6BF90E35BF9E}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -110,6 +112,8 @@ Global
 		{A1EF6D47-3994-4F5E-9488-E3DE7EBC9AB4} = {54AC2767-CF6B-4150-B077-E0D7569BE39E}
 		{83B11913-8D83-4E85-93CF-FD6BE78F2B5D} = {9C22523D-B108-4713-A62A-97A5469443F4}
 		{C158D1A7-213E-449D-8791-152CEA833953} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
+		{E7EF291C-A72B-4B09-B165-02446DF50AC6} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
+		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}
