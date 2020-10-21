@@ -701,6 +701,12 @@
             <param name="exception">Will be set as the exception object when available.</param>
             <returns>Whether the ping request and response processing are finished successfully.</returns>
         </member>
+        <member name="P:SecretNest.RemoteAgency.RemoteAgency.LoopbackAddressDetection">
+            <summary>
+            Enables or disables loopback address detection before sending a message. Default value is <see langword="true"/>.
+            </summary>
+            <remarks>When disabled, all internal messages, which sent from and to the same instance of Remote Agency, are treated as others.</remarks>
+        </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.GenerateEmptyMessage(System.Guid,System.Guid,SecretNest.RemoteAgency.MessageType,System.String,System.Guid,System.Exception)">
             <summary>
             Creates an empty message with sender instance id set as <see cref="T:System.Guid"/>.Empty and one-way is <see langword="true"/>.
@@ -1024,14 +1030,14 @@
             Occurs when a message need to be checked for sending.
             </summary>
             <seealso cref="T:SecretNest.RemoteAgency.MessageProcessTerminatedException" />
-            <remarks>Internal routing message, which is sending to an object managed by the same instance of Remote Agency, never raise this event.</remarks>
+            <remarks>Internal routing message, which is sending to an object managed by the same instance of Remote Agency, never raise this event unless <see cref="P:SecretNest.RemoteAgency.RemoteAgency.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
         </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived">
             <summary>
             Occurs when a message need to be checked for sending.
             </summary>
             <seealso cref="T:SecretNest.RemoteAgency.MessageProcessTerminatedException" />
-            <remarks>Internal routing message, which is sent from object managed by the same instance of Remote Agency, never raise this event.</remarks>
+            <remarks>Internal routing message, which is sent from object managed by the same instance of Remote Agency, never raise this event unless <see cref="P:SecretNest.RemoteAgency.RemoteAgency.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.Serialize(`1)">
             <summary>

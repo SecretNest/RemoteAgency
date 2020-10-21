@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="dc569fad-19e9-46dd-869d-6ee90c5dbe32" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Describes the best practice when using Remote Agency in mixed environment.</para>
+    </introduction>
+
+    <section address="BP">
+      <title>Consistency and the best practice when using Remote Agency in the mixed environment</title>
+      <content>
+        <para>With the support of Remote Hub or other solutions, Remote Agency supports the mutual access of components without paying attention to the physical location of the components. In a mixed environment, some components may be located in the same Remote Agency instance, but some are not.</para>
+        <para>By default, when a message is sent from and to the same instance of Remote Agency, called internal message, will bypass several processing mechanisms, including message filtering, serialization and deserialization. This is by design to speed up message transferring within the same instance by skipping the meaningless steps. But this may break the consistency. For example, some user code operations may lead to different results due to serialization skipped. When required, disable this optimization by set <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgency.LoopbackAddressDetection</codeEntityReference> to false.</para>
+        <para>Although Remote Agency has optimized the mixed environment, it is still not recommended to use Remote Agency to manage all components in this situation. When accessing a remote service object, the very same interface as the service object is implemented by the wrapper created. The best practice is to create a dictionary with some kind of id as the key type and the interface type as the value type, filling with service objects for local and the service wrappers for remote. Locating the object using this dictionary minimizes the negative performance effects of Remote Agency.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="bd599f96-a496-4309-8a6c-82f5e772989f" /> <!--Instance-->
+      <link xlink:href="cf93cf44-b878-4fdf-8752-036c48a9db52" /> <!--MessageFiltering-->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

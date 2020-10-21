@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="4895119b-e34a-45d3-a1ce-6319a8bf97e0" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Ping test is designed for testing the delay and the connectivity between proxy and remote service wrapper.</para>
+    </introduction>
+
+    <section address="Ping">
+      <title>Ping</title>
+      <content>
+        <para>Ping test can be initiated through proxy by calling Ping or TryPing methods, making a message generated and sent to the target specified when proxy is created. Methods end after a response received with test result calculated.</para>
+        <para>Ping and TryPing methods include: <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.Ping(System.Guid,System.Guid@,System.Guid@)</codeEntityReference>, <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.Ping(System.Guid,System.TimeSpan,System.Guid@,System.Guid@)</codeEntityReference>, <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.TryPing(System.Guid,System.TimeSpan,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)</codeEntityReference>, <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.TryPing(System.Guid,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)</codeEntityReference> and <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.TryPing(System.Guid,System.TimeSpan,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)</codeEntityReference>.</para>
+      </content>
+    </section>
+
+    <section address="GetId">
+      <title>Real target</title>
+      <content>
+        <para>In particular, ping methods contain the target site id and instance id as output parameters. They can be used to get the real target from a virtual target.</para>
+        <para>While creating instance of proxy, a default target site id and instance id need to be specified. After initialized, most operations started by proxy will use this as the target of the message, aka will ask the service wrapper with the site id and instance id to access the asset required. The only one kind of message not use this as target, is the event removing message. It will always send the message to the sender of the response message of related event adding message.</para>
+        <para>When the message routing system has load balancing design, like Remote Hub, by creating a virtual target and sharing one site id for many real sites, it allows to distribute the proxy-initiated operations among several servers which contains service wrapper for servicing. If the target site of one proxy is set as a virtual one, all accessing may not be sent to the same real service wrapper. It’s good for load balancing and fail over but may not be friendly with stateful service designing. By creating another proxy using the target grabbed from ping test result, the only one service wrapper from the virtual group is selected and specified.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="bd599f96-a496-4309-8a6c-82f5e772989f" /> <!--Instance-->
+      <link xlink:href="9c3f74b5-3a60-464b-8f4e-85973938528c" /> <!--Concept-->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
