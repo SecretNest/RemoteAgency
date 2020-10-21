@@ -17,6 +17,9 @@ namespace SecretNest.RemoteAgency
 
 		private static void GenerateExplicitImplementation(this TypeBuilder typeBuilder, TypeInfo interfaceInfo)
 		{
+			// Add Interface impl
+			typeBuilder.AddInterfaceImplementation(interfaceInfo);
+
 			foreach (var p in interfaceInfo.DeclaredProperties)
 			{
 				typeBuilder.GenerateExplicitImplementationProperty(p);
@@ -83,7 +86,8 @@ namespace SecretNest.RemoteAgency
 			var g = setMethod.GetILGenerator();
 			g.Emit(OpCodes.Ldarg_0); // this
 			g.Emit(OpCodes.Ldarg_1); // value
-			g.Emit(OpCodes.Ldfld, backField); // set value
+			g.Emit(OpCodes.Stfld, backField); // set value
+			g.Emit(OpCodes.Ret);
 		}
 	}
 }

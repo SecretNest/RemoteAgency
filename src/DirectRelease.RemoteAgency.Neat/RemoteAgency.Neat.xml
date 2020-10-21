@@ -659,6 +659,48 @@
             <event cref="E:SecretNest.RemoteAgency.RemoteAgency.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgency.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.Ping(System.Guid,System.TimeSpan,System.Guid@,System.Guid@)">
+            <summary>
+            Pings to the default target and get the response.
+            </summary>
+            <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
+            <param name="maxWaitingTime">Max waiting time.</param>
+            <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+            <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+            <returns>Delay between ping message sending started and response message processing finished.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.Ping(System.Guid,System.Guid@,System.Guid@)">
+            <summary>
+            Pings to the default target and get the response, using default waiting time which is 90 secs.
+            </summary>
+            <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
+            <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+            <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+            <returns>Delay between ping message sending started and response message processing finished.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.TryPing(System.Guid,System.TimeSpan,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)">
+            <summary>
+            Tries to ping to the default target and get the response.
+            </summary>
+            <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
+            <param name="maxWaitingTime">Max waiting time.</param>
+            <param name="delay">Will be set as the delay between ping message sending started and response message processing finished.</param>
+            <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+            <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+            <param name="exception">Will be set as the exception object when available.</param>
+            <returns>Whether the ping request and response processing are finished successfully.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.TryPing(System.Guid,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)">
+            <summary>
+            Tries to ping to the default target and get the response, using default waiting time which is 90 secs.
+            </summary>
+            <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
+            <param name="delay">Will be set as the delay between ping message sending started and response message processing finished.</param>
+            <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+            <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+            <param name="exception">Will be set as the exception object when available.</param>
+            <returns>Whether the ping request and response processing are finished successfully.</returns>
+        </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.GenerateEmptyMessage(System.Guid,System.Guid,SecretNest.RemoteAgency.MessageType,System.String,System.Guid,System.Exception)">
             <summary>
             Creates an empty message with sender instance id set as <see cref="T:System.Guid"/>.Empty and one-way is <see langword="true"/>.
@@ -719,6 +761,19 @@
             <param name="messageId">Message id.</param>
             <param name="exception">The exception object to be passed.</param>
             <seealso cref="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute"/>
+        </member>
+        <member name="E:SecretNest.RemoteAgency.RemoteAgency.MessageForSendingPreparedGeneric">
+            <summary>
+            Occurs when a message is generated and ready to be sent.
+            </summary>
+            <remarks>This will be raised only when <see cref="E:SecretNest.RemoteAgency.RemoteAgency`2.MessageForSendingPrepared"/> is not handled.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency.ProcessReceivedMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Processes a message received.
+            </summary>
+            <param name="message">Received message.</param>
+            <event cref="E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived">Raised after deserialized before further processing.</event>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency.TryGetWaitingMessageIds(System.Guid,System.Collections.Generic.List{System.Guid}@)">
             <summary>
@@ -911,10 +966,14 @@
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper(System.Type,System.Object,System.Guid@,System.Int32,System.Boolean)">
             <inheritdoc />
         </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.TryPing(System.Guid,System.TimeSpan,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)">
+            <inheritdoc />
+        </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgency`2.MessageForSendingPrepared">
             <summary>
             Occurs when a message is generated and ready to be sent.
             </summary>
+            <remarks>If this event is not handled, <see cref="E:SecretNest.RemoteAgency.RemoteAgency.MessageForSendingPreparedGeneric"/> will be raised.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ProcessReceivedSerializedMessage(`0)">
             <summary>
@@ -931,11 +990,7 @@
             <event cref="E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived">Raised after deserialized before further processing.</event>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.ProcessReceivedMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
-            <summary>
-            Processes a message received.
-            </summary>
-            <param name="message">Received message.</param>
-            <event cref="E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived">Raised after deserialized before further processing.</event>
+            <inheritdoc />
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.TryGetWaitingMessageIds(System.Guid,System.Collections.Generic.List{System.Guid}@)">
             <inheritdoc />
@@ -1188,9 +1243,23 @@
             </summary>
             <returns>Serialized data.</returns>
         </member>
+        <member name="T:SecretNest.RemoteAgency.MessageBodyEventArgs">
+            <summary>
+            Defines a class contains message body derived from <see cref="T:SecretNest.RemoteAgency.MessageBodyEventArgsBase"/>.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.MessageBodyEventArgs.#ctor(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <summary>
+            Initializes an instance of MessageBodyEventArgs.
+            </summary>
+            <param name="messageBodyGeneric">Message body</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.MessageBodyEventArgs.MessageBodyGeneric">
+            <inheritdoc />
+        </member>
         <member name="T:SecretNest.RemoteAgency.MessageBodyEventArgs`2">
             <summary>
-            Defines a class contains message body derived from <see cref="T:System.EventArgs"/> and implemented from <see cref="T:SecretNest.RemoteAgency.IMessageBodyGenericEventArgs`2"/>.
+            Defines a class contains message body derived from <see cref="T:SecretNest.RemoteAgency.MessageBodyEventArgsBase"/> and implemented from <see cref="T:SecretNest.RemoteAgency.IMessageBodyGenericEventArgs`2"/>.
             </summary>
             <typeparam name="TSerialized">Type of the serialized data.</typeparam>
             <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
@@ -1201,9 +1270,6 @@
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.MessageBodyEventArgs`2.Serialize">
-            <inheritdoc />
-        </member>
-        <member name="P:SecretNest.RemoteAgency.MessageBodyEventArgs`2.MessageBodyGeneric">
             <inheritdoc />
         </member>
         <member name="M:SecretNest.RemoteAgency.MessageBodyEventArgs`2.#ctor(`1,System.Func{`1,`0})">
