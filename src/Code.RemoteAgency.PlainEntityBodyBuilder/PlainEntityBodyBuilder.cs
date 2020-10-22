@@ -157,7 +157,7 @@ namespace SecretNest.RemoteAgency
 		/// <returns>属性对应的内部字段对象。</returns>
 		private static FieldInfo GeneratePropertyBackField(this TypeBuilder builder, PropertyInfo propertyInfo)
 		{
-			var fieldName = $"{propertyInfo.Name}_$BackField$";
+			var fieldName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.Name}_$BackField$";
 
 			return builder.DefineField(fieldName, propertyInfo.PropertyType,
 				FieldAttributes.Private | FieldAttributes.HasDefault);
