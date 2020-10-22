@@ -53,9 +53,9 @@ namespace SecretNest.RemoteAgency
         bool IsOneWay { get; set; }
 
         /// <summary>
-        /// Gets whether this message is empty, not containing parameters required by asset.
+        /// Gets or sets whether this message is empty, not containing parameters required by asset.
         /// </summary>
-        bool IsEmptyMessage { get; }
+        bool IsEmptyMessage { get; set; }
     }
     
     /// <summary>
