@@ -125,7 +125,7 @@ namespace SecretNest.RemoteAgency
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
 			// 方法名：{接口名称}.{set_属性名}
-			var methodName = $"{propertyInfo.DeclaringType.Name}.{propertyInfo.SetMethod.Name}";
+			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.SetMethod.Name}";
 			var setMethod = typeBuilder.GenerateSetMethodCore(methodName, propertyBuilder, field);
 
 			typeBuilder.DefineMethodOverride(setMethod, propertyInfo.SetMethod);
@@ -143,7 +143,7 @@ namespace SecretNest.RemoteAgency
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
 			// 方法名：{接口名称}.{set_属性名}
-			var methodName = $"{propertyInfo.DeclaringType.Name}.{propertyInfo.GetMethod.Name}";
+			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.GetMethod.Name}";
 			var getMethod = typeBuilder.GenerateGetMethodCore(methodName, propertyBuilder, field);
 
 			typeBuilder.DefineMethodOverride(getMethod, propertyInfo.GetMethod);
