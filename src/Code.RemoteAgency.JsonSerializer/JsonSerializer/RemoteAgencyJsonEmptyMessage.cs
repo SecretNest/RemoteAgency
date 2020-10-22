@@ -17,6 +17,14 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         Guid IRemoteAgencyMessage.MessageId { get; set; }
         Exception IRemoteAgencyMessage.Exception { get; set; }
         bool IRemoteAgencyMessage.IsOneWay { get; set; }
-        [Newtonsoft.Json.JsonIgnore] bool IRemoteAgencyMessage.IsEmptyMessage => true;
+        [Newtonsoft.Json.JsonIgnore] bool IRemoteAgencyMessage.IsEmptyMessage { get; set; }
+
+        /// <summary>
+        /// Initializes an instance of RemoteAgencyJsonEmptyMessage.
+        /// </summary>
+        public RemoteAgencyJsonEmptyMessage()
+        {
+            ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
+        }
     }
 }

@@ -37,14 +37,8 @@ namespace SecretNest.RemoteAgency
             if (TryProcessRequestAndWaitResponseWithoutException(message, afterPreparedCallback, millisecondsTimeout,
                 out var response))
             {
-                if (response.Exception != null)
-                {
-                    if (response.IsEmptyMessage)
-                    {
-                        throw response.Exception;
-                    }
-                }
-                return response;
+                if (response.Exception == null) return response;
+                return response.IsEmptyMessage ? throw response.Exception : response;
             }
             else
             {
@@ -58,7 +52,7 @@ namespace SecretNest.RemoteAgency
             if (millisecondsTimeout == 0)
                 millisecondsTimeout = DefaultTimeOutTime;
 
-            using (ResponderItem responder = new ResponderItem(message))
+            using (var responder = new ResponderItem(message))
             {
                 _responders[message.MessageId] = responder;
                 afterPreparedCallback(message);
