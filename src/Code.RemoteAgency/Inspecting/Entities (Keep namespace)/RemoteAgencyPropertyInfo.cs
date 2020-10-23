@@ -23,11 +23,22 @@ namespace SecretNest.RemoteAgency.Inspecting
         public RemoteAgencyMethodBodyInfo GettingMethodBodyInfo { get; set; }
         public RemoteAgencyMethodBodyInfo SettingMethodBodyInfo { get; set; }
 
+        public List<RemoteAgencyAttributePassThrough> GettingMethodPassThroughAttributes { get; set; }
+        public List<Attribute> GettingMethodSerializerAssetLevelAttributes { get; set; }
+        public List<RemoteAgencyAttributePassThrough> SettingMethodPassThroughAttributes { get; set; }
+        public List<Attribute> SettingMethodSerializerAssetLevelAttributes { get; set; }
+
+        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> MethodParameterPassThroughAttributes { get; set; }
+        public List<RemoteAgencyAttributePassThrough> GettingMethodReturnValuePassThroughAttributes { get; set; }
+
         public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, Type[] interfaceLevelGenericParameters,
             Dictionary<string, List<RemoteAgencyAttributePassThrough>> interfaceLevelGenericParameterPassThroughAttributes)
         {
             if (IsGettable)
             {
+                List<Attribute> serializerAssetLevelAttributes = SerializerAssetLevelAttributes
+                    .Concat(GettingMethodSerializerAssetLevelAttributes).ToList();
+
                 if (!string.IsNullOrEmpty(GettingMethodBodyInfo.ParameterEntityName))
                 {
                     List<EntityProperty> properties = GettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
@@ -38,7 +49,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     EntityBuildingExtended entity = new EntityBuildingExtended(
                         GettingMethodBodyInfo.ParameterEntityName, properties,
-                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
                         type => GettingMethodBodyInfo.ParameterEntity = type);
 
@@ -55,7 +66,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     EntityBuildingExtended entity = new EntityBuildingExtended(
                         GettingMethodBodyInfo.ReturnValueEntityName, properties,
-                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
                         type => GettingMethodBodyInfo.ReturnValueEntity = type);
 
@@ -65,6 +76,9 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (IsSettable)
             {
+                List<Attribute> serializerAssetLevelAttributes = SerializerAssetLevelAttributes
+                    .Concat(SettingMethodSerializerAssetLevelAttributes).ToList();
+
                 if (!string.IsNullOrEmpty(SettingMethodBodyInfo.ParameterEntityName))
                 {
                     List<EntityProperty> properties = SettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
@@ -75,7 +89,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     EntityBuildingExtended entity = new EntityBuildingExtended(
                         SettingMethodBodyInfo.ParameterEntityName, properties,
-                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
                         type => SettingMethodBodyInfo.ParameterEntity = type);
 
@@ -92,7 +106,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     EntityBuildingExtended entity = new EntityBuildingExtended(
                         SettingMethodBodyInfo.ReturnValueEntityName, properties,
-                        interfaceLevelAttributes, SerializerAssetLevelAttributes, null,
+                        interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
                         type => SettingMethodBodyInfo.ReturnValueEntity = type);
 

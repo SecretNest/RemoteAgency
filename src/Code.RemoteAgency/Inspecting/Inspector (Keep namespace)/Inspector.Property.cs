@@ -23,22 +23,42 @@ namespace SecretNest.RemoteAgency.Inspecting
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(propertyInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
 
+            var getMethod = propertyInfo.GetGetMethod();
+            var setMethod = propertyInfo.GetSetMethod();
+            property.IsGettable = propertyInfo.GetGetMethod() != null;
+            property.IsSettable = propertyInfo.GetSetMethod() != null;
+
             if (_serializerAssetLevelAttributeBaseType != null)
             {
                 property.SerializerAssetLevelAttributes =
                     propertyInfo.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
                         .ToList();
+
+                property.GettingMethodSerializerAssetLevelAttributes =
+                    getMethod.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
+                        .ToList();
+
+                property.SettingMethodSerializerAssetLevelAttributes =
+                    setMethod.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
+                        .ToList();
             }
 
-            //asset level pass through attributes
+            //pass through attributes
             property.AssetLevelPassThroughAttributes = GetAttributePassThrough(propertyInfo,
                 (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+            if (property.IsGettable)
+            {
+                property.GettingMethodPassThroughAttributes = GetAttributePassThrough(getMethod, 
+                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
 
-            var getMethod = propertyInfo.GetGetMethod();
-            var setMethod = propertyInfo.GetSetMethod();
-
-            property.IsGettable = propertyInfo.GetGetMethod() != null;
-            property.IsSettable = propertyInfo.GetSetMethod() != null;
+                property.GettingMethodReturnValuePassThroughAttributes = GetAttributePassThrough(getMethod.ReturnTypeCustomAttributes,
+                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
+            }
+            if (property.IsSettable)
+            {
+                property.SettingMethodPassThroughAttributes = GetAttributePassThrough(setMethod, 
+                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, setMethod, memberPath));
+            }
 
             if (property.IsIgnored)
             {
@@ -49,6 +69,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
             else
             {
+                var parameterInfo = getMethod.GetParameters(); //Parameters are shared for get and set. Except the value in set, which is not able to set an attribute. 
+                property.MethodParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
+                    (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
+
                 var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
 
                 List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForProperty = propertyInfo

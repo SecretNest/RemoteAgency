@@ -21,37 +21,8 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
-                if (entityInfo.GenericParameters.Length > 0)
-                {
-                    GenericTypeParameterBuilder[] typeParams = 
-                        typeBuilder.DefineGenericParameters(entityInfo.GenericParameters
-                            .Select(i => i.Name).ToArray());
-
-                    for (int i = 0; i < entityInfo.GenericParameters.Length; i++)
-                    {
-                        var genericType = entityInfo.GenericParameters[i];
-                        var passThroughAttributes = entityInfo.GenericParameterPassThroughAttributes[genericType.Name];
-                        foreach (var customAttribute in passThroughAttributes)
-                        {
-                            typeParams[i].SetCustomAttribute(customAttribute.GetAttributeBuilder());
-                        }
-
-                        typeParams[i]
-                            .SetGenericParameterAttributes(genericType.GenericParameterAttributes);
-
-                        var typeConstraints = genericType.GetGenericParameterConstraints();
-                        if (typeConstraints.Length > 0)
-                        {
-                            var baseType = typeConstraints.FirstOrDefault(t => t.IsClass);
-                            if (baseType != null)
-                                typeParams[i].SetBaseTypeConstraint(baseType);
-
-                            var interfaces = typeConstraints.Where(t => t != baseType).ToArray();
-                            if (interfaces.Length > 0)
-                                typeParams[i].SetInterfaceConstraints(interfaces);
-                        }
-                    }
-                }
+                EmitGenericParameters(typeBuilder, entityInfo.GenericParameters,
+                    entityInfo.GenericParameterPassThroughAttributes);
 
                 return new Task<Type>(() =>
                 {

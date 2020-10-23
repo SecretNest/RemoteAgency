@@ -25,6 +25,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 basicInfo.SourceInterface = sourceInterface.GetGenericTypeDefinition();
                 basicInfo.IsSourceInterfaceGenericType = true;
                 basicInfo.SourceInterfaceGenericArguments = sourceInterface.GetGenericArguments();
+                basicInfo.SourceInterfaceGenericDefinitionArguments = basicInfo.SourceInterface.GetGenericArguments();
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -18,5 +19,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyReturnValueInfoBase> ReturnValueEntityProperties { get; set; }
         public string ParameterEntityName { get; set; }
         public string ReturnValueEntityName { get; set; }
+
+        public ParameterInfo[] Parameters { get; set; }
+        public Type ReturnType { get; set; }
     }
 }

@@ -88,8 +88,7 @@ namespace SecretNest.RemoteAgency
 
             if (sourceInterface.IsConstructedGenericType)
             {
-                var genericParameters = sourceInterface.GetGenericArguments();
-                proxy = builtProxy.MakeGenericType(genericParameters);
+                proxy = builtProxy.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
             }
             else
             {
@@ -181,8 +180,7 @@ namespace SecretNest.RemoteAgency
 
             if (sourceInterface.IsConstructedGenericType)
             {
-                var genericParameters = sourceInterface.GetGenericArguments();
-                serviceWrapper = builtServiceWrapper.MakeGenericType(genericParameters);
+                serviceWrapper = builtServiceWrapper.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
             }
             else
             {

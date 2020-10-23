@@ -14,6 +14,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             SourceInterface = basicInfo.SourceInterface;
             IsSourceInterfaceGenericType = basicInfo.IsSourceInterfaceGenericType;
             SourceInterfaceGenericArguments = basicInfo.SourceInterfaceGenericArguments;
+            SourceInterfaceGenericDefinitionArguments = basicInfo.SourceInterfaceGenericDefinitionArguments;
             AssemblyName = basicInfo.AssemblyName;
             ClassNameBase = basicInfo.ClassNameBase;
             ProxyTypeName = basicInfo.ProxyTypeName;

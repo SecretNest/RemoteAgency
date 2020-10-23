@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Helper
 {
@@ -100,12 +101,10 @@ namespace SecretNest.RemoteAgency.Helper
         /// <summary>
         /// Adds a builder.
         /// </summary>
-        /// <param name="assetName">Name of the event.</param>
         /// <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
-        public void AddRouter(string assetName, ProxyEventRouterBase router)
+        public void AddRouter(ProxyEventRouterBase router)
         {
-            _routers[assetName] = router;
-            router.AssetName = assetName;
+            _routers[router.AssetName] = router;
             router.ProxyEventHelper = this;
         }
 
@@ -114,16 +113,19 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         /// <param name="message">Message to be processed.</param>
         /// <param name="exception">Exception thrown while running user code.</param>
+        /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>
         /// <returns>Message contains the data to be returned.</returns>
         public IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message,
-            out Exception exception)
+            out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)
         {
             if (_routers.TryGetValue(message.AssetName, out var router))
             {
+                localExceptionHandlingMode = router.LocalExceptionHandlingMode;
                 return router.ProcessEventRaisingMessage(message, out exception);
             }
             else
             {
+                localExceptionHandlingMode = LocalExceptionHandlingMode.Redirect;
                 var result = CreateEmptyMessageCallback();
                 //for sending a feedback, no property of message need to be assigned here.
 
@@ -137,11 +139,18 @@ namespace SecretNest.RemoteAgency.Helper
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        public virtual void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        /// <param name="localExceptionHandlingMode">Local exception handling mode.</param>
+        public virtual void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message,
+            out LocalExceptionHandlingMode localExceptionHandlingMode)
         {
             if (_routers.TryGetValue(message.AssetName, out var router))
             {
+                localExceptionHandlingMode = router.LocalExceptionHandlingMode;
                 router.ProcessOneWayEventRaisingMessage(message);
+            }
+            else
+            {
+                localExceptionHandlingMode = LocalExceptionHandlingMode.Redirect;
             }
         }
     }
@@ -157,9 +166,9 @@ namespace SecretNest.RemoteAgency.Helper
         public ProxyEventHelper ProxyEventHelper { get; set; }
 
         /// <summary>
-        /// Gets or sets the asset name.
+        /// Gets the asset name.
         /// </summary>
-        public string AssetName { get; set; }
+        public abstract string AssetName { get; }
 
         /// <summary>
         /// Processes an event raising message and returns response.
@@ -199,6 +208,11 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         /// <returns>Target site id and instance id.</returns>
         public abstract List<Tuple<Guid, Guid>> GetTargetSiteIdAndInstanceIdThenClose();
+
+        /// <summary>
+        /// Gets the local exception handling mode setting of this asset.
+        /// </summary>
+        public abstract LocalExceptionHandlingMode LocalExceptionHandlingMode { get; }
 
         /// <summary>
         /// Closes this object.
