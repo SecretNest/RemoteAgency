@@ -20,7 +20,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generate a property with auto implemented Get/Set support.
+		/// Generates a property with auto implemented Get/Set support.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="name">The name of the property.</param>
@@ -54,7 +54,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Explicitly implement a property from a interface for a type.
+		/// Explicitly implements a property from a interface for a type.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="propertyInfo">The property should be explicitly implemented.</param>
@@ -73,7 +73,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generate a auto-implemented SET method for a property.
+		/// Generates a auto-implemented SET method for a property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="methodName">The name of the internal method.</param>
@@ -95,7 +95,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generate a auto-implemented GET method for a property.
+		/// Generates a auto-implemented GET method for a property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="methodName">The name of the internal method.</param>
@@ -116,7 +116,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Implement the SET method for an explicitly implemented interface property.
+		/// Implements the SET method for an explicitly implemented interface property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="propertyInfo">The property which should be explicitly implemented.</param>
@@ -134,7 +134,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Implement the GET method for an explicitly implemented interface property.
+		/// Implements the GET method for an explicitly implemented interface property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="propertyInfo">The property which should be explicitly implemented.</param>
@@ -151,7 +151,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generated the backend field for an auto implemented property.
+		/// Generates the backend field for an auto implemented property.
 		/// </summary>
 		/// <param name="builder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="propertyInfo">The property which need to generated the backend field.</param>
@@ -165,7 +165,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generate the method body for a simple GET method.
+		/// Generates the method body for a simple GET method.
 		/// </summary>
 		/// <param name="getMethod">The <see cref="MethodBuilder"/> instance.</param>
 		/// <param name="backField">The backend field related with the <paramref name="getMethod"/>.</param>
@@ -179,7 +179,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generate the method body for a simple SET method.
+		/// Generates the method body for a simple SET method.
 		/// </summary>
 		/// <param name="setMethod">The <see cref="MethodBuilder"/> instance.</param>
 		/// <param name="backField">The backend field related with the <paramref name="setMethod"/>.</param>
