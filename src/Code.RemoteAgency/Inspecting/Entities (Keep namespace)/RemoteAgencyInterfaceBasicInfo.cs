@@ -10,6 +10,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public Type SourceInterface { get; set; }
         public bool IsSourceInterfaceGenericType { get; set; }
         public Type[] SourceInterfaceGenericArguments { get; set; }
+        public Type[] SourceInterfaceGenericDefinitionArguments { get; set; }
         public string AssemblyName { get; set; }
         public string ClassNameBase { get; set; }
         public string ProxyTypeName { get; set; }

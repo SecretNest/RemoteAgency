@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
-        List<Task<Type>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        List<Task<Tuple<TypeBuilder, EntityBuildingExtended>>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
         {
             var entitiesInfo = info.GetEntities();
 
@@ -21,43 +21,13 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
-                if (entityInfo.GenericParameters.Length > 0)
+                EmitGenericParameters(typeBuilder, entityInfo.GenericParameters,
+                    entityInfo.GenericParameterPassThroughAttributes);
+
+                return new Task<Tuple<TypeBuilder, EntityBuildingExtended>>(() =>
                 {
-                    GenericTypeParameterBuilder[] typeParams = 
-                        typeBuilder.DefineGenericParameters(entityInfo.GenericParameters
-                            .Select(i => i.Name).ToArray());
-
-                    for (int i = 0; i < entityInfo.GenericParameters.Length; i++)
-                    {
-                        var genericType = entityInfo.GenericParameters[i];
-                        var passThroughAttributes = entityInfo.GenericParameterPassThroughAttributes[genericType.Name];
-                        foreach (var customAttribute in passThroughAttributes)
-                        {
-                            typeParams[i].SetCustomAttribute(customAttribute.GetAttributeBuilder());
-                        }
-
-                        typeParams[i]
-                            .SetGenericParameterAttributes(genericType.GenericParameterAttributes);
-
-                        var typeConstraints = genericType.GetGenericParameterConstraints();
-                        if (typeConstraints.Length > 0)
-                        {
-                            var baseType = typeConstraints.FirstOrDefault(t => t.IsClass);
-                            if (baseType != null)
-                                typeParams[i].SetBaseTypeConstraint(baseType);
-
-                            var interfaces = typeConstraints.Where(t => t != baseType).ToArray();
-                            if (interfaces.Length > 0)
-                                typeParams[i].SetInterfaceConstraints(interfaces);
-                        }
-                    }
-                }
-
-                return new Task<Type>(() =>
-                {
-                    var type = EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
-                    entityInfo.SetResultCallback(type);
-                    return type;
+                    EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
+                    return new Tuple<TypeBuilder, EntityBuildingExtended>(typeBuilder, entityInfo);
                 });
             }).ToList();
 

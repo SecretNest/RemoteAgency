@@ -43,10 +43,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     var setting = AttributeProperties[i];
                     var info = Attribute.GetProperty(setting.Key);
-                    if (info == null)
-                        throw new InvalidOperationException(
+                    propertyInfo[i] = info ?? throw new InvalidOperationException(
                             $"The property {setting.Key} is not found in {Attribute.Name}.");
-                    propertyInfo[i] = info;
                     propertyValue[i] = setting.Value;
                 }
             }
@@ -66,10 +64,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     var setting = AttributeFields[i];
                     var info = Attribute.GetField(setting.Key);
-                    if (info == null)
-                        throw new InvalidOperationException(
+                    fieldInfo[i] = info ?? throw new InvalidOperationException(
                             $"The field {setting.Key} is not found in {Attribute.Name}.");
-                    fieldInfo[i] = info;
                     fieldValue[i] = setting.Value;
                 }
             }

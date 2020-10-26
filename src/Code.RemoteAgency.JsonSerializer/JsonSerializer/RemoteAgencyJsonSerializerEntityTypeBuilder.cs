@@ -16,10 +16,9 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// </summary>
         /// <param name="typeBuilder">Builder of the entity class.</param>
         /// <param name="entityBuilding">Info of entity to be built in this method.</param>
-        /// <returns>Type of the built entity class.</returns>
-        public override Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
+        public override void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
-            return PlainEntityBodyBuilder.BuildEntity(typeBuilder, entityBuilding);
+            PlainEntityBodyBuilder.BuildEntity(typeBuilder, entityBuilding);
         }
 
         /// <inheritdoc />

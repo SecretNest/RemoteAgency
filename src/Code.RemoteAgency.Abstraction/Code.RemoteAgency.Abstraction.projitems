@@ -41,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\LocalExceptionHandlingAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterReturnRequiredPropertyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ThreadLockAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\IgnoredAssetException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\InstanceNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IManagedObjectCommunicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IProxyCommunicate.cs" />

@@ -14,6 +14,9 @@ namespace SecretNest.RemoteAgency.Inspecting
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
 
+            target.Parameters = parameters;
+            target.ReturnType = returnType;
+
             target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
@@ -54,6 +57,9 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
+
+            target.Parameters = parameters;
+            target.ReturnType = returnType;
 
             target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
@@ -179,6 +185,9 @@ namespace SecretNest.RemoteAgency.Inspecting
             var parameters = methodInfo.GetParameters();
             var returnType = methodInfo.ReturnType;
 
+            target.Parameters = parameters;
+            target.ReturnType = returnType;
+
             target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
             target.Timeout = timeOut;
@@ -254,7 +263,6 @@ namespace SecretNest.RemoteAgency.Inspecting
                     target.ParameterEntityProperties.Add(parameterInfo);
                 }
 
-
                 if (parameter.IsOut || parameter.ParameterType.IsByRef)
                 {
                     #region Out/Ref
@@ -308,7 +316,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
                 else
                 {
-                    #region Return required propery
+                    #region Return required property
 
                     var returnRequiredAttribute = parameter.GetCustomAttribute<ParameterReturnRequiredAttribute>();
 

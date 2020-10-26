@@ -67,6 +67,8 @@ namespace SecretNest.RemoteAgency
                 EntityTypeBuilder.InterfaceLevelAttributeBaseType, EntityTypeBuilder.AssetLevelAttributeBaseType,
                 EntityTypeBuilder.DelegateLevelAttributeBaseType, EntityTypeBuilder.ParameterLevelAttributeBaseType);
 
+            inspector.Process();
+
             var info = inspector.InterfaceTypeInfo;
             info.DefaultMethodCallingTimeout = DefaultMethodCallingTimeoutForBuilding;
             info.DefaultEventAddingTimeout = DefaultEventAddingTimeoutForBuilding;
@@ -78,8 +80,14 @@ namespace SecretNest.RemoteAgency
             var buildingEntityTasks = CreateEmitEntityTasks(moduleBuilder, info);
             buildingEntityTasks.ForEach(i => i.Start());
             // ReSharper disable once AsyncConverter.AsyncWait
-            builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
-
+            var entityBuildingTasks = buildingEntityTasks.Select(i => i.Result).ToList();
+            builtEntities = new List<Type>(entityBuildingTasks.Count);
+            foreach (var entityBuildingTask in entityBuildingTasks)
+            {
+                var type = entityBuildingTask.Item1.CreateType();
+                entityBuildingTask.Item2.SetResultCallback(type);
+                builtEntities.Add(type);
+            }
 
             Task emitProxy, emitServiceWrapper;
             TypeBuilder proxyTypeBuilder, serviceWrapperTypeBuilder;
@@ -89,6 +97,13 @@ namespace SecretNest.RemoteAgency
                 proxyTypeBuilder = moduleBuilder.DefineType(basicInfo.ProxyTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
                     new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
+
+                EmitAttributePassThroughAttributes(proxyTypeBuilder, info.InterfaceLevelPassThroughAttributes);
+
+                if (basicInfo.IsSourceInterfaceGenericType)
+                {
+                    EmitGenericParameters(proxyTypeBuilder, basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
+                }
 
                 emitProxy = Task.Run(() => EmitProxy(proxyTypeBuilder, info));
             }
@@ -103,6 +118,13 @@ namespace SecretNest.RemoteAgency
                 serviceWrapperTypeBuilder = moduleBuilder.DefineType(basicInfo.ServiceWrapperTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
                     new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
+
+                EmitAttributePassThroughAttributes(serviceWrapperTypeBuilder, info.InterfaceLevelPassThroughAttributes);
+
+                if (basicInfo.IsSourceInterfaceGenericType)
+                {
+                    EmitGenericParameters(serviceWrapperTypeBuilder, basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
+                }
 
                 emitServiceWrapper = Task.Run(() => EmitServiceWrapper(serviceWrapperTypeBuilder, info));
             }

@@ -9,7 +9,7 @@ namespace SecretNest.RemoteAgency
 {
 	static class PlainEntityBodyBuilder
 	{
-		internal static Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
+		internal static void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
 		{
 			typeBuilder.GenerateExplicitImplementation(typeof(IRemoteAgencyMessage).GetTypeInfo());
 
@@ -17,8 +17,6 @@ namespace SecretNest.RemoteAgency
 			{
 				typeBuilder.GenerateAutoImplementedProperty(p.Name, p.Type);
 			}
-
-			return typeBuilder;
 		}
 
 		/// <summary>
