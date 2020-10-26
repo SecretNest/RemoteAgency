@@ -20,11 +20,11 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型实现一个自动实现的简单属性。
+		/// Generate a property with auto implemented Get/Set support.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="name">属性名称。</param>
-		/// <param name="propertyType">属性的值的类型。</param>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="name">The name of the property.</param>
+		/// <param name="propertyType">The value type of the property.</param>
 		private static void GenerateAutoImplementedProperty(this TypeBuilder typeBuilder, string name,
 			Type propertyType)
 		{
@@ -37,16 +37,16 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型隐式实现接口。
+		/// Explicitly implements an interface for a type.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="interfaceInfo">要隐式实现的接口。</param>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="interfaceInfo">The interface which should be explicitly implemented.</param>
 		private static void GenerateExplicitImplementation(this TypeBuilder typeBuilder, TypeInfo interfaceInfo)
 		{
-			// 声明类型实现接口
+			// Declare that the type should implement this interface
 			typeBuilder.AddInterfaceImplementation(interfaceInfo);
 
-			// 实现所有属性
+			// Implement all properties
 			foreach (var p in interfaceInfo.DeclaredProperties)
 			{
 				typeBuilder.GenerateExplicitImplementationProperty(p);
@@ -54,29 +54,32 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型实现某个属性的隐式接口实现。
+		/// Explicitly implement a property from a interface for a type.
 		/// </summary>
-		/// <param name="typeBuilder">类型对象。</param>
-		/// <param name="propertyInfo">需要隐式实现的属性。</param>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="propertyInfo">The property should be explicitly implemented.</param>
 		private static void GenerateExplicitImplementationProperty(this TypeBuilder typeBuilder, PropertyInfo propertyInfo)
 		{
+			// Generate back field
 			var field = typeBuilder.GeneratePropertyBackField(propertyInfo);
 
+			// Define property
 			var propertyBuilder = typeBuilder.DefineProperty($"{propertyInfo.DeclaringType.Name}.{propertyInfo.Name}",
 				PropertyAttributes.HasDefault, propertyInfo.PropertyType, null);
 
+			// Generate property getter and setter
 			typeBuilder.GenerateInterfaceImpGetMethodForField(propertyInfo, propertyBuilder, field);
 			typeBuilder.GenerateInterfaceImpSetMethodForField(propertyInfo, propertyBuilder, field);
 		}
 
 		/// <summary>
-		/// 为类型创建属性的自动 set 方法。
+		/// Generate a auto-implemented SET method for a property.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="methodName">set 方法的内部名称。</param>
-		/// <param name="propertyBuilder">该方法关联的属性。</param>
-		/// <param name="field">该方法使用的内部字段。</param>
-		/// <returns>创建的 set 方法。</returns>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="methodName">The name of the internal method.</param>
+		/// <param name="propertyBuilder">The property which the method is related to.</param>
+		/// <param name="field">The field which the method should access to.</param>
+		/// <returns>The generated SET method.</returns>
 		private static MethodBuilder GenerateSetMethodCore(this TypeBuilder typeBuilder, string methodName,
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
@@ -92,13 +95,13 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型创建属性的自动 get 方法。
+		/// Generate a auto-implemented GET method for a property.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="methodName">set 方法的内部名称。</param>
-		/// <param name="propertyBuilder">该方法关联的属性。</param>
-		/// <param name="field">该方法使用的内部字段。</param>
-		/// <returns>创建的 get 方法。</returns>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="methodName">The name of the internal method.</param>
+		/// <param name="propertyBuilder">The property which the method is related to.</param>
+		/// <param name="field">The field which the method should access to.</param>
+		/// <returns>The generated GET method.</returns>
 		private static MethodBuilder GenerateGetMethodCore(this TypeBuilder typeBuilder, string methodName,
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
@@ -113,16 +116,16 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型实现隐式接口实现的属性对应的 set 方法。
+		/// Implement the SET method for an explicitly implemented interface property.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="propertyInfo">接口中定义的属性。</param>
-		/// <param name="propertyBuilder">类型定义的属性。</param>
-		/// <param name="field">属性对应的内部字段。</param>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="propertyInfo">The property which should be explicitly implemented.</param>
+		/// <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
+		/// <param name="field">The backend field related with the new property.</param>
 		private static void GenerateInterfaceImpSetMethodForField(this TypeBuilder typeBuilder, PropertyInfo propertyInfo,
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
-			// 方法名：{接口名称}.{set_属性名}
+			// Method name: {Interface Name}.set_{Property Name}
 			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.SetMethod.Name}";
 			var setMethod = typeBuilder.GenerateSetMethodCore(methodName, propertyBuilder, field);
 
@@ -131,16 +134,16 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 为类型实现隐式接口实现的属性对应的 get 方法。
+		/// Implement the GET method for an explicitly implemented interface property.
 		/// </summary>
-		/// <param name="typeBuilder">类型。</param>
-		/// <param name="propertyInfo">接口中定义的属性。</param>
-		/// <param name="propertyBuilder">类型定义的属性。</param>
-		/// <param name="field">属性对应的内部字段。</param>
+		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="propertyInfo">The property which should be explicitly implemented.</param>
+		/// <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
+		/// <param name="field">The backend field related with the new property.</param>
 		private static void GenerateInterfaceImpGetMethodForField(this TypeBuilder typeBuilder, PropertyInfo propertyInfo,
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
-			// 方法名：{接口名称}.{set_属性名}
+			// Method name: {Interface Name}.get_{Property Name}
 			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.GetMethod.Name}";
 			var getMethod = typeBuilder.GenerateGetMethodCore(methodName, propertyBuilder, field);
 
@@ -148,11 +151,11 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 生成属性对应的内部字段对象。
+		/// Generated the backend field for an auto implemented property.
 		/// </summary>
-		/// <param name="builder">类型。</param>
-		/// <param name="propertyInfo">要生成内部字段的属性。</param>
-		/// <returns>属性对应的内部字段对象。</returns>
+		/// <param name="builder">The <see cref="TypeBuilder"/> instance.</param>
+		/// <param name="propertyInfo">The property which need to generated the backend field.</param>
+		/// <returns>The generated backend field associated with <paramref name="propertyInfo"/>.</returns>
 		private static FieldInfo GeneratePropertyBackField(this TypeBuilder builder, PropertyInfo propertyInfo)
 		{
 			var fieldName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.Name}_$BackField$";
@@ -162,10 +165,10 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 生成简单属性的 get 方法体。
+		/// Generate the method body for a simple GET method.
 		/// </summary>
-		/// <param name="getMethod"></param>
-		/// <param name="backField"></param>
+		/// <param name="getMethod">The <see cref="MethodBuilder"/> instance.</param>
+		/// <param name="backField">The backend field related with the <paramref name="getMethod"/>.</param>
 		private static void GenerateGetBodyForProperty(this MethodBuilder getMethod,
 			FieldInfo backField)
 		{
@@ -176,10 +179,10 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// 生成简单属性的 set 方法体。
+		/// Generate the method body for a simple SET method.
 		/// </summary>
-		/// <param name="setMethod"></param>
-		/// <param name="backField"></param>
+		/// <param name="setMethod">The <see cref="MethodBuilder"/> instance.</param>
+		/// <param name="backField">The backend field related with the <paramref name="setMethod"/>.</param>
 		private static void GenerateSetBodyForProperty(this MethodBuilder setMethod,
 			FieldInfo backField)
 		{
