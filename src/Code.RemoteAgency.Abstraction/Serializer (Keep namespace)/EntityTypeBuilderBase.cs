@@ -19,8 +19,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="typeBuilder">Builder of the entity class.</param>
         /// <param name="entityBuilding">Info of entity to be built in this method.</param>
-        /// <returns>Type of the built entity class.</returns>
-        public abstract Type BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding);
+        public abstract void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding);
 
         /// <summary>
         /// Gets the type of the base class of attributes which are used to mark metadata on interface level.

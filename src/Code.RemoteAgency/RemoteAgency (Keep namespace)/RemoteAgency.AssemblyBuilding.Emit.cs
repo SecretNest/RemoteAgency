@@ -80,7 +80,14 @@ namespace SecretNest.RemoteAgency
             var buildingEntityTasks = CreateEmitEntityTasks(moduleBuilder, info);
             buildingEntityTasks.ForEach(i => i.Start());
             // ReSharper disable once AsyncConverter.AsyncWait
-            builtEntities = buildingEntityTasks.Select(i => i.Result).ToList();
+            var entityBuildingTasks = buildingEntityTasks.Select(i => i.Result).ToList();
+            builtEntities = new List<Type>(entityBuildingTasks.Count);
+            foreach (var entityBuildingTask in entityBuildingTasks)
+            {
+                var type = entityBuildingTask.Item1.CreateType();
+                entityBuildingTask.Item2.SetResultCallback(type);
+                builtEntities.Add(type);
+            }
 
             Task emitProxy, emitServiceWrapper;
             TypeBuilder proxyTypeBuilder, serviceWrapperTypeBuilder;

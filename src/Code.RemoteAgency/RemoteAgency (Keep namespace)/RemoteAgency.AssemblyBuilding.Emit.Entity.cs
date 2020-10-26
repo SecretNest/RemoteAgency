@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency
     {
-        List<Task<Type>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        List<Task<Tuple<TypeBuilder, EntityBuildingExtended>>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
         {
             var entitiesInfo = info.GetEntities();
 
@@ -24,11 +24,10 @@ namespace SecretNest.RemoteAgency
                 EmitGenericParameters(typeBuilder, entityInfo.GenericParameters,
                     entityInfo.GenericParameterPassThroughAttributes);
 
-                return new Task<Type>(() =>
+                return new Task<Tuple<TypeBuilder, EntityBuildingExtended>>(() =>
                 {
-                    var type = EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
-                    entityInfo.SetResultCallback(type);
-                    return type;
+                    EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
+                    return new Tuple<TypeBuilder, EntityBuildingExtended>(typeBuilder, entityInfo);
                 });
             }).ToList();
 
