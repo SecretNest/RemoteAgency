@@ -191,10 +191,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// Processes an event raising message.
         /// </summary>
         /// <param name="message">Message to be processed.</param>
-        public virtual void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
-        {
-            //nothing to do here.
-        }
+        public abstract void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message);
 
         /// <summary>
         /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
@@ -409,7 +406,17 @@ namespace SecretNest.RemoteAgency.Helper
         public sealed override IRemoteAgencyMessage ProcessEventRaisingMessage(IRemoteAgencyMessage message,
             out Exception exception)
         {
-            return Process((TParameterEntity) message, out exception);
+            var response = (IRemoteAgencyMessage) Process((TParameterEntity) message, out exception);
+            response.AssetName = AssetName;
+            return response;
+        }
+
+        /// <inheritdoc />
+        public override void ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message)
+        {
+            Process((TParameterEntity) message, out var exception);
+            if (exception != null)
+                throw exception;
         }
 
         private protected abstract TReturnValueEntity Process(TParameterEntity message, out Exception exception);
