@@ -398,10 +398,13 @@ namespace SecretNest.RemoteAgency.Helper
             _timeout = timeout;
         }
 
-        private protected TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message)
+        private protected TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message, out bool isEmptyMessage, out Exception exception)
         {
             SetMessageProperties(message);
             var response = SendEventMessageCallback(message, _timeout);
+            var responseMessage = (IRemoteAgencyMessage) response;
+            isEmptyMessage = responseMessage.IsEmptyMessage;
+            exception = responseMessage.Exception;
             return (TReturnValueEntity) response;
         }
     }
