@@ -44,26 +44,27 @@
             <param name="sendSpecialCommand">Whether need to send special command.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.AddRouter(System.String,SecretNest.RemoteAgency.Helper.ProxyEventRouterBase)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.AddRouter(SecretNest.RemoteAgency.Helper.ProxyEventRouterBase)">
             <summary>
             Adds a builder.
             </summary>
-            <param name="assetName">Name of the event.</param>
             <param name="router">An instance of a derived class of ProxyEventRouterBase.</param>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
             <summary>
             Processes an event raising message and returns response.
             </summary>
             <param name="message">Message to be processed.</param>
             <param name="exception">Exception thrown while running user code.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
             <returns>Message contains the data to be returned.</returns>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventHelper.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode@)">
             <summary>
             Processes an event raising message.
             </summary>
             <param name="message">Message to be processed.</param>
+            <param name="localExceptionHandlingMode">Local exception handling mode.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase">
             <summary>
@@ -77,7 +78,7 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.AssetName">
             <summary>
-            Gets or sets the asset name.
+            Gets the asset name.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
@@ -106,6 +107,11 @@
             Gets target site id and instance id then closes this object.
             </summary>
             <returns>Target site id and instance id.</returns>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.LocalExceptionHandlingMode">
+            <summary>
+            Gets the local exception handling mode setting of this asset.
+            </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase.Close">
             <summary>

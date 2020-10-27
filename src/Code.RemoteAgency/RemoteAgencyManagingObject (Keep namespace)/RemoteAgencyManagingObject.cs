@@ -145,7 +145,7 @@ namespace SecretNest.RemoteAgency
             finally
             {
                 _proxyObject.SendEventAddingMessageCallback = null;
-                _proxyObject.GetSiteIdCallback = null;
+                //_proxyObject.GetSiteIdCallback = null;
                 _proxyObject.SendEventRemovingMessageCallback = null;
                 _proxyObject.SendMethodMessageCallback = null;
                 _proxyObject.SendOneWayMethodMessageCallback = null;
@@ -250,7 +250,7 @@ namespace SecretNest.RemoteAgency
             }
             finally
             {
-                _serviceWrapperObject.GetSiteIdCallback = null;
+                //_serviceWrapperObject.GetSiteIdCallback = null;
                 _serviceWrapperObject.SendEventMessageCallback = null;
                 _serviceWrapperObject.SendOneWayEventMessageCallback = null;
                 _serviceWrapperObject.SendOneWaySpecialCommandMessageCallback = null;

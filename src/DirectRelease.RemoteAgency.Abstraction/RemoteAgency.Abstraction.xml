@@ -1051,6 +1051,21 @@
             </summary>
             <returns>A string representation of the current exception.</returns>
         </member>
+        <member name="T:SecretNest.RemoteAgency.IgnoredAssetException">
+            <summary>
+            The exception that is thrown when an asset marked by <see cref="T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException"/> is set as <see langword="true" />.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.IgnoredAssetException.Message">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IgnoredAssetException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the AccessingTimeOutException class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
         <member name="T:SecretNest.RemoteAgency.InstanceNotFoundException">
             <summary>
             The exception that is thrown when the object specified by instance id cannot be found in target instance of Remote Agency.
@@ -1095,11 +1110,6 @@
         <member name="T:SecretNest.RemoteAgency.IManagedObjectCommunicate">
             <summary>
             Represents a created managed object that can communicate with Remote Agency.
-            </summary>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.IManagedObjectCommunicate.GetSiteIdCallback">
-            <summary>
-            Gets or sets the callback for a delegate which will be called when site id is required.
             </summary>
         </member>
         <member name="M:SecretNest.RemoteAgency.IManagedObjectCommunicate.CloseRequestedByManagingObject(System.Boolean)">
@@ -1254,7 +1264,6 @@
             </summary>
             <param name="typeBuilder">Builder of the entity class.</param>
             <param name="entityBuilding">Info of entity to be built in this method.</param>
-            <returns>Type of the built entity class.</returns>
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType">
             <summary>
@@ -1420,7 +1429,7 @@
         </member>
         <member name="P:SecretNest.RemoteAgency.IRemoteAgencyMessage.IsEmptyMessage">
             <summary>
-            Gets whether this message is empty, not containing parameters required by asset.
+            Gets or sets whether this message is empty, not containing parameters required by asset.
             </summary>
         </member>
         <member name="T:SecretNest.RemoteAgency.MessageType">

@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called when site id is required.
         /// </summary>
-        Func<Guid> GetSiteIdCallback { get; set; }
+        //Func<Guid> GetSiteIdCallback { get; set; }
 
         /// <summary>
         /// Sends messages to all relevant objects and closes the functions of this object.
