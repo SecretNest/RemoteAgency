@@ -47,12 +47,14 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (method.IsIgnored)
             {
-                ProcessMethodBodyForIgnoredAsset(methodInfo, method.WillThrowExceptionWhileCalling,
-                    method.MethodBodyInfo);
+                ProcessMethodBodyForIgnoredAsset(methodInfo, method.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType,
+                    method.WillThrowExceptionWhileCalling, method.MethodBodyInfo, 
+                    method.AsyncMethodOriginalReturnValueDataTypeClass);
             }
             else if (method.IsOneWay)
             {
-                ProcessMethodBodyForOneWayAsset(methodInfo, memberPath, _includesProxyOnlyInfo, method.MethodBodyInfo);
+                ProcessMethodBodyForOneWayAsset(methodInfo, method.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType,
+                    memberPath, _includesProxyOnlyInfo, method.MethodBodyInfo, method.AsyncMethodOriginalReturnValueDataTypeClass);
             }
             else
             {
@@ -76,9 +78,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                         i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                 }
 
-                ProcessMethodBodyForNormalAsset(methodInfo, memberPath,
+                ProcessMethodBodyForNormalAsset(methodInfo, method.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType, memberPath,
                     GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo, i => i.Timeout, out _, interfaceLevelMethodCallingTimeout),
-                    isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedReturnValueEntityPropertyNameAttribute, method.MethodBodyInfo);
+                    isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedReturnValueEntityPropertyNameAttribute,
+                    method.MethodBodyInfo, method.AsyncMethodOriginalReturnValueDataTypeClass);
             }
         }
     }

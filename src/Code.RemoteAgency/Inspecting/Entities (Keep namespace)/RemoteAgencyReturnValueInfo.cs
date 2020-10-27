@@ -39,6 +39,17 @@ namespace SecretNest.RemoteAgency.Inspecting
         public ParameterInfo Parameter { get; set; }
     }
 
+    enum AsyncMethodOriginalReturnValueDataTypeClass
+    {
+        NotAsyncMethod,
+        Void,
+        Task,
+        TaskOfType,
+        ValueTask,
+        ValueTaskOfType
+    }
+
+
     class RemoteAgencyReturnValueInfoFromReturnValueDefaultValue : RemoteAgencyReturnValueInfoBase
     {
         public override Type DataType => ReturnValueDataType;
@@ -51,6 +62,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         public Type ReturnValueDataType { get; set; }
+        public AsyncMethodOriginalReturnValueDataTypeClass AsyncMethodOriginalReturnValueDataTypeClass { get; set; }
     }
 
     class RemoteAgencyReturnValueInfoFromReturnValue : RemoteAgencyReturnValueInfoBase
@@ -67,6 +79,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public List<Attribute> SerializerParameterLevelAttributesOnReturnValue { get; set; }
         public Type ReturnValueDataType { get; set; }
+        public AsyncMethodOriginalReturnValueDataTypeClass AsyncMethodOriginalReturnValueDataTypeClass { get; set; }
     }
 
     class RemoteAgencyReturnValueInfoFromParameter : RemoteAgencyReturnValueInfoBase, IRemoteAgencyReturnValueInfoIncludedWhenExceptionThrown

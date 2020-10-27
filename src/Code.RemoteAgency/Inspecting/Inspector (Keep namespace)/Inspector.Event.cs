@@ -44,8 +44,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (@event.IsIgnored)
             {
-                ProcessMethodBodyForIgnoredAsset(raiseMethod, @event.WillThrowExceptionWhileCalling,
-                    @event.RaisingMethodBodyInfo);
+                ProcessMethodBodyForIgnoredAsset(raiseMethod, raiseMethod.ReturnType, @event.WillThrowExceptionWhileCalling,
+                    @event.RaisingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
             }
             else
             {
@@ -66,8 +66,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (@event.IsOneWay)
                 {
-                    ProcessMethodBodyForOneWayAsset(raiseMethod, memberPath, _includesServiceWrapperOnlyInfo,
-                        @event.RaisingMethodBodyInfo, eventLevelParameterIgnoredAttributes,
+                    ProcessMethodBodyForOneWayAsset(raiseMethod, raiseMethod.ReturnType, memberPath, _includesServiceWrapperOnlyInfo,
+                        @event.RaisingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, eventLevelParameterIgnoredAttributes,
                         eventLevelParameterEntityPropertyNameAttributes);
                 }
                 else
@@ -136,11 +136,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                             i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                     }
 
-                    ProcessMethodBodyForNormalAsset(raiseMethod, memberPath,
+                    ProcessMethodBodyForNormalAsset(raiseMethod, raiseMethod.ReturnType, memberPath,
                         // ReSharper disable once PossibleNullReferenceException
                         eventRaisingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
                         customizedReturnValueEntityPropertyNameAttribute,
-                        @event.RaisingMethodBodyInfo,
+                        @event.RaisingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod,
                         eventLevelParameterIgnoredAttributes, eventLevelParameterEntityPropertyNameAttributes,
                         eventLevelParameterReturnRequiredAttributes,
                         eventLevelParameterReturnRequiredPropertyAttributes);

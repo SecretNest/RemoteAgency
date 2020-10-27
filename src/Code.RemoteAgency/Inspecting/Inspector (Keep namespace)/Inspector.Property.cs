@@ -62,10 +62,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (property.IsIgnored)
             {
-                ProcessMethodBodyForIgnoredAsset(getMethod, property.WillThrowExceptionWhileCalling,
-                    property.GettingMethodBodyInfo);
-                ProcessMethodBodyForIgnoredAsset(setMethod, property.WillThrowExceptionWhileCalling,
-                    property.SettingMethodBodyInfo);
+                ProcessMethodBodyForIgnoredAsset(getMethod, getMethod.ReturnType, property.WillThrowExceptionWhileCalling,
+                    property.GettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
+                ProcessMethodBodyForIgnoredAsset(setMethod, setMethod.ReturnType, property.WillThrowExceptionWhileCalling,
+                    property.SettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
             }
             else
             {
@@ -84,8 +84,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                     //getting
                     if (property.IsGettingOneWay)
                     {
-                        ProcessMethodBodyForOneWayAsset(getMethod, memberPath, _includesProxyOnlyInfo,
-                            property.GettingMethodBodyInfo, null, null, null);
+                        ProcessMethodBodyForOneWayAsset(getMethod, getMethod.ReturnType, memberPath, _includesProxyOnlyInfo,
+                            property.GettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod,
+                            null, null);
                     }
                     else
                     {
@@ -102,9 +103,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 propertyInfo, i => i.EntityPropertyName,
                                 out var customizedPropertyGetResponsePropertyNameAttribute);
 
-                        ProcessMethodBodyForNormalAsset(getMethod, memberPath,
+                        ProcessMethodBodyForNormalAsset(getMethod, getMethod.ReturnType, memberPath,
                             gettingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
-                            customizedPropertyGetResponsePropertyNameAttribute, property.GettingMethodBodyInfo, null,
+                            customizedPropertyGetResponsePropertyNameAttribute, property.GettingMethodBodyInfo,
+                            AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null,
                             null, null, null,
                             valueParameterSerializerParameterLevelAttributesOverrideForProperty, null);
                     }
@@ -121,8 +123,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                     //setting
                     if (property.IsSettingOneWay)
                     {
-                        ProcessMethodBodyForOneWayAsset(setMethod, memberPath, _includesProxyOnlyInfo,
-                            property.SettingMethodBodyInfo, null, null,
+                        ProcessMethodBodyForOneWayAsset(setMethod, typeof(void) /* Set will never have return */, memberPath, _includesProxyOnlyInfo,
+                            property.SettingMethodBodyInfo,
+                            AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null, null,
                             valueParameterSerializerParameterLevelAttributesOverrideForProperty,
                             propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute);
                     }
@@ -132,9 +135,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                         var settingTimeout =
                             timeoutTime?.PropertySettingTimeout ?? interfaceLevelPropertySettingTimeout;
 
-                        ProcessMethodBodyForNormalAsset(setMethod, memberPath,
+                        ProcessMethodBodyForNormalAsset(setMethod, typeof(void) /* Set will never have return */, memberPath,
                             settingTimeout, true, null, null,
-                            property.SettingMethodBodyInfo, null, null, null, null,
+                            property.SettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null,
+                            null, null, null,
                             null, valueParameterSerializerParameterLevelAttributesOverrideForProperty,
                             propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute,
                             parameterReturnRequiredProperty);

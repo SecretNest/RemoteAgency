@@ -76,6 +76,11 @@
               <entry><para>Specifies the return value of the asset is ignored from type building.</para></entry>
               <entry><para>Can also be used on return value level which has higher priority.</para><para>Can also be used on delegate level when applying on event which has lower priority.</para></entry>
             </row>
+            <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference></para></entry>
+              <entry><para>Specifies this method is asynchronous.</para></entry>
+              <entry><para>Valid on method only.</para></entry>
+            </row>
           </table>
         </para>
       </content>

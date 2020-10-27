@@ -158,6 +158,18 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
                 else
                 {
+                    if (GetValueFromAttribute<AsyncMethodAttribute, bool>(method, i => i.IsAsyncMethod,
+                        out var asyncMethod))
+                    {
+                        var originalReturnType = method.ReturnType;
+
+                        GetAsyncReturnType(originalReturnType, out var returnType, out var asyncMethodOriginalReturnValueDataTypeClass, asyncMethod, method, parentPath);
+
+                        item.AsyncMethodOriginalReturnValueDataTypeClass = asyncMethodOriginalReturnValueDataTypeClass;
+                        item.AsyncMethodOriginalReturnValueDataType = originalReturnType;
+                        item.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType = returnType;
+                    }
+                    
                     item.IsOneWay =
                         GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(method, i => i.IsOneWay, out _);
 

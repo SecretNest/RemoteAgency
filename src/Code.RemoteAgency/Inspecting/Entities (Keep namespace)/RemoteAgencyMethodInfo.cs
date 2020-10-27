@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -16,6 +17,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         public List<RemoteAgencyAttributePassThrough> ReturnValuePassThroughAttributes { get; set; }
 
         public RemoteAgencyMethodBodyInfo MethodBodyInfo { get; set; }
+
+        public AsyncMethodOriginalReturnValueDataTypeClass AsyncMethodOriginalReturnValueDataTypeClass { get; set; }
+        public Type AsyncMethodOriginalReturnValueDataType { get; set; }
+        public Type AsyncMethodInnerOrNonAsyncMethodReturnValueDataType { get; set; }
 
         public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
             Type[] interfaceLevelGenericParameters,

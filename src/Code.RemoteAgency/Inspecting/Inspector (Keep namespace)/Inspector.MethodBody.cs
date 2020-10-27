@@ -3,16 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        void ProcessMethodBodyForIgnoredAsset(MethodInfo methodInfo, bool willThrowExceptionWhileCalling, RemoteAgencyMethodBodyInfo target)
+        void GetAsyncReturnType(Type methodInfoReturnType, out Type returnType,
+            out AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass,
+            AsyncMethodAttribute asyncMethod, MemberInfo member, Stack<MemberInfo> parentPath)
+        {
+            if (asyncMethod != null)
+            {
+                if (methodInfoReturnType == typeof(void))
+                {
+                    returnType = typeof(void);
+                    asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.Void;
+                }
+                else if (methodInfoReturnType == typeof(Task))
+                {
+                    returnType = typeof(void);
+                    asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.Task;
+                }
+#if !netfx
+                else if (methodInfoReturnType == typeof(ValueTask))
+                {
+                    returnType = typeof(void);
+                    asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.ValueTask;
+                }
+#endif
+                else if (methodInfoReturnType.IsGenericType)
+                {
+                    if (methodInfoReturnType.GetGenericTypeDefinition() == typeof(Task<>))
+                    {
+                        returnType = methodInfoReturnType.GetGenericArguments()[0];
+                        asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.TaskOfType;
+                    }
+#if !netfx
+                    else if (methodInfoReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>))
+                    {
+                        returnType = methodInfoReturnType.GetGenericArguments()[0];
+                        asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.ValueTaskOfType;
+                    }
+#endif
+                    else
+                    {
+                        throw new InvalidAttributeDataException(
+                            "The method must has a return value as Task, ValueTask or their derived class, or has no return. Method with other return type is not supported.",
+                            asyncMethod, member, parentPath);
+                    }
+                }
+                else
+                {
+                    throw new InvalidAttributeDataException(
+                        "The method must has a return value as Task, ValueTask or their derived class, or has no return. Method with other return type is not supported.",
+                        asyncMethod, member, parentPath);
+                }
+            }
+            else
+            {
+                returnType = methodInfoReturnType;
+                asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod;
+            }
+        }
+
+        void ProcessMethodBodyForIgnoredAsset(MethodInfo methodInfo, Type returnType, bool willThrowExceptionWhileCalling,
+            RemoteAgencyMethodBodyInfo target, AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass)
         {
             var parameters = methodInfo.GetParameters();
-            var returnType = methodInfo.ReturnType;
 
             target.Parameters = parameters;
             target.ReturnType = returnType;
@@ -38,7 +97,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
                     new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
                     {
-                        ReturnValueDataType = returnType
+                        ReturnValueDataType = returnType,
+                        AsyncMethodOriginalReturnValueDataTypeClass = asyncMethodOriginalReturnValueDataTypeClass
                     };
                 target.ReturnValueEntityProperties.Add(item);
             }
@@ -46,8 +106,9 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         private const string PropertyValueName = "value";
 
-        void ProcessMethodBodyForOneWayAsset(MethodInfo methodInfo, Stack<MemberInfo> memberPath,
-            bool includeCallerOnlyInfo, RemoteAgencyMethodBodyInfo target,
+        void ProcessMethodBodyForOneWayAsset(MethodInfo methodInfo, Type returnType,
+            Stack<MemberInfo> memberPath, bool includeCallerOnlyInfo, RemoteAgencyMethodBodyInfo target,
+            AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass,
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
@@ -56,7 +117,6 @@ namespace SecretNest.RemoteAgency.Inspecting
             Attribute propertyValuePropertyNameSpecifyingAttribute = null)
         {
             var parameters = methodInfo.GetParameters();
-            var returnType = methodInfo.ReturnType;
 
             target.Parameters = parameters;
             target.ReturnType = returnType;
@@ -153,7 +213,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
                         new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
                         {
-                            ReturnValueDataType = returnType
+                            ReturnValueDataType = returnType,
+                            AsyncMethodOriginalReturnValueDataTypeClass = asyncMethodOriginalReturnValueDataTypeClass
                         };
                     target.ReturnValueEntityProperties.Add(item);
                 }
@@ -168,9 +229,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
-        void ProcessMethodBodyForNormalAsset(MethodInfo methodInfo, Stack<MemberInfo> memberPath,
-            int timeOut, bool isReturnValueIgnored, string returnValuePropertyNameSpecifiedByAttribute, Attribute returnValuePropertyNameSpecifyingAttribute,
-            RemoteAgencyMethodBodyInfo target, 
+        void ProcessMethodBodyForNormalAsset(MethodInfo methodInfo, Type returnType,
+            Stack<MemberInfo> memberPath, int timeOut, bool isReturnValueIgnored, 
+            string returnValuePropertyNameSpecifiedByAttribute, Attribute returnValuePropertyNameSpecifyingAttribute,
+            RemoteAgencyMethodBodyInfo target, AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass, 
             Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes = null,
             Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
                 eventLevelParameterEntityPropertyNameAttributes = null,
@@ -183,7 +245,6 @@ namespace SecretNest.RemoteAgency.Inspecting
             List<ParameterReturnRequiredPropertyAttribute> propertyValueParameterReturnRequiredProperty = null)
         {
             var parameters = methodInfo.GetParameters();
-            var returnType = methodInfo.ReturnType;
 
             target.Parameters = parameters;
             target.ReturnType = returnType;
@@ -559,7 +620,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 RemoteAgencyReturnValueInfoFromReturnValue item = new RemoteAgencyReturnValueInfoFromReturnValue()
                 {
                     PropertyName = returnValuePropertyName,
-                    ReturnValueDataType = returnType
+                    ReturnValueDataType = returnType,
+                    AsyncMethodOriginalReturnValueDataTypeClass = asyncMethodOriginalReturnValueDataTypeClass
                 };
                 if (_serializerParameterLevelAttributeBaseType != null)
                 {
