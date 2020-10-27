@@ -9,9 +9,9 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     public interface IManagedObjectCommunicate
     {
-        /// <summary>
-        /// Gets or sets the callback for a delegate which will be called when site id is required.
-        /// </summary>
+        ///// <summary>
+        ///// Gets or sets the callback for a delegate which will be called when site id is required.
+        ///// </summary>
         //Func<Guid> GetSiteIdCallback { get; set; }
 
         /// <summary>
