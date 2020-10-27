@@ -42,7 +42,6 @@ namespace SecretNest.RemoteAgency.Inspecting
     enum AsyncMethodOriginalReturnValueDataTypeClass
     {
         NotAsyncMethod,
-        Void,
         Task,
         TaskOfType,
         ValueTask,
