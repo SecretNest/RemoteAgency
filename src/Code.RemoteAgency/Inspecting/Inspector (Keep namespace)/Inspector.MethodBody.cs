@@ -16,12 +16,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             if (asyncMethod != null)
             {
-                if (methodInfoReturnType == typeof(void))
-                {
-                    returnType = typeof(void);
-                    asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.Void;
-                }
-                else if (methodInfoReturnType == typeof(Task))
+                if (methodInfoReturnType == typeof(Task))
                 {
                     returnType = typeof(void);
                     asyncMethodOriginalReturnValueDataTypeClass = AsyncMethodOriginalReturnValueDataTypeClass.Task;
@@ -50,14 +45,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                     else
                     {
                         throw new InvalidAttributeDataException(
-                            "The method must has a return value as Task, ValueTask or their derived class, or has no return. Method with other return type is not supported.",
+                            "The method must has a return value as Task, ValueTask or their derived class. Method with other return type is not supported.",
                             asyncMethod, member, parentPath);
                     }
                 }
                 else
                 {
                     throw new InvalidAttributeDataException(
-                        "The method must has a return value as Task, ValueTask or their derived class, or has no return. Method with other return type is not supported.",
+                        "The method must has a return value as Task, ValueTask or their derived class. Method with other return type is not supported.",
                         asyncMethod, member, parentPath);
                 }
             }
