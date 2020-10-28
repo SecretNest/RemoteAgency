@@ -43,6 +43,13 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "ProjectForWritingExampleInV
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C3D6473F-B21C-4B15-B2DA-6BF90E35BF9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmitDoc (Chinese)", "EmitDoc (Chinese)", "{0C876E66-72E8-4883-8790-B48FC343934D}"
+	ProjectSection(SolutionItems) = preProject
+		EmitDoc (Chinese)\Entity.txt = EmitDoc (Chinese)\Entity.txt
+		EmitDoc (Chinese)\Proxy.txt = EmitDoc (Chinese)\Proxy.txt
+		EmitDoc (Chinese)\ServiceWrapper.txt = EmitDoc (Chinese)\ServiceWrapper.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
@@ -114,6 +121,7 @@ Global
 		{C158D1A7-213E-449D-8791-152CEA833953} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
 		{E7EF291C-A72B-4B09-B165-02446DF50AC6} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
 		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
+		{0C876E66-72E8-4883-8790-B48FC343934D} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}

@@ -1,0 +1,341 @@
+ServiceWrapper需要在Code.RemoteAgency\RemoteAgency\RemoteAgency.AssemblyBuilding.Emit.ServiceWrapper.cs中实现。方法调用时已经定义了类、接口实现、类头的泛型与AttributePassThrough。
+新方法命名需要以EmitServiceWrapper打头，此类方法较多，需要防止重名。如果方法会在Proxy或ServiceWrapper中共享，可以用Emit打头。
+文档中的执行结束点，指Emit后的代码在此会结束执行，通常为方法的返回点，或异常抛出位置。
+
+随机名称是为了防止固定出现的名称重复而设计的。比如用于Request用途的变量，可以使用request_<guid>来命名。
+
+ServiceWrapper需要实现系统接口。
+
+ServiceWrapper需要定义一个类型为info.SourceInterface指向的接口（即用户接口，下文称用户接口）的Field，保存ServiceObject（名称随机）。
+ServiceWrapper有一个有一个参数的构造函数，参数类型为用户接口。构造函数需要将此参数保存为ServiceObject（下文会继续描述）。
+
+如果info.NeedEventHelper为真，则ServiceWrapper内需要定义一个SecretNest.RemoteAgency.Helper.ServiceWrapperEventHelper<TServiceContractInterface>的对象，并在构造ServiceWrapper时构造其对象，以下简称Helper对象。此对象不需要Dispose。其中TServiceContractInterface为info.SourceInterface指向的接口，即用户接口。Helper对象构造后，需要对其ServiceObject属性赋值，赋值来源为ServiceWrapper构造函数的参数（下文会继续描述）。
+
+ServiceWrapper内需要为每个用户接口中的Event定义一个Router类，此类只会在ServiceWrapper内被使用。为了防止重名，建议放置于ServiceWrapper类内，并随机化名称防止与现有的Type重名。具体构造方式将在下文描述。
+
+用户接口的信息，来自info参数。其中的信息已经在proxy文件中进行了描述，本文不再赘述。
+
+系统接口：需要显式实现IServiceWrapperCommunicate，注意此接口继承于IManagedObjectCommunicate。两个接口均定义在Code.RemoteAgency.Abstraction中。
+属性：
+IServiceWrapperCommunicate.SendEventMessageCallback会在构造后传入，其get set方法需要直接对接Helper对象的同名属性（如果有Helper对象）或使用默认（如果无Helper对象）。
+IServiceWrapperCommunicate.SendOneWayEventMessageCallback会在构造后传入，其get set方法需要直接对接Helper对象的同名属性（如果有Helper对象）或使用默认（如果无Helper对象）。
+IManagedObjectCommunicate.SendOneWaySpecialCommandMessageCallback会在构造后传入，其get set方法需要直接对接Helper对象的同名属性（如果有Helper对象）或使用默认（如果无Helper对象）。
+IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其get方法返回本地副本；其set方法需要同时保存本地副本，并对接Helper对象的同名属性（如果有Helper对象）。
+
+方法（在实际生成时，为性能优化，应混合在同一个序列中生成不同的方法代码。）：
+构造函数(用户接口 serviceObject)：
+	Emit将serviceObject的值保存在ServiceObject。
+	Emit将Helper对象的ServiceObject属性，设置为serviceObject的值。
+	遍历info.Events的每个Event：
+		如果Event元素的IsIgnored为假：
+			如果Event元素的IsOneWay为真：
+				Emit调用Helper对象的AddBuilder方法（void AddBuilder(string assetName, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>> callback)）：
+					参数assetName为Event元素的AssetName的值（硬编码至Emit后的代码中）；
+					参数callback为构造并返回此Event对应的Router类的对象的方法（Router类构造函数无参数）；
+					TServiceContractInterface为用户接口。
+			否则：
+				Emit调用Helper对象的AddBuilder方法（void AddBuilder(string assetName, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>> callback)）：
+					参数assetName为Event元素的AssetName的值（硬编码至Emit后的代码中）；
+					参数callback为构造并返回此Event对应的Router类的对象的方法（Router类构造函数有一个int型的参数）：
+						构造函数的参数为Event元素的RaisingMethodBodyInfo.Timeout（硬编码至Emit后的代码中）；
+					TServiceContractInterface为用户接口。
+
+构造HelperMethod（每个method一个，需要建立assetname到方法的对照表，以供后续Emit使用）：
+	遍历info.Methods的每一个Method：
+		如果Method元素的IsIgnored为假：
+			Emit构造HelperMethod方法（名称随机），方法名可以引用Method元素的AssetName作为部分。
+				如果info.IsGenericMethod为真：
+					方法本身需要执行方法EmitGenericParameters添加泛型参数，genericParameters为Method元素的AssetLevelGenericParameters（不需要genericParameterPassThroughAttributes）。
+				第一参数为MethodBodyInfo中的ParameterEntity指向的类（名称随机）。注，此类可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
+				如果IsOneWay为真：
+					方法无返回值。
+				否则：
+					第二参数为out Exception，名为exception（名称随机）。
+					方法返回值为IRemoteAgencyMessage。
+				方法内：
+					遍历MethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						Emit定义名为ParameterName的变量，值为message中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
+					如果IsOneWay为真：
+						按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
+							为NotAsyncMethod时：
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。无需处理返回值（不论是否有）。——执行结束点
+							为Task或TaskOfType时：
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+								Emit调用返回值（Task）的Wait()。——执行结束点
+							为ValueTask或ValueTaskOfType时：
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+								Emit判断返回值（ValueTask）的IsCompleted为假，或IsFaulted为真：
+									Emit调用返回值.AsTask().Wait()。——执行结束点
+							其它情况：抛出异常（非Emit）。
+					否则：
+						Emit构造一个MethodBodyInfo中的ReturnValueEntity指向的类的对象Response（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
+						Emit将Response类型转换为ResponseMessage（名称随机），类型为IRemoteAgencyMessage。
+						如果AsyncMethodInnerOrNonAsyncMethodReturnValueDataType不是void：
+							Emit构造一个以AsyncMethodInnerOrNonAsyncMethodReturnValueDataType为类型的变量，作为返回值变量，名称随机。
+						Emit构造一个try：
+							在try内：
+								按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
+									为NotAsyncMethod时：
+										当AsyncMethodInnerOrNonAsyncMethodReturnValueDataType不是void时：
+											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。将返回值保存在返回值变量中。
+										否则：
+											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+									为Task时：
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit调用返回值（Task）的Wait()。
+									为ValueTask时：
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit判断返回值（ValueTask）的IsCompleted为假，或IsFaulted为真：
+											Emit调用返回值.AsTask().Wait()。
+									为TaskOfType时：
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit将返回值（Task<>）的Result保存在返回值变量中。
+									为ValueTaskOfType时：
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit将返回值（ValueTask<>）的Result保存在返回值变量中。
+									其它情况：抛出异常（非Emit）。
+								遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段A，与下文段B可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型：Emit将元素的Parameter对应的变量（out或ref参数）的值，赋值至Response中名为元素的PropertyName的属性。
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（MethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为ReturnValue：Emit将返回值变量的值，赋值至Response中名为元素的PropertyName的属性。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+								Emit设置exception的值为default（或null）。
+							在catch（Excepiton ex名称随机）内：
+								Emit设置exception的值为此异常。
+								遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段B，与上文段A可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量（out或ref参数）的值，赋值至Response中名为元素的PropertyName的属性。
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（MethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为ReturnValue，则忽略。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+						Emit返回ResponseMessage。——执行结束点
+			将此方法保存在对应的对照表中。
+
+IRemoteAgencyMessage IServiceWrapperCommunicate.ProcessMethodMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Methods的每一个Method：
+			如果Method元素的IsIgnored为假：
+				如果IsOneWay为假：
+					Emit匹配Method元素的AssetName：
+						Emit设置localExceptionHandlingMode，值为Method元素的LocalExceptionHandlingMode的值（硬编码至Emit后的代码中）。
+						如果info.IsGenericMethod为真：
+							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），Emit返回其返回值。此时HelperMethod为泛型方法（含有方法级泛型）。——执行结束点
+						否则：
+							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），Emit返回其返回值。此时HelperMethod不包含方法级泛型。——执行结束点
+	Emit构建默认匹配：
+		Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。
+		Emit设置exception为新建的AssetNotFoundException的对象，构造函数参数为message。
+		Emit调用CreateEmptyMessageCallback，将返回值返回。——执行结束点
+
+void IServiceWrapperCommunicate.ProcessOneWayMethodMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Methods的每一个Method：
+			如果Method元素的IsIgnored为假：
+				Emit匹配Method元素的AssetName：
+					Emit设置localExceptionHandlingMode，值为Method元素的LocalExceptionHandlingMode的值（硬编码至Emit后的代码中）。
+					如果IsOneWay为真：
+						如果info.IsGenericMethod为真：
+							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（参数为转换为dynamic的message）。此时HelperMethod为泛型方法（含有方法级泛型）。——执行结束点
+						否则：
+							Emit调用HelperMethod（参数为转换为dynamic的message）。此时HelperMethod不包含方法级泛型。——执行结束点
+					否则：
+						Emit定义变量exception（名称随机），类型为Exception。
+						如果info.IsGenericMethod为真：
+							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），放弃返回值。此时HelperMethod为泛型方法（含有方法级泛型）。
+						否则：
+							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），放弃返回值。此时HelperMethod不包含方法级泛型。
+						Emit判断如果exception非空：
+							Emit抛出异常，异常来自exception。——执行结束点
+						——执行结束点
+		Emit构建默认匹配：
+			Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。——执行结束点	
+
+void IServiceWrapperCommunicate.ProcessEventAddingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	如果有Helper对象：
+		Emit调用Helper对象的ProcessEventAddingMessage方法（参数表相同，无返回值）。
+	否则：
+		留空。
+
+void IServiceWrapperCommunicate.ProcessEventRemovingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	如果有Helper对象：
+		Emit调用Helper对象的ProcessEventRemovingMessage方法（参数表相同，无返回值）。
+	否则：
+		留空。
+
+IRemoteAgencyMessage IServiceWrapperCommunicate.ProcessPropertyGettingMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Properties的每个Property：
+			如果Property元素的IsIgnored为假且IsGettable为真：
+				如果Property元素的IsGettingOneWay为假：
+					Emit匹配Property元素的AssetName：
+						Emit设置localExceptionHandlingMode为Property元素的LocalExceptionHandlingMode（硬编码至Emit后的代码中）。
+						Emit将message类型转换为Request，类型为GettingMethodBodyInfo中的ParameterEntity指向的类。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments）。
+						遍历GettingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+							Emit定义名为ParameterName的变量，值为Request中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原Interface中的属性参数定义，类型为ParameterInfo。
+						Emit构造一个GettingMethodBodyInfo中的ReturnValueEntity指向的类的对象Response（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。
+						Emit构造一个以Event元素的Delegate返回值为类型的变量，作为返回值变量，名称随机。
+						Emit构建一个try：
+							在try内：
+								Emit访问ServiceObject中Property元素的Asset对应的属性Get。参数均已通过上述遍历定义并赋值。将返回值保存在返回值变量中。
+								遍历GettingMethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段A，与下文段B可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（GettingMethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为ReturnValue：Emit将返回值变量的值，赋值至Response中名为元素的PropertyName的属性。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+								Emit设置exception的值为default（或null）。
+							在catch（Excepiton ex名称随机）内：
+								Emit设置exception的值为此异常。
+								遍历GettingMethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段B，与上文段A可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（GettingMethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为ReturnValue，则忽略。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+						Emit将Response类型转换为ResponseMessage（名称随机），类型为IRemoteAgencyMessage。
+						Emit返回ResponseMessage。——执行结束点
+		Emit构建默认匹配：
+			Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。
+			Emit设置exception为新建的AssetNotFoundException的对象，构造函数参数为message。
+			Emit调用CreateEmptyMessageCallback，将返回值返回。——执行结束点
+
+void IServiceWrapperCommunicate.ProcessOneWayPropertyGettingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Properties的每个Property：
+			如果Property元素的IsIgnored为假且IsGettable为真：
+				(无需比较IsGettingOneWay)
+				Emit匹配Property元素的AssetName：
+					Emit设置localExceptionHandlingMode为Property元素的LocalExceptionHandlingMode（硬编码至Emit后的代码中）。
+					Emit将message类型转换为Request，类型为GettingMethodBodyInfo中的ParameterEntity指向的类。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments）。
+					遍历GettingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						Emit定义名为ParameterName的变量，值为Request中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原Interface中的属性参数定义，类型为ParameterInfo。
+					Emit访问ServiceObject中Property元素的Asset对应的属性Get。参数均已通过上述遍历定义并赋值。忽略返回值。——执行结束点
+		Emit构建默认匹配：
+			Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。——执行结束点	
+
+IRemoteAgencyMessage IServiceWrapperCommunicate.ProcessPropertySettingMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Properties的每个Property：
+			如果Property元素的IsIgnored为假且IsSettable为真：
+				如果Property元素的IsSettingOneWay为假：
+					Emit匹配Property元素的AssetName：
+						Emit设置localExceptionHandlingMode为Property元素的LocalExceptionHandlingMode（硬编码至Emit后的代码中）。
+						Emit将message类型转换为Request，类型为SettingMethodBodyInfo中的ParameterEntity指向的类。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments）。
+						遍历SettingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+							Emit定义名为ParameterName的变量，值为Request中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原Interface中的属性参数定义，类型为ParameterInfo。
+						Emit构造一个SettingMethodBodyInfo中的ReturnValueEntity指向的类的对象Response（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。
+						Emit构造一个以Event元素的Delegate返回值为类型的变量，作为返回值变量，名称随机。
+						Emit构建一个try：
+							在try内：
+								Emit访问ServiceObject中Property元素的Asset对应的属性Set。参数均已通过上述遍历定义并赋值。将返回值保存在返回值变量中。
+								遍历SettingMethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段A，与下文段B可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（SettingMethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+								Emit设置exception的值为default（或null）。
+							在catch（Excepiton ex名称随机）内：
+								Emit设置exception的值为此异常。
+								遍历GettingMethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段B，与上文段A可联合：通过一次判断，确认Emit代码的不同位置）：
+									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
+									如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将元素的Parameter对应的变量的指定Property中的值，赋值至Response中名为元素的PropertyName的属性，Property由元素的ParameterProperty指定。
+									如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：
+										Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（SettingMethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+										Emit将Helper的指定属性的值，赋值至Response中名为元素的PropertyName的属性。属性的指定通过元素的ParameterHelperProperty指定。
+									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+						Emit将Response类型转换为ResponseMessage（名称随机），类型为IRemoteAgencyMessage。
+						Emit返回ResponseMessage。——执行结束点
+		Emit构建默认匹配：
+			Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。
+			Emit设置exception为新建的AssetNotFoundException的对象，构造函数参数为message。
+			Emit调用CreateEmptyMessageCallback，将返回值返回。——执行结束点
+
+void IServiceWrapperCommunicate.ProcessOneWayPropertySettingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
+	Emit构造一个switch，匹配message.AssetName：
+		遍历info.Properties的每个Property：
+			如果Property元素的IsIgnored为假且IsSettable为真：
+				(无需比较IsSettingOneWay)
+				Emit匹配Property元素的AssetName：
+					Emit设置localExceptionHandlingMode为Property元素的LocalExceptionHandlingMode（硬编码至Emit后的代码中）。
+					Emit将message类型转换为Request，类型为SettingMethodBodyInfo中的ParameterEntity指向的类。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments）。
+					遍历SettingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						Emit定义名为ParameterName的变量，值为Request中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原Interface中的属性参数定义，类型为ParameterInfo。
+					Emit访问ServiceObject中Property元素的Asset对应的属性Set。参数均已通过上述遍历定义并赋值。忽略返回值。——执行结束点
+		Emit构建默认匹配：
+			Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。——执行结束点	
+
+void IServiceWrapperCommunicate.OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null)：
+	如果有Helper对象：
+		Emit调用Helper对象的OnRemoteProxyClosing方法（参数表相同，无返回值）。
+	否则：
+		留空。
+
+void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)：
+	如果有Helper对象：
+		Emit调用Helper对象的CloseRequestedByManagingObject方法（参数表相同，无返回值）。
+	否则：
+		留空。
+
+构造Router类（每个event一个）：
+	遍历info.Events的每个Event：
+		如果Event元素的IsIgnored为假：
+			如果Event元素的IsOneWay为真：
+				Emit构造一个类（名称随机），派生于ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity>，其中TServiceContractInterface为用户接口，TParameterEntity为RaisingMethodBodyInfo中的ParameterEntity指向的类。注，TParameterEntity可能是泛型。如果是（info.IsSourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。此基类没有构造函数，新构造的类也没有构造函数。
+				Emit构造一个方法，名为EventHelper，参数表与返回值与Event元素的Delegate一致：
+					Emit构造RaisingMethodBodyInfo中的ParameterEntity指向的类的对象Request（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
+					遍历RaisingMethodBodyInfo中的ParameterEntityProperties针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						Emit设置Request中名为元素的PropertyName的属性，值为元素的ParameterName对应的变量。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
+					Emit调用SendMessage方法（void SendMessage(TParameterEntity message)），参数为Request。
+					遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						如果元素的ReturnValueSource为ParameterDefaultValue，Emit将元素的Parameter对应的变量（out参数）设置为default。
+						如果元素的ReturnValueSource为ReturnValueDefaultValue，Emit返回一个default。此类元素有且只有一个，且位于ReturnValueEntityProperties末尾。——执行结束点
+						如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+			否则：
+				Emit构造一个类（名称随机），派生于ServiceWrapperEventRouterBase<TServiceContractInterface, TParameterEntity, TReturnValueEntity>，其中TServiceContractInterface为用户接口，TParameterEntity为RaisingMethodBodyInfo中的ParameterEntity指向的类，TReturnValueEntity为RaisingMethodBodyInfo中的ReturnValueEntity。注，TParameterEntity与TReturnValueEntity可能是泛型。如果是（info.IsSourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。此基类构造函数有1个int型的参数（timeout），新构造的类的构造函数应与其一致，并调用此构造函数。
+				Emit构造一个方法，名为EventHelper，参数表与返回值与Event元素的Delegate一致：
+					Emit构造RaisingMethodBodyInfo中的ParameterEntity指向的类的对象Request（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
+					遍历RaisingMethodBodyInfo中的ParameterEntityProperties针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+						Emit设置Request中名为元素的PropertyName的属性，值为元素的ParameterName对应的变量。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
+					Emit调用SendMessageAndGetResponse方法（TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message, out Exception exception)），参数为Request。将返回值保存为Response。
+					Emit判断exception，如果非null：
+						遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+							如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量（out或ref参数）中。
+							如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量的指定Field中，Field由元素的ParameterField指定。
+							如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量的指定Property中，Property由元素的ParameterProperty指定。
+							如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型，如果元素的IsIncludedWhenExceptionThrown为真：
+								Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（MethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+								Emit将Response中名为元素的PropertyName的属性的值，赋值至Helper的指定属性中。属性的指定通过元素的ParameterHelperProperty指定。
+							如果元素的ReturnValueSource为ReturnValue，则忽略。
+							如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+						Emit抛出异常，异常来自exception。——执行结束点
+					否则：
+						遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
+							如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量（out或ref参数）中。
+							如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量的指定Field中，Field由元素的ParameterField指定。
+							如果元素的ReturnValueSource为ParameterProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterProperty类型：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量的指定Property中，Property由元素的ParameterProperty指定。
+							如果元素的ReturnValueSource为ParameterHelperProperty，将此元素转换为RemoteAgencyReturnValueInfoFromParameterHelperProperty类型：
+								Emit构造元素的ParameterHelperClass对应的对象Helper（名称随机），唯一参数为元素的Parameter对应的参数（引用型）——注：在本次遍历（MethodBodyInfo中的ReturnValueEntityProperties）内，对于每个Parameter、每个Helper只允许构造一次；如果重复使用同一个组合，则使用同一个对象。建议在编码器层面构造一个变量的映射表，不必在Emit后的代码内实现字典。
+								Emit将Response中名为元素的PropertyName的属性的值，赋值至Helper的指定属性中。属性的指定通过元素的ParameterHelperProperty指定。
+							如果元素的ReturnValueSource为ReturnValue（此类元素最多只有一个，且位于ReturnValueEntityProperties末尾）：Emit返回Response中名为元素的PropertyName的属性的值。——执行结束点
+							如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
+			Emit实现此类的void RemoveHandler(TServiceContractInterface serviceObject)：
+				Emit对serviceObject的指定事件删除Handler：
+					事件为Event元素的Asset对应的事件，不要使用Event元素的AssetName。
+					Handler为EventHelper方法。
+			Emit实现此类的void AddHandler(TServiceContractInterface serviceObject)：
+				Emit对serviceObject的指定事件添加Handler：
+					事件为Event元素的Asset对应的事件，不要使用Event元素的AssetName。
+					Handler为EventHelper方法。

@@ -42,6 +42,35 @@ namespace SecretNest.RemoteAgency
             }
         }
 
+        void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters)
+        {
+            if (genericParameters.Length > 0)
+            {
+                GenericTypeParameterBuilder[] typeParams =
+                    typeBuilder.DefineGenericParameters(genericParameters.Select(i => i.Name).ToArray());
+
+                for (int i = 0; i < genericParameters.Length; i++)
+                {
+                    var genericType = genericParameters[i];
+
+                    typeParams[i]
+                        .SetGenericParameterAttributes(genericType.GenericParameterAttributes);
+
+                    var typeConstraints = genericType.GetGenericParameterConstraints();
+                    if (typeConstraints.Length > 0)
+                    {
+                        var baseType = typeConstraints.FirstOrDefault(t => t.IsClass);
+                        if (baseType != null)
+                            typeParams[i].SetBaseTypeConstraint(baseType);
+
+                        var interfaces = typeConstraints.Where(t => t != baseType).ToArray();
+                        if (interfaces.Length > 0)
+                            typeParams[i].SetInterfaceConstraints(interfaces);
+                    }
+                }
+            }
+        }
+
         void EmitAttributePassThroughAttributes(GenericTypeParameterBuilder typeBuilder,
             List<RemoteAgencyAttributePassThrough> passThroughAttributes)
         {
