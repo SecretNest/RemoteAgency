@@ -51,27 +51,27 @@ IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其g
 					方法无返回值。
 				否则：
 					第二参数为out Exception，名为exception（名称随机）。
+					第三参数为out bool，名为bypassExceptionForService（名称随机）。
 					方法返回值为IRemoteAgencyMessage。
 				方法内：
 					遍历MethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
 						Emit定义名为ParameterName的变量，值为message中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
-					如果IsOneWay为真：
+					如果IsOneWay为真（此时HelperMethod没有参数out exception、out exceptionForService）：
 						按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
 							为NotAsyncMethod时：
 								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。无需处理返回值（不论是否有）。——执行结束点
-							为Task或TaskOfType时：
-								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
-								Emit调用返回值（Task）的Wait()。——执行结束点
-							为ValueTask或ValueTaskOfType时：
-								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
-								Emit判断返回值（ValueTask）的IsCompleted为假，或IsFaulted为真：
-									Emit调用返回值.AsTask().Wait()。——执行结束点
+							为Task、TaskOfType、ValueTask或ValueTaskOfType时：
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。无需处理返回值。——执行结束点（不等待Task结束，不处理Task中可能存在的异常）
 							其它情况：抛出异常（非Emit）。
-					否则：
+					否则（此时HelperMethod有参数out exception、out exceptionForService）：
 						Emit构造一个MethodBodyInfo中的ReturnValueEntity指向的类的对象Response（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
 						Emit将Response类型转换为ResponseMessage（名称随机），类型为IRemoteAgencyMessage。
 						如果AsyncMethodInnerOrNonAsyncMethodReturnValueDataType不是void：
 							Emit构造一个以AsyncMethodInnerOrNonAsyncMethodReturnValueDataType为类型的变量，作为返回值变量，名称随机。
+						如果AsyncMethodOriginalReturnValueDataTypeClass为Task、ValueTask、TaskOfType或ValueTaskOfType：
+							Emit设置bypassExceptionForService为true。
+						否则：
+							Emit设置bypassExceptionForService为false。
 						Emit构造一个try：
 							在try内：
 								按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
@@ -94,6 +94,7 @@ IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其g
 										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
 										Emit将返回值（ValueTask<>）的Result保存在返回值变量中。
 									其它情况：抛出异常（非Emit）。
+								Emit设置bypassExceptionForService为false。
 								遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段A，与下文段B可联合：通过一次判断，确认Emit代码的不同位置）：
 									如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型：Emit将元素的Parameter对应的变量（out或ref参数）的值，赋值至Response中名为元素的PropertyName的属性。
 									如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
@@ -104,6 +105,7 @@ IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其g
 									如果元素的ReturnValueSource为ReturnValue：Emit将返回值变量的值，赋值至Response中名为元素的PropertyName的属性。
 									如果元素的ReturnValueSource为其他，则抛出异常（非Emit）。
 								Emit设置exception的值为default（或null）。
+								Emit设置exceptionForService的值为default（或null）。
 							在catch（Excepiton ex名称随机）内：
 								Emit设置exception的值为此异常。
 								遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段B，与上文段A可联合：通过一次判断，确认Emit代码的不同位置）：
@@ -125,10 +127,14 @@ IRemoteAgencyMessage IServiceWrapperCommunicate.ProcessMethodMessage(IRemoteAgen
 				如果IsOneWay为假：
 					Emit匹配Method元素的AssetName：
 						Emit设置localExceptionHandlingMode，值为Method元素的LocalExceptionHandlingMode的值（硬编码至Emit后的代码中）。
+						Emit定义变量IRemoteAgencyMessage，名为result（名称随机）。
+						Emit定义变量bool，名为bypassExceptionForService（名称随机）。
 						如果info.IsGenericMethod为真：
-							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），Emit返回其返回值。此时HelperMethod为泛型方法（含有方法级泛型）。——执行结束点
+							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception，第三参数为out bypassExceptionForService）。Emit将返回值保存在result。此时HelperMethod为泛型方法（含有方法级泛型）。
 						否则：
-							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），Emit返回其返回值。此时HelperMethod不包含方法级泛型。——执行结束点
+							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception，第三参数为out bypassExceptionForService）。Emit将返回值保存在result。此时HelperMethod不包含方法级泛型。
+						Emit检查bypassExceptionForService，如果为真：
+							Emit设置localExceptionHandlingMode，值为LocalExceptionHandlingMode.Suppress。
 	Emit构建默认匹配：
 		Emit设置localExceptionHandlingMode为LocalExceptionHandlingMode.Redirect。
 		Emit设置exception为新建的AssetNotFoundException的对象，构造函数参数为message。
@@ -146,12 +152,12 @@ void IServiceWrapperCommunicate.ProcessOneWayMethodMessage(IRemoteAgencyMessage 
 						否则：
 							Emit调用HelperMethod（参数为转换为dynamic的message）。此时HelperMethod不包含方法级泛型。——执行结束点
 					否则：
-						Emit定义变量exception（名称随机），类型为Exception。
+						Emit定义变量Exception，名为exception（名称随机）。
 						如果info.IsGenericMethod为真：
-							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），放弃返回值。此时HelperMethod为泛型方法（含有方法级泛型）。
+							Emit将message转换为dynamic，并Emit调用对应的HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception，第三参数为out bypassExceptionForService），放弃返回值。此时HelperMethod为泛型方法（含有方法级泛型）。
 						否则：
-							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception），放弃返回值。此时HelperMethod不包含方法级泛型。
-						Emit判断如果exception非空：
+							Emit调用HelperMethod（第一参数为转换为dynamic的message，第二参数为out exception，第三参数为out bypassExceptionForService），放弃返回值。此时HelperMethod不包含方法级泛型。
+						Emit判断bypassExceptionForService为false，且exception非空：
 							Emit抛出异常，异常来自exception。——执行结束点
 						——执行结束点
 		Emit构建默认匹配：
