@@ -13,6 +13,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>Without <see cref="EventParameterIgnoredAttribute"/> or <see cref="ParameterIgnoredAttribute"/> specified, no parameter is ignored.</para>
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevelEventOnly" />
+    /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class EventParameterIgnoredAttribute : ParameterIgnoredAttribute
     {

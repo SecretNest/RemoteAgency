@@ -85,6 +85,14 @@
   <HelpKINode Title="AssetOneWayOperatingAttribute.AssetOneWayOperatingAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute__ctor.htm" />
   <HelpKINode Title="AssetOneWayOperatingAttribute.IsOneWay property" Url="html/P_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute_IsOneWay.htm" />
   <HelpKINode Title="AssetProperty enumeration member" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
+  <HelpKINode Title="AsyncMethodAttribute class">
+    <HelpKINode Title="AsyncMethodAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AsyncMethodAttribute.AsyncMethodAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute__ctor.htm" />
+  <HelpKINode Title="AsyncMethodAttribute.IsAsyncMethod property" Url="html/P_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute_IsAsyncMethod.htm" />
   <HelpKINode Title="Attribute property">
     <HelpKINode Title="AttributePassThroughAttribute.Attribute Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_Attribute.htm" />
     <HelpKINode Title="EntityPropertyAttribute.Attribute Property " Url="html/P_SecretNest_RemoteAgency_EntityPropertyAttribute_Attribute.htm" />
@@ -540,12 +548,17 @@
     <HelpKINode Title="InvalidParameterAttributeDataException.GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_Inspecting_InvalidParameterAttributeDataException_GetObjectData.htm" />
     <HelpKINode Title="MessageProcessTerminatedException.GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_GetObjectData.htm" />
   </HelpKINode>
-  <HelpKINode Title="GetSiteIdCallback property" Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_GetSiteIdCallback.htm" />
   <HelpKINode Title="GetTargetSiteIdAndInstanceIdThenClose method">
     <HelpKINode Title="ProxyEventRouterBase(TDelegate).GetTargetSiteIdAndInstanceIdThenClose Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_1_GetTargetSiteIdAndInstanceIdThenClose.htm" />
     <HelpKINode Title="ProxyEventRouterBase.GetTargetSiteIdAndInstanceIdThenClose Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_GetTargetSiteIdAndInstanceIdThenClose.htm" />
   </HelpKINode>
   <HelpKINode Title="HelperClass property" Url="html/P_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute_HelperClass.htm" />
+  <HelpKINode Title="IgnoredAssetException class">
+    <HelpKINode Title="IgnoredAssetException Class" Url="html/T_SecretNest_RemoteAgency_IgnoredAssetException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_IgnoredAssetException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_IgnoredAssetException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IgnoredAssetException.Message property" Url="html/P_SecretNest_RemoteAgency_IgnoredAssetException_Message.htm" />
   <HelpKINode Title="IManagedObjectCommunicate interface">
     <HelpKINode Title="IManagedObjectCommunicate Interface" Url="html/T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm" />
@@ -553,7 +566,6 @@
   </HelpKINode>
   <HelpKINode Title="IManagedObjectCommunicate.CloseRequestedByManagingObject method" Url="html/M_SecretNest_RemoteAgency_IManagedObjectCommunicate_CloseRequestedByManagingObject.htm" />
   <HelpKINode Title="IManagedObjectCommunicate.CreateEmptyMessageCallback property" Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_CreateEmptyMessageCallback.htm" />
-  <HelpKINode Title="IManagedObjectCommunicate.GetSiteIdCallback property" Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_GetSiteIdCallback.htm" />
   <HelpKINode Title="IManagedObjectCommunicate.SendOneWaySpecialCommandMessageCallback property" Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_SendOneWaySpecialCommandMessageCallback.htm" />
   <HelpKINode Title="IMessageBodyGenericEventArgs(Of TSerialized, TEntityBase) interface">
     <HelpKINode Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase) Interface" Url="html/T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm" />
@@ -653,6 +665,7 @@
   <HelpKINode Title="IRemoteAgencyMessage.SenderSiteId property" Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_SenderSiteId.htm" />
   <HelpKINode Title="IRemoteAgencyMessage.TargetInstanceId property" Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_TargetInstanceId.htm" />
   <HelpKINode Title="IRemoteAgencyMessage.TargetSiteId property" Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_TargetSiteId.htm" />
+  <HelpKINode Title="IsAsyncMethod property" Url="html/P_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute_IsAsyncMethod.htm" />
   <HelpKINode Title="IsEmptyMessage property">
     <HelpKINode Title="IRemoteAgencyMessage.IsEmptyMessage Property " Url="html/P_SecretNest_RemoteAgency_IRemoteAgencyMessage_IsEmptyMessage.htm" />
     <HelpKINode Title="MessageBodyEventArgsBase.IsEmptyMessage Property " Url="html/P_SecretNest_RemoteAgency_MessageBodyEventArgsBase_IsEmptyMessage.htm" />
@@ -704,10 +717,16 @@
   <HelpKINode Title="LocalExceptionHandlingAttribute.LocalExceptionHandlingAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute__ctor.htm" />
   <HelpKINode Title="LocalExceptionHandlingAttribute.LocalExceptionHandlingMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute_LocalExceptionHandlingMode.htm" />
   <HelpKINode Title="LocalExceptionHandlingMode enumeration" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingMode.htm" />
-  <HelpKINode Title="LocalExceptionHandlingMode property" Url="html/P_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute_LocalExceptionHandlingMode.htm" />
+  <HelpKINode Title="LocalExceptionHandlingMode property">
+    <HelpKINode Title="LocalExceptionHandlingAttribute.LocalExceptionHandlingMode Property " Url="html/P_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute_LocalExceptionHandlingMode.htm" />
+    <HelpKINode Title="ProxyEventRouterBase.LocalExceptionHandlingMode Property " Url="html/P_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_LocalExceptionHandlingMode.htm" />
+  </HelpKINode>
   <HelpKINode Title="LoopbackAddressDetection property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_LoopbackAddressDetection.htm" />
   <HelpKINode Title="MemberPath property" Url="html/P_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException_MemberPath.htm" />
-  <HelpKINode Title="Message property" Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_Message.htm" />
+  <HelpKINode Title="Message property">
+    <HelpKINode Title="AssetNotFoundException.Message Property " Url="html/P_SecretNest_RemoteAgency_AssetNotFoundException_Message.htm" />
+    <HelpKINode Title="IgnoredAssetException.Message Property " Url="html/P_SecretNest_RemoteAgency_IgnoredAssetException_Message.htm" />
+  </HelpKINode>
   <HelpKINode Title="MessageBody property">
     <HelpKINode Title="BeforeMessageProcessingEventArgs(TSerialized, TEntityBase).MessageBody Property " Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_MessageBody.htm" />
     <HelpKINode Title="IMessageBodyGenericEventArgs(TSerialized, TEntityBase).MessageBody Property " Url="html/P_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2_MessageBody.htm" />
@@ -905,6 +924,7 @@
     <HelpKINode Title="IProxyCommunicate.ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_ProcessOneWayEventRaisingMessage.htm" />
     <HelpKINode Title="ProxyEventHelper.ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventHelper_ProcessOneWayEventRaisingMessage.htm" />
     <HelpKINode Title="ProxyEventRouterBase(TDelegate, TParameterEntity).ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_2_ProcessOneWayEventRaisingMessage.htm" />
+    <HelpKINode Title="ProxyEventRouterBase(TDelegate, TParameterEntity, TReturnValueEntity).ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3_ProcessOneWayEventRaisingMessage.htm" />
     <HelpKINode Title="ProxyEventRouterBase.ProcessOneWayEventRaisingMessage Method " Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_ProcessOneWayEventRaisingMessage.htm" />
   </HelpKINode>
   <HelpKINode Title="ProcessOneWayMethodMessage method" Url="html/M_SecretNest_RemoteAgency_IServiceWrapperCommunicate_ProcessOneWayMethodMessage.htm" />
@@ -987,10 +1007,12 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3.htm" />
   </HelpKINode>
   <HelpKINode Title="ProxyEventRouterBase(Of TDelegate, TParameterEntity, TReturnValueEntity).ProcessEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3_ProcessEventRaisingMessage.htm" />
+  <HelpKINode Title="ProxyEventRouterBase(Of TDelegate, TParameterEntity, TReturnValueEntity).ProcessOneWayEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3_ProcessOneWayEventRaisingMessage.htm" />
   <HelpKINode Title="ProxyEventRouterBase(Of TDelegate, TParameterEntity, TReturnValueEntity).ProxyEventRouterBase constructor" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3__ctor.htm" />
   <HelpKINode Title="ProxyEventRouterBase.AssetName property" Url="html/P_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_AssetName.htm" />
   <HelpKINode Title="ProxyEventRouterBase.Close method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_Close.htm" />
   <HelpKINode Title="ProxyEventRouterBase.GetTargetSiteIdAndInstanceIdThenClose method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_GetTargetSiteIdAndInstanceIdThenClose.htm" />
+  <HelpKINode Title="ProxyEventRouterBase.LocalExceptionHandlingMode property" Url="html/P_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_LocalExceptionHandlingMode.htm" />
   <HelpKINode Title="ProxyEventRouterBase.OnRemoteServiceWrapperClosing method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_OnRemoteServiceWrapperClosing.htm" />
   <HelpKINode Title="ProxyEventRouterBase.ProcessEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_ProcessEventRaisingMessage.htm" />
   <HelpKINode Title="ProxyEventRouterBase.ProcessOneWayEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_ProcessOneWayEventRaisingMessage.htm" />
@@ -1003,6 +1025,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3.htm" />
   </HelpKINode>
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate, TParameterEntity, TReturnValueEntity&gt;.ProcessEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3_ProcessEventRaisingMessage.htm" />
+  <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate, TParameterEntity, TReturnValueEntity&gt;.ProcessOneWayEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3_ProcessOneWayEventRaisingMessage.htm" />
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate, TParameterEntity, TReturnValueEntity&gt;.ProxyEventRouterBase constructor" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_3__ctor.htm" />
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate, TParameterEntity&gt; class">
     <HelpKINode Title="ProxyEventRouterBase(TDelegate, TParameterEntity) Class" Url="html/T_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_2.htm" />
@@ -1237,6 +1260,7 @@
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes namespace" Url="html/N_SecretNest_RemoteAgency_Attributes.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm" />
@@ -1296,6 +1320,7 @@
   <HelpKINode Title="SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase&lt;TServiceContractInterface, TParameterEntity, TReturnValueEntity&gt; class" Url="html/T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventRouterBase_3.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase&lt;TServiceContractInterface, TParameterEntity&gt; class" Url="html/T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventRouterBase_2.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Helper.ServiceWrapperEventRouterBase&lt;TServiceContractInterface&gt; class" Url="html/T_SecretNest_RemoteAgency_Helper_ServiceWrapperEventRouterBase_1.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.IgnoredAssetException class" Url="html/T_SecretNest_RemoteAgency_IgnoredAssetException.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.IManagedObjectCommunicate interface" Url="html/T_SecretNest_RemoteAgency_IManagedObjectCommunicate.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.IMessageBodyGenericEventArgs(Of TSerialized, TEntityBase) interface" Url="html/T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.IMessageBodyGenericEventArgs&lt;TSerialized, TEntityBase&gt; interface" Url="html/T_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2.htm" />

@@ -13,7 +13,8 @@
     <section>
       <title>Ignoring</title>
       <content>
-        <para>Setting <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> will ignore the parameter from transmitting. It’s usually used for optimized entity by removing the parameter not being used by remote site, like the sender in event arguments.</para>
+        <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> on the parameter will avoid the value from transmitting. It’s usually used for optimized entity by removing the parameter not being used by remote site, like the sender in event arguments.</para>
+        <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference> on the asset will avoid the result value from transmitting. It should be noted that this attribute only affects the transmission of the return value. Exception and two-way parameters are not affected.</para>
       </content>
     </section>
 

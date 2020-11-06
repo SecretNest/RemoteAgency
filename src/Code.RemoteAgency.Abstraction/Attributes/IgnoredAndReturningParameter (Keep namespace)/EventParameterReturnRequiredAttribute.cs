@@ -14,6 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When <see cref="ParameterReturnRequiredAttribute.IsIncludedInReturning"/> is set as <see langword="false" />, or <see cref="ParameterReturnRequiredAttribute.IsIncludedWhenExceptionThrown"/> is set as <see langword="false" /> when exception thrown, the parameter will be set as default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
     /// </remark>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevelEventOnly" />
+    /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
     public class EventParameterReturnRequiredAttribute : ParameterReturnRequiredAttribute
     {

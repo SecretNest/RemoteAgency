@@ -9,6 +9,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks>The property should be public readable and writable with the same type as the property pointed.</remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevel" />
+    /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public class ReturnRequiredPropertyHelperAttribute : Attribute
     {

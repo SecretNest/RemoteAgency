@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b6910a74-dde5-4d20-ac0d-4fb1231cea87" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Asynchronous method is not supported by Remote Agency because the advantage from asynchronous calling is meaningless compared to the overhead when running code remotely. </para>
+      <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference> can be used on all methods with return as Task, ValueTask or their derived class for compatible when calling asynchronous methods.</para>
+    </introduction>
+
+    <section>
+      <title>Ignoring</title>
+      <content>
+        <para>When one asset is not required to be handled by Remote Agency, mark it with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference>. The code accessing the ignored asset has no effect and gets only the default outputs or throws an exception based on the setting <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException</codeEntityReference>.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Mechanism</title>
+      <content>
+        <para>No matter async keyword is used on the method or not, this attribute marked method will be treated in the following ways:</para>
+        <list class="nobullet">
+          <listItem><para>Normally, the server side (service wrapper) will call this method and wait for the completion, when requested from the client side (proxy).</para></listItem>
+          <listItem><para>If result is required, a completed task with the result from the server side will be created on the client side.</para></listItem>
+          <listItem><para>The state of the task will never be transferred.</para></listItem>
+          <listItem><para>If there is any exception thrown inside the method, the exception object will be transferred to the client side and thrown. No exception handling is called on the server side.</para></listItem>
+          <listItem><para>If the method is marked with one-way, server side will call the method without waiting for the result.</para></listItem>
+        </list>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
+      <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

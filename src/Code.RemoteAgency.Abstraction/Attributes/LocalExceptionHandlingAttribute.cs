@@ -14,6 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
+    /// <conceptualLink target="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class LocalExceptionHandlingAttribute : Attribute
     {

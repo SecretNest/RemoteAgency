@@ -59,9 +59,9 @@ IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其g
 					如果IsOneWay为真（此时HelperMethod没有参数out exception、out exceptionForService）：
 						按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
 							为NotAsyncMethod时：
-								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。无需处理返回值（不论是否有）。——执行结束点
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。无需处理返回值（不论是否有）。——执行结束点
 							为Task、TaskOfType、ValueTask或ValueTaskOfType时：
-								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。无需处理返回值。——执行结束点（不等待Task结束，不处理Task中可能存在的异常）
+								Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。无需处理返回值。——执行结束点（不等待Task结束，不处理Task中可能存在的异常）
 							其它情况：抛出异常（非Emit）。
 					否则（此时HelperMethod有参数out exception、out exceptionForService）：
 						Emit构造一个MethodBodyInfo中的ReturnValueEntity指向的类的对象Response（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
@@ -77,21 +77,21 @@ IManagedObjectCommunicate.CreateEmptyMessageCallback会在构造后传入，其g
 								按照元素的AsyncMethodOriginalReturnValueDataTypeClass：
 									为NotAsyncMethod时：
 										当AsyncMethodInnerOrNonAsyncMethodReturnValueDataType不是void时：
-											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。将返回值保存在返回值变量中。
+											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。将返回值保存在返回值变量中。
 										否则：
-											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+											Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
 									为Task时：
-										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
 										Emit调用返回值（Task）的Wait()。
 									为ValueTask时：
-										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
 										Emit判断返回值（ValueTask）的IsCompleted为假，或IsFaulted为真：
 											Emit调用返回值.AsTask().Wait()。
 									为TaskOfType时：
-										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
 										Emit将返回值（Task<>）的Result保存在返回值变量中。
 									为ValueTaskOfType时：
-										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，均已通过上述遍历定义并赋值。
+										Emit调用ServiceObject中Method元素的Asset对应的方法。方法的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
 										Emit将返回值（ValueTask<>）的Result保存在返回值变量中。
 									其它情况：抛出异常（非Emit）。
 								Emit设置bypassExceptionForService为false。

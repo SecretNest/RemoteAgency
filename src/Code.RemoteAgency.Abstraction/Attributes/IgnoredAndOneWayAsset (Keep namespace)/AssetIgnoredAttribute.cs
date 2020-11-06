@@ -12,6 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>When this attribute is absent, the ignored mode is disabled.</para>
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
+    /// <conceptualLink target="e7b65736-b2df-4aa9-897a-3a3050d3cceb" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
     public class AssetIgnoredAttribute : Attribute
     {
