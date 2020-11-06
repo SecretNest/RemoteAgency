@@ -47,7 +47,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             var interfaceLevelLocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_result.SourceInterface,
-                    i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Redirect);
+                    i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Suppress);
             var interfaceLevelOperatingTimeoutTimeAttribute =
                 _result.SourceInterface.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
             int interfaceLevelMethodCallingTimeout,

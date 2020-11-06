@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -29,10 +30,10 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public bool NeedEventHelper => Events.Any(i => !i.IsIgnored);
 
-        public List<RemoteAgencyAttributePassThrough> InterfaceLevelPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> InterfaceLevelPassThroughAttributes { get; set; }
         public Type[] InterfaceLevelGenericParameters { get; set; }
 
-        public Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+        public Dictionary<string, List<CustomAttributeBuilder>>
             InterfaceLevelGenericParameterPassThroughAttributes { get; set; }
 
         public List<Attribute> SerializerInterfaceLevelAttributes { get; set; }

@@ -7,18 +7,12 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Specifies an attribute should be marked at the same place of built proxy class.
     /// </summary>
-    /// <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
-    /// <para>When using the parameterless constructor of target attribute, <see cref="AttributeId"/>, <see cref="AttributeConstructorParameterTypes"/> and <see cref="AttributeConstructorParameters"/> are not required.</para>
-    /// <para>When using a constructor with all parameters specified in orders, sets types of parameters of constructor to <see cref="AttributeConstructorParameterTypes"/> and values to <see cref="AttributeConstructorParameters"/>. When the length of <see cref="AttributeConstructorParameters"/> is smaller than the length of <see cref="AttributeConstructorParameterTypes"/>, the missing parameters will not be passed into the constructor. <see cref="AttributeId"/> is not required.</para>
-    /// <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <see cref="AttributeConstructorParameterTypes"/> and leading values to <see cref="AttributeConstructorParameters"/>. Marks the rest one by one using <see cref="AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
-    /// <para>When properties need to be set while initializing, marks the properties one by one using <see cref="AttributePassThroughPropertyAttribute"/>. The <see cref="AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
-    /// <para>When fields need to be set while initializing, marks the fields one by one using <see cref="AttributePassThroughFieldAttribute"/>. The <see cref="AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <see cref="AttributeId"/>.</para>
-    /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+    /// <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue | 
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
-    public class AttributePassThroughAttribute : Attribute
+    public sealed class AttributePassThroughAttribute : Attribute
     {
         /// <summary>
         /// Gets the id of the instance of the attribute.
@@ -48,7 +42,14 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="attribute">Type of the attribute.</param>
         /// <param name="attributeConstructorParameterTypes">Types to identify the constructor of attribute. Default value is <see langword="null"/>. Set the value to <see langword="null"/> or empty array to use parameterless constructor.</param>
         /// <param name="attributeConstructorParameters">Parameters used in constructor. The length can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
-        /// <param name="attributeId"></param>
+        /// <param name="attributeId">Id of the instance of the attribute.</param>
+        /// <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
+        /// <para>When using the parameterless constructor of target attribute, <paramref name="attributeConstructorParameterTypes"/> and <paramref name="attributeConstructorParameters"/> are not required.</para>
+        /// <para>When using a constructor with all parameters specified in order, sets types of parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and values to <paramref name="attributeConstructorParameters"/>. When the length of <paramref name="attributeConstructorParameters"/> is smaller than the length of <paramref name="attributeConstructorParameterTypes"/>, the missing parameters will be filled by <see langword="null"/>.</para>
+        /// <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and leading values to <paramref name="attributeConstructorParameters"/>. Marks the rest one by one using <see cref="AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+        /// <para>When properties need to be set while initializing, marks the properties one by one using <see cref="AttributePassThroughPropertyAttribute"/>. The <see cref="AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+        /// <para>When fields need to be set while initializing, marks the fields one by one using <see cref="AttributePassThroughFieldAttribute"/>. The <see cref="AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+        /// </remarks>
         public AttributePassThroughAttribute(Type attribute, Type[] attributeConstructorParameterTypes = null, object[] attributeConstructorParameters = null, string attributeId = null)
         {
             AttributeId = attributeId;

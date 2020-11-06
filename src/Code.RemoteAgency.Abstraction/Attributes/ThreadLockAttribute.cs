@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>In service wrapper, method and property assets are affected.</para></remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public class ThreadLockAttribute : Attribute
+    public sealed class ThreadLockAttribute : Attribute
     {
         /// <summary>
         /// Gets thread choosing for accessing assets. 

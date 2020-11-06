@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -9,9 +10,9 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        List<RemoteAgencyAttributePassThrough> GetAttributePassThrough(ICustomAttributeProvider dataSource, Func<string, Attribute, InvalidAttributeDataException> creatingExceptionCallback)
+        List<CustomAttributeBuilder> GetAttributePassThrough(ICustomAttributeProvider dataSource, Func<string, Attribute, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            List<RemoteAgencyAttributePassThrough> result = new List<RemoteAgencyAttributePassThrough>();
+            List<CustomAttributeBuilder> result = new List<CustomAttributeBuilder>();
 
             if (!_includesProxyOnlyInfo)
                 return result;
@@ -44,39 +45,38 @@ namespace SecretNest.RemoteAgency.Inspecting
                         continue;
                 }
 
-                var mainRecord = new RemoteAgencyAttributePassThrough
-                {
-                    Attribute = attributePassThroughAttribute.Attribute,
-                    AttributeConstructorParameterTypes =
-                        attributePassThroughAttribute.AttributeConstructorParameterTypes,
-                    AttributeConstructorParameters = new List<KeyValuePair<int, object>>(),
-                    AttributeProperties = new List<KeyValuePair<string, object>>(),
-                    AttributeFields = new List<KeyValuePair<string, object>>()
-                };
+                CustomAttributeBuilder customAttributeBuilder;
+
+                var attribute = attributePassThroughAttribute.Attribute;
+
+                var ctorInfo = attribute.GetConstructor(attributePassThroughAttribute.AttributeConstructorParameterTypes);
+                if (ctorInfo == null)
+                    throw new InvalidOperationException(
+                        $"The constructor of {attribute.Name} specified with {nameof(AttributePassThroughAttribute)}.{nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)} in attribute is not found.");
+
+                object[] ctorParameters = new object[attributePassThroughAttribute.AttributeConstructorParameterTypes.Length];
 
                 if (attributePassThroughAttribute.AttributeConstructorParameterTypes.Length != 0)
                 {
-                    Dictionary<int, object> parameters =
-                        new Dictionary<int, object>(attributePassThroughAttribute.AttributeConstructorParameterTypes
-                            .Length);
-
+                    //parameters
                     if (attributePassThroughAttribute.AttributeConstructorParameters != null)
                     {
                         if (attributePassThroughAttribute.AttributeConstructorParameters.Length >
-                            attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
+                            ctorParameters.Length)
                         {
                             throw creatingExceptionCallback(
-                                $"Length of {nameof(attributePassThroughAttribute.AttributeConstructorParameters)} can not exceed the length of {nameof(attributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
+                                $"Length of {nameof(attributePassThroughAttribute.AttributeConstructorParameters)} cannot exceed the length of {nameof(attributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
                                 attributePassThroughAttribute);
                         }
 
                         for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameters.Length; i++)
                         {
-                            parameters[i] = attributePassThroughAttribute.AttributeConstructorParameters[i];
+                            ctorParameters[i] = attributePassThroughAttribute.AttributeConstructorParameters[i];
                         }
 
                     }
 
+                    //additional parameters
                     if (attributePassThroughAttribute.AttributeId != null)
                     {
                         var linkedAttributePassThroughIndexBasedParameterAttributes =
@@ -92,76 +92,142 @@ namespace SecretNest.RemoteAgency.Inspecting
                             if (!setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
                                 continue;
                             else if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
-                                attributePassThroughAttribute.AttributeConstructorParameterTypes.Length)
+                                     ctorParameters.Length || attributePassThroughIndexBasedParameterAttribute.ParameterIndex < 0)
                             {
                                 throw creatingExceptionCallback(
-                                    $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
+                                    $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be negative, equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
                                     attributePassThroughIndexBasedParameterAttribute);
                             }
                             else
                             {
-                                parameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
+                                ctorParameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
                                     attributePassThroughIndexBasedParameterAttribute.Value;
                             }
                         }
                     }
-
-                    for (int i = 0; i < attributePassThroughAttribute.AttributeConstructorParameterTypes.Length; i++)
-                    {
-                        if (parameters.TryGetValue(i, out var value))
-                            mainRecord.AttributeConstructorParameters.Add(new KeyValuePair<int, object>(i, value));
-                    }
                 }
 
+                //properties and fields
                 if (attributePassThroughAttribute.AttributeId != null)
                 {
-                    HashSet<string> setProperties = new HashSet<string>();
+                    PropertyInfo[] propertyInfo;
+                    object[] propertyValue;
 
+                    bool useProperty;
+
+                    //properties
                     var linkedAttributePassThroughPropertyAttributes =
                         attributePassThroughPropertyAttributes[attributePassThroughAttribute.AttributeId]
-                            .OrderBy(i => i.Order);
+                            .OrderBy(i => i.Order).ToList();
 
-                    foreach (var attributePassThroughPropertyAttribute in linkedAttributePassThroughPropertyAttributes)
+                    if (linkedAttributePassThroughPropertyAttributes.Any())
                     {
-                        //Avoid process with same property.
-                        if (!setProperties.Add(attributePassThroughPropertyAttribute.PropertyName))
-                            continue;
+                        useProperty = true;
+                        HashSet<string> setProperties = new HashSet<string>();
+                        List<PropertyInfo> memberInfos = new List<PropertyInfo>();
+                        List<object> memberValues = new List<object>();
 
-                        mainRecord.AttributeProperties.Add(new KeyValuePair<string, object>(
-                            attributePassThroughPropertyAttribute.PropertyName,
-                            attributePassThroughPropertyAttribute.Value));
+                        foreach (var attributePassThroughPropertyAttribute in linkedAttributePassThroughPropertyAttributes)
+                        {
+                            //Avoid process with same property.
+                            if (!setProperties.Add(attributePassThroughPropertyAttribute.PropertyName))
+                                continue;
+
+                            var info = attribute.GetProperty(attributePassThroughPropertyAttribute.PropertyName, BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance);
+                            if (info == null)
+                                throw creatingExceptionCallback(
+                                    $"Property {attributePassThroughPropertyAttribute.PropertyName} doesn't exist in {attribute.Name} or is not settable publicly.",
+                                    attributePassThroughPropertyAttribute);
+                            memberInfos.Add(info);
+                            memberValues.Add(attributePassThroughPropertyAttribute.Value);
+                        }
+
+                        propertyInfo = memberInfos.ToArray();
+                        propertyValue = memberValues.ToArray();
                     }
-                    
-                    HashSet<string> setFields = new HashSet<string>();
+                    else
+                    {
+                        useProperty = false;
+                        propertyInfo = null;
+                        propertyValue = null;
+                    }
 
+                    //fields and build
                     var linkedAttributePassThroughFieldAttributes =
                         attributePassThroughFieldAttributes[attributePassThroughAttribute.AttributeId]
-                            .OrderBy(i => i.Order);
+                            .OrderBy(i => i.Order).ToList();
 
-                    foreach (var attributePassThroughFieldAttribute in linkedAttributePassThroughFieldAttributes)
+                    if (linkedAttributePassThroughFieldAttributes.Any())
                     {
-                        //Avoid process with same property.
-                        if (!setFields.Add(attributePassThroughFieldAttribute.FieldName))
-                            continue;
+                        FieldInfo[] fieldInfo;
+                        object[] fieldValue;
 
-                        mainRecord.AttributeFields.Add(new KeyValuePair<string, object>(
-                            attributePassThroughFieldAttribute.FieldName,
-                            attributePassThroughFieldAttribute.Value));
+                        HashSet<string> setFields = new HashSet<string>();
+                        List<FieldInfo> memberInfos = new List<FieldInfo>();
+                        List<object> memberValues = new List<object>();
+
+                        foreach (var attributePassThroughFieldAttribute in linkedAttributePassThroughFieldAttributes)
+                        {
+                            //Avoid process with same field.
+                            if (!setFields.Add(attributePassThroughFieldAttribute.FieldName))
+                                continue;
+
+                            var info = attribute.GetField(attributePassThroughFieldAttribute.FieldName, BindingFlags.SetField | BindingFlags.Public | BindingFlags.Instance);
+                            if (info == null)
+                                throw creatingExceptionCallback(
+                                    $"Field {attributePassThroughFieldAttribute.FieldName} doesn't exist in {attribute.Name} or is not settable publicly.",
+                                    attributePassThroughFieldAttribute);
+                            memberInfos.Add(info);
+                            memberValues.Add(attributePassThroughFieldAttribute.Value);
+                        }
+
+                        fieldInfo = memberInfos.ToArray();
+                        fieldValue = memberValues.ToArray();
+
+                        //build with property and field
+                        if (useProperty)
+                        {
+                            customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters, propertyInfo,
+                                propertyValue, fieldInfo,
+                                fieldValue);
+                        }
+                        else
+                        {
+                            customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters, fieldInfo, fieldValue);
+                        }
+                    }
+                    else
+                    {
+                        //build with property
+                        if (useProperty)
+                        {
+                            customAttributeBuilder =
+                                new CustomAttributeBuilder(ctorInfo, ctorParameters, propertyInfo, propertyValue);
+                        }
+                        else
+                        {
+                            customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters);
+                        }
                     }
                 }
+                else
+                {
+                    //build without property or field
+                    customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters);
+                }
 
-                result.Add(mainRecord);
+                result.Add(customAttributeBuilder);
             }
 
             return result;
         }
 
-        Dictionary<string, List<RemoteAgencyAttributePassThrough>> FillAttributePassThroughOnParameters(
+        Dictionary<string, List<CustomAttributeBuilder>> FillAttributePassThroughOnParameters(
             ParameterInfo[] parameters,
             Func<string, Attribute, ParameterInfo, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>> result =
-                new Dictionary<string, List<RemoteAgencyAttributePassThrough>>(parameters.Length);
+            Dictionary<string, List<CustomAttributeBuilder>> result =
+                new Dictionary<string, List<CustomAttributeBuilder>>(parameters.Length);
             foreach (var parameterInfo in parameters)
             {
                 result[parameterInfo.Name] = GetAttributePassThrough(parameterInfo,
@@ -171,11 +237,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             return result;
         }
 
-        Dictionary<string, List<RemoteAgencyAttributePassThrough>> FillAttributePassThroughOnGenericParameters(
+        Dictionary<string, List<CustomAttributeBuilder>> FillAttributePassThroughOnGenericParameters(
             Type[] genericParameters, Func<string, Attribute, MemberInfo, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>> result =
-                new Dictionary<string, List<RemoteAgencyAttributePassThrough>>(genericParameters.Length);
+            Dictionary<string, List<CustomAttributeBuilder>> result =
+                new Dictionary<string, List<CustomAttributeBuilder>>(genericParameters.Length);
             foreach (var typeInfo in genericParameters)
             {
                 result[typeInfo.Name] = GetAttributePassThrough(typeInfo, (m, a) => creatingExceptionCallback(m, a, typeInfo));

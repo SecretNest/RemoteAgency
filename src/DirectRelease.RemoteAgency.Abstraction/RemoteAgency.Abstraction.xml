@@ -30,14 +30,8 @@
             <summary>
             Specifies an attribute should be marked at the same place of built proxy class.
             </summary>
-            <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
-            <para>When using the parameterless constructor of target attribute, <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>, <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> are not required.</para>
-            <para>When using a constructor with all parameters specified in orders, sets types of parameters of constructor to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and values to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/>. When the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> is smaller than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/>, the missing parameters will not be passed into the constructor. <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is not required.</para>
-            <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> and leading values to <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/>. Marks the rest one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
-            <para>When properties need to be set while initializing, marks the properties one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
-            <para>When fields need to be set while initializing, marks the fields one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/>.</para>
-            </remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+            <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId">
             <summary>
@@ -68,7 +62,14 @@
             <param name="attribute">Type of the attribute.</param>
             <param name="attributeConstructorParameterTypes">Types to identify the constructor of attribute. Default value is <see langword="null"/>. Set the value to <see langword="null"/> or empty array to use parameterless constructor.</param>
             <param name="attributeConstructorParameters">Parameters used in constructor. The length can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
-            <param name="attributeId"></param>
+            <param name="attributeId">Id of the instance of the attribute.</param>
+            <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
+            <para>When using the parameterless constructor of target attribute, <paramref name="attributeConstructorParameterTypes"/> and <paramref name="attributeConstructorParameters"/> are not required.</para>
+            <para>When using a constructor with all parameters specified in order, sets types of parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and values to <paramref name="attributeConstructorParameters"/>. When the length of <paramref name="attributeConstructorParameters"/> is smaller than the length of <paramref name="attributeConstructorParameterTypes"/>, the missing parameters will be filled by <see langword="null"/>.</para>
+            <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and leading values to <paramref name="attributeConstructorParameters"/>. Marks the rest one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            <para>When properties need to be set while initializing, marks the properties one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            <para>When fields need to be set while initializing, marks the fields one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            </remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute">
             <summary>
@@ -77,6 +78,7 @@
             <remarks><para>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>.</para>
             <para>Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</para></remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+            <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId">
             <summary>
@@ -110,6 +112,7 @@
             </summary>
             <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/>.</remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+            <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId">
             <summary>
@@ -147,6 +150,7 @@
             </summary>
             <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/>.</remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+            <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId">
             <summary>
@@ -204,8 +208,8 @@
             <summary>
             Initializes an instance of AssetIgnoredAttribute.
             </summary>
-            <param name="isIgnored">Whether the asset is ignored. Default value is true.</param>
-            <param name="willThrownException">Whether an exception should be thrown while accessing this asset. Default value is true.</param>
+            <param name="isIgnored">Whether the asset is ignored. Default value is <see langword="true"/>.</param>
+            <param name="willThrownException">Whether an exception should be thrown while accessing this asset. Default value is <see langword="true"/>.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.PropertyGetOneWayOperatingAttribute">
             <summary>
@@ -380,7 +384,7 @@
             <summary>
             Initializes an instance of ReturnIgnoredAttribute.
             </summary>
-            <param name="isIgnored">Whether the return value is ignored. Default value is true.</param>
+            <param name="isIgnored">Whether the return value is ignored. Default value is <see langword="true"/>.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute">
             <summary>
@@ -508,7 +512,7 @@
             <summary>
             Initializes an instance of AssetOneWayOperatingAttribute.
             </summary>
-            <param name="isOneWay">Whether the operating is one-way. Default value is true.</param>
+            <param name="isOneWay">Whether the operating is one-way. Default value is <see langword="true"/>.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute">
             <summary>
@@ -839,6 +843,7 @@
             <para>This attribute affects the code being called remotely: method in service wrapper, event adding and removing in service wrapper, property getting and setting in service wrapper and event raising in proxy.</para>
             <para>The attribute declared with interface has lower priority on all assets within the interface. The default setting is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Redirect if this attribute is absent.</para>
             <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
+            <para>The default setting is the same as interface when this attribute absents on asset. The default setting is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Suppress when this attribute absents on interface.</para>
             </remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
             <conceptualLink target="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" />
@@ -852,8 +857,7 @@
             <summary>
             Initializes an instance of the LocalExceptionHandlingAttribute.
             </summary>
-            <param name="mode">Local exception handling mode.</param>
-            <remarks>The default setting is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Suppress if this attribute absents.</remarks>
+            <param name="mode">Local exception handling mode. Default value is <see cref="P:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute.LocalExceptionHandlingMode"/>.Redirect.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingMode">
             <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -16,7 +17,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
             Type[] interfaceLevelGenericParameters,
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+            Dictionary<string, List<CustomAttributeBuilder>>
                 interfaceLevelGenericParameterPassThroughAttributes)
         {
             if (!string.IsNullOrEmpty(RaisingMethodBodyInfo.ParameterEntityName))

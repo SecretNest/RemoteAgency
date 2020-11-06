@@ -14,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     /// <conceptualLink target="b6910a74-dde5-4d20-ac0d-4fb1231cea87" />
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class AsyncMethodAttribute : Attribute
+    public sealed class AsyncMethodAttribute : Attribute
     {
         /// <summary>
         /// Gets whether this method is asynchronous.

@@ -22,7 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Property.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\InvalidParameterAttributeDataException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\InvalidReturnValueAttributeDataException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyAttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.AttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Basic.cs" />

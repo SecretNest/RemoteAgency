@@ -22,7 +22,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
     /// <conceptualLink target="e7b65736-b2df-4aa9-897a-3a3050d3cceb" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
-    public class OperatingTimeoutTimeAttribute : Attribute
+    public sealed class OperatingTimeoutTimeAttribute : Attribute
     {
         /// <summary>
         /// Gets the length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.

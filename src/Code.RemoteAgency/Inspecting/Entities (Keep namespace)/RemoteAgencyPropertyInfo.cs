@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -23,16 +24,16 @@ namespace SecretNest.RemoteAgency.Inspecting
         public RemoteAgencyMethodBodyInfo GettingMethodBodyInfo { get; set; }
         public RemoteAgencyMethodBodyInfo SettingMethodBodyInfo { get; set; }
 
-        public List<RemoteAgencyAttributePassThrough> GettingMethodPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> GettingMethodPassThroughAttributes { get; set; }
         public List<Attribute> GettingMethodSerializerAssetLevelAttributes { get; set; }
-        public List<RemoteAgencyAttributePassThrough> SettingMethodPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> SettingMethodPassThroughAttributes { get; set; }
         public List<Attribute> SettingMethodSerializerAssetLevelAttributes { get; set; }
 
-        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> MethodParameterPassThroughAttributes { get; set; }
-        public List<RemoteAgencyAttributePassThrough> GettingMethodReturnValuePassThroughAttributes { get; set; }
+        public Dictionary<string, List<CustomAttributeBuilder>> MethodParameterPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> GettingMethodReturnValuePassThroughAttributes { get; set; }
 
         public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes, Type[] interfaceLevelGenericParameters,
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>> interfaceLevelGenericParameterPassThroughAttributes)
+            Dictionary<string, List<CustomAttributeBuilder>> interfaceLevelGenericParameterPassThroughAttributes)
         {
             if (IsGettable)
             {

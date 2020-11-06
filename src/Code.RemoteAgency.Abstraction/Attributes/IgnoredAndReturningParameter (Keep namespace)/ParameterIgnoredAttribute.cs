@@ -15,7 +15,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevel" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+#pragma warning disable CA1813 // Avoid unsealed attributes
     public class ParameterIgnoredAttribute : Attribute
+#pragma warning restore CA1813 // Avoid unsealed attributes
     {
         /// <summary>
         /// Gets whether this parameter is excluded from parameter entity. If set as <see langword="true"/>, this parameter should not be transferred to remote site.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -16,14 +17,14 @@ namespace SecretNest.RemoteAgency.Inspecting
         
         public bool IsOneWay { get; set; }
 
-        public List<RemoteAgencyAttributePassThrough> AssetLevelPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> AssetLevelPassThroughAttributes { get; set; }
         public List<Attribute> SerializerAssetLevelAttributes { get; set; }
         
         public LocalExceptionHandlingMode LocalExceptionHandlingMode { get; set; }
 
         public abstract IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
             Type[] interfaceLevelGenericParameters,
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+            Dictionary<string, List<CustomAttributeBuilder>>
                 interfaceLevelGenericParameterPassThroughAttributes);
     }
 }

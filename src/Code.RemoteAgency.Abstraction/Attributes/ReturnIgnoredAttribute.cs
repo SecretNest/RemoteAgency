@@ -19,7 +19,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = true, AllowMultiple = false)]
-    public class ReturnIgnoredAttribute : Attribute
+    public sealed class ReturnIgnoredAttribute : Attribute
     {
         /// <summary>
         /// Gets whether the return value is ignored.
@@ -29,7 +29,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Initializes an instance of ReturnIgnoredAttribute.
         /// </summary>
-        /// <param name="isIgnored">Whether the return value is ignored. Default value is true.</param>
+        /// <param name="isIgnored">Whether the return value is ignored. Default value is <see langword="true"/>.</param>
         public ReturnIgnoredAttribute(bool isIgnored = true)
         {
             IsIgnored = isIgnored;

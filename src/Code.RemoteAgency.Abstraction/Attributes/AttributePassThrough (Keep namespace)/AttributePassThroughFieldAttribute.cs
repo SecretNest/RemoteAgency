@@ -9,10 +9,11 @@ namespace SecretNest.RemoteAgency.Attributes
     /// </summary>
     /// <remarks>This attribute works with <see cref="AttributePassThroughAttribute"/> with the value <see cref="AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="AttributeId"/>.</remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+    /// <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
     [AttributeUsage(AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property |
                     AttributeTargets.Parameter | AttributeTargets.GenericParameter | AttributeTargets.ReturnValue |
                     AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
-    public class AttributePassThroughFieldAttribute : Attribute
+    public sealed class AttributePassThroughFieldAttribute : Attribute
     {
         /// <summary>
         /// Gets the id of the instance of the attribute.

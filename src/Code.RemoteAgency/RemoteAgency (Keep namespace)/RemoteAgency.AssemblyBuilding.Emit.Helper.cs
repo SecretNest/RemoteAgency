@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgency
     {
         void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters,
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>> genericParameterPassThroughAttributes)
+            Dictionary<string, List<CustomAttributeBuilder>> genericParameterPassThroughAttributes)
         {
             if (genericParameters.Length > 0)
             {
@@ -72,29 +72,29 @@ namespace SecretNest.RemoteAgency
         }
 
         void EmitAttributePassThroughAttributes(GenericTypeParameterBuilder typeBuilder,
-            List<RemoteAgencyAttributePassThrough> passThroughAttributes)
+            List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
             {
-                typeBuilder.SetCustomAttribute(customAttribute.GetAttributeBuilder());
+                typeBuilder.SetCustomAttribute(customAttribute);
             }
         }
 
         void EmitAttributePassThroughAttributes(TypeBuilder typeBuilder,
-            List<RemoteAgencyAttributePassThrough> passThroughAttributes)
+            List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
             {
-                typeBuilder.SetCustomAttribute(customAttribute.GetAttributeBuilder());
+                typeBuilder.SetCustomAttribute(customAttribute);
             }
         }
 
         void EmitParameterPassThroughAttributes(ParameterBuilder typeBuilder,
-            List<RemoteAgencyAttributePassThrough> passThroughAttributes)
+            List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
             {
-                typeBuilder.SetCustomAttribute(customAttribute.GetAttributeBuilder());
+                typeBuilder.SetCustomAttribute(customAttribute);
             }
         }
     }

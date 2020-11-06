@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     /// <conceptualLink target="e7b65736-b2df-4aa9-897a-3a3050d3cceb" />
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Delegate, Inherited = true, AllowMultiple = false)]
-    public class AssetOneWayOperatingAttribute : Attribute
+    public sealed class AssetOneWayOperatingAttribute : Attribute
     {
         /// <summary>
         /// Gets whether the operating is one-way.
@@ -28,7 +28,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Initializes an instance of AssetOneWayOperatingAttribute.
         /// </summary>
-        /// <param name="isOneWay">Whether the operating is one-way. Default value is true.</param>
+        /// <param name="isOneWay">Whether the operating is one-way. Default value is <see langword="true"/>.</param>
         public AssetOneWayOperatingAttribute(bool isOneWay = true)
         {
             IsOneWay = isOneWay;

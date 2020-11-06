@@ -18,7 +18,9 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevel" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
+#pragma warning disable CA1813 // Avoid unsealed attributes
     public class ParameterReturnRequiredPropertyAttribute : Attribute
+#pragma warning restore CA1813 // Avoid unsealed attributes
     {
         /// <summary>
         /// Gets whether properties or fields specified should be included in return entity.

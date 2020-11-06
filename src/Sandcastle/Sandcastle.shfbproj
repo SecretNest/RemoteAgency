@@ -109,6 +109,7 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\Attributes\AttributePassThrough.aml" />
     <None Include="Content\Attributes\Index.aml" />
     <None Include="Content\Concept.aml" />
     <None Include="Content\Instance\AssemblyBuilding.aml" />

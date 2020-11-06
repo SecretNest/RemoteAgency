@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     /// <conceptualLink target="beb637a2-3887-49ff-93f3-1f71b095aa7e" />
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class CustomizedMethodEntityNameAttribute : Attribute
+    public sealed class CustomizedMethodEntityNameAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the entity class generated for holding parameters of this asset.

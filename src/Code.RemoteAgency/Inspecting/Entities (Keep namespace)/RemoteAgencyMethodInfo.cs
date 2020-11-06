@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -11,10 +12,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         public bool IsGenericMethod => !IsIgnored && AssetLevelGenericParameters.Length > 0;
 
         public Type[] AssetLevelGenericParameters { get; set; }
-        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> AssetLevelGenericParameterPassThroughAttributes { get; set; }
+        public Dictionary<string, List<CustomAttributeBuilder>> AssetLevelGenericParameterPassThroughAttributes { get; set; }
 
-        public Dictionary<string, List<RemoteAgencyAttributePassThrough>> ParameterPassThroughAttributes { get; set; }
-        public List<RemoteAgencyAttributePassThrough> ReturnValuePassThroughAttributes { get; set; }
+        public Dictionary<string, List<CustomAttributeBuilder>> ParameterPassThroughAttributes { get; set; }
+        public List<CustomAttributeBuilder> ReturnValuePassThroughAttributes { get; set; }
 
         public RemoteAgencyMethodBodyInfo MethodBodyInfo { get; set; }
 
@@ -24,7 +25,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public override IEnumerable<EntityBuildingExtended> GetEntities(List<Attribute> interfaceLevelAttributes,
             Type[] interfaceLevelGenericParameters,
-            Dictionary<string, List<RemoteAgencyAttributePassThrough>>
+            Dictionary<string, List<CustomAttributeBuilder>>
                 interfaceLevelGenericParameterPassThroughAttributes)
         {
             Type[] methodGenericParameters =
