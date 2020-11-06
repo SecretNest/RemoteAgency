@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>In proxy, only event assets are affected.</para>
     /// <para>In service wrapper, method and property assets are affected.</para></remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#InterfaceLevel" />
+    /// <conceptualLink target="3c648b23-25dd-454c-b074-d0f3f0a0958c" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public sealed class ThreadLockAttribute : Attribute
     {
@@ -56,7 +57,7 @@ namespace SecretNest.RemoteAgency.Attributes
     public enum ThreadLockMode
     {
         /// <summary>
-        /// Not specified. The same thread of sending message to Remote Agency will be used to access asset specified.
+        /// Not specified. The same thread of processing received message will be used to access asset specified.
         /// </summary>
         None,
         /// <summary>
