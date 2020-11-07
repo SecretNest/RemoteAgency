@@ -17,7 +17,7 @@
     </section>
 
     <section>
-      <title>Collision avoidance</title>
+      <title>Collision Avoidance</title>
       <content>
         <para>When more than one asset or parameter intend to use the same name, method overloading for example, auto collision avoidance is taken place.</para>
         <para>It should be noted that the name given clearly by attribute will not be modified due to collision avoidance. When an auto chosen name is the same as the manually given one, the auto chosen name will be changed. If collision is found among names specified by attributes, exception will be thrown while creating types.</para>

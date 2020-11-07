@@ -28,18 +28,21 @@ namespace SecretNest.RemoteAgency
         /// Gets the metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level.
         /// </summary>
         /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+        /// <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         public IReadOnlyList<Attribute> InterfaceLevelAttributes { get; }
 
         /// <summary>
         /// Gets the metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> in asset level.
         /// </summary>
         /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+        /// <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         public IReadOnlyList<Attribute> AssetLevelAttributes { get; }
 
         /// <summary>
         /// Gets the metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.
         /// </summary>
         /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+        /// <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         public IReadOnlyList<Attribute> DelegateLevelAttributes { get; }
 
         /// <summary>

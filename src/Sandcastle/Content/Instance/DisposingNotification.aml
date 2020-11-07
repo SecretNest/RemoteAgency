@@ -9,14 +9,14 @@
     </introduction>
 
     <section address="AutoGen">
-      <title>Automatic generating</title>
+      <title>Automatic Generating</title>
       <content>
         <para>Since the registration of events needs to be consistent between the Proxy and Service Wrapper, when the Proxy or Service Wrapper is disposed, if any event is registered, a message will be sent to the remote site to notify the disposing happened. The message will be sent automatically while disposing.</para>
       </content>
     </section>
 
     <section address="ManualGen">
-      <title>Manual notifying</title>
+      <title>Manual Notifying</title>
       <content>
         <para>But when exception is thrown while disposing or error occurred in network transportation for that message, the notification should be sent manually by calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference> (including <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteProxyClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference>) and <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference> (including <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.OnRemoteServiceWrapperClosing(System.Guid,System.Nullable{System.Guid})</codeEntityReference>).</para>
       </content>

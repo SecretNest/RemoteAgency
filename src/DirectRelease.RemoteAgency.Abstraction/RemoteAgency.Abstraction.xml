@@ -1279,18 +1279,21 @@
             Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> in interface level.
             </summary>
             <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityBuilding.AssetLevelAttributes">
             <summary>
             Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> in asset level.
             </summary>
             <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityBuilding.DelegateLevelAttributes">
             <summary>
             Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> for the delegate of event. Only available when processing events.
             </summary>
             <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityBuilding.#ctor(System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityProperty},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Collections.Generic.IReadOnlyList{System.Attribute},System.Type[])">
             <summary>
@@ -1308,6 +1311,7 @@
             Provides code generation for entity classes. This is an abstract class.
             </summary>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#SerializerAdditional" />
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)">
             <summary>
@@ -1320,22 +1324,26 @@
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on interface level.
             </summary>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on asset level.
             </summary>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on delegate level. Only works with processing events.
             </summary>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType">
             <summary>
             Gets the type of the base class of attributes which are used to mark metadata on parameter level.
             </summary>
             <remarks>The parameter level attributes will be searched from parameter of method, parameter of delegate and property itself.</remarks>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityTypeBuilderBase.CreateEmptyMessage">
             <summary>
@@ -1597,6 +1605,7 @@
             Gets the metadata objects marked with derived class specified by <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
             </summary>
             <remarks>This will be set as <see langword="null"/> when <see cref="P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="M:SecretNest.RemoteAgency.EntityProperty.#ctor(System.Type,System.String,System.Collections.Generic.IReadOnlyList{SecretNest.RemoteAgency.EntityPropertyAttribute})">
             <summary>
@@ -1610,6 +1619,7 @@
             <summary>
             Represents an attribute that marked for this property.
             </summary>
+            <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         </member>
         <member name="P:SecretNest.RemoteAgency.EntityPropertyAttribute.Position">
             <summary>

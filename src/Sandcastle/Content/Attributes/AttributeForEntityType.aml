@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="37179c21-8267-47da-83c5-cb71adfc1287" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Attributes marked on the interface and its asset can be transferred to the entity type builder of serializer.</para>
+    </introduction>
+
+    <section>
+      <title>Interface Level</title>
+      <content>
+        <para>When interface level information need to be passed into entity type builder, mark it through an attribute class.</para>
+        <para>To do that, an attribute class need to be chosen. If none of the existing attributes meet the requirements, define your own. Mark the attribute on the interface.</para>
+        <para>And, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference> of the entity type builder need to be set as the type of the attribute. If multiple attribute types are used, set it to a common parent class.</para>
+        <para>All attributes on the interface with the type as <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference> or its derived classes will be passed to the entity type builder through the second parameter of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>. <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityBuilding.InterfaceLevelAttributes</codeEntityReference> will be filled with all qualified instances.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Asset Level</title>
+      <content>
+        <para>When interface level information need to be passed into entity type builder, mark it through an attribute class.</para>
+        <para>To do that, an attribute class need to be chosen. If none of the existing attributes meet the requirements, define your own. Mark the attribute on the asset.</para>
+        <para>And, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference> of the entity type builder need to be set as the type of the attribute. If multiple attribute types are used, set it to a common parent class.</para>
+        <para>All attributes on the asset with the type as <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference> or its derived classes will be passed to the entity type builder through the second parameter of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>. <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityBuilding.AssetLevelAttributes</codeEntityReference> will be filled with all qualified instances.</para>
+      </content>
+      <sections>
+        <section>
+          <title>Event</title>
+          <content>
+            <para>If the asset is an event, besides on the event itself, the attribute can be defined on the type of event handler (delegate) also. To do that, mark an attribute on the delegate which is used to define the event.</para>
+            <para>And, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference> of the entity type builder need to be set as the type of the attribute. If multiple attribute types are used, set it to a common parent class.</para>
+            <para>All attributes on the delegate with the type as <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference> or its derived classes will be passed to the entity type builder through the second parameter of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>. <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityBuilding.DelegateLevelAttributes</codeEntityReference> will be filled with all qualified instances.</para>
+          </content>
+        </section>
+      </sections>
+    </section>
+
+    <section>
+      <title>Parameter Level</title>
+      <content>
+        <para>When parameter level information need to be passed into entity type builder, mark it through an attribute class.</para>
+        <para>To do that, an attribute class need to be chosen. If none of the existing attributes meet the requirements, define your own. Attribute can be used on parameter, field and property within parameter entity, property within the <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#TwoWay" >helper class</link> of the parameter and return value.</para>
+        <para>And, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference> of the entity type builder need to be set as the type of the attribute. If multiple attribute types are used, set it to a common parent class.</para>
+        <para>All attributes on the parameter with the type as <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference> or its derived classes will be passed to the entity type builder through the element of <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityBuilding.Properties</codeEntityReference> in the second parameter of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>. Within each element, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityProperty.Attributes</codeEntityReference> will be filled with all qualified instances on the parameter pointed by the element. <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityPropertyAttribute.Attribute</codeEntityReference> is the instance of the attribute and <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityPropertyAttribute.Position</codeEntityReference> reflects the position of it.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Built-in Serializers</title>
+      <content>
+        <para>The built in serializers, binary and Json, do not have any additional attributes required. Therefore, no attribute will be collected and transferred to the entity type builder of those serializers.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd#OtherSerializer">Use other serializer</link>
+      <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

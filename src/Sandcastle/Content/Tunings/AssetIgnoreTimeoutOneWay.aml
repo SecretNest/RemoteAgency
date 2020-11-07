@@ -16,7 +16,7 @@
     </section>
 
     <section>
-      <title>One-way and timeout</title>
+      <title>One-way and Timeout</title>
       <content>
         <para>Usually, asset accessing are in two-way mode, request and response. Even no data need to be returned from remote site, like a void method, the response is still necessary to confirm that there is no exception thrown in the remote site and to ensure the code execution order.</para>
         <para>After the request message sent, the caller waits for the response. The waiting time varies depending on settings, which can be specified in following priority order:</para>

@@ -5,26 +5,35 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <introduction>
-      <para>In Remote Agency, serializer solution provides generating of the entity classes and serializing of those generated types.</para>
+      <para>In Remote Agency, serializer solution provides generating of the entity types and serializing of those generated classes.</para>
     </introduction>
 
+    <section address="Entity">
+      <title>Entities</title>
+      <content>
+        <para>For each asset that is not marked as ignored, the entity types need to be constructed to carry the information required for request and response. For the asset with one-way mode enabled, the entity class of response will not be generated.</para>
+        <para>The entity for request usually carries parameters about the instance of accessing the asset specified. The entity for response usually carries the return value (if exists), parameters which need to send back to the caller, and the exception which thrown from the server side. For a generic method, generic types are also included in the entity types. Entity types are generated separately for getting and setting of a property. Entity type is not required for event adding and removing.</para>
+      </content>
+    </section>
+
     <section address="Builtin">
-      <title>Built-in serializers</title>
+      <title>Built-in Serializers</title>
       <content>
         <para>Binary and JSON serializers are shipped within main library of Remote Agency. Developer can choose one of them to initialize the instance of Remote Agency by calling method <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.CreateWithBinarySerializer(System.Nullable{System.Guid})</codeEntityReference> or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference>.</para>
       </content>
     </section>
 
     <section address="OtherSerializer">
-      <title>Use other serializer</title>
+      <title>Use Other Serializer</title>
       <content>
         <para>Also, developer can use any 3rd party serializer written for Remote Agency by passing the instances of serializer and entity type builder through <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference>.</para>
-        <para>For writing your own serializer, one derived class from <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.EntityTypeBuilderBase</codeEntityReference> is required to build the entity classes. While type building, the information of the entity should be built is passed by arguments of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>, containing properties. If more tuning is required, developer can create attribute classes, mark them on the interfaces, assets and parameters. By specifying the type of those attribute with <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference> and <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference>, those marks will be read by Remote Agency from service contract interface and passed with the arguments of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>.</para>
+        <para>For writing your own serializer, one derived class from <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.EntityTypeBuilderBase</codeEntityReference> is required to build the entity types. While type building, the information of the entity should be built is passed by arguments of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>, containing properties.</para>
+        <para>Entity type builder of serializer can get more information through the attributes set on interface and its assets. By specifying the type of those attribute with <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference> and <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference>, those marks will be read by Remote Agency from service contract interface and passed with the arguments of <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.EntityTypeBuilderBase.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)</codeEntityReference>. For details, check <link xlink:href="37179c21-8267-47da-83c5-cb71adfc1287" >attributes for entity types</link>.</para>
       </content>
     </section>
 
     <section address="Neat">
-      <title>Neat version</title>
+      <title>Neat Version</title>
       <content>
         <para>The neat version of Remote Agency has no built-in serializer, nor sequential scheduler either. For the user won’t use those functions, the neat version is a good choice for reducing referenced packages.</para>
       </content>
@@ -32,6 +41,7 @@
 
     <relatedTopics>
       <link xlink:href="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5#neat">Neat version</link>
+      <link xlink:href="37179c21-8267-47da-83c5-cb71adfc1287">Attributes for Entity Types</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

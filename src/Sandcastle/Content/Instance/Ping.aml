@@ -17,7 +17,7 @@
     </section>
 
     <section address="GetId">
-      <title>Real target</title>
+      <title>Real Target</title>
       <content>
         <para>In particular, ping methods contain the target site id and instance id as output parameters. They can be used to get the real target from a virtual target.</para>
         <para>While creating instance of proxy, a default target site id and instance id need to be specified. After initialized, most operations started by proxy will use this as the target of the message, aka will ask the service wrapper with the site id and instance id to access the asset required. The only one kind of message not use this as target, is the event removing message. It will always send the message to the sender of the response message of related event adding message.</para>

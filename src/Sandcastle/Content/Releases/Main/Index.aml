@@ -98,7 +98,7 @@
     </section>
 
     <section address="neat">
-      <title>Neat version</title>
+      <title>Neat Version</title>
       <content>
         <para>For the user don't require built-in serializers and sequential scheduler, a neat version can be use instead.</para>
         <para>When using neat version, <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.CreateWithBinarySerializer(System.Nullable{System.Guid})</codeEntityReference>, <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference> and <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency.TryAddSequentialScheduler(System.String,SecretNest.TaskSchedulers.SequentialScheduler@,System.Boolean)</codeEntityReference> are not included.</para>

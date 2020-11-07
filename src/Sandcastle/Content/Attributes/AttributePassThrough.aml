@@ -16,7 +16,7 @@
           <listItem>
             <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference> on the asset which requires the attribute. Event, method, property, parameter, generic parameter, return value and interface are supported.</para>
             <para>When a constructor with parameters should be used, specify all types of parameters in attributeConstructorParameterTypes.</para>
-            <para>When parameters of constructor can be provided in order, specify them in attributeConstructorParameters. The length of parameters cannot exceed the length of attributeConstructorParameterTypes. When this is shorter, the missing parameters will be filled by null.</para>
+            <para>When parameters of constructor can be provided in order, specify them in attributeConstructorParameters. The length of parameters cannot exceed the length of attributeConstructorParameterTypes. When this is shorter, the missing parameters will be filled by null / Nothing.</para>
             <para>When additional information need to be provided, attributeId should to be set with a unique string, which is the same as the AttributeId of the attributes providing additional information.</para>
           </listItem>
           <listItem>

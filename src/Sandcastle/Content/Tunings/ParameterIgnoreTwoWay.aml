@@ -18,7 +18,7 @@
       </content>
     </section>
 
-    <section>
+    <section address="TwoWay">
       <title>Two-way</title>
       <content>
         <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredAttribute</codeEntityReference> can only be set on the parameter marked by "ref / ByRef" or "out / Out", adjusting whether the returning is required which is enabled by default, property name in entity and whether should be included while exception is thrown on the remote site which is disabled by default.</para>
