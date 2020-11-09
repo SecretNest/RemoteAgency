@@ -97,5 +97,11 @@ namespace SecretNest.RemoteAgency
                 typeBuilder.SetCustomAttribute(customAttribute);
             }
         }
+
+        private const string RandomizedNameFormat = "{0}_{1:N}";
+        string GetRandomizedName(string prefix)
+        {
+            return string.Format(RandomizedNameFormat, prefix, Guid.NewGuid());
+        }
     }
 }
