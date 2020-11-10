@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters,
             Dictionary<string, List<CustomAttributeBuilder>> genericParameterPassThroughAttributes)

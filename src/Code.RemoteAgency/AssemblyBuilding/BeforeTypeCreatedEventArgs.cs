@@ -6,7 +6,7 @@ using System.Text;
 namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     /// <summary>
-    /// Represents an argument of the <see cref="RemoteAgency.BeforeTypeCreated"/>.
+    /// Represents an argument of the <see cref="RemoteAgencyBase.BeforeTypeCreated"/>.
     /// </summary>
     public class BeforeTypeCreatedEventArgs : EventArgs
     {

@@ -6,7 +6,7 @@ using SecretNest.TaskSchedulers;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         /// <summary>
         /// Tries to add a task scheduler, which run tasks on a single thread, for accessing assets to the instance of Remote Agency.

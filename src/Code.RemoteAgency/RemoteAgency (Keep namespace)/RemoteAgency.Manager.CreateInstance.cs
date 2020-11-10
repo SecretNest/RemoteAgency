@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         /// <summary>
         /// Creates proxy of the interface specified.
@@ -20,9 +20,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
         /// <returns>Proxy instance.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
-        /// <event cref="RemoteAgency.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
             ref Guid instanceId, int defaultTimeout = 90000,
             bool buildServiceWrapperWithProxy = true);
@@ -38,9 +38,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="buildProxyWithServiceWrapper">When building is required, builds proxy and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
         /// <returns>The id of the service wrapper instance created.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
-        /// <event cref="RemoteAgency.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract Guid CreateServiceWrapper(Type sourceInterface, object serviceObject, ref Guid instanceId,
             int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true);
     }
@@ -58,9 +58,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
         /// <returns>Proxy instance.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
-        /// <event cref="RemoteAgency.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public TInterface CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId, ref Guid instanceId,
             int defaultTimeout = 90000,
             bool buildServiceWrapperWithProxy = true)
@@ -138,9 +138,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="buildProxyWithServiceWrapper">When building is required, builds proxy and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
         /// <returns>The id of the service wrapper instance created.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
-        /// <event cref="RemoteAgency.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgency.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public Guid CreateServiceWrapper<TInterface>(TInterface serviceObject, ref Guid instanceId,
             int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
             => (Guid) CreateServiceWrapperInternal(typeof(TInterface), serviceObject, ref instanceId, defaultTimeout,

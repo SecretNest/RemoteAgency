@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         /// <summary>
         /// Creates an empty message with sender instance id set as <see cref="Guid"/>.Empty and one-way is <see langword="true"/>.

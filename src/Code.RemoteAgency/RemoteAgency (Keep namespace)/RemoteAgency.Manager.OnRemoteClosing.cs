@@ -6,7 +6,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         private int _waitingTimeForDisposing = 90000; //90 secs
 

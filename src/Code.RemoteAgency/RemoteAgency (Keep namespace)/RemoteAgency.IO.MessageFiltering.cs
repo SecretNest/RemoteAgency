@@ -16,14 +16,14 @@ namespace SecretNest.RemoteAgency
         /// Occurs when a message need to be checked for sending.
         /// </summary>
         /// <seealso cref="MessageProcessTerminatedException" />
-        /// <remarks>Internal routing message, which is sending to an object managed by the same instance of Remote Agency, never raise this event unless <see cref="RemoteAgency.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
+        /// <remarks>Internal routing message, which is sending to an object managed by the same instance of Remote Agency, never raise this event unless <see cref="RemoteAgencyBase.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
         public event EventHandler<BeforeMessageProcessingEventArgs<TSerialized, TEntityBase>> BeforeMessageSending;
 
         /// <summary>
         /// Occurs when a message need to be checked for sending.
         /// </summary>
         /// <seealso cref="MessageProcessTerminatedException" />
-        /// <remarks>Internal routing message, which is sent from object managed by the same instance of Remote Agency, never raise this event unless <see cref="RemoteAgency.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
+        /// <remarks>Internal routing message, which is sent from object managed by the same instance of Remote Agency, never raise this event unless <see cref="RemoteAgencyBase.LoopbackAddressDetection"/> is set to <see langword="false"/>.</remarks>
         public event EventHandler<BeforeMessageProcessingEventArgs<TSerialized, TEntityBase>> AfterMessageReceived;
 
         void BeforeMessageProcess(ref TEntityBase message,

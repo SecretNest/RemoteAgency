@@ -39,7 +39,7 @@
       <title>Ignoring</title>
       <content>
         <para>By default, system level messages (<codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.MessageType</codeEntityReference> is <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.EventAdd</codeEntityReference>, <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.EventRemove</codeEntityReference> or <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.SpecialCommand</codeEntityReference>) will not raise the events. If developer want to filter those messages also, set <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgency`2.BypassSystemMessagesFromFiltering</codeEntityReference> to false.</para>
-        <para>Internal messages, which sent from and to the same instance of Remote Agency, will never raise the events unless <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgency.LoopbackAddressDetection</codeEntityReference> is set to false.</para>
+        <para>Internal messages, which sent from and to the same instance of Remote Agency, will never raise the events unless <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgencyBase.LoopbackAddressDetection</codeEntityReference> is set to false.</para>
       </content>
     </section>
 

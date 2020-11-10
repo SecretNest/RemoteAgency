@@ -5,7 +5,7 @@ using SecretNest.RemoteAgency.JsonSerializer;
 
 namespace SecretNest.RemoteAgency
 {
-    abstract partial class RemoteAgency
+    abstract partial class RemoteAgencyBase
     {
         /// <summary>
         /// Creates an instance of Remote Agency using Json serializer.

@@ -6,7 +6,7 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         void EmitServiceWrapper(TypeBuilder typeBuilder, RemoteAgencyInterfaceInfo info)
         {

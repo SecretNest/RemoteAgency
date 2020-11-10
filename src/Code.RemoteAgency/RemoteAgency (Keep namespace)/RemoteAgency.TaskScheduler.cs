@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         private readonly ConcurrentDictionary<string, TaskScheduler> _namedTaskSchedulers =
             new ConcurrentDictionary<string, TaskScheduler>();

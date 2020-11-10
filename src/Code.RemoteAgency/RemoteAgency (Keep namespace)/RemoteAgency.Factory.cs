@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    abstract partial class RemoteAgency
+    abstract partial class RemoteAgencyBase
     {
         /// <summary>
         /// Creates an instance of Remote Agency.

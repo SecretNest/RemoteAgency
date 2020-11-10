@@ -5,7 +5,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         private readonly TimeSpan _defaultPingMaxWaitingTime = new TimeSpan(0, 0, 1, 30);
 

@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         /// <summary>
         /// Closes all proxy and service wrapper objects.

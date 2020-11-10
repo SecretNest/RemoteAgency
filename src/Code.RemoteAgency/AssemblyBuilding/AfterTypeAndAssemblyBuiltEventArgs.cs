@@ -8,7 +8,7 @@ using System.Text;
 namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     /// <summary>
-    /// Represents an argument of the <see cref="RemoteAgency.AfterTypeAndAssemblyBuilt"/>.
+    /// Represents an argument of the <see cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt"/>.
     /// </summary>
     public class AfterTypeAndAssemblyBuiltEventArgs : EventArgs, IDisposable
     {

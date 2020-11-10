@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         private protected abstract bool FindManagingObjectAndSendMessage(IRemoteAgencyMessage message);
     }

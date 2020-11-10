@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmitDoc (Chinese)", "EmitDo
 		EmitDoc (Chinese)\ServiceWrapper.txt = EmitDoc (Chinese)\ServiceWrapper.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSharp", "Test.CSharp\Test.CSharp.csproj", "{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
@@ -101,6 +103,12 @@ Global
 		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75}.Doc|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Doc|Any CPU.ActiveCfg = Debug|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Doc|Any CPU.Build.0 = Debug|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +130,7 @@ Global
 		{E7EF291C-A72B-4B09-B165-02446DF50AC6} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
 		{D0D2A042-903F-47BD-9F4B-17FEDBFC6F75} = {14151C5B-65C4-46EC-A2F9-BC723244313F}
 		{0C876E66-72E8-4883-8790-B48FC343934D} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB} = {C3D6473F-B21C-4B15-B2DA-6BF90E35BF9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}

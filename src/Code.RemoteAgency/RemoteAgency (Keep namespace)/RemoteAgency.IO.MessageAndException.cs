@@ -6,7 +6,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgency
+    partial class RemoteAgencyBase
     {
         /// <summary>
         /// Occurs when an exception thrown from user code.
@@ -91,7 +91,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Occurs when a message is generated and ready to be sent.
         /// </summary>
-        /// <remarks>If this event is not handled, <see cref="RemoteAgency.MessageForSendingPreparedGeneric"/> will be raised.</remarks>
+        /// <remarks>If this event is not handled, <see cref="RemoteAgencyBase.MessageForSendingPreparedGeneric"/> will be raised.</remarks>
         public event EventHandler<MessageBodyEventArgs<TSerialized, TEntityBase>> MessageForSendingPrepared;
 
         void SendMessageFinal(TEntityBase message)
