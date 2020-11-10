@@ -14,8 +14,8 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
         /// <param name="maxWaitingTime">Max waiting time.</param>
-        /// <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
-        /// <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+        /// <param name="remoteSiteId">Will be set to the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+        /// <param name="remoteInstanceId">Will be set to the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
         /// <returns>Delay between ping message sending started and response message processing finished.</returns>
         public TimeSpan Ping(Guid localProxyInstanceId, TimeSpan maxWaitingTime, out Guid remoteSiteId, out Guid remoteInstanceId)
         {
@@ -40,8 +40,8 @@ namespace SecretNest.RemoteAgency
         /// Pings to the default target and get the response, using default waiting time which is 90 secs.
         /// </summary>
         /// <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
-        /// <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
-        /// <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+        /// <param name="remoteSiteId">Will be set to the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+        /// <param name="remoteInstanceId">Will be set to the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
         /// <returns>Delay between ping message sending started and response message processing finished.</returns>
         public TimeSpan Ping(Guid localProxyInstanceId, out Guid remoteSiteId, out Guid remoteInstanceId)
             => Ping(localProxyInstanceId, _defaultPingMaxWaitingTime, out remoteSiteId, out remoteInstanceId);
@@ -51,10 +51,10 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
         /// <param name="maxWaitingTime">Max waiting time.</param>
-        /// <param name="delay">Will be set as the delay between ping message sending started and response message processing finished.</param>
-        /// <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
-        /// <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
-        /// <param name="exception">Will be set as the exception object when available.</param>
+        /// <param name="delay">Will be set to the delay between ping message sending started and response message processing finished.</param>
+        /// <param name="remoteSiteId">Will be set to the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+        /// <param name="remoteInstanceId">Will be set to the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+        /// <param name="exception">Will be set to the exception object when available.</param>
         /// <returns>Whether the ping request and response processing are finished successfully.</returns>
         public abstract bool TryPing(Guid localProxyInstanceId, TimeSpan maxWaitingTime, out TimeSpan delay,
             out Guid remoteSiteId,
@@ -64,10 +64,10 @@ namespace SecretNest.RemoteAgency
         /// Tries to ping to the default target and get the response, using default waiting time which is 90 secs.
         /// </summary>
         /// <param name="localProxyInstanceId">Instance id of the local proxy which will be used to initiate the ping process.</param>
-        /// <param name="delay">Will be set as the delay between ping message sending started and response message processing finished.</param>
-        /// <param name="remoteSiteId">Will be set as the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
-        /// <param name="remoteInstanceId">Will be set as the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
-        /// <param name="exception">Will be set as the exception object when available.</param>
+        /// <param name="delay">Will be set to the delay between ping message sending started and response message processing finished.</param>
+        /// <param name="remoteSiteId">Will be set to the sender site id of the response message. Or the target site id of the ping message when no response received.</param>
+        /// <param name="remoteInstanceId">Will be set to the sender instance id of the response message. Or the target instance id of the ping message when no response received.</param>
+        /// <param name="exception">Will be set to the exception object when available.</param>
         /// <returns>Whether the ping request and response processing are finished successfully.</returns>
         public bool TryPing(Guid localProxyInstanceId, out TimeSpan delay, out Guid remoteSiteId, out Guid remoteInstanceId,
             out Exception exception)

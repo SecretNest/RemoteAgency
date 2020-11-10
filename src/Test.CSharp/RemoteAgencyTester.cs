@@ -9,6 +9,6 @@ namespace Test.CSharp
 {
     class RemoteAgencyTester<TServiceContractInterface>
     {
-        //RemoteAgency<string, object> 
+        
     }
 }

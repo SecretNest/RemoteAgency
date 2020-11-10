@@ -39,7 +39,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
-        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
         public void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null)
         {
@@ -197,7 +197,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// Unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
-        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
+        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is null.</param>
         public abstract void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null);
 
         /// <summary>

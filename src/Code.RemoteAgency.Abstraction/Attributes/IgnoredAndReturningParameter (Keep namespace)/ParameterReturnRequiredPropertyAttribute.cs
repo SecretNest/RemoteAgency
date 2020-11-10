@@ -30,37 +30,37 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets whether this is in simple mode.
         /// </summary>
-        /// <remarks>When the value is <see langword="true"/>, property specified by <see cref="PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> and <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set as <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
+        /// <remarks>When the value is <see langword="true"/>, property specified by <see cref="PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> and <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
         public bool IsSimpleMode { get; }
 
         /// <summary>
         /// Gets the property name in the parameter which need to be sent back to the caller.
         /// </summary>
-        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set as <see langword="true"/>.</remarks>
+        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="true"/>.</remarks>
         public string PropertyNameInParameter { get; }
 
         /// <summary>
         /// Gets the type of the helper class.
         /// </summary>
-        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set as <see langword="false"/>.</para>
-        /// <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> and <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set as <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
+        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</para>
+        /// <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> and <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
         public Type HelperClass { get; }
 
         /// <summary>
         /// Gets the preferred property name in response entity.
         /// </summary>
-        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set as <see langword="false"/>.</para>
+        /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</para>
         /// <para>When the value is <see langword="null"/> or empty string, name is chosen automatically.</para></remarks>
         public string ResponseEntityPropertyName { get; }
 
         /// <summary>
         /// Gets whether this property should be included in return entity when exception thrown by the user code on the remote site.
         /// </summary>
-        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set as <see langword="false"/>.</remarks>
+        /// <remarks>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</remarks>
         public bool IsIncludedWhenExceptionThrown { get; }
 
         /// <summary>
-        /// Initializes an instance of the ParameterReturnRequiredPropertyAttribute. <see cref="IsSimpleMode"/> will be set as <see langword="false"/>.
+        /// Initializes an instance of the ParameterReturnRequiredPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="false"/>.
         /// </summary>
         /// <param name="helperClass">Type of the helper class.</param>
         /// <param name="isIncludedInReturning">Whether this helper class should be processed in return entity. Default value is <see langword="true" />.</param>
@@ -73,7 +73,7 @@ namespace SecretNest.RemoteAgency.Attributes
         }
 
         /// <summary>
-        /// Initializes an instance of the ParameterReturnRequiredPropertyAttribute. <see cref="IsSimpleMode"/> will be set as <see langword="true"/>.
+        /// Initializes an instance of the ParameterReturnRequiredPropertyAttribute. <see cref="IsSimpleMode"/> will be set to <see langword="true"/>.
         /// </summary>
         /// <param name="propertyNameInParameter">The name of property or field of the parameter entity.</param>
         /// <param name="responseEntityPropertyName">Preferred property name in response entity. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null" />.</param>

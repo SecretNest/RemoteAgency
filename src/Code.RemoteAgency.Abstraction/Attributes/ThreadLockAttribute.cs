@@ -21,7 +21,7 @@ namespace SecretNest.RemoteAgency.Attributes
         public ThreadLockMode ThreadLockMode { get; }
 
         /// <summary>
-        /// Gets the name of the task scheduler to be used while accessing assets within. Only valid when <see cref="ThreadLockMode"/> is set as <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/>.
+        /// Gets the name of the task scheduler to be used while accessing assets within. Only valid when <see cref="ThreadLockMode"/> is set to <see cref="SecretNest.RemoteAgency.Attributes.ThreadLockMode.TaskSchedulerSpecified"/>.
         /// </summary>
         /// <remarks>One task scheduler with the same name should be added to the instance of Remote Agency before processing the interface related.</remarks>
         public string TaskSchedulerName { get; }

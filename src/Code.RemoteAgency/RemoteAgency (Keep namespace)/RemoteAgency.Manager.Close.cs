@@ -33,7 +33,7 @@ namespace SecretNest.RemoteAgency
         {
             var obj = proxy as IProxyCommunicate;
             if (obj == null)
-                throw new ArgumentNullException(nameof(proxy), $"Argument {nameof(proxy)} is not set as a proxy object.");
+                throw new ArgumentNullException(nameof(proxy), $"Argument {nameof(proxy)} is not set to a proxy object.");
 
             var instanceId = obj.InstanceId;
             return CloseInstance(instanceId);

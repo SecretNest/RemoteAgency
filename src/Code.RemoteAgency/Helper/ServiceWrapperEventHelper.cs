@@ -131,7 +131,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// Unlinks specified remote proxy from the event registered in service wrapper objects.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
-        /// <param name="proxyInstanceId">The instance id of the closing proxy. When set as null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked.</param>
+        /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked.</param>
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
         public void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId)
         {

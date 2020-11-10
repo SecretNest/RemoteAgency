@@ -116,7 +116,7 @@ namespace SecretNest.RemoteAgency
         TEntityBase BeforeMessageSendingProcess_GenerateExceptionForContinueSending(
             TEntityBase originalMessage, string exceptionMessage, bool includeTerminatedMessage)
         {
-            //Sending message cannot set as ReplaceWithException.
+            //Sending message cannot set to ReplaceWithException.
             throw new NotSupportedException(); 
         }
 

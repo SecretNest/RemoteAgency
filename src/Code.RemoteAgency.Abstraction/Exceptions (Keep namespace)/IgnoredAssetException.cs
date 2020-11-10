@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Attributes;
 namespace SecretNest.RemoteAgency
 {
     /// <summary>
-    /// The exception that is thrown when an asset marked by <see cref="AssetIgnoredAttribute"/> with <see cref="AssetIgnoredAttribute.WillThrowException"/> is set as <see langword="true" />.
+    /// The exception that is thrown when an asset marked by <see cref="AssetIgnoredAttribute"/> with <see cref="AssetIgnoredAttribute.WillThrowException"/> is set to <see langword="true" />.
     /// </summary>
     [Serializable]
     public sealed class IgnoredAssetException : InvalidOperationException

@@ -22,7 +22,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Gets the metadata objects marked with derived class specified by <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> in parameter level.
         /// </summary>
-        /// <remarks>This will be set as <see langword="null"/> when <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> is set as <see langword="null"/>.</remarks>
+        /// <remarks>This will be set to <see langword="null"/> when <see cref="EntityTypeBuilderBase.ParameterLevelAttributeBaseType"/> is set to <see langword="null"/>.</remarks>
         /// <conceptualLink target="37179c21-8267-47da-83c5-cb71adfc1287" />
         public IReadOnlyList<EntityPropertyAttribute> Attributes { get; }
 

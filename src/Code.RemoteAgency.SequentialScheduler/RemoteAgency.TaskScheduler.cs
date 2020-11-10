@@ -15,8 +15,8 @@ namespace SecretNest.RemoteAgency
         /// <param name="taskScheduler">Created task scheduler.</param>
         /// <param name="waitForThread">Waiting for SequentialScheduler.Run() to provide thread. Default is <see langword="false"/>.</param>
         /// <returns>Result</returns>
-        /// <remarks><para>When initializing with <paramref name="waitForThread"/> set as <see langword="false"/>, a free thread is created for this scheduler.</para>
-        /// <para>When initializing with <paramref name="waitForThread"/> set as <see langword="true"/>, SequentialScheduler.Run() should be called from the thread which intends to be used for this scheduler before processing required by any interface.</para>
+        /// <remarks><para>When initializing with <paramref name="waitForThread"/> set to <see langword="false"/>, a free thread is created for this scheduler.</para>
+        /// <para>When initializing with <paramref name="waitForThread"/> set to <see langword="true"/>, SequentialScheduler.Run() should be called from the thread which intends to be used for this scheduler before processing required by any interface.</para>
         /// <para>For details please refer to <see href="https://github.com/SecretNest/SequentialScheduler/">https://github.com/SecretNest/SequentialScheduler/</see>.</para>
         /// <para>This event is not present in Neat release.</para></remarks>
         /// <seealso cref="ThreadLockAttribute"/>

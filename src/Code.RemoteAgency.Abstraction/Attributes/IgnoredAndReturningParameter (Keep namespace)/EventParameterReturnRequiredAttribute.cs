@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <para>This attribute is only available for parameters marked with "ref / ByRef" and "out / Out". For sending a property within a parameter, use <see cref="EventParameterReturnRequiredPropertyAttribute"/> or <see cref="ParameterReturnRequiredPropertyAttribute"/> instead.</para>
     /// <para><see cref="ParameterReturnRequiredAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="EventParameterReturnRequiredAttribute"/>.</para>
     /// <para>When this attribute is absent, the value of the parameter will be send back to the caller only when no exception thrown.</para>
-    /// <para>When <see cref="ParameterReturnRequiredAttribute.IsIncludedInReturning"/> is set as <see langword="false" />, or <see cref="ParameterReturnRequiredAttribute.IsIncludedWhenExceptionThrown"/> is set as <see langword="false" /> when exception thrown, the parameter will be set as default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
+    /// <para>When <see cref="ParameterReturnRequiredAttribute.IsIncludedInReturning"/> is set to <see langword="false" />, or <see cref="ParameterReturnRequiredAttribute.IsIncludedWhenExceptionThrown"/> is set to <see langword="false" /> when exception thrown, the parameter will be set to default value when the parameter is marked with "out / Out", or stay untouched when parameter is marked with "ref / ByRef".</para>
     /// </remark>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevelEventOnly" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />

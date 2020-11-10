@@ -31,7 +31,7 @@ namespace SecretNest.RemoteAgency
         /// Unlinks specified remote proxy from the event registered in service wrapper objects.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing proxy.</param>
-        /// <param name="proxyInstanceId">The instance id of the closing proxy. When set as null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
+        /// <param name="proxyInstanceId">The instance id of the closing proxy. When set to null, all proxies from the site specified by <paramref name="siteId" /> will be unlinked. Default value is null.</param>
         /// <remarks>
         /// <para>A message to notify the closing is sent automatically while remote proxy closing. Call this method manually if exception is thrown while processing the closing of the remote proxy.</para>
         /// <para>Service wrapper manages links of all proxies which need to handle events. When remote proxy is closed, message for removing event handlers is sent to the service wrapper. But when something wrong happened, network disconnected or proxy crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in service wrapper which may cause lags or exceptions while processing events.</para></remarks>
@@ -41,7 +41,7 @@ namespace SecretNest.RemoteAgency
         /// Resets sticky target site of all affected proxies and unlinks specified remote service wrapper from the event registered in proxy objects when the service wrapper is closing.
         /// </summary>
         /// <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
-        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set as <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
+        /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
         /// <remarks>
         /// <para>A message to notify the closing is sent automatically while remote service wrapper closing. Call this method manually if exception is thrown while processing the closing of the remote service wrapper.</para>
         /// <para>Proxy manages links of all service wrappers which is registered as an event raiser. When remote service wrapper is closed, message for removing the link of the event handler is sent to the proxy. But when something wrong happened, network disconnected or service wrapper crashed for example, the crucial messages may not be able to transferred correctly. In this case, this method need to be called, or the obsolete links will stay in proxy which may cause lags or exceptions while processing events.</para>

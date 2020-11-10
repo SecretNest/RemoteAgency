@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies property name for a parameter in entity class of the event.
     /// </summary>
     /// <remarks><para><see cref="CustomizedParameterEntityPropertyNameAttribute"/> can be marked on parameters of the delegate related to this event, with lower priority than <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/>.</para>
-    /// <para>For the parameter is not described by either <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> or <see cref="CustomizedParameterEntityPropertyNameAttribute"/>, or <see cref="CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName"/> is set as <see langword="null"/> or empty string, the property name is chosen automatically.</para>
+    /// <para>For the parameter is not described by either <see cref="CustomizedEventParameterEntityPropertyNameAttribute"/> or <see cref="CustomizedParameterEntityPropertyNameAttribute"/>, or <see cref="CustomizedParameterEntityPropertyNameAttribute.EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
     /// </remarks>
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     /// <conceptualLink target="beb637a2-3887-49ff-93f3-1f71b095aa7e" />

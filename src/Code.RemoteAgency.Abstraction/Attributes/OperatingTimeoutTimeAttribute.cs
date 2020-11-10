@@ -72,7 +72,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Initializes an instance of the OperatingTimeoutTimeAttribute with only one value for all waiting time.
         /// </summary>
         /// <param name="timeout">The length of time for waiting response, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
-        /// <remarks><para>All timeout settings will be set as the value specified by <paramref name="timeout"/>.</para>
+        /// <remarks><para>All timeout settings will be set to the value specified by <paramref name="timeout"/>.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int timeout)
         {
@@ -90,7 +90,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <param name="eventAddingTimeout">The length of time for waiting response for event adding, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="eventRemovingTimeout">The length of time for waiting response for event removing, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="eventRaisingTimeout">The length of time for waiting response for event raising, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
-        /// <remarks><para>This constructor is for setting the timeout for event adding, removing and raising separately only. To set as the same value, or set for asset other than event, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
+        /// <remarks><para>This constructor is for setting the timeout for event adding, removing and raising separately only. To set to the same value, or set for asset other than event, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int eventAddingTimeout, int eventRemovingTimeout, int eventRaisingTimeout)
         {
@@ -107,7 +107,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// </summary>
         /// <param name="propertyGettingTimeout">The length of time for waiting response for property getting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
         /// <param name="propertySettingTimeout">The length of time for waiting response for property setting, in milliseconds; or -1 to indicate that the waiting does not time out.</param>
-        /// <remarks><para>This constructor is for setting the timeout for property getting and setting separately only. To set as the same value, or set for asset other than property, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
+        /// <remarks><para>This constructor is for setting the timeout for property getting and setting separately only. To set to the same value, or set for asset other than property, uses <see cref="OperatingTimeoutTimeAttribute(int)"/> instead.</para>
         /// </remarks>
         public OperatingTimeoutTimeAttribute(int propertyGettingTimeout, int propertySettingTimeout)
         {

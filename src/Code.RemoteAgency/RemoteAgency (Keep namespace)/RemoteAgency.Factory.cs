@@ -13,7 +13,7 @@ namespace SecretNest.RemoteAgency
         /// <typeparam name="TEntityBase">Type of the parent class of all entities.</typeparam>
         /// <param name="serializingHelper">Serializer helper.</param>
         /// <param name="entityTypeBuilder">Entity type builder.</param>
-        /// <param name="siteId">Site id. A randomized value is used when it is set as <see cref="Guid"/>.Empty or absent.</param>
+        /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid"/>.Empty or absent.</param>
         /// <returns>Created Remote Agency instance.</returns>
         public static RemoteAgency<TSerialized, TEntityBase> Create<TSerialized, TEntityBase>(
             SerializingHelperBase<TSerialized, TEntityBase> serializingHelper, EntityTypeBuilderBase entityTypeBuilder, Guid? siteId = null)

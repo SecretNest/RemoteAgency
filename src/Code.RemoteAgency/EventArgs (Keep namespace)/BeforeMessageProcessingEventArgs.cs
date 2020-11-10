@@ -49,7 +49,7 @@ namespace SecretNest.RemoteAgency
         /// Replaces this message by an instance of <see cref="MessageProcessTerminatedException" /> then sends it to the receiver. Cannot be used when <see cref="MessageDirection"/> is <see cref="SecretNest.RemoteAgency.MessageDirection.Sending"/>.
         /// </summary>
         /// <param name="message">Message of the exception.</param>
-        /// <remarks>Caution: This may cause the sender throw <see cref="AccessingTimeOutException"/> if <see cref="MessageBodyEventArgsBase.IsOneWay"/> is set as <see langword="false"/>.</remarks>
+        /// <remarks>Caution: This may cause the sender throw <see cref="AccessingTimeOutException"/> if <see cref="MessageBodyEventArgsBase.IsOneWay"/> is set to <see langword="false"/>.</remarks>
         public void SetToReplaceWithException(
             string message = "Remote Agency Manager terminated this message processing due to user request.")
         {

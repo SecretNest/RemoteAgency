@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// Specifies property name for return value in entity class.
     /// </summary>
     /// <remarks>
-    /// <para>When this attribute is not present, or <see cref="EntityPropertyName"/> is set as <see langword="null"/> or empty string, the property name is chosen automatically.</para>
+    /// <para>When this attribute is not present, or <see cref="EntityPropertyName"/> is set to <see langword="null"/> or empty string, the property name is chosen automatically.</para>
     /// <para>The one marked on the event has higher priority than the one marked on the delegate of the same event.</para>
     /// <para>The one marked on the return value has higher priority than the one marked on the same member (method, event or delegate).</para>
     /// </remarks>
