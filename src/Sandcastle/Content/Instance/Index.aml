@@ -12,36 +12,49 @@
       <title>Instance</title>
       <content>
         <para>To use Remote Agency, developer need to create at least one instance of Remote Agency. By accessing the method provided by the instance of Remote Agency, the instance of proxy and service wrapper of the interface provided can be generated.</para>
-        <listItem>
-          <list class="nobullet">
-            <listItem>
-              <para>Serializer is required for Remote Agency. When creating the instance of Remote Agency, a serializer needs to be specified. See <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd" /> for details. </para>
-            </listItem>
-            <listItem>
-              <para>When CreateProxy or CreateServiceWrapper being called, Remote Agency tries to locate the built assembly in current AppDomain by name and create the instance of the proxy or service wrapper. If absents, a new assembly will be created to hold the classes to be created. See <link xlink:href="605ebb50-c23c-4f74-9a16-8aec76c91a01">Assembly Building</link> for details.
-              </para>
-            </listItem>
-            <listItem>
-              <para>When message filtering is required, see <link xlink:href="cf93cf44-b878-4fdf-8752-036c48a9db52">Message Filtering</link> for details.</para>
-            </listItem>
-            <listItem>
-              <para>The routing and transmission of messages between instances of Remote Agency are not resolved by Remote Agency. You may want to check <externalLink>
-                <linkText>Remote Hub</linkText>
-                <linkUri>http://secretnest.info/RemoteHub</linkUri>
-                <linkTarget>_blank</linkTarget>
-              </externalLink> or use any other solution.</para>
-            </listItem>
-            <listItem>
-              <para><link xlink:href="4895119b-e34a-45d3-a1ce-6319a8bf97e0">Ping</link> can be used for network detection. When network load balancing is required, it can also be useful to get a particular service wrapper from virtual.</para>
-            </listItem>
-            <listItem>
-              <para>When the instance of proxy or service wrapper with events registered is disposed, notification and remedial mechanism to deal with communication failures are described in <link xlink:href="8063be9a-3a43-4905-8778-072d57437e8b">Dispose notification</link>.</para>
-            </listItem>
-            <listItem>
-              <para>When hosting instances of proxy or service wrapper in a mixed environment, some components may be located in the same Remote Agency instance, but some are not, check the <link xlink:href="dc569fad-19e9-46dd-869d-6ee90c5dbe32">Consistency</link> for details.</para>
-            </listItem>
-          </list>
-        </listItem>
+        <list class="bullet">
+          <listItem>
+            <para>Serializer is required for Remote Agency. When creating the instance of Remote Agency, a serializer needs to be specified.</para>
+            <list class="nobullet">
+              <listItem>
+                <para>When using JSON serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference> to create the instance.</para>
+              </listItem>
+              <listItem>
+                <para>When using Binary serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Nullable{System.Guid})</codeEntityReference> to create the instance.</para>
+              </listItem>
+              <listItem>
+                <para>When using other serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference> to create the instance with the serializer specified.</para>
+              </listItem>
+            </list>
+            <para>See <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd" /> for details.</para>
+            <para>When siteId is set to Guid.Empty or absent, a randomized value will be generated instead.</para>
+          </listItem>
+          <listItem>
+            <para>When CreateProxy or CreateServiceWrapper being called, Remote Agency tries to locate the built assembly in current AppDomain by name and create the instance of the proxy or service wrapper. If absents, a new assembly will be created to hold the classes to be created.</para>
+            <para>Each instance of proxy has an id, which is determined when it is created. If the id needs be specified explicitly, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference> (<codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>) or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>. Or, the randomized id will be generated and output when calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)</codeEntityReference> (<codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)</codeEntityReference>) or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)</codeEntityReference>.</para>
+            <para>Each instance of service wrapper has an id, which is determined when it is created. If the id needs be specified explicitly, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper(System.Type,System.Object,System.Guid,System.Int32,System.Boolean)</codeEntityReference> (<codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateServiceWrapper(System.Type,System.Object,System.Guid,System.Int32,System.Boolean)</codeEntityReference>) or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Guid,System.Int32,System.Boolean)</codeEntityReference>. Or, the randomized id will be generated and returned when calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper(System.Type,System.Object,System.Int32,System.Boolean)</codeEntityReference> (<codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateServiceWrapper(System.Type,System.Object,System.Int32,System.Boolean)</codeEntityReference>) or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Int32,System.Boolean)</codeEntityReference>.</para>
+            <para>See <link xlink:href="605ebb50-c23c-4f74-9a16-8aec76c91a01">Assembly Building</link> for details.</para>
+          </listItem>
+          <listItem>
+            <para>When message filtering is required, see <link xlink:href="cf93cf44-b878-4fdf-8752-036c48a9db52">Message Filtering</link> for details.</para>
+          </listItem>
+          <listItem>
+            <para>The routing and transmission of messages between instances of Remote Agency are not resolved by Remote Agency. You may want to check <externalLink>
+              <linkText>Remote Hub</linkText>
+              <linkUri>http://secretnest.info/RemoteHub</linkUri>
+              <linkTarget>_blank</linkTarget>
+            </externalLink> or use any other solution.</para>
+          </listItem>
+          <listItem>
+            <para><link xlink:href="4895119b-e34a-45d3-a1ce-6319a8bf97e0">Ping</link> can be used for network detection. When network load balancing is required, it can also be useful to get a particular service wrapper from virtual.</para>
+          </listItem>
+          <listItem>
+            <para>When the instance of proxy or service wrapper with events registered is disposed, notification and remedial mechanism to deal with communication failures are described in <link xlink:href="8063be9a-3a43-4905-8778-072d57437e8b">Dispose notification</link>.</para>
+          </listItem>
+          <listItem>
+            <para>When hosting instances of proxy or service wrapper in a mixed environment, some components may be located in the same Remote Agency instance, but some are not, check the <link xlink:href="dc569fad-19e9-46dd-869d-6ee90c5dbe32">Consistency</link> for details.</para>
+          </listItem>
+        </list>
       </content>
     </section>
 
