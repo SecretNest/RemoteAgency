@@ -19,7 +19,10 @@
     <section address="Builtin">
       <title>Built-in Serializers</title>
       <content>
-        <para>Binary and JSON serializers are shipped within main library of Remote Agency. Developer can choose one of them to initialize the instance of Remote Agency by calling method <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Nullable{System.Guid})</codeEntityReference> or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference>.</para>
+        <para>Binary and JSON serializers are shipped within main library of Remote Agency. Developer can choose one of them to initialize the instance of Remote Agency by calling method <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference> or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference>.</para>
+        <alert class="security">
+          <para>BinaryFormatter is included in Binary Serializer, which is dangerous and should not be used. See <link xlink:href="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</link> for details.</para>
+        </alert>
       </content>
     </section>
 

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="886b6555-5b60-46ed-b0e3-aa383c95108c" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>BinaryFormatter is included in Binary Serializer, which is dangerous and should not be used.</para>
+    </introduction>
+
+    <section>
+      <title>BinaryFormatter</title>
+      <content>
+        <para>Microsoft has stated that BinaryFormatter is dangerous and is not recommended for data processing. Please check <externalLink>
+          <linkText>BinaryFormatter security guide (Microsoft Docs)</linkText>
+          <linkUri>https://aka.ms/binaryformatter</linkUri>
+        </externalLink> for further information.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Use BinaryFormatter with Caution</title>
+      <content>
+        <para>Though it is not recommended, the BinaryFormatter is the fastest way in serializing and deserializing process. When it is necessary, uses it with caution and passes true as the first argument when calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference> or initializing <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer</codeEntityReference>, or an exception will be thrown.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd">Serializer</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

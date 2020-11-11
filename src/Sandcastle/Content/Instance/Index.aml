@@ -20,7 +20,10 @@
                 <para>When using JSON serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference> to create the instance.</para>
               </listItem>
               <listItem>
-                <para>When using Binary serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Nullable{System.Guid})</codeEntityReference> to create the instance.</para>
+                <para>When using Binary serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference> to create the instance.</para>
+                <alert class="security">
+                  <para>BinaryFormatter is included in Binary Serializer, which is dangerous and should not be used. See <link xlink:href="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</link> for details.</para>
+                </alert>
               </listItem>
               <listItem>
                 <para>When using other serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference> to create the instance with the serializer specified.</para>

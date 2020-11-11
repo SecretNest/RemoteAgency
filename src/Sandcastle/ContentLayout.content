@@ -9,7 +9,7 @@
   <Topic id="9217c6f5-947d-4336-a230-45fc33229f63" visible="True" noFile="true" isExpanded="true" title="Attributes">
     <Topic id="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" visible="True" title="Attributes used by Remote Agency" />
     <Topic id="0276dae1-94a2-4e9c-87ab-e3b371f41104" visible="True" title="Attributes Pass-Through" />
-    <Topic id="37179c21-8267-47da-83c5-cb71adfc1287" visible="True" isSelected="true" title="Attributes for Entity Types" />
+    <Topic id="37179c21-8267-47da-83c5-cb71adfc1287" visible="True" title="Attributes for Entity Types" />
   </Topic>
   <Topic id="55c0e474-71f1-48eb-94b2-038f4670f7cb" visible="True" noFile="true" isExpanded="true" title="Components">
     <Topic id="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5" visible="True" title="RemoteAgency and RemoteAgency.Neat" />
@@ -22,6 +22,7 @@
     <Topic id="cf93cf44-b878-4fdf-8752-036c48a9db52" visible="True" title="Message Filtering" />
     <Topic id="4895119b-e34a-45d3-a1ce-6319a8bf97e0" visible="True" title="Ping" />
     <Topic id="dc569fad-19e9-46dd-869d-6ee90c5dbe32" visible="True" title="Consistency" linkText="The Best Practice when in mixing environment" />
+    <Topic id="886b6555-5b60-46ed-b0e3-aa383c95108c" visible="True" isSelected="true" title="Binary Formatter Warning" />
   </Topic>
   <Topic id="2d36d4de-5cb0-4111-8a43-96b3b90d5f61" visible="True" isExpanded="true" title="Tunings">
     <Topic id="e7b65736-b2df-4aa9-897a-3a3050d3cceb" visible="True" title="Asset Ignoring, Timeout and One-way" />
