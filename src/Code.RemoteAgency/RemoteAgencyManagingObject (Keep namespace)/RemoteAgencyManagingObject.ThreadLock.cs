@@ -62,7 +62,7 @@ namespace SecretNest.RemoteAgency
                     _callOnRemoteClosed = CallOnRemoteClosedWithNoThreadLock;
                     break;
                 case ThreadLockMode.SynchronizationContext:
-                    _taskFactory = new TaskFactory(TaskScheduler.FromCurrentSynchronizationContext());
+                    _taskFactory = RemoteAgencyBase.GetSynchronizationContextTaskFactory();
                     _processThreadLockWithReturn = ProcessWithTaskScheduler;
                     _processThreadLockWithoutReturn = ProcessWithTaskScheduler;
                     _callCloseRequestedByManagingObjectCaller = CallCloseRequestedByManagingObjectWithTaskScheduler;

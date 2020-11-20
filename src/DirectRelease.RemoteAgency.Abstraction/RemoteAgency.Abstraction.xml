@@ -985,6 +985,7 @@
             <summary>
             Thread choosing for accessing assets.
             </summary>
+            <conceptualLink target="3c648b23-25dd-454c-b074-d0f3f0a0958c" />
         </member>
         <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.None">
             <summary>
@@ -995,6 +996,7 @@
             <summary>
             Always use SynchronizationContext to access assets within this object.
             </summary>
+            <conceptualLink target="3c648b23-25dd-454c-b074-d0f3f0a0958c#SynchronizationContext" />
         </member>
         <member name="F:SecretNest.RemoteAgency.Attributes.ThreadLockMode.AnyButSameThread">
             <summary>

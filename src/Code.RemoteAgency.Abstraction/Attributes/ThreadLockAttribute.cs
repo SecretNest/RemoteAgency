@@ -54,6 +54,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <summary>
     /// Thread choosing for accessing assets.
     /// </summary>
+    /// <conceptualLink target="3c648b23-25dd-454c-b074-d0f3f0a0958c" />
     public enum ThreadLockMode
     {
         /// <summary>
@@ -63,6 +64,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Always use SynchronizationContext to access assets within this object.
         /// </summary>
+        /// <conceptualLink target="3c648b23-25dd-454c-b074-d0f3f0a0958c#SynchronizationContext" />
         SynchronizationContext,
         /// <summary>
         /// Always use one thread to access assets within this object.
