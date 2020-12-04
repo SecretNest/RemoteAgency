@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevel" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
-    public sealed class ReturnRequiredPropertyHelperAttribute : Attribute
+    public sealed class ReturnRequiredPropertyHelperAttribute : Attribute, IIsReturnRequired
     {
         /// <summary>
         /// Gets whether this parameter should be included in return entity.

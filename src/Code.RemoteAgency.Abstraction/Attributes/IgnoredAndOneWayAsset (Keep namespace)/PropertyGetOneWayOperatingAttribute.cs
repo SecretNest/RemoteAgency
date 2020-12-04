@@ -15,7 +15,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AssetLevel" />
     /// <conceptualLink target="e7b65736-b2df-4aa9-897a-3a3050d3cceb" />
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
-    public sealed class PropertyGetOneWayOperatingAttribute : Attribute
+    public sealed class PropertyGetOneWayOperatingAttribute : Attribute, IIsOneWay
     {
         /// <summary>
         /// Gets whether the property get operating is one-way.

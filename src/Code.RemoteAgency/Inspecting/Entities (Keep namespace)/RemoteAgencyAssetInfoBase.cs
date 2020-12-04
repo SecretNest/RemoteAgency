@@ -7,7 +7,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
-    abstract class RemoteAgencyAssetInfoBase
+    abstract class RemoteAgencyAssetInfoBase : IIsIgnored, IIsOneWay
     {
         public string AssetName { get; set; }
         public MemberInfo Asset { get; set; }

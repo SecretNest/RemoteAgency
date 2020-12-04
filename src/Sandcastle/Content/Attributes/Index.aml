@@ -235,7 +235,7 @@
               <entry><para>Valid on property only.</para></entry>
             </row>
             <row>
-              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetResponsePropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertyGetValuePropertyNameAttribute</codeEntityReference></para></entry>
               <entry><para>Specifies property name in entity class generated for holding the response of getting this property.</para></entry>
               <entry><para>Valid on property only.</para></entry>
             </row>
@@ -245,7 +245,7 @@
               <entry><para>Valid on property only.</para></entry>
             </row>
             <row>
-              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetRequestPropertyNameAttribute</codeEntityReference></para></entry>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedPropertySetValuePropertyNameAttribute</codeEntityReference></para></entry>
               <entry><para>Specifies property name in entity class generated for holding the request of setting this property.</para></entry>
               <entry><para>Valid on property only.</para></entry>
             </row>

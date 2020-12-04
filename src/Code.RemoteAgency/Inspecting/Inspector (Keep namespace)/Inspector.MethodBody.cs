@@ -236,7 +236,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertyGetting = null,
             List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForPropertySetting = null,
             string propertyValuePropertyNameSpecifiedByAttribute = null,
-            Attribute propertyValuePropertyNameSpecifyingAttribute = null,
+            CustomizedParameterEntityPropertyNameAttribute propertyValuePropertyNameSpecifyingAttribute = null,
             List<ParameterReturnRequiredPropertyAttribute> propertyValueParameterReturnRequiredProperty = null)
         {
             var parameters = methodInfo.GetParameters();
@@ -284,7 +284,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     }
 
                     string requiredPropertyName;
-                    Attribute requiredPropertyNameSpecifyingAttribute;
+                    CustomizedParameterEntityPropertyNameAttribute requiredPropertyNameSpecifyingAttribute;
                     if (!string.IsNullOrEmpty(propertyValuePropertyNameSpecifiedByAttribute) &&
                         parameter.Name == PropertyValueName)
                     {

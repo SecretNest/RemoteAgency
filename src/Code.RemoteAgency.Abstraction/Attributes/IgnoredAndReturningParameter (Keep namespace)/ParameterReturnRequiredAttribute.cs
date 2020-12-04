@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
 #pragma warning disable CA1813 // Avoid unsealed attributes
-    public class ParameterReturnRequiredAttribute : Attribute
+    public class ParameterReturnRequiredAttribute : Attribute, IIsReturnRequired
 #pragma warning restore CA1813 // Avoid unsealed attributes
     {
         /// <summary>

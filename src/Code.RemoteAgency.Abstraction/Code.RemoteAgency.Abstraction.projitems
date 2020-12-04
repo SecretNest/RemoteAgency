@@ -19,6 +19,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterReturnRequiredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterReturnRequiredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ReturnRequiredPropertyHelperAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IIsIgnored.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IIsOneWay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\IIsReturnRequired.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedEventEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\ReturnIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions %28Keep namespace%29\AccessingTimeOutException.cs" />
@@ -33,9 +36,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedMethodEntityNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedParameterEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertyGetEntityNameAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertyGetResponsePropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertyGetValuePropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertySetEntityNameAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertySetRequestPropertyNameAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedPropertySetValuePropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\NameCustomization %28Keep namespace%29\CustomizedReturnValueEntityPropertyNameAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\ParameterIgnoredAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\IgnoredAndReturningParameter %28Keep namespace%29\EventParameterReturnRequiredPropertyAttribute.cs" />

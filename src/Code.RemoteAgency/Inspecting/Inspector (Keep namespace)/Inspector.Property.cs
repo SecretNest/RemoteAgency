@@ -99,13 +99,13 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 out _);
 
                         string returnValuePropertyNameSpecifiedByAttribute =
-                            GetValueFromAttribute<CustomizedPropertyGetResponsePropertyNameAttribute, string>(
+                            GetValueFromAttribute<CustomizedPropertyGetValuePropertyNameAttribute, string>(
                                 propertyInfo, i => i.EntityPropertyName,
-                                out var customizedPropertyGetResponsePropertyNameAttribute);
+                                out var customizedPropertyGetValuePropertyNameAttribute);
 
                         ProcessMethodBodyForNormalAsset(getMethod, getMethod.ReturnType, memberPath,
                             gettingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
-                            customizedPropertyGetResponsePropertyNameAttribute, property.GettingMethodBodyInfo,
+                            customizedPropertyGetValuePropertyNameAttribute, property.GettingMethodBodyInfo,
                             AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null,
                             null, null, null,
                             valueParameterSerializerParameterLevelAttributesOverrideForProperty, null);
@@ -115,8 +115,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                 if (property.IsSettable)
                 {
                     var propertyValuePropertyName =
-                        GetValueFromAttribute<CustomizedPropertySetRequestPropertyNameAttribute, string>(propertyInfo,
-                            i => i.EntityPropertyName, out var customizedPropertySetRequestPropertyNameAttribute);
+                        GetValueFromAttribute<CustomizedPropertySetValuePropertyNameAttribute, string>(propertyInfo,
+                            i => i.EntityPropertyName, out var customizedPropertySetValuePropertyNameAttribute);
                     var parameterReturnRequiredProperty = propertyInfo
                         .GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToList();
 
@@ -127,7 +127,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             property.SettingMethodBodyInfo,
                             AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null, null,
                             valueParameterSerializerParameterLevelAttributesOverrideForProperty,
-                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute);
+                            propertyValuePropertyName, customizedPropertySetValuePropertyNameAttribute);
                     }
                     else
                     {
@@ -140,7 +140,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             property.SettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null,
                             null, null, null,
                             null, valueParameterSerializerParameterLevelAttributesOverrideForProperty,
-                            propertyValuePropertyName, customizedPropertySetRequestPropertyNameAttribute,
+                            propertyValuePropertyName, customizedPropertySetValuePropertyNameAttribute,
                             parameterReturnRequiredProperty);
                     }
                 }
