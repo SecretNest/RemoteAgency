@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     /// <summary>
     /// Activator faster than built in version.
     /// </summary>
-    public static class FastActivator
+    internal static class FastActivator
     {
-        static readonly ConcurrentDictionary<Type, Func<object>> ConstructorCache = new ConcurrentDictionary<Type, Func<object>>();
+        static readonly ConcurrentDictionary<Type, Func<object>> ConstructorCache = new ();
 
         /// <summary>
         /// Creates an instance of the type specified.
@@ -24,20 +22,20 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
             return GetConstructor(type)();
         }
 
-        /// <summary>
-        /// Creates an instance of the type specified and cast it to the type specified.
-        /// </summary>
-        /// <typeparam name="T">Target type to be cast to.</typeparam>
-        /// <param name="type">The type of the instance to be created.</param>
-        /// <returns>The created instance.</returns>
-        public static T CreateInstance<T>(Type type) where T : class
-        {
-            return CreateInstance(type) as T;
-        }
+        ///// <summary>
+        ///// Creates an instance of the type specified and cast it to the type specified.
+        ///// </summary>
+        ///// <typeparam name="T">Target type to be cast to.</typeparam>
+        ///// <param name="type">The type of the instance to be created.</param>
+        ///// <returns>The created instance.</returns>
+        //public static T CreateInstance<T>(Type type) where T : class
+        //{
+        //    return CreateInstance(type) as T;
+        //}
 
         static Func<object> GetConstructor(Type objType)
         {
-            return ConstructorCache.GetOrAdd(objType, i => (Func<object>)BuildConstructorDelegate(i, typeof(Func<object>), new Type[] { }));
+            return ConstructorCache.GetOrAdd(objType, i => (Func<object>)BuildConstructorDelegate(i, typeof(Func<object>), Array.Empty<Type>()));
         }
 
         internal static object BuildConstructorDelegate(Type type, Type delegateType, Type[] argTypes)
@@ -59,9 +57,10 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
     /// Activator faster than built in version.
     /// </summary>
     /// <typeparam name="TArg">Type of the argument of the constructor.</typeparam>
-    public static class FastActivator<TArg>
+    internal static class FastActivator<TArg>
     {
-        private static readonly ConcurrentDictionary<Type, Func<TArg, object>> ConstructorCache = new ConcurrentDictionary<Type, Func<TArg, object>>();
+        private static readonly ConcurrentDictionary<Type, Func<TArg, object>> ConstructorCache = new ();
+
         /// <summary>
         /// Creates an instance of the type specified.
         /// </summary>
@@ -70,7 +69,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <returns>The created instance.</returns>
         public static object CreateInstance(Type type, TArg arg1)
         {
-            return GetConstructor(type, new Type[] { typeof(TArg) })(arg1);
+            return GetConstructor(type, new[] { typeof(TArg) })(arg1);
         }
 
         /// <summary>

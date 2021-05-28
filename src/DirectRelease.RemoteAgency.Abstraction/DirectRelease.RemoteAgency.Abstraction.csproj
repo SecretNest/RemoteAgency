@@ -20,9 +20,10 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Abstraction</AssemblyName>
     <Configurations>Debug;Release</Configurations>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'"> <!--Doc is same.-->
     <DocumentationFile>RemoteAgency.Abstraction.xml</DocumentationFile>
   </PropertyGroup>
 

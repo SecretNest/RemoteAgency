@@ -102,11 +102,13 @@ namespace SecretNest.RemoteAgency
             {
                 assembly = Assembly.Load(assemblyName);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
             {
                 type = default;
                 return false;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             type = assembly.GetType(typeName);
             return type != null;

@@ -138,8 +138,8 @@ namespace SecretNest.RemoteAgency
             }
             finally
             {
-                _proxyObject.SendEventAddingMessageCallback = null;
                 //_proxyObject.GetSiteIdCallback = null;
+                _proxyObject.SendEventAddingMessageCallback = null;
                 _proxyObject.SendEventRemovingMessageCallback = null;
                 _proxyObject.SendMethodMessageCallback = null;
                 _proxyObject.SendOneWayMethodMessageCallback = null;

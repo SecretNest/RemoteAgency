@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
@@ -42,8 +39,11 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// </summary>
         /// <param name="assemblyFileName">File name to be written to.</param>
         /// <remarks>Assembly saving is not supported by .net core. This method is only for .net framework.</remarks>
-        /// <exception cref="NotSupportedException">Thrown when called in .net core app.</exception>
+        /// <exception cref="NotSupportedException">Thrown when called not from .net framework.</exception>
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable CA1822 //static
         public void Save(string assemblyFileName)
+#pragma warning restore CA1822
         {
 #if netfx
             _saveFileCallback(assemblyFileName);
@@ -52,7 +52,12 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 #endif
         }
 
+#pragma warning disable IDE0052 // Remove unread private members
+        // ReSharper disable UnusedMember.Global
         private Action<string> _saveFileCallback;
+#pragma warning restore IDE0052 // Remove unread private members
+#pragma warning restore IDE0079 // Remove unnecessary suppression
+        private bool _disposed;
 
         /// <summary>
         /// Initializes an instance of AfterTypeAndAssemblyBuiltEventArgs.
@@ -62,7 +67,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="builtServiceWrapper">Type of built service wrapper.</param>
         /// <param name="builtEntities">Types of built entities.</param>
         /// <param name="assembly">Built assembly.</param>
-        /// <param name="saveFileCallback">Callback for saving assembly to file.</param>
+        /// <param name="saveFileCallback">Callback for saving assembly to file while <see cref="Save"/> called.</param>
         internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, Action<string> saveFileCallback)
         {
             SourceInterface = sourceInterface;
@@ -79,16 +84,31 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="disposing">True: release both managed and unmanaged resources; False: release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (_disposed)
             {
-                _saveFileCallback = null;
+                if (disposing)
+                {
+                    _saveFileCallback = null;
+                }
+
+                _disposed = true;
             }
+
         }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~AfterTypeAndAssemblyBuiltEventArgs()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            Dispose(true);
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

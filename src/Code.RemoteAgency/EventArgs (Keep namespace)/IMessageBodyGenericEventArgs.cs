@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecretNest.RemoteAgency
+﻿namespace SecretNest.RemoteAgency
 {
     /// <summary>
     /// Defines property and method to hold the message body and provide an access point for serialization.

@@ -11,6 +11,7 @@ namespace Test.CSharp
     {
         int Add(int a, int b);
 
+        //When unmark this line, an exception about asset naming conflicts will be thrown.
         //[CustomizedAssetName("AddDouble")]
         float Add(float a, float b);
 

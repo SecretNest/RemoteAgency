@@ -21,13 +21,14 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Neat</AssemblyName>
     <Configurations>Debug;Release</Configurations>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
     <DefineConstants>netfx</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'"> <!--Doc is same.-->
     <DocumentationFile>RemoteAgency.Neat.xml</DocumentationFile>
   </PropertyGroup>
 

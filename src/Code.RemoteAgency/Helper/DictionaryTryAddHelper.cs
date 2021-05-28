@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿#if netfx
 namespace System.Collections.Generic
 {
-    #if netfx
     static class DictionaryTryAddHelper
     {
         public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -15,5 +11,5 @@ namespace System.Collections.Generic
             return true;
         }
     }
-    #endif
 }
+#endif

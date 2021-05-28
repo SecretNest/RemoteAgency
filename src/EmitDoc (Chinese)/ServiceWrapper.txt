@@ -315,7 +315,7 @@ void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCo
 					Emit构造RaisingMethodBodyInfo中的ParameterEntity指向的类的对象Request（名称随机）。注，此对象可能是泛型。如果是（info.IsourceInterfaceGenericType或info.IsGenericMethod），其所有泛型参数的个数与顺序均与Interface与方法一致（info.SourceInterfaceGenericDefinitionArguments + Method元素中的AssetLevelGenericParameters）。
 					遍历RaisingMethodBodyInfo中的ParameterEntityProperties针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
 						Emit设置Request中名为元素的PropertyName的属性，值为元素的ParameterName对应的变量。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
-					Emit调用SendMessageAndGetResponse方法（TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message, out Exception exception)），参数为Request。将返回值保存为Response。
+					Emit调用SendMessageAndGetResponse方法（TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message, out Exception exception)），参数为Request。将返回值保存为Response（名称随机）。
 					Emit判断exception，如果非null：
 						遍历MethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
 							如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型，如果元素的IsIncludedWhenExceptionThrown为真：Emit将Response中名为元素的PropertyName的属性的值，赋值至元素的Parameter对应的变量（out或ref参数）中。

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -12,7 +11,7 @@ namespace SecretNest.RemoteAgency.Helper
     /// </summary>
     public class ProxyEventHelper
     {
-        private Dictionary<string, ProxyEventRouterBase> _routers = new Dictionary<string, ProxyEventRouterBase>();
+        private Dictionary<string, ProxyEventRouterBase> _routers = new ();
 
         /// <summary>
         /// Gets or sets the callback for a delegate which will be called while an event adding is requested.
@@ -58,7 +57,7 @@ namespace SecretNest.RemoteAgency.Helper
         {
             if (sendSpecialCommand)
             {
-                Dictionary<Guid, HashSet<Guid>> targets = new Dictionary<Guid, HashSet<Guid>>(); //site id, instance id
+                var targets = new Dictionary<Guid, HashSet<Guid>>(); //site id, instance id
                 foreach (var router in _routers.Values)
                 foreach (var id in router.GetTargetSiteIdAndInstanceIdThenClose())
                 {
@@ -388,18 +387,18 @@ namespace SecretNest.RemoteAgency.Helper
         where TParameterEntity : IRemoteAgencyMessage
         where TReturnValueEntity : IRemoteAgencyMessage
     {
-        private readonly int _timeout;
+        //private readonly int _timeout;
 
         /// <summary>
         /// Initialize an instance of ProxyEventRouterBase.
         /// </summary>
         /// <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
         /// <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
-        /// <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
-        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout, int raisingTimeout) : base(addingTimeout,
+        ///// <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
+        protected ProxyEventRouterBase(int addingTimeout, int removingTimeout/*, int raisingTimeout*/) : base(addingTimeout,
             removingTimeout)
         {
-            _timeout = raisingTimeout;
+            //_timeout = raisingTimeout;
         }
 
         /// <inheritdoc />

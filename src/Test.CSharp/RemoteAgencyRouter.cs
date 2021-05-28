@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SecretNest.RemoteAgency;
 
 namespace Test.CSharp
 {
     class RemoteAgencyRouter<TSerialized, TEntityBase>
     {
-        private readonly Dictionary<Guid, RemoteAgency<TSerialized, TEntityBase>> _instances = new Dictionary<Guid, RemoteAgency<TSerialized, TEntityBase>>();
+        private readonly Dictionary<Guid, RemoteAgency<TSerialized, TEntityBase>> _instances = new ();
 
         public void AddRemoteAgencyInstance(RemoteAgency<TSerialized, TEntityBase> instance)
         {

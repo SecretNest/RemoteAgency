@@ -275,9 +275,9 @@ info.Events中定义的所有Event。遍历其中的元素，根据元素的属�
 				Emit实现此类的Process方法（void Process(TParameterEntity message)）：
 					遍历RaisingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
 						Emit定义名为ParameterName的变量，值为message中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
-					Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。如果delegate有返回值，则忽略。——执行结束点
+					Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。如果delegate有返回值，则忽略。——执行结束点
 			否则：
-				Emit构造一个类（名称随机），派生于ProxyEventRouterBase<TDelegate, TParameterEntity, TReturnValueEntity>，其中其中TDelegate为event元素的Delegate，TParameterEntity为RaisingMethodBodyInfo中的ParameterEntity指向的类，TReturnValueEntity为RaisingMethodBodyInfo中的ReturnValueEntity。注，TParameterEntity与TReturnValueEntity可能是泛型。如果是（info.IsSourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。此基类构造函数有3个int型的参数（addingTimeout，removingTimeout，raisingTimeout），新构造的类的构造函数应与其一致，并调用此构造函数。
+				Emit构造一个类（名称随机），派生于ProxyEventRouterBase<TDelegate, TParameterEntity, TReturnValueEntity>，其中其中TDelegate为event元素的Delegate，TParameterEntity为RaisingMethodBodyInfo中的ParameterEntity指向的类，TReturnValueEntity为RaisingMethodBodyInfo中的ReturnValueEntity。注，TParameterEntity与TReturnValueEntity可能是泛型。如果是（info.IsSourceInterfaceGenericType），其所有泛型参数的个数与顺序均与Interface一致（info.SourceInterfaceGenericDefinitionArguments）。此基类构造函数有2个int型的参数（addingTimeout，removingTimeout），新构造的类的构造函数应与其一致，并调用此构造函数。
 				Emit实现此类的Process方法（TReturnValueEntity Process(TParameterEntity message, out Exception exception)）：
 					遍历RaisingMethodBodyInfo中的ParameterEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type）：
 						Emit定义名为ParameterName的变量，值为message中属性的值（属性名为元素的PropertyName的属性的值）。元素的Parameter是此参数在原delegate中的参数定义，类型为ParameterInfo。
@@ -287,9 +287,9 @@ info.Events中定义的所有Event。遍历其中的元素，根据元素的属�
 					Emit构造一个try：
 						在try内：
 							如果Event元素的Delegate包含返回值：
-								Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。将返回值保存在返回值变量中。
+								Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。将返回值保存在返回值变量中。
 							否则：
-								Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。。
+								Emit引发Event元素的Asset对应的事件。delegate中的参数，如果未在上述遍历中定义与赋值的，说明为忽略参数。对于忽略参数，如果标记有out的，则忽略其返回值；如果标记有ref的，则建立一个临时变量，并传入default；对于没有标记的，传入default。
 							遍历RaisingMethodBodyInfo中的ReturnValueEntityProperties，针对每个元素（元素的DataType是此属性的数据类型，类型为Type——此段A，与下文段B可联合：通过一次判断，确认Emit代码的不同位置）：
 								如果元素的ReturnValueSource为Parameter，将此元素转换为RemoteAgencyReturnValueInfoFromParameter类型：Emit将元素的Parameter对应的变量（out或ref参数）的值，赋值至Response中名为元素的PropertyName的属性。
 								如果元素的ReturnValueSource为ParameterField，将此元素转换为RemoteAgencyReturnValueInfoFromParameterField类型：Emit将元素的Parameter对应的变量的指定Field中的值，赋值至Response中名为元素的PropertyName的属性，Field由元素的ParameterField指定。
@@ -319,10 +319,7 @@ info.Events中定义的所有Event。遍历其中的元素，根据元素的属�
 			Emit对构造出的Router类定义一个私有对象（名称随机）。
 	构造代码（放置于Proxy的构造函数内的代码）：
 		如果Event元素的IsIgnored为假：
-			如果Event元素的IsOneWay为真：
-				构造构造出的Router类的对象，参数依次为AddingMethodBodyInfo元素的Timeout，RemovingMethodBodyInfo元素的Timeout。
-			否则：
-				构造构造出的Router类的对象，参数依次为AddingMethodBodyInfo元素的Timeout，RemovingMethodBodyInfo元素的Timeout，RaisingMethodBodyInfo元素的Timeout。
+			构造构造出的Router类的对象，参数依次为AddingMethodBodyInfo元素的Timeout，RemovingMethodBodyInfo元素的Timeout。
 			Emit调用Helper对象的AddRouter方法（void AddRouter(ProxyEventRouterBase router)），参数为构造出的Router类的对象。
 	构造事件定义代码：
 		Emit构造事件。事件名取自Event元素的Asset.Name，不要使用Event元素的AssetName。事件的EventHandler为Event元素的Delegate。事件本身需要执行方法EmitAttributePassThroughAttributes，passThroughAttributes为Property元素的AssetLevelPassThroughAttributes。

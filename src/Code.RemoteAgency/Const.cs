@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecretNest.RemoteAgency
+﻿namespace SecretNest.RemoteAgency
 {
-    static partial class Const
+    static class Const
     {
         public const string SpecialCommandProxyDisposed = "ProxyDisposed";
         public const string SpecialCommandServiceWrapperDisposed = "ServiceWrapperDisposed";

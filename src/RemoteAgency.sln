@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmitDoc (Chinese)", "EmitDo
 		EmitDoc (Chinese)\ServiceWrapper.txt = EmitDoc (Chinese)\ServiceWrapper.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSharp", "Test.CSharp\Test.CSharp.csproj", "{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.CSharp", "Test.CSharp\Test.CSharp.csproj", "{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
