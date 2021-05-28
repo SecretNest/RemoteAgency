@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -9,7 +7,7 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <typeparam name="TSerialized">Type of the serialized data.</typeparam>
     /// <remarks>Type of the parent class of all entities is set to object.</remarks>
-    public partial class RemoteAgency<TSerialized> : RemoteAgency<TSerialized, object>
+    public class RemoteAgency<TSerialized> : RemoteAgency<TSerialized, object>
     {
         /// <summary>
         /// Initializes an instance of Remote Agency with type of serialized data specified.

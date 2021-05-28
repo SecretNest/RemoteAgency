@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Inspecting;
@@ -47,11 +45,11 @@ namespace SecretNest.RemoteAgency
             bool isProxyRequired, bool isServiceWrapperRequired,
             out Type builtProxy, out Type builtServiceWrapper, out List<Type> builtEntities, out AssemblyBuilder assemblyBuilder, out ModuleBuilder moduleBuilder)
         {
-            AssemblyName assemblyName = new AssemblyName(basicInfo.AssemblyName);
+            var assemblyName = new AssemblyName(basicInfo.AssemblyName);
 
             assemblyBuilder = 
 #if netfx
-                Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+                System.Threading.Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
 #else
                 AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif
@@ -63,7 +61,7 @@ namespace SecretNest.RemoteAgency
                 assemblyBuilder.DefineDynamicModule("RemoteAgency");
 #endif
 
-            Inspector inspector = new Inspector(basicInfo, isProxyRequired, isServiceWrapperRequired,
+            var inspector = new Inspector(basicInfo, isProxyRequired, isServiceWrapperRequired,
                 EntityTypeBuilder.InterfaceLevelAttributeBaseType, EntityTypeBuilder.AssetLevelAttributeBaseType,
                 EntityTypeBuilder.DelegateLevelAttributeBaseType, EntityTypeBuilder.ParameterLevelAttributeBaseType);
 

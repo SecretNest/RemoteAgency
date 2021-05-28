@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -10,7 +9,9 @@ namespace SecretNest.RemoteAgency.Inspecting
     /// The exception that is thrown when conflict of property name in entity is found.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public class EntityPropertyNameConflictException : InvalidAttributeDataException
+#pragma warning restore CA1032 // Implement standard exception constructors
     { 
         /// <summary>
         /// Gets the parameter which the attribute is on.
@@ -84,7 +85,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             Parameter = (ParameterInfo) info.GetValue("Parameter", typeof(ParameterInfo));
             CausedMemberType = (EntityPropertyNameConflictExceptionCausedMemberType) Enum.Parse(
-                typeof(EntityPropertyNameConflictExceptionCausedMemberType), info.GetString("CausedMemberType"));
+                typeof(EntityPropertyNameConflictExceptionCausedMemberType), info.GetString("CausedMemberType")!);
         }
         
         /// <inheritdoc />

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -12,7 +11,7 @@ namespace SecretNest.RemoteAgency.Inspecting
     {
         List<CustomAttributeBuilder> GetAttributePassThrough(ICustomAttributeProvider dataSource, Func<string, Attribute, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            List<CustomAttributeBuilder> result = new List<CustomAttributeBuilder>();
+            var result = new List<CustomAttributeBuilder>();
 
             if (!_includesProxyOnlyInfo)
                 return result;
@@ -35,7 +34,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     .ToLookup(i => ((AttributePassThroughFieldAttribute) i).AttributeId,
                         i => (AttributePassThroughFieldAttribute) i);
 
-            HashSet<string> processedAttributeId = new HashSet<string>();
+            var processedAttributeId = new HashSet<string>();
             foreach (var attributePassThroughAttribute in attributePassThroughAttributes)
             {
                 //Avoid process with same attribute id.
@@ -54,7 +53,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     throw new InvalidOperationException(
                         $"The constructor of {attribute.Name} specified with {nameof(AttributePassThroughAttribute)}.{nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)} in attribute is not found.");
 
-                object[] ctorParameters = new object[attributePassThroughAttribute.AttributeConstructorParameterTypes.Length];
+                var ctorParameters = new object[attributePassThroughAttribute.AttributeConstructorParameterTypes.Length];
 
                 if (attributePassThroughAttribute.AttributeConstructorParameterTypes.Length != 0)
                 {
@@ -83,25 +82,26 @@ namespace SecretNest.RemoteAgency.Inspecting
                             attributePassThroughIndexBasedParameterAttributes[
                                 attributePassThroughAttribute.AttributeId];
 
-                        HashSet<int> setIndices = new HashSet<int>();
+                        var setIndices = new HashSet<int>();
 
                         foreach (var attributePassThroughIndexBasedParameterAttribute in
                             linkedAttributePassThroughIndexBasedParameterAttributes)
                         {
                             //Avoid process with same index.
-                            if (!setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
-                                continue;
-                            else if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
-                                     ctorParameters.Length || attributePassThroughIndexBasedParameterAttribute.ParameterIndex < 0)
+                            if (setIndices.Add(attributePassThroughIndexBasedParameterAttribute.ParameterIndex))
                             {
-                                throw creatingExceptionCallback(
-                                    $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be negative, equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
-                                    attributePassThroughIndexBasedParameterAttribute);
-                            }
-                            else
-                            {
-                                ctorParameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
-                                    attributePassThroughIndexBasedParameterAttribute.Value;
+                                if (attributePassThroughIndexBasedParameterAttribute.ParameterIndex >=
+                                    ctorParameters.Length || attributePassThroughIndexBasedParameterAttribute.ParameterIndex < 0)
+                                {
+                                    throw creatingExceptionCallback(
+                                        $"{nameof(AttributePassThroughIndexBasedParameterAttribute.ParameterIndex)} cannot be negative, equal or larger than the length of {nameof(AttributePassThroughAttribute.AttributeConstructorParameterTypes)}.",
+                                        attributePassThroughIndexBasedParameterAttribute);
+                                }
+                                else
+                                {
+                                    ctorParameters[attributePassThroughIndexBasedParameterAttribute.ParameterIndex] =
+                                        attributePassThroughIndexBasedParameterAttribute.Value;
+                                }
                             }
                         }
                     }
@@ -123,9 +123,9 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (linkedAttributePassThroughPropertyAttributes.Any())
                     {
                         useProperty = true;
-                        HashSet<string> setProperties = new HashSet<string>();
-                        List<PropertyInfo> memberInfos = new List<PropertyInfo>();
-                        List<object> memberValues = new List<object>();
+                        var setProperties = new HashSet<string>();
+                        var memberInfos = new List<PropertyInfo>();
+                        var memberValues = new List<object>();
 
                         foreach (var attributePassThroughPropertyAttribute in linkedAttributePassThroughPropertyAttributes)
                         {
@@ -159,12 +159,9 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                     if (linkedAttributePassThroughFieldAttributes.Any())
                     {
-                        FieldInfo[] fieldInfo;
-                        object[] fieldValue;
-
-                        HashSet<string> setFields = new HashSet<string>();
-                        List<FieldInfo> memberInfos = new List<FieldInfo>();
-                        List<object> memberValues = new List<object>();
+                        var setFields = new HashSet<string>();
+                        var memberInfos = new List<FieldInfo>();
+                        var memberValues = new List<object>();
 
                         foreach (var attributePassThroughFieldAttribute in linkedAttributePassThroughFieldAttributes)
                         {
@@ -181,8 +178,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                             memberValues.Add(attributePassThroughFieldAttribute.Value);
                         }
 
-                        fieldInfo = memberInfos.ToArray();
-                        fieldValue = memberValues.ToArray();
+                        var fieldInfo = memberInfos.ToArray();
+                        var fieldValue = memberValues.ToArray();
 
                         //build with property and field
                         if (useProperty)
@@ -226,11 +223,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             ParameterInfo[] parameters,
             Func<string, Attribute, ParameterInfo, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            Dictionary<string, List<CustomAttributeBuilder>> result =
+            var result =
                 new Dictionary<string, List<CustomAttributeBuilder>>(parameters.Length);
             foreach (var parameterInfo in parameters)
             {
-                result[parameterInfo.Name] = GetAttributePassThrough(parameterInfo,
+                result[parameterInfo.Name!] = GetAttributePassThrough(parameterInfo,
                     (m, a) => creatingExceptionCallback(m, a, parameterInfo));
             }
 
@@ -240,7 +237,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         Dictionary<string, List<CustomAttributeBuilder>> FillAttributePassThroughOnGenericParameters(
             Type[] genericParameters, Func<string, Attribute, MemberInfo, InvalidAttributeDataException> creatingExceptionCallback)
         {
-            Dictionary<string, List<CustomAttributeBuilder>> result =
+            var result =
                 new Dictionary<string, List<CustomAttributeBuilder>>(genericParameters.Length);
             foreach (var typeInfo in genericParameters)
             {

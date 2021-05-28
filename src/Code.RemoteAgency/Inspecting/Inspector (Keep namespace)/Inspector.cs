@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -37,7 +36,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         public void Process()
         {
             //interface level
-            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            var memberPath = new Stack<MemberInfo>();
             memberPath.Push(_result.SourceInterface);
 
             if (_includesProxyOnlyInfo)
@@ -101,10 +100,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             ReadOriginalAsset(usedAssetNames, usedClassNames, memberPath);
 
             //foreach asset: auto naming
-            AutoNaming(usedAssetNames, usedClassNames, memberPath);
+            AutoNaming(usedAssetNames, usedClassNames/*, memberPath*/);
 
-            Task[] tasks = new Task[_result.Methods.Count + _result.Events.Count + _result.Properties.Count];
-            int taskIndex = 0;
+            var tasks = new Task[_result.Methods.Count + _result.Events.Count + _result.Properties.Count];
+            var taskIndex = 0;
 
             //methods
             foreach (var method in _result.Methods)
@@ -244,7 +243,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     MemberInfo current = @event;
                     if (customizedEntityName == null)
                     {
-                        customizedEntityName = item.Delegate.GetCustomAttribute<CustomizedEventEntityNameAttribute>();
+                        customizedEntityName = item.Delegate!.GetCustomAttribute<CustomizedEventEntityNameAttribute>();
                         if (customizedEntityName != null)
                         {
                             current = item.Delegate;
@@ -406,7 +405,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         }
 
         //foreach asset: auto naming
-        void AutoNaming(HashSet<string> usedAssetNames, HashSet<string> usedClassNames, Stack<MemberInfo> parentPath)
+        void AutoNaming(HashSet<string> usedAssetNames, HashSet<string> usedClassNames/*, Stack<MemberInfo> parentPath*/)
         {
             foreach (var method in _result.Methods)
             {
@@ -506,7 +505,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             Dictionary<string, List<TAttribute>> overrides)
             where TAttribute : Attribute
         {
-            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name, out var attribute))
+            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name!, out var attribute))
             {
                 return parameterInfo.GetCustomAttributes<TAttribute>().ToList();
             }
@@ -571,7 +570,11 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             if (char.IsLower(name[0]))
             {
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable IDE0057 // Use range operator
                 name = char.ToUpper(name[0]) + name.Substring(1);
+#pragma warning restore IDE0057 // Use range operator
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
             return GetAutoName(name, used);
         }

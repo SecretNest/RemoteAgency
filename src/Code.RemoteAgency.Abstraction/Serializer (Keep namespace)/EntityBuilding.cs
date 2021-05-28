@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -17,7 +16,9 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Gets the generic parameters of this entity class.
         /// </summary>
+#pragma warning disable CA1819 // Properties should not return arrays
         public Type[] GenericParameters { get; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
         /// <summary>
         /// Gets properties other than in interface.

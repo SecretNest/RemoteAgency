@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -22,13 +21,13 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             if (!string.IsNullOrEmpty(RaisingMethodBodyInfo.ParameterEntityName))
             {
-                List<EntityProperty> properties = RaisingMethodBodyInfo.ParameterEntityProperties.Select(i =>
+                var properties = RaisingMethodBodyInfo.ParameterEntityProperties.Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName,
                             i.SerializerParameterLevelAttributes
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(
+                var entity = new EntityBuildingExtended(
                     RaisingMethodBodyInfo.ParameterEntityName, properties, interfaceLevelAttributes,
                     SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes, interfaceLevelGenericParameters,
                     interfaceLevelGenericParameterPassThroughAttributes,
@@ -39,13 +38,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(RaisingMethodBodyInfo.ReturnValueEntityName))
             {
-                List<EntityProperty> properties = RaisingMethodBodyInfo.ReturnValueEntityProperties
+                var properties = RaisingMethodBodyInfo.ReturnValueEntityProperties
                     .Where(i => i.IsIncludedInEntity)
                     .Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(
+                var entity = new EntityBuildingExtended(
                     RaisingMethodBodyInfo.ReturnValueEntityName, properties, interfaceLevelAttributes,
                     SerializerAssetLevelAttributes, SerializerDelegateLevelAttributes, interfaceLevelGenericParameters,
                     interfaceLevelGenericParameterPassThroughAttributes,

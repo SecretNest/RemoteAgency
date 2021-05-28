@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -10,7 +8,9 @@ namespace SecretNest.RemoteAgency
     /// </summary>
     /// <remarks>When one-way is not set on the caller side (proxy for methods and properties, service wrapper for events) but set on the other side, AssetNotFoundException will be sent back to the caller. On the contrary, the message will be dropped without processing on the other side.</remarks>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public sealed class AssetNotFoundException : Exception
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the message which causes this exception thrown.
@@ -44,7 +44,7 @@ namespace SecretNest.RemoteAgency
         private AssetNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
-            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType!);
         }
 
         /// <inheritdoc />

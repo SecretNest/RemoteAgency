@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -9,8 +6,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
-        private readonly ConcurrentDictionary<string, TaskScheduler> _namedTaskSchedulers =
-            new ConcurrentDictionary<string, TaskScheduler>();
+        private readonly ConcurrentDictionary<string, TaskScheduler> _namedTaskSchedulers = new ();
 
         /// <summary>
         /// Tries to add a task scheduler for accessing assets to the instance of Remote Agency.

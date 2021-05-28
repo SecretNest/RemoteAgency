@@ -224,7 +224,7 @@ namespace SecretNest.RemoteAgency.Helper
     {
         private readonly int _addingTimeout, _removingTimeout;
 
-        private List<EventTarget> _targetSiteIdAndInstanceId = new List<EventTarget>();
+        private List<EventTarget> _targetSiteIdAndInstanceId = new ();
 
         class EventTarget
         {

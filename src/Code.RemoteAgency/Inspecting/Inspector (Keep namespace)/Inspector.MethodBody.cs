@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -10,7 +9,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        void GetAsyncReturnType(Type methodInfoReturnType, out Type returnType,
+        static void GetAsyncReturnType(Type methodInfoReturnType, out Type returnType,
             out AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass,
             AsyncMethodAttribute asyncMethod, MemberInfo member, Stack<MemberInfo> parentPath)
         {
@@ -63,7 +62,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
-        void ProcessMethodBodyForIgnoredAsset(MethodInfo methodInfo, Type returnType, bool willThrowExceptionWhileCalling,
+        static void ProcessMethodBodyForIgnoredAsset(MethodInfo methodInfo, Type returnType, bool willThrowExceptionWhileCalling,
             RemoteAgencyMethodBodyInfo target, AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass)
         {
             var parameters = methodInfo.GetParameters();
@@ -78,7 +77,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 if (parameter.IsOut)
                 {
-                    RemoteAgencyReturnValueInfoFromParameterDefaultValue item =
+                    var item =
                         new RemoteAgencyReturnValueInfoFromParameterDefaultValue()
                         {
                             Parameter = parameter
@@ -89,7 +88,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (returnType != typeof(void) && !willThrowExceptionWhileCalling)
             {
-                RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
+                var item =
                     new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
                     {
                         ReturnValueDataType = returnType,
@@ -119,9 +118,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
             target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
 
-            HashSet<string>
-                usedPropertyNamesInParameterEntity =
-                    new HashSet<string>(); //could be duplicated cause by the case changing :)
+            var usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
 
             foreach (var parameter in parameters)
             {
@@ -133,7 +130,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     if (includeCallerOnlyInfo) //one-way server won't process return value
                     {
-                        RemoteAgencyReturnValueInfoFromParameterDefaultValue item =
+                        var item =
                             new RemoteAgencyReturnValueInfoFromParameterDefaultValue()
                             {
                                 Parameter = parameter
@@ -205,7 +202,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 if (returnType != typeof(void))
                 {
-                    RemoteAgencyReturnValueInfoFromReturnValueDefaultValue item =
+                    var item =
                         new RemoteAgencyReturnValueInfoFromReturnValueDefaultValue()
                         {
                             ReturnValueDataType = returnType,
@@ -248,10 +245,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
             target.Timeout = timeOut;
 
-            HashSet<string>
-                usedPropertyNamesInParameterEntity =
-                    new HashSet<string>(); //could be duplicated cause by the case changing :)
-            HashSet<string> usedPropertyNamesInReturnValueEntity = new HashSet<string>();
+            var usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
+            var usedPropertyNamesInReturnValueEntity = new HashSet<string>();
 
             foreach (var parameter in parameters)
             {
@@ -342,7 +337,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             name = AutoNamePlaceHolder;
                         }
 
-                        RemoteAgencyReturnValueInfoFromParameter returnProperty =
+                        var returnProperty =
                             new RemoteAgencyReturnValueInfoFromParameter()
                             {
                                 PropertyName = name,
@@ -388,8 +383,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                         returnRequiredPropertyAttributes = GetAttributes(parameter, eventLevelParameterReturnRequiredPropertyAttributes);
                     if (returnRequiredPropertyAttributes.Count > 0)
                     {
-                        HashSet<string> processedProperties = new HashSet<string>();
-                        HashSet<Type> processedHelpers = new HashSet<Type>();
+                        var processedProperties = new HashSet<string>();
+                        var processedHelpers = new HashSet<Type>();
 
                         foreach (var returnRequiredPropertyAttribute in returnRequiredPropertyAttributes)
                         {
@@ -420,7 +415,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                         name = AutoNamePlaceHolder;
                                     }
 
-                                    RemoteAgencyReturnValueInfoFromParameterField returnProperty =
+                                    var returnProperty =
                                         new RemoteAgencyReturnValueInfoFromParameterField()
                                         {
                                             PropertyName = name,
@@ -475,7 +470,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             name = AutoNamePlaceHolder;
                                         }
 
-                                        RemoteAgencyReturnValueInfoFromParameterProperty returnProperty =
+                                        var returnProperty =
                                             new RemoteAgencyReturnValueInfoFromParameterProperty()
                                             {
                                                 PropertyName = name,
@@ -554,7 +549,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                             name = AutoNamePlaceHolder;
                                         }
 
-                                        RemoteAgencyReturnValueInfoFromParameterHelperProperty returnProperty =
+                                        var returnProperty =
                                             new RemoteAgencyReturnValueInfoFromParameterHelperProperty()
                                             {
                                                 PropertyName = name,
@@ -612,7 +607,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     returnValuePropertyName = AutoNamePlaceHolder;
                 }
 
-                RemoteAgencyReturnValueInfoFromReturnValue item = new RemoteAgencyReturnValueInfoFromReturnValue()
+                var item = new RemoteAgencyReturnValueInfoFromReturnValue()
                 {
                     PropertyName = returnValuePropertyName,
                     ReturnValueDataType = returnType,

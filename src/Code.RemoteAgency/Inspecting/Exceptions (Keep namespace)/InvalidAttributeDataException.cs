@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -10,7 +9,9 @@ namespace SecretNest.RemoteAgency.Inspecting
     /// The exception that is thrown when the invalid attribute or data within attribute is found.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public class InvalidAttributeDataException : Exception
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the attribute that cause this exception.
@@ -56,10 +57,10 @@ namespace SecretNest.RemoteAgency.Inspecting
         protected InvalidAttributeDataException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             var attributeType = (Type)info.GetValue("AttributeType", typeof(Type));
-            Attribute = (Attribute)info.GetValue("Attribute", attributeType);
+            Attribute = (Attribute)info.GetValue("Attribute", attributeType!);
             var count= info.GetInt32("MemberPathDeep");
-            MemberInfo[] path = new MemberInfo[count];
-            for (int i = 0; i < count; i++)
+            var path = new MemberInfo[count];
+            for (var i = 0; i < count; i++)
             {
                 path[i] = (MemberInfo) info.GetValue($"MemberPath{i}", typeof(MemberInfo));
             }
@@ -75,7 +76,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             var path = MemberPath.ToArray();
             var count = path.Length;
             info.AddValue("MemberPathDeep", count);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 info.AddValue($"MemberPath{i}", path[i]);
             }

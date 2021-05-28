@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -63,6 +61,7 @@ namespace SecretNest.RemoteAgency
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
         #endregion
     }

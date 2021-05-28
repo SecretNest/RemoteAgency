@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
-using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
-        void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters,
+        static void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters,
             Dictionary<string, List<CustomAttributeBuilder>> genericParameterPassThroughAttributes)
         {
             if (genericParameters.Length > 0)
@@ -42,7 +40,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters)
+        static void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters)
         {
             if (genericParameters.Length > 0)
             {
@@ -71,7 +69,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void EmitAttributePassThroughAttributes(GenericTypeParameterBuilder typeBuilder,
+        static void EmitAttributePassThroughAttributes(GenericTypeParameterBuilder typeBuilder,
             List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
@@ -80,7 +78,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void EmitAttributePassThroughAttributes(TypeBuilder typeBuilder,
+        static void EmitAttributePassThroughAttributes(TypeBuilder typeBuilder,
             List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
@@ -89,7 +87,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void EmitParameterPassThroughAttributes(ParameterBuilder typeBuilder,
+        static void EmitParameterPassThroughAttributes(ParameterBuilder typeBuilder,
             List<CustomAttributeBuilder> passThroughAttributes)
         {
             foreach (var customAttribute in passThroughAttributes)
@@ -99,7 +97,7 @@ namespace SecretNest.RemoteAgency
         }
 
         private const string RandomizedNameFormat = "{0}_{1:N}";
-        string GetRandomizedName(string prefix)
+        static string GetRandomizedName(string prefix)
         {
             return string.Format(RandomizedNameFormat, prefix, Guid.NewGuid());
         }

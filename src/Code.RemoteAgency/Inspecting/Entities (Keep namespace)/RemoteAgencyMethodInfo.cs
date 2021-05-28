@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -41,13 +39,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(MethodBodyInfo.ParameterEntityName))
             {
-                List<EntityProperty> properties = MethodBodyInfo.ParameterEntityProperties.Select(i =>
+                var properties = MethodBodyInfo.ParameterEntityProperties.Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName,
                             i.SerializerParameterLevelAttributes
                                 .Select(j => new EntityPropertyAttribute(AttributePosition.Parameter, j)).ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ParameterEntityName,
+                var entity = new EntityBuildingExtended(MethodBodyInfo.ParameterEntityName,
                     properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
                     methodGenericParameterPassThroughAttributes,
                     type => MethodBodyInfo.ParameterEntity = type);
@@ -57,13 +55,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (!string.IsNullOrEmpty(MethodBodyInfo.ReturnValueEntityName))
             {
-                List<EntityProperty> properties = MethodBodyInfo.ReturnValueEntityProperties
+                var properties = MethodBodyInfo.ReturnValueEntityProperties
                     .Where(i => i.IsIncludedInEntity)
                     .Select(i =>
                         new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                     .ToList();
 
-                EntityBuildingExtended entity = new EntityBuildingExtended(MethodBodyInfo.ReturnValueEntityName,
+                var entity = new EntityBuildingExtended(MethodBodyInfo.ReturnValueEntityName,
                     properties, interfaceLevelAttributes, SerializerAssetLevelAttributes, null, methodGenericParameters,
                     methodGenericParameterPassThroughAttributes,
                     type => MethodBodyInfo.ReturnValueEntity = type);

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
@@ -22,7 +19,7 @@ namespace SecretNest.RemoteAgency
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(WaitingTimeForDisposing));
                 _waitingTimeForDisposing = value;
             }
         }
@@ -54,7 +51,7 @@ namespace SecretNest.RemoteAgency
         /// <inheritdoc />
         public override void OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null)
         {
-            List<Exception> exceptions = new List<Exception>();
+            var exceptions = new List<Exception>();
             foreach (var remoteAgencyManagingObject in _managingObjects.Values)
             {
                 try
@@ -67,13 +64,14 @@ namespace SecretNest.RemoteAgency
                 }
             }
 
-            if (exceptions.Count == 0)
-                return;
-            else if (exceptions.Count == 1)
-                throw exceptions[0];
-            else
+            switch (exceptions.Count)
             {
-                throw new AggregateException(exceptions);
+                case 0:
+                    return;
+                case 1:
+                    throw exceptions[0];
+                default:
+                    throw new AggregateException(exceptions);
             }
         }
 

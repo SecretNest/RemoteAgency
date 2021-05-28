@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SecretNest.RemoteAgency.JsonSerializer;
 
 namespace SecretNest.RemoteAgency
@@ -14,7 +12,7 @@ namespace SecretNest.RemoteAgency
         /// <returns>Created Remote Agency instance.</returns>
         public static RemoteAgency<string> CreateWithJsonSerializer(Guid? siteId = null)
         {
-            return (RemoteAgency<string>)CreateWithoutCheck<string, object>(new RemoteAgencyJsonSerializer(), new RemoteAgencyJsonSerializerEntityTypeBuilder(), siteId);
+            return (RemoteAgency<string>)CreateWithoutCheck(new RemoteAgencyJsonSerializer(), new RemoteAgencyJsonSerializerEntityTypeBuilder(), siteId);
         }
     }
 }

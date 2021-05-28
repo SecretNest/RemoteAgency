@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SecretNest.RemoteAgency
@@ -13,8 +11,7 @@ namespace SecretNest.RemoteAgency
         {
             //don't need to lock, optimized for performance.
 
-            return _synchronizationContextTaskFactory ?? (_synchronizationContextTaskFactory =
-                new TaskFactory(TaskScheduler.FromCurrentSynchronizationContext()));
+            return _synchronizationContextTaskFactory ??= new TaskFactory(TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         /// <summary>

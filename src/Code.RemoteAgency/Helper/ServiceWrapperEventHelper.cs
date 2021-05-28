@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SecretNest.RemoteAgency.Helper
@@ -21,7 +18,7 @@ namespace SecretNest.RemoteAgency.Helper
 
         //siteid, instanceid, asset, routers
         Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>>> _routers
-            = new Dictionary<Guid, Dictionary<Guid, Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>>>>();
+            = new ();
 
         /// <summary>
         /// Processes an event adding.
@@ -146,7 +143,7 @@ namespace SecretNest.RemoteAgency.Helper
                 {
                     if (routersPerSite.TryGetValue(proxyInstanceId.Value, out var routerPerInstance))
                     {
-                        List<Exception> exceptions = new List<Exception>();
+                        var exceptions = new List<Exception>();
                         RemoveRouterPerInstance(routerPerInstance, exceptions);
 
                         if (routersPerSite.Count > 1)
@@ -166,7 +163,7 @@ namespace SecretNest.RemoteAgency.Helper
                 }
                 else
                 {
-                    List<Exception> exceptions = new List<Exception>();
+                    var exceptions = new List<Exception>();
                     foreach (var value in routersPerSite.Values)
                     {
                         RemoveRouterPerInstance(value, exceptions);
@@ -181,19 +178,22 @@ namespace SecretNest.RemoteAgency.Helper
             }
         }
 
-        void RemoveRouterPerInstance(Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>> routerPerInstance, List<Exception> exceptions)
+        void RemoveRouterPerInstance(
+            Dictionary<string, List<ServiceWrapperEventRouterBase<TServiceContractInterface>>> routerPerInstance,
+            List<Exception> exceptions)
         {
-            foreach(var i in routerPerInstance.Values)
-            foreach (var router in i)
+            foreach (var router in routerPerInstance.Values.SelectMany(i => i))
             {
                 try
                 {
                     router.CloseRequestedByManagingObject(ServiceObject);
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
                 {
                     exceptions.Add(e);
                 }
+#pragma warning restore CA1031 // Do not catch general exception types
             }
         }
 
@@ -276,7 +276,7 @@ namespace SecretNest.RemoteAgency.Helper
         /// </summary>
         private CreateEmptyMessageCallback CreateEmptyMessageCallback { get; set; }
 
-        private Dictionary<string, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>>> _builders = new Dictionary<string, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>>>();
+        private Dictionary<string, Func<ServiceWrapperEventRouterBase<TServiceContractInterface>>> _builders = new ();
 
         /// <summary>
         /// Adds a builder callback.
@@ -401,10 +401,9 @@ namespace SecretNest.RemoteAgency.Helper
         private protected TReturnValueEntity SendMessageAndGetResponse(TParameterEntity message, out Exception exception)
         {
             SetMessageProperties(message);
-            var response = SendEventMessageCallback(message, _timeout);
-            var responseMessage = (IRemoteAgencyMessage) response;
+            var responseMessage = SendEventMessageCallback(message, _timeout);
             exception = responseMessage.Exception;
-            return (TReturnValueEntity) response;
+            return (TReturnValueEntity) responseMessage;
         }
     }
 }

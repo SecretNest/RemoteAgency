@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
-using System.Text;
-using Newtonsoft.Json;
 
 namespace SecretNest.RemoteAgency.BinarySerializer
 {
@@ -30,24 +26,22 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         /// <inheritdoc />
         public override byte[] Serialize(object original)
         {
-            using (var stream = new MemoryStream())
-            {
+            using var stream = new MemoryStream();
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable SYSLIB0011
-                _formatter.Serialize(stream, original);
+            _formatter.Serialize(stream, original);
 #pragma warning restore SYSLIB0011
-                return stream.ToArray();
-            }
+            return stream.ToArray();
         }
 
         /// <inheritdoc />
         public override object Deserialize(byte[] serialized)
         {
-            using (var stream = new MemoryStream(serialized))
-            {
+            using var stream = new MemoryStream(serialized);
 #pragma warning disable SYSLIB0011
-                return _formatter.Deserialize(stream);
+            return _formatter.Deserialize(stream);
 #pragma warning restore SYSLIB0011
-            }
+#pragma warning restore IDE0079 // Remove unnecessary suppression
         }
     }
 }

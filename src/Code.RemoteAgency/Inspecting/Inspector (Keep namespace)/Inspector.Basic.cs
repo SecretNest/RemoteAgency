@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
-        public static RemoteAgencyInterfaceBasicInfo GetBasicInfo(Type sourceInterface, bool includesProxyOnlyInfo)
+        public static RemoteAgencyInterfaceBasicInfo GetBasicInfo(Type sourceInterface/*, bool includesProxyOnlyInfo*/)
         {
             var basicInfo = new RemoteAgencyInterfaceBasicInfo();
 
-            SetInterfaceTypeBasicInfo(basicInfo, sourceInterface, sourceInterface.GetTypeInfo(), includesProxyOnlyInfo);
+            SetInterfaceTypeBasicInfo(basicInfo, sourceInterface, sourceInterface.GetTypeInfo()/*, includesProxyOnlyInfo*/);
 
             return basicInfo;
         }
 
-        static void SetInterfaceTypeBasicInfo(RemoteAgencyInterfaceBasicInfo basicInfo, Type sourceInterface, TypeInfo typeInfo, bool includesProxyOnlyInfo)
+        static void SetInterfaceTypeBasicInfo(RemoteAgencyInterfaceBasicInfo basicInfo, Type sourceInterface, TypeInfo typeInfo/*, bool includesProxyOnlyInfo*/)
         {
             if (sourceInterface.IsGenericType)
             {
@@ -48,7 +45,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             basicInfo.ThreadLockMode =
                 GetValueFromAttribute<ThreadLockAttribute, ThreadLockMode>(basicInfo.SourceInterface, i => i.ThreadLockMode,
-                    out var threadLockAttribute, ThreadLockMode.None);
+                    out var threadLockAttribute);
             if (basicInfo.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
                 basicInfo.TaskSchedulerName = threadLockAttribute.TaskSchedulerName;
         }
@@ -68,7 +65,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
             if (typeName.StartsWith("I") && typeName.Length > 1 && !char.IsUpper(typeName[1]))
             {
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable IDE0057 // Use range operator
                 return @namespace + typeName.Substring(1);
+#pragma warning restore IDE0057 // Use range operator
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
             else
             {

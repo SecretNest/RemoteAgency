@@ -152,7 +152,7 @@ namespace SecretNest.RemoteAgency
             }
 
             var serviceInterface = sourceInterface.IsConstructedGenericType ? sourceInterface.GetGenericTypeDefinition() : sourceInterface;
-            var basicInfo = Inspector.GetBasicInfo(serviceInterface, true);
+            var basicInfo = Inspector.GetBasicInfo(serviceInterface/*, true*/);
             
             BuildAssembly(basicInfo, true, buildServiceWrapperWithProxy, out Type builtProxy, out _);
 
@@ -231,7 +231,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public Guid CreateServiceWrapper<TInterface>(TInterface serviceObject, 
             int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
-            => (Guid) CreateServiceWrapperInternal(typeof(TInterface), serviceObject, defaultTimeout,
+            => CreateServiceWrapperInternal(typeof(TInterface), serviceObject, defaultTimeout,
                 buildProxyWithServiceWrapper);
 
         /// <inheritdoc />
@@ -292,7 +292,7 @@ namespace SecretNest.RemoteAgency
             }
 
             var serviceInterface = sourceInterface.IsConstructedGenericType ? sourceInterface.GetGenericTypeDefinition() : sourceInterface;
-            var basicInfo = Inspector.GetBasicInfo(serviceInterface, buildProxyWithServiceWrapper);
+            var basicInfo = Inspector.GetBasicInfo(serviceInterface/*, buildProxyWithServiceWrapper*/);
 
             BuildAssembly(basicInfo, buildProxyWithServiceWrapper, true, out _, out Type builtServiceWrapper);
 

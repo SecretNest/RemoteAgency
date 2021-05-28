@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Attributes
 {
@@ -16,7 +14,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#ParameterLevelEventOnly" />
     /// <conceptualLink target="168d9d48-771b-4912-9bcd-880f1d65c090" />
     [AttributeUsage(AttributeTargets.Event, Inherited = true, AllowMultiple = true)]
-    public sealed class EventParameterReturnRequiredAttribute : ParameterReturnRequiredAttribute, IIsReturnRequired
+    public sealed class EventParameterReturnRequiredAttribute : ParameterReturnRequiredAttribute/*, IIsReturnRequired*/
     {
         /// <summary>
         /// Gets the parameter name of the event.

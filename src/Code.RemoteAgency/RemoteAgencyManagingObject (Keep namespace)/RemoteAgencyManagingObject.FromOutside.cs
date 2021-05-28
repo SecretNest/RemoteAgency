@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
@@ -49,7 +46,11 @@ namespace SecretNest.RemoteAgency
                     ProcessSpecialCommandMessageReceived(message);
                     break;
                 default:
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
                     throw new ArgumentOutOfRangeException(nameof(IRemoteAgencyMessage.MessageType));
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
         }
 
@@ -86,11 +87,13 @@ namespace SecretNest.RemoteAgency
                         var pong = CreateEmptyMessage();
                         SetMessagePropertyFromRequest(pong, message);
                     }
+#pragma warning disable CA1031 // Do not catch general exception types
                     catch (Exception e)
                     {
                         ThrowExceptionWhenNecessary($"<{nameof(MessageType.SpecialCommand)}>{message.AssetName}", e,
                             LocalExceptionHandlingMode.Redirect);
                     }
+#pragma warning restore CA1031 // Do not catch general exception types
                 }
             }
         }

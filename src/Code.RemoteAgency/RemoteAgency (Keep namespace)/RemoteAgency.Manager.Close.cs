@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
@@ -31,8 +27,7 @@ namespace SecretNest.RemoteAgency
         /// <returns>Result. <see langword="true"/> when instance is located and closed; <see langword="false"/> when instance is not found.</returns>
         public bool CloseProxy(object proxy)
         {
-            var obj = proxy as IProxyCommunicate;
-            if (obj == null)
+            if (proxy is not IProxyCommunicate obj)
                 throw new ArgumentNullException(nameof(proxy), $"Argument {nameof(proxy)} is not set to a proxy object.");
 
             var instanceId = obj.InstanceId;
@@ -61,7 +56,7 @@ namespace SecretNest.RemoteAgency
         /// <inheritdoc />
         public override void CloseAllInstances(bool sendSpecialCommand = true)
         {
-            while (_managingObjects.Count > 0)
+            while (!_managingObjects.IsEmpty)
             {
                 var items = _managingObjects.ToArray();
 

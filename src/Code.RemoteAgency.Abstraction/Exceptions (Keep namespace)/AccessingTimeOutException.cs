@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -9,7 +7,9 @@ namespace SecretNest.RemoteAgency
     /// The exception that is thrown when the accessing is timed out.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public sealed class AccessingTimeOutException : TimeoutException
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the message which causes this exception thrown.
@@ -33,7 +33,7 @@ namespace SecretNest.RemoteAgency
         private AccessingTimeOutException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
-            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType!);
         }
 
         /// <inheritdoc />

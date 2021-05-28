@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -64,7 +61,7 @@ namespace SecretNest.RemoteAgency
 			var field = typeBuilder.GeneratePropertyBackField(propertyInfo);
 
 			// Define property
-			var propertyBuilder = typeBuilder.DefineProperty($"{propertyInfo.DeclaringType.Name}.{propertyInfo.Name}",
+			var propertyBuilder = typeBuilder.DefineProperty($"{propertyInfo.DeclaringType!.Name}.{propertyInfo.Name}",
 				PropertyAttributes.HasDefault, propertyInfo.PropertyType, null);
 
 			// Generate property getter and setter
@@ -126,7 +123,7 @@ namespace SecretNest.RemoteAgency
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
 			// Method name: {Interface Name}.set_{Property Name}
-			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.SetMethod.Name}";
+			var methodName = $"{propertyInfo.DeclaringType!.FullName}.{propertyInfo.SetMethod!.Name}";
 			var setMethod = typeBuilder.GenerateSetMethodCore(methodName, propertyBuilder, field);
 
 			typeBuilder.DefineMethodOverride(setMethod, propertyInfo.SetMethod);
@@ -144,7 +141,7 @@ namespace SecretNest.RemoteAgency
 			PropertyBuilder propertyBuilder, FieldInfo field)
 		{
 			// Method name: {Interface Name}.get_{Property Name}
-			var methodName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.GetMethod.Name}";
+			var methodName = $"{propertyInfo.DeclaringType!.FullName}.{propertyInfo.GetMethod!.Name}";
 			var getMethod = typeBuilder.GenerateGetMethodCore(methodName, propertyBuilder, field);
 
 			typeBuilder.DefineMethodOverride(getMethod, propertyInfo.GetMethod);
@@ -158,7 +155,7 @@ namespace SecretNest.RemoteAgency
 		/// <returns>The generated backend field associated with <paramref name="propertyInfo"/>.</returns>
 		private static FieldInfo GeneratePropertyBackField(this TypeBuilder builder, PropertyInfo propertyInfo)
 		{
-			var fieldName = $"{propertyInfo.DeclaringType.FullName}.{propertyInfo.Name}_$BackField$";
+			var fieldName = $"{propertyInfo.DeclaringType!.FullName}.{propertyInfo.Name}_$BackField$";
 
 			return builder.DefineField(fieldName, propertyInfo.PropertyType,
 				FieldAttributes.Private | FieldAttributes.HasDefault);

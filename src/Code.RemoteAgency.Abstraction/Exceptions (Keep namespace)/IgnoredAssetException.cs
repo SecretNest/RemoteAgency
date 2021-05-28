@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
@@ -10,7 +8,9 @@ namespace SecretNest.RemoteAgency
     /// The exception that is thrown when an asset marked by <see cref="AssetIgnoredAttribute"/> with <see cref="AssetIgnoredAttribute.WillThrowException"/> is set to <see langword="true" />.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public sealed class IgnoredAssetException : InvalidOperationException
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
 
         /// <inheritdoc />

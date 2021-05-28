@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -32,11 +30,13 @@ namespace SecretNest.RemoteAgency
                 result = Serialize(original);
                 serializingException = null;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
             {
                 result = default;
                 serializingException = ex;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             return result;
         }
@@ -62,11 +62,13 @@ namespace SecretNest.RemoteAgency
                 result = Deserialize(serialized);
                 deserializingException = null;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
             {
                 result = default;
                 deserializingException = ex;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             return result;
         }

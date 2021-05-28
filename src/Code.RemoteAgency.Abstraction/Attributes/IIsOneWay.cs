@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecretNest.RemoteAgency.Attributes
+﻿namespace SecretNest.RemoteAgency.Attributes
 {
     /// <summary>
     /// Specifies the class contains the property to describe whether the operating is one-way.

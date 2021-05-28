@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
-using SecretNest.RemoteAgency.Helper;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -14,11 +12,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             LocalExceptionHandlingMode interfaceLevelLocalExceptionHandlingMode,
             int interfaceLevelPropertyGettingTimeout, int interfaceLevelPropertySettingTimeout)
         {
-            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            var memberPath = new Stack<MemberInfo>();
             memberPath.Push(@interface);
             memberPath.Push(property.Asset);
 
-            PropertyInfo propertyInfo = (PropertyInfo) property.Asset;
+            var propertyInfo = (PropertyInfo) property.Asset;
             property.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(propertyInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
@@ -35,11 +33,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                         .ToList();
 
                 property.GettingMethodSerializerAssetLevelAttributes =
-                    getMethod.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
+                    getMethod!.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
                         .ToList();
 
                 property.SettingMethodSerializerAssetLevelAttributes =
-                    setMethod.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
+                    setMethod!.GetCustomAttributes(_serializerAssetLevelAttributeBaseType, true).Cast<Attribute>()
                         .ToList();
             }
 
@@ -51,7 +49,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 property.GettingMethodPassThroughAttributes = GetAttributePassThrough(getMethod, 
                     (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
 
-                property.GettingMethodReturnValuePassThroughAttributes = GetAttributePassThrough(getMethod.ReturnTypeCustomAttributes,
+                property.GettingMethodReturnValuePassThroughAttributes = GetAttributePassThrough(getMethod!.ReturnTypeCustomAttributes,
                     (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
             }
             if (property.IsSettable)
@@ -62,20 +60,20 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (property.IsIgnored)
             {
-                ProcessMethodBodyForIgnoredAsset(getMethod, getMethod.ReturnType, property.WillThrowExceptionWhileCalling,
+                ProcessMethodBodyForIgnoredAsset(getMethod, getMethod!.ReturnType, property.WillThrowExceptionWhileCalling,
                     property.GettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
-                ProcessMethodBodyForIgnoredAsset(setMethod, setMethod.ReturnType, property.WillThrowExceptionWhileCalling,
+                ProcessMethodBodyForIgnoredAsset(setMethod, setMethod!.ReturnType, property.WillThrowExceptionWhileCalling,
                     property.SettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
             }
             else
             {
-                var parameterInfo = getMethod.GetParameters(); //Parameters are shared for get and set. Except the value in set, which is not able to set an attribute. 
+                var parameterInfo = getMethod!.GetParameters(); //Parameters are shared for get and set. Except the value in set, which is not able to set an attribute. 
                 property.MethodParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
                     (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
 
                 var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
 
-                List<Attribute> valueParameterSerializerParameterLevelAttributesOverrideForProperty = propertyInfo
+                var valueParameterSerializerParameterLevelAttributesOverrideForProperty = propertyInfo
                     .GetCustomAttributes(_serializerParameterLevelAttributeBaseType, true)
                     .Cast<Attribute>().ToList();
 
@@ -85,8 +83,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (property.IsGettingOneWay)
                     {
                         ProcessMethodBodyForOneWayAsset(getMethod, getMethod.ReturnType, memberPath, _includesProxyOnlyInfo,
-                            property.GettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod,
-                            null, null);
+                            property.GettingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
                     }
                     else
                     {
@@ -98,7 +95,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             GetValueFromAttribute<ReturnIgnoredAttribute, bool>(propertyInfo, i => i.IsIgnored,
                                 out _);
 
-                        string returnValuePropertyNameSpecifiedByAttribute =
+                        var returnValuePropertyNameSpecifiedByAttribute =
                             GetValueFromAttribute<CustomizedPropertyGetValuePropertyNameAttribute, string>(
                                 propertyInfo, i => i.EntityPropertyName,
                                 out var customizedPropertyGetValuePropertyNameAttribute);
@@ -108,7 +105,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             customizedPropertyGetValuePropertyNameAttribute, property.GettingMethodBodyInfo,
                             AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, null,
                             null, null, null,
-                            valueParameterSerializerParameterLevelAttributesOverrideForProperty, null);
+                            valueParameterSerializerParameterLevelAttributesOverrideForProperty);
                     }
                 }
 

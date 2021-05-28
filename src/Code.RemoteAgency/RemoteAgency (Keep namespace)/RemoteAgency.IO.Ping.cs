@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
-        private readonly TimeSpan _defaultPingMaxWaitingTime = new TimeSpan(0, 0, 1, 30);
+        private readonly TimeSpan _defaultPingMaxWaitingTime = new (0, 0, 1, 30);
 
         /// <summary>
         /// Pings to the default target and get the response.
@@ -86,8 +83,7 @@ namespace SecretNest.RemoteAgency
                 throw new ArgumentOutOfRangeException(nameof(localProxyInstanceId), "Proxy specified is not found.");
             }
 
-            var proxy = managingObject as RemoteAgencyManagingObjectProxy<TEntityBase>;
-            if (proxy == null)
+            if (managingObject is not RemoteAgencyManagingObjectProxy<TEntityBase> proxy)
             {
                 throw new ArgumentException("Object specified is not proxy.", nameof(localProxyInstanceId));
             }

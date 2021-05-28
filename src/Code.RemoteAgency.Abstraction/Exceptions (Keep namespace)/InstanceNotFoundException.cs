@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -9,7 +7,9 @@ namespace SecretNest.RemoteAgency
     /// The exception that is thrown when the object specified by instance id cannot be found in target instance of Remote Agency.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public sealed class InstanceNotFoundException : NullReferenceException
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the message which causes this exception thrown.
@@ -47,8 +47,8 @@ namespace SecretNest.RemoteAgency
         private InstanceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             var originalMessageType = (Type)info.GetValue("OriginalMessageType", typeof(Type));
-            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType);
-            ExceptionThrownSiteId = (Guid) info.GetValue("ExceptionThrownSiteId", typeof(Guid));
+            OriginalMessage = (IRemoteAgencyMessage)info.GetValue("OriginalMessage", originalMessageType!);
+            ExceptionThrownSiteId = (Guid) info.GetValue("ExceptionThrownSiteId", typeof(Guid))!;
         }
 
         /// <inheritdoc />

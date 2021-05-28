@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
 using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Inspecting;
 
@@ -11,7 +7,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
-        private const int DefaultTimeout = 90000;
+        //protected const int DefaultTimeout = 90000;
 
         /// <summary>
         /// Occurs before type building finished.

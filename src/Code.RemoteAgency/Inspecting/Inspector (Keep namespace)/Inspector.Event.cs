@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -14,11 +13,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             int interfaceLevelEventAddingTimeout, int interfaceLevelEventRemovingTimeout,
             int interfaceLevelEventRaisingTimeout)
         {
-            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            var memberPath = new Stack<MemberInfo>();
             memberPath.Push(@interface);
             memberPath.Push(@event.Asset);
 
-            EventInfo eventInfo = (EventInfo) @event.Asset;
+            var eventInfo = (EventInfo) @event.Asset;
             @event.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(eventInfo, @event.Delegate,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
@@ -32,7 +31,7 @@ namespace SecretNest.RemoteAgency.Inspecting
             if (_serializerDelegateLevelAttributeBaseType != null)
             {
                 @event.SerializerDelegateLevelAttributes =
-                    eventInfo.EventHandlerType.GetCustomAttributes(_serializerDelegateLevelAttributeBaseType, true).Cast<Attribute>().ToList();
+                    eventInfo.EventHandlerType!.GetCustomAttributes(_serializerDelegateLevelAttributeBaseType, true).Cast<Attribute>().ToList();
             }
 
             //asset level pass through attributes
@@ -44,21 +43,20 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (@event.IsIgnored)
             {
-                ProcessMethodBodyForIgnoredAsset(raiseMethod, raiseMethod.ReturnType, @event.WillThrowExceptionWhileCalling,
+                ProcessMethodBodyForIgnoredAsset(raiseMethod, raiseMethod!.ReturnType, @event.WillThrowExceptionWhileCalling,
                     @event.RaisingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod);
             }
             else
             {
-                Dictionary<string, ParameterIgnoredAttribute> eventLevelParameterIgnoredAttributes =
+                var eventLevelParameterIgnoredAttributes =
                     new Dictionary<string, ParameterIgnoredAttribute>();
                 foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterIgnoredAttribute>())
                 {
                     eventLevelParameterIgnoredAttributes.TryAdd(attribute.ParameterName, attribute);
                 }
 
-                Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>
-                    eventLevelParameterEntityPropertyNameAttributes =
-                        new Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>();
+                var eventLevelParameterEntityPropertyNameAttributes =
+                    new Dictionary<string, CustomizedParameterEntityPropertyNameAttribute>();
                 foreach (var attribute in eventInfo.GetCustomAttributes<CustomizedEventParameterEntityPropertyNameAttribute>())
                 {
                     eventLevelParameterEntityPropertyNameAttributes.TryAdd(attribute.ParameterName, attribute);
@@ -66,7 +64,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (@event.IsOneWay)
                 {
-                    ProcessMethodBodyForOneWayAsset(raiseMethod, raiseMethod.ReturnType, memberPath, _includesServiceWrapperOnlyInfo,
+                    ProcessMethodBodyForOneWayAsset(raiseMethod, raiseMethod!.ReturnType, memberPath, _includesServiceWrapperOnlyInfo,
                         @event.RaisingMethodBodyInfo, AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod, eventLevelParameterIgnoredAttributes,
                         eventLevelParameterEntityPropertyNameAttributes);
                 }
@@ -82,16 +80,15 @@ namespace SecretNest.RemoteAgency.Inspecting
                     @event.RemovingMethodBodyInfo.Timeout = timeoutTime?.EventRemovingTimeout ?? interfaceLevelEventRemovingTimeout;
                     var eventRaisingTimeout = timeoutTime?.EventRaisingTimeout ?? interfaceLevelEventRaisingTimeout;
 
-                    Dictionary<string, ParameterReturnRequiredAttribute> eventLevelParameterReturnRequiredAttributes =
+                    var eventLevelParameterReturnRequiredAttributes =
                         new Dictionary<string, ParameterReturnRequiredAttribute>();
                     foreach (var attribute in eventInfo.GetCustomAttributes<EventParameterReturnRequiredAttribute>())
                     {
                         eventLevelParameterReturnRequiredAttributes.TryAdd(attribute.ParameterName, attribute);
                     }
 
-                    Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>>
-                        eventLevelParameterReturnRequiredPropertyAttributes =
-                            new Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>>();
+                    var eventLevelParameterReturnRequiredPropertyAttributes =
+                        new Dictionary<string, List<ParameterReturnRequiredPropertyAttribute>>();
                     foreach (var attribute in eventInfo
                         .GetCustomAttributes<EventParameterReturnRequiredPropertyAttribute>())
                     {
@@ -120,7 +117,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             GetValueFromAttribute(delegateMethod, i => i.IsIgnored, out returnIgnoredAttribute);
                     }
 
-                    string returnValuePropertyNameSpecifiedByAttribute =
+                    var returnValuePropertyNameSpecifiedByAttribute =
                         GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
                             eventInfo, i => i.EntityPropertyName,
                             out var customizedReturnValueEntityPropertyNameAttribute);
@@ -136,7 +133,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                             i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                     }
 
-                    ProcessMethodBodyForNormalAsset(raiseMethod, raiseMethod.ReturnType, memberPath,
+                    ProcessMethodBodyForNormalAsset(raiseMethod, raiseMethod!.ReturnType, memberPath,
                         // ReSharper disable once PossibleNullReferenceException
                         eventRaisingTimeout, isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute,
                         customizedReturnValueEntityPropertyNameAttribute,

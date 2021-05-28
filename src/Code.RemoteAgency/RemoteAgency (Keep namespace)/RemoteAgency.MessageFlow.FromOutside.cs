@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -41,11 +39,13 @@ namespace SecretNest.RemoteAgency
                         return;
                     }
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
                 {
                     RedirectException(null, Guid.Empty, 
                         $"<{nameof(MessageType.SpecialCommand)}>{message.AssetName}", e);
                 }
+#pragma warning restore CA1031 // Do not catch general exception types
             }
 
             if (FindManagingObjectAndSendMessage(message))
@@ -62,7 +62,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void ProcessMessageReceivedOnManagingObject(RemoteAgencyManagingObject<TEntityBase> managingObject,
+        static void ProcessMessageReceivedOnManagingObject(RemoteAgencyManagingObject<TEntityBase> managingObject,
             IRemoteAgencyMessage message)
         {
             managingObject.ProcessMessageReceivedFromOutside(message);

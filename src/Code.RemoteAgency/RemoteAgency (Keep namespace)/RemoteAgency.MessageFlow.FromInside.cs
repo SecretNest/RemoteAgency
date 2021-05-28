@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecretNest.RemoteAgency
+﻿namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
@@ -13,7 +9,7 @@ namespace SecretNest.RemoteAgency
             var entityMessage = (TEntityBase) message;
 
             //internal routing
-            if (_loopbackAddressDetection && message.TargetSiteId == SiteId)
+            if (LoopbackAddressDetection && message.TargetSiteId == SiteId)
             {
                 ProcessMessageReceivedAfterFiltering(entityMessage);
             }
@@ -31,7 +27,7 @@ namespace SecretNest.RemoteAgency
         void ProcessMessageReceivedFromInsideBypassFiltering(TEntityBase message)
         {
             //internal routing
-            if (_loopbackAddressDetection && ((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
+            if (LoopbackAddressDetection && ((IRemoteAgencyMessage) message).TargetSiteId == SiteId)
             {
                 ProcessMessageReceivedAfterFiltering(message);
             }

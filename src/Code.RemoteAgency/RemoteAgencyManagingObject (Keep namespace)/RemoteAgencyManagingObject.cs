@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency
@@ -84,7 +82,7 @@ namespace SecretNest.RemoteAgency
         #endregion
     }
 
-    abstract partial class RemoteAgencyManagingObject<TEntityBase> : RemoteAgencyManagingObject
+    abstract class RemoteAgencyManagingObject<TEntityBase> : RemoteAgencyManagingObject
     {
         protected RemoteAgencyManagingObject(Guid instanceId, ThreadLockMode threadLockMode,
             Action<IRemoteAgencyMessage> sendMessageToManagerCallback, Action<Guid, string, Exception> sendExceptionToManagerCallback,

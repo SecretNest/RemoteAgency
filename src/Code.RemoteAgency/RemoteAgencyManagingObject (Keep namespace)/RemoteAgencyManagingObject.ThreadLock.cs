@@ -122,10 +122,12 @@ namespace SecretNest.RemoteAgency
                 callback(message, out localExceptionHandlingMode);
                 exception = default;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
             {
                 exception = ex;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
         void CallCloseRequestedByManagingObjectWithNoThreadLock(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand)
@@ -141,7 +143,7 @@ namespace SecretNest.RemoteAgency
         #endregion
 
         #region TaskScheduelr
-        private TaskFactory _taskFactory = null;
+        private TaskFactory _taskFactory;
         
         public delegate bool TryGetTaskSchedulerCallback(string name, out TaskScheduler taskScheduler);
 
@@ -157,14 +159,16 @@ namespace SecretNest.RemoteAgency
                 exception = result.Item2;
                 localExceptionHandlingMode = result.Item3;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (TaskCanceledException)
             {
                 response = default;
                 exception = default;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
-        Tuple<IRemoteAgencyMessage, Exception, LocalExceptionHandlingMode> ProcessWithTaskSchedulerWithResponseInternal(
+        static Tuple<IRemoteAgencyMessage, Exception, LocalExceptionHandlingMode> ProcessWithTaskSchedulerWithResponseInternal(
             AccessWithReturn callback, IRemoteAgencyMessage message)
         {
             var response = callback(message, out var exception, out var localExceptionHandlingMode);
@@ -182,24 +186,28 @@ namespace SecretNest.RemoteAgency
                 exception = result.Item1;
                 localExceptionHandlingMode = result.Item2;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (TaskCanceledException)
             {
                 exception = default;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
-        Tuple<Exception, LocalExceptionHandlingMode> ProcessWithTaskSchedulerInternal(AccessWithoutReturn callback, IRemoteAgencyMessage message)
+        static Tuple<Exception, LocalExceptionHandlingMode> ProcessWithTaskSchedulerInternal(AccessWithoutReturn callback, IRemoteAgencyMessage message)
         {
-            LocalExceptionHandlingMode localExceptionHandlingMode = LocalExceptionHandlingMode.Redirect;
+            var localExceptionHandlingMode = LocalExceptionHandlingMode.Redirect;
             try
             {
                 callback(message, out localExceptionHandlingMode);
                 return new Tuple<Exception, LocalExceptionHandlingMode>(null, localExceptionHandlingMode);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
             {
                 return new Tuple<Exception, LocalExceptionHandlingMode>(ex, localExceptionHandlingMode);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
         async void CallCloseRequestedByManagingObjectWithTaskScheduler(AccessCloseRequestedByManagingObject callback, bool sendSpecialCommand)
@@ -209,9 +217,11 @@ namespace SecretNest.RemoteAgency
                 await _taskFactory
                     .StartNew(() => callback(sendSpecialCommand)).ConfigureAwait(false);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (TaskCanceledException)
             {
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
         async void CallOnRemoteClosedWithTaskScheduler(AccessOnRemoteClosed callback, Guid siteId, Guid? instanceId)
@@ -221,9 +231,11 @@ namespace SecretNest.RemoteAgency
                 await _taskFactory
                     .StartNew(() => callback(siteId, instanceId)).ConfigureAwait(false);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (TaskCanceledException)
             {
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
         #endregion

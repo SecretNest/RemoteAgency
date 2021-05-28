@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SecretNest.RemoteAgency
@@ -97,7 +95,11 @@ namespace SecretNest.RemoteAgency
                     return;
                 }
                 default:
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
                     throw new ArgumentOutOfRangeException(nameof(BeforeMessageProcessingEventArgs<TSerialized, TEntityBase>.FurtherProcessing));
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
         }
 

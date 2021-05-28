@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -37,18 +36,18 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             if (IsGettable)
             {
-                List<Attribute> serializerAssetLevelAttributes = SerializerAssetLevelAttributes
+                var serializerAssetLevelAttributes = SerializerAssetLevelAttributes
                     .Concat(GettingMethodSerializerAssetLevelAttributes).ToList();
 
                 if (!string.IsNullOrEmpty(GettingMethodBodyInfo.ParameterEntityName))
                 {
-                    List<EntityProperty> properties = GettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
+                    var properties = GettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
                             new EntityProperty(i.DataType, i.PropertyName,
                                 i.SerializerParameterLevelAttributes
                                     .Select(j => new EntityPropertyAttribute(AttributePosition.AssetProperty, j)).ToList()))
                         .ToList();
 
-                    EntityBuildingExtended entity = new EntityBuildingExtended(
+                    var entity = new EntityBuildingExtended(
                         GettingMethodBodyInfo.ParameterEntityName, properties,
                         interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
@@ -59,13 +58,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (!string.IsNullOrEmpty(GettingMethodBodyInfo.ReturnValueEntityName))
                 {
-                    List<EntityProperty> properties = GettingMethodBodyInfo.ReturnValueEntityProperties
+                    var properties = GettingMethodBodyInfo.ReturnValueEntityProperties
                         .Where(i => i.IsIncludedInEntity)
                         .Select(i =>
                             new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                         .ToList();
 
-                    EntityBuildingExtended entity = new EntityBuildingExtended(
+                    var entity = new EntityBuildingExtended(
                         GettingMethodBodyInfo.ReturnValueEntityName, properties,
                         interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
@@ -77,18 +76,18 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             if (IsSettable)
             {
-                List<Attribute> serializerAssetLevelAttributes = SerializerAssetLevelAttributes
+                var serializerAssetLevelAttributes = SerializerAssetLevelAttributes
                     .Concat(SettingMethodSerializerAssetLevelAttributes).ToList();
 
                 if (!string.IsNullOrEmpty(SettingMethodBodyInfo.ParameterEntityName))
                 {
-                    List<EntityProperty> properties = SettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
+                    var properties = SettingMethodBodyInfo.ParameterEntityProperties.Select(i =>
                             new EntityProperty(i.DataType, i.PropertyName,
                                 i.SerializerParameterLevelAttributes
                                     .Select(j => new EntityPropertyAttribute(AttributePosition.AssetProperty, j)).ToList()))
                         .ToList();
 
-                    EntityBuildingExtended entity = new EntityBuildingExtended(
+                    var entity = new EntityBuildingExtended(
                         SettingMethodBodyInfo.ParameterEntityName, properties,
                         interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,
@@ -99,13 +98,13 @@ namespace SecretNest.RemoteAgency.Inspecting
 
                 if (!string.IsNullOrEmpty(SettingMethodBodyInfo.ReturnValueEntityName))
                 {
-                    List<EntityProperty> properties = SettingMethodBodyInfo.ReturnValueEntityProperties
+                    var properties = SettingMethodBodyInfo.ReturnValueEntityProperties
                         .Where(i => i.IsIncludedInEntity)
                         .Select(i =>
                             new EntityProperty(i.DataType, i.PropertyName, i.GetEntityPropertyAttributes().ToList()))
                         .ToList();
 
-                    EntityBuildingExtended entity = new EntityBuildingExtended(
+                    var entity = new EntityBuildingExtended(
                         SettingMethodBodyInfo.ReturnValueEntityName, properties,
                         interfaceLevelAttributes, serializerAssetLevelAttributes, null,
                         interfaceLevelGenericParameters, interfaceLevelGenericParameterPassThroughAttributes,

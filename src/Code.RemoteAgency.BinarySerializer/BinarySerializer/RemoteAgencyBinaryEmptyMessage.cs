@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Policy;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.BinarySerializer
 {
@@ -11,6 +8,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
     [Serializable]
     public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage
     {
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA2235 // Mark all non-serializable fields
         Guid IRemoteAgencyMessage.SenderSiteId { get; set; }
         Guid IRemoteAgencyMessage.TargetSiteId { get; set; }
@@ -23,6 +21,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         bool IRemoteAgencyMessage.IsOneWay { get; set; }
         bool IRemoteAgencyMessage.IsEmptyMessage { get; set; }
 #pragma warning restore CA2235 // Mark all non-serializable fields
+#pragma warning restore IDE0079 // Remove unnecessary suppression
 
         /// <summary>
         /// Initializes an instance of RemoteAgencyBinaryEmptyMessage.

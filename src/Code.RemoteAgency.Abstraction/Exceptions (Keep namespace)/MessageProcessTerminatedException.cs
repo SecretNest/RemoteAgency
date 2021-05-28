@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency
 {
@@ -9,7 +7,9 @@ namespace SecretNest.RemoteAgency
     /// The exception to indicate a message processing is terminated.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public sealed class MessageProcessTerminatedException : Exception
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the terminated message.
@@ -47,9 +47,9 @@ namespace SecretNest.RemoteAgency
         private MessageProcessTerminatedException(SerializationInfo info, StreamingContext context) : base(info,
             context)
         {
-            var terminatedMessageType = (Type)info.GetValue("TerminatedMessageType", typeof(Type));
-            TerminatedMessage = (IRemoteAgencyMessage)info.GetValue("TerminatedMessage", terminatedMessageType);
-            TerminatedPosition = (MessageProcessTerminatedPosition)info.GetValue("TerminatedPosition", typeof(MessageProcessTerminatedPosition));
+            var terminatedMessageType = (Type)info.GetValue("TerminatedMessageType", typeof(Type))!;
+            TerminatedMessage = (IRemoteAgencyMessage)info.GetValue("TerminatedMessage", terminatedMessageType!);
+            TerminatedPosition = (MessageProcessTerminatedPosition)info.GetValue("TerminatedPosition", typeof(MessageProcessTerminatedPosition))!;
         }
 
         /// <inheritdoc />

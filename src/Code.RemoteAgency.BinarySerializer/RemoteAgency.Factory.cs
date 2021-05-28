@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SecretNest.RemoteAgency.BinarySerializer;
 
 namespace SecretNest.RemoteAgency
@@ -16,7 +14,7 @@ namespace SecretNest.RemoteAgency
         /// <note type="warning">BinaryFormatter is included in this serializer, which is dangerous and should not be used. See <conceptualLink target="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</conceptualLink> for details.</note>
         public static RemoteAgency<byte[]> CreateWithBinarySerializer(bool securityIssueAcknowledged = false, Guid? siteId = null)
         {
-            return (RemoteAgency<byte[]>)CreateWithoutCheck<byte[], object>(new RemoteAgencyBinarySerializer(securityIssueAcknowledged), new RemoteAgencyBinarySerializerEntityTypeBuilder(), siteId);
+            return (RemoteAgency<byte[]>)CreateWithoutCheck(new RemoteAgencyBinarySerializer(securityIssueAcknowledged), new RemoteAgencyBinarySerializerEntityTypeBuilder(), siteId);
         }
     }
 }

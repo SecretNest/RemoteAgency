@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SecretNest.RemoteAgency.Attributes;
-
-namespace SecretNest.RemoteAgency
+﻿namespace SecretNest.RemoteAgency
 {
     /// <summary>
     /// Sends a message out and gets a response message.

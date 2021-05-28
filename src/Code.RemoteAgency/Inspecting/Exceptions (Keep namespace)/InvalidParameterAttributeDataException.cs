@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -10,7 +9,9 @@ namespace SecretNest.RemoteAgency.Inspecting
     /// The exception that is thrown when the invalid attribute or data within attribute is found on a parameter.
     /// </summary>
     [Serializable]
+#pragma warning disable CA1032 // Implement standard exception constructors
     public class InvalidParameterAttributeDataException : InvalidAttributeDataException
+#pragma warning restore CA1032 // Implement standard exception constructors
     {
         /// <summary>
         /// Gets the parameter which the attribute is on.
