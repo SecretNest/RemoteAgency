@@ -26,7 +26,7 @@
                 </alert>
               </listItem>
               <listItem>
-                <para>When using other serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference> to create the instance with the serializer specified.</para>
+                <para>When using other serializer, calls <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference> or <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.Create(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})</codeEntityReference> to create the instance with the serializer specified.</para>
               </listItem>
             </list>
             <para>See <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd" /> for details.</para>

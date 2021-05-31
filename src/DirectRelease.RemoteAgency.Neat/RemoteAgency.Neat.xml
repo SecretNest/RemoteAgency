@@ -177,13 +177,12 @@
             <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
             <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
         </member>
-        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.#ctor(System.Int32,System.Int32,System.Int32)">
+        <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.#ctor(System.Int32,System.Int32)">
             <summary>
             Initialize an instance of ProxyEventRouterBase.
             </summary>
             <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
             <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
-            <param name="raisingTimeout">Timeout for waiting for the response of event raising.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.Helper.ProxyEventRouterBase`3.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
             <inheritdoc />
@@ -745,6 +744,20 @@
             </summary>
             <remarks>When disabled, all internal messages, which sent from and to the same instance of Remote Agency, are treated as others.</remarks>
         </member>
+        <member name="P:SecretNest.RemoteAgency.RemoteAgencyBase.SiteId">
+            <summary>
+            Gets or sets the site id of this instance.
+            </summary>
+            <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
+            <summary>
+            Initializes the instance of Remote Agency.
+            </summary>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
+            <param name="entityBase">Type of the entity base.</param>
+        </member>
         <member name="P:SecretNest.RemoteAgency.RemoteAgencyBase.SynchronizationContextTaskFactory">
             <summary>
             Gets or sets the task factory based on synchronization context.
@@ -794,6 +807,7 @@
             <param name="entityTypeBuilder">Entity type builder.</param>
             <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty or absent.</param>
             <returns>Created Remote Agency instance.</returns>
+            <remarks>The function of this method is the same as <see cref="M:SecretNest.RemoteAgency.RemoteAgency`2.Create(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})" />.</remarks>
         </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgencyBase.ExceptionRedirected">
             <summary>
@@ -904,6 +918,11 @@
             <returns>Result</returns>
             <seealso cref="T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute"/>
         </member>
+        <member name="F:SecretNest.RemoteAgency.RemoteAgencyBase.EntityTypeBuilder">
+            <summary>
+            Instance of entity type builder.
+            </summary>
+        </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated">
             <summary>
             Occurs before type building finished.
@@ -942,25 +961,6 @@
             <param name="type">Type object specified.</param>
             <exception cref="T:System.TypeLoadException">Thrown when the type request cannot be found in the assembly specified.</exception>
             <returns>Result.</returns>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.RemoteAgencyBase.SiteId">
-            <summary>
-            Gets or sets the site id of this instance.
-            </summary>
-            <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
-        </member>
-        <member name="F:SecretNest.RemoteAgency.RemoteAgencyBase.EntityTypeBuilder">
-            <summary>
-            Instance of entity type builder.
-            </summary>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
-            <summary>
-            Initializes the instance of Remote Agency.
-            </summary>
-            <param name="entityTypeBuilder">Entity type builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
-            <param name="entityBase">Type of the entity base.</param>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.Dispose(System.Boolean)">
             <summary>
@@ -1061,6 +1061,24 @@
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.TryPing(System.Guid,System.TimeSpan,System.TimeSpan@,System.Guid@,System.Guid@,System.Exception@)">
             <inheritdoc />
         </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.#ctor(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid)">
+            <summary>
+            Initializes an instance of Remote Agency with types of serialized data and parent class of all entities specified.
+            </summary>
+            <param name="serializingHelper">Serializer helper.</param>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.Create(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})">
+            <summary>
+            Creates an instance of Remote Agency.
+            </summary>
+            <param name="serializingHelper">Serializer helper.</param>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty or absent.</param>
+            <returns>Created Remote Agency instance.</returns>
+            <remarks>The function of this method is the same as <see cref="M:SecretNest.RemoteAgency.RemoteAgencyBase.Create``2(SecretNest.RemoteAgency.SerializingHelperBase{``0,``1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Nullable{System.Guid})" />.</remarks>
+        </member>
         <member name="E:SecretNest.RemoteAgency.RemoteAgency`2.MessageForSendingPrepared">
             <summary>
             Occurs when a message is generated and ready to be sent.
@@ -1138,14 +1156,6 @@
             </summary>
             <param name="serialized">Serialized data.</param>
             <returns>Entity object.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.#ctor(SecretNest.RemoteAgency.SerializingHelperBase{`0,`1},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid)">
-            <summary>
-            Initializes an instance of Remote Agency with types of serialized data and parent class of all entities specified.
-            </summary>
-            <param name="serializingHelper">Serializer helper.</param>
-            <param name="entityTypeBuilder">Entity type builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.RemoteAgency`1">
             <summary>
@@ -1546,14 +1556,6 @@
             <summary>
             Creates an instance of the type specified.
             </summary>
-            <param name="type">The type of the instance to be created.</param>
-            <returns>The created instance.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.AssemblyBuilding.FastActivator.CreateInstance``1(System.Type)">
-            <summary>
-            Creates an instance of the type specified and cast it to the type specified.
-            </summary>
-            <typeparam name="T">Target type to be cast to.</typeparam>
             <param name="type">The type of the instance to be created.</param>
             <returns>The created instance.</returns>
         </member>

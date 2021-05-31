@@ -10,9 +10,9 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid"/>.Empty or absent.</param>
         /// <returns>Created Remote Agency instance.</returns>
-        public static RemoteAgency<string> CreateWithJsonSerializer(Guid? siteId = null)
+        public static RemoteAgency<string, object> CreateWithJsonSerializer(Guid? siteId = null)
         {
-            return (RemoteAgency<string>)CreateWithoutCheck(new RemoteAgencyJsonSerializer(), new RemoteAgencyJsonSerializerEntityTypeBuilder(), siteId);
+            return CreateWithoutCheck(new RemoteAgencyJsonSerializer(), new RemoteAgencyJsonSerializerEntityTypeBuilder(), siteId);
         }
     }
 }

@@ -12,9 +12,9 @@ namespace SecretNest.RemoteAgency
         /// <param name="siteId">Site id. A randomized value is used when it is set to <see cref="Guid"/>.Empty or absent.</param>
         /// <returns>Created Remote Agency instance.</returns>
         /// <note type="warning">BinaryFormatter is included in this serializer, which is dangerous and should not be used. See <conceptualLink target="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</conceptualLink> for details.</note>
-        public static RemoteAgency<byte[]> CreateWithBinarySerializer(bool securityIssueAcknowledged = false, Guid? siteId = null)
+        public static RemoteAgency<byte[], object> CreateWithBinarySerializer(bool securityIssueAcknowledged = false, Guid? siteId = null)
         {
-            return (RemoteAgency<byte[]>)CreateWithoutCheck(new RemoteAgencyBinarySerializer(securityIssueAcknowledged), new RemoteAgencyBinarySerializerEntityTypeBuilder(), siteId);
+            return CreateWithoutCheck(new RemoteAgencyBinarySerializer(securityIssueAcknowledged), new RemoteAgencyBinarySerializerEntityTypeBuilder(), siteId);
         }
     }
 }

@@ -8,6 +8,11 @@ namespace SecretNest.RemoteAgency
     partial class RemoteAgencyBase
     {
         /// <summary>
+        /// Instance of entity type builder.
+        /// </summary>
+        protected readonly EntityTypeBuilderBase EntityTypeBuilder;
+
+        /// <summary>
         /// Occurs before type building finished.
         /// </summary>
         /// <remarks>Additional code can be added to the type through <see cref="BeforeTypeCreatedEventArgs.TypeBuilder"/>.</remarks>

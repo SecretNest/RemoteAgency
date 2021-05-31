@@ -68,7 +68,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="assembly">Built assembly.</param>
         /// <param name="saveFileCallback">Callback for saving assembly to file while <see cref="Save"/> called.</param>
         internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, 
-            //ReSharper disable UnusedParameter.Local
+            //ReSharper disable once UnusedParameter.Local
             Action<string> saveFileCallback)
         {
             SourceInterface = sourceInterface;

@@ -13,7 +13,7 @@
     <RootNamespace>Sandcastle</RootNamespace>
     <Name>Sandcastle</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>..\..\docs\help.v2\</OutputPath>
     <HtmlHelpName>Doc</HtmlHelpName>
     <Language>en-US</Language>
@@ -48,6 +48,7 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\DirectRelease.RemoteAgency\DirectRelease.RemoteAgency.csproj" />
       <DocumentationSource sourceFile="..\DirectRelease.RemoteAgency.Abstraction\DirectRelease.RemoteAgency.Abstraction.csproj" />
+      <DocumentationSource sourceFile="..\DirectRelease.RemoteAgency.Abstraction\RemoteAgency.Abstraction.xml" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="SecretNest.RemoteAgency" isDocumented="True">Remote Agency from SecretNest.info.</NamespaceSummaryItem>

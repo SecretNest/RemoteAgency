@@ -2,16 +2,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net461;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
     <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
     <Description></Description>
     <PackageProjectUrl></PackageProjectUrl>
-    <Product>Remote Agency</Product>
-    <Copyright>Allen Cui</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
+    <Copyright>Allen Cui</Copyright>
     <PackageIconUrl></PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -28,7 +28,7 @@
     <DefineConstants>netfx</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'"> <!--Doc is same.-->
     <DocumentationFile>SecretNest.RemoteAgency.xml</DocumentationFile>
   </PropertyGroup>
 

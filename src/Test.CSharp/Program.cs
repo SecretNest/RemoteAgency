@@ -7,6 +7,13 @@ namespace Test.CSharp
         static void Main()
         {
             Console.WriteLine("Hello World!");
+
+            Console.WriteLine("Run Test 0");
+            Test0.TestCode.MyTest();
+
+
+
+            Console.WriteLine("Done");
         }
     }
 }

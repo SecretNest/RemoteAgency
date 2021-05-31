@@ -217,8 +217,8 @@
   <HelpKINode Title="BeforeTypeCreatedEventArgs.TypeBuilder property" Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_TypeBuilder.htm" />
   <HelpKINode Title="BuildEntity method">
     <HelpKINode Title="EntityTypeBuilderBase.BuildEntity Method " Url="html/M_SecretNest_RemoteAgency_EntityTypeBuilderBase_BuildEntity.htm" />
-    <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_BuildEntity.htm" />
-    <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.BuildEntity Method " Url="html/Overload_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_BuildEntity.htm" />
+    <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.BuildEntity Method " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_BuildEntity.htm" />
+    <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.BuildEntity Method " Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_BuildEntity.htm" />
   </HelpKINode>
   <HelpKINode Title="BuiltClassType enumeration" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BuiltClassType.htm" />
   <HelpKINode Title="BuiltClassType property" Url="html/P_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs_BuiltClassType.htm" />
@@ -256,6 +256,7 @@
     <HelpKINode Title="ServiceWrapperEventRouterBase(TServiceContractInterface).CloseRequestedByManagingObject Method " Url="html/M_SecretNest_RemoteAgency_Helper_ServiceWrapperEventRouterBase_1_CloseRequestedByManagingObject.htm" />
   </HelpKINode>
   <HelpKINode Title="Continue enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageFurtherProcessing.htm" />
+  <HelpKINode Title="Create method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Create.htm" />
   <HelpKINode Title="Create(Of TSerialized, TEntityBase) method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_Create__2.htm" />
   <HelpKINode Title="Create&lt;TSerialized, TEntityBase&gt; method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_Create__2.htm" />
   <HelpKINode Title="CreateEmptyMessage method">
@@ -267,10 +268,6 @@
   <HelpKINode Title="CreateEmptyMessageCallback property">
     <HelpKINode Title="IManagedObjectCommunicate.CreateEmptyMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_IManagedObjectCommunicate_CreateEmptyMessageCallback.htm" />
     <HelpKINode Title="ProxyEventHelper.CreateEmptyMessageCallback Property " Url="html/P_SecretNest_RemoteAgency_Helper_ProxyEventHelper_CreateEmptyMessageCallback.htm" />
-  </HelpKINode>
-  <HelpKINode Title="CreateInstance method">
-    <HelpKINode Title="FastActivator(TArg).CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm" />
-    <HelpKINode Title="FastActivator.CreateInstance Method " Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance.htm" />
   </HelpKINode>
   <HelpKINode Title="CreateProxy method">
     <HelpKINode Title="RemoteAgency(TSerialized, TEntityBase).CreateProxy Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm" />
@@ -516,21 +513,6 @@
   <HelpKINode Title="ExceptionRedirectedEventArgs.RedirectedException property" Url="html/P_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs_RedirectedException.htm" />
   <HelpKINode Title="ExceptionRedirectedEventArgs.ServiceContractInterface property" Url="html/P_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs_ServiceContractInterface.htm" />
   <HelpKINode Title="ExceptionThrownSiteId property" Url="html/P_SecretNest_RemoteAgency_InstanceNotFoundException_ExceptionThrownSiteId.htm" />
-  <HelpKINode Title="FastActivator class">
-    <HelpKINode Title="FastActivator Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FastActivator(Of TArg) class">
-    <HelpKINode Title="FastActivator(TArg) Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FastActivator(Of TArg).CreateInstance method" Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm" />
-  <HelpKINode Title="FastActivator.CreateInstance method" Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_CreateInstance.htm" />
-  <HelpKINode Title="FastActivator&lt;TArg&gt; class">
-    <HelpKINode Title="FastActivator(TArg) Class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FastActivator&lt;TArg&gt;.CreateInstance method" Url="html/Overload_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1_CreateInstance.htm" />
   <HelpKINode Title="FieldName property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_FieldName.htm" />
   <HelpKINode Title="FieldOfParameter enumeration member" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
   <HelpKINode Title="FurtherProcessing property" Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_FurtherProcessing.htm" />
@@ -1091,6 +1073,7 @@
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).BypassSystemMessagesFromFiltering property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_2_BypassSystemMessagesFromFiltering.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).CloseAllInstances method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseAllInstances.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).CloseInstance method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseInstance.htm" />
+  <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).Create method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Create.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).CreateProxy method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).CreateServiceWrapper method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase).Deserialize method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Deserialize.htm" />
@@ -1115,6 +1098,7 @@
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.BypassSystemMessagesFromFiltering property" Url="html/P_SecretNest_RemoteAgency_RemoteAgency_2_BypassSystemMessagesFromFiltering.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.CloseAllInstances method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseAllInstances.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.CloseInstance method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_CloseInstance.htm" />
+  <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.Create method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Create.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.CreateProxy method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.CreateServiceWrapper method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.Deserialize method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Deserialize.htm" />
@@ -1204,7 +1188,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.AssetLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_AssetLevelAttributeBaseType.htm" />
-  <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.BuildEntity method" Url="html/Overload_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_BuildEntity.htm" />
+  <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.BuildEntity method" Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_BuildEntity.htm" />
   <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.CreateEmptyMessage method" Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_CreateEmptyMessage.htm" />
   <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.DelegateLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_DelegateLevelAttributeBaseType.htm" />
   <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.InterfaceLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_InterfaceLevelAttributeBaseType.htm" />
@@ -1231,7 +1215,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder.htm" />
   </HelpKINode>
   <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.AssetLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_AssetLevelAttributeBaseType.htm" />
-  <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.BuildEntity method" Url="html/Overload_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_BuildEntity.htm" />
+  <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.BuildEntity method" Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_BuildEntity.htm" />
   <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.CreateEmptyMessage method" Url="html/M_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_CreateEmptyMessage.htm" />
   <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.DelegateLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_DelegateLevelAttributeBaseType.htm" />
   <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.InterfaceLevelAttributeBaseType property" Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_InterfaceLevelAttributeBaseType.htm" />
@@ -1287,9 +1271,6 @@
   <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.BeforeAssemblyCreatedEventArgs class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeAssemblyCreatedEventArgs.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.BeforeTypeCreatedEventArgs class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BeforeTypeCreatedEventArgs.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.BuiltClassType enumeration" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BuiltClassType.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.FastActivator class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.FastActivator(Of TArg) class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.AssemblyBuilding.FastActivator&lt;TArg&gt; class" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_FastActivator_1.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.AssetNotFoundException class" Url="html/T_SecretNest_RemoteAgency_AssetNotFoundException.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.AttributePosition enumeration" Url="html/T_SecretNest_RemoteAgency_AttributePosition.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes namespace" Url="html/N_SecretNest_RemoteAgency_Attributes.htm" />
