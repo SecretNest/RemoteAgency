@@ -1,6 +1,6 @@
 ﻿using SecretNest.RemoteAgency.Attributes;
 
-namespace Test.CSharp
+namespace Test.CSharp.Test1
 {
     public interface IContractTest1
     {

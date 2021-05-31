@@ -7,6 +7,8 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
+        private protected const int DefaultTimeout = 90000;
+
         /// <summary>
         /// Creates proxy of the interface and instance id specified.
         /// </summary>
@@ -22,7 +24,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
-            Guid instanceId, int defaultTimeout = 90000,
+            Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true);
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
-            out Guid instanceId, int defaultTimeout = 90000,
+            out Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true);
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract void CreateServiceWrapper(Type sourceInterface, object serviceObject, Guid instanceId,
-            int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true);
+            int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true);
 
         /// <summary>
         /// Creates service wrapper of the interface and the service object specified.
@@ -71,7 +73,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public abstract Guid CreateServiceWrapper(Type sourceInterface, object serviceObject,
-            int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true);
+            int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true);
     }
 
     partial class RemoteAgency<TSerialized, TEntityBase>
@@ -91,7 +93,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public TInterface CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId, Guid instanceId,
-            int defaultTimeout = 90000,
+            int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
             => (TInterface)CreateProxy(typeof(TInterface), targetSiteId, targetInstanceId, instanceId,
                 defaultTimeout, buildServiceWrapperWithProxy);
@@ -111,13 +113,13 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public TInterface CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId, out Guid instanceId,
-            int defaultTimeout = 90000,
+            int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
             => (TInterface)CreateProxy(typeof(TInterface), targetSiteId, targetInstanceId, out instanceId,
                 defaultTimeout, buildServiceWrapperWithProxy);
 
         /// <inheritdoc />
-        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, Guid instanceId, int defaultTimeout = 90000,
+        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
             if (instanceId == Guid.Empty)
@@ -130,7 +132,7 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <inheritdoc />
-        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, out Guid instanceId, int defaultTimeout = 90000,
+        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, out Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
             instanceId = Guid.NewGuid();
@@ -140,7 +142,7 @@ namespace SecretNest.RemoteAgency
         }
 
         object CreateProxyWithInstanceI(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
-            Guid instanceId, int defaultTimeout = 90000,
+            Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
             if (defaultTimeout == 0 || defaultTimeout < -1)
@@ -213,7 +215,7 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public void CreateServiceWrapper<TInterface>(TInterface serviceObject, Guid instanceId,
-            int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+            int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
             => CreateServiceWrapperInternal(typeof(TInterface), serviceObject, instanceId, defaultTimeout,
                 buildProxyWithServiceWrapper);
 
@@ -230,12 +232,12 @@ namespace SecretNest.RemoteAgency
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         public Guid CreateServiceWrapper<TInterface>(TInterface serviceObject, 
-            int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+            int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
             => CreateServiceWrapperInternal(typeof(TInterface), serviceObject, defaultTimeout,
                 buildProxyWithServiceWrapper);
 
         /// <inheritdoc />
-        public override void CreateServiceWrapper(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+        public override void CreateServiceWrapper(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
         {
             if (sourceInterface.IsInstanceOfType(serviceObject))
             {
@@ -248,7 +250,7 @@ namespace SecretNest.RemoteAgency
         }
 
         /// <inheritdoc />
-        public override Guid CreateServiceWrapper(Type sourceInterface, object serviceObject, int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+        public override Guid CreateServiceWrapper(Type sourceInterface, object serviceObject, int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
         {
             if (sourceInterface.IsInstanceOfType(serviceObject))
             {
@@ -260,7 +262,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        void CreateServiceWrapperInternal(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+        void CreateServiceWrapperInternal(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
         {
             if (instanceId == Guid.Empty)
             {
@@ -271,7 +273,7 @@ namespace SecretNest.RemoteAgency
                 buildProxyWithServiceWrapper);
         }
 
-        Guid CreateServiceWrapperInternal(Type sourceInterface, object serviceObject, int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+        Guid CreateServiceWrapperInternal(Type sourceInterface, object serviceObject, int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
         {
             var instanceId = Guid.NewGuid();
 
@@ -281,7 +283,7 @@ namespace SecretNest.RemoteAgency
             return instanceId;
         }
         
-        void CreateServiceWrapperWithInstanceId(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = 90000, bool buildProxyWithServiceWrapper = true)
+        void CreateServiceWrapperWithInstanceId(Type sourceInterface, object serviceObject, Guid instanceId, int defaultTimeout = DefaultTimeout, bool buildProxyWithServiceWrapper = true)
         {
             if (defaultTimeout == 0 || defaultTimeout < -1)
                 throw new ArgumentOutOfRangeException(nameof(defaultTimeout));

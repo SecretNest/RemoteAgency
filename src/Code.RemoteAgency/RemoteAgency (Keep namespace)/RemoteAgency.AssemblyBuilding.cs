@@ -7,8 +7,6 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
-        //protected const int DefaultTimeout = 90000;
-
         /// <summary>
         /// Occurs before type building finished.
         /// </summary>
@@ -40,7 +38,7 @@ namespace SecretNest.RemoteAgency
             bool isProxyRequired, bool isServiceWrapperRequired,
             out Type builtProxy, out Type builtServiceWrapper)
         {
-            bool needBuild = false;
+            var needBuild = false;
             if (isProxyRequired)
             {
                 if (!TryGetType(basicInfo.AssemblyName, basicInfo.ProxyTypeName, out builtProxy))

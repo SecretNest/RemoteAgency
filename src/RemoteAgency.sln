@@ -52,11 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmitDoc (Chinese)", "EmitDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.CSharp", "Test.CSharp\Test.CSharp.csproj", "{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8723FAE9-1549-4419-B630-CC2322F4D7EB}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
