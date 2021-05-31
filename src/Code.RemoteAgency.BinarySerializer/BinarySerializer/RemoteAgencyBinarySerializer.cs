@@ -16,7 +16,9 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         /// Initializes an instance of RemoteAgencyBinarySerializer.
         /// </summary>
         /// <param name="securityIssueAcknowledged">This value needs to be set to <see langword="true" /> to confirm that the security issue is known, or an exception will be thrown. Default value is <see langword="false"/>.</param>
-        public RemoteAgencyBinarySerializer(bool securityIssueAcknowledged = false)
+        public RemoteAgencyBinarySerializer(
+            // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
+            bool securityIssueAcknowledged = false)
         {
             if (!securityIssueAcknowledged)
                 throw new SecurityException("BinaryFormatter is included in this serializer, which is dangerous and should not be used.");
@@ -29,6 +31,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
             using var stream = new MemoryStream();
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable SYSLIB0011
+            //ReSharper disable once CSharpWarnings::CS0618
             _formatter.Serialize(stream, original);
 #pragma warning restore SYSLIB0011
             return stream.ToArray();
@@ -39,6 +42,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         {
             using var stream = new MemoryStream(serialized);
 #pragma warning disable SYSLIB0011
+            //ReSharper disable once CSharpWarnings::CS0618
             return _formatter.Deserialize(stream);
 #pragma warning restore SYSLIB0011
 #pragma warning restore IDE0079 // Remove unnecessary suppression

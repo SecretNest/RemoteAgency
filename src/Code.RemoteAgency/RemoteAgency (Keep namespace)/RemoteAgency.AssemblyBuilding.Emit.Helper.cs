@@ -40,6 +40,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
+        //ReSharper disable once UnusedMember.Local
         static void EmitGenericParameters(TypeBuilder typeBuilder, Type[] genericParameters)
         {
             if (genericParameters.Length > 0)
@@ -87,6 +88,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
+        //ReSharper disable once UnusedMember.Local
         static void EmitParameterPassThroughAttributes(ParameterBuilder typeBuilder,
             List<CustomAttributeBuilder> passThroughAttributes)
         {
@@ -97,6 +99,7 @@ namespace SecretNest.RemoteAgency
         }
 
         private const string RandomizedNameFormat = "{0}_{1:N}";
+        //ReSharper disable once UnusedMember.Local
         static string GetRandomizedName(string prefix)
         {
             return string.Format(RandomizedNameFormat, prefix, Guid.NewGuid());

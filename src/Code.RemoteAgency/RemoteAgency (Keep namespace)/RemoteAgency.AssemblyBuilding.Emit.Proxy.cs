@@ -8,7 +8,11 @@ namespace SecretNest.RemoteAgency
     {
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0060 // Remove unused parameter
-        static void EmitProxy(TypeBuilder typeBuilder, RemoteAgencyInterfaceInfo info)
+        static void EmitProxy(
+            //ReSharper disable once UnusedParameter.Local
+            TypeBuilder typeBuilder, 
+            //ReSharper disable once UnusedParameter.Local
+            RemoteAgencyInterfaceInfo info)
 #pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore IDE0079 // Remove unnecessary suppression
         {

@@ -81,7 +81,8 @@ namespace SecretNest.RemoteAgency
 
         #endregion
     }
-
+    
+    //ReSharper disable UnusedTypeParameter
     abstract class RemoteAgencyManagingObject<TEntityBase> : RemoteAgencyManagingObject
     {
         protected RemoteAgencyManagingObject(Guid instanceId, ThreadLockMode threadLockMode,

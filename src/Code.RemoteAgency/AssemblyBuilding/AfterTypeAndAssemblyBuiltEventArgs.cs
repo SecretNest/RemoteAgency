@@ -41,9 +41,9 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <remarks>Assembly saving is not supported by .net core. This method is only for .net framework.</remarks>
         /// <exception cref="NotSupportedException">Thrown when called not from .net framework.</exception>
 #pragma warning disable IDE0079 // Remove unnecessary suppression
-#pragma warning disable CA1822 //static
+#pragma warning disable CA1822 // Mark members as static
         public void Save(string assemblyFileName)
-#pragma warning restore CA1822
+#pragma warning restore CA1822 // Mark members as static
         {
 #if netfx
             _saveFileCallback(assemblyFileName);
@@ -51,12 +51,11 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
             throw new NotSupportedException("Assembly saving is not supported by .net core.");
 #endif
         }
-
-#pragma warning disable IDE0052 // Remove unread private members
-        // ReSharper disable UnusedMember.Global
-        private Action<string> _saveFileCallback;
-#pragma warning restore IDE0052 // Remove unread private members
 #pragma warning restore IDE0079 // Remove unnecessary suppression
+
+#if netfx
+        private Action<string> _saveFileCallback;
+#endif
         private bool _disposed;
 
         /// <summary>
@@ -68,14 +67,18 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// <param name="builtEntities">Types of built entities.</param>
         /// <param name="assembly">Built assembly.</param>
         /// <param name="saveFileCallback">Callback for saving assembly to file while <see cref="Save"/> called.</param>
-        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, Action<string> saveFileCallback)
+        internal AfterTypeAndAssemblyBuiltEventArgs(Type sourceInterface, Type builtProxy, Type builtServiceWrapper, IReadOnlyList<Type> builtEntities, Assembly assembly, 
+            //ReSharper disable UnusedParameter.Local
+            Action<string> saveFileCallback)
         {
             SourceInterface = sourceInterface;
             BuiltProxy = builtProxy;
             BuiltServiceWrapper = builtServiceWrapper;
             BuiltEntities = builtEntities;
             Assembly = assembly;
+#if netfx
             _saveFileCallback = saveFileCallback;
+#endif
         }
 
         /// <summary>
@@ -88,7 +91,9 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
             {
                 if (disposing)
                 {
+#if netfx
                     _saveFileCallback = null;
+#endif
                 }
 
                 _disposed = true;
