@@ -12,11 +12,11 @@ namespace SecretNest.RemoteAgency.Inspecting
             LocalExceptionHandlingMode interfaceLevelLocalExceptionHandlingMode,
             int interfaceLevelMethodCallingTimeout)
         {
-            Stack<MemberInfo> memberPath = new Stack<MemberInfo>();
+            var memberPath = new Stack<MemberInfo>();
             memberPath.Push(@interface);
             memberPath.Push(method.Asset);
 
-            MethodInfo methodInfo = (MethodInfo)method.Asset;
+            var methodInfo = (MethodInfo)method.Asset;
             method.LocalExceptionHandlingMode =
                 GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(methodInfo,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);

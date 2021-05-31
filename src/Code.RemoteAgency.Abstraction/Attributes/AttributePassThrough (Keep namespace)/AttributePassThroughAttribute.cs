@@ -53,14 +53,13 @@ namespace SecretNest.RemoteAgency.Attributes
             AttributeId = attributeId;
             Attribute = attribute;
 
-            if (attributeConstructorParameterTypes == null)
-                attributeConstructorParameterTypes = Type.EmptyTypes;
+            attributeConstructorParameterTypes ??= Type.EmptyTypes;
             AttributeConstructorParameterTypes = attributeConstructorParameterTypes;
 
             if (attributeConstructorParameters != null &&
                 attributeConstructorParameters.Length > attributeConstructorParameterTypes.Length)
-                throw new ArgumentException(nameof(attributeConstructorParameters),
-                    $"The length can not exceed the length of {nameof(attributeConstructorParameterTypes)}.");
+                throw new ArgumentException($"The length can not exceed the length of {nameof(attributeConstructorParameterTypes)}.",
+                    nameof(attributeConstructorParameters));
             AttributeConstructorParameters = attributeConstructorParameters;
         }
     }
