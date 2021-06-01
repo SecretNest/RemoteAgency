@@ -20,10 +20,14 @@ namespace Test.CSharp
             Console.WriteLine("Run Test 3");
             Test3.TestCode.MyTest();
 
+            Console.WriteLine("Run Test 4");
+            Test4.TestCode.MyTest();
 
+            Console.WriteLine("Run Test 5");
+            Test5.TestCode.MyTest();
 
-
-
+            Console.WriteLine("Run Test 6");
+            Test6.TestCode.MyTest();
 
 
             Console.WriteLine("Done");
