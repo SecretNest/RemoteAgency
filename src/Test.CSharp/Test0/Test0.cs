@@ -16,7 +16,7 @@ namespace Test.CSharp.Test0
         }
     }
 
-    public class TestCode
+    public static class TestCode
     {
         public static void MyTest()
         {

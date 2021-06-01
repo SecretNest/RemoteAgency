@@ -15,6 +15,11 @@ namespace Test.CSharp
             instance.MessageForSendingPrepared += Instance_MessageForSendingPrepared;
         }
 
+        public void RemoveRemoteAgencyInstance(Guid id)
+        {
+            _instances.Remove(id);
+        }
+
         private void Instance_MessageForSendingPrepared(object sender, MessageBodyEventArgs<TSerialized, TEntityBase> e)
         {
             //serialize
@@ -29,7 +34,14 @@ namespace Test.CSharp
             //targetInstance.ProcessReceivedMessage(e.MessageBody);
 
             //Process with serialized data
-            targetInstance.ProcessReceivedSerializedMessage(serialized);
+            try
+            {
+                targetInstance.ProcessReceivedSerializedMessage(serialized);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Processing exception: \n  ExceptionType: {exception.GetType().FullName}\n  ExceptionMessage: {exception.Message}");
+            }
         }
 
     }

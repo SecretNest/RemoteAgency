@@ -18,6 +18,7 @@ namespace SecretNest.RemoteAgency
                 if (disposing)
                 {
                     CloseAllInstances();
+                    ExceptionRedirected = null;
                 }
 
                 _disposedValue = true;
