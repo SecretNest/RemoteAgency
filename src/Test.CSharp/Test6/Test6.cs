@@ -5,7 +5,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace Test.CSharp.Test6
 {
-    interface ITest6
+    public interface ITest6
     {
         int this[int index]
         {

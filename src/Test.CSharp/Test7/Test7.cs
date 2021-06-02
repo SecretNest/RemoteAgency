@@ -5,7 +5,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace Test.CSharp.Test7
 {
-    interface ITest7
+    public interface ITest7
     {
         [AssetIgnored]
         DateTime Ignored { get; set; }
@@ -43,7 +43,7 @@ namespace Test.CSharp.Test7
             get => DateTime.Now;
             set
             {
-                Console.WriteLine("Operation received. Value={0}", value.ToLongDateString());
+                Console.WriteLine("Server side: Operation received. Value={0}", value.ToLongDateString());
                 throw new Exception("You should never receive this from client coz this is a one way (set) property.");
             }
         }
@@ -52,7 +52,7 @@ namespace Test.CSharp.Test7
         {
             get
             {
-                Console.WriteLine("Operation received.");
+                Console.WriteLine("Server side: Operation received.");
                 throw new Exception("You should never receive this from client coz this is a one way (set) property.");
             }
         }
@@ -96,7 +96,6 @@ namespace Test.CSharp.Test7
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
-            serverRemoteAgencyInstance.ExceptionRedirected += ServerRemoteAgencyInstance_ExceptionRedirected;
 
             //Client
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
@@ -104,6 +103,7 @@ namespace Test.CSharp.Test7
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest7>(serverSiteId, serviceWrapperInstanceId,
                 //ReSharper disable once UnusedVariable
                 out var clientProxyInstanceId);
+            clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
 
             //Run test
             Console.WriteLine("Ignored(Exception):");
@@ -145,7 +145,7 @@ namespace Test.CSharp.Test7
             }
             catch (Exception e)
             {
-                Console.WriteLine("Predicted Exception: " + e);
+                Console.WriteLine("Predicted Exception: " + e.Message);
             }
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}");
@@ -155,7 +155,7 @@ namespace Test.CSharp.Test7
             Console.WriteLine();
         }
 
-        private static void ServerRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
+        private static void ClientRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
         {   
             Console.WriteLine($"Client side received exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
         }

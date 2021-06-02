@@ -3,7 +3,7 @@ using SecretNest.RemoteAgency;
 
 namespace Test.CSharp.Test5
 {
-    interface ITest5<out T> where T: struct
+    public interface ITest5<out T> where T: struct
     {
         T Current { get; }
 

@@ -3,7 +3,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace Test.CSharp.Test10
 {
-    interface IContractTest10
+    public interface IContractTest10
     {
         [AttributePassThrough(typeof(MyOwnAttribute),
             new[] {typeof(string), typeof(int), typeof(bool)},

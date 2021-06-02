@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Test.CSharp.Test4
 {
-    interface ITest4
+    public interface ITest4
     {
         T ReturnItself<T>(T value) where T : struct;
 

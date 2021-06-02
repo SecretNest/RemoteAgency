@@ -4,7 +4,7 @@ using SecretNest.RemoteAgency.Attributes;
 
 namespace Test.CSharp.Test2
 {
-    interface ITest2
+    public interface ITest2
     {
         void Add(ref long value);
 
