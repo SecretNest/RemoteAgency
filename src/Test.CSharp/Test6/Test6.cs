@@ -81,6 +81,7 @@ namespace Test.CSharp.Test6
                 //ReSharper disable once UnusedVariable
                 out var clientProxyInstanceId);
 
+            //Run test
             Console.WriteLine("this[2](Get, 102):");
             Console.WriteLine(clientProxy[2]);
 

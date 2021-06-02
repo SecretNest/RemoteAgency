@@ -125,12 +125,18 @@ namespace Test.CSharp.Test3
                 FromClientToServerProperty = "SetFromClient",
                 TwoWayProperty = "SetFromClient"
             };
-
             Console.WriteLine("WithException:");
-            clientProxy.WithException(entity);
+            try
+            {
+                clientProxy.WithException(entity);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Predicted Exception: " + e);
+            }
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}");
-
+            
             Console.WriteLine("TimeOutMethod:");
             try
             {

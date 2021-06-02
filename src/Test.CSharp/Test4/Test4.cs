@@ -77,6 +77,7 @@ namespace Test.CSharp.Test4
                 //ReSharper disable once UnusedVariable
                 out var clientProxyInstanceId);
 
+            //Run test
             Console.WriteLine("ReturnItself(1024):");
             Console.WriteLine(clientProxy.ReturnItself(1024));
 

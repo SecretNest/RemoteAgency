@@ -29,6 +29,13 @@ namespace Test.CSharp
             Console.WriteLine("Run Test 6");
             Test6.TestCode.MyTest();
 
+            Console.WriteLine("Run Test 7");
+            Test7.TestCode.MyTest();
+
+
+
+
+
 
             Console.WriteLine("Done");
         }

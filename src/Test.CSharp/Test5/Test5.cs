@@ -37,6 +37,7 @@ namespace Test.CSharp.Test5
                 //ReSharper disable once UnusedVariable
                 out var clientProxyInstanceId);
 
+            //Run test
             Console.WriteLine("Current(Current date):");
             Console.WriteLine(clientProxy.Current.ToLongDateString());
 
