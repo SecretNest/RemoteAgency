@@ -33,9 +33,7 @@ namespace Test.CSharp.Test5
             //Client
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
-            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest5<DateTime>>(serverSiteId, serviceWrapperInstanceId,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstanceId);
+            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest5<DateTime>>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Run test
             Console.WriteLine("Current(Current date):");

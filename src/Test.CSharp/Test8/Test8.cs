@@ -40,18 +40,12 @@ namespace Test.CSharp.Test8
             //Client 1
             using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1);
-            var clientProxy1 = clientRemoteAgencyInstance1.CreateProxy<ITest8>(serverSiteId,
-                serviceWrapperInstanceId,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstance1Id);
+            var clientProxy1 = clientRemoteAgencyInstance1.CreateProxy<ITest8>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Client 2
             using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2);
-            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<ITest8>(serverSiteId,
-                serviceWrapperInstanceId,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstance2Id);
+            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<ITest8>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Run test
             Console.WriteLine("Run(WithoutHandler)");

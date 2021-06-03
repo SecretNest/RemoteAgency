@@ -39,9 +39,7 @@ namespace Test.CSharp.Test10
         {
             //Create a remote agency instance without target for creating proxy class only.
             using var remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
-            var clientProxy = remoteAgencyInstance.CreateProxy<ITest10>(Guid.Empty, Guid.Empty,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstanceId);
+            var clientProxy = remoteAgencyInstance.CreateProxy<ITest10>(Guid.Empty, Guid.Empty).ProxyGeneric;
 
             Console.WriteLine("Getting attribute...");
             var proxyClassType = clientProxy.GetType();

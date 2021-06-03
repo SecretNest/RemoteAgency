@@ -5,6 +5,55 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
+    /// <summary>
+    /// Represents the instance of the created proxy.
+    /// </summary>
+    public class CreatedProxy
+    {
+        /// <summary>
+        /// Initializes an instance of CreatedProxy.
+        /// </summary>
+        /// <param name="instanceId">Id of the proxy instance.</param>
+        /// <param name="proxy">Proxy created.</param>
+        public CreatedProxy(Guid instanceId, object proxy)
+        {
+            InstanceId = instanceId;
+            Proxy = proxy;
+        }
+
+        /// <summary>
+        /// Gets the id of the proxy instance.
+        /// </summary>
+        public Guid InstanceId { get; }
+
+        /// <summary>
+        /// Gets the proxy created.
+        /// </summary>
+        public object Proxy { get; }
+    }
+
+    /// <summary>
+    /// Represents the instance of the created proxy, created based on the service contract specified by <typeparamref name="TInterface"/>.
+    /// </summary>
+    /// <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
+    public class CreatedProxy<TInterface> : CreatedProxy
+    {
+        /// <summary>
+        /// Initializes an instance of CreatedProxy.
+        /// </summary>
+        /// <param name="instanceId">Id of the proxy instance.</param>
+        /// <param name="proxy">Proxy created.</param>
+        public CreatedProxy(Guid instanceId, TInterface proxy) : base(instanceId, proxy)
+        {
+            ProxyGeneric = proxy;
+        }
+
+        /// <summary>
+        /// Gets the proxy created.
+        /// </summary>
+        public TInterface ProxyGeneric { get; }
+    }
+
     partial class RemoteAgencyBase
     {
         private protected const int DefaultTimeout = 90000;
@@ -18,12 +67,12 @@ namespace SecretNest.RemoteAgency
         /// <param name="instanceId">Id of the proxy instance to be created. Cannot be set to <see cref="Guid"/>.Empty.</param>
         /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
         /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-        /// <returns>Proxy instance.</returns>
+        /// <returns>The created proxy.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
         /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
-        public abstract object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
+        public abstract CreatedProxy CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
             Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true);
 
@@ -33,17 +82,15 @@ namespace SecretNest.RemoteAgency
         /// <param name="sourceInterface">Type of the service contract interface to be implemented by this proxy.</param>
         /// <param name="targetSiteId">Target site id of the proxy instance to be created.</param>
         /// <param name="targetInstanceId">Target instance id of the proxy instance to be created.</param>
-        /// <param name="instanceId">Id of the created proxy instance.</param>
         /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
         /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-        /// <returns>Proxy instance.</returns>
+        /// <returns>The created proxy.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
         /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
-        public abstract object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
-            out Guid instanceId, int defaultTimeout = DefaultTimeout,
-            bool buildServiceWrapperWithProxy = true);
+        public abstract CreatedProxy CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
+            int defaultTimeout = DefaultTimeout, bool buildServiceWrapperWithProxy = true);
 
         /// <summary>
         /// Creates service wrapper of the interface, the service object and instance id specified.
@@ -87,39 +134,14 @@ namespace SecretNest.RemoteAgency
         /// <param name="instanceId">Id of the proxy instance to be created. Cannot be set to <see cref="Guid"/>.Empty.</param>
         /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
         /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-        /// <returns>Proxy instance.</returns>
+        /// <returns>The created proxy.</returns>
         /// <remarks>The types required will be created when necessary.</remarks>
         /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
         /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
-        public TInterface CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId, Guid instanceId,
+        public CreatedProxy<TInterface> CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId,
+            Guid instanceId,
             int defaultTimeout = DefaultTimeout,
-            bool buildServiceWrapperWithProxy = true)
-            => (TInterface)CreateProxy(typeof(TInterface), targetSiteId, targetInstanceId, instanceId,
-                defaultTimeout, buildServiceWrapperWithProxy);
-
-        /// <summary>
-        /// Creates proxy of the interface specified.
-        /// </summary>
-        /// <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
-        /// <param name="targetSiteId">Target site id of the proxy instance to be created.</param>
-        /// <param name="targetInstanceId">Target instance id of the proxy instance to be created.</param>
-        /// <param name="instanceId">Id of the created proxy instance.</param>
-        /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
-        /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-        /// <returns>Proxy instance.</returns>
-        /// <remarks>The types required will be created when necessary.</remarks>
-        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
-        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
-        public TInterface CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId, out Guid instanceId,
-            int defaultTimeout = DefaultTimeout,
-            bool buildServiceWrapperWithProxy = true)
-            => (TInterface)CreateProxy(typeof(TInterface), targetSiteId, targetInstanceId, out instanceId,
-                defaultTimeout, buildServiceWrapperWithProxy);
-
-        /// <inheritdoc />
-        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
             if (instanceId == Guid.Empty)
@@ -127,21 +149,61 @@ namespace SecretNest.RemoteAgency
                 throw new ArgumentException($"{nameof(instanceId)} cannot be set to empty.", nameof(instanceId));
             }
 
-            return CreateProxyWithInstanceI(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
+            var proxy = (TInterface)CreateProxyWithInstanceInternal(typeof(TInterface), targetSiteId, targetInstanceId, instanceId, defaultTimeout,
                 buildServiceWrapperWithProxy);
+            return new CreatedProxy<TInterface>(instanceId, proxy);
+        }
+
+        /// <summary>
+        /// Creates proxy of the interface specified.
+        /// </summary>
+        /// <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
+        /// <param name="targetSiteId">Target site id of the proxy instance to be created.</param>
+        /// <param name="targetInstanceId">Target instance id of the proxy instance to be created.</param>
+        /// <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
+        /// <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
+        /// <returns>The created proxy.</returns>
+        /// <remarks>The types required will be created when necessary.</remarks>
+        /// <event cref="RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
+        /// <event cref="RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
+        public CreatedProxy<TInterface> CreateProxy<TInterface>(Guid targetSiteId, Guid targetInstanceId,
+            int defaultTimeout = DefaultTimeout,
+            bool buildServiceWrapperWithProxy = true)
+        {
+            var instanceId = Guid.NewGuid();
+
+            var proxy = (TInterface)CreateProxyWithInstanceInternal(typeof(TInterface), targetSiteId, targetInstanceId, instanceId,
+                defaultTimeout, buildServiceWrapperWithProxy);
+            return new CreatedProxy<TInterface>(instanceId, proxy);
         }
 
         /// <inheritdoc />
-        public override object CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, out Guid instanceId, int defaultTimeout = DefaultTimeout,
+        public override CreatedProxy CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
-            instanceId = Guid.NewGuid();
-            
-            return CreateProxyWithInstanceI(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
+            if (instanceId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(instanceId)} cannot be set to empty.", nameof(instanceId));
+            }
+
+            var proxy = CreateProxyWithInstanceInternal(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
                 buildServiceWrapperWithProxy);
+            return new CreatedProxy(instanceId, proxy);
         }
 
-        object CreateProxyWithInstanceI(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
+        /// <inheritdoc />
+        public override CreatedProxy CreateProxy(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId, int defaultTimeout = DefaultTimeout,
+            bool buildServiceWrapperWithProxy = true)
+        {
+            var instanceId = Guid.NewGuid();
+            
+            var proxy = CreateProxyWithInstanceInternal(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
+                buildServiceWrapperWithProxy);
+            return new CreatedProxy(instanceId, proxy);
+        }
+
+        object CreateProxyWithInstanceInternal(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
             Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {

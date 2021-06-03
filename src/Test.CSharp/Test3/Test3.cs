@@ -86,9 +86,7 @@ namespace Test.CSharp.Test3
             //Client
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
-            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest3>(serverSiteId, serviceWrapperInstanceId,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstanceId);
+            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest3>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
             clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
 
             //Run test

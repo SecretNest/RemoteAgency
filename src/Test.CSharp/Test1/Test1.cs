@@ -51,9 +51,7 @@ namespace Test.CSharp.Test1
             //Client
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
-            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest1>(serverSiteId, serviceWrapperInstanceId,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstanceId);
+            var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest1>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Run test
             Console.WriteLine("Add(int): 1 + 2");

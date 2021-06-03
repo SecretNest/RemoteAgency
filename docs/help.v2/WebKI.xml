@@ -259,6 +259,31 @@
   <HelpKINode Title="Create method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_Create.htm" />
   <HelpKINode Title="Create(Of TSerialized, TEntityBase) method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_Create__2.htm" />
   <HelpKINode Title="Create&lt;TSerialized, TEntityBase&gt; method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_Create__2.htm" />
+  <HelpKINode Title="CreatedProxy class">
+    <HelpKINode Title="CreatedProxy Class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_CreatedProxy.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CreatedProxy(Of TInterface) class">
+    <HelpKINode Title="CreatedProxy(TInterface) Class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CreatedProxy(Of TInterface).CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+  <HelpKINode Title="CreatedProxy(Of TInterface).ProxyGeneric property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_ProxyGeneric.htm" />
+  <HelpKINode Title="CreatedProxy.CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
+  <HelpKINode Title="CreatedProxy.InstanceId property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_InstanceId.htm" />
+  <HelpKINode Title="CreatedProxy.Proxy property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_Proxy.htm" />
+  <HelpKINode Title="CreatedProxy&lt;TInterface&gt; class">
+    <HelpKINode Title="CreatedProxy(TInterface) Class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CreatedProxy&lt;TInterface&gt;.CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+  <HelpKINode Title="CreatedProxy&lt;TInterface&gt;.ProxyGeneric property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_ProxyGeneric.htm" />
   <HelpKINode Title="CreateEmptyMessage method">
     <HelpKINode Title="EntityTypeBuilderBase.CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_EntityTypeBuilderBase_CreateEmptyMessage.htm" />
     <HelpKINode Title="RemoteAgencyBinarySerializerEntityTypeBuilder.CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder_CreateEmptyMessage.htm" />
@@ -579,6 +604,7 @@
   <HelpKINode Title="IMessageBodyGenericEventArgs&lt;TSerialized, TEntityBase&gt;.Serialize method" Url="html/M_SecretNest_RemoteAgency_IMessageBodyGenericEventArgs_2_Serialize.htm" />
   <HelpKINode Title="IncludeTerminatedMessageInException property" Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgs_2_IncludeTerminatedMessageInException.htm" />
   <HelpKINode Title="InstanceId property">
+    <HelpKINode Title="CreatedProxy.InstanceId Property " Url="html/P_SecretNest_RemoteAgency_CreatedProxy_InstanceId.htm" />
     <HelpKINode Title="ExceptionRedirectedEventArgs.InstanceId Property " Url="html/P_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs_InstanceId.htm" />
     <HelpKINode Title="InstanceNotFoundException.InstanceId Property " Url="html/P_SecretNest_RemoteAgency_InstanceNotFoundException_InstanceId.htm" />
     <HelpKINode Title="IProxyCommunicate.InstanceId Property " Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_InstanceId.htm" />
@@ -956,6 +982,7 @@
   <HelpKINode Title="PropertySet enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
   <HelpKINode Title="PropertySettingTimeout property" Url="html/P_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute_PropertySettingTimeout.htm" />
   <HelpKINode Title="Proxy enumeration member" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BuiltClassType.htm" />
+  <HelpKINode Title="Proxy property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_Proxy.htm" />
   <HelpKINode Title="ProxyClassName property" Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute_ProxyClassName.htm" />
   <HelpKINode Title="ProxyEventHelper class">
     <HelpKINode Title="ProxyEventHelper Class" Url="html/T_SecretNest_RemoteAgency_Helper_ProxyEventHelper.htm" />
@@ -1047,6 +1074,7 @@
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate&gt;.ProcessEventAdding method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_1_ProcessEventAdding.htm" />
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate&gt;.ProcessEventRemoving method" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_1_ProcessEventRemoving.htm" />
   <HelpKINode Title="ProxyEventRouterBase&lt;TDelegate&gt;.ProxyEventRouterBase constructor" Url="html/M_SecretNest_RemoteAgency_Helper_ProxyEventRouterBase_1__ctor.htm" />
+  <HelpKINode Title="ProxyGeneric property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_ProxyGeneric.htm" />
   <HelpKINode Title="RaisingFeedbackEntityName property" Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute_RaisingFeedbackEntityName.htm" />
   <HelpKINode Title="RaisingNotificationEntityName property" Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedEventEntityNameAttribute_RaisingNotificationEntityName.htm" />
   <HelpKINode Title="Receiving enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageDirection.htm" />
@@ -1159,8 +1187,8 @@
   <HelpKINode Title="RemoteAgencyBase.SetExceptionAsResponse method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_SetExceptionAsResponse.htm" />
   <HelpKINode Title="RemoteAgencyBase.SiteId property" Url="html/P_SecretNest_RemoteAgency_RemoteAgencyBase_SiteId.htm" />
   <HelpKINode Title="RemoteAgencyBase.SynchronizationContextTaskFactory property" Url="html/P_SecretNest_RemoteAgency_RemoteAgencyBase_SynchronizationContextTaskFactory.htm" />
-  <HelpKINode Title="RemoteAgencyBase.TryAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddSequentialScheduler.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryAddTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddTaskScheduler.htm" />
+  <HelpKINode Title="RemoteAgencyBase.TryCreateAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAddSequentialScheduler.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetTaskScheduler.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetWaitingMessage method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetWaitingMessage.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetWaitingMessageIds method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetWaitingMessageIds.htm" />
@@ -1316,6 +1344,9 @@
   <HelpKINode Title="SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinaryEmptyMessage class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinaryEmptyMessage.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializer.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializerEntityTypeBuilder class" Url="html/T_SecretNest_RemoteAgency_BinarySerializer_RemoteAgencyBinarySerializerEntityTypeBuilder.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.CreatedProxy class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.CreatedProxy(Of TInterface) class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.CreatedProxy&lt;TInterface&gt; class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.CreateEmptyMessageCallback delegate" Url="html/T_SecretNest_RemoteAgency_CreateEmptyMessageCallback.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.EntityBuilding class" Url="html/T_SecretNest_RemoteAgency_EntityBuilding.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.EntityProperty class" Url="html/T_SecretNest_RemoteAgency_EntityProperty.htm" />
@@ -1589,8 +1620,8 @@
     <HelpKINode Title="InstanceNotFoundException.ToString Method " Url="html/M_SecretNest_RemoteAgency_InstanceNotFoundException_ToString.htm" />
     <HelpKINode Title="MessageProcessTerminatedException.ToString Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_ToString.htm" />
   </HelpKINode>
-  <HelpKINode Title="TryAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddSequentialScheduler.htm" />
   <HelpKINode Title="TryAddTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddTaskScheduler.htm" />
+  <HelpKINode Title="TryCreateAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAddSequentialScheduler.htm" />
   <HelpKINode Title="TryGetTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetTaskScheduler.htm" />
   <HelpKINode Title="TryGetWaitingMessage method">
     <HelpKINode Title="RemoteAgency(TSerialized, TEntityBase).TryGetWaitingMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_TryGetWaitingMessage.htm" />

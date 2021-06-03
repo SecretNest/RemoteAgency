@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Test.VB</RootNamespace>
+    <TargetFrameworks>net461;netcoreapp3.1;net5.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DirectRelease.RemoteAgency\DirectRelease.RemoteAgency.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Test9\" />
+    <Folder Include="Test8\" />
+    <Folder Include="Test7\" />
+    <Folder Include="Test6\" />
+    <Folder Include="Test5\" />
+    <Folder Include="Test2\" />
+    <Folder Include="Test12\" />
+    <Folder Include="Test10\" />
+    <Folder Include="Test11\" />
+    <Folder Include="Test1\" />
+    <Folder Include="Test3\" />
+    <Folder Include="Test4\" />
+  </ItemGroup>
+
+</Project>

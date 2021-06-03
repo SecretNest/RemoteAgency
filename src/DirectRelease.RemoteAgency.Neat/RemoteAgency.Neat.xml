@@ -646,23 +646,22 @@
             <param name="instanceId">Id of the proxy instance to be created. Cannot be set to <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-            <returns>Proxy instance.</returns>
+            <returns>The created proxy.</returns>
             <remarks>The types required will be created when necessary.</remarks>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateProxy(System.Type,System.Guid,System.Guid,System.Int32,System.Boolean)">
             <summary>
             Creates proxy of the interface specified.
             </summary>
             <param name="sourceInterface">Type of the service contract interface to be implemented by this proxy.</param>
             <param name="targetSiteId">Target site id of the proxy instance to be created.</param>
             <param name="targetInstanceId">Target instance id of the proxy instance to be created.</param>
-            <param name="instanceId">Id of the created proxy instance.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-            <returns>Proxy instance.</returns>
+            <returns>The created proxy.</returns>
             <remarks>The types required will be created when necessary.</remarks>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
@@ -748,6 +747,7 @@
             <summary>
             Gets or sets the site id of this instance.
             </summary>
+            <value>The site id of this instance.</value>
             <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
@@ -996,23 +996,22 @@
             <param name="instanceId">Id of the proxy instance to be created. Cannot be set to <see cref="T:System.Guid"/>.Empty.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-            <returns>Proxy instance.</returns>
+            <returns>The created proxy.</returns>
             <remarks>The types required will be created when necessary.</remarks>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.AfterTypeAndAssemblyBuilt">Raised after the assembly built when a type is required for building.</event>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Int32,System.Boolean)">
             <summary>
             Creates proxy of the interface specified.
             </summary>
             <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
             <param name="targetSiteId">Target site id of the proxy instance to be created.</param>
             <param name="targetInstanceId">Target instance id of the proxy instance to be created.</param>
-            <param name="instanceId">Id of the created proxy instance.</param>
             <param name="defaultTimeout">Default timeout in milliseconds for all operations; or -1 to indicate that the waiting does not time out. Value cannot be 0. Default value is 90000 (90 sec).</param>
             <param name="buildServiceWrapperWithProxy">When building is required, builds service wrapper and its required entities in the same assembly. Default value is <see langword="true"/>.</param>
-            <returns>Proxy instance.</returns>
+            <returns>The created proxy.</returns>
             <remarks>The types required will be created when necessary.</remarks>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated">Raised before type building finished when a type is required for building.</event>
             <event cref="E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated">Raised before module and assembly building finished when a type is required for building.</event>
@@ -1021,7 +1020,7 @@
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid,System.Int32,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy(System.Type,System.Guid,System.Guid,System.Guid@,System.Int32,System.Boolean)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy(System.Type,System.Guid,System.Guid,System.Int32,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Guid,System.Int32,System.Boolean)">
@@ -1156,6 +1155,46 @@
             </summary>
             <param name="serialized">Serialized data.</param>
             <returns>Entity object.</returns>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.CreatedProxy">
+            <summary>
+            Represents the instance of the created proxy.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy.#ctor(System.Guid,System.Object)">
+            <summary>
+            Initializes an instance of CreatedProxy.
+            </summary>
+            <param name="instanceId">Id of the proxy instance.</param>
+            <param name="proxy">Proxy created.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy.InstanceId">
+            <summary>
+            Gets the id of the proxy instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy.Proxy">
+            <summary>
+            Gets the proxy created.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.CreatedProxy`1">
+            <summary>
+            Represents the instance of the created proxy, created based on the service contract specified by <typeparamref name="TInterface"/>.
+            </summary>
+            <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy`1.#ctor(System.Guid,`0)">
+            <summary>
+            Initializes an instance of CreatedProxy.
+            </summary>
+            <param name="instanceId">Id of the proxy instance.</param>
+            <param name="proxy">Proxy created.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy`1.ProxyGeneric">
+            <summary>
+            Gets the proxy created.
+            </summary>
         </member>
         <member name="T:SecretNest.RemoteAgency.RemoteAgency`1">
             <summary>

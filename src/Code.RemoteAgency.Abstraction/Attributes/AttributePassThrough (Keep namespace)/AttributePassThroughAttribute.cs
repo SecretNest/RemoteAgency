@@ -39,7 +39,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// </summary>
         /// <param name="attribute">Type of the attribute.</param>
         /// <param name="attributeConstructorParameterTypes">Types to identify the constructor of attribute. Default value is <see langword="null"/>. Set the value to <see langword="null"/> or empty array to use parameterless constructor.</param>
-        /// <param name="attributeConstructorParameters">Parameters used in constructor. The length can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
+        /// <param name="attributeConstructorParameters">Parameters used in constructor. The length of this parameter can not exceed the length of <paramref name="attributeConstructorParameterTypes"/>.</param>
         /// <param name="attributeId">Id of the instance of the attribute.</param>
         /// <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
         /// <para>When using the parameterless constructor of target attribute, <paramref name="attributeConstructorParameterTypes"/> and <paramref name="attributeConstructorParameters"/> are not required.</para>

@@ -38,10 +38,9 @@ namespace Test.CSharp.Test11
             //Client 1
             using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1);
-            var clientProxy1 = clientRemoteAgencyInstance1.CreateProxy<Test11>(serverSite1Id,
-                serviceWrapperInstance1Id,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstance1Id);
+            var clientCreatedProxy1 = clientRemoteAgencyInstance1.CreateProxy<Test11>(serverSite1Id, serviceWrapperInstance1Id);
+            var clientProxy1 = clientCreatedProxy1.ProxyGeneric;
+            var clientProxyInstance1Id = clientCreatedProxy1.InstanceId;
 
             //Run test in client 1
             Console.WriteLine("Run in client 1: all server side thread should be same, but may not be same as client side thread.");
@@ -60,6 +59,9 @@ namespace Test.CSharp.Test11
                 jobs[i].Join();
             }
 
+            router.RemoveRemoteAgencyInstance(serverSite1Id);
+            router.RemoveRemoteAgencyInstance(clientProxyInstance1Id);
+
             //Server 2
             using var serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             serverRemoteAgencyInstance1.TryCreateAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
@@ -70,10 +72,7 @@ namespace Test.CSharp.Test11
             //Client 2
             using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2);
-            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<Test11>(serverSite2Id,
-                serviceWrapperInstance2Id,
-                //ReSharper disable once UnusedVariable
-                out var clientProxyInstance2Id);
+            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<Test11>(serverSite2Id, serviceWrapperInstance2Id).ProxyGeneric;
 
             //Run test in client 2
             Console.WriteLine("Run in client 2: all server side thread should be same as the thread specified.");

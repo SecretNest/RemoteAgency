@@ -33,9 +33,7 @@ namespace Test.CSharp.Test12
             //Client
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
-            _ = clientRemoteAgencyInstance.CreateProxy<ITest12>(serverSiteId,
-                serviceWrapperInstanceId,
-                out var clientProxyInstanceId);
+            var clientProxyInstanceId = clientRemoteAgencyInstance.CreateProxy<ITest12>(serverSiteId, serviceWrapperInstanceId).InstanceId;
 
             //Run test
             Console.WriteLine("Ping (ms):");
