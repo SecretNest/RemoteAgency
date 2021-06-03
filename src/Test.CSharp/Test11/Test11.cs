@@ -64,10 +64,10 @@ namespace Test.CSharp.Test11
 
             //Server 2
             using var serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
-            serverRemoteAgencyInstance1.TryCreateAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
+            serverRemoteAgencyInstance2.TryCreateAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2);
-            var serverSite2Id = serverRemoteAgencyInstance1.SiteId;
-            var serviceWrapperInstance2Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService);
+            var serverSite2Id = serverRemoteAgencyInstance2.SiteId;
+            var serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService);
 
             //Client 2
             using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
@@ -83,7 +83,6 @@ namespace Test.CSharp.Test11
                 taskScheduler2.Run();
             });
             theThreadToRun.Start();
-            jobs = new Thread[5];
             for (var i = 0; i < 5; i++)
             {
                 jobs[i] = new Thread(clientProxy2.Hello);

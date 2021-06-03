@@ -10,9 +10,4 @@
     <ProjectReference Include="..\DirectRelease.RemoteAgency\DirectRelease.RemoteAgency.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Test12\" />
-    <Folder Include="Test11\" />
-  </ItemGroup>
-
 </Project>

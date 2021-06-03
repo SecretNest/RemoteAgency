@@ -40,15 +40,11 @@ Module Program
         Console.WriteLine("Run Test 10")
         Test10.TestCode.MyTest()
 
+        Console.WriteLine("Run Test 11")
+        Test11.TestCode.MyTest()
 
-
-
-
-
-
-
-
-
+        Console.WriteLine("Run Test 12")
+        Test12.TestCode.MyTest()
 
         Console.WriteLine("Done")
     End Sub
