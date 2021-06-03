@@ -11,6 +11,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Gets or sets the site id of this instance.
         /// </summary>
+        /// <value>The site id of this instance.</value>
         /// <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         public Guid SiteId { get; set; }
 
