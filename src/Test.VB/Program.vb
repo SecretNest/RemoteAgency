@@ -16,6 +16,11 @@ Module Program
         Console.WriteLine("Run Test 2")
         Test2.TestCode.MyTest()
 
+        Console.WriteLine("Run Test 3")
+        Test3.TestCode.MyTest()
+
+
+
 
 
 

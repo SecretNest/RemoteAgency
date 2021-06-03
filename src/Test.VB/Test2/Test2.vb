@@ -1,5 +1,4 @@
-﻿Imports System
-Imports SecretNest.RemoteAgency
+﻿Imports SecretNest.RemoteAgency
 Imports SecretNest.RemoteAgency.Attributes
 
 Namespace Test2

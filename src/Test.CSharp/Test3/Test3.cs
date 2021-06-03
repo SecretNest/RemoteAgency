@@ -13,7 +13,7 @@ namespace Test.CSharp.Test3
         [PropertyGetOneWayOperating]
         long ValueOneWayGet { get; }
 
-        [AssetIgnored()]
+        [AssetIgnored]
         long ValueIgnored { get; }
 
         long Value { get; set; }
@@ -29,7 +29,7 @@ namespace Test.CSharp.Test3
     {
         public string FromClientToServerProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedInReturning: true)]
+        [ParameterReturnRequiredProperty("EntityTwoWayProperty")]
         public string TwoWayProperty { get; set; }
     }
 
@@ -158,7 +158,7 @@ namespace Test.CSharp.Test3
 
         private static void ClientRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
         {   
-            Console.WriteLine($"Client side received exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
+            Console.WriteLine($"Client side received exception: \n  Interface: {e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
         }
     }
 }

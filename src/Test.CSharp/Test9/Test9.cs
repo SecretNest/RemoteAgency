@@ -19,7 +19,7 @@ namespace Test.CSharp.Test9
         [LocalExceptionHandling]
         event EventHandler WithException;
 
-        [EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", isIncludedInReturning: true)]
+        [EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", isIncludedWhenExceptionThrown: true)]
         event MyEventWithExceptionCallback MyEventWithException;
         [LocalExceptionHandling]
         delegate void MyEventWithExceptionCallback(EntityInTest9B parameter);
@@ -29,7 +29,7 @@ namespace Test.CSharp.Test9
     {
         public string FromServerToClientProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedInReturning: true)]
+        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
         public string TwoWayProperty { get; set; }
     }
 

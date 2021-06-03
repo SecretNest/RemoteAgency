@@ -27,7 +27,7 @@ namespace Test.CSharp.Test7
     {
         public string FromClientToServerProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedInReturning: true)]
+        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
         public string TwoWayProperty { get; set; }
     }
 
