@@ -103,7 +103,7 @@ namespace Test.CSharp.Test11
             
             theThreadToRun.Join();
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

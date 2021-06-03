@@ -38,10 +38,12 @@ namespace Test.CSharp
             {
                 targetInstance.ProcessReceivedSerializedMessage(serialized);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
             {
                 Console.WriteLine($"Processing exception: \n  ExceptionType: {exception.GetType().FullName}\n  ExceptionMessage: {exception.Message}");
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
 
     }

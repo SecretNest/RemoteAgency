@@ -63,7 +63,7 @@ namespace Test.CSharp.Test1
             Console.WriteLine("Add(double): 1.1 + 2.2");
             Console.WriteLine(clientProxy.Add(1.1, 2.2));
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

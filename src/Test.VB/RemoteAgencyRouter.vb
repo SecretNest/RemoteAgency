@@ -29,8 +29,10 @@ Public Class RemoteAgencyRouter(Of TSerialized, TEntityBase)
         'Process with serialized data
         Try
             targetInstance.ProcessReceivedSerializedMessage(serialized)
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             Console.WriteLine($"Processing exception: \n  ExceptionType: {ex.GetType().FullName}\n  ExceptionMessage: {ex.Message}")
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
     End Sub
 End Class

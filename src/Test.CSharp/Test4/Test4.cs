@@ -56,7 +56,7 @@ namespace Test.CSharp.Test4
         }
     }
 
-    public class TestCode
+    public sealed class TestCode
     {
         public static void MyTest()
         {
@@ -93,7 +93,7 @@ namespace Test.CSharp.Test4
             Console.WriteLine($"Out parameter type: {exception.GetType().FullName}");
             Console.WriteLine($"Out parameter message: {exception.Message}");
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

@@ -93,22 +93,26 @@ namespace Test.CSharp.Test6
             {
                 Console.WriteLine(clientProxy["Timeout"]);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             Console.WriteLine("this[\"Timeout\"](Set, Timeout):");
             try
             {
                 clientProxy["Timeout"] = 0;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

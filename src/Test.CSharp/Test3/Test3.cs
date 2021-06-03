@@ -101,10 +101,12 @@ namespace Test.CSharp.Test3
             {
                 _ = clientProxy.ValueIgnored;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             Console.WriteLine("Value(Get, 100):");
             Console.WriteLine(clientProxy.Value);
@@ -128,10 +130,12 @@ namespace Test.CSharp.Test3
             {
                 clientProxy.WithException(entity);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e.Message);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}");
             
@@ -140,12 +144,14 @@ namespace Test.CSharp.Test3
             {
                 clientProxy.TimeOutMethod();
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

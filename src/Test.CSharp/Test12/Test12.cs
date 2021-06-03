@@ -48,7 +48,7 @@ namespace Test.CSharp.Test12
             Console.WriteLine("Ping (ms):");
 
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

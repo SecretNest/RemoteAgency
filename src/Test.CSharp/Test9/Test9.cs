@@ -88,10 +88,12 @@ namespace Test.CSharp.Test9
                 {
                     WithException.Invoke(this, EventArgs.Empty);
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
                 {
                     Console.WriteLine("Predicted Exception: " + e.Message);
                 }
+#pragma warning restore CA1031 // Do not catch general exception types
             }
 
             Console.WriteLine("Server side: MyEventWithException");
@@ -106,12 +108,14 @@ namespace Test.CSharp.Test9
                 {
                     MyEventWithException.Invoke(parameter);
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception e)
                 {
                     Console.WriteLine($"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}");
                     Console.WriteLine($"Server side: parameter.TwoWayProperty (should be SetBeforeException): {parameter.TwoWayProperty}");
                     Console.WriteLine("Predicted Exception: " + e.Message);
                 }
+#pragma warning restore CA1031 // Do not catch general exception types
             }
         }
     }
@@ -144,10 +148,12 @@ namespace Test.CSharp.Test9
                 clientProxy.Ignored += (sender, args) => { };
                 //ReSharper enable UnusedParameter.Local
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
             {
                 Console.WriteLine("Predicted Exception: " + e);
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             clientProxy.MyEvent += parameter =>
             {
@@ -181,7 +187,7 @@ namespace Test.CSharp.Test9
             Console.WriteLine("Run:");
             originalService.Test();
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

@@ -16,7 +16,7 @@ namespace Test.CSharp.Test5
         public int Value { get; set; }
     }
 
-    public class TestCode
+    public static class TestCode
     {
         public static void MyTest()
         {
@@ -45,7 +45,7 @@ namespace Test.CSharp.Test5
             Console.WriteLine("Value(Get, 100:");
             Console.WriteLine(clientProxy.Value);
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

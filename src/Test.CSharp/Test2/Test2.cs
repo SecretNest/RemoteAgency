@@ -6,7 +6,7 @@ namespace Test.CSharp.Test2
 {
     public interface ITest2
     {
-        void Add(ref long value);
+        void AddOne(ref long value);
 
         void Read(out long value);
 
@@ -25,7 +25,7 @@ namespace Test.CSharp.Test2
     {
         private long _data;
 
-        public void Add(ref long value)
+        public void AddOne(ref long value)
         {
             value += 1;
             _data = value;
@@ -68,8 +68,8 @@ namespace Test.CSharp.Test2
             //Run test
             long value = 100;
 
-            Console.WriteLine("Add:");
-            clientProxy.Add(ref value);
+            Console.WriteLine("AddOne:");
+            clientProxy.AddOne(ref value);
             Console.WriteLine(value);
 
             Console.WriteLine("Read:");
@@ -87,7 +87,7 @@ namespace Test.CSharp.Test2
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}");
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

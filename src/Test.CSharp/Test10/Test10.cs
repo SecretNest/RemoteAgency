@@ -17,7 +17,8 @@ namespace Test.CSharp.Test10
         void MyMethod();
     }
 
-    public class MyOwnAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class MyOwnAttribute : Attribute
     {
         public string MyProperty { get; set; }
         public int MyField;
@@ -59,7 +60,7 @@ namespace Test.CSharp.Test10
                 Console.WriteLine("  CFromCtor: (true): {0}", myAttribute.CFromCtor);
             }
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

@@ -79,7 +79,7 @@ namespace Test.CSharp.Test8
             clientProxy2.MyEventWithHandler -= ClientProxy2_MyEventWithHandler;
             clientProxy1.Test();
 
-            Console.Write("Press any key to quit...");
+            Console.Write("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
         }

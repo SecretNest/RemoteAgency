@@ -33,7 +33,7 @@ Namespace Test0
             'Run test
             clientProxy.Hello()
 
-            Console.Write("Press any key to quit...")
+            Console.Write("Press any key to continue...")
             Console.ReadKey(True)
             Console.WriteLine()
 
