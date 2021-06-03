@@ -42,7 +42,7 @@
     <section>
       <title>Example</title>
       <content>
-        <para>If there is an attribute <c>MyOwnAttribute</c> is defined like <codeReference>AttributePassThroughExample#Attribute</codeReference>, user can define such a interface <codeReference>AttributePassThroughExample#Interface</codeReference> which will be analyzed to generate <codeReference>AttributePassThroughExample#Proxy</codeReference> as the proxy class.</para>
+        <para>If there is an attribute <c>MyOwnAttribute</c> is defined like <codeReference>Example10#Attribute</codeReference>, user can define such a interface <codeReference>Example10#Interface</codeReference> which will be analyzed to generate <codeReference>Example10#Proxy</codeReference> as the proxy class.</para>
       </content>
     </section>
 
