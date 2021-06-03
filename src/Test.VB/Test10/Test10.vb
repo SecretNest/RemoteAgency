@@ -4,7 +4,6 @@ Imports SecretNest.RemoteAgency.Attributes
 
 Namespace Test10
     Public Interface ITest10
-
         <AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New Object() {"ValueOfA"}, "ThisIsMyMethod")>
         <AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, True)>
         <AttributePassThroughProperty("ThisIsMyMethod", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")>

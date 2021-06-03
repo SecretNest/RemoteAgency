@@ -3,49 +3,62 @@
 <examples>
   <item id="AttributePassThroughExample#Attribute">
     <sampleCode language="CSharp">
-      public class MyOwnAttribute : Attribute
+      [AttributeUsage(AttributeTargets.Method)]
+      public sealed class MyOwnAttribute : Attribute
       {
         public string MyProperty { get; set; }
         public int MyField;
+        public string AFromCtor { get; }
+        public int BFromCtor { get; } 
+        public bool CFromCtor { get; }
 
         public MyOwnAttribute(string a, int b = 0, bool c = false)
         {
+          AFromCtor = a;
+          BFromCtor = b;
+          CFromCtor = c;
         }
       }
     </sampleCode>
     <sampleCode language="VisualBasic">
-      Public Class MyOwnAttribute
-        Inherits Attribute
+      &lt;AttributeUsage(AttributeTargets.Method)&gt;
+      Public NotInheritable Class MyOwnAttribute
+          Inherits Attribute
+          Public Property MyProperty As String
+          Public MyField As Integer
+          Public ReadOnly Property AFromCtor As String
+          Public ReadOnly Property BFromCtor As Integer
+          Public ReadOnly Property CFromCtor As Boolean
 
-        Public Property MyProperty As String
-        Public MyField As Integer
-
-        Public Sub New(a As String, Optional b As Integer = 0, Optional c As Boolean = False)
-        End Sub
+          Sub New(a As String, Optional b As Integer = 0, Optional c As Boolean = False)
+              AFromCtor = a
+              BFromCtor = b
+              CFromCtor = c
+          End Sub
       End Class
     </sampleCode>
   </item>
 
   <item id="AttributePassThroughExample#Interface">
     <sampleCode language="CSharp">
-      public interface IMyService
+      public interface ITest10
       {
         [AttributePassThrough(typeof(MyOwnAttribute),
           new[] {typeof(string), typeof(int), typeof(bool)},
           new object[] {"ValueOfA"},
-          "IdOfThisInstance")]
-        [AttributePassThroughIndexBasedParameter("IdOfThisInstance", 2, true)]
-        [AttributePassThroughProperty("IdOfThisInstance", nameof(MyOwnAttribute.MyProperty), "PropertyValue")]
-        [AttributePassThroughField("IdOfThisInstance", nameof(MyOwnAttribute.MyField), 123)]
+          "ThisIsMyMethod")]
+        [AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, true)]
+        [AttributePassThroughProperty("ThisIsMyMethod", nameof(MyOwnAttribute.MyProperty), "PropertyValue")]
+        [AttributePassThroughField("ThisIsMyMethod", nameof(MyOwnAttribute.MyField), 123)]
         void MyMethod();
       }
     </sampleCode>
     <sampleCode language="VisualBasic">
-      Public Interface IMyService
-        &lt;AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New String() {"ValueOfA"}, "IdOfThisInstance")&gt;
-        &lt;AttributePassThroughIndexBasedParameter("IdOfThisInstance", 2, True)&gt;
-        &lt;AttributePassThroughProperty("IdOfThisInstance", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")&gt;
-        &lt;AttributePassThroughField("IdOfThisInstance", NameOf(MyOwnAttribute.MyField), 123)&gt;
+      Public Interface ITest10
+        &lt;AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New Object() {"ValueOfA"}, "ThisIsMyMethod")&gt;
+        &lt;AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, True)&gt;
+        &lt;AttributePassThroughProperty("ThisIsMyMethod", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")&gt;
+        &lt;AttributePassThroughField("ThisIsMyMethod", NameOf(MyOwnAttribute.MyField), 123)&gt;
         Sub MyMethod()
       End Interface
     </sampleCode>
