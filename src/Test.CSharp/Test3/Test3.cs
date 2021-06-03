@@ -80,6 +80,7 @@ namespace Test.CSharp.Test3
             var originalService = new Server3();
             using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+            serverRemoteAgencyInstance.ExceptionRedirected += ServerRemoteAgencyInstance_ExceptionRedirected;
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
@@ -87,7 +88,6 @@ namespace Test.CSharp.Test3
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest3>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
-            clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
 
             //Run test
             Console.WriteLine("Add(No return):");
@@ -156,9 +156,9 @@ namespace Test.CSharp.Test3
             Console.WriteLine();
         }
 
-        private static void ClientRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
+        private static void ServerRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
         {   
-            Console.WriteLine($"Client side received exception: \n  Interface: {e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
+            Console.WriteLine($"Server side exception: \n  Interface: {e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
         }
     }
 }

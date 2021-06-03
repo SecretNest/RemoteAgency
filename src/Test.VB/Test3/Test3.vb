@@ -73,6 +73,7 @@ Namespace Test3
             Dim originalService As New Server3()
             Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+            AddHandler serverRemoteAgencyInstance.ExceptionRedirected, AddressOf ServerRemoteAgencyInstance_ExceptionRedirected
             Dim serverSiteId = serverRemoteAgencyInstance.SiteId
             Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
 
@@ -80,7 +81,6 @@ Namespace Test3
             Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
             Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest3)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
-            AddHandler clientRemoteAgencyInstance.ExceptionRedirected, AddressOf ClientRemoteAgencyInstance_ExceptionRedirected
 
             'Run test
             Console.WriteLine("Add(No return):")
@@ -97,8 +97,8 @@ Namespace Test3
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())
-#Enable Warning CA1031 ' Do not catch general exception types
             End Try
+#Enable Warning CA1031 ' Do not catch general exception types
 
             Console.WriteLine("Value(Get, 100):")
             Console.WriteLine(clientProxy.Value)
@@ -124,8 +124,8 @@ Namespace Test3
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())
-#Enable Warning CA1031 ' Do not catch general exception types
             End Try
+#Enable Warning CA1031 ' Do not catch general exception types
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}")
 
@@ -135,17 +135,20 @@ Namespace Test3
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())
-#Enable Warning CA1031 ' Do not catch general exception types
             End Try
+#Enable Warning CA1031 ' Do not catch general exception types
 
             Console.Write("Press any key to continue...")
             Console.ReadKey(True)
             Console.WriteLine()
+
+            serverRemoteAgencyInstance.Dispose()
+            clientRemoteAgencyInstance.Dispose()
         End Sub
 
-        Private Shared Sub ClientRemoteAgencyInstance_ExceptionRedirected(sender As Object, e As ExceptionRedirectedEventArgs)
+        Private Shared Sub ServerRemoteAgencyInstance_ExceptionRedirected(sender As Object, e As ExceptionRedirectedEventArgs)
             Console.WriteLine(
-                "Client side received exception: " + vbCrLf +
+                "Server side exception: " + vbCrLf +
                 $"  Interface: {e.ServiceContractInterface.FullName}" + vbCrLf +
                 $"  InstanceId: {e.InstanceId}" + vbCrLf +
                 $"  AssetName: {e.AssetName}" + vbCrLf +

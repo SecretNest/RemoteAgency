@@ -72,7 +72,7 @@ namespace Test.CSharp.Test8
             clientProxy1.Test();
 
             Console.WriteLine("Run(WithoutHandler2)");
-            clientProxy1.MyEventWithHandler -= ClientProxy2_MyEventWithHandler; //useless coz no active handler registered.
+            clientProxy1.MyEventWithHandler -= ClientProxy1_MyEventWithHandler; //useless coz no active handler registered.
             clientProxy1.Test();
 
             Console.WriteLine("Run(WithoutHandler)");

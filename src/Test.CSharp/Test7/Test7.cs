@@ -53,7 +53,7 @@ namespace Test.CSharp.Test7
             get
             {
                 Console.WriteLine("Server side: Operation received.");
-                throw new Exception("You should never receive this from client coz this is a one way (set) property.");
+                throw new Exception("You should never receive this from client coz this is a one way (get) property.");
             }
         }
 
@@ -94,6 +94,7 @@ namespace Test.CSharp.Test7
             var originalService = new Server7();
             using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+            serverRemoteAgencyInstance.ExceptionRedirected += ServerRemoteAgencyInstance_ExceptionRedirected;
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
@@ -101,7 +102,6 @@ namespace Test.CSharp.Test7
             using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest7>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
-            clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
 
             //Run test
             Console.WriteLine("Ignored(Exception):");
@@ -159,9 +159,9 @@ namespace Test.CSharp.Test7
             Console.WriteLine();
         }
 
-        private static void ClientRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
+        private static void ServerRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
         {   
-            Console.WriteLine($"Client side received exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
+            Console.WriteLine($"Server side exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
         }
     }
 }
