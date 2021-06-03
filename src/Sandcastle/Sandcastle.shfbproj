@@ -112,6 +112,7 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Attributes\AttributeForEntityType.aml" />
+    <None Include="Content\Attributes\AttributesPassThough.aml" />
     <None Include="Content\Attributes\Index.aml" />
     <None Include="Content\Concept.aml" />
     <None Include="Content\Instance\AssemblyBuilding.aml" />
@@ -131,7 +132,6 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
     <None Include="Content\Tunings\NameCustomizing.aml" />
     <None Include="Content\Tunings\ParameterIgnoreTwoWay.aml" />
     <None Include="Content\Tunings\ThreadLock.aml" />
-    <None Include="Content\Use\CodeSnippets\Example10.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
     <None Include="Resources.pptx" />
@@ -147,7 +147,7 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
   </ItemGroup>
   <ItemGroup>
     <CodeSnippets Include="Content\Attributes\AttributeExamples.snippets" />
-    <CodeSnippets Include="Content\Attributes\AttributePassThroughExamples.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example10.snippets" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\Picture1.png">
