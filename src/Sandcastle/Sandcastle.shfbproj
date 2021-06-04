@@ -132,6 +132,9 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
     <None Include="Content\Tunings\NameCustomizing.aml" />
     <None Include="Content\Tunings\ParameterIgnoreTwoWay.aml" />
     <None Include="Content\Tunings\ThreadLock.aml" />
+    <None Include="Content\Use\Example.aml" />
+    <None Include="Content\Use\Example0.aml" />
+    <None Include="Content\Use\ExamplePrerequisites.aml" />
     <None Include="Content\VersionHistory\VersionHistory.aml" />
     <None Include="Content\Welcome.aml" />
     <None Include="Resources.pptx" />
@@ -177,7 +180,8 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Tokens Include="Url.tokens" />
+    <Tokens Include="Content\Shared.tokens" />
+    <Tokens Include="Content\Use\ExampleShared.tokens" />
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />

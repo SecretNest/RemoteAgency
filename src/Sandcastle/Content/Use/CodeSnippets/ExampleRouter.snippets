@@ -45,7 +45,6 @@ class RemoteAgencyRouter&lt;TSerialized, TEntityBase&gt;
             Console.WriteLine($"Processing exception: \n  ExceptionType: {exception.GetType().FullName}\n  ExceptionMessage: {exception.Message}");
         }
     }
-
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
@@ -85,24 +84,6 @@ Public Class RemoteAgencyRouter(Of TSerialized, TEntityBase)
     End Try
   End Sub
 End Class
-    </sampleCode>
-  </item>
-
-  <item id="CreateInstance#Local">
-    <sampleCode language="CSharp">
-      CSharpClass x = new CSharpClass();
-    </sampleCode>
-    <sampleCode language="VisualBasic">
-      Dim x As VBClass = New VBClass()
-    </sampleCode>
-  </item>
-
-  <item id="CreateInstance#Static">
-    <sampleCode language="CSharp">
-      public static CSharpClass sharedInstance = new CSharpClass();
-    </sampleCode>
-    <sampleCode language="VisualBasic">
-      Public Shared sharedInstance As VBClass = New VBClass()
     </sampleCode>
   </item>
 </examples>
