@@ -22,7 +22,6 @@ Namespace Test2
         Implements ITest2
         Dim _data As Long
 
-
         Public Sub AddOne(ByRef value As Long) Implements ITest2.AddOne
             value += 1
             _data = value

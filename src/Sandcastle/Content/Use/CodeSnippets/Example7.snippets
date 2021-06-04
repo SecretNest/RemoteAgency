@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="Example7#Interface">
+    <sampleCode language="CSharp">
+public interface ITest7
+{
+    [AssetIgnored]
+    DateTime Ignored { get; set; }
+
+    [AssetOneWayOperating]
+    DateTime OneWaySet { get; set; }
+
+    [PropertyGetOneWayOperating]
+    DateTime OneWayGet { get; }
+
+    [OperatingTimeoutTime(1000, 2000)]
+    DateTime TimeoutExceptionTest { get; set; }
+
+    [LocalExceptionHandling]
+    EntityInTest7 WithException { get; set; }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Interface ITest7
+    &lt;AssetIgnored&gt;
+    Property Ignored As DateTime
+
+    &lt;AssetOneWayOperating&gt;
+    Property OneWaySet As DateTime
+
+    &lt;PropertyGetOneWayOperating&gt;
+    ReadOnly Property OneWayGet As DateTime
+
+    &lt;OperatingTimeoutTime(1000, 2000)&gt;
+    Property TimeoutExceptionTest As DateTime
+
+    &lt;LocalExceptionHandling&gt;
+    Property WithException As EntityInTest7
+End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example7#Entity">
+    <sampleCode language="CSharp">
+public class EntityInTest7
+{
+    public string FromClientToServerProperty { get; set; }
+
+    [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
+    public string TwoWayProperty { get; set; }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class EntityInTest7
+    Public Property FromClientToServerProperty As String
+
+    &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt;
+    Public Property TwoWayProperty As String
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example7#Server">
+    <sampleCode language="CSharp">
+public class Server7 : ITest7
+{
+    public DateTime Ignored
+    {
+        get => throw new Exception("You should never see this due to ignored.");
+        set => throw new Exception("You should never see this due to ignored.");
+    }
+
+    public DateTime OneWaySet
+    {
+        get => DateTime.Now;
+        set
+        {
+            Console.WriteLine("Server side: Operation received. Value={0}", value.ToLongDateString());
+            throw new Exception("You should never receive this from client coz this is a one way (set) property.");
+        }
+    }
+
+    public DateTime OneWayGet
+    {
+        get
+        {
+            Console.WriteLine("Server side: Operation received.");
+            throw new Exception("You should never receive this from client coz this is a one way (get) property.");
+        }
+    }
+
+    public DateTime TimeoutExceptionTest
+    {
+        get
+        {
+            Thread.Sleep(2000);
+            return DateTime.Now;
+        }
+        set
+        {
+            Thread.Sleep(3000);
+            _ = value;
+        }
+    }
+
+    public EntityInTest7 WithException
+    {
+        get => null;
+        set
+        {
+            value.FromClientToServerProperty = "ChangedByServer"; //should never returned
+            value.TwoWayProperty = "SetBeforeException";
+            throw new Exception("oops.");
+        }
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class Server7
+    Implements ITest7
+
+    Public Property Ignored As Date Implements ITest7.Ignored
+        Get
+            Throw New Exception("You should never see this due to ignored.")
+        End Get
+        Set(value As Date)
+            Throw New Exception("You should never see this due to ignored.")
+        End Set
+    End Property
+
+    Public Property OneWaySet As Date Implements ITest7.OneWaySet
+        Get
+            Return DateTime.Now
+        End Get
+        Set(value As Date)
+            Console.WriteLine("Server side: Operation received. Value={0}", value.ToLongDateString())
+            Throw New Exception("You should never receive this from client coz this is a one way (set) property.")
+        End Set
+    End Property
+
+    Public ReadOnly Property OneWayGet As Date Implements ITest7.OneWayGet
+        Get
+            Console.WriteLine("Server side: Operation received.")
+            Throw New Exception("You should never receive this from client coz this is a one way (get) property.")
+        End Get
+    End Property
+
+    Public Property TimeoutExceptionTest As Date Implements ITest7.TimeoutExceptionTest
+        Get
+            Thread.Sleep(2000)
+            Return DateTime.Now
+        End Get
+        Set(value As Date)
+            Thread.Sleep(3000)
+        End Set
+    End Property
+
+    Public Property WithException As EntityInTest7 Implements ITest7.WithException
+        Get
+            Return Nothing
+        End Get
+        Set(value As EntityInTest7)
+            value.FromClientToServerProperty = "ChangedByServer" 'should never returned
+            value.TwoWayProperty = "SetBeforeException"
+            Throw New Exception("oops.")
+        End Set
+    End Property
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example7#Test">
+    <sampleCode language="CSharp">
+//test router
+var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+
+//Server
+var originalService = new Server7();
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+serverRemoteAgencyInstance.ExceptionRedirected += ServerRemoteAgencyInstance_ExceptionRedirected;
+var serverSiteId = serverRemoteAgencyInstance.SiteId;
+var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+//Client
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest7&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+//Run test
+Console.WriteLine("Ignored(Exception):");
+try
+{
+    _ = clientProxy.Ignored;
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
+
+Console.WriteLine("OneWaySet(NoClientException):");
+clientProxy.OneWaySet = DateTime.Now;
+
+Console.WriteLine("OneWayGet(default):");
+Console.WriteLine(clientProxy.OneWayGet);
+
+Console.WriteLine("TimeoutExceptionTest:");
+try
+{
+    Console.WriteLine(clientProxy.TimeoutExceptionTest);
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
+
+var entity = new EntityInTest7
+{
+    FromClientToServerProperty = "SetFromClient",
+    TwoWayProperty = "SetFromClient"
+};
+
+Console.WriteLine("WithException(Exception):");
+try
+{
+    clientProxy.WithException = entity;
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e.Message);
+}
+Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
+Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}");
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+'test router
+Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+
+'Server
+Dim originalService As New Server7()
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+AddHandler serverRemoteAgencyInstance.ExceptionRedirected, AddressOf ServerRemoteAgencyInstance_ExceptionRedirected
+Dim serverSiteId = serverRemoteAgencyInstance.SiteId
+Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+
+'Client
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest7)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+
+'Run test
+Console.WriteLine("Ignored(Exception):")
+Try
+    ' ReSharper disable once UnusedVariable
+    Dim useless = clientProxy.Ignored
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
+
+Console.WriteLine("OneWaySet(NoClientException):")
+clientProxy.OneWaySet = DateTime.Now
+
+Console.WriteLine("OneWayGet(default):")
+Console.WriteLine(clientProxy.OneWayGet)
+
+Console.WriteLine("TimeoutExceptionTest:")
+Try
+    Console.WriteLine(clientProxy.TimeoutExceptionTest)
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
+
+Dim entity As New EntityInTest7()
+With entity
+    .FromClientToServerProperty = "SetFromClient"
+    .TwoWayProperty = "SetFromClient"
+End With
+
+Console.WriteLine("WithException(Exception):")
+Try
+    clientProxy.WithException = entity
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.Message)
+End Try
+Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
+Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetBeforeException): {entity.TwoWayProperty}")
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()
+    </sampleCode>
+  </item>
+
+  <item id="Example7#Handler">
+    <sampleCode language="CSharp">
+private static void ServerRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
+{   
+    Console.WriteLine($"Server side exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Private Shared Sub ServerRemoteAgencyInstance_ExceptionRedirected(sender As Object, e As ExceptionRedirectedEventArgs)
+    Console.WriteLine(
+        "Server side exception: " + vbCrLf +
+        $"  Interface: {e.ServiceContractInterface.FullName}" + vbCrLf +
+        $"  InstanceId: {e.InstanceId}" + vbCrLf +
+        $"  AssetName: {e.AssetName}" + vbCrLf +
+        $"  ExceptionType: {e.RedirectedException.GetType().FullName}" + vbCrLf +
+        $"  ExceptionMessage: {e.RedirectedException.Message}")
+End Sub
+    </sampleCode>
+  </item>
+</examples>
+

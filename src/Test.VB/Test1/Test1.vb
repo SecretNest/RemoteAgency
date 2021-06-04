@@ -5,8 +5,8 @@ Namespace Test1
     Public Interface ITest1
         Function Add(a As Integer, b As Integer) As Integer
 
-        'When unmark this line, an exception about asset naming conflicts will be thrown.
-        <CustomizedAssetName("AddDouble")>
+        'When unmark this line below, an exception about asset naming conflicts will be thrown.
+        '<CustomizedAssetName("AddDouble")>
         Function Add(a As Single, b As Single) As Single
 
         <CustomizedAssetName("AddDouble")>

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="ExampleRouter#Define">
+    <sampleCode language="CSharp">
+using System;
+using System.Collections.Generic;
+using SecretNest.RemoteAgency;
+
+class RemoteAgencyRouter&lt;TSerialized, TEntityBase&gt;
+{
+    private readonly Dictionary&lt;Guid, RemoteAgency&lt;TSerialized, TEntityBase&gt;&gt; _instances = new ();
+
+    public void AddRemoteAgencyInstance(RemoteAgency&lt;TSerialized, TEntityBase&gt; instance)
+    {
+        var id = instance.SiteId;
+        _instances.Add(id, instance);
+        instance.MessageForSendingPrepared += Instance_MessageForSendingPrepared;
+    }
+
+    public void RemoveRemoteAgencyInstance(Guid id)
+    {
+        _instances.Remove(id);
+    }
+
+    private void Instance_MessageForSendingPrepared(object sender, MessageBodyEventArgs&lt;TSerialized, TEntityBase&gt; e)
+    {
+        //serialize
+        var serialized = e.Serialize();
+
+        if (!_instances.TryGetValue(e.TargetSiteId, out var targetInstance))
+        {
+            throw new Exception("Target instance doesn't exist.");
+        }
+
+        //Process without serialization
+        //targetInstance.ProcessReceivedMessage(e.MessageBody);
+
+        //Process with serialized data
+        try
+        {
+            targetInstance.ProcessReceivedSerializedMessage(serialized);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Processing exception: \n  ExceptionType: {exception.GetType().FullName}\n  ExceptionMessage: {exception.Message}");
+        }
+    }
+
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Imports SecretNest.RemoteAgency
+
+Public Class RemoteAgencyRouter(Of TSerialized, TEntityBase)
+  Private ReadOnly _instances As New Dictionary(Of Guid, RemoteAgency(Of TSerialized, TEntityBase))
+
+  Public Sub AddRemoteAgencyInstance(instance As RemoteAgency(Of TSerialized, TEntityBase))
+    Dim id = instance.SiteId
+    _instances.Add(id, instance)
+    AddHandler instance.MessageForSendingPrepared, AddressOf Instance_MessageForSendingPrepared
+  End Sub
+
+  Public Sub RemoveRemoteAgencyInstance(id As Guid)
+    _instances.Remove(id)
+  End Sub
+
+  Private Sub Instance_MessageForSendingPrepared(sender As Object, e As MessageBodyEventArgs(Of TSerialized, TEntityBase))
+    'serialize
+    Dim serialized = e.Serialize()
+
+    Dim targetInstance As RemoteAgency(Of TSerialized, TEntityBase) = Nothing
+
+    If Not _instances.TryGetValue(e.TargetSiteId, targetInstance) Then
+      Throw New Exception("Target instance doesn't exist.")
+    End If
+
+    'Process without serialization
+    'targetInstance.ProcessReceivedMessage(e.MessageBody)
+
+    'Process with serialized data
+    Try
+      targetInstance.ProcessReceivedSerializedMessage(serialized)
+    Catch ex As Exception
+      Console.WriteLine($"Processing exception: \n  ExceptionType: {ex.GetType().FullName}\n  ExceptionMessage: {ex.Message}")
+    End Try
+  End Sub
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="CreateInstance#Local">
+    <sampleCode language="CSharp">
+      CSharpClass x = new CSharpClass();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+      Dim x As VBClass = New VBClass()
+    </sampleCode>
+  </item>
+
+  <item id="CreateInstance#Static">
+    <sampleCode language="CSharp">
+      public static CSharpClass sharedInstance = new CSharpClass();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+      Public Shared sharedInstance As VBClass = New VBClass()
+    </sampleCode>
+  </item>
+</examples>
+

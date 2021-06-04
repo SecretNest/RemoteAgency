@@ -33,7 +33,8 @@ namespace Test.CSharp.Test7
 
     public class Server7 : ITest7
     {
-        public DateTime Ignored {
+        public DateTime Ignored
+        {
             get => throw new Exception("You should never see this due to ignored.");
             set => throw new Exception("You should never see this due to ignored.");
         }

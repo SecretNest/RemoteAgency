@@ -11,7 +11,7 @@ namespace Test.CSharp.Test11
         void Hello();
     }
 
-    public class Test11 : ITest11
+    public class Server11 : ITest11
     {
         public void Hello()
         {
@@ -26,7 +26,7 @@ namespace Test.CSharp.Test11
             //test router
             var router = new RemoteAgencyRouter<byte[], object>();
 
-            var originalService = new Test11();
+            var originalService = new Server11();
 
             //Server 1
             using var serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
@@ -38,7 +38,7 @@ namespace Test.CSharp.Test11
             //Client 1
             using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1);
-            var clientCreatedProxy1 = clientRemoteAgencyInstance1.CreateProxy<Test11>(serverSite1Id, serviceWrapperInstance1Id);
+            var clientCreatedProxy1 = clientRemoteAgencyInstance1.CreateProxy<Server11>(serverSite1Id, serviceWrapperInstance1Id);
             var clientProxy1 = clientCreatedProxy1.ProxyGeneric;
             var clientProxyInstance1Id = clientCreatedProxy1.InstanceId;
 
@@ -72,7 +72,7 @@ namespace Test.CSharp.Test11
             //Client 2
             using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2);
-            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<Test11>(serverSite2Id, serviceWrapperInstance2Id).ProxyGeneric;
+            var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<Server11>(serverSite2Id, serviceWrapperInstance2Id).ProxyGeneric;
 
             //Run test in client 2
             Console.WriteLine("Run in client 2: all server side thread should be same as the thread specified.");

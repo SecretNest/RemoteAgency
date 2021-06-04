@@ -56,7 +56,7 @@ namespace Test.CSharp.Test4
         }
     }
 
-    public sealed class TestCode
+    public static class TestCode
     {
         public static void MyTest()
         {
@@ -79,17 +79,17 @@ namespace Test.CSharp.Test4
             Console.WriteLine("ReturnItself(1024):");
             Console.WriteLine(clientProxy.ReturnItself(1024));
 
-            Console.WriteLine("GetGenericTypeName(Test.CSharp.Test4.TestCode):");
-            Console.WriteLine(clientProxy.GetGenericTypeName<TestCode>());
+            Console.WriteLine("GetGenericTypeName(System.Collections.ArrayList):");
+            Console.WriteLine(clientProxy.GetGenericTypeName<System.Collections.ArrayList>());
 
             Console.WriteLine("GetGenericTypeName2(System.String):");
             Console.WriteLine(clientProxy.GetGenericTypeName2<string>());
 
-            Console.WriteLine("Supported(Test.CSharp.Test4.TestCode, System.Object):");
-            clientProxy.Supported<TestCode, object>(null);
+            Console.WriteLine("Supported(System.Collections.ArrayList, System.Object):");
+            clientProxy.Supported<System.Collections.ArrayList, object>(null);
 
-            Console.WriteLine("Supported(System.Collections.Generic.ICollection<Test.CSharp.Test4.TestCode>), System.NotSupportedException, Test.CSharp.Test4.TestCode):");
-            clientProxy.Supported<ICollection<TestCode>, NotSupportedException, TestCode>(new List<TestCode>(), out var exception);
+            Console.WriteLine("Supported(System.Collections.Generic.ICollection<System.Collections.ArrayList>), System.NotSupportedException, System.Collections.ArrayList):");
+            clientProxy.Supported<ICollection<System.Collections.ArrayList>, NotSupportedException, System.Collections.ArrayList>(new List<System.Collections.ArrayList>(), out var exception);
             Console.WriteLine($"Out parameter type: {exception.GetType().FullName}");
             Console.WriteLine($"Out parameter message: {exception.Message}");
 

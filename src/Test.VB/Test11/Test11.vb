@@ -9,7 +9,7 @@ Namespace Test11
         Sub Hello()
     End Interface
 
-    Public Class Test11
+    Public Class Server11
         Implements ITest11
 
         Public Sub Hello() Implements ITest11.Hello
@@ -22,7 +22,7 @@ Namespace Test11
             'test router
             Dim router = New RemoteAgencyRouter(Of Byte(), Object)
 
-            Dim originalService As New Test11()
+            Dim originalService As New Server11()
 
             'Server 1
             Dim taskScheduler1 As SequentialScheduler = Nothing

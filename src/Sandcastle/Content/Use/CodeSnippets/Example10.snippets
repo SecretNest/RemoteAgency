@@ -1,89 +1,144 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- This is an example code snippets file -->
 <examples>
   <item id="Example10#Attribute">
     <sampleCode language="CSharp">
-      [AttributeUsage(AttributeTargets.Method)]
-      public sealed class MyOwnAttribute : Attribute
-      {
-        public string MyProperty { get; set; }
-        public int MyField;
-        public string AFromCtor { get; }
-        public int BFromCtor { get; } 
-        public bool CFromCtor { get; }
+[AttributeUsage(AttributeTargets.Method)]
+public sealed class MyOwnAttribute : Attribute
+{
+    public string MyProperty { get; set; }
+    public int MyField;
+    public string AFromCtor { get; }
+    public int BFromCtor { get; } 
+    public bool CFromCtor { get; }
 
-        public MyOwnAttribute(string a, int b = 0, bool c = false)
-        {
-          AFromCtor = a;
-          BFromCtor = b;
-          CFromCtor = c;
-        }
-      }
+    public MyOwnAttribute(string a, int b = 0, bool c = false)
+    {
+        AFromCtor = a;
+        BFromCtor = b;
+        CFromCtor = c;
+    }
+}
     </sampleCode>
     <sampleCode language="VisualBasic">
-      &lt;AttributeUsage(AttributeTargets.Method)&gt;
-      Public NotInheritable Class MyOwnAttribute
-          Inherits Attribute
-          Public Property MyProperty As String
-          Public MyField As Integer
-          Public ReadOnly Property AFromCtor As String
-          Public ReadOnly Property BFromCtor As Integer
-          Public ReadOnly Property CFromCtor As Boolean
+&lt;AttributeUsage(AttributeTargets.Method)&gt;
+Public NotInheritable Class MyOwnAttribute
+    Inherits Attribute
+    Public Property MyProperty As String
+    Public MyField As Integer
+    Public ReadOnly Property AFromCtor As String
+    Public ReadOnly Property BFromCtor As Integer
+    Public ReadOnly Property CFromCtor As Boolean
 
-          Sub New(a As String, Optional b As Integer = 0, Optional c As Boolean = False)
-              AFromCtor = a
-              BFromCtor = b
-              CFromCtor = c
-          End Sub
-      End Class
+    Sub New(a As String, Optional b As Integer = 0, Optional c As Boolean = False)
+        AFromCtor = a
+        BFromCtor = b
+        CFromCtor = c
+    End Sub
+End Class
     </sampleCode>
   </item>
 
   <item id="Example10#Interface">
     <sampleCode language="CSharp">
-      public interface ITest10
-      {
-        [AttributePassThrough(typeof(MyOwnAttribute),
-          new[] {typeof(string), typeof(int), typeof(bool)},
-          new object[] {"ValueOfA"},
-          "ThisIsMyMethod")]
-        [AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, true)]
-        [AttributePassThroughProperty("ThisIsMyMethod", nameof(MyOwnAttribute.MyProperty), "PropertyValue")]
-        [AttributePassThroughField("ThisIsMyMethod", nameof(MyOwnAttribute.MyField), 123)]
-        void MyMethod();
-      }
+public interface ITest10
+{
+    [AttributePassThrough(typeof(MyOwnAttribute),
+        new[] {typeof(string), typeof(int), typeof(bool)},
+        new object[] {"ValueOfA"},
+        "ThisIsMyMethod")]
+    [AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, true)]
+    [AttributePassThroughProperty("ThisIsMyMethod", nameof(MyOwnAttribute.MyProperty), "PropertyValue")]
+    [AttributePassThroughField("ThisIsMyMethod", nameof(MyOwnAttribute.MyField), 123)]
+    void MyMethod();
+}
     </sampleCode>
     <sampleCode language="VisualBasic">
-      Public Interface ITest10
-        &lt;AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New Object() {"ValueOfA"}, "ThisIsMyMethod")&gt;
-        &lt;AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, True)&gt;
-        &lt;AttributePassThroughProperty("ThisIsMyMethod", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")&gt;
-        &lt;AttributePassThroughField("ThisIsMyMethod", NameOf(MyOwnAttribute.MyField), 123)&gt;
-        Sub MyMethod()
-      End Interface
+Public Interface ITest10
+    &lt;AttributePassThrough(GetType(MyOwnAttribute), New Type() {GetType(String), GetType(Integer), GetType(Boolean)}, New Object() {"ValueOfA"}, "ThisIsMyMethod")&gt;
+    &lt;AttributePassThroughIndexBasedParameter("ThisIsMyMethod", 2, True)&gt;
+    &lt;AttributePassThroughProperty("ThisIsMyMethod", NameOf(MyOwnAttribute.MyProperty), "PropertyValue")&gt;
+    &lt;AttributePassThroughField("ThisIsMyMethod", NameOf(MyOwnAttribute.MyField), 123)&gt;
+    Sub MyMethod()
+End Interface
     </sampleCode>
   </item>
 
   <item id="Example10#Proxy">
     <sampleCode language="CSharp">
-      public class MyService_Proxy : IMyService
-      {
-        [MyOwn("ValueOfA", c: true, MyProperty = "PropertyValue", MyField = 123)]
-        public void MyMethod()
-        {
-          //...
-        }
-      }
+public class MyService_Proxy : IMyService
+{
+    [MyOwn("ValueOfA", c: true, MyProperty = "PropertyValue", MyField = 123)]
+    public void MyMethod()
+    {
+        //...
+    }
+}
     </sampleCode>
     <sampleCode language="VisualBasic">
-      Public Class MyService_Proxy
-        Implements IMyService
+Public Class MyService_Proxy
+    Implements IMyService
 
-        &lt;MyOwn("ValueOfA", , True, MyProperty:="PropertyValue", MyField:=123)&gt;
-        Public Sub MyMethod() Implements IMyService.MyMethod
-          '...
-        End Sub
-      End Class
+    &lt;MyOwn("ValueOfA", , True, MyProperty:="PropertyValue", MyField:=123)&gt;
+    Public Sub MyMethod() Implements IMyService.MyMethod
+        '...
+    End Sub
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example10#Test">
+    <sampleCode language="CSharp">
+//Create a remote agency instance without target for creating proxy class only.
+using var remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+var clientProxy = remoteAgencyInstance.CreateProxy&lt;ITest10&gt;(Guid.Empty, Guid.Empty).ProxyGeneric;
+
+Console.WriteLine("Getting attribute...");
+var proxyClassType = clientProxy.GetType();
+var myMethod = proxyClassType.GetMethod(nameof(ITest10.MyMethod));
+var myAttribute = myMethod!.GetCustomAttribute&lt;MyOwnAttribute&gt;();
+if (myAttribute == null)
+{
+    Console.WriteLine("Houston, we have a problem.");
+}
+else
+{
+    Console.WriteLine("Here are attribute values:");
+    Console.WriteLine("  MyProperty: (PropertyValue): {0}", myAttribute.MyProperty);
+    Console.WriteLine("  MyField: (123): {0}", myAttribute.MyField);
+    Console.WriteLine("  AFromCtor: (ValueOfA): {0}", myAttribute.AFromCtor);
+    Console.WriteLine("  BFromCtor: (0): {0}", myAttribute.BFromCtor);
+    Console.WriteLine("  CFromCtor: (true): {0}", myAttribute.CFromCtor);
+}
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+'Create a remote agency instance without target for creating proxy class only.
+Dim remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+Dim clientProxy = remoteAgencyInstance.CreateProxy(Of ITest10)(Guid.Empty, Guid.Empty).ProxyGeneric
+
+Console.WriteLine("Getting attribute...")
+Dim proxyClassType = clientProxy.GetType()
+Dim myMethod = proxyClassType.GetMethod(NameOf(ITest10.MyMethod))
+Dim myAttribute = myMethod.GetCustomAttribute(Of MyOwnAttribute)()
+If (myAttribute Is Nothing) Then
+    Console.WriteLine("Houston, we have a problem.")
+Else
+    Console.WriteLine("Here are attribute values:")
+    Console.WriteLine("  MyProperty: (PropertyValue): {0}", myAttribute.MyProperty)
+    Console.WriteLine("  MyField: (123): {0}", myAttribute.MyField)
+    Console.WriteLine("  AFromCtor: (ValueOfA): {0}", myAttribute.AFromCtor)
+    Console.WriteLine("  BFromCtor: (0): {0}", myAttribute.BFromCtor)
+    Console.WriteLine("  CFromCtor: (true): {0}", myAttribute.CFromCtor)
+End If
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+remoteAgencyInstance.Dispose()
     </sampleCode>
   </item>
 </examples>

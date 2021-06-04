@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="Example9#Interface">
+    <sampleCode language="CSharp">
+public interface ITest9
+{
+    [AssetIgnored]
+    event EventHandler Ignored;
+
+    [OperatingTimeoutTime(1000)]
+    event MyEventCallback MyEvent;
+    delegate int MyEventCallback(EntityInTest9 parameter);
+
+    event MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
+    delegate int MyEventWithTwoWayParameterCallback(int parameter, ref int parameter1, out int parameter2, [ParameterIgnored]int ignored);
+
+    [LocalExceptionHandling]
+    event EventHandler WithException;
+
+    [EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", isIncludedWhenExceptionThrown: true)]
+    event MyEventWithExceptionCallback MyEventWithException;
+    [LocalExceptionHandling]
+    delegate void MyEventWithExceptionCallback(EntityInTest9B parameter);
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Interface ITest9
+    &lt;AssetIgnored&gt;
+    Event Ignored As EventHandler
+
+    &lt;OperatingTimeoutTime(1000)&gt;
+    Event MyEvent As MyEventCallback
+    Delegate Sub MyEventCallback(parameter As EntityInTest9)
+
+    Event MyEventWithTwoWayParameter As MyEventWithTwoWayParameterCallback
+    Delegate Sub MyEventWithTwoWayParameterCallback(parameter As Integer, ByRef parameter1 As Integer, ByRef parameter2 As Integer, &lt;ParameterIgnored&gt; ignored As Integer)
+
+    &lt;LocalExceptionHandling&gt;
+    Event WithException As EventHandler
+
+    &lt;EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", Nothing, True)&gt;
+    Event MyEventWithException As MyEventWithExceptionCallback
+    &lt;LocalExceptionHandling&gt;
+    Delegate Sub MyEventWithExceptionCallback(parameter As EntityInTest9B)
+End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example9#Entity">
+    <sampleCode language="CSharp">
+public class EntityInTest9
+{
+    public string FromServerToClientProperty { get; set; }
+
+    [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
+    public string TwoWayProperty { get; set; }
+}
+
+public class EntityInTest9B
+{
+    public string FromServerToClientProperty { get; set; }
+
+    public string TwoWayProperty { get; set; }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class EntityInTest9
+    Public Property FromServerToClientProperty As String
+
+    &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt;
+    Public Property TwoWayProperty As String
+End Class
+
+Public Class EntityInTest9B
+    Public Property FromServerToClientProperty As String
+
+    Public Property TwoWayProperty As String
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example9#Server">
+    <sampleCode language="CSharp">
+public class Server9 : ITest9
+{
+    public event EventHandler Ignored;
+    public event ITest9.MyEventCallback MyEvent;
+    public event ITest9.MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
+    public event EventHandler WithException;
+    public event ITest9.MyEventWithExceptionCallback MyEventWithException;
+
+    public void Test()
+    {
+        Console.WriteLine("Server side: Ignored");
+        if (Ignored == null)
+        {
+            Console.WriteLine("Server side: This is predicted due to ignored.");
+        }
+
+        Console.WriteLine("Server side: MyEvent");
+        if (MyEvent != null)
+        {
+            var parameter = new EntityInTest9
+            {
+                FromServerToClientProperty = "SetFromServer",
+                TwoWayProperty = "SetFromServer"
+            };
+
+            var result = MyEvent.Invoke(parameter);
+            Console.WriteLine($"Server side: (100): {result}");
+            Console.WriteLine($"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}");
+            Console.WriteLine($"Server side: parameter.TwoWayProperty (should be ChangedByClient): {parameter.TwoWayProperty}");
+        }
+
+        Console.WriteLine("Server side: MyEventWithTwoWayParameter");
+        if (MyEventWithTwoWayParameter != null)
+        {
+            var p1 = 101;
+            var result = MyEventWithTwoWayParameter(100, ref p1, out var p2, 103);
+            Console.WriteLine($"Server side: (1): {result}");
+            Console.WriteLine($"Server side: p1=(501): {p1}");
+            Console.WriteLine($"Server side: p2=(502): {p2}");
+        }
+
+        Console.WriteLine("Server side: WithException");
+        if (WithException != null)
+        {
+            try
+            {
+                WithException.Invoke(this, EventArgs.Empty);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Predicted Exception: " + e.Message);
+            }
+        }
+
+        Console.WriteLine("Server side: MyEventWithException");
+        if (MyEventWithException != null)
+        {
+            var parameter = new EntityInTest9B
+            {
+                FromServerToClientProperty = "SetFromServer",
+                TwoWayProperty = "SetFromServer"
+            }; 
+            try
+            {
+                MyEventWithException.Invoke(parameter);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}");
+                Console.WriteLine($"Server side: parameter.TwoWayProperty (should be SetBeforeException): {parameter.TwoWayProperty}");
+                Console.WriteLine("Predicted Exception: " + e.Message);
+            }
+        }
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class Server9
+    Implements ITest9
+
+    Public Custom Event Ignored As EventHandler Implements ITest9.Ignored
+        AddHandler(ByVal value As EventHandler)
+            Console.WriteLine("Server side: This is predicted due to ignored.")
+        End AddHandler
+        RemoveHandler(ByVal value As EventHandler)
+            Console.WriteLine("Server side: This is predicted due to ignored.")
+        End RemoveHandler
+        RaiseEvent(sender As Object, e As EventArgs)
+        End RaiseEvent
+    End Event
+
+    Public Event MyEvent As ITest9.MyEventCallback Implements ITest9.MyEvent
+    Public Event MyEventWithTwoWayParameter As ITest9.MyEventWithTwoWayParameterCallback Implements ITest9.MyEventWithTwoWayParameter
+    Public Event WithException As EventHandler Implements ITest9.WithException
+    Public Event MyEventWithException As ITest9.MyEventWithExceptionCallback Implements ITest9.MyEventWithException
+
+    Public Sub Test()
+        Console.WriteLine("Server side: MyEvent")
+        Dim parameter As New EntityInTest9()
+        With parameter
+            .FromServerToClientProperty = "SetFromServer"
+            .TwoWayProperty = "SetFromServer"
+        End With
+        RaiseEvent MyEvent(parameter)
+        Console.WriteLine($"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}")
+        Console.WriteLine($"Server side: parameter.TwoWayProperty (should be ChangedByClient): {parameter.TwoWayProperty}")
+
+        Console.WriteLine("Server side: MyEventWithTwoWayParameter")
+        Dim p1 = 101
+        Dim p2 As Integer
+        RaiseEvent MyEventWithTwoWayParameter(100, p1, p2, 103)
+        Console.WriteLine($"Server side: p1=(501): {p1}")
+        Console.WriteLine($"Server side: p2=(502): {p2}")
+
+        Console.WriteLine("Server side: WithException")
+        Try
+            RaiseEvent WithException(Me, EventArgs.Empty)
+        Catch ex As Exception
+            Console.WriteLine("Predicted Exception: " + ex.Message)
+        End Try
+
+        Console.WriteLine("Server side: MyEventWithException")
+        Dim parameterB As New EntityInTest9B()
+        With parameterB
+            .FromServerToClientProperty = "SetFromServer"
+            .TwoWayProperty = "SetFromServer"
+        End With
+        Try
+            RaiseEvent MyEventWithException(parameterB)
+        Catch ex As Exception
+            Console.WriteLine($"Server side: parameterB.FromServerToClientProperty (should be SetFromServer): {parameterB.FromServerToClientProperty}")
+            Console.WriteLine($"Server side: parameterB.TwoWayProperty (should be SetBeforeException): {parameterB.TwoWayProperty}")
+            Console.WriteLine("Predicted Exception: " + ex.Message)
+        End Try
+    End Sub
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example9#Test">
+    <sampleCode language="CSharp">
+//test router
+var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+
+//Server
+var originalService = new Server9();
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+var serverSiteId = serverRemoteAgencyInstance.SiteId;
+var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+//Client
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
+var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest9&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+//Run test
+Console.WriteLine("Ignored Add(Exception):");
+try
+{
+    //ReSharper disable UnusedParameter.Local
+    clientProxy.Ignored += (sender, args) =&gt; { };
+    //ReSharper enable UnusedParameter.Local
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
+
+clientProxy.MyEvent += parameter =&gt;
+{
+    parameter.FromServerToClientProperty = "ChangedByClient";
+    parameter.TwoWayProperty =  "ChangedByClient";
+    return 100;
+};
+
+clientProxy.MyEventWithTwoWayParameter +=
+    (int parameter, ref int parameter1, out int parameter2, int ignored) =&gt;
+    {
+        Console.WriteLine($"parameter: (100): {parameter}");
+        Console.WriteLine($"parameter1: (101): {parameter1}");
+        Console.WriteLine($"ignored: (0): {ignored}");
+        parameter1 = 501;
+        parameter2 = 502;
+        return 1;
+    };
+
+//ReSharper disable UnusedParameter.Local
+clientProxy.WithException += (sender, args) =&gt; throw new Exception("oops.");
+//ReSharper enable UnusedParameter.Local
+
+clientProxy.MyEventWithException += (parameter) =&gt;
+{
+    parameter.FromServerToClientProperty = "ChangedByClient";
+    parameter.TwoWayProperty = "SetBeforeException";
+    throw new Exception("oops.");
+};
+
+Console.WriteLine("Run:");
+originalService.Test();
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+'test router
+Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+
+'Server
+Dim originalService As New Server9()
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+Dim serverSiteId = serverRemoteAgencyInstance.SiteId
+Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+
+'Client
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest9)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+AddHandler clientRemoteAgencyInstance.ExceptionRedirected, AddressOf ClientRemoteAgencyInstance_ExceptionRedirected
+
+'Run test
+Console.WriteLine("Ignored Add(Exception):")
+Try
+    AddHandler clientProxy.Ignored, Sub(sender, args)
+                                    End Sub
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
+
+AddHandler clientProxy.MyEvent, Sub(parameter)
+                                    parameter.FromServerToClientProperty = "ChangedByClient"
+                                    parameter.TwoWayProperty = "ChangedByClient"
+                                End Sub
+
+AddHandler clientProxy.MyEventWithTwoWayParameter, Sub(parameter, ByRef parameter1, ByRef parameter2, ignored)
+                                                       Console.WriteLine($"parameter: (100): {parameter}")
+                                                       Console.WriteLine($"parameter1: (101): {parameter1}")
+                                                       Console.WriteLine($"ignored: (0): {ignored}")
+                                                       parameter1 = 501
+                                                       parameter2 = 502
+                                                   End Sub
+
+AddHandler clientProxy.WithException, Sub(sender, args) Throw New Exception("oops.")
+
+AddHandler clientProxy.MyEventWithException, Sub(parameter)
+                                                 parameter.FromServerToClientProperty = "ChangedByClient"
+                                                 parameter.TwoWayProperty = "SetBeforeException"
+                                                 Throw New Exception("oops.")
+                                             End Sub
+
+Console.WriteLine("Run:")
+originalService.Test()
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()
+    </sampleCode>
+  </item>
+
+  <item id="Example9#Handler">
+    <sampleCode language="CSharp">
+private static void ClientRemoteAgencyInstance_ExceptionRedirected(object sender, ExceptionRedirectedEventArgs e)
+{   
+    Console.WriteLine($"Client side exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}");
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Private Shared Sub ClientRemoteAgencyInstance_ExceptionRedirected(sender As Object, e As ExceptionRedirectedEventArgs)
+    Console.WriteLine(
+        "Client side exception: " + vbCrLf +
+        $"  Interface: {e.ServiceContractInterface.FullName}" + vbCrLf +
+        $"  InstanceId: {e.InstanceId}" + vbCrLf +
+        $"  AssetName: {e.AssetName}" + vbCrLf +
+        $"  ExceptionType: {e.RedirectedException.GetType().FullName}" + vbCrLf +
+        $"  ExceptionMessage: {e.RedirectedException.Message}")
+End Sub
+    </sampleCode>
+  </item>
+</examples>
+

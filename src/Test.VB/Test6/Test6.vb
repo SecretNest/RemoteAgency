@@ -8,7 +8,6 @@ Namespace Test6
 
         <OperatingTimeoutTime(1000, 2000)>
         Default Property Item(name As String) As Integer
-
     End Interface
 
     Public Class Server6

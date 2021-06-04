@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="Example1#Interface">
+    <sampleCode language="CSharp">
+public interface ITest1
+{
+    int Add(int a, int b);
+
+    //When unmark this line below, an exception about asset naming conflicts will be thrown.
+    //[CustomizedAssetName("AddDouble")]
+    float Add(float a, float b);
+
+    [CustomizedAssetName("AddDouble")]
+    double Add(double a, double b);
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Interface ITest1
+  Function Add(a As Integer, b As Integer) As Integer
+
+  'When unmark this line below, an exception about asset naming conflicts will be thrown.
+  '&lt;CustomizedAssetName("AddDouble")&gt;
+  Function Add(a As Single, b As Single) As Single
+
+  &lt;CustomizedAssetName("AddDouble")&gt;
+  Function Add(a As Double, b As Double) As Double
+End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example1#Server">
+    <sampleCode language="CSharp">
+public class Server1 : ITest1
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public float Add(float a, float b)
+    {
+        return a + b;
+    }
+
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class Server1
+  Implements ITest1
+
+  Public Function Add(a As Integer, b As Integer) As Integer Implements ITest1.Add
+    Return a + b
+  End Function
+
+  Public Function Add(a As Single, b As Single) As Single Implements ITest1.Add
+    Return a + b
+  End Function
+
+  Public Function Add(a As Double, b As Double) As Double Implements ITest1.Add
+    Return a + b
+  End Function
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example1#Test">
+    <sampleCode language="CSharp">
+//test router
+var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+
+//Server
+var originalService = new Server1();
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+var serverSiteId = serverRemoteAgencyInstance.SiteId;
+var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+//Client
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest1&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+//Run test
+Console.WriteLine("Add(int): 1 + 2");
+Console.WriteLine(clientProxy.Add(1, 2));
+
+Console.WriteLine("Add(float): 1.1 + 2.2");
+Console.WriteLine(clientProxy.Add(1.1f, 2.2f));
+
+Console.WriteLine("Add(double): 1.1 + 2.2");
+Console.WriteLine(clientProxy.Add(1.1, 2.2));
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+'test router
+Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+
+'Server
+Dim originalService As New Server1()
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+Dim serverSiteId = serverRemoteAgencyInstance.SiteId
+Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+
+'Client
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest1)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+
+'Run test
+Console.WriteLine("Add(Integer): 1 + 2")
+Console.WriteLine(clientProxy.Add(1, 2))
+
+Console.WriteLine("Add(Single): 1.1 + 2.2")
+Console.WriteLine(clientProxy.Add(1.1!, 2.2!))
+
+Console.WriteLine("Add(Double): 1.1 + 2.2")
+Console.WriteLine(clientProxy.Add(1.1, 2.2))
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()
+    </sampleCode>
+  </item>
+</examples>
+

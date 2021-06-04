@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="Example6#Interface">
+    <sampleCode language="CSharp">
+public interface ITest6
+{
+    int this[int index]
+    {
+        get;
+        set;
+    }
+
+    [OperatingTimeoutTime(1000, 2000)]
+    int this[string name]
+    {
+        get;
+        set;
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Interface ITest6
+    Default Property Item(index As Integer) As Integer
+
+    &lt;OperatingTimeoutTime(1000, 2000)&gt;
+    Default Property Item(name As String) As Integer
+End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example6#Server">
+    <sampleCode language="CSharp">
+public class Server6 : ITest6
+{
+    private readonly int[] _data = {101, 102, 103, 104, 105};
+
+    public int this[int index]
+    {
+        get =&gt; _data[index];
+        set =&gt; _data[index] = value;
+    }
+
+    public int this[string name]
+    {
+        get
+        {
+            if (int.TryParse(name, out var index))
+            {
+                return _data[index];
+            }
+            else
+            {
+                Thread.Sleep(5000);
+                return -1;
+            }
+        }
+        set
+        {
+            if (int.TryParse(name, out var index))
+            {
+                _data[index] = value;
+            }
+            else
+            {
+                Thread.Sleep(5000);
+            }
+        }
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class Server6
+    Implements ITest6
+
+    Private ReadOnly _data As Integer() = {101, 102, 103, 104, 105}
+
+    Default Public Property Item(index As Integer) As Integer Implements ITest6.Item
+        Get
+            Return _data(index)
+        End Get
+        Set(value As Integer)
+            _data(index) = value
+        End Set
+    End Property
+
+    Default Public Property Item(name As String) As Integer Implements ITest6.Item
+        Get
+          Dim index As Integer
+          If Integer.TryParse(name, index) Then
+              Return _data(index)
+          Else
+              Thread.Sleep(5000)
+              Return -1
+          End If
+        End Get
+        Set(value As Integer)
+            Dim index As Integer
+            If Integer.TryParse(name, index) Then
+                _data(index) = value
+            Else
+                Thread.Sleep(5000)
+            End If
+        End Set
+    End Property
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example6#Test">
+    <sampleCode language="CSharp">
+//test router
+var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+
+//Server
+var originalService = new Server6();
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+var serverSiteId = serverRemoteAgencyInstance.SiteId;
+var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+//Client
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest6&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+//Run test
+Console.WriteLine("this[2](Get, 102):");
+Console.WriteLine(clientProxy[2]);
+
+Console.WriteLine("this[4](Set+Get, No return):");
+clientProxy[4] += 100;
+
+Console.WriteLine("this[\"4\"](Get, 204):");
+Console.WriteLine(clientProxy["4"]);
+
+Console.WriteLine("this[\"Timeout\"](Get, Timeout):");
+try
+{
+    Console.WriteLine(clientProxy["Timeout"]);
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
+
+Console.WriteLine("this[\"Timeout\"](Set, Timeout):");
+try
+{
+    clientProxy["Timeout"] = 0;
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+'test router
+Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+
+'Server
+Dim originalService As New Server6()
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+Dim serverSiteId = serverRemoteAgencyInstance.SiteId
+Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+
+'Client
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest6)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+
+'Run test
+Console.WriteLine("Item(2)(Get, 102):")
+Console.WriteLine(clientProxy(2))
+
+Console.WriteLine("Item(4)(Set+Get, No return):")
+clientProxy(4) += 100
+
+Console.WriteLine("Item(""4"")(Get, 204):")
+Console.WriteLine(clientProxy("4"))
+
+Console.WriteLine("Item(""Timeout"")(Get, Timeout):")
+Try
+    ' ReSharper disable once UnusedVariable
+    Console.WriteLine(clientProxy("Timeout"))
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
+
+Console.WriteLine("Item(""Timeout"")(Set, Timeout):")
+Try
+    ' ReSharper disable once UnusedVariable
+    clientProxy("Timeout") = 0
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()
+    </sampleCode>
+  </item>
+</examples>
+

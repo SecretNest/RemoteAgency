@@ -147,7 +147,20 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
   </ItemGroup>
   <ItemGroup>
     <CodeSnippets Include="Content\Attributes\AttributeExamples.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example0.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example1.snippets" />
     <CodeSnippets Include="Content\Use\CodeSnippets\Example10.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example11.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example12.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example2.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example3.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example4.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example5.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example6.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example7.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example8.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\Example9.snippets" />
+    <CodeSnippets Include="Content\Use\CodeSnippets\ExampleRouter.snippets" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\Picture1.png">
@@ -162,6 +175,9 @@ Check &lt;conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c" /&gt; for
       <ImageId>Picture3</ImageId>
       <AlternateText>New Structure</AlternateText>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Tokens Include="Url.tokens" />
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />

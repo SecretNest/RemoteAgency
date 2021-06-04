@@ -9,7 +9,6 @@ Namespace Test4
         Sub Supported(Of T1 As {T2}, T2 As {New})(obj As T1)
 
         Sub Supported(Of T1 As {IEnumerable(Of T3)}, T2 As {Exception, New}, T3)(obj As T1, ByRef obj2 As T2)
-
     End Interface
 
     Public Class Server4
@@ -60,15 +59,15 @@ Namespace Test4
             Console.WriteLine("ReturnItself(1024):")
             Console.WriteLine(clientProxy.ReturnItself(1024))
 
-            Console.WriteLine("GetGenericTypeName(Test.CSharp.Test4.TestCode):")
-            Console.WriteLine(clientProxy.GetGenericTypeName(Of TestCode)())
+            Console.WriteLine("GetGenericTypeName(System.Collections.ArrayList):")
+            Console.WriteLine(clientProxy.GetGenericTypeName(Of ArrayList)())
 
-            Console.WriteLine("Supported(Test.CSharp.Test4.TestCode, System.Object):")
-            clientProxy.Supported(Of TestCode, Object)(Nothing)
+            Console.WriteLine("Supported(System.Collections.ArrayList, System.Object):")
+            clientProxy.Supported(Of ArrayList, Object)(Nothing)
 
             Dim exception As Exception = Nothing
-            Console.WriteLine("Supported(System.Collections.Generic.ICollection<Test.CSharp.Test4.TestCode>), System.NotSupportedException, Test.CSharp.Test4.TestCode):")
-            clientProxy.Supported(Of ICollection(Of TestCode), NotSupportedException, TestCode)(New List(Of TestCode)(), exception)
+            Console.WriteLine("Supported(System.Collections.Generic.ICollection<System.Collections.ArrayList>), System.NotSupportedException, System.Collections.ArrayList):")
+            clientProxy.Supported(Of ICollection(Of ArrayList), NotSupportedException, ArrayList)(New List(Of ArrayList)(), exception)
             Console.WriteLine($"Out parameter type: {exception.GetType().FullName}")
             Console.WriteLine($"Out parameter message: {exception.Message}")
 

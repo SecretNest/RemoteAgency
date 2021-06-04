@@ -9,6 +9,7 @@ Namespace Test5
 
     Public Class Server5
         Implements ITest5(Of DateTime)
+
         Public ReadOnly Property Current As Date Implements ITest5(Of Date).Current
             Get
                 Return DateTime.Now

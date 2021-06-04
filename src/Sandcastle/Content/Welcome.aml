@@ -3,15 +3,9 @@
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
       <para>
-        <externalLink>
-          <linkText>Remote Agency</linkText>
-          <linkUri>https://secretnest.info/RemoteAgency</linkUri>
-        </externalLink> is built for making the communicating among components in different computers easier.</para>
+        <token>Remote Agency Url</token> is built for making the communicating among components in different computers easier.</para>
       <para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
-      <para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <externalLink>
-        <linkText>Remote Hub</linkText>
-        <linkUri>https://secretnest.info/RemoteHub</linkUri>
-      </externalLink>.</para>
+      <para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <token>Remote Hub Url</token>.</para>
 		</introduction>
 
 		<section>
@@ -20,12 +14,7 @@
 				<para>Welcome to Remote Agency.</para>
 
 				<para>Remote Agency aims to a part of the technical solution for accessing a remote object, only management and serialization, but not network transportation.</para>
-        <para>
-          <externalLink>
-            <linkText>Remote Hub</linkText>
-            <linkUri>https://secretnest.info/RemoteHub</linkUri>
-          </externalLink>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
-
+        <para><token>Remote Hub Url</token>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
         <para>The original way we used daily</para>
 				<mediaLink>
 					<image placement="left" xlink:href="Picture1"/>
@@ -55,7 +44,7 @@
 						<para>Reference to Remote Agency;</para>
 					</listItem>
 					<listItem>
-						<para>The transportation among Remote Agency Manager objects, using <externalLink><linkText>Remote Hub</linkText><linkUri>https://secretnest.info/RemoteHub</linkUri></externalLink></para>
+						<para>The transportation among Remote Agency Manager objects, using <token>Remote Hub Url</token> for example.</para>
 					</listItem>
 				</list>
 				<para>The things Remote Agency cares:</para>
@@ -105,12 +94,7 @@
 							<para>Main library.</para>
 						</entry>
 						<entry>
-							<para>
-								<externalLink>
-									<linkText>NuGet</linkText>
-									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency/</linkUri>
-								</externalLink>
-							</para>
+							<para><token>Remote Agency Nuget Url</token></para>
 						</entry>
 						<entry>
 							<para>
@@ -126,12 +110,7 @@
 							<para>Interfaces, attributes and exceptions (other than thrown while building) of Remote Agency.</para>
 						</entry>
 						<entry>
-							<para>
-								<externalLink>
-									<linkText>NuGet</linkText>
-									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Abstraction/</linkUri>
-								</externalLink>
-							</para>
+              <para><token>Remote Agency Abstraction Nuget Url</token></para>
 						</entry>
 						<entry>
 							<para>
@@ -147,12 +126,7 @@
 							<para>All functions in main library except serializers and reference of Sequential Scheduler.</para>
 						</entry>
 						<entry>
-							<para>
-								<externalLink>
-									<linkText>NuGet</linkText>
-									<linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Neat/</linkUri>
-								</externalLink>
-							</para>
+              <para><token>Remote Agency Neat Nuget Url</token></para>
 						</entry>
 						<entry>
               <link xlink:href="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5#neat" />
@@ -171,25 +145,13 @@
     <section>
       <title>Licenses</title>
       <content>
-        <para>SecretNest.RemoteAgency packages are licensed under <externalLink>
-            <linkText>MIT</linkText>
-            <linkUri>https://github.com/SecretNest/RemoteAgency/tree/v2/LICENSE</linkUri>
-          </externalLink>. You can copy and redistribute the material in any medium or format
-          for any purpose, even commercially. Source code is available at <externalLink>
-            <linkText>Github</linkText>
-            <linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
-          </externalLink>.
-        </para>
+        <para>SecretNest.RemoteAgency packages are licensed under <token>Remote Agency MIT Url</token>. You can copy and redistribute the material in any medium or format for any purpose, even commercially. Source code is available at <token>Remote Agency Github Url</token>.</para>
       </content>
     </section>
     <section>
       <title>Links</title>
       <content>
-        <para>Issues, requests and source code: <externalLink>
-            <linkText>Github</linkText>
-            <linkUri>https://github.com/SecretNest/RemoteAgency</linkUri>
-          </externalLink>
-        </para>
+        <para>Issues, requests and source code: <token>Remote Agency Github Url</token></para>
       </content>
     </section>
 

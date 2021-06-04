@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<examples>
+  <item id="Example4#Interface">
+    <sampleCode language="CSharp">
+public interface ITest4
+{
+    T ReturnItself&lt;T&gt;(T value) where T : struct;
+
+    #nullable enable
+    string GetGenericTypeName&lt;T&gt;() where T : class?;
+    #nullable disable
+
+    string GetGenericTypeName2&lt;T&gt;() where T : notnull;
+
+    void Supported&lt;T1, T2&gt;(T1 obj) where T1 : T2, new();
+
+    void Supported&lt;T1, T2, T3&gt;(T1 obj, out T2 obj2) where T1 : IEnumerable&lt;T3&gt; where T2 : Exception, new();
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Interface ITest4
+    Function ReturnItself(Of T As {Structure})(value As T)
+
+    Function GetGenericTypeName(Of T As {Class})()
+
+    Sub Supported(Of T1 As {T2}, T2 As {New})(obj As T1)
+
+    Sub Supported(Of T1 As {IEnumerable(Of T3)}, T2 As {Exception, New}, T3)(obj As T1, ByRef obj2 As T2)
+End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example4#Server">
+    <sampleCode language="CSharp">
+public class Server4 : ITest4
+{
+    public T ReturnItself&lt;T&gt;(T value) where T : struct
+    {
+        return value;
+    }
+
+#nullable enable
+    public string GetGenericTypeName&lt;T&gt;() where T : class?
+    {
+#nullable disable
+        var name = typeof(T).FullName;
+        return name ?? "&lt;null&gt;";
+    }
+
+    public string GetGenericTypeName2&lt;T&gt;() where T : notnull
+    {
+        return typeof(T).FullName;
+    }
+
+    public void Supported&lt;T1, T2&gt;(T1 obj) where T1 : T2, new()
+    {
+        Console.WriteLine($"Server side: T1: {typeof(T1).FullName}");
+        Console.WriteLine($"Server side: T2: {typeof(T2).FullName}");
+    }
+
+    public void Supported&lt;T1, T2, T3&gt;(T1 obj, out T2 obj2) where T1 : IEnumerable&lt;T3&gt; where T2 : Exception, new()
+    {
+        Console.WriteLine($"Server side: T1: {typeof(T1).FullName}");
+        Console.WriteLine($"Server side: T2: {typeof(T2).FullName}");
+        Console.WriteLine($"Server side: T3: {typeof(T3).FullName}");
+
+        var myException = new NotSupportedException("oops.");
+        obj2 = __refvalue(__makeref(myException), T2);
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class Server4
+    Implements ITest4
+
+    Public Function ReturnItself(Of T As Structure)(value As T) As Object Implements ITest4.ReturnItself
+        Return value
+    End Function
+
+    Public Function GetGenericTypeName(Of T As Class)() As Object Implements ITest4.GetGenericTypeName
+        Dim name = (GetType(T)).FullName
+        Return name
+    End Function
+
+    Public Sub Supported(Of T1 As T2, T2 As New)(obj As T1) Implements ITest4.Supported
+        Console.WriteLine($"Server side: T1: {GetType(T1).FullName}")
+        Console.WriteLine($"Server side: T2: {GetType(T2).FullName}")
+    End Sub
+
+    Public Sub Supported(Of T1 As IEnumerable(Of T3), T2 As {Exception, New}, T3)(obj As T1, ByRef obj2 As T2) Implements ITest4.Supported
+        Console.WriteLine($"Server side: T1: {GetType(T1).FullName}")
+        Console.WriteLine($"Server side: T2: {GetType(T2).FullName}")
+        Console.WriteLine($"Server side: T3: {GetType(T3).FullName}")
+
+        Dim myException As Object = New NotSupportedException("oops.")
+        obj2 = CType(myException, T2)
+    End Sub
+End Class
+    </sampleCode>
+  </item>
+
+  <item id="Example4#Test">
+    <sampleCode language="CSharp">
+//test router
+var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+
+//Server
+var originalService = new Server4();
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+var serverSiteId = serverRemoteAgencyInstance.SiteId;
+var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+//Client
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest4&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+//Run test
+Console.WriteLine("ReturnItself(1024):");
+Console.WriteLine(clientProxy.ReturnItself(1024));
+
+Console.WriteLine("GetGenericTypeName(System.Collections.ArrayList):");
+Console.WriteLine(clientProxy.GetGenericTypeName&lt;System.Collections.ArrayList&gt;());
+
+Console.WriteLine("GetGenericTypeName2(System.String):");
+Console.WriteLine(clientProxy.GetGenericTypeName2&lt;string&gt;());
+
+Console.WriteLine("Supported(System.Collections.ArrayList, System.Object):");
+clientProxy.Supported&lt;System.Collections.ArrayList, object&gt;(null);
+
+Console.WriteLine("Supported(System.Collections.Generic.ICollection&lt;System.Collections.ArrayList&gt;), System.NotSupportedException, System.Collections.ArrayList):");
+clientProxy.Supported&lt;ICollection&lt;System.Collections.ArrayList&gt;, NotSupportedException, System.Collections.ArrayList&gt;(new List&lt;System.Collections.ArrayList&gt;(), out var exception);
+Console.WriteLine($"Out parameter type: {exception.GetType().FullName}");
+Console.WriteLine($"Out parameter message: {exception.Message}");
+
+Console.Write("Press any key to continue...");
+Console.ReadKey(true);
+Console.WriteLine();
+    </sampleCode>
+      <sampleCode language="VisualBasic">
+'test router
+Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+
+'Server
+Dim originalService As New Server4()
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+Dim serverSiteId = serverRemoteAgencyInstance.SiteId
+Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+
+'Client
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest4)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+
+'Run test
+Console.WriteLine("ReturnItself(1024):")
+Console.WriteLine(clientProxy.ReturnItself(1024))
+
+Console.WriteLine("GetGenericTypeName(System.Collections.ArrayList):")
+Console.WriteLine(clientProxy.GetGenericTypeName(Of ArrayList)())
+
+Console.WriteLine("Supported(System.Collections.ArrayList, System.Object):")
+clientProxy.Supported(Of ArrayList, Object)(Nothing)
+
+Dim exception As Exception = Nothing
+Console.WriteLine("Supported(System.Collections.Generic.ICollection&lt;System.Collections.ArrayList&gt;), System.NotSupportedException, System.Collections.ArrayList):")
+clientProxy.Supported(Of ICollection(Of ArrayList), NotSupportedException, ArrayList)(New List(Of ArrayList)(), exception)
+Console.WriteLine($"Out parameter type: {exception.GetType().FullName}")
+Console.WriteLine($"Out parameter message: {exception.Message}")
+
+Console.Write("Press any key to continue...")
+Console.ReadKey(True)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()
+    </sampleCode>
+  </item>
+</examples>
+
