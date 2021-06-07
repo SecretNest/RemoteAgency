@@ -27,6 +27,7 @@
               <content>
                 <para>Add this class, which is used for message routing in examples, to the project created.</para>
                 <codeReference>ExampleRouter#Define</codeReference>
+                <alert class="note"><para>This is a demo routing class for example. To use Remote Agency in a real scenario, a well designed routing solution, like <token>Remote Hub Url</token>, is preferred.</para></alert>
               </content>
             </step>
           </steps>
@@ -38,7 +39,7 @@
     <nextSteps>
       <content>
         <para>Choose an example to continue:</para>
-        <para><token>Example List</token></para>
+        <token>Example List</token>
       </content>
     </nextSteps>
 

@@ -21,7 +21,7 @@
     <section>
       <title>Use BinaryFormatter with Caution</title>
       <content>
-        <para>Though it is not recommended, the BinaryFormatter is the fastest way in serializing and deserializing process. When it is necessary, uses it with caution and passes true as the first argument when calling <codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference> or initializing <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer</codeEntityReference>, or an exception will be thrown.</para>
+        <para>Though it is not recommended, the BinaryFormatter is the fastest way in serializing and deserializing process. When it is necessary, uses it with caution and passes true as the first argument when calling <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference> or initializing <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer</codeEntityReference>, or an exception will be thrown.</para>
       </content>
     </section>
 

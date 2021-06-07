@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <content xml:space="preserve" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <item id="Example Prerequisites Reference"><ddue:prerequisites>
-  <ddue:content>Before using this example code, an app need to be created first. Follow <ddue:link xlink:href="59115d8d-60b6-4dcb-81ba-465d85cc1260">this doc</ddue:link> to prepare that first.</ddue:content>
+  <item id="Example List"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Supported Frameworks:
+  <ddue:list class="bullet">
+    <ddue:listItem><ddue:link xlink:href="f227ff2f-572b-4efe-ae73-807e53b4ef60" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="bb409edb-480f-4ffe-abb3-cb8b39fc033c" /></ddue:listItem>
+  </ddue:list>
+</ddue:para></item>
+  <item id="Example Prerequisites Reference"><ddue:prerequisites xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:content>Before using this example code, an app need to be created first. Follow <ddue:link xlink:href="59115d8d-60b6-4dcb-81ba-465d85cc1260" xmlns:xlink="http://www.w3.org/1999/xlink">this doc</ddue:link> to prepare that first.</ddue:content>
 </ddue:prerequisites></item>
-  <item id="Example List" />
+  <item id="CreateProxy with Id"><ddue:para>When creating proxy, target site id and service wrapper instance id need to be specified.</ddue:para>
+<ddue:para>Site id is used to locate the server. In a real scenario, servers are usually deployed into different applications even computers. Message routing component, like <ddue:token>Remote Hub Url</ddue:token>, need to use the site id to deliver messages generated from proxy to the right server instance.</ddue:para>
+<ddue:para>Service wrapper instance id is used to locate the service object which contains user code. This is used by Remote Agency to deliver the message to the right service object registered by <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Int32,System.Boolean)</ddue:codeEntityReference> (or <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateServiceWrapper(System.Type,System.Object,System.Int32,System.Boolean)</ddue:codeEntityReference>).</ddue:para>
+<ddue:para>No such id is required when creating service wrapper because the response messages are sent to the source of the request.</ddue:para></item>
 </content>

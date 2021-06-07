@@ -10,16 +10,24 @@
     </introduction>
 
     <section address="Prerequisites">
-      <title>Optional section title</title>
+      <title>Prerequisites</title>
       <content>
-        <para>Add one or more sections with content</para>
+        <para>Before using this example code, an app need to be created first. Follow <link xlink:href="59115d8d-60b6-4dcb-81ba-465d85cc1260" xmlns:xlink="http://www.w3.org/1999/xlink">this doc</link> to prepare that first.</para>
+      </content>
+    </section>
+
+    <section address="Serializer">
+      <title>Serializer</title>
+      <content>
+        <para>In these examples, Binary Serializer is used. Check <link xlink:href="26d57454-40da-4f5d-aff5-7647aac1acbd" /> for details.</para>
       </content>
     </section>
 
     <section address="Examples">
-      <title>Optional section title</title>
+      <title>Examples</title>
       <content>
-        <para>Add one or more sections with content</para>
+        <para>Here are 12 examples:</para>
+        <token>Example List</token>
       </content>
     </section>
   </developerConceptualDocument>
