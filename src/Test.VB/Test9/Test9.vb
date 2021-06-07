@@ -8,7 +8,7 @@ Namespace Test9
 
         <OperatingTimeoutTime(1000)>
         Event MyEvent As MyEventCallback
-        Delegate Sub MyEventCallback(parameter As EntityInTest9)
+        Delegate Sub MyEventCallback(<ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)> parameter As EntityInTest9)
 
         Event MyEventWithTwoWayParameter As MyEventWithTwoWayParameterCallback
         Delegate Sub MyEventWithTwoWayParameterCallback(parameter As Integer, ByRef parameter1 As Integer, ByRef parameter2 As Integer, <ParameterIgnored> ignored As Integer)
@@ -25,7 +25,6 @@ Namespace Test9
     Public Class EntityInTest9
         Public Property FromServerToClientProperty As String
 
-        <ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)>
         Public Property TwoWayProperty As String
     End Class
 

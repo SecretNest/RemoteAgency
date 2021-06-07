@@ -11,7 +11,7 @@ namespace Test.CSharp.Test9
 
         [OperatingTimeoutTime(1000)]
         event MyEventCallback MyEvent;
-        delegate int MyEventCallback(EntityInTest9 parameter);
+        delegate int MyEventCallback([ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)] EntityInTest9 parameter);
 
         event MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
         delegate int MyEventWithTwoWayParameterCallback(int parameter, ref int parameter1, out int parameter2, [ParameterIgnored]int ignored);
@@ -29,7 +29,6 @@ namespace Test.CSharp.Test9
     {
         public string FromServerToClientProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
         public string TwoWayProperty { get; set; }
     }
 

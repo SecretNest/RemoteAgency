@@ -930,7 +930,7 @@
             <summary>
             Gets whether this is in simple mode.
             </summary>
-            <remarks>When the value is <see langword="true"/>, property specified by <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
+            <remarks>When the value is <see langword="true"/>, property specified by <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter">
             <summary>
@@ -943,7 +943,7 @@
             Gets the type of the helper class.
             </summary>
             <remarks><para>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> is set to <see langword="false"/>.</para>
-            <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> and <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
+            <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.ResponseEntityPropertyName">
             <summary>

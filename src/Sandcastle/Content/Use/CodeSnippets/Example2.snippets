@@ -8,17 +8,65 @@ public interface ITest2
 
     void Read(out long value);
 
-    void Process(EntityInTest2 entity);
+    void Process([ParameterReturnRequiredProperty("TwoWayProperty")][ParameterReturnRequiredProperty(typeof(EntityHelperInTest2))] EntityInTest2 entity);
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
 Public Interface ITest2
-  Sub AddOne(ByRef value As Long)
+    Sub AddOne(ByRef value As Long)
 
-  Sub Read(ByRef value As Long)
+    Sub Read(ByRef value As Long)
 
-  Sub Process(entity As EntityInTest2)
+    Sub Process(&lt;ParameterReturnRequiredProperty("TwoWayProperty")&gt; &lt;ParameterReturnRequiredProperty(GetType(EntityHelperInTest2))&gt; entity As EntityInTest2)
 End Interface
+    </sampleCode>
+  </item>
+
+  <item id="Example2#EntityHelper">
+    <sampleCode language="CSharp">
+public class EntityHelperInTest2
+{
+    [ReturnRequiredPropertyHelper]
+    public bool Helper
+    {
+        get =&gt; _value.Contains(100);
+        set
+        {
+            if (value)
+            {
+                _value.Add(100);
+            }
+        }
+    }
+
+    private readonly List&lt;int&gt; _value;
+
+    public EntityHelperInTest2(EntityInTest2 value)
+    {
+        _value = value.ComplexResult;
+    }
+}
+    </sampleCode>
+    <sampleCode language="VisualBasic">
+Public Class EntityHelperInTest2
+    &lt;ReturnRequiredPropertyHelper&gt;
+    Public Property Helper As Boolean
+        Get
+            Return _value.Contains(100)
+        End Get
+        Set(value As Boolean)
+            If value Then
+                _value.Add(100)
+            End If
+        End Set
+    End Property
+
+    Private ReadOnly _value As List(Of Integer)
+
+    Public Sub New(value As EntityInTest2)
+        _value = value.ComplexResult
+    End Sub
+End Class
     </sampleCode>
   </item>
 
@@ -28,16 +76,18 @@ public class EntityInTest2
 {
     public string FromClientToServerProperty { get; set; }
 
-    [ParameterReturnRequiredProperty("EntityTwoWayProperty")]
     public string TwoWayProperty { get; set; }
+
+    public List&lt;int&gt; ComplexResult { get; set; }
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
 Public Class EntityInTest2
-  Public Property FromClientToServerProperty As String
+    Public Property FromClientToServerProperty As String
 
-  &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty")&gt;
-  Public Property TwoWayProperty As String
+    Public Property TwoWayProperty As String
+
+    Public Property ComplexResult As List(Of Integer)
 End Class
     </sampleCode>
   </item>
@@ -61,6 +111,11 @@ public class Server2 : ITest2
 
     public void Process(EntityInTest2 entity)
     {
+        if (entity.ComplexResult.Contains(0))
+        {
+            entity.ComplexResult.Add(100); //This will be returned due to matching the Helper code in EntityHelperInTest2.
+            entity.ComplexResult.Add(200); //This will not be returned.
+        }
         Console.WriteLine($"Server side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
         Console.WriteLine($"Server side: entity.TwoWayProperty (should be SetFromClient): {entity.TwoWayProperty}");
 
@@ -71,25 +126,29 @@ public class Server2 : ITest2
     </sampleCode>
     <sampleCode language="VisualBasic">
 Public Class Server2
-  Implements ITest2
-  Dim _data As Long
+    Implements ITest2
+    Dim _data As Long
 
-  Public Sub AddOne(ByRef value As Long) Implements ITest2.AddOne
-    value += 1
-    _data = value
-  End Sub
+    Public Sub AddOne(ByRef value As Long) Implements ITest2.AddOne
+        value += 1
+        _data = value
+    End Sub
 
-  Public Sub Read(ByRef value As Long) Implements ITest2.Read
-    value = _data
-  End Sub
+    Public Sub Read(ByRef value As Long) Implements ITest2.Read
+        value = _data
+    End Sub
 
-  Public Sub Process(entity As EntityInTest2) Implements ITest2.Process
-    Console.WriteLine($"Server side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
-    Console.WriteLine($"Server side: entity.TwoWayProperty (should be SetFromClient): {entity.TwoWayProperty}")
+    Public Sub Process(entity As EntityInTest2) Implements ITest2.Process
+        If entity.ComplexResult.Contains(0) Then
+            entity.ComplexResult.Add(100) 'This will be returned due to matching the Helper code in EntityHelperInTest2.
+            entity.ComplexResult.Add(200) 'This will not be returned.
+        End If
+        Console.WriteLine($"Server side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
+        Console.WriteLine($"Server side: entity.TwoWayProperty (should be SetFromClient): {entity.TwoWayProperty}")
 
-    entity.TwoWayProperty = "SetFromServer"
-    entity.FromClientToServerProperty = "useless"
-  End Sub
+        entity.TwoWayProperty = "SetFromServer"
+        entity.FromClientToServerProperty = "useless"
+    End Sub
 End Class
     </sampleCode>
   </item>
@@ -125,13 +184,16 @@ Console.WriteLine(parameter);
 var entity = new EntityInTest2
 {
     FromClientToServerProperty = "SetFromClient",
-    TwoWayProperty = "SetFromClient"
+    TwoWayProperty = "SetFromClient",
+    ComplexResult = new List&lt;int&gt; {0}
 };
 
 Console.WriteLine("Process:");
 clientProxy.Process(entity);
 Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
 Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}");
+Console.WriteLine($"Client side: entity.ComplexResult.Contains(100) (should be true): {entity.ComplexResult.Contains(100)}");
+Console.WriteLine($"Client side: entity.ComplexResult.Contains(200) (should be false): {entity.ComplexResult.Contains(200)}");
 
 Console.Write("Press any key to continue...");
 Console.ReadKey(true);
@@ -167,14 +229,18 @@ Console.WriteLine(parameter)
 
 Dim entity As New EntityInTest2()
 With entity
-  .FromClientToServerProperty = "SetFromClient"
-  .TwoWayProperty = "SetFromClient"
+    .FromClientToServerProperty = "SetFromClient"
+    .TwoWayProperty = "SetFromClient"
+    .ComplexResult = New List(Of Integer)
 End With
+entity.ComplexResult.Add(0)
 
 Console.WriteLine("Process:")
 clientProxy.Process(entity)
 Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
 Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}")
+Console.WriteLine($"Client side: entity.ComplexResult.Contains(100) (should be True): {entity.ComplexResult.Contains(100)}")
+Console.WriteLine($"Client side: entity.ComplexResult.Contains(200) (should be False): {entity.ComplexResult.Contains(200)}")
 
 Console.Write("Press any key to continue...")
 Console.ReadKey(True)

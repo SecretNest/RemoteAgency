@@ -26,6 +26,7 @@
         <para>When multiple properties or fields need to be specified, marks them one by one, or use a helper class instead. Helper class is also used for handling some special operation coded by developer. When helper class is preferred, marks the parameter by <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference> with helper class specified. There should be a publicly accessible constructor with one parameter in the helper class. The type of the parameter should be the same as the marked parameter. In the helper class, each property marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference> will be processed. Each property should have both get and set method publicly accessible.</para>
         <para>The property specified will be read immediately after accessing asset. Only changes that occur within the asset (body of the method being called for example) will be guaranteed to be sent back.</para>
         <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference> can be marked on property also, which only affects set operating.</para>
+        <para>Check <link xlink:href="e0c354d3-50df-45a7-a19f-8053f4a4b52a" >this example</link> for reference.</para>
       </content>
     </section>
 

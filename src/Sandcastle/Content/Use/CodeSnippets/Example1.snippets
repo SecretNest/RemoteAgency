@@ -12,18 +12,22 @@ public interface ITest1
 
     [CustomizedAssetName("AddDouble")]
     double Add(double a, double b);
+
+    Task&lt;int&gt; AsyncCall();
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
 Public Interface ITest1
-  Function Add(a As Integer, b As Integer) As Integer
+    Function Add(a As Integer, b As Integer) As Integer
 
-  'When unmark this line below, an exception about asset naming conflicts will be thrown.
-  '&lt;CustomizedAssetName("AddDouble")&gt;
-  Function Add(a As Single, b As Single) As Single
+    'When unmark this line below, an exception about asset naming conflicts will be thrown.
+    '&lt;CustomizedAssetName("AddDouble")&gt;
+    Function Add(a As Single, b As Single) As Single
 
-  &lt;CustomizedAssetName("AddDouble")&gt;
-  Function Add(a As Double, b As Double) As Double
+    &lt;CustomizedAssetName("AddDouble")&gt;
+    Function Add(a As Double, b As Double) As Double
+
+    Function AsyncCall() As Task(Of Integer)
 End Interface
     </sampleCode>
   </item>
@@ -46,23 +50,32 @@ public class Server1 : ITest1
     {
         return a + b;
     }
+
+    public Task&lt;int&gt; AsyncCall()
+    {
+        return Task.FromResult(100);
+    }
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
 Public Class Server1
-  Implements ITest1
+    Implements ITest1
 
-  Public Function Add(a As Integer, b As Integer) As Integer Implements ITest1.Add
-    Return a + b
-  End Function
+    Public Function Add(a As Integer, b As Integer) As Integer Implements ITest1.Add
+        Return a + b
+    End Function
 
-  Public Function Add(a As Single, b As Single) As Single Implements ITest1.Add
-    Return a + b
-  End Function
+    Public Function Add(a As Single, b As Single) As Single Implements ITest1.Add
+        Return a + b
+    End Function
 
-  Public Function Add(a As Double, b As Double) As Double Implements ITest1.Add
-    Return a + b
-  End Function
+    Public Function Add(a As Double, b As Double) As Double Implements ITest1.Add
+        Return a + b
+    End Function
+
+    Public Function AsyncCall() As Task(Of Integer) Implements ITest1.AsyncCall
+        Return Task.FromResult(100)
+    End Function
 End Class
     </sampleCode>
   </item>
@@ -94,6 +107,9 @@ Console.WriteLine(clientProxy.Add(1.1f, 2.2f));
 Console.WriteLine("Add(double): 1.1 + 2.2");
 Console.WriteLine(clientProxy.Add(1.1, 2.2));
 
+Console.WriteLine("AsyncCall(100):");
+Console.WriteLine(clientProxy.AsyncCall().Result);
+
 Console.Write("Press any key to continue...");
 Console.ReadKey(true);
 Console.WriteLine();
@@ -123,6 +139,9 @@ Console.WriteLine(clientProxy.Add(1.1!, 2.2!))
 
 Console.WriteLine("Add(Double): 1.1 + 2.2")
 Console.WriteLine(clientProxy.Add(1.1, 2.2))
+
+Console.WriteLine("AsyncCall(100):")
+Console.WriteLine(clientProxy.AsyncCall().Result)
 
 Console.Write("Press any key to continue...")
 Console.ReadKey(True)

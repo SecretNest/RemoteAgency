@@ -9,7 +9,7 @@ public interface ITest9
 
     [OperatingTimeoutTime(1000)]
     event MyEventCallback MyEvent;
-    delegate int MyEventCallback(EntityInTest9 parameter);
+    delegate int MyEventCallback([ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)] EntityInTest9 parameter);
 
     event MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
     delegate int MyEventWithTwoWayParameterCallback(int parameter, ref int parameter1, out int parameter2, [ParameterIgnored]int ignored);
@@ -30,7 +30,8 @@ Public Interface ITest9
 
     &lt;OperatingTimeoutTime(1000)&gt;
     Event MyEvent As MyEventCallback
-    Delegate Sub MyEventCallback(parameter As EntityInTest9)
+    Delegate Sub MyEventCallback(&lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt; parameter As EntityInTest9)
+
 
     Event MyEventWithTwoWayParameter As MyEventWithTwoWayParameterCallback
     Delegate Sub MyEventWithTwoWayParameterCallback(parameter As Integer, ByRef parameter1 As Integer, ByRef parameter2 As Integer, &lt;ParameterIgnored&gt; ignored As Integer)
@@ -52,7 +53,6 @@ public class EntityInTest9
 {
     public string FromServerToClientProperty { get; set; }
 
-    [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
     public string TwoWayProperty { get; set; }
 }
 
@@ -67,7 +67,6 @@ public class EntityInTest9B
 Public Class EntityInTest9
     Public Property FromServerToClientProperty As String
 
-    &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt;
     Public Property TwoWayProperty As String
 End Class
 

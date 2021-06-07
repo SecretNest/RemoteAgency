@@ -20,6 +20,7 @@ namespace Test.CSharp.Test7
         DateTime TimeoutExceptionTest { get; set; }
 
         [LocalExceptionHandling]
+        [ParameterReturnRequiredProperty("TwoWayProperty", isIncludedWhenExceptionThrown: true)]
         EntityInTest7 WithException { get; set; }
     }
 
@@ -27,7 +28,6 @@ namespace Test.CSharp.Test7
     {
         public string FromClientToServerProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
         public string TwoWayProperty { get; set; }
     }
 

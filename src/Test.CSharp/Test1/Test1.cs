@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SecretNest.RemoteAgency;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -14,6 +15,8 @@ namespace Test.CSharp.Test1
 
         [CustomizedAssetName("AddDouble")]
         double Add(double a, double b);
+
+        Task<int> AsyncCall();
     }
 
     public class Server1 : ITest1
@@ -31,6 +34,11 @@ namespace Test.CSharp.Test1
         public double Add(double a, double b)
         {
             return a + b;
+        }
+
+        public Task<int> AsyncCall()
+        {
+            return Task.FromResult(100);
         }
     }
 
@@ -62,6 +70,9 @@ namespace Test.CSharp.Test1
 
             Console.WriteLine("Add(double): 1.1 + 2.2");
             Console.WriteLine(clientProxy.Add(1.1, 2.2));
+
+            Console.WriteLine("AsyncCall(100):");
+            Console.WriteLine(clientProxy.AsyncCall().Result);
 
             Console.Write("Press any key to continue...");
             Console.ReadKey(true);

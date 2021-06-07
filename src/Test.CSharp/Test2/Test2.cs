@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SecretNest.RemoteAgency;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -10,15 +11,39 @@ namespace Test.CSharp.Test2
 
         void Read(out long value);
 
-        void Process(EntityInTest2 entity);
+        void Process([ParameterReturnRequiredProperty("TwoWayProperty")][ParameterReturnRequiredProperty(typeof(EntityHelperInTest2))] EntityInTest2 entity);
     }
 
     public class EntityInTest2
     {
         public string FromClientToServerProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty")]
         public string TwoWayProperty { get; set; }
+
+        public List<int> ComplexResult { get; set; }
+    }
+
+    public class EntityHelperInTest2
+    {
+        [ReturnRequiredPropertyHelper]
+        public bool Helper
+        {
+            get => _value.Contains(100);
+            set
+            {
+                if (value)
+                {
+                    _value.Add(100);
+                }
+            }
+        }
+
+        private readonly List<int> _value;
+
+        public EntityHelperInTest2(EntityInTest2 value)
+        {
+            _value = value.ComplexResult;
+        }
     }
 
     public class Server2 : ITest2
@@ -38,6 +63,11 @@ namespace Test.CSharp.Test2
 
         public void Process(EntityInTest2 entity)
         {
+            if (entity.ComplexResult.Contains(0))
+            {
+                entity.ComplexResult.Add(100); //This will be returned due to matching the Helper code in EntityHelperInTest2.
+                entity.ComplexResult.Add(200); //This will not be returned.
+            }
             Console.WriteLine($"Server side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Server side: entity.TwoWayProperty (should be SetFromClient): {entity.TwoWayProperty}");
 
@@ -79,13 +109,16 @@ namespace Test.CSharp.Test2
             var entity = new EntityInTest2
             {
                 FromClientToServerProperty = "SetFromClient",
-                TwoWayProperty = "SetFromClient"
+                TwoWayProperty = "SetFromClient",
+                ComplexResult = new List<int> {0}
             };
 
             Console.WriteLine("Process:");
             clientProxy.Process(entity);
             Console.WriteLine($"Client side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}");
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}");
+            Console.WriteLine($"Client side: entity.ComplexResult.Contains(100) (should be true): {entity.ComplexResult.Contains(100)}");
+            Console.WriteLine($"Client side: entity.ComplexResult.Contains(200) (should be false): {entity.ComplexResult.Contains(200)}");
 
             Console.Write("Press any key to continue...");
             Console.ReadKey(true);

@@ -17,13 +17,13 @@ Namespace Test7
         Property TimeoutExceptionTest As DateTime
 
         <LocalExceptionHandling>
+        <ParameterReturnRequiredProperty("TwoWayProperty", Nothing, True)>
         Property WithException As EntityInTest7
     End Interface
 
     Public Class EntityInTest7
         Public Property FromClientToServerProperty As String
 
-        <ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)>
         Public Property TwoWayProperty As String
     End Class
 

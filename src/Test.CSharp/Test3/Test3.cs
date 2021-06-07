@@ -19,7 +19,7 @@ namespace Test.CSharp.Test3
         long Value { get; set; }
 
         [LocalExceptionHandling]
-        void WithException(EntityInTest3 entity);
+        void WithException([ParameterReturnRequiredProperty("TwoWayProperty")] EntityInTest3 entity);
 
         [OperatingTimeoutTime(1000)]
         void TimeOutMethod();
@@ -29,7 +29,6 @@ namespace Test.CSharp.Test3
     {
         public string FromClientToServerProperty { get; set; }
 
-        [ParameterReturnRequiredProperty("EntityTwoWayProperty")]
         public string TwoWayProperty { get; set; }
     }
 

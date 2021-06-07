@@ -27,7 +27,12 @@
               <content>
                 <para>Create an interface that contains all the assets used for communication.</para>
                 <codeReference>Example1#Interface</codeReference>
-                <alert class="node"><para>When unmarking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference> from interface, an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Inspecting.AssetNameConflictException</codeEntityReference> will be thrown because the name "AddDouble" is designated twice.</para></alert>
+                <alert class="note">
+                  <para>When unmarking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference> from interface, an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Inspecting.AssetNameConflictException</codeEntityReference> will be thrown because the name "AddDouble" is designated twice.</para>
+                </alert>
+                <alert class="note">
+                  <para>The supporting of Async method, which returns a task as result, is optimized by Remote Agency. See <link xlink:href="b6910a74-dde5-4d20-ac0d-4fb1231cea87" /> for details.</para>
+                </alert>
               </content>
             </step>
             <step>
@@ -58,6 +63,7 @@
       <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>
+      <link xlink:href="beb637a2-3887-49ff-93f3-1f71b095aa7e" />
     </relatedTopics>
   </developerWalkthroughDocument>
 </topic>

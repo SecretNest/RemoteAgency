@@ -11,6 +11,8 @@ Namespace Test1
 
         <CustomizedAssetName("AddDouble")>
         Function Add(a As Double, b As Double) As Double
+
+        Function AsyncCall() As Task(Of Integer)
     End Interface
 
     Public Class Server1
@@ -26,6 +28,10 @@ Namespace Test1
 
         Public Function Add(a As Double, b As Double) As Double Implements ITest1.Add
             Return a + b
+        End Function
+
+        Public Function AsyncCall() As Task(Of Integer) Implements ITest1.AsyncCall
+            Return Task.FromResult(100)
         End Function
     End Class
 
@@ -55,6 +61,9 @@ Namespace Test1
 
             Console.WriteLine("Add(Double): 1.1 + 2.2")
             Console.WriteLine(clientProxy.Add(1.1, 2.2))
+
+            Console.WriteLine("AsyncCall(100):")
+            Console.WriteLine(clientProxy.AsyncCall().Result)
 
             Console.Write("Press any key to continue...")
             Console.ReadKey(True)

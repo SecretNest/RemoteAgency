@@ -16,7 +16,7 @@ Namespace Test3
         Property Value As Long
 
         <LocalExceptionHandling>
-        Sub WithException(entity As EntityInTest3)
+        Sub WithException(<ParameterReturnRequiredProperty("TwoWayProperty")> entity As EntityInTest3)
 
         <OperatingTimeoutTime(1000)>
         Sub TimeOutMethod()
@@ -25,7 +25,6 @@ Namespace Test3
     Public Class EntityInTest3
         Public Property FromClientToServerProperty As String
 
-        <ParameterReturnRequiredProperty("EntityTwoWayProperty")>
         Public Property TwoWayProperty As String
     End Class
 

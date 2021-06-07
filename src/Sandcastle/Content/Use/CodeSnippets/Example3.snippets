@@ -16,7 +16,7 @@ public interface ITest3
     long Value { get; set; }
 
     [LocalExceptionHandling]
-    void WithException(EntityInTest3 entity);
+    void WithException([ParameterReturnRequiredProperty("TwoWayProperty")] EntityInTest3 entity);
 
     [OperatingTimeoutTime(1000)]
     void TimeOutMethod();
@@ -36,7 +36,7 @@ Public Interface ITest3
     Property Value As Long
 
     &lt;LocalExceptionHandling&gt;
-    Sub WithException(entity As EntityInTest3)
+    Sub WithException(&lt;ParameterReturnRequiredProperty("TwoWayProperty")&gt; entity As EntityInTest3)
 
     &lt;OperatingTimeoutTime(1000)&gt;
     Sub TimeOutMethod()
@@ -50,7 +50,6 @@ public class EntityInTest3
 {
     public string FromClientToServerProperty { get; set; }
 
-    [ParameterReturnRequiredProperty("EntityTwoWayProperty")]
     public string TwoWayProperty { get; set; }
 }
     </sampleCode>
@@ -58,7 +57,6 @@ public class EntityInTest3
 Public Class EntityInTest3
     Public Property FromClientToServerProperty As String
 
-    &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty")&gt;
     Public Property TwoWayProperty As String
 End Class
     </sampleCode>

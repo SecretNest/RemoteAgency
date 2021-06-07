@@ -17,6 +17,7 @@ public interface ITest7
     DateTime TimeoutExceptionTest { get; set; }
 
     [LocalExceptionHandling]
+    [ParameterReturnRequiredProperty("TwoWayProperty", isIncludedWhenExceptionThrown: true)]
     EntityInTest7 WithException { get; set; }
 }
     </sampleCode>
@@ -35,6 +36,7 @@ Public Interface ITest7
     Property TimeoutExceptionTest As DateTime
 
     &lt;LocalExceptionHandling&gt;
+    &lt;ParameterReturnRequiredProperty("TwoWayProperty", Nothing, True)&gt;
     Property WithException As EntityInTest7
 End Interface
     </sampleCode>
@@ -46,7 +48,6 @@ public class EntityInTest7
 {
     public string FromClientToServerProperty { get; set; }
 
-    [ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)]
     public string TwoWayProperty { get; set; }
 }
     </sampleCode>
@@ -54,7 +55,6 @@ public class EntityInTest7
 Public Class EntityInTest7
     Public Property FromClientToServerProperty As String
 
-    &lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt;
     Public Property TwoWayProperty As String
 End Class
     </sampleCode>
