@@ -4,19 +4,16 @@ Imports SecretNest.RemoteAgency.Attributes
 
 Namespace Test3
     Public Interface ITest3
-        <AssetOneWayOperating>
-        Sub Add(v As Long)
-
-        <PropertyGetOneWayOperating>
-        ReadOnly Property ValueOneWayGet As Long
-
         <AssetIgnored>
-        ReadOnly Property ValueIgnored As Long
+        Function MethodIgnored() As Long
 
         Property Value As Long
 
+        <AssetOneWayOperating>
+        Sub Add(v As Long)
+
         <LocalExceptionHandling>
-        Sub WithException(<ParameterReturnRequiredProperty("TwoWayProperty")> entity As EntityInTest3)
+        Sub WithException(<ParameterReturnRequiredProperty("TwoWayProperty",, True)> entity As EntityInTest3)
 
         <OperatingTimeoutTime(1000)>
         Sub TimeOutMethod()
@@ -31,24 +28,15 @@ Namespace Test3
     Public Class Server3
         Implements ITest3
 
+        Public Function MethodIgnored() As Long Implements ITest3.MethodIgnored
+            Throw New Exception("You should never see this due to ignored.")
+        End Function
+
+        Public Property Value As Long Implements ITest3.Value
+
         Public Sub Add(v As Long) Implements ITest3.Add
             Value += v
         End Sub
-
-        Public ReadOnly Property ValueOneWayGet As Long Implements ITest3.ValueOneWayGet
-            Get
-                Console.WriteLine("Server side: ValueOneWayGet called.")
-                Return Value
-            End Get
-        End Property
-
-        Public ReadOnly Property ValueIgnored As Long Implements ITest3.ValueIgnored
-            Get
-                Return 0
-            End Get
-        End Property
-
-        Public Property Value As Long Implements ITest3.Value
 
         Public Sub WithException(entity As EntityInTest3) Implements ITest3.WithException
             Console.WriteLine($"Server side: entity.FromClientToServerProperty (should be SetFromClient): {entity.FromClientToServerProperty}")
@@ -82,30 +70,20 @@ Namespace Test3
             Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest3)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
 
             'Run test
-            Console.WriteLine("Add(No return):")
-            clientProxy.Add(100)
-
-            Console.WriteLine("ValueOneWayGet(Default value returning after server processed):")
-            Console.WriteLine(clientProxy.ValueOneWayGet)
-
-            Console.WriteLine("ValueIgnored(Exception):")
-
+            Console.WriteLine("MethodIgnored(Exception):")
             Try
                 ' ReSharper disable once UnusedVariable
-                Dim useless = clientProxy.ValueIgnored
+                Dim useless = clientProxy.MethodIgnored()
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())
             End Try
 #Enable Warning CA1031 ' Do not catch general exception types
 
-            Console.WriteLine("Value(Get, 100):")
-            Console.WriteLine(clientProxy.Value)
-
             Console.WriteLine("Value(Set, no return):")
             clientProxy.Value = 500
 
-            Console.WriteLine("Add(No return):")
+            Console.WriteLine("Add(No return on client but exception on server):")
             clientProxy.Add(100)
 
             Console.WriteLine("Value(Get, 600):")

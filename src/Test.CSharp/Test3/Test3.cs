@@ -7,19 +7,16 @@ namespace Test.CSharp.Test3
 {
     public interface ITest3
     {
-        [AssetOneWayOperating]
-        void Add(long value);
-
-        [PropertyGetOneWayOperating]
-        long ValueOneWayGet { get; }
-
         [AssetIgnored]
-        long ValueIgnored { get; }
+        long MethodIgnored();
 
         long Value { get; set; }
 
+        [AssetOneWayOperating]
+        void Add(long value);
+
         [LocalExceptionHandling]
-        void WithException([ParameterReturnRequiredProperty("TwoWayProperty")] EntityInTest3 entity);
+        void WithException([ParameterReturnRequiredProperty("TwoWayProperty", isIncludedInReturning: true)] EntityInTest3 entity);
 
         [OperatingTimeoutTime(1000)]
         void TimeOutMethod();
@@ -36,22 +33,18 @@ namespace Test.CSharp.Test3
     {
         private long _data;
 
+        public long MethodIgnored()
+        {
+            throw new Exception("You should never see this due to ignored.");
+        }
+
+        public long Value { get => _data; set => _data = value; }
+
         public void Add(long value)
         {
             _data += value;
+            throw new Exception("You should never receive this from client side due to one way calling.");
         }
-
-        public long ValueOneWayGet 
-        {
-            get
-            {
-                Console.WriteLine("Server side: ValueOneWayGet called.");
-                return _data;
-            }
-        }
-        public long ValueIgnored => 0;
-
-        public long Value { get => _data; set => _data = value; }
 
         public void WithException(EntityInTest3 entity)
         {
@@ -89,16 +82,10 @@ namespace Test.CSharp.Test3
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest3>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Run test
-            Console.WriteLine("Add(No return):");
-            clientProxy.Add(100);
-
-            Console.WriteLine("ValueOneWayGet(Default value returning after server processed):");
-            Console.WriteLine(clientProxy.ValueOneWayGet);
-
-            Console.WriteLine("ValueIgnored(Exception):");
+            Console.WriteLine("MethodIgnored(Exception):");
             try
             {
-                _ = clientProxy.ValueIgnored;
+                _ = clientProxy.MethodIgnored();
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
@@ -107,13 +94,10 @@ namespace Test.CSharp.Test3
             }
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            Console.WriteLine("Value(Get, 100):");
-            Console.WriteLine(clientProxy.Value);
-
             Console.WriteLine("Value(Set, no return):");
             clientProxy.Value = 500;
 
-            Console.WriteLine("Add(No return):");
+            Console.WriteLine("Add(No return on client but exception on server):");
             clientProxy.Add(100);
 
             Console.WriteLine("Value(Get, 600):");

@@ -8,7 +8,7 @@ Namespace Test9
 
         <OperatingTimeoutTime(1000)>
         Event MyEvent As MyEventCallback
-        Delegate Sub MyEventCallback(<ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)> parameter As EntityInTest9)
+        Delegate Sub MyEventCallback(<ParameterReturnRequiredProperty("EntityTwoWayProperty",, True)> parameter As EntityInTest9)
 
         Event MyEventWithTwoWayParameter As MyEventWithTwoWayParameterCallback
         Delegate Sub MyEventWithTwoWayParameterCallback(parameter As Integer, ByRef parameter1 As Integer, ByRef parameter2 As Integer, <ParameterIgnored> ignored As Integer)
@@ -16,7 +16,7 @@ Namespace Test9
         <LocalExceptionHandling>
         Event WithException As EventHandler
 
-        <EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", Nothing, True)>
+        <EventParameterReturnRequiredProperty("parameter", "TwoWayProperty",, True)>
         Event MyEventWithException As MyEventWithExceptionCallback
         <LocalExceptionHandling>
         Delegate Sub MyEventWithExceptionCallback(parameter As EntityInTest9B)

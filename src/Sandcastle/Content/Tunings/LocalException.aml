@@ -20,8 +20,17 @@
       </content>
     </section>
 
+    <section address="TwoWay">
+      <title>Two way parameters and properties</title>
+      <content>
+        <para>When exception is thrown, no return other than exception will be returned by default.</para>
+        <para>Values of all parameters and properties marked by <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#TwoWay" >Two-way attributes</link> with <codeInline>IsIncludedInReturning</codeInline> set to <codeInline>true/True</codeInline> will be transferred and set to local before exception is thrown on the local site.</para>
+      </content>
+    </section>
+
     <relatedTopics>
       <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="ce9cead6-69f0-456a-94c6-f7988ed3eb3d">Example 3: Method One Way, Ignored, Local Exception Handling and Timeout</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

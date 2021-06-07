@@ -30,7 +30,7 @@ Public Interface ITest9
 
     &lt;OperatingTimeoutTime(1000)&gt;
     Event MyEvent As MyEventCallback
-    Delegate Sub MyEventCallback(&lt;ParameterReturnRequiredProperty("EntityTwoWayProperty", Nothing, True)&gt; parameter As EntityInTest9)
+    Delegate Sub MyEventCallback(&lt;ParameterReturnRequiredProperty("EntityTwoWayProperty",, True)&gt; parameter As EntityInTest9)
 
 
     Event MyEventWithTwoWayParameter As MyEventWithTwoWayParameterCallback
@@ -39,7 +39,7 @@ Public Interface ITest9
     &lt;LocalExceptionHandling&gt;
     Event WithException As EventHandler
 
-    &lt;EventParameterReturnRequiredProperty("parameter", "TwoWayProperty", Nothing, True)&gt;
+    &lt;EventParameterReturnRequiredProperty("parameter", "TwoWayProperty",, True)&gt;
     Event MyEventWithException As MyEventWithExceptionCallback
     &lt;LocalExceptionHandling&gt;
     Delegate Sub MyEventWithExceptionCallback(parameter As EntityInTest9B)

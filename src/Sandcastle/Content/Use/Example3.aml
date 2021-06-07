@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<topic id="e0c354d3-50df-45a7-a19f-8053f4a4b52a" revisionNumber="1">
+<topic id="ce9cead6-69f0-456a-94c6-f7988ed3eb3d" revisionNumber="1">
   <developerWalkthroughDocument
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <introduction>
-      <para>Remote Agency supports returning value of parameter.</para>
-      <para>Through there is no way to pass a reference among apps, Remote Agency can pass the value of parameter back to the caller to simulate this feature.</para>
+      <para>Remote Agency supports tunings of remote calling of methods.</para>
     </introduction>
 
     <token>Example Prerequisites Reference</token>
@@ -14,8 +13,14 @@
     <section>
       <title>Brief</title>
       <content>
-        <para>When a parameter is marked with <codeInline>ref</codeInline> (C#) or <codeInline>ByRef</codeInline> (VB.Net), the parameter will be passed as reference. This is defined by dotnet standard. Unfortunately, there is no such a good way to pass reference among applications. To simulate this feature, Remote Agency pass the value of parameter back to the caller when required. Also, the parameter marked with <codeInline>out</codeInline> (C#) should be returned to the caller. Additionally, some properties specified in entity class used by parameter can also be returned.</para>
-        <para>See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#TwoWay" /> for details.</para>
+        <para>Remote Agency supports tunings of remote calling of methods such as:</para>
+        <list class="bullet">
+          <listItem>One way, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute</codeEntityReference>,</listItem>
+          <listItem>Ignored, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference>,</listItem>
+          <listItem>Enabling <link xlink:href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" />, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference>, and</listItem>
+          <listItem>Adjusting timeout time, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference>.</listItem>
+        </list>
+        <para>For one way, ignored and timeout behavior, check <link xlink:href="e7b65736-b2df-4aa9-897a-3a3050d3cceb" /> for details.</para>
       </content>
     </section>
 
@@ -27,33 +32,32 @@
             <step>
               <content>
                 <para>Create an interface that contains all the assets used for communication.</para>
-                <codeReference>Example2#Interface</codeReference>
-                <alert class="vb"><para>Due to lack of language support, <codeInline>out</codeInline> in C# is replaced to <codeInline>ByRef</codeInline> in the example of VB.</para></alert>
+                <codeReference>Example3#Interface</codeReference>
               </content>
             </step>
             <step>
               <content>
                 <para>Create an entity class that used in interface.</para>
-                <codeReference>Example2#Entity</codeReference>
-              </content>
-            </step>
-            <step>
-              <content>
-                <para>Create a helper class that deal with the value of <codeInline>ComplexResult</codeInline> in <codeInline>EntityInTest2</codeInline>.</para>
-                <codeReference>Example2#EntityHelper</codeReference>
+                <codeReference>Example3#Entity</codeReference>
               </content>
             </step>
             <step>
               <content>
                 <para>Create a server class that implement the interface created above.</para>
-                <codeReference>Example2#Server</codeReference>
-                <alert class="vb"><para>Due to lack of language support, <codeInline>out</codeInline> in C# is replaced to <codeInline>ByRef</codeInline> in the example of VB.</para></alert>
+                <codeReference>Example3#Server</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create a method for local exception handling.</para>
+                <codeReference>Example3#Handler</codeReference>
+                <token>LocalExceptionHandler</token>
               </content>
             </step>
             <step>
               <content>
                 <para>Place this code to a method, <codeInline>main</codeInline> method for example.</para>
-                <codeReference>Example2#Test</codeReference>
+                <codeReference>Example3#Test</codeReference>
                 <token>CreateProxy with Id</token>
               </content>
             </step>
@@ -70,7 +74,6 @@
     <relatedTopics>
       <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a">Examples</link>
       <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference>
-      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>
     </relatedTopics>

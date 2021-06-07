@@ -14,4 +14,8 @@
 <ddue:para>Site id is used to locate the server. In a real scenario, servers are usually deployed into different applications even computers. Message routing component, like <ddue:token>Remote Hub Url</ddue:token>, need to use the site id to deliver messages generated from proxy to the right server instance.</ddue:para>
 <ddue:para>Service wrapper instance id is used to locate the service object which contains user code. This is used by Remote Agency to deliver the message to the right service object registered by <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Int32,System.Boolean)</ddue:codeEntityReference> (or <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateServiceWrapper(System.Type,System.Object,System.Int32,System.Boolean)</ddue:codeEntityReference>).</ddue:para>
 <ddue:para>No such id is required when creating service wrapper because the response messages are sent to the source of the request.</ddue:para></item>
+  <item id="LocalExceptionHandler"><ddue:alert class="note">
+  <ddue:para>By default, all exception thrown on the remote site will be suppressed remotely and transferred to caller as result. If additional exception handler is required on the remote site, use <ddue:link xlink:href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" /> on the instance which the exception thrown originally.</ddue:para>
+  <ddue:para>All values of two way parameters or proerpties marked with <ddue:codeInline>IsIncludedInReturning</ddue:codeInline> will be transferred to caller when exception thrown.</ddue:para>
+</ddue:alert></item>
 </content>

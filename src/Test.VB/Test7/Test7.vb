@@ -17,7 +17,7 @@ Namespace Test7
         Property TimeoutExceptionTest As DateTime
 
         <LocalExceptionHandling>
-        <ParameterReturnRequiredProperty("TwoWayProperty", Nothing, True)>
+        <ParameterReturnRequiredProperty("TwoWayProperty",, True)>
         Property WithException As EntityInTest7
     End Interface
 
