@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="ddf8c107-d1ad-4e41-b851-1ab542686164" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Remote Agency supports indexer property.</para>
+    </introduction>
+
+    <token>Example Prerequisites Reference</token>
+
+    <section>
+      <title>Brief</title>
+      <content>
+        <para>Remote Agency supports indexer property, no matter the type and number of parameters.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Steps</title>
+      <content>
+        <procedure>
+          <steps class="ordered">
+            <step>
+              <content>
+                <para>Create an interface that contains all the assets used for communication.</para>
+                <codeReference>Example6#Interface</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create a server class that implement the interface created above.</para>
+                <codeReference>Example6#Server</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Place this code to a method, <codeInline>main</codeInline> method for example.</para>
+                <codeReference>Example6#Test</codeReference>
+                <token>CreateProxy with Id</token>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Run the example.</para>
+              </content>
+            </step>
+          </steps>
+        </procedure>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a">Examples</link>
+      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference>
+      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference>
+      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>
