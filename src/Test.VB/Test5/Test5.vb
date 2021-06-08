@@ -1,10 +1,15 @@
 ﻿Imports SecretNest.RemoteAgency
+Imports SecretNest.RemoteAgency.Attributes
 
 Namespace Test5
     Public Interface ITest5(Of Out T As {Structure})
         ReadOnly Property Current As T
 
         Property Value As Integer
+
+        <ReturnIgnored> ReadOnly Property ReturnIgnored As Integer
+
+        <ReturnIgnored> ReadOnly Property ReturnIgnoredButException As Integer
     End Interface
 
     Public Class Server5
@@ -17,6 +22,18 @@ Namespace Test5
         End Property
 
         Public Property Value As Integer Implements ITest5(Of Date).Value
+
+        Public ReadOnly Property ReturnIgnored As Integer Implements ITest5(Of Date).ReturnIgnored
+            Get
+                Return 100
+            End Get
+        End Property
+
+        Public ReadOnly Property ReturnIgnoredButException As Integer Implements ITest5(Of Date).ReturnIgnoredButException
+            Get
+                Throw New Exception("oops.")
+            End Get
+        End Property
     End Class
 
     Public NotInheritable Class TestCode
@@ -43,8 +60,21 @@ Namespace Test5
             Console.WriteLine("Value(Set, No return):")
             clientProxy.Value = 100
 
-            Console.WriteLine("Value(Get, 100:")
+            Console.WriteLine("Value(Get, 100):")
             Console.WriteLine(clientProxy.Value)
+
+            Console.WriteLine("ReturnIgnored(Get, 0 due to return ignored):")
+            Console.WriteLine(clientProxy.ReturnIgnored)
+
+            Console.WriteLine("ReturnIgnored(Get, Exception):")
+            Try
+                ' ReSharper disable once UnusedVariable
+                Dim useless = clientProxy.ReturnIgnoredButException
+#Disable Warning CA1031 ' Do not catch general exception types
+            Catch ex As Exception
+                Console.WriteLine("Predicted Exception: " + ex.ToString())
+            End Try
+#Enable Warning CA1031 ' Do not catch general exception types
 
             Console.Write("Press any key to continue...")
             Console.ReadKey(True)

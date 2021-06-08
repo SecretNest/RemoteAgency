@@ -4,9 +4,7 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <introduction>
-      <para>Ping test is designed for testing the delay and the connectivity between proxy and remote service wrapper.</para>
-    </introduction>
+    <token>Ping Introduction</token>
 
     <section address="Ping">
       <title>Ping</title>
@@ -17,11 +15,11 @@
     </section>
 
     <section address="GetId">
-      <title>Real Target</title>
+      <title>Real Target in Cluster</title>
       <content>
         <para>In particular, ping methods contain the target site id and instance id as output parameters. They can be used to get the real target from a virtual target.</para>
         <para>While creating instance of proxy, a default target site id and instance id need to be specified. After initialized, most operations started by proxy will use this as the target of the message, aka will ask the service wrapper with the site id and instance id to access the asset required. The only one kind of message not use this as target, is the event removing message. It will always send the message to the sender of the response message of related event adding message.</para>
-        <para>When the message routing system has load balancing design, like Remote Hub, by creating a virtual target and sharing one site id for many real sites, it allows to distribute the proxy-initiated operations among several servers which contains service wrapper for servicing. If the target site of one proxy is set to a virtual one, all accessing may not be sent to the same real service wrapper. It’s good for load balancing and fail over but may not be friendly with stateful service designing. By creating another proxy using the target grabbed from ping test result, the only one service wrapper from the virtual group is selected and specified.</para>
+        <para>When the message routing system has load balancing design, like <token>Remote Hub Url</token>, by creating a cluster based on many real sites, it allows to distribute the proxy-initiated operations among several servers which contains service wrapper for servicing. If the target site of one proxy is set to a virtual one, all accessing may not be sent to the same real service wrapper. It’s good for load balancing and fail over but may not be friendly with stateful service designing. By creating another proxy using the target grabbed from ping test result, the only one service wrapper from the virtual group is selected and specified.</para>
       </content>
     </section>
 

@@ -14,7 +14,7 @@ namespace Test.CSharp.Test6
         }
 
         [OperatingTimeoutTime(1000, 2000)]
-        int this[string name]
+        int this[string name, [ParameterIgnored]string ignored]
         {
             get;
             set;
@@ -31,10 +31,14 @@ namespace Test.CSharp.Test6
             set => _data[index] = value;
         }
 
-        public int this[string name]
+        public int this[string name, string ignored]
         {
             get
             {
+                if (ignored != null)
+                {
+                    Console.WriteLine("Server side: Why is this happened?");
+                }
                 if (int.TryParse(name, out var index))
                 {
                     return _data[index];
@@ -47,6 +51,10 @@ namespace Test.CSharp.Test6
             }
             set
             {
+                if (ignored != null)
+                {
+                    Console.WriteLine("Server side: Why is this happened?");
+                }
                 if (int.TryParse(name, out var index))
                 {
                     _data[index] = value;
@@ -85,13 +93,13 @@ namespace Test.CSharp.Test6
             Console.WriteLine("this[4](Set+Get, No return):");
             clientProxy[4] += 100;
 
-            Console.WriteLine("this[\"4\"](Get, 204):");
-            Console.WriteLine(clientProxy["4"]);
+            Console.WriteLine("this[\"4\", \"brabrabra\"](Get, 204):");
+            Console.WriteLine(clientProxy["4", "brabrabra"]);
 
-            Console.WriteLine("this[\"Timeout\"](Get, Timeout):");
+            Console.WriteLine("this[\"Timeout\", \"brabrabra\"](Get, Timeout):");
             try
             {
-                Console.WriteLine(clientProxy["Timeout"]);
+                Console.WriteLine(clientProxy["Timeout", "brabrabra"]);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
@@ -100,10 +108,10 @@ namespace Test.CSharp.Test6
             }
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            Console.WriteLine("this[\"Timeout\"](Set, Timeout):");
+            Console.WriteLine("this[\"Timeout\", \"brabrabra\"](Set, Timeout):");
             try
             {
-                clientProxy["Timeout"] = 0;
+                clientProxy["Timeout", "brabrabra"] = 0;
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)

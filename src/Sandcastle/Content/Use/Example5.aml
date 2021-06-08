@@ -16,6 +16,7 @@
       <content>
         <para>Remote Agency supports property defined in interface, including <codeInline>get</codeInline> and <codeInline>set</codeInline>.</para>
         <para>When interface is defined with generic type parameter, it is possible to use it directly in Remote Agency when creating proxy with generic type argument specified.</para>
+        <para>The property marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference> will always return the default value while getting. But exception will be transferred to the caller if thrown. See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#Ignore" /> for details.</para>
       </content>
     </section>
 

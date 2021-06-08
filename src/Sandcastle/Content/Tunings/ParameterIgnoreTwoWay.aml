@@ -10,7 +10,7 @@
       <para>No return value or output parameters will be set if exception thrown while accessing on the remote site.</para>
     </introduction>
 
-    <section>
+    <section address="Ignore">
       <title>Ignoring</title>
       <content>
         <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> on the parameter will avoid the value from transmitting. It’s usually used for optimized entity by removing the parameter not being used by remote site, like the sender in event arguments.</para>
@@ -30,7 +30,7 @@
       </content>
     </section>
 
-    <section>
+    <section address="Event">
       <title>Event</title>
       <content>
         <para>When using these attributes on events, specifies those on the delegate of the event handler. Or, use <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterIgnoredAttribute</codeEntityReference>, <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute</codeEntityReference> and <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute</codeEntityReference> on the event instead which have higher priority than those on delegate.</para>
@@ -40,6 +40,10 @@
     <relatedTopics>
       <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
       <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="e0c354d3-50df-45a7-a19f-8053f4a4b52a">Example 2: Method Parameter Ignored and Two-way</link>
+      <link xlink:href="1546aac8-8553-468e-8cc6-f3f2cefb6784">Example 5: Property and Generic Interface</link>
+      <link xlink:href="ddf8c107-d1ad-4e41-b851-1ab542686164">Example 6: Indexer</link>
+      <link xlink:href="3fce1b5d-997f-4caa-9239-73257e7d6abe">Example 9: Event One-way, Ignored, Local Exception Handling and Timeout, Parameter Ignored and Two-way</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

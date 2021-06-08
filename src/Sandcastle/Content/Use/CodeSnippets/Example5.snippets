@@ -7,6 +7,10 @@ public interface ITest5&lt;out T&gt; where T: struct
     T Current { get; }
 
     int Value { get; set; }
+
+    [ReturnIgnored] int ReturnIgnored { get; }
+
+    [ReturnIgnored] int ReturnIgnoredButException { get; }
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
@@ -14,6 +18,10 @@ Public Interface ITest5(Of Out T As {Structure})
     ReadOnly Property Current As T
 
     Property Value As Integer
+
+    &lt;ReturnIgnored&gt; ReadOnly Property ReturnIgnored As Integer
+
+    &lt;ReturnIgnored&gt; ReadOnly Property ReturnIgnoredButException As Integer
 End Interface
     </sampleCode>
   </item>
@@ -24,6 +32,8 @@ public class Server5 : ITest5&lt;DateTime&gt;
 {
     public DateTime Current =&gt; DateTime.Now;
     public int Value { get; set; }
+    public int ReturnIgnored =&gt; 100;
+    public int ReturnIgnoredButException =&gt; throw new Exception("oops.");
 }
     </sampleCode>
     <sampleCode language="VisualBasic">
@@ -37,6 +47,18 @@ Public Class Server5
     End Property
 
     Public Property Value As Integer Implements ITest5(Of Date).Value
+
+    Public ReadOnly Property ReturnIgnored As Integer Implements ITest5(Of Date).ReturnIgnored
+        Get
+            Return 100
+        End Get
+    End Property
+
+    Public ReadOnly Property ReturnIgnoredButException As Integer Implements ITest5(Of Date).ReturnIgnoredButException
+        Get
+            Throw New Exception("oops.")
+        End Get
+    End Property
 End Class
     </sampleCode>
   </item>
@@ -65,8 +87,21 @@ Console.WriteLine(clientProxy.Current.ToLongDateString());
 Console.WriteLine("Value(Set, No return):");
 clientProxy.Value = 100;
 
-Console.WriteLine("Value(Get, 100:");
+Console.WriteLine("Value(Get, 100):");
 Console.WriteLine(clientProxy.Value);
+
+Console.WriteLine("ReturnIgnored(Get, 0 due to return ignored):");
+Console.WriteLine(clientProxy.ReturnIgnored);
+
+Console.WriteLine("ReturnIgnored(Get, Exception):");
+try
+{
+    _ = clientProxy.ReturnIgnoredButException;
+}
+catch (Exception e)
+{
+    Console.WriteLine("Predicted Exception: " + e);
+}
 
 Console.Write("Press any key to continue...");
 Console.ReadKey(true);
@@ -95,8 +130,18 @@ Console.WriteLine(clientProxy.Current.ToLongDateString())
 Console.WriteLine("Value(Set, No return):")
 clientProxy.Value = 100
 
-Console.WriteLine("Value(Get, 100:")
+Console.WriteLine("Value(Get, 100):")
 Console.WriteLine(clientProxy.Value)
+
+Console.WriteLine("ReturnIgnored(Get, 0 due to return ignored):")
+Console.WriteLine(clientProxy.ReturnIgnored)
+
+Console.WriteLine("ReturnIgnored(Get, Exception):")
+Try
+    Dim useless = clientProxy.ReturnIgnoredButException
+Catch ex As Exception
+    Console.WriteLine("Predicted Exception: " + ex.ToString())
+End Try
 
 Console.Write("Press any key to continue...")
 Console.ReadKey(True)

@@ -4,6 +4,9 @@ Imports SecretNest.RemoteAgency.Attributes
 Namespace Test2
 
     Public Interface ITest2
+        <ReturnIgnored>
+        Function IgnoredParameter(value As Integer, <ParameterIgnored> ignored As Integer) As Integer
+
         Sub AddOne(ByRef value As Long)
 
         Sub Read(ByRef value As Long)
@@ -42,6 +45,13 @@ Namespace Test2
     Public Class Server2
         Implements ITest2
         Dim _data As Long
+
+        Public Function IgnoredParameter(value As Integer, <ParameterIgnored(True)> ignored As Integer) As Integer Implements ITest2.IgnoredParameter
+            Console.WriteLine($"Server side: value (should be 100): {value}")
+            Console.WriteLine($"Server side: ignored (should be 0 due to ignored): {ignored}")
+
+            Return value
+        End Function
 
         Public Sub AddOne(ByRef value As Long) Implements ITest2.AddOne
             value += 1
@@ -108,6 +118,9 @@ Namespace Test2
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}")
             Console.WriteLine($"Client side: entity.ComplexResult.Contains(100) (should be True): {entity.ComplexResult.Contains(100)}")
             Console.WriteLine($"Client side: entity.ComplexResult.Contains(200) (should be False): {entity.ComplexResult.Contains(200)}")
+
+            Console.WriteLine("IgnoredParameter(0 due to ignored):")
+            Console.WriteLine(clientProxy.IgnoredParameter(100, 200))
 
             Console.Write("Press any key to continue...")
             Console.ReadKey(True)

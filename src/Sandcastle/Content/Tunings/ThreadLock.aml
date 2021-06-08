@@ -4,9 +4,7 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <introduction>
-      <para>By default, Remote Agency access asset specified using the same thread of processing received message. When messages come from different threads, the assets in target service object should be thread safe for being called from multiple threads.</para>
-    </introduction>
+    <token>ThreadLock Introduction</token>
 
     <section>
       <title>Mode</title>
@@ -24,14 +22,17 @@
     <section address="SynchronizationContext">
       <title>Synchronization Context</title>
       <content>
-        <para>The task factory based on synchronization context is stored at <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgencyBase.SynchronizationContextTaskFactory</codeEntityReference>. This is a static property. When required, the task factory specified is used. If the value is null / Nothing, an instance of task factory based on synchronization context is created from the current thread.</para>
-        <para>Due to the limitation of dotnet core and dotnet 5, synchronization context may not be obtained in any thread. This may cause an exception thrown while trying to create the task factory base on it. To avoid it, always set the value manually in UI thread, like in Form_Load method. To simplify the operation, call <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateSynchronizationContextTaskFactoryFromCurrentThread</codeEntityReference> in UI thread.</para>
+        <para>The task factory based on synchronization context is stored at <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgencyBase.SynchronizationContextTaskFactory</codeEntityReference>. This is a static property. When required, the task factory specified is used. If the value is <codeInline>null</codeInline> / <codeInline>Nothing</codeInline>, an instance of task factory based on synchronization context is created from the current thread.</para>
+        <alert class="caution">
+          <para>Due to the limitation of dotnet core and dotnet 5, synchronization context may not be obtained in any thread. This may cause an exception thrown while trying to create the task factory base on it. To avoid it, always set the value manually in UI thread, like in Form_Load method. To simplify the operation, call <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateSynchronizationContextTaskFactoryFromCurrentThread</codeEntityReference> in UI thread.</para>
+        </alert>
       </content>
     </section>
 
     <relatedTopics>
       <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
       <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="e4a395b7-5162-40a5-a999-040e685755fb">Example 11: ThreadLock</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

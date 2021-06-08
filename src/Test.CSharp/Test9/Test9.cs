@@ -14,6 +14,7 @@ namespace Test.CSharp.Test9
         delegate int MyEventCallback([ParameterReturnRequiredProperty("EntityTwoWayProperty", isIncludedWhenExceptionThrown: true)] EntityInTest9 parameter);
 
         event MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
+        [ReturnIgnored()]
         delegate int MyEventWithTwoWayParameterCallback(int parameter, ref int parameter1, out int parameter2, [ParameterIgnored]int ignored);
 
         [LocalExceptionHandling]
@@ -75,7 +76,7 @@ namespace Test.CSharp.Test9
             {
                 var p1 = 101;
                 var result = MyEventWithTwoWayParameter(100, ref p1, out var p2, 103);
-                Console.WriteLine($"Server side: (1): {result}");
+                Console.WriteLine($"Server side: (0 due to return ignored): {result}");
                 Console.WriteLine($"Server side: p1=(501): {p1}");
                 Console.WriteLine($"Server side: p2=(502): {p2}");
             }

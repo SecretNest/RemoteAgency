@@ -4,38 +4,12 @@
     xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <introduction>
-      <para>When attributes should be marked on the proxy being created by Remote Agency, the information should be specified by <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference>, <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</codeEntityReference>, <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</codeEntityReference> and <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</codeEntityReference> on interface and its assets.</para>
-    </introduction>
+    <token>Attribute Pass-Through Introduction</token>
 
     <section>
       <title>Attributes</title>
       <content>
-        <para>When an attribute is required on the proxy being created, follow these steps:</para>
-        <list class="ordered">
-          <listItem>
-            <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</codeEntityReference> on the asset which requires the attribute. Event, method, property, parameter, generic parameter, return value and interface are supported.</para>
-            <para>When a constructor with parameters should be used, specify all types of parameters in attributeConstructorParameterTypes.</para>
-            <para>When parameters of constructor can be provided in order, specify them in attributeConstructorParameters. The length of parameters cannot exceed the length of attributeConstructorParameterTypes. When this is shorter, the missing parameters will be filled by null / Nothing.</para>
-            <para>When additional information need to be provided, attributeId should to be set with a unique string, which is the same as the AttributeId of the attributes providing additional information.</para>
-          </listItem>
-          <listItem>
-            <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</codeEntityReference> on the asset with the same attributeId to pass additional parameter to the constructor. Parameter parameterIndex cannot be negative, equal or larger than the length of the parameters of the constructor. Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</para>
-            <para>When multiple parameters are required, specify one at a time.</para>
-          </listItem>
-          <listItem>
-            <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</codeEntityReference> on the asset with the same attributeId when some property need to be set. The property pointed by propertyName should be settable publicly.</para>
-            <para>Parameter order can be adjust when setting order needs to be guaranteed. The property with smaller order number will be set first. Default value is 0.</para>
-            <para>When multiple properties are required to be set, specify one at a time.</para>
-          </listItem>
-          <listItem>
-            <para>Marking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</codeEntityReference> on the asset with the same attributeId when some field need to be set. The field pointed by fieldName should be settable publicly.</para>
-            <para>Parameter order can be adjust when setting order needs to be guaranteed. The field with smaller order number will be set first. Default value is 0.</para>
-            <para>When multiple fields are required to be set, specify one at a time.</para>
-          </listItem>
-        </list>
-        <para>The setting order between properties and fields are controlled by dotnet runtime.</para>
-        <para>When multiple attributes are required, specify each of them using the steps above.</para>
+        <token>Attribute Pass-Through Description</token>
       </content>
     </section>
 
@@ -49,6 +23,7 @@
     <relatedTopics>
       <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
       <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="9d138999-0ebe-4bd8-90d5-0b84f2000a0a">Example 10: Attributes Pass-Through</link>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

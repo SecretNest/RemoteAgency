@@ -7,6 +7,9 @@ namespace Test.CSharp.Test2
 {
     public interface ITest2
     {
+        [ReturnIgnored]
+        int IgnoredParameter(int value, [ParameterIgnored] int ignored);
+
         void AddOne(ref long value);
 
         void Read(out long value);
@@ -49,6 +52,14 @@ namespace Test.CSharp.Test2
     public class Server2 : ITest2
     {
         private long _data;
+
+        public int IgnoredParameter(int value, int ignored)
+        {
+            Console.WriteLine($"Server side: value (should be 100): {value}");
+            Console.WriteLine($"Server side: ignored (should be 0 due to ignored): {ignored}");
+
+            return value;
+        }
 
         public void AddOne(ref long value)
         {
@@ -119,6 +130,9 @@ namespace Test.CSharp.Test2
             Console.WriteLine($"Client side: entity.TwoWayProperty (should be SetFromServer): {entity.TwoWayProperty}");
             Console.WriteLine($"Client side: entity.ComplexResult.Contains(100) (should be true): {entity.ComplexResult.Contains(100)}");
             Console.WriteLine($"Client side: entity.ComplexResult.Contains(200) (should be false): {entity.ComplexResult.Contains(200)}");
+
+            Console.WriteLine("IgnoredParameter(0 due to ignored):");
+            Console.WriteLine(clientProxy.IgnoredParameter(100, 200));
 
             Console.Write("Press any key to continue...");
             Console.ReadKey(true);

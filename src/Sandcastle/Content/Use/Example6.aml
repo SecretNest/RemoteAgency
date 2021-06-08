@@ -14,6 +14,7 @@
       <title>Brief</title>
       <content>
         <para>Remote Agency supports indexer property, no matter the type and number of parameters.</para>
+        <para>A parameter which is marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> will be ignored from passing to target and always has the default value. See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#Ignore" /> for details.</para>
       </content>
     </section>
 

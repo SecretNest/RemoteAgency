@@ -15,12 +15,12 @@
       <content>
         <para>Remote Agency supports tunings of remote calling of methods such as:</para>
         <list class="bullet">
-          <listItem>One way, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute</codeEntityReference>,</listItem>
+          <listItem>One-way, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute</codeEntityReference>,</listItem>
           <listItem>Ignored, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference>,</listItem>
           <listItem>Enabling <link xlink:href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" />, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference>, and</listItem>
           <listItem>Adjusting timeout time, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference>.</listItem>
         </list>
-        <para>For one way, ignored and timeout behavior, check <link xlink:href="e7b65736-b2df-4aa9-897a-3a3050d3cceb" /> for details.</para>
+        <para>For one-way, ignored and timeout behavior, check <link xlink:href="e7b65736-b2df-4aa9-897a-3a3050d3cceb" /> for details.</para>
       </content>
     </section>
 
@@ -74,7 +74,6 @@
     <relatedTopics>
       <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a">Examples</link>
       <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference>
-      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>
       <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>
     </relatedTopics>

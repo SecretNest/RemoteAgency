@@ -7,7 +7,7 @@ Namespace Test6
         Default Property Item(index As Integer) As Integer
 
         <OperatingTimeoutTime(1000, 2000)>
-        Default Property Item(name As String) As Integer
+        Default Property Item(name As String, <ParameterIgnored> ignored As String) As Integer
     End Interface
 
     Public Class Server6
@@ -24,8 +24,11 @@ Namespace Test6
             End Set
         End Property
 
-        Default Public Property Item(name As String) As Integer Implements ITest6.Item
+        Default Public Property Item(name As String, ignored As String) As Integer Implements ITest6.Item
             Get
+                If ignored IsNot Nothing Then
+                    Console.WriteLine("Server side: Why is this happened?")
+                End If
                 Dim index As Integer
                 If Integer.TryParse(name, index) Then
                     Return _data(index)
@@ -35,6 +38,9 @@ Namespace Test6
                 End If
             End Get
             Set(value As Integer)
+                If ignored IsNot Nothing Then
+                    Console.WriteLine("Server side: Why is this happened?")
+                End If
                 Dim index As Integer
                 If Integer.TryParse(name, index) Then
                     _data(index) = value
@@ -69,23 +75,23 @@ Namespace Test6
             Console.WriteLine("Item(4)(Set+Get, No return):")
             clientProxy(4) += 100
 
-            Console.WriteLine("Item(""4"")(Get, 204):")
-            Console.WriteLine(clientProxy("4"))
+            Console.WriteLine("Item(""4"", ""brabrabra"")(Get, 204):")
+            Console.WriteLine(clientProxy("4", "brabrabra"))
 
-            Console.WriteLine("Item(""Timeout"")(Get, Timeout):")
+            Console.WriteLine("Item(""Timeout"", ""brabrabra"")(Get, Timeout):")
             Try
                 ' ReSharper disable once UnusedVariable
-                Console.WriteLine(clientProxy("Timeout"))
+                Console.WriteLine(clientProxy("Timeout", "brabrabra"))
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())
             End Try
 #Enable Warning CA1031 ' Do not catch general exception types
 
-            Console.WriteLine("Item(""Timeout"")(Set, Timeout):")
+            Console.WriteLine("Item(""Timeout"", ""brabrabra"")(Set, Timeout):")
             Try
                 ' ReSharper disable once UnusedVariable
-                clientProxy("Timeout") = 0
+                clientProxy("Timeout", "brabrabra") = 0
 #Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Console.WriteLine("Predicted Exception: " + ex.ToString())

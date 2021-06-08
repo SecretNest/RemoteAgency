@@ -5,8 +5,9 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <introduction>
-      <para>Remote Agency supports returning value of parameter.</para>
+      <para>Remote Agency supports returning value from parameter.</para>
       <para>Through there is no way to pass a reference among apps, Remote Agency can pass the value of parameter back to the caller to simulate this feature.</para>
+      <para>Also, value of parameter and return can be opt-out from transferring.</para>
     </introduction>
 
     <token>Example Prerequisites Reference</token>
@@ -14,8 +15,10 @@
     <section>
       <title>Brief</title>
       <content>
-        <para>When a parameter is marked with <codeInline>ref</codeInline> (C#) or <codeInline>ByRef</codeInline> (VB.Net), the parameter will be passed as reference. This is defined by dotnet standard. Unfortunately, there is no such a good way to pass reference among applications. To simulate this feature, Remote Agency pass the value of parameter back to the caller when required. Also, the parameter marked with <codeInline>out</codeInline> (C#) should be returned to the caller. Additionally, some properties specified in entity class used by parameter can also be returned.</para>
-        <para>See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#TwoWay" /> for details.</para>
+        <para>By dotnet standard, a parameter which is marked with <codeInline>ref</codeInline> (C#) or <codeInline>ByRef</codeInline> (VB.Net) should be passed as reference. Unfortunately, there is no such a good way to pass reference among applications. To simulate this feature, Remote Agency pass the value of parameter back to the caller when required. Also, the value of the parameter marked with <codeInline>out</codeInline> (C#) will be returned. Additionally, some properties in entity class used by parameter can also be returned by using <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference> on the parameter, and <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference> on the property of helper class.</para>
+        <para>A parameter which is marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> will be ignored from passing to target and always has the default value.</para>
+        <para>The return code of the method which is marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference> will be ignored form passing back to caller and always has the default value.</para>
+        <para>See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090" /> for details.</para>
       </content>
     </section>
 
