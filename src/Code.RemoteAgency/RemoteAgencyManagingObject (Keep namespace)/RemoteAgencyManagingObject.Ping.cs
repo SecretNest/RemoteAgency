@@ -11,7 +11,7 @@ namespace SecretNest.RemoteAgency
             var pingMessage = CreateEmptyMessage();
             pingMessage.AssetName = Const.SpecialCommandProxyPing;
             PrepareDefaultTargetRequestMessageReceivedFromInside(pingMessage, MessageType.SpecialCommand, false);
-            DateTime start = DateTime.Now;
+            var start = DateTime.Now;
 
             if (TryProcessRequestAndWaitResponseWithoutException(pingMessage,
                 ProcessPreparedRequestMessageReceivedFromInside, (int) maxWaitingTime.TotalMilliseconds,

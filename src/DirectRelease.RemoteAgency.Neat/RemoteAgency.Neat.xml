@@ -4,6 +4,46 @@
         <name>SecretNest.RemoteAgency.Neat</name>
     </assembly>
     <members>
+        <member name="T:SecretNest.RemoteAgency.CreatedProxy">
+            <summary>
+            Represents the instance of the created proxy.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy.#ctor(System.Guid,System.Object)">
+            <summary>
+            Initializes an instance of CreatedProxy.
+            </summary>
+            <param name="instanceId">Id of the proxy instance.</param>
+            <param name="proxy">Proxy created.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy.InstanceId">
+            <summary>
+            Gets the id of the proxy instance.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy.Proxy">
+            <summary>
+            Gets the proxy created.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.CreatedProxy`1">
+            <summary>
+            Represents the instance of the created proxy, created based on the service contract specified by <typeparamref name="TInterface"/>.
+            </summary>
+            <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy`1.#ctor(System.Guid,`0)">
+            <summary>
+            Initializes an instance of CreatedProxy.
+            </summary>
+            <param name="instanceId">Id of the proxy instance.</param>
+            <param name="proxy">Proxy created.</param>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy`1.ProxyGeneric">
+            <summary>
+            Gets the proxy created.
+            </summary>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Helper.ProxyEventHelper">
             <summary>
             Defines a helper class to be implanted into built assembly for event servicing in proxy.
@@ -750,13 +790,12 @@
             <value>The site id of this instance.</value>
             <remarks>SiteId is used to identify the instance of Remote Agency when routing messages on network.</remarks>
         </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid,System.Type)">
+        <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.#ctor(SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid)">
             <summary>
             Initializes the instance of Remote Agency.
             </summary>
             <param name="entityTypeBuilder">Entity type builder.</param>
             <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
-            <param name="entityBase">Type of the entity base.</param>
         </member>
         <member name="P:SecretNest.RemoteAgency.RemoteAgencyBase.SynchronizationContextTaskFactory">
             <summary>
@@ -1155,62 +1194,6 @@
             </summary>
             <param name="serialized">Serialized data.</param>
             <returns>Entity object.</returns>
-        </member>
-        <member name="T:SecretNest.RemoteAgency.CreatedProxy">
-            <summary>
-            Represents the instance of the created proxy.
-            </summary>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.CreatedProxy.#ctor(System.Guid,System.Object)">
-            <summary>
-            Initializes an instance of CreatedProxy.
-            </summary>
-            <param name="instanceId">Id of the proxy instance.</param>
-            <param name="proxy">Proxy created.</param>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.CreatedProxy.InstanceId">
-            <summary>
-            Gets the id of the proxy instance.
-            </summary>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.CreatedProxy.Proxy">
-            <summary>
-            Gets the proxy created.
-            </summary>
-        </member>
-        <member name="T:SecretNest.RemoteAgency.CreatedProxy`1">
-            <summary>
-            Represents the instance of the created proxy, created based on the service contract specified by <typeparamref name="TInterface"/>.
-            </summary>
-            <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.CreatedProxy`1.#ctor(System.Guid,`0)">
-            <summary>
-            Initializes an instance of CreatedProxy.
-            </summary>
-            <param name="instanceId">Id of the proxy instance.</param>
-            <param name="proxy">Proxy created.</param>
-        </member>
-        <member name="P:SecretNest.RemoteAgency.CreatedProxy`1.ProxyGeneric">
-            <summary>
-            Gets the proxy created.
-            </summary>
-        </member>
-        <member name="T:SecretNest.RemoteAgency.RemoteAgency`1">
-            <summary>
-            Remote Agency from SecretNest.info. 
-            </summary>
-            <typeparam name="TSerialized">Type of the serialized data.</typeparam>
-            <remarks>Type of the parent class of all entities is set to object.</remarks>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.RemoteAgency`1.#ctor(SecretNest.RemoteAgency.SerializingHelperBase{`0,System.Object},SecretNest.RemoteAgency.EntityTypeBuilderBase,System.Guid)">
-            <summary>
-            Initializes an instance of Remote Agency with type of serialized data specified.
-            </summary>
-            <param name="serializingHelper">Serializer helper.</param>
-            <param name="entityTypeBuilder">Entity type builder.</param>
-            <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty.</param>
-            <remarks>Type of the parent class of all entities is set to object.</remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase">
             <summary>

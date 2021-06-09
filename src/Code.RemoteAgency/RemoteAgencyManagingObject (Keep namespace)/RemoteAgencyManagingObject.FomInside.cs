@@ -6,7 +6,7 @@ namespace SecretNest.RemoteAgency
     {
         protected void ProcessPreparedRequestMessageReceivedFromInside(IRemoteAgencyMessage message)
         {
-            //local site id will be set by manager.
+            //message.SenderSiteId leave to manager.
             _sendMessageToManagerCallback(message);
         }
 

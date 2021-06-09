@@ -8,7 +8,7 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-        readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ();
+        private readonly ConcurrentDictionary<Guid, ResponderItem> _responders = new ();
 
         public List<Guid> GetWaitingMessageIds() => _responders.Keys.ToList();
 
@@ -66,15 +66,15 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        bool WaitingForRespondersClosed()
+        private bool WaitingForRespondersClosed()
         {
-            DateTime timeoutTime = DateTime.Now.AddMilliseconds(_getWaitingTimeForDisposingCallback());
+            var timeoutTime = DateTime.Now.AddMilliseconds(_getWaitingTimeForDisposingCallback());
             while (!_responders.IsEmpty)
             {
                 var first = _responders.Values.FirstOrDefault();
                 if (first == null) continue;
 
-                int timeout = (int)(timeoutTime - DateTime.Now).TotalMilliseconds;
+                var timeout = (int)(timeoutTime - DateTime.Now).TotalMilliseconds;
                 if (timeout <= 0) return false;
 
                 if (!first.WaitOnly(timeout))
@@ -84,7 +84,7 @@ namespace SecretNest.RemoteAgency
             return true; //all responders are closed gracefully. no need to close forcibly.
         }
 
-        void ForceCloseAllResponders()
+        private void ForceCloseAllResponders()
         {
             if (!_responders.IsEmpty)
             {
@@ -104,7 +104,7 @@ namespace SecretNest.RemoteAgency
             }
         }
 
-        class ResponderItem : IDisposable
+        private class ResponderItem : IDisposable
         {
             public IRemoteAgencyMessage SentMessage { get; private set; }
             public DateTime StartWaiting { get; private set; }
@@ -130,7 +130,7 @@ namespace SecretNest.RemoteAgency
 
             public void SetWhenEmpty(IRemoteAgencyMessage value)
             {
-                if (_value == null) _value = value;
+                _value ??= value;
                 _waitHandle?.Set();
             }
 

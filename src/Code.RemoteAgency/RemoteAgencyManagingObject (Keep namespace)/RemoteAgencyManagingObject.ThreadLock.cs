@@ -6,7 +6,6 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyManagingObject
     {
-
         #region Entry methods
         protected void ProcessThreadLockWithReturn(
             AccessWithReturn callback, IRemoteAgencyMessage message,

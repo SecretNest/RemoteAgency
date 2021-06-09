@@ -5,12 +5,12 @@ namespace SecretNest.RemoteAgency
 {
     abstract partial class RemoteAgencyManagingObject
     {
-        public Guid InstanceId { get; }
+        protected Guid InstanceId { get; }
 
         private Action<IRemoteAgencyMessage> _sendMessageToManagerCallback; //send message out
         private Action<Guid, string, Exception> _sendExceptionToManagerCallback; //redirect exception in user code, string is the asset name
         private CreateEmptyMessageCallback _createEmptyMessageCallback;
-        protected int DefaultTimeOutTime { get; }
+        private int DefaultTimeOutTime { get; }
         private readonly Func<int> _getWaitingTimeForDisposingCallback; //get WaitingTimeForDisposing.
 
         #region Constructors
@@ -108,9 +108,9 @@ namespace SecretNest.RemoteAgency
     {
         private IProxyCommunicate _proxyObject;
 
-        public Guid DefaultTargetSiteId { get; }
+        private Guid DefaultTargetSiteId { get; }
 
-        public Guid DefaultTargetInstanceId { get; }
+        private Guid DefaultTargetInstanceId { get; }
 
         //requested by manager: RemoteAgency.OnRemoteServiceWrapperClosing
         public override void OnServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId) 

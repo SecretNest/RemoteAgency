@@ -2,6 +2,7 @@
 {
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
+        //called from RemoteAgencyManagingObjectProxy and RemoteAgencyManagingObjectServiceWrapper
         void ProcessMessageReceivedFromInside(IRemoteAgencyMessage message)
         {
             message.SenderSiteId = SiteId;
@@ -15,6 +16,7 @@
             }
             else
             {
+                //filter message before being sent out
                 BeforeMessageSendingProcess(ref entityMessage, out bool shouldTerminate);
 
                 if (shouldTerminate)
@@ -24,6 +26,8 @@
             }
         }
 
+        //called from ProcessMessageReceivedAfterFiltering
+        //and when an error message of InstanceNotFoundException need to be sent back.
         void ProcessMessageReceivedFromInsideBypassFiltering(TEntityBase message)
         {
             //internal routing
@@ -37,6 +41,7 @@
             }
         }
 
+        //Final step to send message out
         void ProcessMessageReceivedFromInsideAfterInternalRoutingAndFiltering(TEntityBase message)
         {
             SendMessageFinal(message);

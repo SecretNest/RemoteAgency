@@ -39,6 +39,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="taskScheduler">Task scheduler.</param>
         /// <returns>Result</returns>
         /// <seealso cref="ThreadLockAttribute"/>
+        //also as a callback to be transferred to RemoteAgencyManagingObjectProxy and RemoteAgencyManagingObjectServiceWrapper
         public bool TryGetTaskScheduler(string name, out TaskScheduler taskScheduler)
         {
             return _namedTaskSchedulers.TryGetValue(name, out taskScheduler);

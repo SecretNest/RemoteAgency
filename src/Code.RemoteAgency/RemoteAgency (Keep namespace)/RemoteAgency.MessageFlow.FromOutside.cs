@@ -9,8 +9,10 @@ namespace SecretNest.RemoteAgency
 
     partial class RemoteAgency<TSerialized, TEntityBase>
     {
+        //First step to process received message.
         void ProcessMessageReceivedFromOutside(TEntityBase message)
         {
+            //filter message after received
             AfterMessageReceivedProcess(ref message, out bool shouldTerminate);
 
             if (shouldTerminate)
@@ -18,6 +20,7 @@ namespace SecretNest.RemoteAgency
 
             ProcessMessageReceivedAfterFiltering(message);
         }
+
 
         void ProcessMessageReceivedAfterFiltering(TEntityBase message)
             => ProcessMessageReceivedAfterFiltering((IRemoteAgencyMessage) message);
@@ -59,20 +62,16 @@ namespace SecretNest.RemoteAgency
                     message.SenderInstanceId, message.MessageType,
                     message.AssetName, message.MessageId, exception);
                 ProcessMessageReceivedFromInsideBypassFiltering((TEntityBase) emptyMessage);
+                //Note: this will not make a deadlock coz it only send an error message, which the IsOneWay is always true.
             }
         }
 
-        static void ProcessMessageReceivedOnManagingObject(RemoteAgencyManagingObject<TEntityBase> managingObject,
-            IRemoteAgencyMessage message)
-        {
-            managingObject.ProcessMessageReceivedFromOutside(message);
-        }
-
+        //Final step of received message, sent to managed object
         private protected override bool FindManagingObjectAndSendMessage(IRemoteAgencyMessage message)
         {
             if (_managingObjects.TryGetValue(message.TargetInstanceId, out var managingObject))
             {
-                ProcessMessageReceivedOnManagingObject(managingObject, message);
+                managingObject.ProcessMessageReceivedFromOutside(message);
                 return true;
             }
             else

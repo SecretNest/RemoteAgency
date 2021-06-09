@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency
             var buildings = entitiesInfo.Select(entityInfo =>
             {
                 var typeBuilder = moduleBuilder.DefineType(entityInfo.EntityClassName,
-                    /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
+                    /*TypeAttributes.Class | */TypeAttributes.Public, EntityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
                 EmitGenericParameters(typeBuilder, entityInfo.GenericParameters,

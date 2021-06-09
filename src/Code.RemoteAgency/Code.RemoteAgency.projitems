@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Const.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreatedProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DictionaryTryAddHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ProxyEventHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />

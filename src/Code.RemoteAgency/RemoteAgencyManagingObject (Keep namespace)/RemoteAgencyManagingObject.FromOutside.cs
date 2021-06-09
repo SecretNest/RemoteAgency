@@ -69,7 +69,7 @@ namespace SecretNest.RemoteAgency
 
         protected abstract void ProcessPropertySetMessageReceived(IRemoteAgencyMessage message);
 
-        protected void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
+        private void ProcessSpecialCommandMessageReceived(IRemoteAgencyMessage message)
         {
             if (message.AssetName == Const.SpecialCommandProxyPing)
             {
@@ -120,16 +120,14 @@ namespace SecretNest.RemoteAgency
 
         protected void ThrowExceptionWhenNecessary(string assetName, Exception exception, LocalExceptionHandlingMode localExceptionHandlingMode)
         {
-            if (exception != null)
+            if (exception == null) return;
+            switch (localExceptionHandlingMode)
             {
-                if (localExceptionHandlingMode == LocalExceptionHandlingMode.Throw)
-                {
+                case LocalExceptionHandlingMode.Throw:
                     throw exception;
-                }
-                else if (localExceptionHandlingMode == LocalExceptionHandlingMode.Redirect)
-                {
+                case LocalExceptionHandlingMode.Redirect:
                     _sendExceptionToManagerCallback(InstanceId, assetName, exception);
-                }
+                    break;
             }
         }
     }

@@ -1083,15 +1083,6 @@
   <HelpKINode Title="Receiving enumeration member" Url="html/T_SecretNest_RemoteAgency_MessageDirection.htm" />
   <HelpKINode Title="Redirect enumeration member" Url="html/T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingMode.htm" />
   <HelpKINode Title="RedirectedException property" Url="html/P_SecretNest_RemoteAgency_ExceptionRedirectedEventArgs_RedirectedException.htm" />
-  <HelpKINode Title="RemoteAgency(Of TSerialized) class">
-    <HelpKINode Title="RemoteAgency(TSerialized) Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_1__ctor.htm" />
-    <HelpKINode Title="events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="fields" Url="html/Fields_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-  </HelpKINode>
-  <HelpKINode Title="RemoteAgency(Of TSerialized).RemoteAgency constructor" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_1__ctor.htm" />
   <HelpKINode Title="RemoteAgency(Of TSerialized, TEntityBase) class">
     <HelpKINode Title="RemoteAgency(TSerialized, TEntityBase) Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_2.htm" />
     <HelpKINode Title="events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency_2.htm" />
@@ -1142,15 +1133,6 @@
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.TryGetWaitingMessage method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_TryGetWaitingMessage.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.TryGetWaitingMessageIds method" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_2_TryGetWaitingMessageIds.htm" />
   <HelpKINode Title="RemoteAgency&lt;TSerialized, TEntityBase&gt;.TryPing method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_TryPing.htm" />
-  <HelpKINode Title="RemoteAgency&lt;TSerialized&gt; class">
-    <HelpKINode Title="RemoteAgency(TSerialized) Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_1__ctor.htm" />
-    <HelpKINode Title="events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="fields" Url="html/Fields_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
-  </HelpKINode>
-  <HelpKINode Title="RemoteAgency&lt;TSerialized&gt;.RemoteAgency constructor" Url="html/M_SecretNest_RemoteAgency_RemoteAgency_1__ctor.htm" />
   <HelpKINode Title="RemoteAgencyBase class">
     <HelpKINode Title="RemoteAgencyBase Class" Url="html/T_SecretNest_RemoteAgency_RemoteAgencyBase.htm" />
     <HelpKINode Title="events" Url="html/Events_T_SecretNest_RemoteAgency_RemoteAgencyBase.htm" />
@@ -1402,10 +1384,8 @@
   <HelpKINode Title="SecretNest.RemoteAgency.MessageProcessTerminatedException class" Url="html/T_SecretNest_RemoteAgency_MessageProcessTerminatedException.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.MessageProcessTerminatedPosition enumeration" Url="html/T_SecretNest_RemoteAgency_MessageProcessTerminatedPosition.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.MessageType enumeration" Url="html/T_SecretNest_RemoteAgency_MessageType.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.RemoteAgency(Of TSerialized) class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.RemoteAgency(Of TSerialized, TEntityBase) class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_2.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.RemoteAgency&lt;TSerialized, TEntityBase&gt; class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_2.htm" />
-  <HelpKINode Title="SecretNest.RemoteAgency.RemoteAgency&lt;TSerialized&gt; class" Url="html/T_SecretNest_RemoteAgency_RemoteAgency_1.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.RemoteAgencyBase class" Url="html/T_SecretNest_RemoteAgency_RemoteAgencyBase.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.SendOneWayMessageCallback delegate" Url="html/T_SecretNest_RemoteAgency_SendOneWayMessageCallback.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.SendTwoWayMessageCallback delegate" Url="html/T_SecretNest_RemoteAgency_SendTwoWayMessageCallback.htm" />

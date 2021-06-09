@@ -93,7 +93,7 @@ namespace SecretNest.RemoteAgency
             if (isProxyRequired)
             {
                 proxyTypeBuilder = moduleBuilder.DefineType(basicInfo.ProxyTypeName,
-                    /*TypeAttributes.Class | */TypeAttributes.Public, _entityBase,
+                    /*TypeAttributes.Class | */TypeAttributes.Public, EntityBase,
                     new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
 
                 EmitAttributePassThroughAttributes(proxyTypeBuilder, info.InterfaceLevelPassThroughAttributes);
