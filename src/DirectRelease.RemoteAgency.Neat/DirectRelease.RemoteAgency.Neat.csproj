@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net461;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net461;netcoreapp2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency.Neat</PackageId>
     <Authors>Allen Cui</Authors>
@@ -28,7 +28,7 @@
     <DefineConstants>netfx</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'"> <!--Doc is same.-->
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.1'"> <!--Doc is same.-->
     <DocumentationFile>RemoteAgency.Neat.xml</DocumentationFile>
   </PropertyGroup>
 

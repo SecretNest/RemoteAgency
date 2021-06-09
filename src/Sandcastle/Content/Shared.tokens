@@ -28,6 +28,9 @@
   <item id="Attribute Pass-Through Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
   <ddue:para>When attributes should be marked on the proxy being created by Remote Agency, the information should be specified by <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</ddue:codeEntityReference>, <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</ddue:codeEntityReference>, <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</ddue:codeEntityReference> and <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</ddue:codeEntityReference> on interface and its assets.</ddue:para>
 </ddue:introduction></item>
+  <item id="Ping Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+    <ddue:para>Ping test is designed for testing the delay and the connectivity between proxy and remote service wrapper.</ddue:para>
+</ddue:introduction></item>
   <item id="Remote Agency Abstraction Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
   <ddue:linkText>NuGet</ddue:linkText>
   <ddue:linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Abstraction/</ddue:linkUri>
@@ -61,16 +64,26 @@
   <item id="Sequential Scheduler Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Nuget</ddue:linkText><ddue:linkUri>https://www.nuget.org/packages/SecretNest.SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
   <item id="Supported Framework Version List"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Supported Frameworks:
   <ddue:list class="bullet">
+    <ddue:listItem>All platform supported by .Net Standard 2.1
+      <ddue:alert class="note">Starts from
+        <ddue:list class="bullet">
+          <ddue:listItem>.Net 5.0</ddue:listItem>
+          <ddue:listItem>.Net Core 3.0</ddue:listItem>
+          <ddue:listItem>Mono 6.4</ddue:listItem>
+          <ddue:listItem>Xamarin.iOS 12.16</ddue:listItem>
+          <ddue:listItem>Xamarin.Mac 5.16</ddue:listItem>
+          <ddue:listItem>Xamarin.Android 10</ddue:listItem>
+          <ddue:listItem>An upcoming version Universal Windows Platform</ddue:listItem>
+          <ddue:listItem>An upcoming version Unity</ddue:listItem>
+        </ddue:list>
+        <ddue:para>See <ddue:externalLink><ddue:linkText>this article</ddue:linkText><ddue:linkUri>https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support</ddue:linkUri></ddue:externalLink> for details.</ddue:para>
+      </ddue:alert>
+    </ddue:listItem>
     <ddue:listItem>.Net Framework 4.6.1 and higher version</ddue:listItem>
     <ddue:listItem>.Net Core 2.1</ddue:listItem>
-    <ddue:listItem>.Net Core 3.1</ddue:listItem>
-    <ddue:listItem>.Net 5</ddue:listItem>
   </ddue:list>
 </ddue:para></item>
   <item id="ThreadLock Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
   <ddue:para>By default, Remote Agency access asset specified using the same thread of processing received message. When messages come from different threads, the assets in target service object should be thread safe for being called from multiple threads.</ddue:para>
-</ddue:introduction></item>
-  <item id="Ping Introduction"><ddue:introduction>
-    <ddue:para>Ping test is designed for testing the delay and the connectivity between proxy and remote service wrapper.</ddue:para>
 </ddue:introduction></item>
 </content>
