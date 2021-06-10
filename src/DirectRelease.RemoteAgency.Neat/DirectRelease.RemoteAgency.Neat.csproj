@@ -1,24 +1,8 @@
-﻿<!--EXTERNAL_PROPERTIES: TargetFramework-->
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net461;netcoreapp2.1</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
-    <PackageId>SecretNest.RemoteAgency.Neat</PackageId>
-    <Authors>Allen Cui</Authors>
-    <Company>SecretNest.info</Company>
-    <Product>Remote Agency</Product>
-    <Description></Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <Copyright>Allen Cui</Copyright>
-    <PackageIconUrl></PackageIconUrl>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
-    <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency.Neat</AssemblyName>
     <Configurations>Debug;Release</Configurations>
     <LangVersion>9.0</LangVersion>

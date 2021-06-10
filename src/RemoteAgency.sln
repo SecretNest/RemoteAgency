@@ -52,6 +52,12 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Test.VB", "Test.VB\Test.VB.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.Injection", "Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.shproj", "{715C9A5E-CD2D-42C8-B364-9744E56265A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency.Abstraction", "NuGet.RemoteAgency.Abstraction\NuGet.RemoteAgency.Abstraction.csproj", "{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency", "NuGet.RemoteAgency\NuGet.RemoteAgency.csproj", "{992E2F62-5F36-4BED-9E02-32B9D64C34A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency.Neat", "NuGet.RemoteAgency.Neat\NuGet.RemoteAgency.Neat.csproj", "{446833F0-3100-4ABF-B5AF-0D8768F6584B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
@@ -63,12 +69,22 @@ Global
 		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{69b6869b-fd3a-4904-a8fe-4b77874b6f74}*SharedItemsImports = 13
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{715c9a5e-cd2d-42c8-b364-9744e56265a4}*SharedItemsImports = 13
 		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{83b11913-8d83-4e85-93cf-fd6be78f2b5d}*SharedItemsImports = 13
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{93927ab8-d6b6-4b10-8a52-abc25c80d0e3}*SharedItemsImports = 5
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
 		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{a1ef6d47-3994-4f5e-9488-e3de7ebc9ab4}*SharedItemsImports = 13
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
 		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{d9e5ac17-43db-406c-9fdc-c7b34a703acf}*SharedItemsImports = 13
@@ -76,6 +92,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Doc|Any CPU = Doc|Any CPU
+		NuGet|Any CPU = NuGet|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -83,35 +100,54 @@ Global
 		{3893D742-0C28-4562-915A-8656196A3B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3893D742-0C28-4562-915A-8656196A3B7C}.Doc|Any CPU.ActiveCfg = Release|Any CPU
 		{3893D742-0C28-4562-915A-8656196A3B7C}.Doc|Any CPU.Build.0 = Release|Any CPU
+		{3893D742-0C28-4562-915A-8656196A3B7C}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{3893D742-0C28-4562-915A-8656196A3B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3893D742-0C28-4562-915A-8656196A3B7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Doc|Any CPU.ActiveCfg = Release|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Doc|Any CPU.Build.0 = Release|Any CPU
+		{11B3F107-2F03-4A21-9241-723F1642A3FA}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11B3F107-2F03-4A21-9241-723F1642A3FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.Doc|Any CPU.ActiveCfg = Release|Any CPU
+		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{618EDEA0-8656-4904-9DD6-9655EB98B67D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C158D1A7-213E-449D-8791-152CEA833953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C158D1A7-213E-449D-8791-152CEA833953}.Doc|Any CPU.ActiveCfg = Release|Any CPU
 		{C158D1A7-213E-449D-8791-152CEA833953}.Doc|Any CPU.Build.0 = Release|Any CPU
+		{C158D1A7-213E-449D-8791-152CEA833953}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{C158D1A7-213E-449D-8791-152CEA833953}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Doc|Any CPU.ActiveCfg = Debug|Any CPU
-		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Doc|Any CPU.Build.0 = Debug|Any CPU
+		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1209FA34-8892-41AA-816A-10CFA02474C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1209FA34-8892-41AA-816A-10CFA02474C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1209FA34-8892-41AA-816A-10CFA02474C4}.Doc|Any CPU.ActiveCfg = Debug|Any CPU
-		{1209FA34-8892-41AA-816A-10CFA02474C4}.Doc|Any CPU.Build.0 = Debug|Any CPU
+		{1209FA34-8892-41AA-816A-10CFA02474C4}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
 		{1209FA34-8892-41AA-816A-10CFA02474C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1209FA34-8892-41AA-816A-10CFA02474C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}.Doc|Any CPU.ActiveCfg = Release|Any CPU
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}.NuGet|Any CPU.Build.0 = Release|Any CPU
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0}.Doc|Any CPU.ActiveCfg = Release|Any CPU
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0}.NuGet|Any CPU.Build.0 = Release|Any CPU
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B}.Doc|Any CPU.ActiveCfg = Release|Any CPU
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B}.NuGet|Any CPU.ActiveCfg = Release|Any CPU
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B}.NuGet|Any CPU.Build.0 = Release|Any CPU
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +169,9 @@ Global
 		{8584C112-7C87-4D4A-8A2A-6E3C77928CEB} = {C3D6473F-B21C-4B15-B2DA-6BF90E35BF9E}
 		{1209FA34-8892-41AA-816A-10CFA02474C4} = {C3D6473F-B21C-4B15-B2DA-6BF90E35BF9E}
 		{715C9A5E-CD2D-42C8-B364-9744E56265A4} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
+		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3} = {9CD0A745-394A-463B-A203-B666E26BB287}
+		{992E2F62-5F36-4BED-9E02-32B9D64C34A0} = {9CD0A745-394A-463B-A203-B666E26BB287}
+		{446833F0-3100-4ABF-B5AF-0D8768F6584B} = {9CD0A745-394A-463B-A203-B666E26BB287}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}

@@ -5,6 +5,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
     /// <summary>
     /// Defines an empty message with binary serialization support.
     /// </summary>
+    /// <remarks><para>This class is not present in Neat release.</para></remarks>
     [Serializable]
     public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage
     {
@@ -26,6 +27,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         /// <summary>
         /// Initializes an instance of RemoteAgencyBinaryEmptyMessage.
         /// </summary>
+        /// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
         public RemoteAgencyBinaryEmptyMessage()
         {
             ((IRemoteAgencyMessage) this).IsEmptyMessage = true;

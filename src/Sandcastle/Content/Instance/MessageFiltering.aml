@@ -10,7 +10,7 @@
     <section address="Filter">
       <title>Message Filtering</title>
       <content>
-        <para>Developer can filter the messages after received and before being sent by handling <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived</codeEntityReference> and <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.BeforeMessageSending</codeEntityReference>. This is useful for audit and authentication checking.</para>
+        <para>Developer can filter messages after received and before being sent by handling <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived</codeEntityReference> and <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.BeforeMessageSending</codeEntityReference>. This is useful for audit and authentication checking.</para>
         <para>The argument of the handler provides the message body. Developer can change properties of the message with caution. And, developer can break the message routing using one of the following methods provided by the argument of the handler.</para>
         <listItem>
           <list class="nobullet">

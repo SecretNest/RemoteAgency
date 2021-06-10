@@ -1,9 +1,11 @@
 ﻿using System;
 
 namespace SecretNest.RemoteAgency.JsonSerializer
-{    /// <summary>
+{
+    /// <summary>
     /// Defines an empty message with Json serialization support.
     /// </summary>
+    /// <remarks><para>This class is not present in Neat release.</para></remarks>
     public class RemoteAgencyJsonEmptyMessage : IRemoteAgencyMessage
     {
         Guid IRemoteAgencyMessage.SenderSiteId { get; set; }
@@ -20,6 +22,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// <summary>
         /// Initializes an instance of RemoteAgencyJsonEmptyMessage.
         /// </summary>
+        /// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
         public RemoteAgencyJsonEmptyMessage()
         {
             ((IRemoteAgencyMessage) this).IsEmptyMessage = true;

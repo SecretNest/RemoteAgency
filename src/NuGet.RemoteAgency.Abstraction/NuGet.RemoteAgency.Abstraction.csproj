@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net461;netcoreapp2.1</TargetFrameworks>
+    <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
+    <PackageId>SecretNest.RemoteAgency.Abstraction</PackageId>
+    <Authors>Allen Cui</Authors>
+    <Company>SecretNest.info</Company>
+    <Product>Remote Agency</Product>
+    <Description>Contains interfaces, attributes and exceptions (other than thrown while building) of Remote Agency.</Description>
+    <PackageProjectUrl>https://secretnest.info/RemoteAgency</PackageProjectUrl>
+    <Copyright>Allen Cui / SecretNest.info</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Initial release of version 2.</PackageReleaseNotes>
+    <AssemblyName>SecretNest.RemoteAgency.Abstraction</AssemblyName>
+    <Configurations>Release</Configurations>
+    <LangVersion>9.0</LangVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SecretNest/RemoteAgency</RepositoryUrl>
+    <DocumentationFile>SecretNest.RemoteAgency.Abstraction.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <Import Project="..\Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems" Label="Shared" />
+</Project>
