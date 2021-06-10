@@ -56,6 +56,8 @@
 
   <Import Project="..\Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems" Label="Shared" />
 
+  <Import Project="..\Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems" Label="Shared" />
+
 </Project>
 
 

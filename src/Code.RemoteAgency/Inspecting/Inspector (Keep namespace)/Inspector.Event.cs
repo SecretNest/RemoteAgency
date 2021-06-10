@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -19,7 +20,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             var eventInfo = (EventInfo) @event.Asset;
             @event.LocalExceptionHandlingMode =
-                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(eventInfo, @event.Delegate,
+                eventInfo.GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(@event.Delegate,
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
 
             if (_serializerAssetLevelAttributeBaseType != null)
@@ -35,9 +36,9 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //asset level pass through attributes
-            if (_includesProxyOnlyInfo)
-                @event.AssetLevelPassThroughAttributes = GetAttributePassThrough(eventInfo,
-                    (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+            @event.AssetLevelPassThroughAttributes = _includesProxyOnlyInfo
+                ? eventInfo.GetAttributePassThrough((m, a) => new InvalidAttributeDataException(m, a, memberPath))
+                : new List<CustomAttributeBuilder>();
 
             var raiseMethod = eventInfo.GetRaiseMethod();
 
@@ -73,9 +74,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                     //normal
                     var delegateMethod = @event.Delegate.GetMethod("Invoke");
                     
-                    var timeoutTime = GetValueFromAttribute<OperatingTimeoutTimeAttribute, OperatingTimeoutTimeAttribute>(
-                        eventInfo, @event.Delegate,
-                        i => i, out _);
+                    var timeoutTime = eventInfo.GetValueFromAttribute<OperatingTimeoutTimeAttribute, OperatingTimeoutTimeAttribute>(
+                        @event.Delegate, i => i, out _);
                     @event.AddingMethodBodyInfo.Timeout = timeoutTime?.EventAddingTimeout ?? interfaceLevelEventAddingTimeout;
                     @event.RemovingMethodBodyInfo.Timeout = timeoutTime?.EventRemovingTimeout ?? interfaceLevelEventRemovingTimeout;
                     var eventRaisingTimeout = timeoutTime?.EventRaisingTimeout ?? interfaceLevelEventRaisingTimeout;
@@ -102,34 +102,34 @@ namespace SecretNest.RemoteAgency.Inspecting
                     }
 
                     var isReturnValueIgnored =
-                        GetValueFromAttribute<ReturnIgnoredAttribute, bool>(eventInfo, i => i.IsIgnored,
+                        eventInfo.GetValueFromAttribute<ReturnIgnoredAttribute, bool>(i => i.IsIgnored,
                             out var returnIgnoredAttribute);
                     if (returnIgnoredAttribute == null)
                     {
                         // ReSharper disable once PossibleNullReferenceException
-                        isReturnValueIgnored = GetValueFromAttribute(delegateMethod.ReturnTypeCustomAttributes,
+                        isReturnValueIgnored = delegateMethod.ReturnTypeCustomAttributes.GetValueFromAttribute(
                             i => i.IsIgnored, out returnIgnoredAttribute);
                            
                     }
                     if (returnIgnoredAttribute == null)
                     {
                         isReturnValueIgnored =
-                            GetValueFromAttribute(delegateMethod, i => i.IsIgnored, out returnIgnoredAttribute);
+                            delegateMethod.GetValueFromAttribute(i => i.IsIgnored, out returnIgnoredAttribute);
                     }
 
                     var returnValuePropertyNameSpecifiedByAttribute =
-                        GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
-                            eventInfo, i => i.EntityPropertyName,
+                        eventInfo.GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
+                            i => i.EntityPropertyName,
                             out var customizedReturnValueEntityPropertyNameAttribute);
                     if (customizedReturnValueEntityPropertyNameAttribute == null)
                     {
                         // ReSharper disable once PossibleNullReferenceException
-                        returnValuePropertyNameSpecifiedByAttribute = GetValueFromAttribute(delegateMethod.ReturnTypeCustomAttributes,
+                        returnValuePropertyNameSpecifiedByAttribute = delegateMethod.ReturnTypeCustomAttributes.GetValueFromAttribute(
                             i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                     }
                     if (customizedReturnValueEntityPropertyNameAttribute == null)
                     {
-                        returnValuePropertyNameSpecifiedByAttribute = GetValueFromAttribute(delegateMethod,
+                        returnValuePropertyNameSpecifiedByAttribute = delegateMethod.GetValueFromAttribute(
                             i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                     }
 

@@ -13,6 +13,7 @@ public interface ITest1
     [CustomizedAssetName("AddDouble")]
     double Add(double a, double b);
 
+    [AsyncMethod]
     Task&lt;int&gt; AsyncCall();
 }
     </sampleCode>
@@ -27,6 +28,7 @@ Public Interface ITest1
     &lt;CustomizedAssetName("AddDouble")&gt;
     Function Add(a As Double, b As Double) As Double
 
+    &lt;AsyncMethod&gt;
     Function AsyncCall() As Task(Of Integer)
 End Interface
     </sampleCode>

@@ -10,9 +10,11 @@
     </introduction>
 
     <section>
-      <title>Ignoring</title>
+      <title>Simulation</title>
       <content>
-        <para>When one asset is not required to be handled by Remote Agency, mark it with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference>. The code accessing the ignored asset has no effect and gets only the default outputs or throws an exception based on the setting <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute.WillThrowException</codeEntityReference>.</para>
+        <para>Through supporting of asynchronous method is insignificant in Remote Agency. Simulation solution presents still for code level compatible reason.</para>
+        <para>Due to lack of serialization support of <codeInline>Task</codeInline>, the method returning an instance of Task could not be used in Remote Agency directly. However, the method marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference> is supported by Remote Agency by extracting the result on remote site and reconstruct the task instance from it on local.</para>
+        <alert note="Caution">By getting the result of the Task on the remote side, the exception thrown inside the task will be processed and transmitted to local. Exception will be thrown on local when getting the return value from the method if happened, instead of getting <codeInline>Result</codeInline> property or running <codeInline>Wait</codeInline> method of the <codeInline>Task</codeInline> instance.</alert>
       </content>
     </section>
 

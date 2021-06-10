@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
@@ -18,7 +19,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             var methodInfo = (MethodInfo)method.Asset;
             method.LocalExceptionHandlingMode =
-                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(methodInfo,
+                methodInfo.GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
 
             if (_serializerAssetLevelAttributeBaseType != null)
@@ -29,20 +30,30 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             //generic parameter
             method.AssetLevelGenericParameters = methodInfo.GetGenericArguments();
-            method.AssetLevelGenericParameterPassThroughAttributes = FillAttributePassThroughOnGenericParameters(method.AssetLevelGenericParameters,
-                (m, a, t) => new InvalidAttributeDataException(m, a, t, memberPath));
 
             //pass through attributes
             if (_includesProxyOnlyInfo)
             {
-                method.AssetLevelPassThroughAttributes = GetAttributePassThrough(methodInfo,
+                method.AssetLevelGenericParameterPassThroughAttributes =
+                    method.AssetLevelGenericParameters.FillAttributePassThroughOnGenericParameters((m, a, t) =>
+                        new InvalidAttributeDataException(m, a, t, memberPath));
+
+                method.AssetLevelPassThroughAttributes = methodInfo.GetAttributePassThrough(
                     (m, a) => new InvalidAttributeDataException(m, a, memberPath));
-                method.ReturnValuePassThroughAttributes = GetAttributePassThrough(methodInfo.ReturnTypeCustomAttributes,
+                method.ReturnValuePassThroughAttributes = methodInfo.ReturnTypeCustomAttributes.GetAttributePassThrough(
                     (m, a) => new InvalidReturnValueAttributeDataException(m, a, memberPath));
 
                 var parameterInfo = methodInfo.GetParameters();
-                method.ParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
+                method.ParameterPassThroughAttributes = parameterInfo.FillAttributePassThroughOnParameters(
                     (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
+            }
+            else
+            {
+                method.AssetLevelGenericParameterPassThroughAttributes =
+                    new Dictionary<string, List<CustomAttributeBuilder>>();
+                method.AssetLevelPassThroughAttributes = new List<CustomAttributeBuilder>();
+                method.ReturnValuePassThroughAttributes = new List<CustomAttributeBuilder>();
+                method.ParameterPassThroughAttributes = new Dictionary<string, List<CustomAttributeBuilder>>();
             }
 
             if (method.IsIgnored)
@@ -60,26 +71,26 @@ namespace SecretNest.RemoteAgency.Inspecting
             {
                 //normal
                 var isReturnValueIgnored =
-                    GetValueFromAttribute<ReturnIgnoredAttribute, bool>(methodInfo.ReturnTypeCustomAttributes, i => i.IsIgnored,
+                    methodInfo.ReturnTypeCustomAttributes.GetValueFromAttribute<ReturnIgnoredAttribute, bool>(i => i.IsIgnored,
                         out var returnIgnoredAttribute);
                 if (returnIgnoredAttribute == null)
                 {
                     isReturnValueIgnored =
-                        GetValueFromAttribute(methodInfo, i => i.IsIgnored, out returnIgnoredAttribute);
+                        methodInfo.GetValueFromAttribute(i => i.IsIgnored, out returnIgnoredAttribute);
                 }
 
-                string returnValuePropertyNameSpecifiedByAttribute =
-                    GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
-                        methodInfo.ReturnTypeCustomAttributes, i => i.EntityPropertyName,
+                var returnValuePropertyNameSpecifiedByAttribute =
+                    methodInfo.ReturnTypeCustomAttributes.GetValueFromAttribute<CustomizedReturnValueEntityPropertyNameAttribute, string>(
+                        i => i.EntityPropertyName,
                         out var customizedReturnValueEntityPropertyNameAttribute);
                 if (customizedReturnValueEntityPropertyNameAttribute == null)
                 {
-                    returnValuePropertyNameSpecifiedByAttribute = GetValueFromAttribute(methodInfo,
+                    returnValuePropertyNameSpecifiedByAttribute = methodInfo.GetValueFromAttribute(
                         i => i.EntityPropertyName, out customizedReturnValueEntityPropertyNameAttribute);
                 }
 
                 ProcessMethodBodyForNormalAsset(methodInfo, method.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType, memberPath,
-                    GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(methodInfo, i => i.Timeout, out _, interfaceLevelMethodCallingTimeout),
+                    methodInfo.GetValueFromAttribute<OperatingTimeoutTimeAttribute, int>(i => i.Timeout, out _, interfaceLevelMethodCallingTimeout),
                     isReturnValueIgnored, returnValuePropertyNameSpecifiedByAttribute, customizedReturnValueEntityPropertyNameAttribute,
                     method.MethodBodyInfo, method.AsyncMethodOriginalReturnValueDataTypeClass);
             }

@@ -154,7 +154,7 @@ namespace SecretNest.RemoteAgency
             return new CreatedProxy(instanceId, proxy);
         }
 
-        object CreateProxyWithInstanceInternal(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
+        IProxyCommunicate CreateProxyWithInstanceInternal(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
             Guid instanceId, int defaultTimeout = DefaultTimeout,
             bool buildServiceWrapperWithProxy = true)
         {
@@ -163,32 +163,32 @@ namespace SecretNest.RemoteAgency
 
             if (_managingObjects.ContainsKey(instanceId))
             {
-                throw new ArgumentException("Instance id specified exists in this Remote Agency instance.", nameof(instanceId));
+                throw new ArgumentException("Instance id specified already exists in this Remote Agency instance.", nameof(instanceId));
             }
 
             var serviceInterface = sourceInterface.IsConstructedGenericType ? sourceInterface.GetGenericTypeDefinition() : sourceInterface;
-            var basicInfo = Inspector.GetBasicInfo(serviceInterface/*, true*/);
+            var basicInfo = serviceInterface.GetBasicInfo(/*true*/);
             
             BuildAssembly(basicInfo, true, buildServiceWrapperWithProxy, out Type builtProxy, out _);
 
-            Type proxy;
+            Type proxyClass;
 
             if (sourceInterface.IsConstructedGenericType)
             {
-                proxy = builtProxy.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
+                proxyClass = builtProxy.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
             }
             else
             {
-                proxy = builtProxy;
+                proxyClass = builtProxy;
             }
 
-            var item = FastActivator.CreateInstance(proxy);
+            var proxyInstance = proxyClass.CreateProxyInstance();
 
             RemoteAgencyManagingObjectProxy<TEntityBase> managingObject;
 
             if (basicInfo.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
             {
-                managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
+                managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>(proxyInstance,
                     instanceId, targetSiteId, targetInstanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
                     ProcessMessageReceivedFromInside, 
                     (id, assetName, exception) =>
@@ -197,7 +197,7 @@ namespace SecretNest.RemoteAgency
             }
             else
             {
-                managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>((IProxyCommunicate) item,
+                managingObject = new RemoteAgencyManagingObjectProxy<TEntityBase>(proxyInstance,
                     instanceId, targetSiteId, targetInstanceId, basicInfo.ThreadLockMode,
                     ProcessMessageReceivedFromInside, 
                     (id, assetName, exception) =>
@@ -207,11 +207,11 @@ namespace SecretNest.RemoteAgency
 
             if (_managingObjects.TryAdd(instanceId, managingObject))
             {
-                return item;
+                return proxyInstance;
             }
             else
             {
-                throw new ArgumentException("Instance id specified exists in this Remote Agency instance.", nameof(instanceId));
+                throw new ArgumentException("Instance id specified already exists in this Remote Agency instance.", nameof(instanceId));
             }
         }
 
@@ -303,33 +303,33 @@ namespace SecretNest.RemoteAgency
 
             if (_managingObjects.ContainsKey(instanceId))
             {
-                throw new ArgumentException("Instance id specified exists in this Remote Agency instance.", nameof(instanceId));
+                throw new ArgumentException("Instance id specified already exists in this Remote Agency instance.", nameof(instanceId));
             }
 
             var serviceInterface = sourceInterface.IsConstructedGenericType ? sourceInterface.GetGenericTypeDefinition() : sourceInterface;
-            var basicInfo = Inspector.GetBasicInfo(serviceInterface/*, buildProxyWithServiceWrapper*/);
+            var basicInfo = serviceInterface.GetBasicInfo(/*buildProxyWithServiceWrapper*/);
 
             BuildAssembly(basicInfo, buildProxyWithServiceWrapper, true, out _, out Type builtServiceWrapper);
 
-            Type serviceWrapper;
+            Type serviceWrapperClass;
 
             if (sourceInterface.IsConstructedGenericType)
             {
-                serviceWrapper = builtServiceWrapper.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
+                serviceWrapperClass = builtServiceWrapper.MakeGenericType(basicInfo.SourceInterfaceGenericArguments);
             }
             else
             {
-                serviceWrapper = builtServiceWrapper;
+                serviceWrapperClass = builtServiceWrapper;
             }
 
-            var item = FastActivator<object>.CreateInstance(serviceWrapper, serviceObject);
+            var serviceWrapperInstance = serviceWrapperClass.CreateServiceWrapperInstance(serviceObject);
 
             RemoteAgencyManagingObjectServiceWrapper<TEntityBase> managingObject;
 
             if (basicInfo.ThreadLockMode == ThreadLockMode.TaskSchedulerSpecified)
             {
                 managingObject = new RemoteAgencyManagingObjectServiceWrapper<TEntityBase>(
-                    (IServiceWrapperCommunicate) item, instanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
+                    serviceWrapperInstance, instanceId, basicInfo.TaskSchedulerName, TryGetTaskScheduler,
                     ProcessMessageReceivedFromInside,
                     (id, assetName, exception) =>
                         RedirectException(sourceInterface, id, assetName, exception),
@@ -338,7 +338,7 @@ namespace SecretNest.RemoteAgency
             else
             {
                 managingObject = new RemoteAgencyManagingObjectServiceWrapper<TEntityBase>(
-                    (IServiceWrapperCommunicate) item, instanceId, basicInfo.ThreadLockMode,
+                    serviceWrapperInstance, instanceId, basicInfo.ThreadLockMode,
                     ProcessMessageReceivedFromInside, 
                     (id, assetName, exception) =>
                         RedirectException(sourceInterface, id, assetName, exception),
@@ -347,7 +347,7 @@ namespace SecretNest.RemoteAgency
 
             if (!_managingObjects.TryAdd(instanceId, managingObject))
             {
-                throw new ArgumentException("Instance id specified exists in this Remote Agency instance.", nameof(instanceId));
+                throw new ArgumentException("Instance id specified already exists in this Remote Agency instance.", nameof(instanceId));
             }
         }
 

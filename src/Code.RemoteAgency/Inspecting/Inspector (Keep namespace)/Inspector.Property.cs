@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
@@ -18,7 +19,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             var propertyInfo = (PropertyInfo) property.Asset;
             property.LocalExceptionHandlingMode =
-                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(propertyInfo,
+                propertyInfo.GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(
                     i => i.LocalExceptionHandlingMode, out _, interfaceLevelLocalExceptionHandlingMode);
 
             var getMethod = propertyInfo.GetGetMethod();
@@ -42,20 +43,24 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             //pass through attributes
-            property.AssetLevelPassThroughAttributes = GetAttributePassThrough(propertyInfo,
-                (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+            property.AssetLevelPassThroughAttributes = _includesProxyOnlyInfo
+                ? propertyInfo.GetAttributePassThrough((m, a) => new InvalidAttributeDataException(m, a, memberPath))
+                : new List<CustomAttributeBuilder>();
             if (property.IsGettable)
             {
-                property.GettingMethodPassThroughAttributes = GetAttributePassThrough(getMethod, 
-                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
+                property.GettingMethodPassThroughAttributes = _includesProxyOnlyInfo
+                    ? getMethod.GetAttributePassThrough((m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath))
+                    : new List<CustomAttributeBuilder>();
 
-                property.GettingMethodReturnValuePassThroughAttributes = GetAttributePassThrough(getMethod!.ReturnTypeCustomAttributes,
-                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath));
+                property.GettingMethodReturnValuePassThroughAttributes = _includesProxyOnlyInfo
+                    ? getMethod!.ReturnTypeCustomAttributes.GetAttributePassThrough((m, a) => new InvalidReturnValueAttributeDataException(m, a, getMethod, memberPath))
+                    : new List<CustomAttributeBuilder>();
             }
             if (property.IsSettable)
             {
-                property.SettingMethodPassThroughAttributes = GetAttributePassThrough(setMethod, 
-                    (m, a) => new InvalidReturnValueAttributeDataException(m, a, setMethod, memberPath));
+                property.SettingMethodPassThroughAttributes = _includesProxyOnlyInfo
+                    ? setMethod.GetAttributePassThrough((m, a) => new InvalidReturnValueAttributeDataException(m, a, setMethod, memberPath))
+                    : new List<CustomAttributeBuilder>();
             }
 
             if (property.IsIgnored)
@@ -68,8 +73,10 @@ namespace SecretNest.RemoteAgency.Inspecting
             else
             {
                 var parameterInfo = getMethod!.GetParameters(); //Parameters are shared for get and set. Except the value in set, which is not able to set an attribute. 
-                property.MethodParameterPassThroughAttributes = FillAttributePassThroughOnParameters(parameterInfo,
-                    (m, a, p) => new InvalidParameterAttributeDataException(m, a, p, memberPath));
+                property.MethodParameterPassThroughAttributes = _includesProxyOnlyInfo
+                    ? parameterInfo.FillAttributePassThroughOnParameters((m, a, p) =>
+                        new InvalidParameterAttributeDataException(m, a, p, memberPath))
+                    : new Dictionary<string, List<CustomAttributeBuilder>>();
 
                 var timeoutTime = propertyInfo.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
 
@@ -92,12 +99,12 @@ namespace SecretNest.RemoteAgency.Inspecting
                             timeoutTime?.PropertyGettingTimeout ?? interfaceLevelPropertyGettingTimeout;
 
                         var isReturnValueIgnored =
-                            GetValueFromAttribute<ReturnIgnoredAttribute, bool>(propertyInfo, i => i.IsIgnored,
+                            propertyInfo.GetValueFromAttribute<ReturnIgnoredAttribute, bool>(i => i.IsIgnored,
                                 out _);
 
                         var returnValuePropertyNameSpecifiedByAttribute =
-                            GetValueFromAttribute<CustomizedPropertyGetValuePropertyNameAttribute, string>(
-                                propertyInfo, i => i.EntityPropertyName,
+                            propertyInfo.GetValueFromAttribute<CustomizedPropertyGetValuePropertyNameAttribute, string>(
+                                i => i.EntityPropertyName,
                                 out var customizedPropertyGetValuePropertyNameAttribute);
 
                         ProcessMethodBodyForNormalAsset(getMethod, getMethod.ReturnType, memberPath,
@@ -112,7 +119,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 if (property.IsSettable)
                 {
                     var propertyValuePropertyName =
-                        GetValueFromAttribute<CustomizedPropertySetValuePropertyNameAttribute, string>(propertyInfo,
+                        propertyInfo.GetValueFromAttribute<CustomizedPropertySetValuePropertyNameAttribute, string>(
                             i => i.EntityPropertyName, out var customizedPropertySetValuePropertyNameAttribute);
                     var parameterReturnRequiredProperty = propertyInfo
                         .GetCustomAttributes<ParameterReturnRequiredPropertyAttribute>().ToList();

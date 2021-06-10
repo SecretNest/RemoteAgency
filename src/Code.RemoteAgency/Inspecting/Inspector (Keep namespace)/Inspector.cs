@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using SecretNest.RemoteAgency.Attributes;
 
@@ -39,13 +40,12 @@ namespace SecretNest.RemoteAgency.Inspecting
             var memberPath = new Stack<MemberInfo>();
             memberPath.Push(_result.SourceInterface);
 
-            if (_includesProxyOnlyInfo)
-                _result.InterfaceLevelPassThroughAttributes =
-                    GetAttributePassThrough(_sourceInterfaceTypeInfo,
-                        (m, a) => new InvalidAttributeDataException(m, a, memberPath));
+            _result.InterfaceLevelPassThroughAttributes = _includesProxyOnlyInfo
+                ? _sourceInterfaceTypeInfo.GetAttributePassThrough((m, a) => new InvalidAttributeDataException(m, a, memberPath))
+                : new List<CustomAttributeBuilder>();
 
             var interfaceLevelLocalExceptionHandlingMode =
-                GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(_result.SourceInterface,
+                _result.SourceInterface.GetValueFromAttribute<LocalExceptionHandlingAttribute, LocalExceptionHandlingMode>(
                     i => i.LocalExceptionHandlingMode, out _, LocalExceptionHandlingMode.Suppress);
             var interfaceLevelOperatingTimeoutTimeAttribute =
                 _result.SourceInterface.GetCustomAttribute<OperatingTimeoutTimeAttribute>();
@@ -81,9 +81,9 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
 
             _result.InterfaceLevelGenericParameters = _result.SourceInterface.GetGenericArguments();
-            _result.InterfaceLevelGenericParameterPassThroughAttributes =
-                FillAttributePassThroughOnGenericParameters(_result.InterfaceLevelGenericParameters,
-                    (m, a, t) => new InvalidAttributeDataException(m, a, t, memberPath));
+            _result.InterfaceLevelGenericParameterPassThroughAttributes = _includesProxyOnlyInfo
+                ? _result.InterfaceLevelGenericParameters.FillAttributePassThroughOnGenericParameters((m, a, t) => new InvalidAttributeDataException(m, a, t, memberPath))
+                : new Dictionary<string, List<CustomAttributeBuilder>>();
 
             //assets start
             var usedClassNames = new HashSet<string>
@@ -150,14 +150,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                     MethodBodyInfo = new RemoteAgencyMethodBodyInfo()
                 };
 
-                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(method, i => i.IsIgnored, out var assetIgnored))
+                if (method.GetValueFromAttribute<AssetIgnoredAttribute, bool>(i => i.IsIgnored, out var assetIgnored))
                 {
                     item.IsIgnored = true;
                     item.WillThrowExceptionWhileCalling = assetIgnored.WillThrowException;
                 }
                 else
                 {
-                    if (GetValueFromAttribute<AsyncMethodAttribute, bool>(method, i => i.IsAsyncMethod,
+                    if (method.GetValueFromAttribute<AsyncMethodAttribute, bool>(i => i.IsAsyncMethod,
                         out var asyncMethod))
                     {
                         var originalReturnType = method.ReturnType;
@@ -170,7 +170,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     }
                     
                     item.IsOneWay =
-                        GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(method, i => i.IsOneWay, out _);
+                        method.GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(i => i.IsOneWay, out _);
 
                     var customizedEntityName = method.GetCustomAttribute<CustomizedMethodEntityNameAttribute>();
                     if (customizedEntityName != null)
@@ -227,7 +227,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     RemovingMethodBodyInfo = new RemoteAgencySimpleMethodBodyInfo()
                 };
 
-                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(@event, item.Delegate, i => i.IsIgnored,
+                if (@event.GetValueFromAttribute<AssetIgnoredAttribute, bool>(item.Delegate, i => i.IsIgnored,
                     out var assetIgnored))
                 {
                     item.IsIgnored = true;
@@ -236,7 +236,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 else
                 {
                     item.IsOneWay =
-                        GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(@event, item.Delegate,
+                        @event.GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(item.Delegate,
                             i => i.IsOneWay, out _);
 
                     var customizedEntityName = @event.GetCustomAttribute<CustomizedEventEntityNameAttribute>();
@@ -306,7 +306,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     SettingMethodBodyInfo = new RemoteAgencyMethodBodyInfo()
                 };
 
-                if (GetValueFromAttribute<AssetIgnoredAttribute, bool>(property, i => i.IsIgnored, out var assetIgnored))
+                if (property.GetValueFromAttribute<AssetIgnoredAttribute, bool>(i => i.IsIgnored, out var assetIgnored))
                 {
                     item.IsIgnored = true;
                     item.WillThrowExceptionWhileCalling = assetIgnored.WillThrowException;
@@ -314,10 +314,10 @@ namespace SecretNest.RemoteAgency.Inspecting
                 else
                 {
                     item.IsGettingOneWay =
-                        GetValueFromAttribute<PropertyGetOneWayOperatingAttribute, bool>(property, i => i.IsOneWay,
+                        property.GetValueFromAttribute<PropertyGetOneWayOperatingAttribute, bool>(i => i.IsOneWay,
                             out _);
                     item.IsSettingOneWay =
-                        GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(property, i => i.IsOneWay, out _);
+                        property.GetValueFromAttribute<AssetOneWayOperatingAttribute, bool>(i => i.IsOneWay, out _);
 
                     var customizedGetEntityName =
                         property.GetCustomAttribute<CustomizedPropertyGetEntityNameAttribute>();
@@ -475,68 +475,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
         }
 
-        static TValue GetValueFromAttribute<TAttribute, TValue>(ICustomAttributeProvider memberInfo, Func<TAttribute, TValue> selector, out TAttribute attribute,
-            TValue defaultValue = default)
-            where TAttribute : Attribute
-        {
-            attribute = memberInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>().FirstOrDefault();
-            if (attribute == null)
-                return defaultValue;
-            else
-                return selector(attribute);
-        }
         
-        static TValue GetValueFromAttribute<TAttribute, TValue>(ParameterInfo parameterInfo,
-            Func<TAttribute, TValue> selector, out TAttribute attribute, Dictionary<string, TAttribute> overrides,
-            TValue defaultValue = default)
-            where TAttribute : Attribute
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name, out attribute))
-                attribute = parameterInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>()
-                    .FirstOrDefault();
-            if (attribute == null)
-                return defaultValue;
-            else
-                return selector(attribute);
-        }
 
-        static List<TAttribute> GetAttributes<TAttribute>(ParameterInfo parameterInfo,
-            Dictionary<string, List<TAttribute>> overrides)
-            where TAttribute : Attribute
-        {
-            if (overrides == null || !overrides.TryGetValue(parameterInfo.Name!, out var attribute))
-            {
-                return parameterInfo.GetCustomAttributes<TAttribute>().ToList();
-            }
-            else
-            {
-                return attribute;
-            }
-        }
-
-        static TValue GetValueFromAttribute<TAttribute, TValue>(EventInfo memberInfo, Type @delegate, Func<TAttribute, TValue> selector, out TAttribute attribute,
-            TValue defaultValue = default)
-            where TAttribute : Attribute
-        {
-            attribute = memberInfo.GetCustomAttribute<TAttribute>();
-            if (attribute == null)
-            {
-                return GetValueFromAttribute(@delegate, selector, out attribute, defaultValue);
-            }
-            else
-            {
-                var value = selector(attribute);
-                if (value.Equals(defaultValue))
-                {
-                    return GetValueFromAttribute(@delegate, selector, out attribute, defaultValue);
-                }
-                else
-                {
-                    return value;
-                }
-            }
-        }
 
 
 

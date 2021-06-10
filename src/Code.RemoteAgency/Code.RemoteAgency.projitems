@@ -9,23 +9,23 @@
     <Import_RootNamespace>SecretNest.RemoteAgency</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Const.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BuildConstructorDelegateExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\CreateInstanceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Const.SpecialCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreatedProxy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helper\DictionaryTryAddHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helper\ProxyEventHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helper\ServiceWrapperEventHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DictionaryTryAddHelper.ForNetFx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\AttributePassThroughExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\EntityBuildingExtended.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyMethodBodyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\EntityNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\AssetNameConflictException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\EntityPropertyNameConflictException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\GetValueFromAttributeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Property.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\InvalidParameterAttributeDataException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Exceptions %28Keep namespace%29\InvalidReturnValueAttributeDataException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.AttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Basic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.Method.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyAssetInfoBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyPropertyInfo.cs" />
@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyParameterInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyReturnValueInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.MethodBody.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Inspecting\GetBasicInfoExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.Helper.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BeforeAssemblyCreatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BeforeTypeCreatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\BuiltClassType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuilding\FastActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Serializer.EmptyMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Factory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.IO.MessageAndException.cs" />

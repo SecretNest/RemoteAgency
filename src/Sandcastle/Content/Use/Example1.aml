@@ -31,7 +31,7 @@
                   <para>When unmarking <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference> from interface, an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Inspecting.AssetNameConflictException</codeEntityReference> will be thrown because the name "AddDouble" is designated twice.</para>
                 </alert>
                 <alert class="note">
-                  <para>The supporting of Async method, which returns a task as result, is optimized by Remote Agency. See <link xlink:href="b6910a74-dde5-4d20-ac0d-4fb1231cea87" /> for details.</para>
+                  <para>The supporting of Async method, which returns a task as result, is optimized by Remote Agency by marking them with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference>. See <link xlink:href="b6910a74-dde5-4d20-ac0d-4fb1231cea87" /> for details.</para>
                 </alert>
               </content>
             </step>

@@ -3,7 +3,7 @@
 namespace SecretNest.RemoteAgency
 {
     /// <summary>
-    /// Represents the instance of the created proxy.
+    /// Contains the instance of the created proxy and id of it.
     /// </summary>
     public class CreatedProxy
     {
@@ -30,7 +30,7 @@ namespace SecretNest.RemoteAgency
     }
 
     /// <summary>
-    /// Represents the instance of the created proxy, created based on the service contract specified by <typeparamref name="TInterface"/>.
+    /// Represents the instance of the created proxy and id of it, created based on the service contract specified by <typeparamref name="TInterface"/>.
     /// </summary>
     /// <typeparam name="TInterface">Service contract interface to be implemented by this proxy.</typeparam>
     public class CreatedProxy<TInterface> : CreatedProxy

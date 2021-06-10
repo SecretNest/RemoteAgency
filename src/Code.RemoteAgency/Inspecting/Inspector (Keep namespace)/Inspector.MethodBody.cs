@@ -122,7 +122,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             foreach (var parameter in parameters)
             {
-                if (GetValueFromAttribute(parameter, i => i.IsIgnored, out _, eventLevelParameterIgnoredAttributes))
+                if (parameter.GetValueFromAttribute(i => i.IsIgnored, out _, eventLevelParameterIgnoredAttributes))
                 {
                     //continue;
                 }
@@ -172,7 +172,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     else
                     {
                         requiredPropertyName =
-                            GetValueFromAttribute(parameter, i => i.EntityPropertyName,
+                            parameter.GetValueFromAttribute(i => i.EntityPropertyName,
                                 out var customizedParameterEntityPropertyNameAttribute,
                                 eventLevelParameterEntityPropertyNameAttributes);
                         requiredPropertyNameSpecifyingAttribute = customizedParameterEntityPropertyNameAttribute;
@@ -250,7 +250,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             foreach (var parameter in parameters)
             {
-                if (parameter.IsOut || GetValueFromAttribute(parameter, i => i.IsIgnored, out _,
+                if (parameter.IsOut || parameter.GetValueFromAttribute(i => i.IsIgnored, out _,
                     eventLevelParameterIgnoredAttributes))
                 {
                     //ignored in parameter entity
@@ -289,7 +289,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     else
                     {
                         requiredPropertyName =
-                            GetValueFromAttribute(parameter, i => i.EntityPropertyName,
+                            parameter.GetValueFromAttribute(i => i.EntityPropertyName,
                                 out var customizedParameterEntityPropertyNameAttribute,
                                 eventLevelParameterEntityPropertyNameAttributes);
                         requiredPropertyNameSpecifyingAttribute = customizedParameterEntityPropertyNameAttribute;
@@ -318,7 +318,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                 {
                     #region Out/Ref
 
-                    var isIncludedInReturning = GetValueFromAttribute(parameter, i => i.IsIncludedInReturning, out var returnRequiredAttribute,
+                    var isIncludedInReturning = parameter.GetValueFromAttribute(i => i.IsIncludedInReturning, out var returnRequiredAttribute,
                         eventLevelParameterReturnRequiredAttributes, true); //default value is true
                     if (isIncludedInReturning)
                     {
@@ -355,7 +355,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     }
 
                     var returnRequiredPropertyAttribute =
-                        GetAttributes(parameter, eventLevelParameterReturnRequiredPropertyAttributes)
+                        parameter.GetAttributes(eventLevelParameterReturnRequiredPropertyAttributes)
                             .FirstOrDefault();
 
                     if (returnRequiredPropertyAttribute != null)
@@ -380,7 +380,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     if (propertyValueParameterReturnRequiredProperty != null && parameter.Name == PropertyValueName)
                         returnRequiredPropertyAttributes = propertyValueParameterReturnRequiredProperty;
                     else
-                        returnRequiredPropertyAttributes = GetAttributes(parameter, eventLevelParameterReturnRequiredPropertyAttributes);
+                        returnRequiredPropertyAttributes = parameter.GetAttributes(eventLevelParameterReturnRequiredPropertyAttributes);
                     if (returnRequiredPropertyAttributes.Count > 0)
                     {
                         var processedProperties = new HashSet<string>();
@@ -522,7 +522,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 var propertiesInHelperClass = returnRequiredPropertyAttribute.HelperClass.GetProperties();
                                 foreach (var propertyInHelperClass in propertiesInHelperClass)
                                 {
-                                    if (GetValueFromAttribute<ReturnRequiredPropertyHelperAttribute, bool>(propertyInHelperClass,
+                                    if (propertyInHelperClass.GetValueFromAttribute<ReturnRequiredPropertyHelperAttribute, bool>(
                                         i => i.IsIncludedInReturning, out var returnRequiredHelperAttribute))
                                     {
                                         if (propertyInHelperClass.GetGetMethod() == null)
@@ -534,7 +534,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                                                 $"The property {propertyInHelperClass.Name} in helper class {returnRequiredPropertyAttribute.HelperClass.FullName} is not readable publicly.",
                                                 returnRequiredPropertyAttribute, parameter, memberPath);
 
-                                        string name = returnRequiredHelperAttribute.ResponseEntityPropertyName;
+                                        var name = returnRequiredHelperAttribute.ResponseEntityPropertyName;
                                         if (!string.IsNullOrEmpty(name))
                                         {
                                             if (!usedPropertyNamesInReturnValueEntity.Add(name))

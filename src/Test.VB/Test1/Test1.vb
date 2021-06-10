@@ -12,6 +12,7 @@ Namespace Test1
         <CustomizedAssetName("AddDouble")>
         Function Add(a As Double, b As Double) As Double
 
+        <AsyncMethod>
         Function AsyncCall() As Task(Of Integer)
     End Interface
 

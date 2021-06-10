@@ -16,6 +16,7 @@ namespace Test.CSharp.Test1
         [CustomizedAssetName("AddDouble")]
         double Add(double a, double b);
 
+        [AsyncMethod]
         Task<int> AsyncCall();
     }
 
