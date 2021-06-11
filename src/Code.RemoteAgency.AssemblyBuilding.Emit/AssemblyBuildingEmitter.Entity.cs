@@ -8,24 +8,24 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgencyBase
+    partial class AssemblyBuildingEmitter
     {
-        List<Task<Tuple<TypeBuilder, EntityBuildingExtended>>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, RemoteAgencyInterfaceInfo info)
+        internal List<Task<Tuple<TypeBuilder, EntityBuildingExtended>>> CreateEmitEntityTasks(ModuleBuilder moduleBuilder, EntityTypeBuilderBase entityTypeBuilder, Type entityBase)
         {
-            var entitiesInfo = info.GetEntities();
+            var entitiesInfo = InterfaceInfo.GetEntities();
 
             var buildings = entitiesInfo.Select(entityInfo =>
             {
                 var typeBuilder = moduleBuilder.DefineType(entityInfo.EntityClassName,
-                    /*TypeAttributes.Class | */TypeAttributes.Public, EntityBase,
+                    /*TypeAttributes.Class | */TypeAttributes.Public, entityBase,
                     new[] {typeof(IRemoteAgencyMessage)});
 
-                EmitGenericParameters(typeBuilder, entityInfo.GenericParameters,
+                typeBuilder.EmitGenericParameters(entityInfo.GenericParameters,
                     entityInfo.GenericParameterPassThroughAttributes);
 
                 return new Task<Tuple<TypeBuilder, EntityBuildingExtended>>(() =>
                 {
-                    EntityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
+                    entityTypeBuilder.BuildEntity(typeBuilder, entityInfo);
                     return new Tuple<TypeBuilder, EntityBuildingExtended>(typeBuilder, entityInfo);
                 });
             }).ToList();

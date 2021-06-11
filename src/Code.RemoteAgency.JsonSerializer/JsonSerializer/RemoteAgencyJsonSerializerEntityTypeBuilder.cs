@@ -17,7 +17,7 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         /// <remarks><para>This method and this class are not present in Neat release.</para></remarks>
         public override void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
         {
-            PlainEntityBodyBuilder.BuildEntity(typeBuilder, entityBuilding);
+            typeBuilder.BuildEntity(entityBuilding);
         }
 
         /// <summary>

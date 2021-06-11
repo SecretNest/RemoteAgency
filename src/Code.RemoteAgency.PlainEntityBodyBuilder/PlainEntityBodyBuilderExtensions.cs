@@ -4,9 +4,9 @@ using System.Reflection.Emit;
 
 namespace SecretNest.RemoteAgency
 {
-	static class PlainEntityBodyBuilder
+	static class PlainEntityBodyBuilderExtensions
 	{
-		internal static void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
+		internal static void BuildEntity(this TypeBuilder typeBuilder, EntityBuilding entityBuilding)
 		{
 			typeBuilder.GenerateExplicitImplementation(typeof(IRemoteAgencyMessage).GetTypeInfo());
 

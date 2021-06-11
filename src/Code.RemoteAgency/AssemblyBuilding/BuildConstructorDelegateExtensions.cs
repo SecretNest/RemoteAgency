@@ -8,11 +8,13 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
     {
         private static readonly Type[] EmptyType = Array.Empty<Type>();
 
+        private const string MethodNamePrefix = "FastActivatorMethod";
+
         internal static TDelegate BuildConstructorDelegate<TDelegate>(this Type type)
             where TDelegate : Delegate
         {
-            var methodName = Guid.NewGuid();
-            var dynMethod = new DynamicMethod($"FastActivatorMethod_{methodName:N}", type, EmptyType, type);
+            var methodName = RandomizedName.GetRandomizedName(MethodNamePrefix);
+            var dynMethod = new DynamicMethod(methodName, type, EmptyType, type);
             var ilGen = dynMethod.GetILGenerator();
             ilGen.Emit(OpCodes.Newobj, type.GetTypeInfo().GetConstructor(EmptyType) ?? throw new InvalidOperationException());
             ilGen.Emit(OpCodes.Ret);
@@ -23,8 +25,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
             where TDelegate : Delegate
         {
             var argTypes = new[] {argType};
-            var methodName = Guid.NewGuid();
-            var dynMethod = new DynamicMethod($"FastActivatorMethod_{methodName:N}", type, argTypes, type);
+            var methodName = RandomizedName.GetRandomizedName(MethodNamePrefix);
+            var dynMethod = new DynamicMethod(methodName, type, argTypes, type);
             var ilGen = dynMethod.GetILGenerator();
             ilGen.Emit(OpCodes.Ldarg, 0); //one parameter
             ilGen.Emit(OpCodes.Newobj, type.GetTypeInfo().GetConstructor(argTypes) ?? throw new InvalidOperationException());
@@ -35,8 +37,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         //internal static TDelegate BuildConstructorDelegate<TDelegate>(this Type type, params Type[] argTypes)
         //    where TDelegate : Delegate
         //{
-        //    var methodName = Guid.NewGuid();
-        //    var dynMethod = new DynamicMethod($"FastActivatorMethod_{methodName:N}", type, argTypes, type);
+        //    var methodName = RandomizedName.GetRandomizedName(MethodNamePrefix);
+        //    var dynMethod = new DynamicMethod(methodName, type, argTypes, type);
         //    var ilGen = dynMethod.GetILGenerator();
         //    for (var argIdx = 0; argIdx < argTypes.Length; argIdx++)
         //    {

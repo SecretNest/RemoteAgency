@@ -52,26 +52,31 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Test.VB", "Test.VB\Test.VB.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.Injection", "Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.shproj", "{715C9A5E-CD2D-42C8-B364-9744E56265A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency.Abstraction", "NuGet.RemoteAgency.Abstraction\NuGet.RemoteAgency.Abstraction.csproj", "{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.RemoteAgency.Abstraction", "NuGet.RemoteAgency.Abstraction\NuGet.RemoteAgency.Abstraction.csproj", "{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency", "NuGet.RemoteAgency\NuGet.RemoteAgency.csproj", "{992E2F62-5F36-4BED-9E02-32B9D64C34A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.RemoteAgency", "NuGet.RemoteAgency\NuGet.RemoteAgency.csproj", "{992E2F62-5F36-4BED-9E02-32B9D64C34A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.RemoteAgency.Neat", "NuGet.RemoteAgency.Neat\NuGet.RemoteAgency.Neat.csproj", "{446833F0-3100-4ABF-B5AF-0D8768F6584B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.RemoteAgency.Neat", "NuGet.RemoteAgency.Neat\NuGet.RemoteAgency.Neat.csproj", "{446833F0-3100-4ABF-B5AF-0D8768F6584B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.AssemblyBuilding.Emit", "Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.shproj", "{D316C77A-3FBF-4575-914C-0C122EB35589}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{23a75af3-8979-45f8-a7b3-984cef6c3e39}*SharedItemsImports = 13
 		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{38520679-a9fe-45cc-9520-32cbcb1713e2}*SharedItemsImports = 13
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
 		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
@@ -79,6 +84,7 @@ Global
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{715c9a5e-cd2d-42c8-b364-9744e56265a4}*SharedItemsImports = 13
 		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{83b11913-8d83-4e85-93cf-fd6be78f2b5d}*SharedItemsImports = 13
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{93927ab8-d6b6-4b10-8a52-abc25c80d0e3}*SharedItemsImports = 5
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
 		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
 		Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
 		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
@@ -87,6 +93,7 @@ Global
 		Code.RemoteAgency\Code.RemoteAgency.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
 		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{a1ef6d47-3994-4f5e-9488-e3de7ebc9ab4}*SharedItemsImports = 13
 		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{d316c77a-3fbf-4575-914c-0c122eb35589}*SharedItemsImports = 13
 		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{d9e5ac17-43db-406c-9fdc-c7b34a703acf}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -172,6 +179,7 @@ Global
 		{93927AB8-D6B6-4B10-8A52-ABC25C80D0E3} = {9CD0A745-394A-463B-A203-B666E26BB287}
 		{992E2F62-5F36-4BED-9E02-32B9D64C34A0} = {9CD0A745-394A-463B-A203-B666E26BB287}
 		{446833F0-3100-4ABF-B5AF-0D8768F6584B} = {9CD0A745-394A-463B-A203-B666E26BB287}
+		{D316C77A-3FBF-4575-914C-0C122EB35589} = {AC0D8FE4-885F-4776-8B5C-179EED825604}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}

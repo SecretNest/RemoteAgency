@@ -11,6 +11,8 @@ namespace SecretNest.RemoteAgency
 {
     partial class RemoteAgencyBase
     {
+        private const string DynamicModuleName = "RemoteAgencyGenerated";
+
         /// <summary>
         /// Gets of sets default setting for method calling timeout in milliseconds. Default value is 0 (use default value while initializing). Only valid when building type (not on building instance).
         /// </summary>
@@ -43,7 +45,8 @@ namespace SecretNest.RemoteAgency
 
         void Emit(RemoteAgencyInterfaceBasicInfo basicInfo, 
             bool isProxyRequired, bool isServiceWrapperRequired,
-            out Type builtProxy, out Type builtServiceWrapper, out List<Type> builtEntities, out AssemblyBuilder assemblyBuilder, out ModuleBuilder moduleBuilder)
+            out Type builtProxy, out Type builtServiceWrapper, out List<Type> builtEntities,
+            out AssemblyBuilder assemblyBuilder, out ModuleBuilder moduleBuilder)
         {
             var assemblyName = new AssemblyName(basicInfo.AssemblyName);
 
@@ -53,12 +56,14 @@ namespace SecretNest.RemoteAgency
 #else
                 AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif
-
             moduleBuilder =
 #if netfx
-                assemblyBuilder.DefineDynamicModule("RemoteAgency", basicInfo.ClassNameBase + ".dll");
+                assemblyBuilder.DefineDynamicModule(
+                    DynamicModuleName
+                    + string.Join("_", basicInfo.ClassNameBase.Split(System.IO.Path.GetInvalidFileNameChars()))
+                    + ".dll");
 #else
-                assemblyBuilder.DefineDynamicModule("RemoteAgency");
+                assemblyBuilder.DefineDynamicModule(DynamicModuleName);
 #endif
 
             var inspector = new Inspector(basicInfo, isProxyRequired, isServiceWrapperRequired,
@@ -74,8 +79,10 @@ namespace SecretNest.RemoteAgency
             info.DefaultEventRaisingTimeout = DefaultEventRaisingTimeoutForBuilding;
             info.DefaultPropertyGettingTimeout = DefaultPropertyGettingTimeoutForBuilding;
             info.DefaultPropertySettingTimeout = DefaultPropertySettingTimeoutForBuilding;
+           
+            var emitter = new AssemblyBuildingEmitter(info);
 
-            var buildingEntityTasks = CreateEmitEntityTasks(moduleBuilder, info);
+            var buildingEntityTasks = emitter.CreateEmitEntityTasks(moduleBuilder, EntityTypeBuilder, EntityBase);
             buildingEntityTasks.ForEach(i => i.Start());
             // ReSharper disable once AsyncConverter.AsyncWait
             var entityBuildingTasks = buildingEntityTasks.Select(i => i.Result).ToList();
@@ -96,14 +103,14 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, EntityBase,
                     new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
 
-                EmitAttributePassThroughAttributes(proxyTypeBuilder, info.InterfaceLevelPassThroughAttributes);
+                proxyTypeBuilder.EmitAttributePassThroughAttributes(info.InterfaceLevelPassThroughAttributes);
 
                 if (basicInfo.IsSourceInterfaceGenericType)
                 {
-                    EmitGenericParameters(proxyTypeBuilder, basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
+                    proxyTypeBuilder.EmitGenericParameters(basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
                 }
 
-                emitProxy = Task.Run(() => EmitProxy(proxyTypeBuilder, info));
+                emitProxy = Task.Run(() => emitter.EmitProxy(proxyTypeBuilder));
             }
             else
             {
@@ -117,14 +124,14 @@ namespace SecretNest.RemoteAgency
                     /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
                     new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
 
-                EmitAttributePassThroughAttributes(serviceWrapperTypeBuilder, info.InterfaceLevelPassThroughAttributes);
+                serviceWrapperTypeBuilder.EmitAttributePassThroughAttributes(info.InterfaceLevelPassThroughAttributes);
 
                 if (basicInfo.IsSourceInterfaceGenericType)
                 {
-                    EmitGenericParameters(serviceWrapperTypeBuilder, basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
+                    serviceWrapperTypeBuilder.EmitGenericParameters(basicInfo.SourceInterfaceGenericDefinitionArguments, info.InterfaceLevelGenericParameterPassThroughAttributes);
                 }
 
-                emitServiceWrapper = Task.Run(() => EmitServiceWrapper(serviceWrapperTypeBuilder, info));
+                emitServiceWrapper = Task.Run(() => emitter.EmitServiceWrapper(serviceWrapperTypeBuilder));
             }
             else
             {

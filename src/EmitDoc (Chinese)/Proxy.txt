@@ -1,5 +1,8 @@
-Proxy需要在Code.RemoteAgency\RemoteAgency\RemoteAgency.AssmeblyBuilding.Emit.Proxy.cs中实现。方法调用时已经定义了类、接口实现、类头的泛型与AttributePassThrough。
-新方法命名需要以EmitProxy打头，此类方法较多，需要防止重名。如果方法会在Proxy或ServiceWrapper中共享，可以用Emit打头。
+Proxy需要在Code.RemoteAgency.AssemblyBuilding.Emit\AssemblyBuildingEmitter.Proxy.cs中EmitProxy方法实现。方法调用时已经定义了类、接口实现、类头的泛型与AttributePassThrough。
+可能用得到的现有方法：
+	EmitAttributePassThroughAttributes方法：定义为GenericTypeParameterBuilder、TypeBuilder、ParameterBuilder的扩展方法, 
+	EmitGenericParameters方法：定义为TypeBuilder的扩展方法,
+	RandomizedName.GetRandomizedName方法：获得随机名称。静态方法，参数为名称前缀。
 文档中的执行结束点，指Emit后的代码在此会结束执行，通常为方法的返回点，或异常抛出位置。
 
 随机名称是为了防止固定出现的名称重复而设计的。比如用于Request用途的变量，可以使用request_<guid>来命名。

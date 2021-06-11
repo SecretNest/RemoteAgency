@@ -38,11 +38,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Entities %28Keep namespace%29\RemoteAgencyReturnValueInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\Inspector %28Keep namespace%29\Inspector.MethodBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Inspecting\GetBasicInfoExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RandomizedName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.Entity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.Helper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.Proxy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.AssemblyBuilding.Emit.ServiceWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Manager.Close.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Manager.Common.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteAgency %28Keep namespace%29\RemoteAgency.Manager.CreateInstance.cs" />

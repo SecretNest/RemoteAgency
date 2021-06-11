@@ -38,6 +38,8 @@
 
   <Import Project="..\Code.RemoteAgency.Injection\Code.RemoteAgency.Injection.projitems" Label="Shared" />
 
+  <Import Project="..\Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems" Label="Shared" />
+
 </Project>
 
 
