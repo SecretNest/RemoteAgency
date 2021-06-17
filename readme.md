@@ -18,15 +18,15 @@ Documentation: https://RemoteAgency.docs.secretnest.info
 # Remote Hub
 [Remote Hub](https://secretnest.info/RemoteHub) is the solution for connecting Remote Agency sites.
 
-# Old Major Release
-The version 1 of Remote Agency is obsoleted. It's not recommended to use version 1 in new projects.
+# Version 1 Release
+The version 1 of Remote Agency is __obsoleted__. It's __NOT__ recommended to use version 1 in new projects.
 
 The latest release of version 1:
 
 |Package|Description|
 |---|---|
-|[V1 SecretNest.RemoteAgency](https://www.nuget.org/packages/SecretNest.RemoteAgency/1.7.2)|Main library.|
-|[V1 SecretNest.RemoteAgency.Base](https://www.nuget.org/packages/SecretNest.RemoteAgency.Base/)|Base classes, interfaces and attributes of Remote Agency.|
-|[V1 SecretNest.RemoteAgency.DataContractSerializer](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer/)|Using DataContractSerializer as serialization solution in Remote Agency.|
-|[V1 SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation/)|Encapsulation including DataContractSerializer and RemoteAgency.|
+|[V1 SecretNest.RemoteAgency](https://www.nuget.org/packages/SecretNest.RemoteAgency/1.7.2)|Main library of version 1.|
+|[V1 SecretNest.RemoteAgency.Base](https://www.nuget.org/packages/SecretNest.RemoteAgency.Base/)|Base classes, interfaces and attributes of Remote Agency version 1.|
+|[V1 SecretNest.RemoteAgency.<br>DataContractSerializer](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer/)|Using DataContractSerializer as serialization solution in Remote Agency version 1.|
+|[V1 SecretNest.RemoteAgency.<br>DataContractSerializer.EasyEncapsulation](https://www.nuget.org/packages/SecretNest.RemoteAgency.DataContractSerializer.EasyEncapsulation/)|Encapsulation including DataContractSerializer and RemoteAgency version 1.|
 |[V1 Documentation](https://RemoteAgency.docs.secretnest.info/html.v1/)|Documentation of version 1.|
