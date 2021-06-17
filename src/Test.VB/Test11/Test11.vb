@@ -27,7 +27,7 @@ Namespace Test11
             'Server 1
             Dim taskScheduler1 As SequentialScheduler = Nothing
             Dim serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(True)
-            serverRemoteAgencyInstance1.TryCreateAddSequentialScheduler("MyTaskScheduler", taskScheduler1)
+            serverRemoteAgencyInstance1.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler1)
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance1)
             Dim serverSite1Id = serverRemoteAgencyInstance1.SiteId
             Dim serviceWrapperInstance1Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService)
@@ -59,7 +59,7 @@ Namespace Test11
             'Server 2
             Dim taskScheduler2 As SequentialScheduler = Nothing
             Dim serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(True)
-            serverRemoteAgencyInstance2.TryCreateAddSequentialScheduler("MyTaskScheduler", taskScheduler2, True)
+            serverRemoteAgencyInstance2.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler2, True)
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2)
             Dim serverSite2Id = serverRemoteAgencyInstance2.SiteId
             Dim serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService)

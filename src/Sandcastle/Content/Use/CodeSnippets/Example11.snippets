@@ -46,7 +46,7 @@ var originalService = new Server11();
 
 //Server 1
 using var serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
-serverRemoteAgencyInstance1.TryCreateAddSequentialScheduler("MyTaskScheduler", out var taskScheduler1);
+serverRemoteAgencyInstance1.TryCreateAndAddSequentialScheduler("MyTaskScheduler", out var taskScheduler1);
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance1);
 var serverSite1Id = serverRemoteAgencyInstance1.SiteId;
 var serviceWrapperInstance1Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService);
@@ -80,7 +80,7 @@ router.RemoveRemoteAgencyInstance(clientProxyInstance1Id);
 
 //Server 2
 using var serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
-serverRemoteAgencyInstance2.TryCreateAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
+serverRemoteAgencyInstance2.TryCreateAndAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2);
 var serverSite2Id = serverRemoteAgencyInstance2.SiteId;
 var serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService);
@@ -130,7 +130,7 @@ Dim originalService As New Server11()
 'Server 1
 Dim taskScheduler1 As SequentialScheduler = Nothing
 Dim serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(True)
-serverRemoteAgencyInstance1.TryCreateAddSequentialScheduler("MyTaskScheduler", taskScheduler1)
+serverRemoteAgencyInstance1.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler1)
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance1)
 Dim serverSite1Id = serverRemoteAgencyInstance1.SiteId
 Dim serviceWrapperInstance1Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService)
@@ -162,7 +162,7 @@ router.RemoveRemoteAgencyInstance(clientProxyInstance1Id)
 'Server 2
 Dim taskScheduler2 As SequentialScheduler = Nothing
 Dim serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(True)
-serverRemoteAgencyInstance2.TryCreateAddSequentialScheduler("MyTaskScheduler", taskScheduler2, True)
+serverRemoteAgencyInstance2.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler2, True)
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2)
 Dim serverSite2Id = serverRemoteAgencyInstance2.SiteId
 Dim serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService)

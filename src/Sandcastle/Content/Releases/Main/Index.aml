@@ -100,7 +100,7 @@
       <title>Neat Version</title>
       <content>
         <para>For the user don't require built-in serializers and sequential scheduler, a neat version can be use instead.</para>
-        <para>When using neat version, <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>, <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference> and <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.TryCreateAddSequentialScheduler(System.String,SecretNest.TaskSchedulers.SequentialScheduler@,System.Boolean)</codeEntityReference> are not included.</para>
+        <para>When using neat version, <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>, <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithJsonSerializer(System.Nullable{System.Guid})</codeEntityReference> and <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.TryCreateAndAddSequentialScheduler(System.String,SecretNest.TaskSchedulers.SequentialScheduler@,System.Boolean)</codeEntityReference> are not included.</para>
       </content>
     </section>
 
