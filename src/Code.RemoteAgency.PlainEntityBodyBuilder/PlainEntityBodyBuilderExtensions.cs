@@ -61,7 +61,7 @@ namespace SecretNest.RemoteAgency
 			var field = typeBuilder.GeneratePropertyBackField(propertyInfo);
 
 			// Define property
-			var propertyBuilder = typeBuilder.DefineProperty($"{propertyInfo.DeclaringType!.Name}.{propertyInfo.Name}",
+			var propertyBuilder = typeBuilder.DefineProperty($"{propertyInfo.DeclaringType!.FullName}.{propertyInfo.Name}",
 				PropertyAttributes.HasDefault, propertyInfo.PropertyType, null);
 
 			// Generate property getter and setter
