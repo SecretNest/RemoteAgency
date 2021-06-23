@@ -30,13 +30,13 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         bool IRemoteAgencyMessage.IsOneWay { get => _isOneWay; set => _isOneWay = value; }
         bool IRemoteAgencyMessage.IsEmptyMessage { get => true; set => _ = value; }
 
-        /// <summary>
-        /// Initializes an instance of RemoteAgencyBinaryEmptyMessage.
-        /// </summary>
-        /// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
-        public RemoteAgencyBinaryEmptyMessage()
-        {
-            ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
-        }
+        ///// <summary>
+        ///// Initializes an instance of RemoteAgencyBinaryEmptyMessage.
+        ///// </summary>
+        ///// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
+        //public RemoteAgencyBinaryEmptyMessage()
+        //{
+        //    ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
+        //}
     }
 }
