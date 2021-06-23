@@ -1345,12 +1345,6 @@
             </summary>
             <remarks><para>This class is not present in Neat release.</para></remarks>
         </member>
-        <member name="M:SecretNest.RemoteAgency.JsonSerializer.RemoteAgencyJsonEmptyMessage.#ctor">
-            <summary>
-            Initializes an instance of RemoteAgencyJsonEmptyMessage.
-            </summary>
-            <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
-        </member>
         <member name="T:SecretNest.RemoteAgency.JsonSerializer.RemoteAgencyJsonSerializer">
             <summary>
             Provides json based serializing and deserializing methods for entities.
@@ -1436,12 +1430,6 @@
             Defines an empty message with binary serialization support.
             </summary>
             <remarks><para>This class is not present in Neat release.</para></remarks>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinaryEmptyMessage.#ctor">
-            <summary>
-            Initializes an instance of RemoteAgencyBinaryEmptyMessage.
-            </summary>
-            <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer">
             <summary>
