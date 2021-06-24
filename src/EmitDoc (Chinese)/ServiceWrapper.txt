@@ -169,14 +169,10 @@ void IServiceWrapperCommunicate.ProcessOneWayMethodMessage(IRemoteAgencyMessage 
 void IServiceWrapperCommunicate.ProcessEventAddingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
 	如果有Helper对象：
 		Emit调用Helper对象的ProcessEventAddingMessage方法（参数表相同，无返回值）。
-	否则：
-		留空。
 
 void IServiceWrapperCommunicate.ProcessEventRemovingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
 	如果有Helper对象：
 		Emit调用Helper对象的ProcessEventRemovingMessage方法（参数表相同，无返回值）。
-	否则：
-		留空。
 
 IRemoteAgencyMessage IServiceWrapperCommunicate.ProcessPropertyGettingMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)：
 	Emit构造一个switch，匹配message.AssetName：
@@ -289,14 +285,10 @@ void IServiceWrapperCommunicate.ProcessOneWayPropertySettingMessage(IRemoteAgenc
 void IServiceWrapperCommunicate.OnRemoteProxyClosing(Guid siteId, Guid? proxyInstanceId = null)：
 	如果有Helper对象：
 		Emit调用Helper对象的OnRemoteProxyClosing方法（参数表相同，无返回值）。
-	否则：
-		留空。
 
 void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)：
 	如果有Helper对象：
 		Emit调用Helper对象的CloseRequestedByManagingObject方法（参数表相同，无返回值）。
-	否则：
-		留空。
 
 构造Router类（每个event一个）：
 	遍历info.Events的每个Event：
