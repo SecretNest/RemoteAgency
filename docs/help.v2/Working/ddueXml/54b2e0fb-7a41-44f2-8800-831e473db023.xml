@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="54b2e0fb-7a41-44f2-8800-831e473db023" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+      <para>
+        <token>Remote Agency Url</token> is built for making the communicating among components in different computers easier.</para>
+      <para>Remote Agency can create proxy objects based on one interface file which should be implemented by a remote class, and serializing the accessing between the proxy and the real service object.</para>
+      <para>NOTE: Network transportation is not included in Remote Agency. The developer should take care about the sending and receiving messages among Remote Agency sites, e.g. using <token>Remote Hub Url</token>.</para>
+		</introduction>
+
+		<section>
+			<title>Getting Started</title>
+			<content>
+				<para>Welcome to Remote Agency.</para>
+
+				<para>Remote Agency aims to a part of the technical solution for accessing a remote object, only management and serialization, but not network transportation.</para>
+        <para><token>Remote Hub Url</token>, which works in pair with Remote Agency, is ready for taking care of network transportation required by Remote Agency.</para>
+        <para>The original way we used daily</para>
+				<mediaLink>
+					<image placement="left" xlink:href="Picture1"/>
+				</mediaLink>
+				<para>could be transferred to</para>
+				<mediaLink>
+					<image placement="left" xlink:href="Picture2"/>
+				</mediaLink>
+				<para>with designed interface as service contract. Service object should implement the interface. This is finished by architecture or summary design.</para>
+				<para>Now, with the instances of Remote Agency and the object created by it, the structure is changed to</para>
+        <mediaLink>
+          <image placement="left" xlink:href="Picture3"/>
+        </mediaLink>
+				<para>and communication between instances of Remote Agency are serialized.</para>
+				<para>The things user should handle:</para>
+				<list class="bullet">
+					<listItem>
+						<para>User code as usual;</para>
+					</listItem>
+					<listItem>
+						<para>Server object as usual;</para>
+					</listItem>
+					<listItem>
+						<para>A service contract interface, including all methods, properties and events, which clients should access;</para>
+					</listItem>
+					<listItem>
+						<para>Reference to Remote Agency;</para>
+					</listItem>
+					<listItem>
+						<para>The transportation among Remote Agency Manager objects, using <token>Remote Hub Url</token> for example.</para>
+					</listItem>
+				</list>
+				<para>The things Remote Agency cares:</para>
+				<list class="bullet">
+					<listItem>
+						<para>Creating types based on the service contract interfaces (access modifier must be public);</para>
+					</listItem>
+          <listItem>
+						<para>Creating proxy and service wrapper objects;</para>
+          </listItem>
+					<listItem>
+						<para>Handling the serialization and packing process;</para>
+					</listItem>
+					<listItem>
+						<para>Catching and playing back exceptions on remote sites; etc.</para>
+					</listItem>
+				</list>
+			</content>
+		</section>
+
+		<section address="packages">
+			<title>Released Packages</title>
+			<content>
+				<para>Currently, 3 packages are officially released on NuGet:</para>
+				<table>
+					<tableHeader>
+						<row>
+							<entry>
+								<para>Name</para>
+							</entry>
+							<entry>
+								<para>Description</para>
+							</entry>
+							<entry>
+								<para>Package</para>
+							</entry>
+							<entry>
+								<para>Documentation</para>
+							</entry>
+						</row>
+					</tableHeader>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency</para>
+						</entry>
+						<entry>
+							<para>Main library.</para>
+						</entry>
+						<entry>
+							<para><token>Remote Agency Nuget Url</token></para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.Abstraction</para>
+						</entry>
+						<entry>
+							<para>Interfaces, attributes and exceptions (other than thrown while building) of Remote Agency.</para>
+						</entry>
+						<entry>
+              <para><token>Remote Agency Abstraction Nuget Url</token></para>
+						</entry>
+						<entry>
+							<para>
+								<link xlink:href="5dad6464-9089-44e2-b945-e94a953defde" />
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>SecretNest.RemoteAgency.Neat</para>
+						</entry>
+						<entry>
+							<para>All functions in main library except serializers and reference of Sequential Scheduler.</para>
+						</entry>
+						<entry>
+              <para><token>Remote Agency Neat Nuget Url</token></para>
+						</entry>
+						<entry>
+              <link xlink:href="e84a4d5d-59a8-43fa-9dca-67fcdffaefd5#neat" />
+						</entry>
+					</row>
+				</table>
+			</content>
+		</section>
+
+    <section>
+      <title>Supported Frameworks</title>
+      <content>
+        <token>Supported Framework Version List</token>
+      </content>
+    </section>
+    <section>
+      <title>Licenses</title>
+      <content>
+        <para>SecretNest.RemoteAgency packages are licensed under <token>Remote Agency MIT Url</token>. You can copy and redistribute the material in any medium or format for any purpose, even commercially. Source code is available at <token>Remote Agency Github Url</token>.</para>
+      </content>
+    </section>
+    <section>
+      <title>Links</title>
+      <content>
+        <para>Issues, requests and source code: <token>Remote Agency Github Url</token></para>
+      </content>
+    </section>
+
+		<relatedTopics>
+			<link xlink:href="32d8086d-6b51-4ca9-9dcf-6e1be9282355" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>

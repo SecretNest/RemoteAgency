@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content xml:space="preserve" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <item id="CreateProxy with Id"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">When creating proxy, target site id and service wrapper instance id need to be specified.</ddue:para>
+<ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Site id is used to locate the server. In a real scenario, servers are usually deployed into different applications even computers. Message routing component, like <ddue:token>Remote Hub Url</ddue:token>, need to use the site id to deliver messages generated from proxy to the right server instance.</ddue:para>
+<ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Service wrapper instance id is used to locate the service object which contains user code. This is used by Remote Agency to deliver the message to the right service object registered by <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateServiceWrapper``1(``0,System.Int32,System.Boolean)</ddue:codeEntityReference> (or <ddue:codeEntityReference qualifyHint="false" autoUpgrade="true">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateServiceWrapper(System.Type,System.Object,System.Int32,System.Boolean)</ddue:codeEntityReference>).</ddue:para>
+<ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">No such id is required when creating service wrapper because the response messages are sent to the source of the request.</ddue:para></item>
+  <item id="Example List"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Supported Frameworks:
+  <ddue:list class="bullet">
+    <ddue:listItem><ddue:link xlink:href="f227ff2f-572b-4efe-ae73-807e53b4ef60" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="bb409edb-480f-4ffe-abb3-cb8b39fc033c" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="e0c354d3-50df-45a7-a19f-8053f4a4b52a" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="ce9cead6-69f0-456a-94c6-f7988ed3eb3d" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="a5bbf82f-ea0b-4f46-9cd7-cbfe91df45d3" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="1546aac8-8553-468e-8cc6-f3f2cefb6784" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="ddf8c107-d1ad-4e41-b851-1ab542686164" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="e8eb7ada-7632-4567-9a2f-904fe7895adc" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="b132f22d-3901-47eb-85b1-8b94a34f7627" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="3fce1b5d-997f-4caa-9239-73257e7d6abe" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="9d138999-0ebe-4bd8-90d5-0b84f2000a0a" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="e4a395b7-5162-40a5-a999-040e685755fb" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+    <ddue:listItem><ddue:link xlink:href="eb3856b1-4342-4467-a0ed-ca715663ed71" xmlns:xlink="http://www.w3.org/1999/xlink" /></ddue:listItem>
+  </ddue:list>
+</ddue:para></item>
+  <item id="Example Prerequisites Reference"><ddue:prerequisites xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:content>Before using this example code, an app need to be created first. Follow <ddue:link xlink:href="59115d8d-60b6-4dcb-81ba-465d85cc1260" xmlns:xlink="http://www.w3.org/1999/xlink">this doc</ddue:link> to prepare that first.</ddue:content>
+</ddue:prerequisites></item>
+  <item id="LocalExceptionHandler"><ddue:alert class="note" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:para>By default, all exception thrown on the remote site will be suppressed remotely and transferred to caller as result. If additional exception handler is required on the remote site, use <ddue:link xlink:href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" xmlns:xlink="http://www.w3.org/1999/xlink" /> on the instance which the exception thrown originally.</ddue:para>
+  <ddue:para>All values of two-way parameters or properties marked with <ddue:codeInline>IsIncludedInReturning</ddue:codeInline> will be transferred to caller when exception thrown.</ddue:para>
+</ddue:alert></item>
+</content>

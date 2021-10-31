@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="3c648b23-25dd-454c-b074-d0f3f0a0958c" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <token>ThreadLock Introduction</token>
+
+    <section>
+      <title>Mode</title>
+      <content>
+        <para>When tuning required, <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute</codeEntityReference> can be marked on interface with 4 modes.</para>
+        <list class="nobullet">
+          <listItem><para>None: Default value. The same as when ThreadLockAttribute absents.</para></listItem>
+          <listItem><para>SynchronizationContext: Always use Synchronization Context for accessing assets.</para></listItem>
+          <listItem><para>AnyButSameThread: Within each object (service wrapper and proxy), asset access will be restricted to a single thread. This is not supported by neat version of Remote Agency due to lack of built-in SequentialScheduler.</para></listItem>
+          <listItem><para>TaskSchedulerSpecified: Tasks for accessing assets related to this interface will be started from a Task Scheduler specified by name. The name is passed by ThreadLockAttribute(string taskSchedulerName). Before processing this interface, the instance of Task Scheduler should be added to the instance of Remote Agency by <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.TryAddTaskScheduler(System.String,System.Threading.Tasks.TaskScheduler)</codeEntityReference>. <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.TryGetTaskScheduler(System.String,System.Threading.Tasks.TaskScheduler@)</codeEntityReference> and <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.TryRemoveTaskScheduler(System.String,System.Threading.Tasks.TaskScheduler@)</codeEntityReference> can help manage added schedulers.</para></listItem>
+        </list>
+      </content>
+    </section>
+
+    <section address="SynchronizationContext">
+      <title>Synchronization Context</title>
+      <content>
+        <para>The task factory based on synchronization context is stored at <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgencyBase.SynchronizationContextTaskFactory</codeEntityReference>. This is a static property. When required, the task factory specified is used. If the value is <codeInline>null</codeInline> / <codeInline>Nothing</codeInline>, an instance of task factory based on synchronization context is created from the current thread.</para>
+        <alert class="caution">
+          <para>Due to the limitation of dotnet core and dotnet 5, synchronization context may not be obtained in any thread. This may cause an exception thrown while trying to create the task factory base on it. To avoid it, always set the value manually in UI thread, like in Form_Load method. To simplify the operation, call <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateSynchronizationContextTaskFactoryFromCurrentThread</codeEntityReference> in UI thread.</para>
+        </alert>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
+      <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="e4a395b7-5162-40a5-a999-040e685755fb">Example 11: ThreadLock</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

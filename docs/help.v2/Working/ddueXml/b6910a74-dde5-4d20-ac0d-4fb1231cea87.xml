@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b6910a74-dde5-4d20-ac0d-4fb1231cea87" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Asynchronous method is not supported by Remote Agency because the advantage from asynchronous calling is meaningless compared to the overhead when running code remotely. </para>
+      <para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference> can be used on all methods with return as Task, ValueTask or their derived class for compatible when calling asynchronous methods.</para>
+    </introduction>
+
+    <section>
+      <title>Simulation</title>
+      <content>
+        <para>Through supporting of asynchronous method is insignificant in Remote Agency. Simulation solution presents still for code level compatible reason.</para>
+        <para>Due to lack of serialization support of <codeInline>Task</codeInline>, the method returning an instance of Task could not be used in Remote Agency directly. However, the method marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute</codeEntityReference> is supported by Remote Agency by extracting the result on remote site and reconstruct the task instance from it on local.</para>
+        <alert note="Caution">By getting the result of the Task on the remote side, the exception thrown inside the task will be processed and transmitted to local. Exception will be thrown on local when getting the return value from the method if happened, instead of getting <codeInline>Result</codeInline> property or running <codeInline>Wait</codeInline> method of the <codeInline>Task</codeInline> instance.</alert>
+      </content>
+    </section>
+
+    <section>
+      <title>Mechanism</title>
+      <content>
+        <para>No matter async keyword is used on the method or not, this attribute marked method will be treated in the following ways:</para>
+        <list class="nobullet">
+          <listItem><para>Normally, the server side (service wrapper) will call this method and wait for the completion, when requested from the client side (proxy).</para></listItem>
+          <listItem><para>If result is required, a completed task with the result from the server side will be created on the client side.</para></listItem>
+          <listItem><para>The state of the task will never be transferred.</para></listItem>
+          <listItem><para>If there is any exception thrown inside the method, the exception object will be transferred to the client side and thrown. No exception handling is called on the server side.</para></listItem>
+          <listItem><para>If the method is marked with one-way, server side will call the method without waiting for the result.</para></listItem>
+        </list>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <codeEntityReference linkText="All attributes">N:SecretNest.RemoteAgency.Attributes</codeEntityReference>
+      <link xlink:href="14c3caef-7392-4f68-b7eb-d0bb014a2e4c">Attributes</link>
+      <link xlink:href="bb409edb-480f-4ffe-abb3-cb8b39fc033c">Example 1: Method Overloading, Customized Asset Name and Async</link>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net461;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <AssemblyName>SecretNest.RemoteAgency.Abstraction</AssemblyName>
     <Configurations>Debug;Release</Configurations>

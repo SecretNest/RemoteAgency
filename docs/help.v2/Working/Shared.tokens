@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content xml:space="preserve" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <item id="Attribute Pass-Through Description"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">When an attribute is required on the proxy being created, follow these steps:</ddue:para>
+<ddue:list class="ordered" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:listItem>
+    <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</ddue:codeEntityReference> on the asset which requires the attribute. Event, method, property, parameter, generic parameter, return value and interface are supported.</ddue:para>
+    <ddue:para>When a constructor with parameters should be used, specify all types of parameters in attributeConstructorParameterTypes.</ddue:para>
+    <ddue:para>When parameters of constructor can be provided in order, specify them in attributeConstructorParameters. The length of parameters cannot exceed the length of attributeConstructorParameterTypes. When this is shorter, the missing parameters will be filled by <ddue:codeInline>null</ddue:codeInline> / <ddue:codeInline>Nothing</ddue:codeInline>.</ddue:para>
+    <ddue:para>When additional information need to be provided, attributeId should to be set with a unique string, which is the same as the AttributeId of the attributes providing additional information.</ddue:para>
+  </ddue:listItem>
+  <ddue:listItem>
+    <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</ddue:codeEntityReference> on the asset with the same attributeId to pass additional parameter to the constructor. Parameter parameterIndex cannot be negative, equal or larger than the length of the parameters of the constructor. Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</ddue:para>
+    <ddue:para>When multiple parameters are required, specify one at a time.</ddue:para>
+  </ddue:listItem>
+  <ddue:listItem>
+    <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</ddue:codeEntityReference> on the asset with the same attributeId when some property need to be set. The property pointed by propertyName should be settable publicly.</ddue:para>
+    <ddue:para>Parameter order can be adjust when setting order needs to be guaranteed. The property with smaller order number will be set first. Default value is 0.</ddue:para>
+    <ddue:para>When multiple properties are required to be set, specify one at a time.</ddue:para>
+  </ddue:listItem>
+  <ddue:listItem>
+    <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</ddue:codeEntityReference> on the asset with the same attributeId when some field need to be set. The field pointed by fieldName should be settable publicly.</ddue:para>
+    <ddue:para>Parameter order can be adjust when setting order needs to be guaranteed. The field with smaller order number will be set first. Default value is 0.</ddue:para>
+    <ddue:para>When multiple fields are required to be set, specify one at a time.</ddue:para>
+  </ddue:listItem>
+</ddue:list>
+<ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">The setting order between properties and fields are controlled by dotnet runtime.</ddue:para>
+<ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">When multiple attributes are required, specify each of them using the steps above.</ddue:para></item>
+  <item id="Attribute Pass-Through Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:para>When attributes should be marked on the proxy being created by Remote Agency, the information should be specified by <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute</ddue:codeEntityReference>, <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute</ddue:codeEntityReference>, <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</ddue:codeEntityReference> and <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</ddue:codeEntityReference> on interface and its assets.</ddue:para>
+</ddue:introduction></item>
+  <item id="Ping Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+    <ddue:para>Ping test is designed for testing the delay and the connectivity between proxy and remote service wrapper.</ddue:para>
+</ddue:introduction></item>
+  <item id="Remote Agency Abstraction Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>NuGet</ddue:linkText>
+  <ddue:linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Abstraction/</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency Github Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>Github</ddue:linkText>
+  <ddue:linkUri>https://github.com/SecretNest/RemoteAgency</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency MIT Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>MIT</ddue:linkText>
+  <ddue:linkUri>https://github.com/SecretNest/RemoteAgency/tree/v2/LICENSE</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency Neat Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>NuGet</ddue:linkText>
+  <ddue:linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Neat/</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>NuGet</ddue:linkText>
+  <ddue:linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency/</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>Remote Agency</ddue:linkText>
+  <ddue:linkUri>https://secretnest.info/RemoteAgency</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Remote Agency Version1 Doc Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Remote Agency Version1 Doc</ddue:linkText><ddue:linkUri>https://remoteagency.docs.secretnest.info/help.v1</ddue:linkUri></ddue:externalLink></item>
+  <item id="Remote Hub Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:linkText>Remote Hub</ddue:linkText>
+  <ddue:linkUri>https://secretnest.info/RemoteHub</ddue:linkUri>
+</ddue:externalLink></item>
+  <item id="Sequential Scheduler Github Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Sequential Scheduler</ddue:linkText><ddue:linkUri>https://github.com/SecretNest/SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
+  <item id="Sequential Scheduler Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Nuget</ddue:linkText><ddue:linkUri>https://www.nuget.org/packages/SecretNest.SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
+  <item id="Supported Framework Version List"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Supported Frameworks:
+  <ddue:list class="bullet">
+    <ddue:listItem>All platform supported by .Net Standard 2.1
+      <ddue:alert class="note">Starts from
+        <ddue:list class="bullet">
+          <ddue:listItem>.Net 5.0</ddue:listItem>
+          <ddue:listItem>.Net Core 3.0</ddue:listItem>
+          <ddue:listItem>Mono 6.4</ddue:listItem>
+          <ddue:listItem>Xamarin.iOS 12.16</ddue:listItem>
+          <ddue:listItem>Xamarin.Mac 5.16</ddue:listItem>
+          <ddue:listItem>Xamarin.Android 10</ddue:listItem>
+          <ddue:listItem>An upcoming version Universal Windows Platform</ddue:listItem>
+          <ddue:listItem>An upcoming version Unity</ddue:listItem>
+        </ddue:list>
+        <ddue:para>See <ddue:externalLink><ddue:linkText>this article</ddue:linkText><ddue:linkUri>https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support</ddue:linkUri></ddue:externalLink> for details.</ddue:para>
+      </ddue:alert>
+    </ddue:listItem>
+    <ddue:listItem>.Net Framework 4.6.1 and higher version</ddue:listItem>
+    <ddue:listItem>.Net Core 2.1</ddue:listItem>
+  </ddue:list>
+</ddue:para></item>
+  <item id="ThreadLock Introduction"><ddue:introduction xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <ddue:para>By default, Remote Agency access asset specified using the same thread of processing received message. When messages come from different threads, the assets in target service object should be thread safe for being called from multiple threads.</ddue:para>
+</ddue:introduction></item>
+</content>

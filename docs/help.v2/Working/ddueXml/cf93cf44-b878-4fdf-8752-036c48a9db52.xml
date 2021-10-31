@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="cf93cf44-b878-4fdf-8752-036c48a9db52" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>Developer can filter the messages after received and before being sent.</para>
+    </introduction>
+
+    <section address="Filter">
+      <title>Message Filtering</title>
+      <content>
+        <para>Developer can filter messages after received and before being sent by handling <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.AfterMessageReceived</codeEntityReference> and <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgency`2.BeforeMessageSending</codeEntityReference>. This is useful for audit and authentication checking.</para>
+        <para>The argument of the handler provides the message body. Developer can change properties of the message with caution. And, developer can break the message routing using one of the following methods provided by the argument of the handler.</para>
+        <listItem>
+          <list class="nobullet">
+            <listItem>
+              <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToContinue</codeEntityReference>: Default. Continues the message sending or processing.</para>
+            </listItem>
+            <listItem>
+              <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToTerminateAndReturnException(System.String)</codeEntityReference>: Terminates this process and send an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.MessageProcessTerminatedException</codeEntityReference> back to the sender. Cannot be used when <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay</codeEntityReference> is true.</para>
+            </listItem>
+            <listItem>
+              <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToReplaceWithException(System.String)</codeEntityReference>: Replaces this message by an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.MessageProcessTerminatedException</codeEntityReference> then sends it to the receiver. Cannot be used when message direction is <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageDirection.Sending</codeEntityReference>. Caution: This may cause the sender throw <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.AccessingTimeOutException</codeEntityReference> if <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay</codeEntityReference> is set to false.</para>
+            </listItem>
+            <listItem>
+              <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToReplaceWithExceptionAndReturn(System.String)</codeEntityReference>: Replaces this message by an instance of <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.MessageProcessTerminatedException</codeEntityReference> then sends it to the receiver and the sender.</para>
+            </listItem>
+            <listItem>
+              <para><codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgsBase.SetToTerminateSilently</codeEntityReference>: Terminates this process silently. Caution: This may cause the sender throw <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.AccessingTimeOutException</codeEntityReference> if <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.IsOneWay</codeEntityReference> is set to false.</para>
+            </listItem>
+          </list>
+        </listItem>
+        <para>When <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.BeforeMessageProcessingEventArgs`2.IncludeTerminatedMessageInException</codeEntityReference> is set to true, the terminated message will be contained in the exception. For hiding the message, set it as false. Default value is true.</para>
+      </content>
+    </section>
+
+    <section address="Ignore">
+      <title>Ignoring</title>
+      <content>
+        <para>By default, system level messages (<codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.MessageBodyEventArgsBase.MessageType</codeEntityReference> is <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.EventAdd</codeEntityReference>, <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.EventRemove</codeEntityReference> or <codeEntityReference qualifyHint="false">F:SecretNest.RemoteAgency.MessageType.SpecialCommand</codeEntityReference>) will not raise the events. If developer want to filter those messages also, set <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgency`2.BypassSystemMessagesFromFiltering</codeEntityReference> to false.</para>
+        <para>Internal messages, which sent from and to the same instance of Remote Agency, will never raise the events unless <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.RemoteAgencyBase.LoopbackAddressDetection</codeEntityReference> is set to false.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="bd599f96-a496-4309-8a6c-82f5e772989f" /> <!--Instance-->
+      <link xlink:href="9c3f74b5-3a60-464b-8f4e-85973938528c" /> <!--Concept-->
+      <link xlink:href="dc569fad-19e9-46dd-869d-6ee90c5dbe32" /> <!--ConsistencyAndBestPracticeWhenMixing-->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
