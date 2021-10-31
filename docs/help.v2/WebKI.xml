@@ -1036,7 +1036,7 @@
   <HelpKINode Title="RemoteAgencyBase.SiteId property" Url="html/P_SecretNest_RemoteAgency_RemoteAgencyBase_SiteId.htm" />
   <HelpKINode Title="RemoteAgencyBase.SynchronizationContextTaskFactory property" Url="html/P_SecretNest_RemoteAgency_RemoteAgencyBase_SynchronizationContextTaskFactory.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryAddTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddTaskScheduler.htm" />
-  <HelpKINode Title="RemoteAgencyBase.TryCreateAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAddSequentialScheduler.htm" />
+  <HelpKINode Title="RemoteAgencyBase.TryCreateAndAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAndAddSequentialScheduler.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetTaskScheduler.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetWaitingMessage method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetWaitingMessage.htm" />
   <HelpKINode Title="RemoteAgencyBase.TryGetWaitingMessageIds method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetWaitingMessageIds.htm" />
@@ -1338,7 +1338,7 @@
     <HelpKINode Title="MessageProcessTerminatedException.ToString Method " Url="html/M_SecretNest_RemoteAgency_MessageProcessTerminatedException_ToString.htm" />
   </HelpKINode>
   <HelpKINode Title="TryAddTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryAddTaskScheduler.htm" />
-  <HelpKINode Title="TryCreateAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAddSequentialScheduler.htm" />
+  <HelpKINode Title="TryCreateAndAddSequentialScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryCreateAndAddSequentialScheduler.htm" />
   <HelpKINode Title="TryGetTaskScheduler method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_TryGetTaskScheduler.htm" />
   <HelpKINode Title="TryGetWaitingMessage method">
     <HelpKINode Title="RemoteAgency(TSerialized, TEntityBase).TryGetWaitingMessage Method " Url="html/Overload_SecretNest_RemoteAgency_RemoteAgency_2_TryGetWaitingMessage.htm" />

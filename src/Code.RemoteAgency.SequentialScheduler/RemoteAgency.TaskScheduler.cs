@@ -18,7 +18,7 @@ namespace SecretNest.RemoteAgency
         /// <para>For details please refer to <see href="https://github.com/SecretNest/SequentialScheduler/">https://github.com/SecretNest/SequentialScheduler/</see>.</para>
         /// <para>This method is not present in Neat release.</para></remarks>
         /// <seealso cref="ThreadLockAttribute"/>
-        public bool TryCreateAddSequentialScheduler(string name, out SequentialScheduler taskScheduler, bool waitForThread = false)
+        public bool TryCreateAndAddSequentialScheduler(string name, out SequentialScheduler taskScheduler, bool waitForThread = false)
         {
             if (_namedTaskSchedulers.ContainsKey(name))
             {

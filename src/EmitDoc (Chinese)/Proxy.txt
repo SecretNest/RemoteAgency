@@ -30,22 +30,16 @@ IRemoteAgencyMessage IProxyCommunicate.ProcessEventRaisingMessage(IRemoteAgencyM
 	如果有Helper对象：
 		调用Helper对象的ProcessEventRaisingMessage方法（参数表与返回值均相同），并返回其返回值.
 	否则：
-		留空。
+		返回空。
 void IProxyCommunicate.ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)：
 	如果有Helper对象：
 		调用Helper对象的ProcessOneWayEventRaisingMessage方法（参数表相同，无返回值）。
-	否则：
-		留空。
 void IProxyCommunicate.OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null)：
 	如果有Helper对象：
 		调用Helper对象的OnRemoteServiceWrapperClosing方法（参数表相同，无返回值）。
-	否则：
-		留空。
 void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)：
 	如果有Helper对象：
 		调用Helper对象的CloseRequestedByManagingObject方法（参数表相同，无返回值）。
-	否则：
-		留空。
 
 用户接口：需要隐式实现。接口类型来自info.SourceInterface。不论接口是否为泛型，只需要实现SourceInterface本身。IsSourceInterfaceGenericType与SourceInterfaceGenericArguments说明接口是否为泛型以及泛型的类型参数，如有需要可以参考。例如用户如指定实现List<string>，则SourceInterface为List<T>，IsSourceInterfaceGenericType为真，SourceInterfaceGenericArguments为[String]，SourceInterfaceGenericDefinitionArguments为[T]。
 

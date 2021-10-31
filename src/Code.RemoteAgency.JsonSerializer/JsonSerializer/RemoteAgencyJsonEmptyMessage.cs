@@ -17,15 +17,15 @@ namespace SecretNest.RemoteAgency.JsonSerializer
         Guid IRemoteAgencyMessage.MessageId { get; set; }
         Exception IRemoteAgencyMessage.Exception { get; set; }
         bool IRemoteAgencyMessage.IsOneWay { get; set; }
-        [Newtonsoft.Json.JsonIgnore] bool IRemoteAgencyMessage.IsEmptyMessage { get; set; }
+        [Newtonsoft.Json.JsonIgnore] bool IRemoteAgencyMessage.IsEmptyMessage { get => true; set => _ = value; }
 
-        /// <summary>
-        /// Initializes an instance of RemoteAgencyJsonEmptyMessage.
-        /// </summary>
-        /// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
-        public RemoteAgencyJsonEmptyMessage()
-        {
-            ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
-        }
+        ///// <summary>
+        ///// Initializes an instance of RemoteAgencyJsonEmptyMessage.
+        ///// </summary>
+        ///// <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
+        //public RemoteAgencyJsonEmptyMessage()
+        //{
+        //    ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
+        //}
     }
 }
