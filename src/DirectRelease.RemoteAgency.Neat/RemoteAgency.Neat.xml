@@ -1471,6 +1471,27 @@
         <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`2.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
             <inheritdoc />
         </member>
+        <member name="T:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3">
+            <summary>
+            Defines a helper class to be implanted into built assembly for handling an two-way event handler in proxy. This is an abstract class.
+            </summary>
+            <typeparam name="TDelegate">Delegate of event.</typeparam>
+            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
+            <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initialize an instance of ProxyEventRouterBase.
+            </summary>
+            <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
+            <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
+            <inheritdoc />
+        </member>
         <member name="T:SecretNest.RemoteAgency.Injection.EventHelper.ServiceWrapperEventHelper`1">
             <summary>
             Defines a helper class to be implanted into built assembly for event servicing in service wrapper.
@@ -1605,27 +1626,6 @@
             Initialize an instance of ServiceWrapperEventRouterBase.
             </summary>
             <param name="timeout">Timeout for waiting for the response of event raising.</param>
-        </member>
-        <member name="T:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3">
-            <summary>
-            Defines a helper class to be implanted into built assembly for handling an two-way event handler in proxy. This is an abstract class.
-            </summary>
-            <typeparam name="TDelegate">Delegate of event.</typeparam>
-            <typeparam name="TParameterEntity">Parameter entity type.</typeparam>
-            <typeparam name="TReturnValueEntity">Return value entity type.</typeparam>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Initialize an instance of ProxyEventRouterBase.
-            </summary>
-            <param name="addingTimeout">Timeout for waiting for the response of event adding.</param>
-            <param name="removingTimeout">Timeout for waiting for the response of event removing.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.ProcessEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage,System.Exception@)">
-            <inheritdoc />
-        </member>
-        <member name="M:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventRouterBase`3.ProcessOneWayEventRaisingMessage(SecretNest.RemoteAgency.IRemoteAgencyMessage)">
-            <inheritdoc />
         </member>
     </members>
 </doc>

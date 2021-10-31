@@ -1,0 +1,329 @@
+﻿<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" type="text/css" href="../styles/branding.css" /><link rel="stylesheet" type="text/css" href="../styles/branding-en-US.css" /><script type="text/javascript" src="../scripts/branding.js"> </script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>9: Event One-way, Ignored, Local Exception Handling and Timeout, Parameter Ignored and Two-way</title><meta name="Language" content="en-us" /><meta name="Microsoft.Help.Id" content="3fce1b5d-997f-4caa-9239-73257e7d6abe" /><meta name="Description" content="Remote Agency supports tunings of remote accessing of events." /><meta name="Microsoft.Help.ContentType" content="How To" /><meta name="BrandingAware" content="true" /><link rel="stylesheet" type="text/css" href="../styles/branding-Website.css" /><script type="text/javascript" src="../scripts/jquery-3.5.1.min.js"></script><script type="text/javascript" src="../scripts/branding-Website.js"></script><script type="text/javascript" src="../scripts/clipboard.min.js"></script></head><body onload="OnLoad('cs')"><input type="hidden" id="userDataCache" class="userDataStyle" /><div class="pageHeader" id="PageHeader">Remote Agency</div><div class="pageBody"><div class="topicContent" id="TopicContent"><table class="titleTable"><tr><td class="logoColumn"><img src="../icons/Help.png" /></td><td class="titleColumn"><h1>9: Event One-way, Ignored, Local Exception Handling and Timeout, Parameter Ignored and Two-way</h1></td></tr></table><span class="introStyle"></span> <div class="introduction"><p>Remote Agency supports tunings of remote accessing of events.</p></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID0RB')" onkeypress="SectionExpandCollapse_CheckKey('ID0RB', event)" tabindex="0"><img id="ID0RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Prerequisites</span></div><div id="ID0RBSection" class="collapsibleSection">
+  Before using this example code, an app need to be created first. Follow <a href="59115d8d-60b6-4dcb-81ba-465d85cc1260.htm">this doc</a> to prepare that first.
+</div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID1RB')" onkeypress="SectionExpandCollapse_CheckKey('ID1RB', event)" tabindex="0"><img id="ID1RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Brief</span></div><div id="ID1RBSection" class="collapsibleSection"><h4 class="subHeading">Event and Delegate</h4><div class="subsection"><p>Remote Agency supports tunings of remote accessing of events such as:</p><ul><li>One-way, by marking asset with <a href="T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm">AssetOneWayOperatingAttribute</a>,</li><li>Ignored, by marking asset with <a href="T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm">AssetIgnoredAttribute</a>,</li><li>Enabling <a href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7.htm">Local Exception Handling</a>, by marking asset with <a href="T_SecretNest_RemoteAgency_Attributes_LocalExceptionHandlingAttribute.htm">LocalExceptionHandlingAttribute</a>, and</li><li>Adjusting timeout time, by marking asset with <a href="T_SecretNest_RemoteAgency_Attributes_OperatingTimeoutTimeAttribute.htm">OperatingTimeoutTimeAttribute</a>.</li></ul><p>For one-way, ignored and timeout behavior, check <a href="e7b65736-b2df-4aa9-897a-3a3050d3cceb.htm">Asset Ignoring, Timeout and One-way</a> for details.</p></div><h4 class="subHeading">Parameter and Return</h4><div class="subsection"><p>Similar as method, Remote Agency pass the value of parameter, which is marked with <span class="code">ref</span> (C#) or <span class="code">ByRef</span> (VB.Net), back to the caller when required. Also, the value of the parameter marked with <span class="code">out</span> (C#) will be returned. Additionally, some properties in entity class used by parameter can also be returned by specifying <a href="T_SecretNest_RemoteAgency_Attributes_ParameterReturnRequiredPropertyAttribute.htm">ParameterReturnRequiredPropertyAttribute</a> on the parameter of the delegate related or <a href="T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredAttribute.htm">EventParameterReturnRequiredAttribute</a> on the event, and <a href="T_SecretNest_RemoteAgency_Attributes_ReturnRequiredPropertyHelperAttribute.htm">ReturnRequiredPropertyHelperAttribute</a> on the property of helper class.</p><p>A parameter specified by <a href="T_SecretNest_RemoteAgency_Attributes_EventParameterReturnRequiredPropertyAttribute.htm">EventParameterReturnRequiredPropertyAttribute</a> on event, and a parameter which is marked with <a href="T_SecretNest_RemoteAgency_Attributes_ParameterIgnoredAttribute.htm">ParameterIgnoredAttribute</a> in delegate definition, will be ignored from passing to target and always has the default value.</p><p>The return code of the event or the delegate related which is marked with <a href="T_SecretNest_RemoteAgency_Attributes_ReturnIgnoredAttribute.htm">ReturnIgnoredAttribute</a> will be ignored form passing back to caller and always has the default value.</p><p>See <a href="168d9d48-771b-4912-9bcd-880f1d65c090.htm">Parameter Ignoring and Two-way</a> for details.</p></div></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID3RB')" onkeypress="SectionExpandCollapse_CheckKey('ID3RB', event)" tabindex="0"><img id="ID3RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Steps</span></div><div id="ID3RBSection" class="collapsibleSection"><div class="subSection"><ol><li><p>Create an interface that contains all the assets used for communication.</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EBAAAFAAABAAA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAAFAAABAAA','cs','1','2');return false;">C#</a></div><div id="ID2EBAAAFAAABAAA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAAFAAABAAA','vb','2','2');return false;">VB</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EBAAAFAAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EBAAAFAAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EBAAAFAAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">interface</span> ITest9
+{
+    [AssetIgnored]
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> EventHandler Ignored;
+
+    [OperatingTimeoutTime(1000)]
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> MyEventCallback MyEvent;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> MyEventCallback([ParameterReturnRequiredProperty(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"EntityTwoWayProperty"</span>, isIncludedWhenExceptionThrown: <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">true</span>)] EntityInTest9 parameter);
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> MyEventWithTwoWayParameterCallback(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ref</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter1, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">out</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter2, [ParameterIgnored]<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> ignored);
+
+    [LocalExceptionHandling]
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> EventHandler WithException;
+
+    [EventParameterReturnRequiredProperty(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter"</span>, <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"TwoWayProperty"</span>, isIncludedWhenExceptionThrown: <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">true</span>)]
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> MyEventWithExceptionCallback MyEventWithException;
+    [LocalExceptionHandling]
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">void</span> MyEventWithExceptionCallback(EntityInTest9B parameter);
+}</pre></div><div id="ID2EBAAAFAAABAAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Interface</span> ITest9
+    &lt;AssetIgnored&gt;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> Ignored <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler
+
+    &lt;OperatingTimeoutTime(1000)&gt;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEvent <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> MyEventCallback
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span> MyEventCallback(&lt;ParameterReturnRequiredProperty(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"EntityTwoWayProperty"</span>,, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">True</span>)&gt; parameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EntityInTest9)
+
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEventWithTwoWayParameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> MyEventWithTwoWayParameterCallback
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span> MyEventWithTwoWayParameterCallback(parameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Integer</span>, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByRef</span> parameter1 <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Integer</span>, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByRef</span> parameter2 <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Integer</span>, &lt;ParameterIgnored&gt; ignored <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Integer</span>)
+
+    &lt;LocalExceptionHandling&gt;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> WithException <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler
+
+    &lt;EventParameterReturnRequiredProperty(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter"</span>, <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"TwoWayProperty"</span>,, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">True</span>)&gt;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEventWithException <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> MyEventWithExceptionCallback
+    &lt;LocalExceptionHandling&gt;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Delegate</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span> MyEventWithExceptionCallback(parameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EntityInTest9B)
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Interface</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EBAAAFAAABAAA");</script></li><li><p>Create an entity class that used in interface.</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EBAAAEAAABAAA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAAEAAABAAA','cs','1','2');return false;">C#</a></div><div id="ID2EBAAAEAAABAAA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAAEAAABAAA','vb','2','2');return false;">VB</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EBAAAEAAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EBAAAEAAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EBAAAEAAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">class</span> EntityInTest9
+{
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">string</span> FromServerToClientProperty { <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">get</span>; <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">set</span>; }
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">string</span> TwoWayProperty { <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">get</span>; <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">set</span>; }
+}
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">class</span> EntityInTest9B
+{
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">string</span> FromServerToClientProperty { <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">get</span>; <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">set</span>; }
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">string</span> TwoWayProperty { <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">get</span>; <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">set</span>; }
+}</pre></div><div id="ID2EBAAAEAAABAAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span> EntityInTest9
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Property</span> FromServerToClientProperty <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">String</span>
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Property</span> TwoWayProperty <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">String</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span>
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span> EntityInTest9B
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Property</span> FromServerToClientProperty <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">String</span>
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Property</span> TwoWayProperty <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">String</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EBAAAEAAABAAA");</script></li><li><p>Create a server class that implement the interface created above.</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EBAAADAAABAAA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAADAAABAAA','cs','1','2');return false;">C#</a></div><div id="ID2EBAAADAAABAAA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAAADAAABAAA','vb','2','2');return false;">VB</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EBAAADAAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EBAAADAAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EBAAADAAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">class</span> Server9 : ITest9
+{
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> EventHandler Ignored;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> ITest9.MyEventCallback MyEvent;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> ITest9.MyEventWithTwoWayParameterCallback MyEventWithTwoWayParameter;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> EventHandler WithException;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">event</span> ITest9.MyEventWithExceptionCallback MyEventWithException;
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">void</span> Test()
+    {
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: Ignored"</span>);
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">if</span> (Ignored == <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">null</span>)
+        {
+            Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: This is predicted due to ignored."</span>);
+        }
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEvent"</span>);
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">if</span> (MyEvent != <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">null</span>)
+        {
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> parameter = <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> EntityInTest9
+            {
+                FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>,
+                TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+            };
+
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> result = MyEvent.Invoke(parameter);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: (100): {result}"</span>);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}"</span>);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.TwoWayProperty (should be ChangedByClient): {parameter.TwoWayProperty}"</span>);
+        }
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEventWithTwoWayParameter"</span>);
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">if</span> (MyEventWithTwoWayParameter != <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">null</span>)
+        {
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> p1 = 101;
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> result = MyEventWithTwoWayParameter(100, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ref</span> p1, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">out</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> p2, 103);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: (1): {result}"</span>);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: p1=(501): {p1}"</span>);
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: p2=(502): {p2}"</span>);
+        }
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: WithException"</span>);
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">if</span> (WithException != <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">null</span>)
+        {
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">try</span>
+            {
+                WithException.Invoke(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">this</span>, EventArgs.Empty);
+            }
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">catch</span> (Exception e)
+            {
+                Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + e.Message);
+            }
+        }
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEventWithException"</span>);
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">if</span> (MyEventWithException != <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">null</span>)
+        {
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> parameter = <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> EntityInTest9B
+            {
+                FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>,
+                TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+            }; 
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">try</span>
+            {
+                MyEventWithException.Invoke(parameter);
+            }
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">catch</span> (Exception e)
+            {
+                Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}"</span>);
+                Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.TwoWayProperty (should be SetBeforeException): {parameter.TwoWayProperty}"</span>);
+                Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + e.Message);
+            }
+        }
+    }
+}</pre></div><div id="ID2EBAAADAAABAAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span> Server9
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> Custom <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> Ignored <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9.Ignored
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span>(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByVal</span> value <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler)
+            Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: This is predicted due to ignored."</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RemoveHandler</span>(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByVal</span> value <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler)
+            Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: This is predicted due to ignored."</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RemoveHandler</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span>(sender <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Object</span>, e <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventArgs)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span>
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span>
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEvent <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> ITest9.MyEventCallback <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9.MyEvent
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEventWithTwoWayParameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> ITest9.MyEventWithTwoWayParameterCallback <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9.MyEventWithTwoWayParameter
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> WithException <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> EventHandler <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9.WithException
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Event</span> MyEventWithException <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> ITest9.MyEventWithExceptionCallback <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Implements</span> ITest9.MyEventWithException
+
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Public</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span> Test()
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEvent"</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> parameter <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> EntityInTest9()
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">With</span> parameter
+            .FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+            .TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">With</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span> MyEvent(parameter)
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.FromServerToClientProperty (should be SetFromServer): {parameter.FromServerToClientProperty}"</span>)
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameter.TwoWayProperty (should be ChangedByClient): {parameter.TwoWayProperty}"</span>)
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEventWithTwoWayParameter"</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> p1 = 101
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> p2 <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Integer</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span> MyEventWithTwoWayParameter(100, p1, p2, 103)
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: p1=(501): {p1}"</span>)
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: p2=(502): {p2}"</span>)
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: WithException"</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span> WithException(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Me</span>, EventArgs.Empty)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Catch</span> ex <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> Exception
+            Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + ex.Message)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+
+        Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: MyEventWithException"</span>)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> parameterB <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> EntityInTest9B()
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">With</span> parameterB
+            .FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+            .TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetFromServer"</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">With</span>
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+            <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">RaiseEvent</span> MyEventWithException(parameterB)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Catch</span> ex <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> Exception
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameterB.FromServerToClientProperty (should be SetFromServer): {parameterB.FromServerToClientProperty}"</span>)
+            Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Server side: parameterB.TwoWayProperty (should be SetBeforeException): {parameterB.TwoWayProperty}"</span>)
+            Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + ex.Message)
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Class</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EBAAADAAABAAA");</script></li><li><p>Create a method for local exception handling. All exception thrown locally will be redirected to the handler associated.</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EBABACAAABAAA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBABACAAABAAA','cs','1','2');return false;">C#</a></div><div id="ID2EBABACAAABAAA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBABACAAABAAA','vb','2','2');return false;">VB</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EBABACAAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EBABACAAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EBABACAAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">private</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">static</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">void</span> ClientRemoteAgencyInstance_ExceptionRedirected(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">object</span> sender, ExceptionRedirectedEventArgs e)
+{   
+    Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Client side exception: \n  Interface:{e.ServiceContractInterface.FullName}\n  InstanceId: {e.InstanceId}\n  AssetName: {e.AssetName}\n  ExceptionType: {e.RedirectedException.GetType().FullName}\n  ExceptionMessage: {e.RedirectedException.Message}"</span>);
+}</pre></div><div id="ID2EBABACAAABAAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Private</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Shared</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span> ClientRemoteAgencyInstance_ExceptionRedirected(sender <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Object</span>, e <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> ExceptionRedirectedEventArgs)
+    Console.WriteLine(
+        <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Client side exception: "</span> + vbCrLf +
+        $<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"  Interface: {e.ServiceContractInterface.FullName}"</span> + vbCrLf +
+        $<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"  InstanceId: {e.InstanceId}"</span> + vbCrLf +
+        $<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"  AssetName: {e.AssetName}"</span> + vbCrLf +
+        $<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"  ExceptionType: {e.RedirectedException.GetType().FullName}"</span> + vbCrLf +
+        $<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"  ExceptionMessage: {e.RedirectedException.Message}"</span>)
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span></pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EBABACAAABAAA");</script><div class="alert"><table><tr><th><img src="../icons/AlertNote.png" alt="Note" /> Note</th></tr><tr><td>
+  <p>By default, all exception thrown on the remote site will be suppressed remotely and transferred to caller as result. If additional exception handler is required on the remote site, use <a href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7.htm">Local Exception Handling</a> on the instance which the exception thrown originally.</p>
+  <p>All values of two-way parameters or properties marked with <span class="code">IsIncludedInReturning</span> will be transferred to caller when exception thrown.</p>
+</td></tr></table></div></li><li><p>Place this code to a method, <span class="code">main</span> method for example.</p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID2EBAHABAAABAAA_tab1" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAHABAAABAAA','cs','1','2');return false;">C#</a></div><div id="ID2EBAHABAAABAAA_tab2" class="codeSnippetContainerTab"><a href="#" onclick="javascript:ChangeTab('ID2EBAHABAAABAAA','vb','2','2');return false;">VB</a></div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID2EBAHABAAABAAA_copyCode" href="#" class="copyCodeSnippet" onclick="javascript:CopyToClipboard('ID2EBAHABAAABAAA');return false;" title="Copy">Copy</a></div></div><div id="ID2EBAHABAAABAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//test router</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> router = <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> RemoteAgencyRouter&lt;<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">byte</span>[], <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">object</span>&gt;();
+
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//Server</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> originalService = <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> Server9();
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">using</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">true</span>);
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> serverSiteId = serverRemoteAgencyInstance.SiteId;
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
+
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//Client</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">using</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">true</span>);
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
+clientRemoteAgencyInstance.ExceptionRedirected += ClientRemoteAgencyInstance_ExceptionRedirected;
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">var</span> clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest9&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
+
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//Run test</span>
+Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Ignored Add(Exception):"</span>);
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">try</span>
+{
+    <span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//ReSharper disable UnusedParameter.Local</span>
+    clientProxy.Ignored += (sender, args) =&gt; { };
+    <span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//ReSharper enable UnusedParameter.Local</span>
+}
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">catch</span> (Exception e)
+{
+    Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + e);
+}
+
+clientProxy.MyEvent += parameter =&gt;
+{
+    parameter.FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>;
+    parameter.TwoWayProperty =  <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">return</span> 100;
+};
+
+clientProxy.MyEventWithTwoWayParameter +=
+    (<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ref</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter1, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">out</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> parameter2, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">int</span> ignored) =&gt;
+    {
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter: (100): {parameter}"</span>);
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter1: (101): {parameter1}"</span>);
+        Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ignored: (0): {ignored}"</span>);
+        parameter1 = 501;
+        parameter2 = 502;
+        <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">return</span> 1;
+    };
+
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//ReSharper disable UnusedParameter.Local</span>
+clientProxy.WithException += (sender, args) =&gt; <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">throw</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> Exception(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"oops."</span>);
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">//ReSharper enable UnusedParameter.Local</span>
+
+clientProxy.MyEventWithException += (parameter) =&gt;
+{
+    parameter.FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>;
+    parameter.TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetBeforeException"</span>;
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">throw</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">new</span> Exception(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"oops."</span>);
+};
+
+Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Run:"</span>);
+originalService.Test();
+
+Console.Write(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Press any key to continue..."</span>);
+Console.ReadKey(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">true</span>);
+Console.WriteLine();</pre></div><div id="ID2EBAHABAAABAAA_code_Div2" class="codeSnippetContainerCode" style="display: none"><pre xml:space="preserve"><span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">'test router</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> router = <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> RemoteAgencyRouter(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Of</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Byte</span>(), <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Object</span>)
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+'Server</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> originalService <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> Server9()
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">True</span>)
+router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> serverSiteId = serverRemoteAgencyInstance.SiteId
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+'Client</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">True</span>)
+router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Dim</span> clientProxy = clientRemoteAgencyInstance.CreateProxy(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Of</span> ITest9)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientRemoteAgencyInstance.ExceptionRedirected, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddressOf</span> ClientRemoteAgencyInstance_ExceptionRedirected
+<span class="comment" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+'Run test</span>
+Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Ignored Add(Exception):"</span>)
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientProxy.Ignored, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>(sender, args)
+                                    <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Catch</span> ex <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">As</span> Exception
+    Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Predicted Exception: "</span> + ex.ToString())
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Try</span>
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientProxy.MyEvent, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>(parameter)
+                                    parameter.FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>
+                                    parameter.TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>
+                                <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientProxy.MyEventWithTwoWayParameter, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>(parameter, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByRef</span> parameter1, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ByRef</span> parameter2, ignored)
+                                                       Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter: (100): {parameter}"</span>)
+                                                       Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"parameter1: (101): {parameter1}"</span>)
+                                                       Console.WriteLine($<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ignored: (0): {ignored}"</span>)
+                                                       parameter1 = 501
+                                                       parameter2 = 502
+                                                   <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientProxy.WithException, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>(sender, args) <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Throw</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> Exception(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"oops."</span>)
+
+<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">AddHandler</span> clientProxy.MyEventWithException, <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>(parameter)
+                                                 parameter.FromServerToClientProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"ChangedByClient"</span>
+                                                 parameter.TwoWayProperty = <span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"SetBeforeException"</span>
+                                                 <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Throw</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">New</span> Exception(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"oops."</span>)
+                                             <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">End</span> <span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Sub</span>
+
+Console.WriteLine(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Run:"</span>)
+originalService.Test()
+
+Console.Write(<span class="literal" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">"Press any key to continue..."</span>)
+Console.ReadKey(<span class="keyword" xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">True</span>)
+Console.WriteLine()
+
+serverRemoteAgencyInstance.Dispose()
+clientRemoteAgencyInstance.Dispose()</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID2EBAHABAAABAAA");</script><p>When creating proxy, target site id and service wrapper instance id need to be specified.</p>
+<p>Site id is used to locate the server. In a real scenario, servers are usually deployed into different applications even computers. Message routing component, like <a href="https://secretnest.info/RemoteHub" target="_blank" rel="noopener noreferrer">Remote Hub</a>, need to use the site id to deliver messages generated from proxy to the right server instance.</p>
+<p>Service wrapper instance id is used to locate the service object which contains user code. This is used by Remote Agency to deliver the message to the right service object registered by <a href="Overload_SecretNest_RemoteAgency_RemoteAgency_2_CreateServiceWrapper.htm">CreateServiceWrapper</a> (or <a href="Overload_SecretNest_RemoteAgency_RemoteAgencyBase_CreateServiceWrapper.htm">CreateServiceWrapper</a>).</p>
+<p>No such id is required when creating service wrapper because the response messages are sent to the source of the request.</p></li><li><p>Run the example.</p></li></ol></div></div><div class="collapsibleAreaRegion" id="seeAlsoSection"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID4RB')" onkeypress="SectionExpandCollapse_CheckKey('ID4RB', event)" tabindex="0"><img id="ID4RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />See Also</span></div><div id="ID4RBSection" class="collapsibleSection"><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><a href="M_SecretNest_RemoteAgency_RemoteAgencyBase_CreateWithBinarySerializer.htm">CreateWithBinarySerializer</a></div><div class="seeAlsoStyle"><a href="M_SecretNest_RemoteAgency_RemoteAgency_2_CreateProxy__1_1.htm">CreateProxy<span id="LSTF34F4217_0"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF34F4217_0?cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=(");</script>TInterface<span id="LSTF34F4217_1"></span><script type="text/javascript">AddLanguageSpecificTextSet("LSTF34F4217_1?cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)");</script></a></div><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><a href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a.htm">Examples</a></div></div></div></div><div id="pageFooter" class="pageFooter" /></body></html>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="3fce1b5d-997f-4caa-9239-73257e7d6abe" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Remote Agency supports tunings of remote accessing of events.</para>
+    </introduction>
+
+    <token>Example Prerequisites Reference</token>
+
+    <section>
+      <title>Brief</title>
+      <sections>
+        <section>
+          <title>Event and Delegate</title>
+          <content>
+            <para>Remote Agency supports tunings of remote accessing of events such as:</para>
+            <list class="bullet">
+              <listItem>One-way, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute</codeEntityReference>,</listItem>
+              <listItem>Ignored, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute</codeEntityReference>,</listItem>
+              <listItem>Enabling <link xlink:href="5e4cbd69-ed6d-4b66-8496-4925ae64b4c7" />, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.LocalExceptionHandlingAttribute</codeEntityReference>, and</listItem>
+              <listItem>Adjusting timeout time, by marking asset with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.OperatingTimeoutTimeAttribute</codeEntityReference>.</listItem>
+            </list>
+            <para>For one-way, ignored and timeout behavior, check <link xlink:href="e7b65736-b2df-4aa9-897a-3a3050d3cceb" /> for details.</para>
+          </content>
+        </section>
+        <section>
+          <title>Parameter and Return</title>
+          <content>
+            <para>Similar as method, Remote Agency pass the value of parameter, which is marked with <codeInline>ref</codeInline> (C#) or <codeInline>ByRef</codeInline> (VB.Net), back to the caller when required. Also, the value of the parameter marked with <codeInline>out</codeInline> (C#) will be returned. Additionally, some properties in entity class used by parameter can also be returned by specifying <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference> on the parameter of the delegate related or <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute</codeEntityReference> on the event, and <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference> on the property of helper class.</para>
+            <para>A parameter specified by <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute</codeEntityReference> on event, and a parameter which is marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterIgnoredAttribute</codeEntityReference> in delegate definition, will be ignored from passing to target and always has the default value.</para>
+            <para>The return code of the event or the delegate related which is marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference> will be ignored form passing back to caller and always has the default value.</para>
+            <para>See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090" /> for details.</para>
+          </content>
+        </section>
+      </sections>
+    </section>
+
+    <section>
+      <title>Steps</title>
+      <content>
+        <procedure>
+          <steps class="ordered">
+            <step>
+              <content>
+                <para>Create an interface that contains all the assets used for communication.</para>
+                <codeReference>Example9#Interface</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create an entity class that used in interface.</para>
+                <codeReference>Example9#Entity</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create a server class that implement the interface created above.</para>
+                <codeReference>Example9#Server</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create a method for local exception handling. All exception thrown locally will be redirected to the handler associated.</para>
+                <codeReference>Example9#Handler</codeReference>
+                <token>LocalExceptionHandler</token>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Place this code to a method, <codeInline>main</codeInline> method for example.</para>
+                <codeReference>Example9#Test</codeReference>
+                <token>CreateProxy with Id</token>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Run the example.</para>
+              </content>
+            </step>
+          </steps>
+        </procedure>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a">Examples</link>
+      <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgencyBase.CreateWithBinarySerializer(System.Boolean,System.Nullable{System.Guid})</codeEntityReference>
+      <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.RemoteAgency`2.CreateProxy``1(System.Guid,System.Guid,System.Int32,System.Boolean)</codeEntityReference>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

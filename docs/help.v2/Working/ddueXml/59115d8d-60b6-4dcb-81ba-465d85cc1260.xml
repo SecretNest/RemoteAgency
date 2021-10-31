@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="59115d8d-60b6-4dcb-81ba-465d85cc1260" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Before using example codes, an app need to be prepared first. Both C# and VB.Net are supported.</para>
+    </introduction>
+    <section>
+      <title>Create project for using example code</title>
+      <content>
+        <procedure>
+          <steps class="ordered">
+            <step>
+              <content>
+                <para>Create a console app using C# or VB.Net.</para>
+                <token>Supported Framework Version List</token>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Add Remote Agency reference from <token>Remote Agency Nuget Url</token>.</para>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Add this class, which is used for message routing in examples, to the project created.</para>
+                <codeReference>ExampleRouter#Define</codeReference>
+                <alert class="note"><para>This is a demo routing class for example. To use Remote Agency in a real scenario, a well designed routing solution, like <token>Remote Hub Url</token>, is preferred.</para></alert>
+              </content>
+            </step>
+          </steps>
+          <conclusion>Now, you are ready to add example code.</conclusion>
+        </procedure>
+      </content>
+    </section>
+
+    <nextSteps>
+      <content>
+        <para>Choose an example to continue:</para>
+        <token>Example List</token>
+      </content>
+    </nextSteps>
+
+    <relatedTopics>
+      <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a" />
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>

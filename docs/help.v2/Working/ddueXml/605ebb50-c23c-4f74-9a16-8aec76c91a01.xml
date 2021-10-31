@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="605ebb50-c23c-4f74-9a16-8aec76c91a01" revisionNumber="1">
+  <developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Remote Agency need classes while servicing, including proxy, service wrapper, helpers and entities. All of them are generated automatically while adding service contract interface to the instance of Remote Agency.</para>
+    </introduction>
+
+    <section address="Creating">
+      <title>Classes Creation</title>
+      <content>
+        <para>Remote Agency need classes while servicing, including proxy, service wrapper, helpers and entities. All of them are generated automatically while adding service contract interface to the instance of Remote Agency. If the above classes cannot be found while adding interface for building instance of proxy or service wrapper, those classes will be automatically generated on the fly and stored into a new created assembly.</para>
+        <para>For speeding up, classes used in remote site only can be skipped from generating (for example, when building proxy, service wrapper class is used only in remote site). This function is disabled by default in order to build a full assembly for caching. This behavior can be adjusted by passing argument while calling CreateProxy or CreateServiceWrapper.</para>
+      </content>
+    </section>
+
+    <section address="Assembly">
+      <title>Built Assembly</title>
+      <content>
+        <para>When CreateProxy or CreateServiceWrapper being called, Remote Agency tries to locate the built assembly in current AppDomain by name. If presents, all the classes required must be included, or an exception will be thrown. When assembly specified is not found, a new assembly will be created to hold the classes to be created.</para>
+      </content>
+    </section>
+
+    <section address="Flow">
+      <title>Building Flow</title>
+      <content>
+        <para>After code required is generated for proxy and service wrapper, <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeTypeCreated</codeEntityReference> will be raised. User can add own code into the class before building finished. After all types created, <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated</codeEntityReference> will be raised, allowing user to add more classes and other members into the assembly to be completed. All types created are referenced in the argument of <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyBase.BeforeAssemblyCreated</codeEntityReference> also. After that, <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyBase.AfterTypeAndAssemblyBuilt</codeEntityReference> will be raised to present all built types and assembly.</para>
+        <para>When Remote Agency is running on .Net Framework, a <codeEntityReference qualifyHint="false">M:SecretNest.RemoteAgency.AssemblyBuilding.AfterTypeAndAssemblyBuiltEventArgs.Save(System.String)</codeEntityReference> method is available in the argument of <codeEntityReference qualifyHint="false">E:SecretNest.RemoteAgency.RemoteAgencyBase.AfterTypeAndAssemblyBuilt</codeEntityReference> to save the built assembly into file. Due to lack of support on .Net Core, this method is absent when Remote Agency is running on .Net Core. Built assembly is loaded to current AppDomain and cached in memory for further use automatically.</para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="bd599f96-a496-4309-8a6c-82f5e772989f" /> <!--Instance-->
+      <link xlink:href="9c3f74b5-3a60-464b-8f4e-85973938528c" /> <!--Concept-->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

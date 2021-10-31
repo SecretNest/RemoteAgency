@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="1546aac8-8553-468e-8cc6-f3f2cefb6784" revisionNumber="1">
+  <developerWalkthroughDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>Remote Agency supports property defined in interface as well.</para>
+      <para>When interface is defined with generic type parameter, Remote Agency supports it as elsewhere in your coding.</para>
+    </introduction>
+
+    <token>Example Prerequisites Reference</token>
+
+    <section>
+      <title>Brief</title>
+      <content>
+        <para>Remote Agency supports property defined in interface, including <codeInline>get</codeInline> and <codeInline>set</codeInline>.</para>
+        <para>When interface is defined with generic type parameter, it is possible to use it directly in Remote Agency when creating proxy with generic type argument specified.</para>
+        <para>The property marked with <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute</codeEntityReference> will always return the default value while getting. But exception will be transferred to the caller if thrown. See <link xlink:href="168d9d48-771b-4912-9bcd-880f1d65c090#Ignore" /> for details.</para>
+      </content>
+    </section>
+
+    <section>
+      <title>Steps</title>
+      <content>
+        <procedure>
+          <steps class="ordered">
+            <step>
+              <content>
+                <para>Create an interface that contains all the assets used for communication.</para>
+                <codeReference>Example5#Interface</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Create a server class that implement the interface created above.</para>
+                <codeReference>Example5#Server</codeReference>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Place this code to a method, <codeInline>main</codeInline> method for example.</para>
+                <codeReference>Example5#Test</codeReference>
+                <token>CreateProxy with Id</token>
+              </content>
+            </step>
+            <step>
+              <content>
+                <para>Run the example.</para>
+              </content>
+            </step>
+          </steps>
+        </procedure>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="1e4e6ad4-f0b5-4925-9a9f-4e2704e27d6a">Examples</link>
+      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference>
+      <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute</codeEntityReference>
+    </relatedTopics>
+  </developerWalkthroughDocument>
+</topic>
