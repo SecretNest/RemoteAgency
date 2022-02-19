@@ -76,5 +76,18 @@ namespace SecretNest.RemoteAgency
         /// <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
         /// <exception cref="AggregateException">When exceptions occurred.</exception>
         void OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId = null);
+
+        /// <summary>
+        /// Gets the names of all properties marked with init only setter.
+        /// </summary>
+        /// <returns>Names of all properties marked with init only setter.</returns>
+        string[] GetInitOnlyPropertyNames();
+
+        /// <summary>
+        /// Sets value to the property marked with init only setter.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="value">Value to be set.</param>
+        void SetInitOnlyPropertyValue(string propertyName, object value);
     }
 }

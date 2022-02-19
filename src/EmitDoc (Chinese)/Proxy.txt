@@ -40,6 +40,16 @@ void IProxyCommunicate.OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceW
 void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)：
 	如果有Helper对象：
 		调用Helper对象的CloseRequestedByManagingObject方法（参数表相同，无返回值）。
+void IProxyCommunicate.GetInitOnlyPropertyNames()：
+当至少有一个属性IsSetMarkedAsInit为真时：
+	返回所有的IsSetMarkedAsInit为真的属性名，排名不分先后。
+当没有属性IsSetMarkedAsInit为真时：
+	返回null。
+void IProxyCommunicate.SetInitOnlyPropertyValue(string propertyName, object value)：
+当至少有一个属性IsSetMarkedAsInit为真时：
+	设置名为propertyName的属性的值为value。注，此属性名存在于GetInitOnlyPropertyNames返回值中。
+当没有属性IsSetMarkedAsInit为真时：
+	返回。
 
 用户接口：需要隐式实现。接口类型来自info.SourceInterface。不论接口是否为泛型，只需要实现SourceInterface本身。IsSourceInterfaceGenericType与SourceInterfaceGenericArguments说明接口是否为泛型以及泛型的类型参数，如有需要可以参考。例如用户如指定实现List<string>，则SourceInterface为List<T>，IsSourceInterfaceGenericType为真，SourceInterfaceGenericArguments为[String]，SourceInterfaceGenericDefinitionArguments为[T]。
 
@@ -51,6 +61,7 @@ info.Properties中定义的所有Property。遍历其中的元素，根据元素
 	IsSettable，此Property是否有Set方法。下列描述中为有Set方法的情况。如果此属性为否，忽略下列对于Set的描述。
 	IsGettingOneWay，Get方法是否为OneWay。
 	IsSettingOneWay，Set方法是否为OneWay。
+	IsSetMarkedAsInit，Set方法为InitOnly。
 	DataType，此Property的类型，类型为Type。
 	GettingMethodBodyInfo，Get方法的信息，具体解析下详。
 	SettingMethodBodyInfo，Set方法的信息，具体解析下详。

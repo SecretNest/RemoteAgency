@@ -156,6 +156,14 @@
             Contains the instance of the created proxy and id of it.
             </summary>
         </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy.#ctor(System.Guid,System.Object,System.Type)">
+            <summary>
+            Initializes an instance of CreatedProxy.
+            </summary>
+            <param name="instanceId">Id of the proxy instance.</param>
+            <param name="proxy">Proxy created.</param>
+            <param name="interfaceType">Type of the interface.</param>
+        </member>
         <member name="M:SecretNest.RemoteAgency.CreatedProxy.#ctor(System.Guid,System.Object)">
             <summary>
             Initializes an instance of CreatedProxy.
@@ -172,6 +180,19 @@
             <summary>
             Gets the proxy created.
             </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy.InterfaceType">
+            <summary>
+            Gets the type of the interface.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.CreatedProxy.SetInitOnlyPropertyValue(System.String,System.Object)">
+            <summary>
+            Sets value for the property marked with init only setter.
+            </summary>
+            <param name="name">Name of the property marked with init only setter.</param>
+            <param name="value">The value to be set to the property.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the property is not found or not marked with init only setter.</exception>
         </member>
         <member name="T:SecretNest.RemoteAgency.CreatedProxy`1">
             <summary>
@@ -190,6 +211,9 @@
             <summary>
             Gets the proxy created.
             </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.CreatedProxy`1.InterfaceType">
+            <inheritdoc />
         </member>
         <member name="T:SecretNest.RemoteAgency.Inspecting.EntityNameConflictException">
             <summary>

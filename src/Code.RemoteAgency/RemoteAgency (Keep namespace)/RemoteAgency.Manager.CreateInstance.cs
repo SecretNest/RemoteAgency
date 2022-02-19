@@ -140,7 +140,7 @@ namespace SecretNest.RemoteAgency
 
             var proxy = CreateProxyWithInstanceInternal(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
                 buildServiceWrapperWithProxy);
-            return new CreatedProxy(instanceId, proxy);
+            return new CreatedProxy(instanceId, proxy, sourceInterface);
         }
 
         /// <inheritdoc />
@@ -151,7 +151,7 @@ namespace SecretNest.RemoteAgency
             
             var proxy = CreateProxyWithInstanceInternal(sourceInterface, targetSiteId, targetInstanceId, instanceId, defaultTimeout,
                 buildServiceWrapperWithProxy);
-            return new CreatedProxy(instanceId, proxy);
+            return new CreatedProxy(instanceId, proxy, sourceInterface);
         }
 
         IProxyCommunicate CreateProxyWithInstanceInternal(Type sourceInterface, Guid targetSiteId, Guid targetInstanceId,
