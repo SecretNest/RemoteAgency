@@ -19,6 +19,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public bool IsGettable { get; set; }
         public bool IsSettable { get; set; }
+        public bool IsSetMarkedAsInit { get; set; }
 
         public RemoteAgencyMethodBodyInfo GettingMethodBodyInfo { get; set; }
         public RemoteAgencyMethodBodyInfo SettingMethodBodyInfo { get; set; }
