@@ -143,6 +143,7 @@ namespace SecretNest.RemoteAgency.Inspecting
         {
             foreach (var method in _sourceInterfaceTypeInfo.GetMethods())
             {
+                if (method.IsSpecialName) continue;
                 var item = new RemoteAgencyMethodInfo
                 {
                     AssetName = GetAssetNameSpecified(method, parentPath, usedAssetNames, AutoNamePlaceHolder),
@@ -217,6 +218,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             foreach (var @event in _sourceInterfaceTypeInfo.GetEvents())
             {
+                if (@event.IsSpecialName) continue;
                 var item = new RemoteAgencyEventInfo()
                 {
                     AssetName = GetAssetNameSpecified(@event, parentPath, usedAssetNames, AutoNamePlaceHolder),
@@ -298,6 +300,7 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             foreach (var property in _sourceInterfaceTypeInfo.GetProperties())
             {
+                if (property.IsSpecialName) continue;
                 var item = new RemoteAgencyPropertyInfo()
                 {
                     AssetName = GetAssetNameSpecified(property, parentPath, usedAssetNames, AutoNamePlaceHolder),
@@ -474,11 +477,6 @@ namespace SecretNest.RemoteAgency.Inspecting
                 }
             }
         }
-
-        
-
-
-
 
         static string GetAssetNameSpecified(MemberInfo memberInfo, Stack<MemberInfo> memberParentPath, HashSet<string> used, string defaultValue)
         {
