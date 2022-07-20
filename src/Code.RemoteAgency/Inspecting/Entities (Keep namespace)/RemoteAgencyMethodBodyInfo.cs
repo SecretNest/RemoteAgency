@@ -11,6 +11,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
     class RemoteAgencyMethodBodyInfo : RemoteAgencySimpleMethodBodyInfo
     {
+        public bool IsStatic { get; set; }
+
         public Type ParameterEntity { get; set; }
         public Type ReturnValueEntity { get; set; }
 

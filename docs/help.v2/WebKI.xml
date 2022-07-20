@@ -96,11 +96,17 @@
   <HelpKINode Title="AttributeConstructorParameters property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_AttributeConstructorParameters.htm" />
   <HelpKINode Title="AttributeConstructorParameterTypes property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_AttributeConstructorParameterTypes.htm" />
   <HelpKINode Title="AttributeId property">
+    <HelpKINode Title="AttributePassThroughAdditionalDataAttributeBase.AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase_AttributeId.htm" />
     <HelpKINode Title="AttributePassThroughAttribute.AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute_AttributeId.htm" />
-    <HelpKINode Title="AttributePassThroughFieldAttribute.AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_AttributeId.htm" />
-    <HelpKINode Title="AttributePassThroughIndexBasedParameterAttribute.AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_AttributeId.htm" />
-    <HelpKINode Title="AttributePassThroughPropertyAttribute.AttributeId Property " Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_AttributeId.htm" />
   </HelpKINode>
+  <HelpKINode Title="AttributePassThroughAdditionalDataAttributeBase class">
+    <HelpKINode Title="AttributePassThroughAdditionalDataAttributeBase Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase.htm" />
+    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AttributePassThroughAdditionalDataAttributeBase.AttributeId property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase_AttributeId.htm" />
+  <HelpKINode Title="AttributePassThroughAdditionalDataAttributeBase.AttributePassThroughAdditionalDataAttributeBase constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase__ctor.htm" />
   <HelpKINode Title="AttributePassThroughAttribute class">
     <HelpKINode Title="AttributePassThroughAttribute Class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm" />
     <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute__ctor.htm" />
@@ -118,7 +124,6 @@
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="AttributePassThroughFieldAttribute.AttributeId property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_AttributeId.htm" />
   <HelpKINode Title="AttributePassThroughFieldAttribute.AttributePassThroughFieldAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute__ctor.htm" />
   <HelpKINode Title="AttributePassThroughFieldAttribute.FieldName property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_FieldName.htm" />
   <HelpKINode Title="AttributePassThroughFieldAttribute.Order property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute_Order.htm" />
@@ -129,7 +134,6 @@
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="AttributePassThroughIndexBasedParameterAttribute.AttributeId property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_AttributeId.htm" />
   <HelpKINode Title="AttributePassThroughIndexBasedParameterAttribute.AttributePassThroughIndexBasedParameterAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute__ctor.htm" />
   <HelpKINode Title="AttributePassThroughIndexBasedParameterAttribute.ParameterIndex property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_ParameterIndex.htm" />
   <HelpKINode Title="AttributePassThroughIndexBasedParameterAttribute.Value property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute_Value.htm" />
@@ -139,7 +143,6 @@
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute.htm" />
   </HelpKINode>
-  <HelpKINode Title="AttributePassThroughPropertyAttribute.AttributeId property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_AttributeId.htm" />
   <HelpKINode Title="AttributePassThroughPropertyAttribute.AttributePassThroughPropertyAttribute constructor" Url="html/M_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute__ctor.htm" />
   <HelpKINode Title="AttributePassThroughPropertyAttribute.Order property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_Order.htm" />
   <HelpKINode Title="AttributePassThroughPropertyAttribute.PropertyName property" Url="html/P_SecretNest_RemoteAgency_Attributes_AttributePassThroughPropertyAttribute_PropertyName.htm" />
@@ -248,7 +251,7 @@
   <HelpKINode Title="Create&lt;TSerialized, TEntityBase&gt; method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_Create__2.htm" />
   <HelpKINode Title="CreatedProxy class">
     <HelpKINode Title="CreatedProxy Class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy.htm" />
-    <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_CreatedProxy.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy.htm" />
   </HelpKINode>
@@ -259,10 +262,13 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
   </HelpKINode>
   <HelpKINode Title="CreatedProxy(Of TInterface).CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+  <HelpKINode Title="CreatedProxy(Of TInterface).InterfaceType property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_InterfaceType.htm" />
   <HelpKINode Title="CreatedProxy(Of TInterface).ProxyGeneric property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_ProxyGeneric.htm" />
-  <HelpKINode Title="CreatedProxy.CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
+  <HelpKINode Title="CreatedProxy.CreatedProxy constructor" Url="html/Overload_SecretNest_RemoteAgency_CreatedProxy__ctor.htm" />
   <HelpKINode Title="CreatedProxy.InstanceId property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_InstanceId.htm" />
+  <HelpKINode Title="CreatedProxy.InterfaceType property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_InterfaceType.htm" />
   <HelpKINode Title="CreatedProxy.Proxy property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_Proxy.htm" />
+  <HelpKINode Title="CreatedProxy.SetInitOnlyPropertyValue method" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_SetInitOnlyPropertyValue.htm" />
   <HelpKINode Title="CreatedProxy&lt;TInterface&gt; class">
     <HelpKINode Title="CreatedProxy(TInterface) Class" Url="html/T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
     <HelpKINode Title="constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
@@ -270,6 +276,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_CreatedProxy_1.htm" />
   </HelpKINode>
   <HelpKINode Title="CreatedProxy&lt;TInterface&gt;.CreatedProxy constructor" Url="html/M_SecretNest_RemoteAgency_CreatedProxy_1__ctor.htm" />
+  <HelpKINode Title="CreatedProxy&lt;TInterface&gt;.InterfaceType property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_InterfaceType.htm" />
   <HelpKINode Title="CreatedProxy&lt;TInterface&gt;.ProxyGeneric property" Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_ProxyGeneric.htm" />
   <HelpKINode Title="CreateEmptyMessage method">
     <HelpKINode Title="EntityTypeBuilderBase.CreateEmptyMessage Method " Url="html/M_SecretNest_RemoteAgency_EntityTypeBuilderBase_CreateEmptyMessage.htm" />
@@ -528,6 +535,7 @@
   <HelpKINode Title="FurtherProcessing property" Url="html/P_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_FurtherProcessing.htm" />
   <HelpKINode Title="GenerateEmptyMessage method" Url="html/Overload_SecretNest_RemoteAgency_RemoteAgencyBase_GenerateEmptyMessage.htm" />
   <HelpKINode Title="GenericParameters property" Url="html/P_SecretNest_RemoteAgency_EntityBuilding_GenericParameters.htm" />
+  <HelpKINode Title="GetInitOnlyPropertyNames method" Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_GetInitOnlyPropertyNames.htm" />
   <HelpKINode Title="GetObjectData method">
     <HelpKINode Title="AccessingTimeOutException.GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_AccessingTimeOutException_GetObjectData.htm" />
     <HelpKINode Title="AssetNotFoundException.GetObjectData Method " Url="html/M_SecretNest_RemoteAgency_AssetNotFoundException_GetObjectData.htm" />
@@ -609,6 +617,10 @@
     <HelpKINode Title="RemoteAgencyJsonSerializerEntityTypeBuilder.InterfaceLevelAttributeBaseType Property " Url="html/P_SecretNest_RemoteAgency_JsonSerializer_RemoteAgencyJsonSerializerEntityTypeBuilder_InterfaceLevelAttributeBaseType.htm" />
   </HelpKINode>
   <HelpKINode Title="InterfaceLevelAttributes property" Url="html/P_SecretNest_RemoteAgency_EntityBuilding_InterfaceLevelAttributes.htm" />
+  <HelpKINode Title="InterfaceType property">
+    <HelpKINode Title="CreatedProxy(TInterface).InterfaceType Property " Url="html/P_SecretNest_RemoteAgency_CreatedProxy_1_InterfaceType.htm" />
+    <HelpKINode Title="CreatedProxy.InterfaceType Property " Url="html/P_SecretNest_RemoteAgency_CreatedProxy_InterfaceType.htm" />
+  </HelpKINode>
   <HelpKINode Title="InvalidAttributeDataException class">
     <HelpKINode Title="InvalidAttributeDataException Class" Url="html/T_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException.htm" />
     <HelpKINode Title="constructor" Url="html/Overload_SecretNest_RemoteAgency_Inspecting_InvalidAttributeDataException__ctor.htm" />
@@ -643,6 +655,7 @@
     <HelpKINode Title="methods" Url="html/Methods_T_SecretNest_RemoteAgency_IProxyCommunicate.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_IProxyCommunicate.htm" />
   </HelpKINode>
+  <HelpKINode Title="IProxyCommunicate.GetInitOnlyPropertyNames method" Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_GetInitOnlyPropertyNames.htm" />
   <HelpKINode Title="IProxyCommunicate.InstanceId property" Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_InstanceId.htm" />
   <HelpKINode Title="IProxyCommunicate.OnRemoteServiceWrapperClosing method" Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_OnRemoteServiceWrapperClosing.htm" />
   <HelpKINode Title="IProxyCommunicate.ProcessEventRaisingMessage method" Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_ProcessEventRaisingMessage.htm" />
@@ -655,6 +668,7 @@
   <HelpKINode Title="IProxyCommunicate.SendOneWayPropertySetMessageCallback property" Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_SendOneWayPropertySetMessageCallback.htm" />
   <HelpKINode Title="IProxyCommunicate.SendPropertyGetMessageCallback property" Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_SendPropertyGetMessageCallback.htm" />
   <HelpKINode Title="IProxyCommunicate.SendPropertySetMessageCallback property" Url="html/P_SecretNest_RemoteAgency_IProxyCommunicate_SendPropertySetMessageCallback.htm" />
+  <HelpKINode Title="IProxyCommunicate.SetInitOnlyPropertyValue method" Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_SetInitOnlyPropertyValue.htm" />
   <HelpKINode Title="IRemoteAgencyMessage interface">
     <HelpKINode Title="IRemoteAgencyMessage Interface" Url="html/T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_SecretNest_RemoteAgency_IRemoteAgencyMessage.htm" />
@@ -1150,6 +1164,7 @@
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AssetIgnoredAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetIgnoredAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AssetOneWayOperatingAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AssetOneWayOperatingAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AsyncMethodAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AsyncMethodAttribute.htm" />
+  <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAdditionalDataAttributeBase.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughFieldAttribute.htm" />
   <HelpKINode Title="SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute class" Url="html/T_SecretNest_RemoteAgency_Attributes_AttributePassThroughIndexBasedParameterAttribute.htm" />
@@ -1290,6 +1305,10 @@
   <HelpKINode Title="ServiceWrapper enumeration member" Url="html/T_SecretNest_RemoteAgency_AssemblyBuilding_BuiltClassType.htm" />
   <HelpKINode Title="ServiceWrapperClassName property" Url="html/P_SecretNest_RemoteAgency_Attributes_CustomizedClassNameAttribute_ServiceWrapperClassName.htm" />
   <HelpKINode Title="SetExceptionAsResponse method" Url="html/M_SecretNest_RemoteAgency_RemoteAgencyBase_SetExceptionAsResponse.htm" />
+  <HelpKINode Title="SetInitOnlyPropertyValue method">
+    <HelpKINode Title="CreatedProxy.SetInitOnlyPropertyValue Method " Url="html/M_SecretNest_RemoteAgency_CreatedProxy_SetInitOnlyPropertyValue.htm" />
+    <HelpKINode Title="IProxyCommunicate.SetInitOnlyPropertyValue Method " Url="html/M_SecretNest_RemoteAgency_IProxyCommunicate_SetInitOnlyPropertyValue.htm" />
+  </HelpKINode>
   <HelpKINode Title="SetToContinue method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToContinue.htm" />
   <HelpKINode Title="SetToReplaceWithException method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToReplaceWithException.htm" />
   <HelpKINode Title="SetToReplaceWithExceptionAndReturn method" Url="html/M_SecretNest_RemoteAgency_BeforeMessageProcessingEventArgsBase_SetToReplaceWithExceptionAndReturn.htm" />

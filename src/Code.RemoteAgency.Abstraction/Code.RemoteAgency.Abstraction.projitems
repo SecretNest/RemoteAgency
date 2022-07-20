@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AsyncMethodAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughAdditionalDataAttributeBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughIndexBasedParameterAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\AttributePassThrough %28Keep namespace%29\AttributePassThroughPropertyAttribute.cs" />

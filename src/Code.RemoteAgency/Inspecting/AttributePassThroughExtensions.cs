@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Attributes;
 
 namespace SecretNest.RemoteAgency.Inspecting
 {
     static class AttributePassThroughExtensions
     {
+        static ILookup<string, T> BuildRelatedLookup<T>(this ICustomAttributeProvider dataSource) where T : AttributePassThroughAdditionalDataAttributeBase
+        {
+            return dataSource.GetCustomAttributes(typeof(T), true)
+                .ToLookup(i => ((T)i).AttributeId,
+                    i => (T)i);
+        }
+
         public static List<CustomAttributeBuilder> GetAttributePassThrough(this ICustomAttributeProvider dataSource, Func<string, Attribute, InvalidAttributeDataException> creatingExceptionCallback)
         {
             var result = new List<CustomAttributeBuilder>();
@@ -19,17 +27,11 @@ namespace SecretNest.RemoteAgency.Inspecting
                 return result;
 
             var attributePassThroughIndexBasedParameterAttributes =
-                dataSource.GetCustomAttributes(typeof(AttributePassThroughIndexBasedParameterAttribute), true)
-                    .ToLookup(i => ((AttributePassThroughIndexBasedParameterAttribute) i).AttributeId,
-                        i => (AttributePassThroughIndexBasedParameterAttribute) i);
+                dataSource.BuildRelatedLookup<AttributePassThroughIndexBasedParameterAttribute>();
             var attributePassThroughPropertyAttributes =
-                dataSource.GetCustomAttributes(typeof(AttributePassThroughPropertyAttribute), true)
-                    .ToLookup(i => ((AttributePassThroughPropertyAttribute) i).AttributeId,
-                        i => (AttributePassThroughPropertyAttribute) i);
+                dataSource.BuildRelatedLookup<AttributePassThroughPropertyAttribute>();
             var attributePassThroughFieldAttributes =
-                dataSource.GetCustomAttributes(typeof(AttributePassThroughFieldAttribute), true)
-                    .ToLookup(i => ((AttributePassThroughFieldAttribute) i).AttributeId,
-                        i => (AttributePassThroughFieldAttribute) i);
+                dataSource.BuildRelatedLookup<AttributePassThroughFieldAttribute>();
 
             var processedAttributeId = new HashSet<string>();
             foreach (var attributePassThroughAttribute in attributePassThroughAttributes)
@@ -73,7 +75,7 @@ namespace SecretNest.RemoteAgency.Inspecting
                     }
 
                     //additional parameters
-                    if (attributePassThroughAttribute.AttributeId != null)
+                    if (attributePassThroughAttribute.AttributeId != null && attributePassThroughIndexBasedParameterAttributes.Contains(attributePassThroughAttribute.AttributeId))
                     {
                         var linkedAttributePassThroughIndexBasedParameterAttributes =
                             attributePassThroughIndexBasedParameterAttributes[
@@ -108,17 +110,18 @@ namespace SecretNest.RemoteAgency.Inspecting
                 if (attributePassThroughAttribute.AttributeId != null)
                 {
                     PropertyInfo[] propertyInfo;
-                    object[] propertyValue;
+                    FieldInfo[] fieldInfo;
+                    object[] propertyValue, fieldValue;
 
-                    bool useProperty;
+                    bool useProperty, useField;
 
                     //properties
-                    var linkedAttributePassThroughPropertyAttributes =
-                        attributePassThroughPropertyAttributes[attributePassThroughAttribute.AttributeId]
-                            .OrderBy(i => i.Order).ToList();
-
-                    if (linkedAttributePassThroughPropertyAttributes.Any())
+                    if (attributePassThroughPropertyAttributes.Contains(attributePassThroughAttribute.AttributeId))
                     {
+                        var linkedAttributePassThroughPropertyAttributes =
+                            attributePassThroughPropertyAttributes[attributePassThroughAttribute.AttributeId]
+                                .OrderBy(i => i.Order).ToList();
+
                         useProperty = true;
                         var setProperties = new HashSet<string>();
                         var memberInfos = new List<PropertyInfo>();
@@ -149,13 +152,14 @@ namespace SecretNest.RemoteAgency.Inspecting
                         propertyValue = null;
                     }
 
-                    //fields and build
-                    var linkedAttributePassThroughFieldAttributes =
-                        attributePassThroughFieldAttributes[attributePassThroughAttribute.AttributeId]
-                            .OrderBy(i => i.Order).ToList();
-
-                    if (linkedAttributePassThroughFieldAttributes.Any())
+                    //fields
+                    if (attributePassThroughFieldAttributes.Contains(attributePassThroughAttribute.AttributeId))
                     {
+                        var linkedAttributePassThroughFieldAttributes =
+                            attributePassThroughFieldAttributes[attributePassThroughAttribute.AttributeId]
+                                .OrderBy(i => i.Order).ToList();
+
+                        useField = true;
                         var setFields = new HashSet<string>();
                         var memberInfos = new List<FieldInfo>();
                         var memberValues = new List<object>();
@@ -175,11 +179,20 @@ namespace SecretNest.RemoteAgency.Inspecting
                             memberValues.Add(attributePassThroughFieldAttribute.Value);
                         }
 
-                        var fieldInfo = memberInfos.ToArray();
-                        var fieldValue = memberValues.ToArray();
+                        fieldInfo = memberInfos.ToArray();
+                        fieldValue = memberValues.ToArray();
+                    }
+                    else
+                    {
+                        useField = false;
+                        fieldInfo = null;
+                        fieldValue = null;
+                    }
 
-                        //build with property and field
-                        if (useProperty)
+                    //build
+                    if (useProperty)
+                    {
+                        if (useField)
                         {
                             customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters, propertyInfo,
                                 propertyValue, fieldInfo,
@@ -187,21 +200,18 @@ namespace SecretNest.RemoteAgency.Inspecting
                         }
                         else
                         {
-                            customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters, fieldInfo, fieldValue);
-                        }
-                    }
-                    else
-                    {
-                        //build with property
-                        if (useProperty)
-                        {
                             customAttributeBuilder =
                                 new CustomAttributeBuilder(ctorInfo, ctorParameters, propertyInfo, propertyValue);
                         }
-                        else
-                        {
-                            customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters);
-                        }
+                    }
+                    else if (useField)
+                    {
+                        customAttributeBuilder =
+                            new CustomAttributeBuilder(ctorInfo, ctorParameters, fieldInfo, fieldValue);
+                    }
+                    else
+                    {
+                        customAttributeBuilder = new CustomAttributeBuilder(ctorInfo, ctorParameters);
                     }
                 }
                 else

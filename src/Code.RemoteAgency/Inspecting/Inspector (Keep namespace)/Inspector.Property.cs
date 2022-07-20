@@ -9,6 +9,11 @@ namespace SecretNest.RemoteAgency.Inspecting
 {
     partial class Inspector
     {
+
+#if net5or6
+        private static readonly Type PropertySetInitType = typeof(System.Runtime.CompilerServices.IsExternalInit);
+#endif 
+
         void ProcessProperty(RemoteAgencyPropertyInfo property, TypeInfo @interface,
             LocalExceptionHandlingMode interfaceLevelLocalExceptionHandlingMode,
             int interfaceLevelPropertyGettingTimeout, int interfaceLevelPropertySettingTimeout)
@@ -24,8 +29,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
             var getMethod = propertyInfo.GetGetMethod();
             var setMethod = propertyInfo.GetSetMethod();
-            property.IsGettable = propertyInfo.GetGetMethod() != null;
-            property.IsSettable = propertyInfo.GetSetMethod() != null;
+            property.IsGettable = getMethod != null;
+            property.IsSettable = setMethod != null;
 
             if (_serializerAssetLevelAttributeBaseType != null)
             {
@@ -58,6 +63,14 @@ namespace SecretNest.RemoteAgency.Inspecting
             }
             if (property.IsSettable)
             {
+                property.IsSetMarkedAsInit =
+#if net5or6
+                    setMethod.ReturnParameter.GetRequiredCustomModifiers().Contains(PropertySetInitType);
+#else
+                    false;
+#endif
+
+                //property.IsSetMarkedAsInit = 
                 property.SettingMethodPassThroughAttributes = _includesProxyOnlyInfo
                     ? setMethod.GetAttributePassThrough((m, a) => new InvalidReturnValueAttributeDataException(m, a, setMethod, memberPath))
                     : new List<CustomAttributeBuilder>();

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net461;net5;net6</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
@@ -24,6 +24,10 @@
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
     <DefineConstants>netfx</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5' OR '$(TargetFramework)'=='net6'">
+    <DefineConstants>net5or6</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SecretNest.RemoteAgency
 {
@@ -12,7 +14,20 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="instanceId">Id of the proxy instance.</param>
         /// <param name="proxy">Proxy created.</param>
-        public CreatedProxy(Guid instanceId, object proxy)
+        /// <param name="interfaceType">Type of the interface.</param>
+        public CreatedProxy(Guid instanceId, object proxy, Type interfaceType)
+        {
+            InstanceId = instanceId;
+            Proxy = proxy;
+            InterfaceType = interfaceType;
+        }
+
+        /// <summary>
+        /// Initializes an instance of CreatedProxy.
+        /// </summary>
+        /// <param name="instanceId">Id of the proxy instance.</param>
+        /// <param name="proxy">Proxy created.</param>
+        protected CreatedProxy(Guid instanceId, object proxy)
         {
             InstanceId = instanceId;
             Proxy = proxy;
@@ -27,6 +42,49 @@ namespace SecretNest.RemoteAgency
         /// Gets the proxy created.
         /// </summary>
         public object Proxy { get; }
+
+        /// <summary>
+        /// Gets the type of the interface.
+        /// </summary>
+        public virtual Type InterfaceType { get; }
+
+        private bool _proxyInitPropertyPrepared;
+        private HashSet<string> _proxyInitPropertyNames;
+
+        private void PrepareProxyInitProperty()
+        {
+            var proxy = (IProxyCommunicate) Proxy;
+            var returned = proxy.GetInitOnlyPropertyNames();
+            _proxyInitPropertyNames = returned != null ? new HashSet<string>(returned) : new HashSet<string>();
+        }
+
+        /// <summary>
+        /// Sets value for the property marked with init only setter.
+        /// </summary>
+        /// <param name="name">Name of the property marked with init only setter.</param>
+        /// <param name="value">The value to be set to the property.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the property is not found or not marked with init only setter.</exception>
+        public void SetInitOnlyPropertyValue(string name, object value)
+        {
+            lock (Proxy)
+            {
+                if (!_proxyInitPropertyPrepared)
+                {
+                    PrepareProxyInitProperty();
+                    
+                    _proxyInitPropertyPrepared = true;
+                }
+            }
+
+            if (_proxyInitPropertyNames.Contains(name))
+            {
+                ((IProxyCommunicate)Proxy).SetInitOnlyPropertyValue(name, value);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Property with name {name} is absent or not marked with init only setter.");
+            }
+        }
     }
 
     /// <summary>
@@ -49,5 +107,8 @@ namespace SecretNest.RemoteAgency
         /// Gets the proxy created.
         /// </summary>
         public TInterface ProxyGeneric { get; }
+
+        /// <inheritdoc />
+        public override Type InterfaceType => typeof(TInterface);
     }
 }

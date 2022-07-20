@@ -26,6 +26,25 @@
             </summary>
             <param name="isAsyncMethod">Whether this method is asynchronous. Default value is <see langword="true" />.</param>
         </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase">
+            <summary>
+            An abstract class of all attributes for providing additional data to attribute pass through.
+            </summary>
+            <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
+            <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
+        </member>
+        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId">
+            <summary>
+            Gets the id of the instance of the attribute.
+            </summary>
+            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.#ctor(System.String)">
+            <summary>
+            Initializes an instance of AttributePassThroughAdditionalDataAttributeBase.
+            </summary>
+            <param name="attributeId">Id of the instance of the attribute. This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</param>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute">
             <summary>
             Specifies an attribute should be marked at the same place of built proxy class.
@@ -66,32 +85,26 @@
             <remarks><para>Use this attribute to mark an attribute at the same place in the created class.</para>
             <para>When using the parameterless constructor of target attribute, <paramref name="attributeConstructorParameterTypes"/> and <paramref name="attributeConstructorParameters"/> are not required.</para>
             <para>When using a constructor with all parameters specified in order, sets types of parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and values to <paramref name="attributeConstructorParameters"/>. When the length of <paramref name="attributeConstructorParameters"/> is smaller than the length of <paramref name="attributeConstructorParameterTypes"/>, the missing parameters will be filled by <see langword="null"/>.</para>
-            <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and leading values to <paramref name="attributeConstructorParameters"/>. Marks the rest one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
-            <para>When properties need to be set while initializing, marks the properties one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
-            <para>When fields need to be set while initializing, marks the fields one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            <para>When named parameter is required for constructing, sets types of full form parameters of constructor to <paramref name="attributeConstructorParameterTypes"/> and leading values to <paramref name="attributeConstructorParameters"/>. Marks the rest one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            <para>When properties need to be set while initializing, marks the properties one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
+            <para>When fields need to be set while initializing, marks the fields one by one using <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute"/>. The <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/> should have the same value as <paramref name="attributeId"/>.</para>
             </remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute">
             <summary>
             Specifies a parameter value to be passed while constructing an instance of attribute.
             </summary>
-            <remarks><para>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>.</para>
+            <remarks><para>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/>.</para>
             <para>Name of the parameter should be specified by index of the parameter due to lack of parameter name list.</para></remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
             <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId">
-            <summary>
-            Gets the id of the instance of the attribute.
-            </summary>
-            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.ParameterIndex">
             <summary>
             Gets the index of the parameter.
             </summary>
-            <returns><para>The value cannot be equal or larger than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>.</para>
-            <para>When the index is smaller than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.AttributeId"/>, the parameter in <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> with the index specified by <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.ParameterIndex"/> is replaced with <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.Value"/>.</para></returns>
+            <returns><para>The value cannot be equal or larger than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameterTypes"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/>.</para>
+            <para>When the index is smaller than the length of <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> marked at the same place with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/>, the parameter in <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeConstructorParameters"/> with the index specified by <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.ParameterIndex"/> is replaced with <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.Value"/>.</para></returns>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughIndexBasedParameterAttribute.Value">
             <summary>
@@ -110,15 +123,9 @@
             <summary>
             Specifies a property value to be passed while initializing an instance of attribute.
             </summary>
-            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId"/>.</remarks>
+            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/>.</remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
             <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.AttributeId">
-            <summary>
-            Gets the id of the instance of the attribute.
-            </summary>
-            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute.Order">
             <summary>
@@ -148,15 +155,9 @@
             <summary>
             Specifies a field value to be passed while initializing an instance of attribute.
             </summary>
-            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId"/>.</remarks>
+            <remarks>This attribute works with <see cref="T:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute"/> with the value <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> is the same as <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAdditionalDataAttributeBase.AttributeId"/>.</remarks>
             <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#AttributePassThrough" />
             <conceptualLink target="0276dae1-94a2-4e9c-87ab-e3b371f41104" />
-        </member>
-        <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.AttributeId">
-            <summary>
-            Gets the id of the instance of the attribute.
-            </summary>
-            <remarks>This value should be same as the <see cref="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughAttribute.AttributeId"/> marked at the same place for the same instance of attribute.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute.Order">
             <summary>
@@ -930,7 +931,7 @@
             <summary>
             Gets whether this is in simple mode.
             </summary>
-            <remarks>When the value is <see langword="true"/>, property specified by <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
+            <remarks>When the value is <see langword="true"/>, property specified by <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper for return required property accessing.</remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.PropertyNameInParameter">
             <summary>
@@ -943,7 +944,7 @@
             Gets the type of the helper class.
             </summary>
             <remarks><para>Only valid when <see cref="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.IsSimpleMode"/> is set to <see langword="false"/>.</para>
-            <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
+            <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="T:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute"/> with <see cref="P:SecretNest.RemoteAgency.Attributes.ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper for return required property accessing.</para></remarks>
         </member>
         <member name="P:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute.ResponseEntityPropertyName">
             <summary>
@@ -1282,6 +1283,19 @@
             <param name="siteId">The site id of the instance of the Remote Agency which managing the closing service wrapper.</param>
             <param name="serviceWrapperInstanceId">The instance id of the closing service wrapper. When set to <see langword="null"/>, all proxies with sticky target site specified by <paramref name="siteId" /> will be reset. Default value is <see langword="null"/>.</param>
             <exception cref="T:System.AggregateException">When exceptions occurred.</exception>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.GetInitOnlyPropertyNames">
+            <summary>
+            Gets the names of all properties marked with init only setter.
+            </summary>
+            <returns>Names of all properties marked with init only setter.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.IProxyCommunicate.SetInitOnlyPropertyValue(System.String,System.Object)">
+            <summary>
+            Sets value to the property marked with init only setter.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">Value to be set.</param>
         </member>
         <member name="T:SecretNest.RemoteAgency.EntityBuilding">
             <summary>

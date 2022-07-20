@@ -65,6 +65,8 @@ namespace SecretNest.RemoteAgency.Inspecting
         static void ProcessMethodBodyForIgnoredAsset(MethodInfo methodInfo, Type returnType, bool willThrowExceptionWhileCalling,
             RemoteAgencyMethodBodyInfo target, AsyncMethodOriginalReturnValueDataTypeClass asyncMethodOriginalReturnValueDataTypeClass)
         {
+            target.IsStatic = methodInfo.IsStatic;
+
             var parameters = methodInfo.GetParameters();
 
             target.Parameters = parameters;
@@ -110,6 +112,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             string propertyValuePropertyNameSpecifiedByAttribute = null,
             Attribute propertyValuePropertyNameSpecifyingAttribute = null)
         {
+            target.IsStatic = methodInfo.IsStatic;
+
             var parameters = methodInfo.GetParameters();
 
             target.Parameters = parameters;
@@ -236,6 +240,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             CustomizedParameterEntityPropertyNameAttribute propertyValuePropertyNameSpecifyingAttribute = null,
             List<ParameterReturnRequiredPropertyAttribute> propertyValueParameterReturnRequiredProperty = null)
         {
+            target.IsStatic = methodInfo.IsStatic;
+
             var parameters = methodInfo.GetParameters();
 
             target.Parameters = parameters;

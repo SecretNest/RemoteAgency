@@ -28,7 +28,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// <summary>
         /// Gets whether this is in simple mode.
         /// </summary>
-        /// <remarks>When the value is <see langword="true"/>, property specified by <see cref="PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> with <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</remarks>
+        /// <remarks>When the value is <see langword="true"/>, property specified by <see cref="PropertyNameInParameter"/> need to be sent back to the caller; when the value is <see langword="false"/>, properties marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> with <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper for return required property accessing.</remarks>
         public bool IsSimpleMode { get; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace SecretNest.RemoteAgency.Attributes
         /// Gets the type of the helper class.
         /// </summary>
         /// <remarks><para>Only valid when <see cref="IsSimpleMode"/> is set to <see langword="false"/>.</para>
-        /// <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> with <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper fow return required property accessing.</para></remarks>
+        /// <para>The helper class should have a public constructor with one parameter in the same type of the parameter marked with this attribute. All properties in the helper class marked with <see cref="ReturnRequiredPropertyHelperAttribute"/> with <see cref="ReturnRequiredPropertyHelperAttribute.IsIncludedInReturning"/> set to <see langword="true"/> are used as the helper for return required property accessing.</para></remarks>
         public Type HelperClass { get; }
 
         /// <summary>
