@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+
 using SecretNest.RemoteAgency.Attributes;
 using SecretNest.RemoteAgency.Injection.EventHelper;
 using SecretNest.RemoteAgency.Inspecting;
@@ -29,6 +30,11 @@ namespace SecretNest.RemoteAgency
 			foreach (var propertyInfo in InterfaceInfo.Properties)
 			{
 				ImplementProperty(proxyTypeBuilder, propertyInfo);
+			}
+
+			foreach (var methodInfo in InterfaceInfo.Methods)
+			{
+				ImplementMethod(proxyTypeBuilder, methodInfo);
 			}
 		}
 
@@ -134,7 +140,6 @@ namespace SecretNest.RemoteAgency
 			}
 		}
 
-
 		/// <summary>
 		/// Implements a method instance for Remote Agency.
 		/// </summary>
@@ -144,6 +149,56 @@ namespace SecretNest.RemoteAgency
 		{
 			var methodName = methodInfo.Asset.Name;
 			var methodBuilder = proxyTypeBuilder.DefineMethod(methodName, MethodAttributes.Public);
+
+			void GenerateReturnValue()
+			{
+				switch (methodInfo.AsyncMethodOriginalReturnValueDataTypeClass)
+				{
+					case AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod:
+						if (methodInfo.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType != null)
+						{
+							methodBuilder.GenerateDefaultValue(methodInfo
+								.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
+						}
+						else
+						{
+							methodBuilder.End();
+						}
+
+						break;
+					case AsyncMethodOriginalReturnValueDataTypeClass.Task:
+						methodBuilder.ReturnStaticValue(typeof(Task), nameof(Task.CompletedTask));
+						break;
+					case AsyncMethodOriginalReturnValueDataTypeClass.ValueTask:
+						methodBuilder.GenerateDefaultValue(typeof(ValueTask));
+						break;
+					case AsyncMethodOriginalReturnValueDataTypeClass.TaskOfType:
+						methodBuilder.ReturnTaskOfT(methodInfo.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
+						break;
+					case AsyncMethodOriginalReturnValueDataTypeClass.ValueTaskOfType:
+						methodBuilder.ReturnValueTaskOfT(methodInfo
+							.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
+						break;
+
+					default:
+						throw new InvalidOperationException(
+							$"The {nameof(methodInfo.AsyncMethodOriginalReturnValueDataTypeClass)} of method {methodInfo.Asset.Name} is not supported.");
+				}
+			}
+
+
+			Type ExpandGenericType(Type type)
+			{
+				if (InterfaceInfo.IsSourceInterfaceGenericType || methodInfo.IsGenericMethod)
+				{
+					var genericArguments =
+						InterfaceInfo.InterfaceLevelGenericParameters.Concat(methodInfo.AssetLevelGenericParameters);
+
+					return type.MakeGenericType(genericArguments.ToArray());
+				}
+
+				return type;
+			}
 
 			// Add generic parameters
 			if (methodInfo.IsGenericMethod)
@@ -208,38 +263,163 @@ namespace SecretNest.RemoteAgency
 				}
 				else
 				{
-					switch (methodInfo.AsyncMethodOriginalReturnValueDataTypeClass)
+					GenerateReturnValue();
+				}
+			}
+			else
+			{
+				var g = methodBuilder.GetILGenerator();
+
+				var requestType = ExpandGenericType(methodInfo.MethodBodyInfo.ParameterEntity);
+				var request = g.DeclareLocal(methodInfo.MethodBodyInfo.ParameterEntity);
+
+				// request = new <RequestType>()
+				g.Emit(OpCodes.Newobj);
+				g.Emit(OpCodes.Stloc, request);
+
+				foreach (var parameterInfo in methodInfo.MethodBodyInfo.ParameterEntityProperties)
+				{
+					var requestProperty = requestType.GetProperty(parameterInfo.PropertyName,
+											  BindingFlags.Public | BindingFlags.Instance)
+										  ?? throw new InvalidOperationException(
+											  $"Cannot find property {parameterInfo.PropertyName} on type {requestType.FullName}.");
+
+					var valueParameter = methodBuilder.GetParameters()
+						.First(i => i.Name == parameterInfo.ParameterName);
+
+					// this.<PropertyName> = <argument>
+					g.Emit(OpCodes.Ldarg, valueParameter.Position + 1); // 0 = this
+					g.Emit(OpCodes.Ldarg_0);
+					g.EmitCall(OpCodes.Call, requestProperty.SetMethod, null);
+				}
+
+				var requestMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
+
+				// requestMessage = (IRemoteAgencyMessage)request
+				g.Emit(OpCodes.Ldloc, request);
+				g.Emit(OpCodes.Castclass, typeof(IRemoteAgencyMessage));
+				g.Emit(OpCodes.Stloc, requestMessage);
+
+				var assetNameProperty = typeof(IRemoteAgencyMessage).GetProperty(nameof(IRemoteAgencyMessage.AssetName),
+					BindingFlags.Public | BindingFlags.Instance)!;
+
+				// requestMessage.AssetName = <AssetName>
+				g.Emit(OpCodes.Ldstr, methodInfo.AssetName);
+				g.Emit(OpCodes.Ldloc, requestMessage);
+				g.EmitCall(OpCodes.Call, assetNameProperty.SetMethod, null);
+
+				if (methodInfo.IsOneWay)
+				{
+					var sendOneWayCallback =
+						typeof(IProxyCommunicate).GetProperty(nameof(IProxyCommunicate.SendOneWayMethodMessageCallback),
+							BindingFlags.Public | BindingFlags.Instance)!;
+
+					// ((IProxyCommunicate)this).SendOneWayMethodMessageCallback(requestMessage)
+
+					g.Emit(OpCodes.Ldloc, requestMessage);
+					g.Emit(OpCodes.Ldarg_0);
+
+					g.Emit(OpCodes.Ldarg_0);
+					g.Emit(OpCodes.Castclass, typeof(IProxyCommunicate));
+					g.EmitCall(OpCodes.Call, sendOneWayCallback.GetMethod, null);
+
+					g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, null, new[] { typeof(IRemoteAgencyMessage) },
+						null);
+
+					foreach (var returnValueInfo in methodInfo.MethodBodyInfo.ReturnValueEntityProperties)
 					{
-						case AsyncMethodOriginalReturnValueDataTypeClass.NotAsyncMethod:
-							if (methodInfo.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType != null)
-							{
-								methodBuilder.GenerateDefaultValue(methodInfo
-									.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
-							}
-							else
-							{
-								methodBuilder.End();
-							}
-							break;
-						case AsyncMethodOriginalReturnValueDataTypeClass.Task:
-							methodBuilder.ReturnStaticValue(typeof(Task), nameof(Task.CompletedTask));
-							break;
-						case AsyncMethodOriginalReturnValueDataTypeClass.ValueTask:
-							methodBuilder.GenerateDefaultValue(typeof(ValueTask));
-							break;
-						case AsyncMethodOriginalReturnValueDataTypeClass.TaskOfType:
-							methodBuilder.ReturnTaskOfT(methodInfo.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
-							break;
-						case AsyncMethodOriginalReturnValueDataTypeClass.ValueTaskOfType:
-							methodBuilder.ReturnValueTaskOfT(methodInfo
-								.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
-							break;
+						switch (returnValueInfo.ReturnValueSource)
+						{
+							case RemoteAgencyReturnValueSource.ParameterDefaultValue:
 
-						default:
-							throw new InvalidOperationException(
-								$"The {nameof(methodInfo.AsyncMethodOriginalReturnValueDataTypeClass)} of method {methodInfo.Asset.Name} is not supported.");
+								var argumentDefault = g.DeclareLocal(returnValueInfo.DataType);
+								var relatedArgument =
+									methodBuilder.GetParameters()
+										.SingleOrDefault(i => i.ParameterType == returnValueInfo.DataType) ??
+									throw new InvalidOperationException(
+										$"Cannot find a method argument with type {returnValueInfo.DataType} and thus the return value cannot be produced.");
 
+								// <argument> = default(<Type>)
+								g.Emit(OpCodes.Ldloca, argumentDefault);
+								g.Emit(OpCodes.Initobj);
+								g.Emit(OpCodes.Ldloc, argumentDefault);
+								g.Emit(OpCodes.Starg, relatedArgument.Position + 1);
+								break;
+
+							case RemoteAgencyReturnValueSource.ReturnValueDefaultValue:
+								GenerateReturnValue();
+								break;
+							default:
+								throw new InvalidOperationException(
+									$"The return value source type {returnValueInfo.ReturnValueSource} is not supported.");
+						}
 					}
+				}
+				else
+				{
+					var sendMessageCallback = typeof(IProxyCommunicate).GetProperty(
+						nameof(IProxyCommunicate.SendMethodMessageCallback),
+						BindingFlags.Public | BindingFlags.Instance)!;
+
+					// ((IProxyCommunicate)this).SendMethodMessageCallback(requestMessage, <timeout>)
+					g.Emit(OpCodes.Ldloc, requestMessage);
+					g.Emit(OpCodes.Ldc_I4, methodInfo.MethodBodyInfo.Timeout);
+					g.Emit(OpCodes.Ldarg_0);
+
+					g.Emit(OpCodes.Ldarg_0);
+					g.EmitCall(OpCodes.Call, sendMessageCallback.GetMethod, null);
+
+					g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, typeof(IRemoteAgencyMessage),
+						new[] { typeof(IRemoteAgencyMessage), typeof(int) }, null);
+
+					// responseMessage = <return_value>
+					var responseMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
+					g.Emit(OpCodes.Stloc, responseMessage);
+
+					// response = (<Type>)responseMessage
+					var responseType = ExpandGenericType(methodInfo.MethodBodyInfo.ReturnValueEntity);
+					var response = g.DeclareLocal(responseType);
+					g.Emit(OpCodes.Ldloc, responseMessage);
+					g.Emit(OpCodes.Castclass, responseType);
+					g.Emit(OpCodes.Stloc, response);
+
+
+					// if (responseMessage.Exception == null ...)
+					var exceptionProperty =
+						(typeof(IRemoteAgencyMessage)).GetProperty(nameof(IRemoteAgencyMessage.Exception))!;
+					g.Emit(OpCodes.Ldloc, responseMessage);
+					g.EmitCall(OpCodes.Call, exceptionProperty.GetMethod, null);
+
+					var nonExceptionLabel = g.DefineLabel();
+					g.Emit(OpCodes.Brfalse, nonExceptionLabel);
+
+					foreach (var returnValueInfo in methodInfo.MethodBodyInfo.ReturnValueEntityProperties)
+					{
+						switch (returnValueInfo.ReturnValueSource)
+						{
+							case RemoteAgencyReturnValueSource.Parameter:
+								if (((RemoteAgencyReturnValueInfoFromParameter)returnValueInfo).IsIncludedWhenExceptionThrown)
+								{
+									var responseProperty = responseType.GetProperty(returnValueInfo.PropertyName) ??
+									                       throw new InvalidOperationException(
+										                       $"Cannot find property {returnValueInfo.PropertyName} on type {requestType.FullName}");
+									var parameter = methodBuilder.GetParameters()
+										                .SingleOrDefault(i =>
+											                i.ParameterType == returnValueInfo.DataType) ??
+									                throw new InvalidOperationException(
+										                $"Cannot find an argument with the type {returnValueInfo.DataType.FullName}");
+
+									g.Emit(OpCodes.Ldloc, response);
+									g.EmitCall(OpCodes.Call, responseProperty.GetMethod, null);
+									g.Emit(OpCodes.Starg, parameter.Position + 1);
+								}
+								break;
+						}
+					}
+
+
+
+
 				}
 			}
 		}
@@ -334,7 +514,6 @@ namespace SecretNest.RemoteAgency
 		{
 			Helper.OnRemoteServiceWrapperClosing(siteId, serviceWrapperInstanceId);
 		}
-
 
 		void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)
 		{

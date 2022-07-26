@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EmitExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlainEntityBodyBuilderExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility.cs" />
   </ItemGroup>
 </Project>
