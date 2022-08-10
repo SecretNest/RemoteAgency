@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuildingEmitter.Proxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuildingEmitExtensions.AttributePassThrough.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyBuildingEmitExtensions.GenericParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EmitExtensions.cs" />
   </ItemGroup>
 </Project>

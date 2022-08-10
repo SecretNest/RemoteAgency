@@ -70,6 +70,8 @@ namespace SecretNest.RemoteAgency
 		/// <param name="propertyInfo"></param>
 		private void ImplementProperty(TypeBuilder proxyTypeBuilder, RemoteAgencyPropertyInfo propertyInfo)
 		{
+
+
 			var propertyBuilder = proxyTypeBuilder.DefineProperty(propertyInfo.Asset.Name, PropertyAttributes.None,
 				propertyInfo.DataType, null);
 
@@ -135,6 +137,11 @@ namespace SecretNest.RemoteAgency
 				}
 				else
 				{
+					var requestType = ExpandGenericType(propertyInfo.GettingMethodBodyInfo.ParameterEntity);
+					var assetName = propertyInfo.AssetName;
+
+					var requestMessage = GenerateRequestCore(methodBuilder, propertyInfo.GettingMethodBodyInfo,
+						requestType, assetName);
 
 				}
 			}
@@ -184,20 +191,6 @@ namespace SecretNest.RemoteAgency
 						throw new InvalidOperationException(
 							$"The {nameof(methodInfo.AsyncMethodOriginalReturnValueDataTypeClass)} of method {methodInfo.Asset.Name} is not supported.");
 				}
-			}
-
-
-			Type ExpandGenericType(Type type)
-			{
-				if (InterfaceInfo.IsSourceInterfaceGenericType || methodInfo.IsGenericMethod)
-				{
-					var genericArguments =
-						InterfaceInfo.InterfaceLevelGenericParameters.Concat(methodInfo.AssetLevelGenericParameters);
-
-					return type.MakeGenericType(genericArguments.ToArray());
-				}
-
-				return type;
 			}
 
 			// Add generic parameters
@@ -268,45 +261,11 @@ namespace SecretNest.RemoteAgency
 			}
 			else
 			{
+				var requestType = ExpandGenericType(methodInfo.MethodBodyInfo.ParameterEntity, methodInfo);
+				var assetName = methodInfo.AssetName;
+
 				var g = methodBuilder.GetILGenerator();
-
-				var requestType = ExpandGenericType(methodInfo.MethodBodyInfo.ParameterEntity);
-				var request = g.DeclareLocal(methodInfo.MethodBodyInfo.ParameterEntity);
-
-				// request = new <RequestType>()
-				g.Emit(OpCodes.Newobj);
-				g.Emit(OpCodes.Stloc, request);
-
-				foreach (var parameterInfo in methodInfo.MethodBodyInfo.ParameterEntityProperties)
-				{
-					var requestProperty = requestType.GetProperty(parameterInfo.PropertyName,
-											  BindingFlags.Public | BindingFlags.Instance)
-										  ?? throw new InvalidOperationException(
-											  $"Cannot find property {parameterInfo.PropertyName} on type {requestType.FullName}.");
-
-					var valueParameter = methodBuilder.GetParameters()
-						.First(i => i.Name == parameterInfo.ParameterName);
-
-					// this.<PropertyName> = <argument>
-					g.Emit(OpCodes.Ldarg, valueParameter.Position + 1); // 0 = this
-					g.Emit(OpCodes.Ldarg_0);
-					g.EmitCall(OpCodes.Call, requestProperty.SetMethod, null);
-				}
-
-				var requestMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
-
-				// requestMessage = (IRemoteAgencyMessage)request
-				g.Emit(OpCodes.Ldloc, request);
-				g.Emit(OpCodes.Castclass, typeof(IRemoteAgencyMessage));
-				g.Emit(OpCodes.Stloc, requestMessage);
-
-				var assetNameProperty = typeof(IRemoteAgencyMessage).GetProperty(nameof(IRemoteAgencyMessage.AssetName),
-					BindingFlags.Public | BindingFlags.Instance)!;
-
-				// requestMessage.AssetName = <AssetName>
-				g.Emit(OpCodes.Ldstr, methodInfo.AssetName);
-				g.Emit(OpCodes.Ldloc, requestMessage);
-				g.EmitCall(OpCodes.Call, assetNameProperty.SetMethod, null);
+				var requestMessage = GenerateRequestCore(methodBuilder, methodInfo.MethodBodyInfo, requestType, assetName);
 
 				if (methodInfo.IsOneWay)
 				{
@@ -321,7 +280,7 @@ namespace SecretNest.RemoteAgency
 
 					g.Emit(OpCodes.Ldarg_0);
 					g.Emit(OpCodes.Castclass, typeof(IProxyCommunicate));
-					g.EmitCall(OpCodes.Call, sendOneWayCallback.GetMethod, null);
+					g.Emit(OpCodes.Call, sendOneWayCallback.GetMethod);
 
 					g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, null, new[] { typeof(IRemoteAgencyMessage) },
 						null);
@@ -367,7 +326,7 @@ namespace SecretNest.RemoteAgency
 					g.Emit(OpCodes.Ldarg_0);
 
 					g.Emit(OpCodes.Ldarg_0);
-					g.EmitCall(OpCodes.Call, sendMessageCallback.GetMethod, null);
+					g.Emit(OpCodes.Call, sendMessageCallback.GetMethod);
 
 					g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, typeof(IRemoteAgencyMessage),
 						new[] { typeof(IRemoteAgencyMessage), typeof(int) }, null);
@@ -388,7 +347,7 @@ namespace SecretNest.RemoteAgency
 					var exceptionProperty =
 						(typeof(IRemoteAgencyMessage)).GetProperty(nameof(IRemoteAgencyMessage.Exception))!;
 					g.Emit(OpCodes.Ldloc, responseMessage);
-					g.EmitCall(OpCodes.Call, exceptionProperty.GetMethod, null);
+					g.Emit(OpCodes.Call, exceptionProperty.GetMethod);
 
 					var nonExceptionLabel = g.DefineLabel();
 					g.Emit(OpCodes.Brfalse, nonExceptionLabel);
@@ -401,16 +360,16 @@ namespace SecretNest.RemoteAgency
 								if (((RemoteAgencyReturnValueInfoFromParameter)returnValueInfo).IsIncludedWhenExceptionThrown)
 								{
 									var responseProperty = responseType.GetProperty(returnValueInfo.PropertyName) ??
-									                       throw new InvalidOperationException(
-										                       $"Cannot find property {returnValueInfo.PropertyName} on type {requestType.FullName}");
+														   throw new InvalidOperationException(
+															   $"Cannot find property {returnValueInfo.PropertyName} on type {responseType.FullName}");
 									var parameter = methodBuilder.GetParameters()
-										                .SingleOrDefault(i =>
-											                i.ParameterType == returnValueInfo.DataType) ??
-									                throw new InvalidOperationException(
-										                $"Cannot find an argument with the type {returnValueInfo.DataType.FullName}");
+														.SingleOrDefault(i =>
+															i.ParameterType == returnValueInfo.DataType) ??
+													throw new InvalidOperationException(
+														$"Cannot find an argument with the type {returnValueInfo.DataType.FullName}");
 
 									g.Emit(OpCodes.Ldloc, response);
-									g.EmitCall(OpCodes.Call, responseProperty.GetMethod, null);
+									g.Emit(OpCodes.Call, responseProperty.GetMethod);
 									g.Emit(OpCodes.Starg, parameter.Position + 1);
 								}
 								break;
@@ -424,12 +383,153 @@ namespace SecretNest.RemoteAgency
 			}
 		}
 
+		/// <summary>
+		/// Expand a generic type if <see cref="InterfaceInfo"/> has generic arguments.
+		/// </summary>
+		/// <param name="type">The source type.</param>
+		/// <returns>The expanded type.</returns>
+		Type ExpandGenericType(Type type)
+		{
+			return !InterfaceInfo.IsSourceInterfaceGenericType
+				? type
+				: type.MakeGenericType(InterfaceInfo.SourceInterfaceGenericArguments);
+		}
+
+
+		/// <summary>
+		/// Expand a generic type if <see cref="InterfaceInfo"/> or <paramref name="methodInfo"/> has generic arguments.
+		/// </summary>
+		/// <param name="type">The source type.</param>
+		/// <param name="methodInfo">The additional method context.</param>
+		/// <returns>The expanded type.</returns>
+		Type ExpandGenericType(Type type, RemoteAgencyMethodInfo methodInfo)
+		{
+			if (InterfaceInfo.IsSourceInterfaceGenericType || methodInfo.IsGenericMethod)
+			{
+				var genericArguments =
+					InterfaceInfo.InterfaceLevelGenericParameters.Concat(methodInfo.AssetLevelGenericParameters);
+
+				return type.MakeGenericType(genericArguments.ToArray());
+			}
+
+			return type;
+		}
+
+
+		private static LocalBuilder GenerateRequestCore(MethodBuilder methodBuilder,
+			RemoteAgencyMethodBodyInfo methodBodyInfo, Type requestType, string assetName)
+		{
+			var g = methodBuilder.GetILGenerator();
+
+			var request = g.DeclareLocal(requestType);
+			var ctor = requestType.GetConstructor(Type.EmptyTypes);
+
+			// request = new <RequestType>()
+			g.Emit(OpCodes.Newobj, ctor);
+			g.Emit(OpCodes.Stloc, request);
+
+
+			foreach (var parameterInfo in methodBodyInfo.ParameterEntityProperties)
+			{
+				var requestProperty = requestType.GetProperty(parameterInfo.PropertyName,
+										  BindingFlags.Public | BindingFlags.Instance)
+									  ?? throw new InvalidOperationException(
+										  $"Cannot find property {parameterInfo.PropertyName} on type {requestType.FullName}.");
+
+				var valueParameter = methodBuilder.GetParameters()
+					.First(i => i.Name == parameterInfo.ParameterName);
+
+				// this.<PropertyName> = <argument>
+				g.Emit(OpCodes.Ldarg, valueParameter.Position + 1); // 0 = this
+				g.Emit(OpCodes.Ldarg_0);
+				g.Emit(OpCodes.Call, (MethodInfo)requestProperty.SetMethod);
+			}
+
+			var requestMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
+
+			// requestMessage = (IRemoteAgencyMessage)request
+			g.Emit(OpCodes.Ldloc, request);
+			g.Emit(OpCodes.Castclass, typeof(IRemoteAgencyMessage));
+			g.Emit(OpCodes.Stloc, requestMessage);
+
+			var assetNameProperty = typeof(IRemoteAgencyMessage).GetProperty(nameof(IRemoteAgencyMessage.AssetName),
+				BindingFlags.Public | BindingFlags.Instance)!;
+
+			// requestMessage.AssetName = <AssetName>
+			g.Emit(OpCodes.Ldstr, assetName);
+			g.Emit(OpCodes.Ldloc, requestMessage);
+			g.Emit(OpCodes.Call, assetNameProperty.SetMethod);
+
+			return requestMessage;
+		}
+	}
+
+	internal abstract class ProxyBase : IProxyCommunicate
+	{
+		public RemoteAgencyInterfaceInfo InterfaceInfo { get; set; }
+
+		#region Unsupported Method
+
+		Guid IProxyCommunicate.InstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendTwoWayMessageCallback IProxyCommunicate.SendMethodMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendOneWayMessageCallback IProxyCommunicate.SendOneWayMethodMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendTwoWayMessageCallback IProxyCommunicate.SendEventAddingMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendTwoWayMessageCallback IProxyCommunicate.SendEventRemovingMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendTwoWayMessageCallback IProxyCommunicate.SendPropertyGetMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendOneWayMessageCallback IProxyCommunicate.SendOneWayPropertyGetMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendTwoWayMessageCallback IProxyCommunicate.SendPropertySetMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendOneWayMessageCallback IProxyCommunicate.SendOneWayPropertySetMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		SendOneWayMessageCallback IManagedObjectCommunicate.SendOneWaySpecialCommandMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		CreateEmptyMessageCallback IManagedObjectCommunicate.CreateEmptyMessageCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		#endregion
+
+		void IManagedObjectCommunicate.CloseRequestedByManagingObject(bool sendSpecialCommand)
+		{
+			throw new NotImplementedException();
+		}
+
+		string[] IProxyCommunicate.GetInitOnlyPropertyNames()
+		{
+			var result = new List<string>();
+
+			foreach (var i in InterfaceInfo.Properties)
+			{
+				if (i.IsSetMarkedAsInit)
+				{
+					result.Add(i.AssetName);
+				}
+			}
+
+			return result.Any() ? result.ToArray() : null;
+		}
+
+		void IProxyCommunicate.OnRemoteServiceWrapperClosing(Guid siteId, Guid? serviceWrapperInstanceId)
+		{
+			throw new NotImplementedException();
+		}
+
+		IRemoteAgencyMessage IProxyCommunicate.ProcessEventRaisingMessage(IRemoteAgencyMessage message, out Exception exception, out LocalExceptionHandlingMode localExceptionHandlingMode)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IProxyCommunicate.ProcessOneWayEventRaisingMessage(IRemoteAgencyMessage message, out LocalExceptionHandlingMode localExceptionHandlingMode)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IProxyCommunicate.SetInitOnlyPropertyValue(string propertyName, object value)
+		{
+			var propertyInfo = this.GetType().GetProperty(propertyName);
+			propertyInfo.SetValue(this, value);
+		}
 	}
 
 	/// <summary>
 	/// Base class used for implementing the <see cref="IProxyCommunicate"/> interface with helper supported.
 	/// </summary>
-	internal class ProxyBaseWithHelper : IProxyCommunicate
+	internal class ProxyBaseWithHelper : ProxyBase, IProxyCommunicate
 	{
 		/// <summary>
 		/// The internal <see cref="ProxyEventHelper"/> instance.
@@ -526,7 +626,7 @@ namespace SecretNest.RemoteAgency
 	/// <summary>
 	///     Base class for generated proxy type without helper.
 	/// </summary>
-	internal class ProxyBaseWithoutHelper : IProxyCommunicate
+	internal class ProxyBaseWithoutHelper : ProxyBase, IProxyCommunicate
 	{
 		SendOneWayMessageCallback IManagedObjectCommunicate.SendOneWaySpecialCommandMessageCallback { get; set; }
 
