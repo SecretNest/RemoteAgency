@@ -303,8 +303,12 @@ namespace SecretNest.RemoteAgency
 
 		public static void ReturnValueTaskOfT(this MethodBuilder method, Type taskInnerType)
 		{
+			#if netfx
+            throw new NotSupportedException("ValueTask is not supported by .NET framework.");
+			#else
 			var realType = typeof(ValueTask<>).MakeGenericType(taskInnerType);
-			method.GenerateDefaultValue(realType);
+          	method.GenerateDefaultValue(realType);
+            #endif
 		}
 
 		public static void GenerateException(this MethodBuilder method, Type exceptionType)

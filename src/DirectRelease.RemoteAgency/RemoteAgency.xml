@@ -1535,88 +1535,6 @@
             <returns>Empty message.</returns>
             <remarks><para>This method and this class are not present in Neat release.</para></remarks>
         </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateAutoImplementedProperty(System.Reflection.Emit.TypeBuilder,System.String,System.Type)">
-            <summary>
-            Generates a property with auto implemented Get/Set support.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="name">The name of the property.</param>
-            <param name="propertyType">The value type of the property.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateExplicitImplementation(System.Reflection.Emit.TypeBuilder,System.Reflection.TypeInfo)">
-            <summary>
-            Explicitly implements an interface for a type.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="interfaceInfo">The interface which should be explicitly implemented.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateExplicitImplementationProperty(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo)">
-            <summary>
-            Explicitly implements a property from a interface for a type.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="propertyInfo">The property should be explicitly implemented.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateSetMethodCore(System.Reflection.Emit.TypeBuilder,System.String,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Generates a auto-implemented SET method for a property.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="methodName">The name of the internal method.</param>
-            <param name="propertyBuilder">The property which the method is related to.</param>
-            <param name="field">The field which the method should access to.</param>
-            <returns>The generated SET method.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateGetMethodCore(System.Reflection.Emit.TypeBuilder,System.String,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Generates a auto-implemented GET method for a property.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="methodName">The name of the internal method.</param>
-            <param name="propertyBuilder">The property which the method is related to.</param>
-            <param name="field">The field which the method should access to.</param>
-            <returns>The generated GET method.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateInterfaceImpSetMethodForField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Implements the SET method for an explicitly implemented interface property.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="propertyInfo">The property which should be explicitly implemented.</param>
-            <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
-            <param name="field">The backend field related with the new property.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateInterfaceImpGetMethodForField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Implements the GET method for an explicitly implemented interface property.
-            </summary>
-            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="propertyInfo">The property which should be explicitly implemented.</param>
-            <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
-            <param name="field">The backend field related with the new property.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GeneratePropertyBackField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo)">
-            <summary>
-            Generates the backend field for an auto implemented property.
-            </summary>
-            <param name="builder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
-            <param name="propertyInfo">The property which need to generated the backend field.</param>
-            <returns>The generated backend field associated with <paramref name="propertyInfo"/>.</returns>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateGetBodyForProperty(System.Reflection.Emit.MethodBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Generates the method body for a simple GET method.
-            </summary>
-            <param name="getMethod">The <see cref="T:System.Reflection.Emit.MethodBuilder"/> instance.</param>
-            <param name="backField">The backend field related with the <paramref name="getMethod"/>.</param>
-        </member>
-        <member name="M:SecretNest.RemoteAgency.PlainEntityBodyBuilderExtensions.GenerateSetBodyForProperty(System.Reflection.Emit.MethodBuilder,System.Reflection.FieldInfo)">
-            <summary>
-            Generates the method body for a simple SET method.
-            </summary>
-            <param name="setMethod">The <see cref="T:System.Reflection.Emit.MethodBuilder"/> instance.</param>
-            <param name="backField">The backend field related with the <paramref name="setMethod"/>.</param>
-        </member>
         <member name="T:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventHelper">
             <summary>
             Defines a helper class to be implanted into built assembly for event servicing in proxy.
@@ -1937,6 +1855,162 @@
             Initialize an instance of ServiceWrapperEventRouterBase.
             </summary>
             <param name="timeout">Timeout for waiting for the response of event raising.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ExplicitImplementUserInterface(System.Reflection.Emit.TypeBuilder)">
+            <summary>
+            Implements the user defined <see cref="T:SecretNest.RemoteAgency.Inspecting.RemoteAgencyInterfaceInfo"/>.SourceInterface properties from <see cref="P:SecretNest.RemoteAgency.AssemblyBuildingEmitter.InterfaceInfo"/>.
+            </summary>
+            <param name="proxyTypeBuilder">The type represents the generated agent type.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ExplicitImplementIProxyCommunicate(System.Reflection.Emit.TypeBuilder)">
+            <summary>
+            Implements the <see cref="T:SecretNest.RemoteAgency.IProxyCommunicate"/> interface for the generated type.
+            </summary>
+            <param name="proxyTypeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> represents the generated type.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ImplementProperty(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.Inspecting.RemoteAgencyPropertyInfo)">
+            <summary>
+            Implements a property instance for Remote Agency.
+            </summary>
+            <param name="proxyTypeBuilder"></param>
+            <param name="propertyInfo"></param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ImplementMethod(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.Inspecting.RemoteAgencyMethodInfo)">
+            <summary>
+            Implements a method instance for Remote Agency.
+            </summary>
+            <param name="proxyTypeBuilder"></param>
+            <param name="methodInfo"></param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ExpandGenericType(System.Type)">
+            <summary>
+            Expand a generic type if <see cref="P:SecretNest.RemoteAgency.AssemblyBuildingEmitter.InterfaceInfo"/> has generic arguments.
+            </summary>
+            <param name="type">The source type.</param>
+            <returns>The expanded type.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.AssemblyBuildingEmitter.ExpandGenericType(System.Type,SecretNest.RemoteAgency.Inspecting.RemoteAgencyMethodInfo)">
+            <summary>
+            Expand a generic type if <see cref="P:SecretNest.RemoteAgency.AssemblyBuildingEmitter.InterfaceInfo"/> or <paramref name="methodInfo"/> has generic arguments.
+            </summary>
+            <param name="type">The source type.</param>
+            <param name="methodInfo">The additional method context.</param>
+            <returns>The expanded type.</returns>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.ProxyBaseWithHelper">
+            <summary>
+            Base class used for implementing the <see cref="T:SecretNest.RemoteAgency.IProxyCommunicate"/> interface with helper supported.
+            </summary>
+        </member>
+        <member name="P:SecretNest.RemoteAgency.ProxyBaseWithHelper.Helper">
+            <summary>
+            The internal <see cref="T:SecretNest.RemoteAgency.Injection.EventHelper.ProxyEventHelper"/> instance.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.ProxyBaseWithoutHelper">
+            <summary>
+                Base class for generated proxy type without helper.
+            </summary>
+        </member>
+        <member name="T:SecretNest.RemoteAgency.EmitExtensions">
+            <summary>
+            Provide extension methods of Emit. This class is static.
+            </summary>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateAutoImplementedProperty(System.Reflection.Emit.TypeBuilder,System.String,System.Type)">
+            <summary>
+            Generates a property with auto implemented Get/Set support.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="name">The name of the property.</param>
+            <param name="propertyType">The value type of the property.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateExplicitImplementationForProperties(System.Reflection.Emit.TypeBuilder,System.Type)">
+            <summary>
+            Explicitly implements all properties of an interface for a type.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="interfaceInfo">The interface which should be explicitly implemented.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateExplicitImplementationProperty(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo)">
+            <summary>
+            Explicitly implements a property from a interface for a type.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="propertyInfo">The property should be explicitly implemented.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateSetMethodCore(System.Reflection.Emit.TypeBuilder,System.String,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Generates a auto-implemented SET method for a property.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="methodName">The name of the internal method.</param>
+            <param name="propertyBuilder">The property which the method is related to.</param>
+            <param name="field">The field which the method should access to.</param>
+            <returns>The generated SET method.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateGetMethodCore(System.Reflection.Emit.TypeBuilder,System.String,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Generates a auto-implemented GET method for a property.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="methodName">The name of the internal method.</param>
+            <param name="propertyBuilder">The property which the method is related to.</param>
+            <param name="field">The field which the method should access to.</param>
+            <returns>The generated GET method.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateInterfaceImpSetMethodForField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Implements the SET method for an explicitly implemented interface property.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="propertyInfo">The property which should be explicitly implemented.</param>
+            <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
+            <param name="field">The backend field related with the new property.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateInterfaceImpGetMethodForField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo,System.Reflection.Emit.PropertyBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Implements the GET method for an explicitly implemented interface property.
+            </summary>
+            <param name="typeBuilder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="propertyInfo">The property which should be explicitly implemented.</param>
+            <param name="propertyBuilder">The new property which is used to implement the <paramref name="propertyInfo"/>.</param>
+            <param name="field">The backend field related with the new property.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GeneratePropertyBackField(System.Reflection.Emit.TypeBuilder,System.Reflection.PropertyInfo)">
+            <summary>
+            Generates the backend field for an auto implemented property.
+            </summary>
+            <param name="builder">The <see cref="T:System.Reflection.Emit.TypeBuilder"/> instance.</param>
+            <param name="propertyInfo">The property which need to generated the backend field.</param>
+            <returns>The generated backend field associated with <paramref name="propertyInfo"/>.</returns>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.End(System.Reflection.Emit.MethodBuilder)">
+            <summary>
+            Simpely end the method code with a <see cref="F:System.Reflection.Emit.OpCodes.Ret"/> instruction.
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateGetBodyForProperty(System.Reflection.Emit.MethodBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Generates the method body for a simple GET method.
+            </summary>
+            <param name="getMethod">The <see cref="T:System.Reflection.Emit.MethodBuilder"/> instance.</param>
+            <param name="backField">The backend field related with the <paramref name="getMethod"/>.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateSetBodyForProperty(System.Reflection.Emit.MethodBuilder,System.Reflection.FieldInfo)">
+            <summary>
+            Generates the method body for a simple SET method.
+            </summary>
+            <param name="setMethod">The <see cref="T:System.Reflection.Emit.MethodBuilder"/> instance.</param>
+            <param name="backField">The backend field related with the <paramref name="setMethod"/>.</param>
+        </member>
+        <member name="M:SecretNest.RemoteAgency.EmitExtensions.GenerateDefaultValue(System.Reflection.Emit.MethodBuilder,System.Type)">
+            <summary>
+            Generate a default(T) as return value for <paramref name="method"/>.
+            </summary>
+            <param name="method">The <see cref="T:System.Reflection.Emit.MethodBuilder"/> instance.</param>
+            <param name="type">The type for the default value.</param>
         </member>
     </members>
 </doc>
