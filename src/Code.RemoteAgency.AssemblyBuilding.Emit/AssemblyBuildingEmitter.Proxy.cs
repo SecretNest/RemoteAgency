@@ -91,7 +91,7 @@ namespace SecretNest.RemoteAgency
                     var originalParameterInfo = methodBodyInfo.Parameters[i];
 
                     var p = methodBuilder.DefineParameter(i, ParameterAttributes.None, originalParameterInfo.Name);
-                    p.ApplyCustomAttributes(propertyInfo.MethodParameterPassThroughAttributes[originalParameterInfo.Name]);
+                    p.ApplyCustomAttributes(propertyInfo.MethodParameterPassThroughAttributes[originalParameterInfo.Name!]);
                 }
 
                 // Return attributes
@@ -182,7 +182,9 @@ namespace SecretNest.RemoteAgency
                         #else
                         methodBuilder.GenerateDefaultValue(typeof(ValueTask));
                         #endif
+#pragma warning disable CS0162 // Unreachable code detected
                         break;
+#pragma warning restore CS0162 // Unreachable code detected
                     case AsyncMethodOriginalReturnValueDataTypeClass.TaskOfType:
                         methodBuilder.ReturnTaskOfT(methodInfo.AsyncMethodInnerOrNonAsyncMethodReturnValueDataType);
                         break;
@@ -221,7 +223,7 @@ namespace SecretNest.RemoteAgency
                     var parameterBuilder =
                         methodBuilder.DefineParameter(position, parameterInfo.Attributes, parameterInfo.Name);
 
-                    parameterBuilder.ApplyCustomAttributes(methodInfo.ParameterPassThroughAttributes[parameterInfo.Name]);
+                    parameterBuilder.ApplyCustomAttributes(methodInfo.ParameterPassThroughAttributes[parameterInfo.Name!]);
                     position++;
 
                 }
@@ -446,7 +448,7 @@ namespace SecretNest.RemoteAgency
                 // this.<PropertyName> = <argument>
                 g.Emit(OpCodes.Ldarg, valueParameter.Position + 1); // 0 = this
                 g.Emit(OpCodes.Ldarg_0);
-                g.Emit(OpCodes.Call, (MethodInfo)requestProperty.SetMethod);
+                g.Emit(OpCodes.Call, requestProperty.SetMethod);
             }
 
             var requestMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
@@ -526,7 +528,7 @@ namespace SecretNest.RemoteAgency
         void IProxyCommunicate.SetInitOnlyPropertyValue(string propertyName, object value)
         {
             var propertyInfo = this.GetType().GetProperty(propertyName);
-            propertyInfo.SetValue(this, value);
+            propertyInfo!.SetValue(this, value);
         }
     }
 

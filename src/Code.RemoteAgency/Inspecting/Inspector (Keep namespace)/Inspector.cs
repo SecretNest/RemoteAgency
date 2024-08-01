@@ -22,8 +22,8 @@ namespace SecretNest.RemoteAgency.Inspecting
 
         public Inspector(RemoteAgencyInterfaceBasicInfo basicInfo, bool includesProxyOnlyInfo, bool includesServiceWrapperOnlyInfo, Type serializerInterfaceLevelAttributeBaseType, Type serializerAssetLevelAttributeBaseType, Type serializerDelegateLevelAttributeBaseType, Type serializerParameterLevelAttributeBaseType)
         {
-            _sourceInterfaceTypeInfo = _result.SourceInterface.GetTypeInfo();
             _result = new RemoteAgencyInterfaceInfo(basicInfo);
+            _sourceInterfaceTypeInfo = _result.SourceInterface.GetTypeInfo();
             _includesProxyOnlyInfo = includesProxyOnlyInfo;
             _includesServiceWrapperOnlyInfo = includesServiceWrapperOnlyInfo;
             _serializerInterfaceLevelAttributeBaseType = serializerInterfaceLevelAttributeBaseType;

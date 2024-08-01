@@ -26,6 +26,11 @@
               </row>
             </tableHeader>
             <row>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.RemoteAgencyInterfaceAttribute</codeEntityReference></para></entry>
+              <entry><para>Indicates this interface should be processed by Remote Agency.</para></entry>
+              <entry><para>This attribute has no use in this release. Future releases may preprocess the Interface that marks this attribute to enable acceleration.</para><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute</codeEntityReference> and <codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute</codeEntityReference> are derived from this attribute. It's not necessary to mark with this attribute when the interface has marked with derived attributes already.</para></entry>
+            </row>
+            <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ThreadLockAttribute</codeEntityReference></para></entry>
               <entry><para>Designate the task scheduler should be used while accessing assets within.</para></entry>
               <entry></entry>
@@ -104,12 +109,12 @@
             </row>
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredAttribute</codeEntityReference></para></entry>
-              <entry><para>Specifies the parameter should be send back to the caller.</para></entry>
+              <entry><para>Specifies the parameter should be sent back to the caller.</para></entry>
               <entry><para>Valid on parameter of asset, including method and delegate of event. The parameter should be marked with "Ref / ByRef" or "out / Out".</para></entry>
             </row>
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.ParameterReturnRequiredPropertyAttribute</codeEntityReference></para></entry>
-              <entry><para>Specifies a property or field which value should be send back to the caller is contained in the parameter.</para></entry>
+              <entry><para>Specifies a property or field which value should be sent back to the caller is contained in the parameter.</para></entry>
               <entry><para>Valid on parameter of asset, including method and delegate of event, and property. When specifying this on properties, only set operating will be affected. The parameter should not be marked with "Ref / ByRef" or "out / Out".</para></entry>
             </row>
             <row>
@@ -141,12 +146,12 @@
             </row>
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredAttribute</codeEntityReference></para></entry>
-              <entry><para>Specifies a parameter of the event should be send back to the caller.</para></entry>
+              <entry><para>Specifies a parameter of the event should be sent back to the caller.</para></entry>
               <entry><para>Valid on event only.</para></entry>
             </row>
             <row>
               <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.EventParameterReturnRequiredPropertyAttribute</codeEntityReference></para></entry>
-              <entry><para>Specifies a property or field which value should be send back to the caller is contained in a parameter of the event.</para></entry>
+              <entry><para>Specifies a property or field which value should be sent back to the caller is contained in a parameter of the event.</para></entry>
               <entry><para>Valid on event only.</para></entry>
             </row>
           </table>
@@ -205,7 +210,7 @@
               </row>
             </tableHeader>
             <row>
-              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedAssetNameAttribute</codeEntityReference></para></entry>
+              <entry><para><codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.CustomizedClassNameAttribute</codeEntityReference></para></entry>
               <entry><para>Specifies the name of proxy, service wrapper and assembly to be generated.</para></entry>
               <entry><para>Valid on interface only.</para></entry>
             </row>
@@ -267,7 +272,7 @@
       <title>Serializer Required Additional Attributes</title>
       <content>
         <para>The chosen serializer may contain some functions that can be customized. When required, serializer defines several attributes and specify the types of them through <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.AssetLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.DelegateLevelAttributeBaseType</codeEntityReference>, <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.InterfaceLevelAttributeBaseType</codeEntityReference> and <codeEntityReference qualifyHint="false">P:SecretNest.RemoteAgency.EntityTypeBuilderBase.ParameterLevelAttributeBaseType</codeEntityReference>. When these 4 properties are not set to null / Nothing, attributes with the type specified or its derived classes marked on the object will be collected and transferred to the entity type builder of serializer.</para>
-        <para>The built in serializers, binary and Json, do not have any additional attributes required.</para>
+        <para>The built-in serializers, binary and Json, do not have any additional attributes required.</para>
         <para>For details, check <link xlink:href="37179c21-8267-47da-83c5-cb71adfc1287" >attributes for entity types</link>.</para>
       </content>
     </section>

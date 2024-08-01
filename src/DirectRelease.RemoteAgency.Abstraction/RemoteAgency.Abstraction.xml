@@ -401,6 +401,14 @@
             <param name="raisingNotificationEntityName">Name of the entity class for processing event raising notification. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
             <param name="raisingFeedbackEntityName">Name of the entity class for processing event raising feedback. When the value is <see langword="null"/> or empty string, name is chosen automatically. Default value is <see langword="null"/>.</param>
         </member>
+        <member name="T:SecretNest.RemoteAgency.Attributes.RemoteAgencyInterfaceAttribute">
+            <summary>
+            Indicates this interface should be processed by Remote Agency.
+            </summary>
+            <remarks>
+            This attribute has no use in this release. Future releases may preprocess the Interface that marks this attribute to enable acceleration.
+            </remarks>
+        </member>
         <member name="T:SecretNest.RemoteAgency.Attributes.ReturnIgnoredAttribute">
             <summary>
             Specifies the return value of the asset is ignored from type building.

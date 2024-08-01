@@ -10,7 +10,7 @@ namespace SecretNest.RemoteAgency.Inspecting
     partial class Inspector
     {
 
-#if net5or6
+#if NET5_0_OR_GREATER
         private static readonly Type PropertySetInitType = typeof(System.Runtime.CompilerServices.IsExternalInit);
 #endif 
 
@@ -64,8 +64,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             if (property.IsSettable)
             {
                 property.IsSetMarkedAsInit =
-#if net5or6
-                    setMethod.ReturnParameter.GetRequiredCustomModifiers().Contains(PropertySetInitType);
+#if NET5_0_OR_GREATER
+                    setMethod!.ReturnParameter!.GetRequiredCustomModifiers().Contains(PropertySetInitType);
 #else
                     false;
 #endif

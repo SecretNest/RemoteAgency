@@ -12,7 +12,7 @@ namespace SecretNest.RemoteAgency.Attributes
     /// <conceptualLink target="14c3caef-7392-4f68-b7eb-d0bb014a2e4c#CustomizedName" />
     /// <conceptualLink target="beb637a2-3887-49ff-93f3-1f71b095aa7e" />
     [AttributeUsage(AttributeTargets.Interface, Inherited = false, AllowMultiple = false)]
-    public sealed class CustomizedClassNameAttribute : Attribute
+    public sealed class CustomizedClassNameAttribute : RemoteAgencyInterfaceAttribute
     {
         /// <summary>
         /// Gets the name of proxy class.

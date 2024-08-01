@@ -14,12 +14,12 @@
   </ddue:listItem>
   <ddue:listItem>
     <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughPropertyAttribute</ddue:codeEntityReference> on the asset with the same attributeId when some property need to be set. The property pointed by propertyName should be settable publicly.</ddue:para>
-    <ddue:para>Parameter order can be adjust when setting order needs to be guaranteed. The property with smaller order number will be set first. Default value is 0.</ddue:para>
+    <ddue:para>Parameter order can be adjusted when setting order needs to be guaranteed. The property with smaller order number will be set first. Default value is 0.</ddue:para>
     <ddue:para>When multiple properties are required to be set, specify one at a time.</ddue:para>
   </ddue:listItem>
   <ddue:listItem>
     <ddue:para>Marking <ddue:codeEntityReference qualifyHint="false">T:SecretNest.RemoteAgency.Attributes.AttributePassThroughFieldAttribute</ddue:codeEntityReference> on the asset with the same attributeId when some field need to be set. The field pointed by fieldName should be settable publicly.</ddue:para>
-    <ddue:para>Parameter order can be adjust when setting order needs to be guaranteed. The field with smaller order number will be set first. Default value is 0.</ddue:para>
+    <ddue:para>Parameter order can be adjusted when setting order needs to be guaranteed. The field with smaller order number will be set first. Default value is 0.</ddue:para>
     <ddue:para>When multiple fields are required to be set, specify one at a time.</ddue:para>
   </ddue:listItem>
 </ddue:list>
@@ -35,7 +35,7 @@
   <ddue:linkText>NuGet</ddue:linkText>
   <ddue:linkUri>https://www.NuGet.org/packages/SecretNest.RemoteAgency.Abstraction/</ddue:linkUri>
 </ddue:externalLink></item>
-  <item id="Remote Agency Github Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
+  <item id="Remote Agency GitHub Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
   <ddue:linkText>Github</ddue:linkText>
   <ddue:linkUri>https://github.com/SecretNest/RemoteAgency</ddue:linkUri>
 </ddue:externalLink></item>
@@ -60,7 +60,7 @@
   <ddue:linkText>Remote Hub</ddue:linkText>
   <ddue:linkUri>https://secretnest.info/RemoteHub</ddue:linkUri>
 </ddue:externalLink></item>
-  <item id="Sequential Scheduler Github Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Sequential Scheduler</ddue:linkText><ddue:linkUri>https://github.com/SecretNest/SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
+  <item id="Sequential Scheduler GitHub Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Sequential Scheduler</ddue:linkText><ddue:linkUri>https://github.com/SecretNest/SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
   <item id="Sequential Scheduler Nuget Url"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5"><ddue:linkText>Nuget</ddue:linkText><ddue:linkUri>https://www.nuget.org/packages/SecretNest.SequentialScheduler/</ddue:linkUri></ddue:externalLink></item>
   <item id="Supported Framework Version List"><ddue:para xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">Supported Frameworks:
   <ddue:list class="bullet">
