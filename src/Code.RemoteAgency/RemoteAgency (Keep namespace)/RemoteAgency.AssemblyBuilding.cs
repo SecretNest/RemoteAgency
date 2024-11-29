@@ -27,7 +27,7 @@ namespace SecretNest.RemoteAgency
         /// <summary>
         /// Occurs when an assembly is built.
         /// </summary>
-        /// <remarks>The handler of this event can contains the code for saving assembly for further use, aka caching.</remarks>
+        /// <remarks>For saving the created assembly for further use, like caching, handles in this event.</remarks>
         public event EventHandler<AfterTypeAndAssemblyBuiltEventArgs> AfterTypeAndAssemblyBuilt;
 
         /// <summary>
