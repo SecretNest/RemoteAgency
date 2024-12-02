@@ -5,6 +5,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     static class CreateInstanceExtensions
     {
+        //This extension caches delegates of ctor of create types. The delegates are created by Emit (FastActivatorMethod), as a quick way to replace Activator.
+
         //For Proxy
         private static readonly ConcurrentDictionary<Type, Func<IProxyCommunicate>> ProxyConstructorCache = new ();
 
