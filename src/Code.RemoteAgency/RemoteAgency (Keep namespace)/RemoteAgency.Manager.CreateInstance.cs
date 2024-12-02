@@ -182,6 +182,7 @@ namespace SecretNest.RemoteAgency
                 proxyClass = builtProxy;
             }
 
+            //NOTE: this will use emit to call the ctor of the type when no matched from cache. 
             var proxyInstance = proxyClass.CreateProxyInstance();
 
             RemoteAgencyManagingObjectProxy<TEntityBase> managingObject;
@@ -322,6 +323,7 @@ namespace SecretNest.RemoteAgency
                 serviceWrapperClass = builtServiceWrapper;
             }
 
+            //NOTE: this will use emit to call the ctor of the type when no matched from cache. 
             var serviceWrapperInstance = serviceWrapperClass.CreateServiceWrapperInstance(serviceObject);
 
             RemoteAgencyManagingObjectServiceWrapper<TEntityBase> managingObject;

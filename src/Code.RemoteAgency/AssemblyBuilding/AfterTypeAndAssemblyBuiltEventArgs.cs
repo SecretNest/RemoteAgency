@@ -48,7 +48,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 #if netfx
             _saveFileCallback(assemblyFileName);
 #else
-            throw new NotSupportedException("Assembly saving is not supported by .net core.");
+            throw new NotSupportedException("Assembly saving is not supported by this .net version.");
 #endif
         }
 #pragma warning restore IDE0079 // Remove unnecessary suppression
