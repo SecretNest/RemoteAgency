@@ -828,7 +828,7 @@
             <summary>
             Occurs when an assembly is built.
             </summary>
-            <remarks>The handler of this event can contains the code for saving assembly for further use, aka caching.</remarks>
+            <remarks>For saving the created assembly for further use, like caching, handles in this event.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.BuildAssembly(SecretNest.RemoteAgency.Inspecting.RemoteAgencyInterfaceBasicInfo,System.Boolean,System.Boolean,System.Type@,System.Type@)">
             <summary>
@@ -878,7 +878,7 @@
             <param name="siteId">Site id. A randomized value is used when it is set to <see cref="T:System.Guid"/>.Empty or absent.</param>
             <returns>Created Remote Agency instance.</returns>
             <note type="warning">BinaryFormatter is included in this serializer, which is dangerous and should not be used. See <conceptualLink target="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</conceptualLink> for details.</note>
-            <remarks><para>This method is not present in Neat release.</para></remarks>
+            <remarks><para>This method is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.TryCreateAndAddSequentialScheduler(System.String,SecretNest.TaskSchedulers.SequentialScheduler@,System.Boolean)">
             <summary>
@@ -1453,21 +1453,21 @@
             <summary>
             Defines an empty message with binary serialization support.
             </summary>
-            <remarks><para>This class is not present in Neat release.</para></remarks>
+            <remarks><para>This class is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer">
             <summary>
             Provides binary based serializing and deserializing methods for entities.
             </summary>
             <note type="warning">BinaryFormatter is included in this serializer, which is dangerous and should not be used. See <conceptualLink target="886b6555-5b60-46ed-b0e3-aa383c95108c" >Binary Formatter Warning</conceptualLink> for details.</note>
-            <remarks><para>This class is not present in Neat release.</para></remarks>
+            <remarks><para>This class is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer.#ctor(System.Boolean)">
             <summary>
             Initializes an instance of RemoteAgencyBinarySerializer.
             </summary>
             <param name="securityIssueAcknowledged">This value needs to be set to <see langword="true" /> to confirm that the security issue is known, or an exception will be thrown. Default value is <see langword="false"/>.</param>
-            <remarks><para>This constructor and this class are not present in Neat release.</para></remarks>
+            <remarks><para>This constructor and this class are not present in Neat release.</para><para>This method is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer.Serialize(System.Object)">
             <summary>
@@ -1475,7 +1475,7 @@
             </summary>
             <param name="original">The entity object to be serialized.</param>
             <returns>Serialized data.</returns>
-            <remarks><para>This method and this class are not present in Neat release.</para></remarks>
+            <remarks><para>This method and this class are not present in Neat release.</para><para>This method is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer.Deserialize(System.Byte[])">
             <summary>
@@ -1483,13 +1483,13 @@
             </summary>
             <param name="serialized">The serialized data to be deserialized.</param>
             <returns>Entity object.</returns>
-            <remarks><para>This method and this class are not present in Neat release.</para></remarks>
+            <remarks><para>This method and this class are not present in Neat release.</para><para>This method is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializerEntityTypeBuilder">
             <summary>
             Provides code generating for entity classes working with <see cref="T:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializer"/>
             </summary>
-            <remarks><para>This class is not present in Neat release.</para></remarks>
+            <remarks><para>This class is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.BinarySerializer.RemoteAgencyBinarySerializerEntityTypeBuilder.BuildEntity(System.Reflection.Emit.TypeBuilder,SecretNest.RemoteAgency.EntityBuilding)">
             <summary>

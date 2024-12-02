@@ -2,10 +2,52 @@
 
 namespace SecretNest.RemoteAgency.BinarySerializer
 {
+#if NET9_0_OR_GREATER
+    /// <summary>
+    /// Obsoleted class. This class is not present from .net 9 version releases. Defines an empty message with binary serialization support.
+    /// </summary>
+    /// <remarks><para>This class is not present in Neat release.</para></remarks>
+    [Serializable]
+    [Obsolete("This class is not present from .net 9 version releases.")]
+    public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage
+    {
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Guid SenderSiteId { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Guid TargetSiteId { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Guid SenderInstanceId { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Guid TargetInstanceId { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public MessageType MessageType { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public string AssetName { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Guid MessageId { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public Exception Exception { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public bool IsOneWay { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public bool IsEmptyMessage { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+    }
+#else
+
     /// <summary>
     /// Defines an empty message with binary serialization support.
     /// </summary>
-    /// <remarks><para>This class is not present in Neat release.</para></remarks>
+    /// <remarks><para>This class is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
     [Serializable]
     public class RemoteAgencyBinaryEmptyMessage : IRemoteAgencyMessage
     {
@@ -39,4 +81,6 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         //    ((IRemoteAgencyMessage) this).IsEmptyMessage = true;
         //}
     }
+
+#endif
 }

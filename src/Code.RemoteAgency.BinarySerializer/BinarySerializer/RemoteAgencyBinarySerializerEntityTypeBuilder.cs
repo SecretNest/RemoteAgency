@@ -3,10 +3,46 @@ using System.Reflection.Emit;
 
 namespace SecretNest.RemoteAgency.BinarySerializer
 {
+#if NET9_0_OR_GREATER
+    /// <summary>
+    /// Obsoleted class. This class is not present from .net 9 version releases.  Provides code generating for entity classes working with <see cref="RemoteAgencyBinarySerializer"/>
+    /// </summary>
+    /// <remarks><para>This class is not present in Neat release.</para>/remarks>
+    [Obsolete("This class is not present from .net 9 version releases.")]
+    public class RemoteAgencyBinarySerializerEntityTypeBuilder : EntityTypeBuilderBase
+    {
+        /// <inheritdoc />
+        [Obsolete("This method is not present from .net 9 version releases.")]
+        public override void BuildEntity(TypeBuilder typeBuilder, EntityBuilding entityBuilding)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public override Type InterfaceLevelAttributeBaseType => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public override Type AssetLevelAttributeBaseType => throw new NotSupportedException();
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public override Type DelegateLevelAttributeBaseType => throw new NotSupportedException();
+        /// <inheritdoc />
+        [Obsolete("This property is not present from .net 9 version releases.")]
+        public override Type ParameterLevelAttributeBaseType => throw new NotSupportedException();
+        /// <inheritdoc />
+        [Obsolete("This method is not present from .net 9 version releases.")]
+        public override IRemoteAgencyMessage CreateEmptyMessage()
+        {
+            throw new NotSupportedException();
+        }
+    }
+#else
     /// <summary>
     /// Provides code generating for entity classes working with <see cref="RemoteAgencyBinarySerializer"/>
     /// </summary>
-    /// <remarks><para>This class is not present in Neat release.</para></remarks>
+    /// <remarks><para>This class is not present in Neat release.</para><para>This class is not present from .net 9 version releases.</para></remarks>
     public class RemoteAgencyBinarySerializerEntityTypeBuilder : EntityTypeBuilderBase
     {
         /// <summary>
@@ -68,4 +104,5 @@ namespace SecretNest.RemoteAgency.BinarySerializer
             return new RemoteAgencyBinaryEmptyMessage();
         }
     }
+#endif
 }

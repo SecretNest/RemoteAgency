@@ -828,7 +828,7 @@
             <summary>
             Occurs when an assembly is built.
             </summary>
-            <remarks>The handler of this event can contains the code for saving assembly for further use, aka caching.</remarks>
+            <remarks>For saving the created assembly for further use, like caching, handles in this event.</remarks>
         </member>
         <member name="M:SecretNest.RemoteAgency.RemoteAgencyBase.BuildAssembly(SecretNest.RemoteAgency.Inspecting.RemoteAgencyInterfaceBasicInfo,System.Boolean,System.Boolean,System.Type@,System.Type@)">
             <summary>
