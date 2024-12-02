@@ -39,7 +39,7 @@ namespace Test.CSharp.Test10
         public static void MyTest()
         {
             //Create a remote agency instance without target for creating proxy class only.
-            using var remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var remoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             var clientProxy = remoteAgencyInstance.CreateProxy<ITest10>(Guid.Empty, Guid.Empty).ProxyGeneric;
 
             Console.WriteLine("Getting attribute...");

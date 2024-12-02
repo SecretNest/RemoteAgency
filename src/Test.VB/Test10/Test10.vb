@@ -30,7 +30,7 @@ Namespace Test10
     Public NotInheritable Class TestCode
         Public Shared Sub MyTest()
             'Create a remote agency instance without target for creating proxy class only.
-            Dim remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim remoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
             Dim clientProxy = remoteAgencyInstance.CreateProxy(Of ITest10)(Guid.Empty, Guid.Empty).ProxyGeneric
 
             Console.WriteLine("Getting attribute...")

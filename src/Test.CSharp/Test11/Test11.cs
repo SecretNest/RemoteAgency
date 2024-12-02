@@ -24,19 +24,19 @@ namespace Test.CSharp.Test11
         public static void MyTest()
         {
             //test router
-            var router = new RemoteAgencyRouter<byte[], object>();
+            var router = new RemoteAgencyRouter<string, object>();
 
             var originalService = new Server11();
 
             //Server 1
-            using var serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer();
             serverRemoteAgencyInstance1.TryCreateAndAddSequentialScheduler("MyTaskScheduler", out var taskScheduler1);
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance1);
             var serverSite1Id = serverRemoteAgencyInstance1.SiteId;
             var serviceWrapperInstance1Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService);
 
             //Client 1
-            using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1);
             var clientCreatedProxy1 = clientRemoteAgencyInstance1.CreateProxy<Server11>(serverSite1Id, serviceWrapperInstance1Id);
             var clientProxy1 = clientCreatedProxy1.ProxyGeneric;
@@ -63,14 +63,14 @@ namespace Test.CSharp.Test11
             router.RemoveRemoteAgencyInstance(clientProxyInstance1Id);
 
             //Server 2
-            using var serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer();
             serverRemoteAgencyInstance2.TryCreateAndAddSequentialScheduler("MyTaskScheduler", out var taskScheduler2, true);
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2);
             var serverSite2Id = serverRemoteAgencyInstance2.SiteId;
             var serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService);
 
             //Client 2
-            using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2);
             var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<Server11>(serverSite2Id, serviceWrapperInstance2Id).ProxyGeneric;
 

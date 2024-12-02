@@ -89,7 +89,7 @@ End Class
   <item id="Example10#Test">
     <sampleCode language="CSharp">
 //Create a remote agency instance without target for creating proxy class only.
-using var remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+using var remoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
 var clientProxy = remoteAgencyInstance.CreateProxy&lt;ITest10&gt;(Guid.Empty, Guid.Empty).ProxyGeneric;
 
 Console.WriteLine("Getting attribute...");
@@ -116,7 +116,7 @@ Console.WriteLine();
     </sampleCode>
     <sampleCode language="VisualBasic">
 'Create a remote agency instance without target for creating proxy class only.
-Dim remoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+Dim remoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
 Dim clientProxy = remoteAgencyInstance.CreateProxy(Of ITest10)(Guid.Empty, Guid.Empty).ProxyGeneric
 
 Console.WriteLine("Getting attribute...")

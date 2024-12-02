@@ -102,17 +102,17 @@ End Class
   <item id="Example4#Test">
     <sampleCode language="CSharp">
 //test router
-var router = new RemoteAgencyRouter&lt;byte[], object&gt;();
+var router = new RemoteAgencyRouter&lt;string, object&gt;();
 
 //Server
 var originalService = new Server4();
-using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
 var serverSiteId = serverRemoteAgencyInstance.SiteId;
 var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
 //Client
-using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
 router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
 var clientProxy = clientRemoteAgencyInstance.CreateProxy&lt;ITest4&gt;(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
@@ -140,17 +140,17 @@ Console.WriteLine();
     </sampleCode>
       <sampleCode language="VisualBasic">
 'test router
-Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+Dim router = New RemoteAgencyRouter(Of String, Object)
 
 'Server
 Dim originalService As New Server4()
-Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
 router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
 Dim serverSiteId = serverRemoteAgencyInstance.SiteId
 Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
 
 'Client
-Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
 router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
 Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest4)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
 

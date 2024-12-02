@@ -81,18 +81,18 @@ Namespace Test7
     Public NotInheritable Class TestCode
         Public Shared Sub MyTest()
             'test router
-            Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+            Dim router = New RemoteAgencyRouter(Of String, Object)
 
             'Server
             Dim originalService As New Server7()
-            Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
             AddHandler serverRemoteAgencyInstance.ExceptionRedirected, AddressOf ServerRemoteAgencyInstance_ExceptionRedirected
             Dim serverSiteId = serverRemoteAgencyInstance.SiteId
             Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
 
             'Client
-            Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance)
             Dim clientProxy = clientRemoteAgencyInstance.CreateProxy(Of ITest7)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
 

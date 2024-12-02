@@ -66,18 +66,18 @@ namespace Test.CSharp.Test3
         public static void MyTest()
         {
             //test router
-            var router = new RemoteAgencyRouter<byte[], object>();
+            var router = new RemoteAgencyRouter<string, object>();
             
             //Server
             var originalService = new Server3();
-            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
             serverRemoteAgencyInstance.ExceptionRedirected += ServerRemoteAgencyInstance_ExceptionRedirected;
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
             //Client
-            using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest3>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 

@@ -21,17 +21,17 @@ namespace Test.CSharp.Test0
         public static void MyTest()
         {
             //test router
-            var router = new RemoteAgencyRouter<byte[], object>();
+            var router = new RemoteAgencyRouter<string, object>();
             
             //Server
             var originalService = new Server0();
-            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
             //Client
-            using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance);
             var clientProxy = clientRemoteAgencyInstance.CreateProxy<ITest0>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 

@@ -20,20 +20,20 @@ Namespace Test11
     Public NotInheritable Class TestCode
         Public Shared Sub MyTest()
             'test router
-            Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+            Dim router = New RemoteAgencyRouter(Of String, Object)
 
             Dim originalService As New Server11()
 
             'Server 1
             Dim taskScheduler1 As SequentialScheduler = Nothing
-            Dim serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim serverRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer()
             serverRemoteAgencyInstance1.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler1)
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance1)
             Dim serverSite1Id = serverRemoteAgencyInstance1.SiteId
             Dim serviceWrapperInstance1Id = serverRemoteAgencyInstance1.CreateServiceWrapper(originalService)
 
             'Client 1
-            Dim clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1)
             Dim clientCreatedProxy1 = clientRemoteAgencyInstance1.CreateProxy(Of ITest11)(serverSite1Id, serviceWrapperInstance1Id)
             Dim clientProxy1 = clientCreatedProxy1.ProxyGeneric
@@ -58,14 +58,14 @@ Namespace Test11
 
             'Server 2
             Dim taskScheduler2 As SequentialScheduler = Nothing
-            Dim serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim serverRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer()
             serverRemoteAgencyInstance2.TryCreateAndAddSequentialScheduler("MyTaskScheduler", taskScheduler2, True)
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance2)
             Dim serverSite2Id = serverRemoteAgencyInstance2.SiteId
             Dim serviceWrapperInstance2Id = serverRemoteAgencyInstance2.CreateServiceWrapper(originalService)
 
             'Client 2
-            Dim clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2)
             Dim clientProxy2 = clientRemoteAgencyInstance2.CreateProxy(Of ITest11)(serverSite2Id, serviceWrapperInstance2Id).ProxyGeneric
 

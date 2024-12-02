@@ -23,22 +23,22 @@ Namespace Test8
     Public NotInheritable Class TestCode
         Public Shared Sub MyTest()
             'test router
-            Dim router = New RemoteAgencyRouter(Of Byte(), Object)
+            Dim router = New RemoteAgencyRouter(Of String, Object)
 
             'Server
             Dim originalService As New Server8()
-            Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance)
             Dim serverSiteId = serverRemoteAgencyInstance.SiteId
             Dim serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService)
 
             'Client 1
-            Dim clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1)
             Dim clientProxy1 = clientRemoteAgencyInstance1.CreateProxy(Of ITest8)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
 
             'Client 2
-            Dim clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(True)
+            Dim clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer()
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2)
             Dim clientProxy2 = clientRemoteAgencyInstance2.CreateProxy(Of ITest8)(serverSiteId, serviceWrapperInstanceId).ProxyGeneric
 

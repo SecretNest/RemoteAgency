@@ -28,22 +28,22 @@ namespace Test.CSharp.Test8
         public static void MyTest()
         {
             //test router
-            var router = new RemoteAgencyRouter<byte[], object>();
+            var router = new RemoteAgencyRouter<string, object>();
 
             //Server
             var originalService = new Server8();
-            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var serverRemoteAgencyInstance = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(serverRemoteAgencyInstance);
             var serverSiteId = serverRemoteAgencyInstance.SiteId;
             var serviceWrapperInstanceId = serverRemoteAgencyInstance.CreateServiceWrapper(originalService);
 
             //Client 1
-            using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance1 = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance1);
             var clientProxy1 = clientRemoteAgencyInstance1.CreateProxy<ITest8>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
             //Client 2
-            using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithBinarySerializer(true);
+            using var clientRemoteAgencyInstance2 = RemoteAgencyBase.CreateWithJsonSerializer();
             router.AddRemoteAgencyInstance(clientRemoteAgencyInstance2);
             var clientProxy2 = clientRemoteAgencyInstance2.CreateProxy<ITest8>(serverSiteId, serviceWrapperInstanceId).ProxyGeneric;
 
