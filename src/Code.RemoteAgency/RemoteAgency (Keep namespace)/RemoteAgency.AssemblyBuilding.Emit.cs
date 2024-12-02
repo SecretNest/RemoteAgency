@@ -50,11 +50,13 @@ namespace SecretNest.RemoteAgency
         {
             var assemblyName = new AssemblyName(basicInfo.AssemblyName);
 
-            assemblyBuilder = 
+            assemblyBuilder =
 #if netfx
                 System.Threading.Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+#elif NET9_0_OR_GREATER
+                new PersistedAssemblyBuilder(assemblyName, typeof(object).Assembly);
 #else
-                AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+				AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif
             moduleBuilder =
 #if netfx
@@ -101,7 +103,7 @@ namespace SecretNest.RemoteAgency
             {
                 proxyTypeBuilder = moduleBuilder.DefineType(basicInfo.ProxyTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, EntityBase,
-                    new[] {typeof(IProxyCommunicate), basicInfo.SourceInterface});
+                    [typeof(IProxyCommunicate), basicInfo.SourceInterface]);
 
                 proxyTypeBuilder.EmitAttributePassThroughAttributes(info.InterfaceLevelPassThroughAttributes);
 
@@ -122,7 +124,7 @@ namespace SecretNest.RemoteAgency
             {
                 serviceWrapperTypeBuilder = moduleBuilder.DefineType(basicInfo.ServiceWrapperTypeName,
                     /*TypeAttributes.Class | */TypeAttributes.Public, typeof(object),
-                    new[] {typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface});
+                    [typeof(IServiceWrapperCommunicate), basicInfo.SourceInterface]);
 
                 serviceWrapperTypeBuilder.EmitAttributePassThroughAttributes(info.InterfaceLevelPassThroughAttributes);
 
@@ -151,6 +153,7 @@ namespace SecretNest.RemoteAgency
             else
             {
                 builtProxy = null;
+
             }
 
             if (isServiceWrapperRequired)

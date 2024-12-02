@@ -2,7 +2,7 @@
 
 namespace SecretNest.RemoteAgency
 {
-    partial class AssemblyBuildingEmitter
+    internal partial class AssemblyBuildingEmitter
     {
         public AssemblyBuildingEmitter(RemoteAgencyInterfaceInfo interfaceInfo)
         {

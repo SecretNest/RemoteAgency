@@ -6,7 +6,7 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 {
     static class BuildConstructorDelegateExtensions
     {
-        private static readonly Type[] EmptyType = Array.Empty<Type>();
+        private static readonly Type[] EmptyType = [];
 
         private const string MethodNamePrefix = "FastActivatorMethod";
 

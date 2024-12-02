@@ -25,7 +25,7 @@ namespace SecretNest.RemoteAgency.BinarySerializer
         {
             var ctorInfo = typeof(SerializableAttribute).GetConstructor(Type.EmptyTypes);
             var attributeBuilder = new CustomAttributeBuilder(ctorInfo ?? throw new InvalidOperationException(),
-                Array.Empty<object>());
+                []);
             typeBuilder.SetCustomAttribute(attributeBuilder);
         }
 

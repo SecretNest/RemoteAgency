@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30128.74
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{AC0D8FE4-885F-4776-8B5C-179EED825604}"
 EndProject
@@ -65,42 +65,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Files", "GitHub File
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Code.RemoteAgency.Injection.EventHelper", "Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.shproj", "{50234B18-4596-4DBC-BD84-5E8EBE55B39F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{CE286894-D08A-4D23-85BF-FA8A1C3CD7A5}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
-		Code.RemoteAgency\Code.RemoteAgency.projitems*{23a75af3-8979-45f8-a7b3-984cef6c3e39}*SharedItemsImports = 13
-		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{38520679-a9fe-45cc-9520-32cbcb1713e2}*SharedItemsImports = 13
-		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
-		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
-		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
-		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
-		Code.RemoteAgency\Code.RemoteAgency.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
-		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{50234b18-4596-4dbc-bd84-5e8ebe55b39f}*SharedItemsImports = 13
-		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
-		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
-		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
-		Code.RemoteAgency\Code.RemoteAgency.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
-		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{69b6869b-fd3a-4904-a8fe-4b77874b6f74}*SharedItemsImports = 13
-		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{83b11913-8d83-4e85-93cf-fd6be78f2b5d}*SharedItemsImports = 13
-		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{93927ab8-d6b6-4b10-8a52-abc25c80d0e3}*SharedItemsImports = 5
-		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency\Code.RemoteAgency.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
-		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{a1ef6d47-3994-4f5e-9488-e3de7ebc9ab4}*SharedItemsImports = 13
-		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
-		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{d316c77a-3fbf-4575-914c-0c122eb35589}*SharedItemsImports = 13
-		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{d9e5ac17-43db-406c-9fdc-c7b34a703acf}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Doc|Any CPU = Doc|Any CPU
@@ -190,5 +160,40 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45BBACF4-069F-42CE-976C-F8860A2122B8}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{11b3f107-2f03-4a21-9241-723f1642a3fa}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{23a75af3-8979-45f8-a7b3-984cef6c3e39}*SharedItemsImports = 13
+		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{38520679-a9fe-45cc-9520-32cbcb1713e2}*SharedItemsImports = 13
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{3893d742-0c28-4562-915a-8656196a3b7c}*SharedItemsImports = 5
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{446833f0-3100-4abf-b5af-0d8768f6584b}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{50234b18-4596-4dbc-bd84-5e8ebe55b39f}*SharedItemsImports = 13
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
+		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{618edea0-8656-4904-9dd6-9655eb98b67d}*SharedItemsImports = 5
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{69b6869b-fd3a-4904-a8fe-4b77874b6f74}*SharedItemsImports = 13
+		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{83b11913-8d83-4e85-93cf-fd6be78f2b5d}*SharedItemsImports = 13
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{93927ab8-d6b6-4b10-8a52-abc25c80d0e3}*SharedItemsImports = 5
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.BinarySerializer\Code.RemoteAgency.BinarySerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.Injection.EventHelper\Code.RemoteAgency.Injection.EventHelper.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.JsonSerializer\Code.RemoteAgency.JsonSerializer.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.PlainEntityBodyBuilder\Code.RemoteAgency.PlainEntityBodyBuilder.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency\Code.RemoteAgency.projitems*{992e2f62-5f36-4bed-9e02-32b9d64c34a0}*SharedItemsImports = 5
+		Code.RemoteAgency.NoSequentialScheduler\Code.RemoteAgency.NoSequentialScheduler.projitems*{a1ef6d47-3994-4f5e-9488-e3de7ebc9ab4}*SharedItemsImports = 13
+		Code.RemoteAgency.Abstraction\Code.RemoteAgency.Abstraction.projitems*{b16acfbc-d798-4629-9225-f8fb12f15afc}*SharedItemsImports = 13
+		Code.RemoteAgency.AssemblyBuilding.Emit\Code.RemoteAgency.AssemblyBuilding.Emit.projitems*{d316c77a-3fbf-4575-914c-0c122eb35589}*SharedItemsImports = 13
+		Code.RemoteAgency.SequentialScheduler\Code.RemoteAgency.SequentialScheduler.projitems*{d9e5ac17-43db-406c-9fdc-c7b34a703acf}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

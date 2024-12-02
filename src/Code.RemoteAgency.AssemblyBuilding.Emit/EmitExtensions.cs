@@ -122,7 +122,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generates a auto-implemented SET method for a property.
+		/// Generates an auto-implemented SET method for a property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="methodName">The name of the internal method.</param>
@@ -135,7 +135,7 @@ namespace SecretNest.RemoteAgency
 			var setMethod = typeBuilder.DefineMethod(methodName,
 				MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.NewSlot |
 				MethodAttributes.Final | MethodAttributes.Virtual | MethodAttributes.SpecialName, null,
-				new[] { propertyBuilder.PropertyType });
+				[propertyBuilder.PropertyType]);
 
 			setMethod.GenerateSetBodyForProperty(field);
 			propertyBuilder.SetSetMethod(setMethod);
@@ -144,7 +144,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generates a auto-implemented GET method for a property.
+		/// Generates an auto-implemented GET method for a property.
 		/// </summary>
 		/// <param name="typeBuilder">The <see cref="TypeBuilder"/> instance.</param>
 		/// <param name="methodName">The name of the internal method.</param>
@@ -206,7 +206,7 @@ namespace SecretNest.RemoteAgency
 		/// Generates the backend field for an auto implemented property.
 		/// </summary>
 		/// <param name="builder">The <see cref="TypeBuilder"/> instance.</param>
-		/// <param name="propertyInfo">The property which need to generated the backend field.</param>
+		/// <param name="propertyInfo">The property which need to generate the backend field.</param>
 		/// <returns>The generated backend field associated with <paramref name="propertyInfo"/>.</returns>
 		private static FieldInfo GeneratePropertyBackField(this TypeBuilder builder, PropertyInfo propertyInfo)
 		{
@@ -218,7 +218,7 @@ namespace SecretNest.RemoteAgency
 
 
 		/// <summary>
-		/// Simpely end the method code with a <see cref="OpCodes.Ret"/> instruction.
+		/// Simply end the method code with a <see cref="OpCodes.Ret"/> instruction.
 		/// </summary>
 		/// <param name="method"></param>
 		public static void End(this MethodBuilder method)
@@ -228,7 +228,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generates the method body for a simple GET method.
+		/// Generates the method body for a simple GET method (return this.{BackField}).
 		/// </summary>
 		/// <param name="getMethod">The <see cref="MethodBuilder"/> instance.</param>
 		/// <param name="backField">The backend field related with the <paramref name="getMethod"/>.</param>
@@ -242,7 +242,7 @@ namespace SecretNest.RemoteAgency
 		}
 
 		/// <summary>
-		/// Generates the method body for a simple SET method.
+		/// Generates the method body for a simple SET method (this.{BackField} = value).
 		/// </summary>
 		/// <param name="setMethod">The <see cref="MethodBuilder"/> instance.</param>
 		/// <param name="backField">The backend field related with the <paramref name="setMethod"/>.</param>
@@ -256,10 +256,15 @@ namespace SecretNest.RemoteAgency
 			g.Emit(OpCodes.Ret);
 		}
 
+		/// <summary>
+		/// Generate a default output value for an out <paramref name="parameter"/> in <paramref name="method"/>.
+		/// </summary>
+		/// <param name="method">The method instance.</param>
+		/// <param name="parameter">The parameter instance.</param>
 		public static void SetOutParameterDefaultValue(this MethodBuilder method, ParameterInfo parameter)
 		{
 			var g = method.GetILGenerator();
-			
+
 			// Default value
 			var local = g.DeclareLocal(parameter.ParameterType);
 
@@ -285,41 +290,74 @@ namespace SecretNest.RemoteAgency
 			g.Emit(OpCodes.Ret);
 		}
 
+		/// <summary>
+		/// return Task.FromResult(default(T));
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="taskInnerType"></param>
 		public static void ReturnTaskOfT(this MethodBuilder method, Type taskInnerType)
 		{
 			var g = method.GetILGenerator();
-			var local = g.DeclareLocal(taskInnerType);
+			var local = g.DeclareLocal(taskInnerType); // T
 
 			var fromResultMethod =
 				typeof(Task).GetMethod(nameof(Task.FromResult), BindingFlags.Public | BindingFlags.Static);
 
 			g.Emit(OpCodes.Ldtoken, typeof(Task));
-			g.Emit(OpCodes.Ldloca, local);
-			g.Emit(OpCodes.Initobj);
-			g.Emit(OpCodes.Ldloc, local);
-			g.EmitCall(OpCodes.Call, fromResultMethod, new[] {taskInnerType});
+			g.Emit(OpCodes.Ldloca, local); 
+			g.Emit(OpCodes.Initobj); // default(T)
+			g.Emit(OpCodes.Ldloc, local); 
+			g.EmitCall(OpCodes.Call, fromResultMethod, [taskInnerType]);
 			g.Emit(OpCodes.Ret);
 		}
 
+		/// <summary>
+		/// Generate the method body with returning a default value of <see cref="ValueTask{T}"/>.
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="taskInnerType"></param>
 		public static void ReturnValueTaskOfT(this MethodBuilder method, Type taskInnerType)
 		{
-			#if netfx
+#if netfx
             throw new NotSupportedException("ValueTask is not supported by .NET framework.");
-			#else
+#else
 			var realType = typeof(ValueTask<>).MakeGenericType(taskInnerType);
-          	method.GenerateDefaultValue(realType);
-            #endif
+			method.GenerateDefaultValue(realType);
+#endif
 		}
 
+		/// <summary>
+		/// Generate the method body with throwing an exception with the specified type (throw new {Type}()). 
+		/// </summary>
+		/// <param name="method">The method instance.</param>
+		/// <param name="exceptionType">The type of exception to be thrown.</param>
 		public static void GenerateException(this MethodBuilder method, Type exceptionType)
 		{
 			var g = method.GetILGenerator();
 
-			var constructor = exceptionType.GetConstructor(Array.Empty<Type>());
+			var constructor = exceptionType.GetConstructor([]);
 			g.Emit(OpCodes.Newobj, constructor);
 			g.Emit(OpCodes.Throw);
 		}
 
+
+		/// <summary>
+		/// Generate the method body with throwing an exception with the specified type.
+		/// </summary>
+		/// <typeparam name="T">The type of exception to be thrown. </typeparam>
+		/// <param name="method">The method instance.</param>
+		public static void GenerateException<T>(this MethodBuilder method)
+			where T : Exception
+			=> method.GenerateException(typeof(T));
+
+
+		/// <summary>
+		/// Generate the method body with returning a static property value (return {Type}.{StaticProperty}).
+		/// </summary>
+		/// <param name="method">The method instance.</param>
+		/// <param name="containerType">The type which containing the static property.</param>
+		/// <param name="propertyName">The name of the property.</param>
+		/// <exception cref="InvalidOperationException">Cannot find the property with specified <paramref name="propertyName"/> within the <paramref name="containerType"/>.</exception>
 		public static void ReturnStaticValue(this MethodBuilder method, Type containerType, string propertyName)
 		{
 			var propertyInfo = containerType.GetProperty(propertyName, BindingFlags.Static | BindingFlags.Public);
@@ -336,8 +374,5 @@ namespace SecretNest.RemoteAgency
 			g.Emit(OpCodes.Ret);
 		}
 
-		public static void GenerateException<T>(this MethodBuilder method)
-			where T : Exception
-				=> method.GenerateException(typeof(T));
 	}
 }

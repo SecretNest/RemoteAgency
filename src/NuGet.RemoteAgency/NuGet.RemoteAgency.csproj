@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net461;net5</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net461;net5; net9</TargetFrameworks>
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <PackageId>SecretNest.RemoteAgency</PackageId>
     <Authors>Allen Cui</Authors>
@@ -16,7 +16,6 @@
     <PackageReleaseNotes>Initial release of version 2.</PackageReleaseNotes>
     <AssemblyName>SecretNest.RemoteAgency</AssemblyName>
     <Configurations>Release</Configurations>
-    <LangVersion>9.0</LangVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SecretNest/RemoteAgency</RepositoryUrl>
     <DocumentationFile>SecretNest.RemoteAgency.xml</DocumentationFile>

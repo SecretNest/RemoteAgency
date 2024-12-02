@@ -54,7 +54,7 @@ namespace SecretNest.RemoteAgency
         {
             var proxy = (IProxyCommunicate) Proxy;
             var returned = proxy.GetInitOnlyPropertyNames();
-            _proxyInitPropertyNames = returned != null ? new HashSet<string>(returned) : new HashSet<string>();
+            _proxyInitPropertyNames = returned != null ? [..returned] : [];
         }
 
         /// <summary>

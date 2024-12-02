@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 
 namespace SecretNest.RemoteAgency
 {
-    static partial class AssemblyBuildingEmitExtensions
+    internal static partial class AssemblyBuildingEmitExtensions
     {
         internal static void EmitAttributePassThroughAttributes(this GenericTypeParameterBuilder typeBuilder, IEnumerable<CustomAttributeBuilder> passThroughAttributes)
         {
