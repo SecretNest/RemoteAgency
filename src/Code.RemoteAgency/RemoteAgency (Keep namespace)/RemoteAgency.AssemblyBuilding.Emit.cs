@@ -50,9 +50,11 @@ namespace SecretNest.RemoteAgency
         {
             var assemblyName = new AssemblyName(basicInfo.AssemblyName);
 
-            assemblyBuilder = 
+            assemblyBuilder =
 #if netfx
                 System.Threading.Thread.GetDomain().DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+#elif NET9_0_OR_GREATER
+                AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
 #else
                 AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #endif

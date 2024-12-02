@@ -77,8 +77,10 @@ namespace SecretNest.RemoteAgency
                 new BeforeAssemblyCreatedEventArgs(assemblyBuilder, moduleBuilder, basicInfo.SourceInterface,
                     builtProxy, builtServiceWrapper, entities));
 
-            AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder, 
+            AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder,
 #if netfx
+                assemblyBuilder.Save
+#elif NET9_0_OR_GREATER
                 assemblyBuilder.Save
 #else
                 null
