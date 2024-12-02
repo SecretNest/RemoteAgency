@@ -72,8 +72,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             target.Parameters = parameters;
             target.ReturnType = returnType;
 
-            target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
-            target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+            target.ParameterEntityProperties = [];
+            target.ReturnValueEntityProperties = [];
 
             foreach (var parameter in parameters)
             {
@@ -119,8 +119,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             target.Parameters = parameters;
             target.ReturnType = returnType;
 
-            target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
-            target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+            target.ParameterEntityProperties = [];
+            target.ReturnValueEntityProperties = [];
 
             var usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
 
@@ -247,8 +247,8 @@ namespace SecretNest.RemoteAgency.Inspecting
             target.Parameters = parameters;
             target.ReturnType = returnType;
 
-            target.ParameterEntityProperties = new List<RemoteAgencyParameterInfo>();
-            target.ReturnValueEntityProperties = new List<RemoteAgencyReturnValueInfoBase>();
+            target.ParameterEntityProperties = [];
+            target.ReturnValueEntityProperties = [];
             target.Timeout = timeOut;
 
             var usedPropertyNamesInParameterEntity = new HashSet<string>(); //could be duplicated cause by the case changing :)
@@ -516,8 +516,8 @@ namespace SecretNest.RemoteAgency.Inspecting
                                 if (!processedHelpers.Add(returnRequiredPropertyAttribute.HelperClass))
                                     continue;
 
-                                var ctor = returnRequiredPropertyAttribute.HelperClass.GetConstructor(new[]
-                                    {parameter.ParameterType});
+                                var ctor = returnRequiredPropertyAttribute.HelperClass.GetConstructor([parameter.ParameterType
+                                ]);
                                 if (ctor == null)
                                 {
                                     throw new InvalidParameterAttributeDataException(

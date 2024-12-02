@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Reflection.Emit;
 using SecretNest.RemoteAgency.AssemblyBuilding;
 using SecretNest.RemoteAgency.Inspecting;
 
@@ -79,16 +80,15 @@ namespace SecretNest.RemoteAgency
                 new BeforeAssemblyCreatedEventArgs(assemblyBuilder, moduleBuilder, basicInfo.SourceInterface,
                     builtProxy, builtServiceWrapper, entities));
 
-
             AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder,
 #if netfx
                 assemblyBuilder.Save
 #elif NET9_0_OR_GREATER
-                assemblyBuilder.Save
+				((PersistedAssemblyBuilder)assemblyBuilder).Save
 #else
                 null
 #endif
-                ));
+				));
         }
 
         /// <summary>

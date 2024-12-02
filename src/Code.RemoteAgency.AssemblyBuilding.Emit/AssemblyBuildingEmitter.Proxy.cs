@@ -288,7 +288,7 @@ namespace SecretNest.RemoteAgency
                     g.Emit(OpCodes.Castclass, typeof(IProxyCommunicate));
                     g.Emit(OpCodes.Call, sendOneWayCallback.GetMethod);
 
-                    g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, null, new[] { typeof(IRemoteAgencyMessage) },
+                    g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, null, [typeof(IRemoteAgencyMessage)],
                         null);
 
                     foreach (var returnValueInfo in methodInfo.MethodBodyInfo.ReturnValueEntityProperties)
@@ -335,7 +335,7 @@ namespace SecretNest.RemoteAgency
                     g.Emit(OpCodes.Call, sendMessageCallback.GetMethod);
 
                     g.EmitCalli(OpCodes.Calli, CallingConventions.HasThis, typeof(IRemoteAgencyMessage),
-                        new[] { typeof(IRemoteAgencyMessage), typeof(int) }, null);
+                        [typeof(IRemoteAgencyMessage), typeof(int)], null);
 
                     // responseMessage = <return_value>
                     var responseMessage = g.DeclareLocal(typeof(IRemoteAgencyMessage));
@@ -394,7 +394,7 @@ namespace SecretNest.RemoteAgency
         /// </summary>
         /// <param name="type">The source type.</param>
         /// <returns>The expanded type.</returns>
-        Type ExpandGenericType(Type type)
+        private Type ExpandGenericType(Type type)
         {
             return !InterfaceInfo.IsSourceInterfaceGenericType
                 ? type
@@ -408,7 +408,7 @@ namespace SecretNest.RemoteAgency
         /// <param name="type">The source type.</param>
         /// <param name="methodInfo">The additional method context.</param>
         /// <returns>The expanded type.</returns>
-        Type ExpandGenericType(Type type, RemoteAgencyMethodInfo methodInfo)
+        private Type ExpandGenericType(Type type, RemoteAgencyMethodInfo methodInfo)
         {
             if (InterfaceInfo.IsSourceInterfaceGenericType || methodInfo.IsGenericMethod)
             {

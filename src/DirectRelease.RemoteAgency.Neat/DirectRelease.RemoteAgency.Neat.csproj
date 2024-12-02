@@ -5,7 +5,6 @@
     <RootNamespace>SecretNest.RemoteAgency</RootNamespace>
     <AssemblyName>SecretNest.RemoteAgency.Neat</AssemblyName>
     <Configurations>Debug;Release</Configurations>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
