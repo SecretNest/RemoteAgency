@@ -38,14 +38,16 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
         /// Saves the built assembly to the file specified.
         /// </summary>
         /// <param name="assemblyFileName">File name to be written to.</param>
-        /// <remarks>Assembly saving is not supported by .net core. This method is only for .net framework.</remarks>
-        /// <exception cref="NotSupportedException">Thrown when called not from .net framework.</exception>
+        /// <remarks>Assembly saving is not supported by .net core 1 to 8. This method is only for .net framework, .net 9 and latter.</remarks>
+        /// <exception cref="NotSupportedException">Thrown when called not from supported runtime.</exception>
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA1822 // Mark members as static
         public void Save(string assemblyFileName)
 #pragma warning restore CA1822 // Mark members as static
         {
 #if netfx
+            _saveFileCallback(assemblyFileName);
+#elif NET9_0_OR_GREATER
             _saveFileCallback(assemblyFileName);
 #else
             throw new NotSupportedException("Assembly saving is not supported by this .net version.");
@@ -54,6 +56,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
 #pragma warning restore IDE0079 // Remove unnecessary suppression
 
 #if netfx
+        private Action<string> _saveFileCallback;
+#elif NET9_0_OR_GREATER
         private Action<string> _saveFileCallback;
 #endif
         private bool _disposed;
@@ -78,6 +82,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
             Assembly = assembly;
 #if netfx
             _saveFileCallback = saveFileCallback;
+#elif NET9_0_OR_GREATER
+            _saveFileCallback = saveFileCallback;
 #endif
         }
 
@@ -92,6 +98,8 @@ namespace SecretNest.RemoteAgency.AssemblyBuilding
                 if (disposing)
                 {
 #if netfx
+                    _saveFileCallback = null;
+#elif NET9_0_OR_GREATER
                     _saveFileCallback = null;
 #endif
                 }

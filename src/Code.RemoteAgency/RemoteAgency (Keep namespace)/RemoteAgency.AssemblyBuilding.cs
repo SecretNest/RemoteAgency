@@ -6,116 +6,116 @@ using SecretNest.RemoteAgency.Inspecting;
 
 namespace SecretNest.RemoteAgency
 {
-    partial class RemoteAgencyBase
-    {
-        /// <summary>
-        /// Instance of entity type builder.
-        /// </summary>
-        protected readonly EntityTypeBuilderBase EntityTypeBuilder;
+	partial class RemoteAgencyBase
+	{
+		/// <summary>
+		/// Instance of entity type builder.
+		/// </summary>
+		protected readonly EntityTypeBuilderBase EntityTypeBuilder;
 
-        /// <summary>
-        /// Occurs before type building finished.
-        /// </summary>
-        /// <remarks>Additional code can be added to the type through <see cref="BeforeTypeCreatedEventArgs.TypeBuilder"/>.</remarks>
-        public event EventHandler<BeforeTypeCreatedEventArgs> BeforeTypeCreated;
+		/// <summary>
+		/// Occurs before type building finished.
+		/// </summary>
+		/// <remarks>Additional code can be added to the type through <see cref="BeforeTypeCreatedEventArgs.TypeBuilder"/>.</remarks>
+		public event EventHandler<BeforeTypeCreatedEventArgs> BeforeTypeCreated;
 
-        /// <summary>
-        /// Occurs before module and assembly building finished.
-        /// </summary>
-        /// <remarks>Additional code can be added to the type through <see cref="BeforeAssemblyCreatedEventArgs.ModuleBuilder"/> and <see cref="BeforeAssemblyCreatedEventArgs.AssemblyBuilder"/>.</remarks>
-        public event EventHandler<BeforeAssemblyCreatedEventArgs> BeforeAssemblyCreated;
+		/// <summary>
+		/// Occurs before module and assembly building finished.
+		/// </summary>
+		/// <remarks>Additional code can be added to the type through <see cref="BeforeAssemblyCreatedEventArgs.ModuleBuilder"/> and <see cref="BeforeAssemblyCreatedEventArgs.AssemblyBuilder"/>.</remarks>
+		public event EventHandler<BeforeAssemblyCreatedEventArgs> BeforeAssemblyCreated;
 
-        /// <summary>
-        /// Occurs when an assembly is built.
-        /// </summary>
-        /// <remarks>For saving the created assembly for further use, like caching, handles in this event.</remarks>
-        public event EventHandler<AfterTypeAndAssemblyBuiltEventArgs> AfterTypeAndAssemblyBuilt;
+		/// <summary>
+		/// Occurs when an assembly is built.
+		/// </summary>
+		/// <remarks>For saving the created assembly for further use, like caching, handles in this event.</remarks>
+		public event EventHandler<AfterTypeAndAssemblyBuiltEventArgs> AfterTypeAndAssemblyBuilt;
 
-        /// <summary>
-        /// Builds an assembly contains built types.
-        /// </summary>
-        /// <param name="basicInfo">Basic info of the source interface.</param>
-        /// <param name="isProxyRequired">Whether proxy is required to be built.</param>
-        /// <param name="isServiceWrapperRequired">Whether service wrapper is required to be built.</param>
-        /// <param name="builtProxy">Type of built proxy. When proxy is not built, the value is <see langword="null"/>.</param>
-        /// <param name="builtServiceWrapper">Type of built service wrapper. When service wrapper is not built, the value is <see langword="null"/>.</param>
-        /// <remarks>Caution: This should not be called if types exist in application domain.</remarks>
-        private protected void BuildAssembly(RemoteAgencyInterfaceBasicInfo basicInfo,
-            bool isProxyRequired, bool isServiceWrapperRequired,
-            out Type builtProxy, out Type builtServiceWrapper)
-        {
-            var needBuild = false;
-            if (isProxyRequired)
-            {
-                if (!TryGetType(basicInfo.AssemblyName, basicInfo.ProxyTypeName, out builtProxy))
-                {
-                    needBuild = true;
-                }
-            }
-            else
-            {
-                builtProxy = null;
-            }
+		/// <summary>
+		/// Builds an assembly contains built types.
+		/// </summary>
+		/// <param name="basicInfo">Basic info of the source interface.</param>
+		/// <param name="isProxyRequired">Whether proxy is required to be built.</param>
+		/// <param name="isServiceWrapperRequired">Whether service wrapper is required to be built.</param>
+		/// <param name="builtProxy">Type of built proxy. When proxy is not built, the value is <see langword="null"/>.</param>
+		/// <param name="builtServiceWrapper">Type of built service wrapper. When service wrapper is not built, the value is <see langword="null"/>.</param>
+		/// <remarks>Caution: This should not be called if types exist in application domain.</remarks>
+		private protected void BuildAssembly(RemoteAgencyInterfaceBasicInfo basicInfo,
+			bool isProxyRequired, bool isServiceWrapperRequired,
+			out Type builtProxy, out Type builtServiceWrapper)
+		{
+			var needBuild = false;
+			if (isProxyRequired)
+			{
+				if (!TryGetType(basicInfo.AssemblyName, basicInfo.ProxyTypeName, out builtProxy))
+				{
+					needBuild = true;
+				}
+			}
+			else
+			{
+				builtProxy = null;
+			}
 
-            if (isServiceWrapperRequired)
-            {
-                if (!TryGetType(basicInfo.AssemblyName, basicInfo.ServiceWrapperTypeName, out builtServiceWrapper))
-                {
-                    needBuild = true;
-                }
-            }
-            else
-            {
-                builtServiceWrapper = null;
-            }
+			if (isServiceWrapperRequired)
+			{
+				if (!TryGetType(basicInfo.AssemblyName, basicInfo.ServiceWrapperTypeName, out builtServiceWrapper))
+				{
+					needBuild = true;
+				}
+			}
+			else
+			{
+				builtServiceWrapper = null;
+			}
 
-            if (!needBuild)
-            {
-                return;
-            }
+			if (!needBuild)
+			{
+				return;
+			}
 
-            Emit(basicInfo, isProxyRequired, isServiceWrapperRequired, out builtProxy, out builtServiceWrapper, out var entities, out var assemblyBuilder, out var moduleBuilder);
+			Emit(basicInfo, isProxyRequired, isServiceWrapperRequired, out builtProxy, out builtServiceWrapper, out var entities, out var assemblyBuilder, out var moduleBuilder);
 
-            BeforeAssemblyCreated?.Invoke(this,
-                new BeforeAssemblyCreatedEventArgs(assemblyBuilder, moduleBuilder, basicInfo.SourceInterface,
-                    builtProxy, builtServiceWrapper, entities));
+			BeforeAssemblyCreated?.Invoke(this,
+				new BeforeAssemblyCreatedEventArgs(assemblyBuilder, moduleBuilder, basicInfo.SourceInterface,
+					builtProxy, builtServiceWrapper, entities));
 
-            AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder,
+			AfterTypeAndAssemblyBuilt?.Invoke(this, new AfterTypeAndAssemblyBuiltEventArgs(basicInfo.SourceInterface, builtProxy, builtServiceWrapper, entities, assemblyBuilder,
 #if netfx
-                assemblyBuilder.Save
+				assemblyBuilder.Save
 #elif NET9_0_OR_GREATER
 				((PersistedAssemblyBuilder)assemblyBuilder).Save
 #else
-                null
+				null
 #endif
 				));
-        }
+		}
 
-        /// <summary>
-        /// Tries to get type specified.
-        /// </summary>
-        /// <param name="assemblyName">Assembly name.</param>
-        /// <param name="typeName">Type name.</param>
-        /// <param name="type">Type object specified.</param>
-        /// <exception cref="TypeLoadException">Thrown when the type request cannot be found in the assembly specified.</exception>
-        /// <returns>Result.</returns>
-        private static bool TryGetType(string assemblyName, string typeName, out Type type)
-        {
-            Assembly assembly;
-            try
-            {
-                assembly = Assembly.Load(assemblyName);
-            }
+		/// <summary>
+		/// Tries to get type specified.
+		/// </summary>
+		/// <param name="assemblyName">Assembly name.</param>
+		/// <param name="typeName">Type name.</param>
+		/// <param name="type">Type object specified.</param>
+		/// <exception cref="TypeLoadException">Thrown when the type request cannot be found in the assembly specified.</exception>
+		/// <returns>Result.</returns>
+		private static bool TryGetType(string assemblyName, string typeName, out Type type)
+		{
+			Assembly assembly;
+			try
+			{
+				assembly = Assembly.Load(assemblyName);
+			}
 #pragma warning disable CA1031 // Do not catch general exception types
-            catch
-            {
-                type = default;
-                return false;
-            }
+			catch
+			{
+				type = default;
+				return false;
+			}
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            type = assembly.GetType(typeName);
-            return type != null;
-        }
-    }
+			type = assembly.GetType(typeName);
+			return type != null;
+		}
+	}
 }
